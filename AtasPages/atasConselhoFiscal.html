@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Transparência - Cruzeiro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-royal: #003b70;
+            --azul-escuro: #002855;
+            --azul-claro: #055eed;
+            --branco: #ffffff;
+            --cinza-claro: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        h2 {
+            line-height: 40px;
+        }
+
+        body {
+            background-color: var(--branco);
+            flex-direction: column;
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Conteúdo principal */
+        .main-content {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Cabeçalho das seções */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: initial;
+            position: relative;
+            width: 100%;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            color: var(--azul-claro);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-spacing-trim: 5px;
+            font-size: 42px;
+            margin-left: 15px;
+        }
+
+        /* Grade de cards - TRANSFORMADA EM LISTA */
+        .card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+            width: 100%;
+            justify-content: center;
+            position: initial;
+        }
+
+        /* Cards - TRANSFORMAÇÃO PARA HORIZONTAL */
+        .card {
+            width: 100%;
+            height: 80px; /* Altura fixa para cards horizontais */
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-grid a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            width: 100%;
+        }
+
+        .card-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--azul-escuro) 0%, rgba(0, 91, 170, 0.7) 100%);
+            display: flex;
+            flex-direction: row; /* Modificado para horizontal */
+            align-items: center;
+            text-align: left; /* Alinhamento à esquerda */
+            padding: 0 20px;
+        }
+
+        .card-icon {
+            width: 30px;
+            height: 30px;
+            fill: var(--branco);
+            margin-right: 20px; /* Espaço à direita do ícone */
+            flex-shrink: 0;
+        }
+
+        .card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: calc(100% - 80px); /* Espaço para o ícone e estrela */
+        }
+
+        .card-text {
+            flex-grow: 1;
+            padding-right: 20px;
+        }
+
+        .card-titulo {
+            color: var(--branco);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            max-height: 42px;
+        }
+
+        .card-count {
+            color: var(--branco) !important;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Estrela do Cruzeiro */
+        .cruzeiro-star {
+            width: 20px;
+            height: 20px;
+            fill: var(--branco);
+            opacity: 0.8;
+            flex-shrink: 0;
+        }
+
+        /* Responsividade - AJUSTES ESPECÍFICOS */
+        @media (max-width: 1200px) {
+            .section-header h2 {
+                font-size: 36px;
+            }
+            
+            .card-titulo {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .section-header h2 {
+                font-size: 32px;
+                letter-spacing: 3px;
+            }
+            
+            .card-titulo {
+                font-size: 15px;
+                -webkit-line-clamp: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 0 15px;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+                letter-spacing: 2px;
+            }
+
+            .card {
+                height: 85px; /* Aumento de altura para garantir visibilidade */
+            }
+
+            .card-icon {
+                width: 25px;
+                height: 25px;
+                margin-right: 15px;
+            }
+
+            .card-titulo {
+                font-size: 14px;
+                -webkit-line-clamp: 2;
+            }
+
+            .card-count {
+                font-size: 13px;
+            }
+
+            .cruzeiro-star {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-header {
+                margin: 25px 0 15px;
+            }
+
+            .section-header h2 {
+                font-size: 24px;
+                letter-spacing: 1px;
+                margin-left: 10px;
+            }
+
+            .card {
+                /* Aumentando altura para acomodar conteúdo */
+                height: 90px;
+            }
+
+            .card-overlay {
+                padding: 0 15px;
+            }
+
+            .card-icon {
+                width: 22px;
+                height: 22px;
+                margin-right: 12px;
+            }
+
+            .card-titulo {
+                font-size: 13px;
+                line-height: 1.3;
+            }
+
+            .card-count {
+                font-size: 12px;
+            }
+
+            .cruzeiro-star {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .section-header h2 {
+                font-size: 20px;
+            }
+
+            /* Reorganização para telas muito pequenas */
+            .card {
+                height: auto;
+                min-height: 90px;
+            }
+
+            .card-overlay {
+                padding: 12px 10px;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: space-between;
+            }
+
+            .card-icon {
+                width: 20px;
+                height: 20px;
+                margin-bottom: 8px;
+                margin-right: 0;
+            }
+
+            .card-content {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .card-titulo {
+                font-size: 12px;
+                -webkit-line-clamp: 2;
+                margin-bottom: 4px;
+                width: 100%;
+            }
+
+            .card-count {
+                font-size: 11px;
+            }
+
+            .cruzeiro-star {
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="main-content">
+        <div class="section">
+            <div class="section-header">
+                <h2>ATA RCF</h2>
+            </div>
+            <div class="card-grid">
+                <!-- Ata RCF - 02.02.2024 -->
+                <a href="https://cruzeiro-website-project-documents.s3.amazonaws.com/Documentos+obrigat%C3%B3rios+SITE/ATAS/CONSELHO+FISCAL/Ata+RCF+-+02.02.2024.pdf">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Ata RCF</h3>
+                                    <p class="card-count">02/02/2024</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Ata RCF - 15.12.2023 -->
+                <a href="https://cruzeiro-website-project-documents.s3.amazonaws.com/Documentos+obrigat%C3%B3rios+SITE/ATAS/CONSELHO+FISCAL/Ata+RCF+-+15.12.2023.pdf">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Ata RCF</h3>
+                                    <p class="card-count">15/12/2023</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Ata RCF - 12.09.2023 -->
+                <a href="https://cruzeiro-website-project-documents.s3.amazonaws.com/Documentos+obrigat%C3%B3rios+SITE/ATAS/CONSELHO+FISCAL/Ata+RCF+-+12.09.2023.pdf">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Ata RCF</h3>
+                                    <p class="card-count">12/09/2023</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Ata RCF - 12.07.2023 -->
+                <a href="https://cruzeiro-website-project-documents.s3.amazonaws.com/Documentos+obrigat%C3%B3rios+SITE/ATAS/CONSELHO+FISCAL/Ata+RCF+-+12.07.2023.pdf">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Ata RCF</h3>
+                                    <p class="card-count">12/07/2023</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="section-header">
+                <h2>Alteração conselho fiscal posse</h2>
+            </div>
+            <div class="card-grid">
+                <!-- Alteração Conselho Fiscal e Termo de Posse - 19.09.2023 -->
+                <a href="https://cruzeiro-website-project-documents.s3.amazonaws.com/Documentos+obrigat%C3%B3rios+SITE/ATAS/CONSELHO+FISCAL/Altera%C3%A7%C3%A3o+Conselho+Fiscal+e+Termo+de+Posse+19.09.2023.pdf">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Alteração Conselho Fiscal Posse</h3>
+                                    <p class="card-count">19/09/2023</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Alteração Conselho Fiscal - 07.04.2022 -->
+                <a href="https://cruzeiro-website-project-documents.s3.amazonaws.com/Documentos+obrigat%C3%B3rios+SITE/ATAS/CONSELHO+FISCAL/Altera%C3%A7%C3%A3o+Conselho+Fiscal+07.04.2022.PDF">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Alteração Conselho Fiscal</h3>
+                                    <p class="card-count">07/04/2022</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Alteração Conselho Fiscal e Termo de Posse - 10.01.2022 -->
+                <a href="https://cruzeiro-website-project-documents.s3.amazonaws.com/Documentos+obrigat%C3%B3rios+SITE/ATAS/CONSELHO+FISCAL/Altera%C3%A7%C3%A3o+Conselho+Fiscal+e+Termo+de+Posse+10.01.2022.pdf">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Alteração Conselho Fiscal Posse</h3>
+                                    <p class="card-count">10/01/2022</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="section-header">
+                <h2>Lista de Presença RCF</h2>
+            </div>
+            <div class="card-grid">
+                <!-- Lista de Presença RCF - 02.02.2024 -->
+                <a href="https://cruzeiro-website-project-documents.s3.amazonaws.com/Documentos+obrigat%C3%B3rios+SITE/ATAS/CONSELHO+FISCAL/Lista+de+Presen%C3%A7a+RCF+-+02.02.2024.pdf">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Lista de Presença RCF</h3>
+                                    <p class="card-count">02/02/2024</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Lista de Presença RCF - 15.12.2023 -->
+                <a href="">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Lista de Presença RCF</h3>
+                                    <p class="card-count">15/12/2023</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Lista de Presença RCF - 12.09.2023 -->
+                <a href="https://cruzeiro-website-project-documents.s3.amazonaws.com/Documentos+obrigat%C3%B3rios+SITE/ATAS/CONSELHO+FISCAL/Lista+de+Presen%C3%A7a+RCF+-+12.09.2023.pdf">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Lista de Presença RCF</h3>
+                                    <p class="card-count">12/09/2023</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Lista de Presença RCF - 12.07.2023 -->
+                <a href="https://cruzeiro-website-project-documents.s3.amazonaws.com/Documentos+obrigat%C3%B3rios+SITE/ATAS/CONSELHO+FISCAL/Lista+de+Presen%C3%A7a+RCF+-+12.07.2023.pdf">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Lista de Presença RCF</h3>
+                                    <p class="card-count">12/07/2023</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="section-header">
+                <h2>summary RCF</h2>
+            </div>
+            <div class="card-grid">
+                <!-- Summary RCF - 02.02.2024 -->
+                <a href="https://cruzeiro-website-project-documents.s3.amazonaws.com/Documentos+obrigat%C3%B3rios+SITE/ATAS/CONSELHO+FISCAL/Summary+RCF+-+02.02.2024.pdf">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Summary RCF</h3>
+                                    <p class="card-count">02/02/2024</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Summary RCF - 15.12.2023 -->
+                <a href="https://cruzeiro-website-project-documents.s3.amazonaws.com/Documentos+obrigat%C3%B3rios+SITE/ATAS/CONSELHO+FISCAL/Summary+RCF+-+15.12.2023.pdf">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Summary RCF</h3>
+                                    <p class="card-count">15/12/2023</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="section-header">
+                <h2>termo de posse conselho fiscal</h2>
+            </div>
+            <div class="card-grid">
+                <!-- Termo de Posse Conselho Fiscal - 20.04.2022 -->
+                <a href="https://cruzeiro-website-project-documents.s3.amazonaws.com/Documentos+obrigat%C3%B3rios+SITE/ATAS/CONSELHO+FISCAL/Termo+de+Posse+Conselho+Fiscal+20.04.2022.pdf">
+                    <div class="card">
+                        <div class="card-overlay">
+                            <svg class="card-icon" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="#ffffff" />
+                            </svg>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    <h3 class="card-titulo">Termo de Posse Conselho Fiscal</h3>
+                                    <p class="card-count">20/04/2022</p>
+                                </div>
+                                <svg class="cruzeiro-star" viewBox="0 0 100 100">
+                                    <polygon points="50,10 61,40 95,40 68,60 79,90 50,70 21,90 32,60 5,40 39,40" fill="#ffffff" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

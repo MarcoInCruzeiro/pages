@@ -1,0 +1,1187 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estádio Mineirão</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Use a unique namespace for all our styles to avoid affecting parent elements */
+        .mineirao-container {
+            --primary-color: #055EED;
+            --primary-dark: #003380;
+            --primary-light: #4D85D6;
+            --accent-color: #FFD700;
+            --text-dark: #001060;
+            --text-light: #FFFFFF;
+            --bg-light: #F8F9FA;
+            --bg-gray: #EFEFEF;
+            --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --body-font-size: 16px;
+            --heading1-size: 28px;
+            --heading2-size: 20px;
+            font-size: var(--body-font-size);
+            line-height: 1.6;
+            color: var(--text-dark);
+            font-family: 'Outfit', Arial, sans-serif;
+            background-color: var(--bg-light);
+        }
+
+        /* Reset all CSS only within our container */
+        .mineirao-container * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', Arial, sans-serif;
+        }
+
+        /* Basic typography within our container */
+        .mineirao-container p,
+        .mineirao-container li,
+        .mineirao-container a:not(.btn):not(.app-btn):not(.btn-rota):not(.btn-ingresso),
+        .mineirao-container div:not(.logo-area):not(.buttons-area):not(.app-grid):not(.app-buttons):not(.botoes-acao) {
+            font-size: var(--body-font-size);
+            line-height: 1.6;
+        }
+
+        .mineirao-container h1,
+        .mineirao-container .section-title {
+            font-size: var(--heading1-size);
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 40px 0 20px 0;
+            line-height: 1.3;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .mineirao-container h2,
+        .mineirao-container h3:not(.card-header h3) {
+            font-size: var(--heading2-size);
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 30px 0 15px 0;
+            line-height: 1.4;
+        }
+
+        .mineirao-container .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .mineirao-container .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .mineirao-container .main-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            background-color: white;
+            padding: 20px;
+        }
+
+        .mineirao-container .logo-area {
+            width: 60%;
+            height: 100%;
+            min-height: 220px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 28px;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .mineirao-container .logo-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            max-width: 800px;
+        }
+
+        .mineirao-container .buttons-area {
+            width: 35%;
+        }
+
+        .mineirao-container .btn {
+            display: flex;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 55px;
+        }
+
+        .mineirao-container .btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mineirao-container .info-list {
+            list-style-type: none;
+            color: var(--text-dark);
+            margin-bottom: 40px;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .mineirao-container .info-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            font-size: var(--body-font-size);
+        }
+
+        .mineirao-container .info-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .mineirao-container .info-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .mineirao-container .info-list p {
+            font-size: var(--body-font-size);
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+
+        .mineirao-container .content-section {
+            margin-bottom: 50px;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .mineirao-container .content-with-image {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .mineirao-container .content-text {
+            width: 58%;
+            font-size: var(--body-font-size);
+            line-height: 1.7;
+        }
+
+        .mineirao-container .content-image {
+            width: 38%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            font-weight: 600;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .mineirao-container .content-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .mineirao-container .full-banner {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            margin: 40px 0;
+            font-size: 26px;
+            font-weight: 700;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mineirao-container .full-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.3;
+        }
+
+        .mineirao-container .full-banner span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .mineirao-container .full-banner h1 {
+            font-size: 26px;
+            color: var(--text-light);
+            position: relative;
+            z-index: 1;
+            margin: 0;
+        }
+
+        .mineirao-container .app-section {
+            margin: 50px 0;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .mineirao-container .app-section p {
+            margin-bottom: 20px;
+            font-size: var(--body-font-size);
+            line-height: 1.7;
+        }
+
+        .mineirao-container .app-grid {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            gap: 20px;
+        }
+
+        .mineirao-container .app-item {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            font-weight: 600;
+            border-radius: 12px;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0, 71, 171, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .mineirao-container .app-item img {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        .mineirao-container .app-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 71, 171, 0.3);
+        }
+
+        .mineirao-container .app-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .mineirao-container .app-buttons {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0 10px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .mineirao-container .app-btn {
+            padding: 15px 25px;
+            margin-top: 10px;
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 55px;
+            min-width: 180px;
+            max-width: 45%;
+            flex: 1;
+        }
+
+        .mineirao-container .app-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos para a seção de contatos */
+        .mineirao-container .cont-section {
+            margin: 50px 0;
+            transition: max-height 1s ease;
+        }
+
+        .mineirao-container .cont-card {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: var(--card-shadow);
+
+            transition: var(--transition);
+        }
+
+        .mineirao-container .cont-card:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Remove o marcador padrão do elemento details */
+        .mineirao-container .cont-card summary {
+            list-style: none;
+            cursor: pointer;
+        }
+
+        .mineirao-container .cont-card summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* O conteúdo começa escondido */
+        .mineirao-container .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 1s ease;
+        }
+
+        /* Quando o details estiver aberto */
+        .mineirao-container .cont-card[open] .card-content {
+            max-height: 10000px;
+            /* Ajuste se o conteúdo for maior */
+        }
+
+        .mineirao-container .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            padding: 18px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .mineirao-container .card-header:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+        }
+
+        .mineirao-container .card-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+        }
+
+        .mineirao-container .dropdown-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: var(--transition);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .mineirao-container .card-header:hover .dropdown-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Rotação do ícone quando o card está aberto */
+        .mineirao-container details[open] .dropdown-btn svg {
+            transform: rotate(180deg);
+            transition: transform 0.5s ease;
+        }
+
+        /* Rotação do ícone quando o card está aberto */
+        .mineirao-container details[close] .dropdown-btn svg {
+            transform: rotate(0deg);
+            transition: transform 0.5s ease;
+        }
+
+        .mineirao-container .card-content {
+            padding: 25px;
+            background-color: var(--bg-light);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* Fixed for contact list alignment */
+        .mineirao-container .cont-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mineirao-container .cont-list li {
+            padding: 12px 0;
+            color: var(--text-dark);
+            display: flex;
+            align-items: flex-start;
+            /* Changed from center to flex-start */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            word-break: normal;
+            overflow-wrap: break-word;
+            white-space: normal;
+            font-size: var(--body-font-size);
+            line-height: 1.6;
+        }
+
+        .mineirao-container .cont-list li:last-child {
+            border-bottom: none;
+        }
+
+        .mineirao-container .cont-list li::before {
+            content: "•";
+            color: var(--primary-color);
+            display: inline-block;
+            margin-right: 12px;
+            font-size: 1.3em;
+            margin-top: 0.25em;
+            /* Align the bullet better with the top line */
+            flex-shrink: 0;
+        }
+
+        .mineirao-container .cont-list li strong {
+            font-weight: 600;
+            margin-right: 5px;
+            color: var(--primary-dark);
+            min-width: 140px;
+            /* Fixed width for labels */
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .mineirao-container .cont-list .info-value {
+            display: inline-block;
+            flex: 1;
+        }
+
+        .mineirao-container .estadio-box {
+            width: 100%;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .mineirao-container .estadio-cruzeiro {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            font-family: 'Outfit', sans-serif;
+            margin: 0 auto;
+            background-color: #f8f8f8;
+        }
+
+        .mineirao-container .mapa-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .mineirao-container .cruzeiro-logo {
+            width: 40px;
+            height: auto;
+        }
+
+        .mineirao-container .mapa-header h3 {
+            margin: 0;
+            font-size: 20px;
+            color: var(--text-light);
+        }
+
+        .mineirao-container .mapa-container {
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+            border-top: 3px solid #0099ff;
+            border-bottom: 3px solid #0099ff;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            /* Proporção 16:9 para responsividade */
+        }
+
+        .mineirao-container .mapa-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: hue-rotate(30deg) saturate(2.3) contrast(0.9);
+        }
+
+        .mineirao-container .mapa-container:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 15px rgba(30, 60, 114, 0.4);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .mineirao-container .info-cruzeiro {
+            padding: 15px;
+            background-color: #f0f5ff;
+            color: #1e3c72;
+        }
+
+        .mineirao-container .info-cruzeiro p {
+            margin: 8px 0;
+            font-size: var(--body-font-size);
+            line-height: 1.6;
+        }
+
+        .mineirao-container .botoes-acao {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .mineirao-container .btn-rota,
+        .mineirao-container .btn-ingresso {
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            flex: 1;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mineirao-container .btn-rota {
+            background-color: #1e3c72;
+            color: white;
+        }
+
+        .mineirao-container .btn-ingresso {
+            background-color: #0099ff;
+            color: white;
+        }
+
+        .mineirao-container .btn-rota:hover,
+        .mineirao-container .btn-ingresso:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Adiciona estrelas (representando os títulos) ao redor do mapa */
+        .mineirao-container .mapa-container:after {
+            content: '★ ★ ★ ★ ★';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: #1e3c72;
+            font-size: 20px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .mineirao-container {
+                --body-font-size: 16px;
+                --heading1-size: 22px;
+                --heading2-size: 18px;
+            }
+
+            .mineirao-container .estadio-cruzeiro {
+                border-width: 3px;
+            }
+
+            .mineirao-container .mapa-container {
+                padding-bottom: 75%;
+            }
+
+            .mineirao-container .btn,
+            .mineirao-container .app-btn {
+                font-size: 13px;
+            }
+
+            .mineirao-container .btn-rota,
+            .mineirao-container .btn-ingresso {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .mineirao-container .cont-card .card-content {
+                padding: 15px;
+            }
+
+            /* Layout adjustments */
+            .mineirao-container .logo-area,
+            .mineirao-container .buttons-area,
+            .mineirao-container .content-with-image,
+            .mineirao-container .main-area {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .mineirao-container .logo-area,
+            .mineirao-container .buttons-area,
+            .mineirao-container .content-text,
+            .mineirao-container .content-image {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .mineirao-container .content-image {
+                height: 200px;
+            }
+
+            .mineirao-container .app-grid {
+                flex-direction: column;
+            }
+
+            .mineirao-container .app-item {
+                margin-bottom: 20px;
+            }
+
+            .mineirao-container .app-buttons {
+                flex-direction: column;
+            }
+
+            .mineirao-container .app-btn {
+                width: 100%;
+                max-width: 100%;
+                margin: 5px 0;
+            }
+
+            .mineirao-container .cont-list li strong {
+                min-width: 100px;
+            }
+        }
+        @media (max-width: 480px) {
+            .mineirao-container {
+                --body-font-size: 14px;
+                --heading1-size: 20px;
+                --heading2-size: 16px;
+            }
+
+            .mineirao-container .main-area {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .mineirao-container .logo-area {
+                width: 100%;
+                height: auto;
+                min-height: 180px;
+            }
+
+            .mineirao-container .buttons-area {
+                width: 100%;
+            }
+
+            .mineirao-container .btn,
+            .mineirao-container .app-btn {
+                font-size: 12px;
+                padding: 10px;
+            }
+
+            .mineirao-container .content-with-image {
+                flex-direction: column;
+            }
+
+            .mineirao-container .content-text,
+            .mineirao-container .content-image {
+                width: 100%;
+            }
+            .app-section{
+                display: none;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Namespace container to prevent CSS leakage -->
+    <div class="mineirao-container">
+        <div class="container">
+            <!-- Área principal com logo e botões -->
+            <div class="main-area">
+                <div class="logo-area">
+                    <img src="https://th.bing.com/th/id/R.02883cdd914b09cf4c9df966a4311b95?rik=%2bpebfcMBFfbKQw&riu=http%3a%2f%2fi.imgur.com%2fDPEEDax.jpg&ehk=xWMwtofgcnNzEBOnVluwOVuv9V66uqQeE8NWVu1O3L8%3d&risl=&pid=ImgRaw&r=0"
+                        alt="Art">
+                </div>
+                <div class="buttons-area">
+                    <a href="https://socio.cruzeiro.com.br/jogos" class="btn"><strong>COMPRAR INGRESSOS</strong></a>
+                    <a href="https://play.google.com/store/apps/details?id=br.com.cruzeiro.nacaoazul&hl=pt-BR#:~:text=Na%C3%A7%C3%A3o%20Azul,%20baixe%20o%20aplicativo%20oficial%20do%20Cruzeiro.,Not%C3%ADcias,%20V%C3%ADdeos,%20Agenda,%20Estat%C3%ADsticas,%20Promo%C3%A7%C3%B5es%20e%20muito%20mais."
+                        class="btn"><strong>BAIXAR APLICATIVO</strong></a>
+                    <a href="https://socio.cruzeiro.com.br/" class="btn"><strong>SÓCIO 5 ESTRELAS</strong></a>
+                    <a href="https://socio.cruzeiro.com.br/duvidas" class="btn"><strong>PERGUNTAS
+                            FREQUENTES</strong></a>
+                    <a href="#" class="btn"><strong>ATENDIMENTO</strong></a>
+                </div>
+            </div>
+
+            <!-- Seção de Informações de Ingressos -->
+            <div class="cont-section">
+                <h2 class="section-title">INFORMAÇÕES DE INGRESSOS</h2>
+                <ul class="info-list">
+                    <li>Os ingressos poderão ser adquiridos através do site ingressos.cruzeiro.com.br e serão
+                        disponibilizados no aplicativo Cruzeiro Nação Azul 7 horas antes do início da partida.</li>
+                    <li>O acesso às arquibancadas do Mineirão se dará apenas pelo reconhecimento facial. O cadastro é
+                        rápido, fácil, seguro e obrigatório. Você consegue realizar o cadastro através
+                        de suacara.cruzeiro.com.br. </li>
+                    <li>É proibida a impressão do QR CODE em papel. O QR CODE deve estar no celular. </li>
+                    <li>Telefones com tela quebrada e/ou danificada não são reconhecidos pelo leitor de ingresso. </li>
+                    <li>Caso deseje comprar ingressos extras, após a abertura da venda geral, o titular deve adquirir o
+                        ingresso para o mesmo setor em que já tiver resgatado os</li>
+                    <li>Para adquirir ingressos extras, será necessário preencher os dados do utilizador no ato da
+                        compra. O
+                        convidado também precisa realizar o cadastro da biometria facial previamente. </li>
+                    <p>O atendimento na Central do Sócio no Mineirão (Bilheteria Sul) é exclusivo ao sócio titular. O
+                        funcionamento no dia da partida ocorrerá de 16h30 até o fim do primeiro tempo. </p>
+                    <div class="app-buttons">
+                        <a href="" class="app-btn">MEUS INGRESSOS</a>
+                        <a href="https://suacara.cruzeiro.com.br" class="app-btn">CADASTRO FACIAL</a>
+                    </div>
+                </ul>
+            </div>
+
+            <!-- Seção de Como Chegar ao Ingressos -->
+            <div class="content-section">
+                <h2 class="section-title">COMO CHEGAR AO ESTÁDIO</h2>
+                <p>O acesso ao Mineirão se dá principalmente por duas grandes vias: Av. Carlos Luz (setor sul) e Av.
+                    Antônio Carlos (setor norte).<br>A Avenida Carlos Luz liga a Avenida Pedro II à Lagoa da Pampulha,
+                    enquanto a Avenida Antônio Carlos liga o Centro de Belo Horizonte à Pampulha. <br> O Mineirão ainda
+                    pode
+                    ser acessado pela Avenida Otacílio Negrão de Lima, na orla da Lagoa da Pampulha.</p>
+
+                <h2 class="section-title">Transportes</h2>
+
+                <ul class="info-list">
+                    <li><strong>CARRO:</strong> O Mineirão conta com estacionamento próprio, que pode ser adquirido
+                        antecipadamente pelo site do MINEIRÃO OFICIAL.</li>
+                    <div class="app-buttons">
+                        <a href="https://mineirao.com.br/estacionamento" class="app-btn">ESTACIONAMENTO</a>
+                    </div>
+                </ul>
+
+                <h2 class="section-title">Ônibus:</h2>
+                <p>Há várias linhas de ônibus que passam perto do Mineirão, facilitando o acesso ao estádio.</p>
+
+                <ul class="info-list">
+                    <li><strong>64</strong> – Estação Venda Nova / Assembleia via Carlos Luz&nbsp;</li>
+                    <li><strong>67</strong> - Estação Vilarinho / Santo Agostinho via Carlos Luz</li>
+                    <li><strong>5106</strong> – Bandeirantes / BH Shopping</li>
+                    <li><strong>5401</strong> - São Luís / Dom Cabral</li>
+                    <li><strong>503</strong> – Estação São Gabriel / Aparecida/Sta Rosa</li>
+                    <li><strong>504</strong> - Estação São Gabriel / Santa Rosa / Aparecida</li>
+                    <li><strong>506</strong> – Estação Ponto São José/ Av. Antônio Carlos</li>
+                    <li><strong>S-53</strong> - Confisco / Ouro Minas</li>
+                    <li><strong>S-54A</strong> - Dom Bosco/Shopping Del Rey</li>
+                    <li><strong>S-54B</strong> - Dom Bosco/Shopping Del Rey</li>
+                    <li><strong>S-56</strong> - Vilarinho / São José</li>
+                </ul>
+
+                <h2 class="section-title">TÁXI ou uber:</h2>
+                <p>Há dois pontos de táxis nas proximidades do Mineirão.</p>
+                <ul class="info-list">
+                    <li>Avenida Cel. Oscar Paschoal, em frente ao Hall principal.</li>
+                    <li>Avenida Rei Pelé, esquina com Avenida Antônio Abrahão Caram.</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">ROTA PARA O MINEIRÃO</h2>
+            <div class="estadio-box">
+                <div class="estadio-cruzeiro">
+                    <div class="mapa-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3751.3396765236194!2d-43.97361232378554!3d-19.865994486646985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690fe49e51c161%3A0xf7aa247bd44c12a5!2sMineirão!5e0!3m2!1spt-BR!2sbr!4v1714062417839!5m2!1spt-BR!2sbr"
+                            width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="info-cruzeiro">
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Antônio Abrahão Caram, 1001 - São José, Belo
+                            Horizonte
+                        </p>
+                        <div class="botoes-acao">
+                            <a href="https://www.google.com/maps/dir//Mineirão,+Av.+Antônio+Abrahão+Caram,+1001+-+São+José,+Belo+Horizonte+-+MG,+31275-000/@-19.8659945,-43.9710581,17z/"
+                                target="_blank" class="btn-rota">ROTA</a>
+                            <a href="https://cruzeiro.com.br/ingressos" target="_blank" class="btn-ingresso">
+                                INGRESSOS</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Adicione o link para os ícones Font Awesome -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            </div>
+
+            <!-- Aplicativos Recomendados -->
+            <div class="app-section">
+                <h2 class="section-title">APLICATIVO NAÇÃO AZUL</h2>
+                <p>Para adentrar as dependências do Mineirão, é necessário baixar o aplicativo Cruzeiro Nação Azul, o
+                    aplicativo oficial do time. O acesso à esplanada se dará unicamente para os torcedores que tiverem
+                    no
+                    aplicativo o QR Code do ingresso da partida. </p>
+
+                <div class="app-grid">
+                    <div class="app-item">
+                        <img src="https://play-lh.googleusercontent.com/wI8NxZg6_BvaP_BUQ82o0ftlM0z361QqSee357V6TQdXuFQRdndJMkMqbkh6SyzMBg=w5120-h2880-rw"
+                            alt="App screenshot 1">
+                    </div>
+                    <div class="app-item">
+                        <img src="https://play-lh.googleusercontent.com/JRlJCXnQaBvsEX146whd2F5EFUHfuDDPUleO5_vgIh_ZZRb4A_Buq3rcm0vqVVF_rt8z=w5120-h2880-rw"
+                            alt="App screenshot 2">
+                    </div>
+                    <div class="app-item">
+                        <img src="https://play-lh.googleusercontent.com/i_qUJbzCFfNk7aj1_R6o40BXz5Lxcfb3-MDkgcGz08KIqLtItBP6qo9Yva8LA4vemzE=w5120-h2880-rw"
+                            alt="App screenshot 3">
+                    </div>
+                </div>
+                <p>Além disso, o torcedor consegue acompanhar as principais informações do jogo, escalações, dados,
+                    estatísticas, lances da partida e tudo em tempo real. </p>
+
+                <div class="app-buttons">
+                    <a href="https://play.google.com/store/apps/details?id=br.com.cruzeiro.nacaoazul&hl=pt-BR#:~:text=Na%C3%A7%C3%A3o%20Azul,%20baixe%20o%20aplicativo%20oficial%20do%20Cruzeiro.,Not%C3%ADcias,%20V%C3%ADdeos,%20Agenda,%20Estat%C3%ADsticas,%20Promo%C3%A7%C3%B5es%20e%20muito%20mais."
+                        class="app-btn">APP(Android)</a>
+                    <a href="https://apps.apple.com/br/app/cruzeiro-na%C3%A7%C3%A3o-azul/id1632719034" class="app-btn">
+                        APP(iOS)</a>
+                </div>
+            </div>
+
+            <!-- Banner principal -->
+            <div class="full-banner">
+                <img src="https://imagens.cruzeiro.com.br/Estádios/Mineirão.png" alt="Estádio Mineirão">
+                <h1>INFORMAÇÕES DO ESTÁDIO</h1>
+            </div>
+
+            <!-- Alimentação -->
+            <div class="content-section">
+                <h2 class="section-title">ALIMENTAÇÃO</h2>
+                <p>Informações sobre opções de alimentação disponíveis no estádio. Detalhes sobre restaurantes,
+                    lanchonetes, bares e outros estabelecimentos onde os visitantes podem comer e beber durante o
+                    evento.</p>
+
+                <details class="cont-card">
+                    <summary class="card-header">
+                        <h3>ALIMENTAÇÃO</h3>
+                        <div class="dropdown-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 10L12 15L17 10" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </summary>
+                    <div class="card-content">
+                        <details class="cont-card">
+                            <summary class="card-header">
+                                <h3>BOLÃO ESPLANADA</h3>
+                                <div class="dropdown-btn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 10L12 15L17 10" stroke="white" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </summary>
+                            <div class="card-content">
+                                <p>Restaurante tradicional que funciona diariamente até o fechamento da Esplanada,
+                                    servindo
+                                    pratos como espaguete, Rochedão e Mexidão.</p>
+                            </div>
+                            <div class="botoes-acao">
+                                <a href="https://www.google.com.br/maps/place/Bol%C3%A3o+Esplanada+Mineir%C3%A3o/@-19.8639792,-43.9732914,17z/data=!3m1!4b1!4m6!3m5!1s0xa6916746b80e67:0x8c57997722d78cb1!8m2!3d-19.8639792!4d-43.9707165!16s%2Fg%2F11hdh8hcd_?entry=ttu&g_ep=EgoyMDI1MDgwMy4wIKXMDSoASAFQAw%3D%3D"
+                                    target="_blank" class="btn-rota">Como chegar</a>
+                            </div>
+                        </details>
+
+                        <details class="cont-card">
+                            <summary class="card-header">
+                                <h3>GOLAÇO</h3>
+                                <div class="dropdown-btn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 10L12 15L17 10" stroke="white" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </summary>
+                            <div class="card-content">
+                                <p>Ambiente com vista privilegiada, cerveja gelada, variedade de espetos, tropeiro e
+                                    almoço
+                                    aos fins de semana.</p>
+                            </div>
+                            <div class="botoes-acao">
+                                <a href="https://www.google.com.br/maps/place/Gola%C3%A7o/@-19.8646524,-43.9733778,17z/data=!3m1!4b1!4m6!3m5!1s0xa690f7b8afba0b:0x85a8d096a7ce1e4a!8m2!3d-19.8646524!4d-43.9708029!16s%2Fg%2F11c1xj41s4?entry=ttu&g_ep=EgoyMDI1MDgwMy4wIKXMDSoASAFQAw%3D%3D"
+                                    target="_blank" class="btn-rota">Como chegar</a>
+                            </div>
+                        </details>
+
+                        <details class="cont-card">
+                            <summary class="card-header">
+                                <h3>EMPADAS FUTEBOL</h3>
+                                <div class="dropdown-btn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 10L12 15L17 10" stroke="white" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </summary>
+                            <div class="card-content">
+                                <p>place holder .</p>
+                            </div>
+                            <div class="botoes-acao">
+                                <a href="https://www.google.com.br/maps/place/Empadas+Futebol+Clube+-+Lanchonete/@-19.8640982,-43.9707525,20z/data=!4m6!3m5!1s0xa691d2af278f21:0x49980e5981b2393f!8m2!3d-19.8640958!4d-43.9705857!16s%2Fg%2F11srqs2zdx?entry=ttu&g_ep=EgoyMDI1MDgwMy4wIKXMDSoASAFQAw%3D%3D"
+                                    target="_blank" class="btn-rota">Como chegar</a>
+                            </div>
+                        </details>
+
+                        <details class="cont-card">
+                            <summary class="card-header">
+                                <h3>BRAGA PÃO DE QUEIJO</h3>
+                                <div class="dropdown-btn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 10L12 15L17 10" stroke="white" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </summary>
+                            <div class="card-content">
+                                <p>Pioneira em pão de queijo em Minas, com receita familiar exclusiva e cardápio com
+                                    recheios artesanais e pizza de pão de queijo.</p>
+                            </div>
+                            <div class="botoes-acao">
+                                <a href="https://www.google.com.br/maps/place/Braga+P%C3%A3o+de+Queijo/@-19.8650266,-43.9735849,17z/data=!4m6!3m5!1s0xa690f7464fd221:0x998a5387130e6de1!8m2!3d-19.8675597!4d-43.9713298!16s%2Fg%2F1z3tb491s?entry=ttu&g_ep=EgoyMDI1MDgwMy4wIKXMDSoASAFQAw%3D%3D"
+                                    target="_blank" class="btn-rota">Como chegar</a>
+                            </div>
+                        </details>
+
+                        <details class="cont-card">
+                            <summary class="card-header">
+                                <h3>SORVETERIA NO MINEIRÃO</h3>
+                                <div class="dropdown-btn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 10L12 15L17 10" stroke="white" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </summary>
+                            <div class="card-content">
+                                <p>place holder</p>
+                                <div class="botoes-acao">
+                                    <a href="https://www.google.com.br/maps/place/Sorveteria+no+Mineir%C3%A3o/@-19.864087,-43.9714057,19z/data=!3m1!4b1!4m6!3m5!1s0xa690f76d4d5983:0xfdb84e3fcd27476b!8m2!3d-19.864087!4d-43.970762!16s%2Fg%2F11d_8d2126?entry=ttu&g_ep=EgoyMDI1MDgwMy4wIKXMDSoASAFQAw%3D%3D"
+                                        target="_blank" class="btn-rota">Como chegar</a>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Objetos Proibidos -->
+            <div class="content-section">
+                <h2 class="section-title">OBJETOS NÃO PERMITIDOS</h2>
+                <p>Lista dos itens que não podem ser levados para o estádio. <br> É importante verificar esta lista
+                    antes de sair de casa para evitar problemas na entrada.</p>
+
+                <div class="content-image"
+                    style="width: 100%; height: auto; min-height: 300px; margin-top: 20px; margin-bottom: 20px;">
+                    <img src="https://imagens.cruzeiro.com.br/Estádios/Arena da Baixada.png" alt="Objetos proibidos">
+                </div>
+
+                <details class="cont-card">
+                    <summary class="card-header">
+                        <h3>ITENS NÃO PERMITIDOS NO ESTÁDIO</h3>
+                        <div class="dropdown-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 10L12 15L17 10" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </summary>
+                    <div class="card-content">
+                        <ul class="cont-list">
+                            <li>Bebida alcóolica (exceto para abastecimento dos bares);</li>
+                            <li>Álcool Líquido, sendo permitido apenas até 100 ml de álcool em gel em recipiente de
+                                plástico;</li>
+                            <li>Armas de fogo;</li>
+                            <li>Armas brancas;</li>
+                            <li>Pilhas avulsas;</li>
+                            <li>Instrumentos que produzam volume excessivo de barulho, tais como apitos, megafones,
+                                sirenes ou buzinas a gás;</li>
+                            <li>Guarda-chuva ou sombrinha, que possuam pontas;</li>
+                            <li>Bastão de selfie;</li>
+                            <li>Fogos de artifício de qualquer espécie;</li>
+                            <li>Indumentárias que dificultam a identificação das pessoas;</li>
+                            <li>Instrumentos que emitam raios laser, apontadores a laser ou similares;</li>
+                            <li>Explosivos;</li>
+                            <li>Recipientes de vidro;</li>
+                            <li>Churrasqueiras e similares;</li>
+                            <li>Animais;</li>
+                            <li>Bebida e comida (com exceção de quem tiver laudo com orientação médica);</li>
+                            <li>E outros materiais e objetos que possam ofender a integridade física das pessoas.</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+
+            <div class="cont-section">
+                <h2 class="section-title">CONTATOS IMPORTANTES</h2>
+
+                <details class="cont-card">
+                    <summary class="card-header">
+                        <h3>ATENDIMENTO SÓCIO 5 ESTRELAS</h3>
+                        <div class="dropdown-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 10L12 15L17 10" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </summary>
+                    <div class="card-content">
+                        <ul class="cont-list">
+                             <a href="tel:+553140002161"><strong>Telefone / WhatsApp:</strong>+55 31 4000‑2161</a><br>
+                            
+                            <strong>Email:</strong> <a
+                                    href="mailto:socio5estrelas@cruzeiro.com.br">socio5estrelas@cruzeiro.com.br</a><br>
+                            <strong>Atendimento presencial:</strong> Bilheteria Sul do Mineirão (em dias de jogo do
+                                Cruzeiro‑MG, a partir de 3h antes da partida)<br>
+                            <strong>Horário:</strong> Segunda a sexta, das 8h às 18h
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="cont-card">
+                    <summary class="card-header">
+                        <h3>MINEIRÃO (ESTÁDIO)</h3>
+                        <div class="dropdown-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 10L12 15L17 10" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </summary>
+                    <div class="card-content">
+                        <ul class="cont-list">
+                            <a href="tel:+553125801800"><strong>Telefone:</strong>+55 31 2580‑1800</a>
+                            <br><strong>Email:</strong> <a
+                                    href="mailto:atendimento@estadiomineirao.com.br">atendimento@estadiomineirao.com.br</a>
+                            <br>
+                            <strong>Endereço:</strong> Av. Antônio Abrahão Caram, 1001, São José, Belo Horizonte –
+                                MG, CEP 31275‑000<br>
+                            <strong>Site oficial:</strong> <a href="https://mineirao.com.br" target="_blank"
+                                    rel="noopener noreferrer">mineirao.com.br</a>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="cont-card">
+                    <summary class="card-header">
+                        <h3>DENÚNCIAS</h3>
+                        <div class="dropdown-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 10L12 15L17 10" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </summary>
+                    <div class="card-content">
+                        <ul class="cont-list">
+                            <strong>Canal interno "Alô Mineirão":</strong> Disponível via site de compliance do
+                                Mineirão: <a href="https://www.contatoseguro.com.br/mineirao" target="_blank"
+                                    rel="noopener noreferrer">contatoseguro.com.br</a><br>
+                            <strong>Disque Denúncia MG:</strong> <a href="tel:+5531181">181</a> – atendimento 24 h,
+                                gratuito e anônimo<br>
+                             <a href="tel:+558007003939"><strong>Telefone:</strong>Alô Mineirão 0800 700 3939</a>
+                            
+                        </ul>
+                    </div>
+                </details>
+            </div>
+
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,271 @@
+
+<style>
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+:root{
+
+--azul-royal: #003b70;
+
+--azul-escuro: #002855;
+
+--azul-claro: #055eed;
+
+--branco: #ffffff;
+
+--cinza-claro: #f5f5f5;
+
+}
+
+*{
+
+padding: 0;
+
+margin: 0;
+
+box-sizing: border-box;
+
+}
+
+body{
+
+background: var(--branco);
+
+color: var(--azul-escuro);
+
+display: flex;
+
+flex-direction: column;
+
+margin: 0;
+
+padding: 10px !important;
+
+align-items: center;
+
+justify-content: center;
+
+font-family: 'Outfit', sans-serif;
+
+}
+
+.container{
+
+max-width: 1200px;
+
+width: 100%;
+
+padding: 20px;
+
+display: flex;
+
+flex-direction: column;
+
+gap: 20px;
+
+align-items: center;
+
+}
+
+.iframe-wrapper{
+
+width: 100%;
+
+background: linear-gradient(135deg, var(--azul-escuro), var(--azul-claro));
+
+padding: 3px;
+
+border-radius: 15px;
+
+box-shadow: 0 10px 30px rgba(0, 20, 98, 0.3);
+
+}
+
+iframe{
+
+width: 100%;
+
+height: 80vh;
+
+min-height: 600px;
+
+border: none;
+
+border-radius: 12px;
+
+background: #002b82;
+
+}
+
+.downloads-grid {
+
+display: flex;
+
+flex-direction: column;
+
+gap: 15px;
+
+width: 100%;
+
+}
+
+.btn-Download {
+
+width: 100%;
+
+height: 80px;
+
+border-radius: 15px;
+
+overflow: hidden;
+
+position: relative;
+
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+cursor: pointer;
+
+transition: transform 0.3s;
+
+text-decoration: none;
+
+display: flex;
+
+align-items: center;
+
+}
+
+.btn-Download:hover {
+
+transform: translateY(-5px);
+
+}
+
+.btn-Download::before {
+
+content: '';
+
+position: absolute;
+
+top: 0;
+
+left: 0;
+
+width: 100%;
+
+height: 100%;
+
+background: linear-gradient(to right, var(--azul-escuro) 0%, rgba(0, 91, 170, 0.7) 100%);
+
+z-index: 1;
+
+}
+
+.btn-icon {
+
+width: 30px;
+
+height: 30px;
+
+margin-right: 20px;
+
+margin-left: 20px;
+
+flex-shrink: 0;
+
+z-index: 2;
+
+position: relative;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+font-size: 18px;
+
+color: var(--branco);
+
+}
+
+.btn-text {
+
+flex-grow: 1;
+
+color: var(--branco);
+
+font-family: 'Outfit', sans-serif;
+
+font-weight: 900;
+
+font-size: 16px;
+
+text-transform: uppercase;
+
+letter-spacing: 0.5px;
+
+z-index: 2;
+
+position: relative;
+
+}
+
+@media (max-width: 768px){
+
+iframe{
+
+height: 70vh;
+
+min-height: 500px;
+
+}
+
+}
+
+</style>
+
+<div class="downloads-grid">
+
+<h1>Downloads</h1><br>
+
+<p>Nessa página você tem acesso aos arquivos do Manual de Identidade Visual do Cruzeiro Esporte Clube e os elementos presentes nele. Clique abaixo na opção desejada e faça o download.</p>
+
+<a class="btn-Download" href="https://drive.usercontent.google.com/u/0/uc?id=1bIp-4jCN3Zy3eGqLBhd6LOq5P0EKoLxy&export=download">
+
+<div class="btn-icon"><i class="fa fa-download"></i></div>
+
+<div class="btn-text">Manual de Identidade Visual</div>
+
+</a>
+
+<a class="btn-Download" href="https://drive.usercontent.google.com/u/0/uc?id=1PVm3fmiRiN5kU89ORSNWOuJ-4TBLv0HO&export=download">
+
+<div class="btn-icon"><i class="fa fa-download"></i></div>
+
+<div class="btn-text">Marcas Oficiais e Variações</div>
+
+</a>
+
+<a class="btn-Download" href="https://drive.usercontent.google.com/u/0/uc?id=1MVrd241nIli0M4p2yum2wwdpQDxBFhqC&export=download">
+
+<div class="btn-icon"><i class="fa fa-download"></i></div>
+
+<div class="btn-text">Ícones</div>
+
+</a>
+
+<a class="btn-Download" href="https://drive.usercontent.google.com/u/0/uc?id=1f-EOz6tZsZVGw7IqXR83sJ0TYsVBEmbH&export=download">
+
+<div class="btn-icon"><i class="fa fa-download"></i></div>
+
+<div class="btn-text">Linha de Taças</div>
+
+</a>
+
+
+</div>
+
+</body>

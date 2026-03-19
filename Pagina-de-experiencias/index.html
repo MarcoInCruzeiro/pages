@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Experiências 5 estrelas Cruzeiro SAF</title>
+<style>
+    :root {
+        --primary-color: #002bab;
+        --secondary-color: #e6f0ff;
+        --terciary-color: #1348f5;
+        --quarter-color: gold;
+        --text-color: #031247;
+        --background-color: #f4f4f4;
+    }
+
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        border: none;
+    }
+
+    body {
+        font-family: 'Outfit', sans-serif;
+        margin: 0;
+        padding: 15px;
+        background: var(--background-color);
+    }
+
+    .content {
+        margin-top: 30px;
+    }
+
+    .text-center {
+        color: var(--text-color);
+        text-align: center;
+        padding: 20px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto 30px auto;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 4px;
+        background-color: #f2f2f2;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .card:hover {
+        transform: translateY(-2px);
+    }
+
+    .card:last-child {
+        margin-bottom: 30px;
+    }
+
+    .card-header {
+        background: linear-gradient(to right, #002e95, #00b4fe);
+        color: white;
+        text-align: center;
+        padding: 8px;
+        font-weight: 600;
+        font-size: clamp(14px, 2.5vw, 18px);
+        text-transform: uppercase;
+    }
+
+    .card-header h2 {
+        color: white;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin: 0;
+        font-size: clamp(20px, 4vw, 24px);
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+    }
+
+    .card-titulo {
+        color: #001060;
+        text-align: center;
+        font-size: 1rem;
+        margin: 0;
+        padding: 10px;
+        font-weight: 650;
+    }
+
+    .card-img {
+        width: 100%;
+        object-fit: cover;
+        aspect-ratio: 21/9;
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+
+    .btn-ver-mais {
+        background: linear-gradient(135deg, #ffcc00, #ffd700);
+        color: #001060;
+        font-size: clamp(12px, 2vw, 16px);
+        padding: clamp(8px, 1.5vw, 12px) clamp(16px, 3vw, 24px);
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
+        text-align: center;
+        font-weight: 800;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+    .btn-ver-mais:hover {
+        background: linear-gradient(135deg, #ffd700, #ffed4e);
+        box-shadow: 0 6px 20px rgba(255, 204, 0, 0.5);
+    }
+
+    .toggle-checkbox {
+        display: none;
+    }
+
+    .collapse-content {
+        position: relative;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        background: linear-gradient(135deg, #f8f9fa 0%, #e8eef7 100%);
+        padding: 0;
+    }
+
+    .toggle-checkbox:checked + .btn-ver-mais + .collapse-content {
+        height: 500px;
+    }
+
+    .carousel {
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: #002bab #e8eef7;
+        padding: 20px 15px;
+        position: relative;
+    }
+
+    .carousel::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .carousel::-webkit-scrollbar-track {
+        background: #e8eef7;
+        border-radius: 10px;
+    }
+
+    .carousel::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #002bab 0%, #1348f5 100%);
+        border-radius: 10px;
+        border: 2px solid #e8eef7;
+    }
+
+    .carousel::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #001b7f 0%, #0d2fb8 100%);
+    }
+
+    .carousel::after {
+        content: '⬇';
+        position: absolute;
+        bottom: 10px;
+        right: 12px;
+        color: #002bab;
+        font-size: 20px;
+        animation: bounce 2s infinite;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(8px); }
+    }
+
+    .carousel-slides {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        height: auto;
+        padding-bottom: 30px;
+    }
+
+    .slide {
+        width: 100%;
+        aspect-ratio: 16/9;
+        flex-shrink: 0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0, 43, 171, 0.12);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .slide:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 43, 171, 0.18);
+    }
+
+    .slide::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(0, 43, 171, 0.1) 0%, transparent 100%);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease;
+    }
+
+    .slide:hover img {
+        transform: scale(1.02);
+    }
+
+    .carousel-controls {
+        display: none;
+    }
+
+    .carousel-arrow {
+        display: none;
+    }
+
+    .experience-section {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+
+    .experience-description {
+        text-align: center;
+        color: white;
+        padding: 10px;
+        background: rgba(0, 7, 50, 0.8);
+        margin: 0;
+        z-index: 2;
+    }
+
+    @media (max-width: 768px) {
+        .toggle-checkbox:checked + .btn-ver-mais + .collapse-content { height: 600px; }
+        .slide { aspect-ratio: 4/3; }
+    }
+
+    @media (max-width: 480px) {
+        .toggle-checkbox:checked + .btn-ver-mais + .collapse-content { height: 700px; }
+        .slide { aspect-ratio: 1/1; }
+        .carousel { padding: 15px 10px; }
+        .carousel-slides { gap: 12px; }
+        *{
+            font-size: 15px;
+        }
+    }
+</style>
+</head>
+
+<body>
+    <div class="text-center">
+        <p style="color: #0e127f; font-size: 1.2rem;">
+            Para conseguir ter acesso às experiências, confira a área de resgates dentro do aplicativo Cruzeiro Oficial: Nação Azul.
+        </p>
+    </div>
+
+    <main>
+        <section class="content">
+            <div>
+                <!-- Experiência 1 -->
+                <div class="card">
+                    <div class="card-header"><h2>Tour na Toca da Raposa 2</h2></div>
+                    <div class="card-body">
+                        <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Thumbs/ThumbExperiencia_Toca_02.png" alt="Tour na Toca da Raposa 2" class="card-img">
+                        <p class="card-titulo">Uma experiência imersiva no dia a dia do Cruzeiro.</p>
+                    </div>
+                    <input type="checkbox" id="toggle1" class="toggle-checkbox">
+                    <label for="toggle1" class="btn-ver-mais">ver mais</label>
+                    <div class="collapse-content">
+                        <div class="carousel">
+                            <div class="carousel-slides">
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_Toca_02.png" alt="Foto Tour na Toca da Raposa 01"></div>
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_Toca_01.png" alt="Foto Tour na Toca da Raposa 02"></div>
+                            </div>
+                        </div>
+                        <div class="experience-section">
+                            <p class="experience-description">A Toca da Raposa 2 é o principal centro de treinamento do Cruzeiro e um dos mais modernos do país. Totalmente dedicada para o desenvolvimento do futebol profissional e preparação de atletas, a Toca da Raposa 2 possui uma estrutura de primeira e inúmeras referências à história do Cruzeiro. O tour na Toca é uma excelente experiência para quem quer conhecer mais do dia a dia do Cruzeiro, em um ambiente onde tudo é preparado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experiência 2 -->
+                <div class="card">
+                    <div class="card-header"><h2>Tour no Mineirão</h2></div>
+                    <div class="card-body">
+                        <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Thumbs/ThumbExperiencia_TourMineirao_02.png" alt="Tour no Mineirão" class="card-img">
+                        <p class="card-titulo">No Tour 5 Estrelas pelo Mineirão, o torcedor cruzeirense será inserido no momento de preparação dos atletas para uma partida.</p>
+                    </div>
+                    <input type="checkbox" id="toggle2" class="toggle-checkbox">
+                    <label for="toggle2" class="btn-ver-mais">ver mais</label>
+                    <div class="collapse-content">
+                        <div class="carousel">
+                            <div class="carousel-slides">
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_Tour_01.png" alt="Foto Experiência Tour 1"></div>
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_Tour_02.png" alt="Foto Experiência Tour 2"></div>
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_Tour_03.png" alt="Foto Experiência Tour 3"></div>
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_Tour_04.png" alt="Foto Experiência Tour 4"></div>
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_Tour_05.png" alt="Foto Experiência Tour 5"></div>
+                            </div>
+                        </div>
+                        <div class="experience-section">
+                            <p class="experience-description">Você vai conhecer todo o percurso que o jogador faz, desde a saída do ônibus, passando pela sala de aquecimento, o vestiário do Cruzeiro e, enfim, subir ao gramado do Mineirão, palco dos grandes jogos do Cabuloso. (Fotos: André Araújo)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experiência 3 -->
+                <div class="card">
+                    <div class="card-header"><h2>Mascotinhos</h2></div>
+                    <div class="card-body">
+                        <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Thumbs/ThumbExperiencia_Mascotinho_02.png" alt="Mascotinhos" class="card-img">
+                        <p class="card-titulo">Um dos momentos de maior emoção para um torcedor mirim é conhecer o seu ídolo.</p>
+                    </div>
+                    <input type="checkbox" id="toggle3" class="toggle-checkbox">
+                    <label for="toggle3" class="btn-ver-mais">ver mais</label>
+                    <div class="collapse-content">
+                        <div class="carousel">
+                            <div class="carousel-slides">
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_Mascotinho_01.png" alt="Foto Experiência Mascotinho 1"></div>
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_Mascotinho_02.png" alt="Foto Experiência Mascotinho 2"></div>
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_Mascotinho_03.png" alt="Foto Experiência Mascotinho 3"></div>
+                            </div>
+                        </div>
+                        <div class="experience-section">
+                            <p class="experience-description">Subir para o gramado e perfilar junto com os jogadores é uma experiência única para os pequenos cruzeirenses. (Fotos: André Araújo)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experiência 4 -->
+                <div class="card">
+                    <div class="card-header"><h2>Desafio do Intervalo</h2></div>
+                    <div class="card-body">
+                        <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Thumbs/ThumbExperiencia_Desafio_02.png" alt="Desafio do Intervalo" class="card-img">
+                        <p class="card-titulo">Quer participar do desafio no intervalo do jogo?</p>
+                    </div>
+                    <input type="checkbox" id="toggle4" class="toggle-checkbox">
+                    <label for="toggle4" class="btn-ver-mais">ver mais</label>
+                    <div class="collapse-content">
+                        <div class="carousel">
+                            <div class="carousel-slides">
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_Desafio_01.png" alt="Foto Experiência Desafio do Intervalo 1"></div>
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_Desafio_02.png" alt="Foto Experiência Desafio do Intervalo 2"></div>
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_Desafio_03.png" alt="Foto Experiência Desafio do Intervalo 3"></div>
+                            </div>
+                        </div>
+                        <div class="experience-section">
+                            <p class="experience-description">O torcedor será desafiado pelo Raposão e o Raposinho a cumprir uma tarefa no gramado do estádio durante os 15 minutos de intervalo da partida. Será que você consegue cumprir o desafio? (Fotos: André Araújo)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experiência 5 -->
+                <div class="card">
+                    <div class="card-header"><h2>Visita dos Mascotes</h2></div>
+                    <div class="card-body">
+                        <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Thumbs/ThumbExperiencia_VisitaMascotes_02.png" alt="Visita dos Mascotes" class="card-img">
+                        <p class="card-titulo">Muito além dos gramados, o Raposão e o Raposinho são figurinhas carimbadas em diversos eventos.</p>
+                    </div>
+                    <input type="checkbox" id="toggle5" class="toggle-checkbox">
+                    <label for="toggle5" class="btn-ver-mais">ver mais</label>
+                    <div class="collapse-content">
+                        <div class="carousel">
+                            <div class="carousel-slides">
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_VisitaMascotes_01.png" alt="Foto Experiência Visita dos mascotes 1"></div>
+                                <div class="slide"><img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Experiencias/Fotos/FotoExperiencia_VisitaMascotes_02.png" alt="Foto Experiência Visita dos mascotes 2"></div>
+                            </div>
+                        </div>
+                        <div class="experience-section">
+                            <p class="experience-description">Seja em casamentos, formaturas, aniversários, eventos beneficentes ou visitas em escolas e hospitais, os mascotes sempre levarão muita alegria para todos os convidados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

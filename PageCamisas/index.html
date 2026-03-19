@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+  <title>...</title>
+
+  <style>
+
+    /* CSS style para page camisas */
+
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+
+
+
+
+    * {
+
+      margin: 0;
+
+      padding: 0;
+
+      box-sizing: border-box;
+
+      overflow-x: none;
+
+      overflow-y: none;
+
+    }
+
+    body {
+
+      background-color: #f4f4f4;
+
+      color: rgb(0, 0, 67);
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      font-family: 'Outfit', sans-serif;
+
+      max-width: 100%;
+
+      margin: 10px;
+
+    }
+
+    section.all {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      margin-top: 50px;
+
+    }
+
+    .titulo-camisas {
+
+      padding: clamp(10px, 4vw, 20px);
+
+      padding-bottom: 0;
+
+      margin: clamp(10px, 4vw, 20px);
+
+      width: 100%;
+
+      max-width: fit-content;
+
+      font-size: clamp(2rem, 6vw, 3rem);
+
+    }
+
+    .enfase-titulo {
+
+      border-bottom: clamp(4px, 1vw, 6px) solid gold;
+
+      width: clamp(150px, 50vw, 250px);
+
+      margin: 0 auto;
+
+      box-shadow: gold 0px 4px 6px -1px;
+
+    }
+
+     
+
+    .conteudo-camisas-all {
+
+      display: grid;
+
+      gap: clamp(20px, 4vw, 40px);
+
+      max-width: 1200px;
+
+      margin: clamp(20px, 4vw, 30px) auto;
+
+      padding: 0 clamp(10px, 3vw, 20px);
+
+    }
+
+     
+
+    @media (min-width: 600px) {
+
+      .conteudo-camisas-all {
+
+        grid-template-columns: repeat(2, 1fr);
+
+      }
+
+    }
+
+
+
+     
+
+    .card-1 {
+
+      position: relative;
+
+      width: 100%;
+
+      max-width: 400px;
+
+      height: auto;
+
+      background: transparent;
+
+      border-radius: 12px;
+
+      box-shadow: 0 0px rgba(0,0,0,0.1);
+
+      transition: transform 0.3s ease;
+
+      justify-self: center;
+
+    }
+
+     
+
+
+
+     
+
+    .card-titulo {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      padding: clamp(10px, 1vw, 25px);
+
+      background: linear-gradient(to right, #002e95, #00b4fe);
+
+      color: white !important;
+
+      border-radius: 5px 5px 0 0;
+
+      z-index: 0;
+
+      text-transform: uppercase;
+
+      justify-content: center;
+
+    }
+
+     
+
+    .card-titulo h2 {
+
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+
+      font-weight: 600;
+
+    }
+
+     
+
+    .dropdown-toggle {
+
+      display: none;
+
+    }
+
+     
+
+    .gold-arrow {
+
+      position: absolute;
+
+      top: clamp(15px, 3vw, 20px);
+
+      right: clamp(15px, 3vw, 20px);
+
+      width: 0;
+
+      height: 0;
+
+      border-left: clamp(10px, 2vw, 15px) solid transparent;
+
+      border-right: clamp(10px, 2vw, 15px) solid transparent;
+
+      border-top: clamp(18px, 3vw, 25px) solid gold;
+
+      transition: transform 0.3s ease;
+
+      z-index: 10;
+
+      pointer-events: none;
+
+    }
+
+     
+
+    .img-container {
+
+      position: relative;
+
+      cursor: pointer;
+
+    }
+
+     
+
+    .img-destaque-camisa {
+
+
+
+      width: 100%;
+
+      object-fit: cover;
+
+      cursor: pointer;
+
+      transition: ease 0.3s;
+
+      background-color: rgba(215, 215, 215, 0.377);
+
+    }
+
+    .img-destaque-camisa:hover {
+
+      transition: transform 0.3s ease;
+
+      border-left: #00b4fe 2px solid;
+
+      border-right: #00b4fe 2px solid;
+
+      border-bottom: #00b4fe 2px solid;
+
+    }
+
+     
+
+    .card-dropdown {
+
+      position: absolute;
+
+      top: 95%;
+
+      left: 0;
+
+      width: 100%;
+
+      background: white;
+
+      border-radius: 0 0 clamp(8px, 2vw, 12px) clamp(8px, 2vw, 12px);
+
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      transform: translateY(-10px);
+
+      transition: all 0.3s ease;
+
+      z-index: 99999;
+
+    }
+
+     
+
+    .dropdown-toggle:checked ~ .card-dropdown {
+
+      opacity: 1;
+
+      visibility: visible;
+
+      transform: translateY(0);
+
+    }
+
+     
+
+    .dropdown-toggle:checked ~ .img-container .gold-arrow {
+
+      transform: rotate(180deg);
+
+    }
+
+    .dropdown-toggle:checked ~ .img-container .img-destaque-camisa {
+
+      border-left: #00b4fe 2px solid;
+
+      border-right: #00b4fe 2px solid;
+
+    }
+
+     
+
+    .dropdown-content {
+
+      padding: clamp(15px, 4vw, 25px);
+
+    }
+
+     
+
+    .dropdown-content p {
+
+      margin-bottom: clamp(8px, 2vw, 12px);
+
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+
+      line-height: 1.5;
+
+      text-align: center;
+
+    }
+
+     
+
+    .dropdown-btn {
+
+      background: gold;
+
+      color: #004343;
+
+      border: none;
+
+      padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 24px);
+
+      border-radius: clamp(4px, 1vw, 6px);
+
+      font-weight: 600;
+
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+
+      cursor: pointer;
+
+      transition: background 0.3s ease;
+
+      text-decoration: none;
+
+      display: inline-block;
+
+    }
+
+     
+
+    .dropdown-btn:hover {
+
+      background: #000e47;
+
+      color: white;
+
+    }
+
+
+
+    .caracteristicas {
+
+      text-align: left;
+
+      text-transform: uppercase;
+
+    }
+
+    .descricao {
+
+      text-align: justify;
+
+      margin-top: 15px;
+
+    }
+
+    .cta-camisa {
+
+      margin-top: 15px;
+
+      color: #000743;
+
+    }
+
+     
+
+    .btn-fechar {
+
+      background: #001358;
+
+      color: white;
+
+      border: none;
+
+      padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 24px);
+
+      border-radius: clamp(4px, 1vw, 6px);
+
+      font-weight: 600;
+
+      font-size: clamp(0.8rem, 2vw, 1rem);
+
+      cursor: pointer;
+
+      transition: background 0.3s ease;
+
+      margin-top: 10px;
+
+      display: block;
+
+      width: fit-content;
+
+      justify-self: center;
+
+    }
+
+     
+
+    .btn-fechar:hover {
+
+      background: #c82333;
+
+    }
+
+
+
+    @media (max-width: 1440px) {
+
+      .dropdown-content p {
+
+        font-size: clamp(1rem, 3.5vw, 1.5rem);
+
+      }
+
+    }
+
+     
+
+    @media (max-width: 768px) {
+
+      .conteudo-camisas-all {
+
+        grid-template-columns: 1fr;
+
+      }
+
+       
+
+      .dropdown-content p {
+
+        font-size:1rem;
+
+      }
+
+    }
+
+
+
+  </style>
+
+</head>
+
+<body>
+
+
+
+  <section class="all">
+
+    <article class="vitrine-camisas">
+
+
+
+
+
+      <div class="conteudo-camisas-all">
+
+        <!-- Conteúdo dos uniformes atuais vai aqui -->
+
+
+
+
+
+        <div class="card-1">
+
+          <div class="card-titulo">
+
+            <h2 class="text-card-titulo">Camisa Azul</h2>
+
+          </div>
+
+          <input type="checkbox" id="dropdown-toggle" class="dropdown-toggle">
+
+          <div class="img-container">
+
+            <label for="dropdown-toggle">
+
+              <img class="img-destaque-camisa" src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Uniformes/2025/Camisa_1_Azul_2025.png" alt="Camisa Azul">
+
+            </label>
+
+            <div class="gold-arrow"></div>
+
+          </div>
+
+          <div class="card-dropdown">
+
+            <div class="dropdown-content">
+
+              <p class="caracteristicas"><strong>Temporada:</strong>2025</p>
+
+              <p class="caracteristicas"><strong>Cores:</strong> Azul e Branco</p>
+
+              <p class="caracteristicas"><strong>Tecnologia:</strong> Aeroready</p>
+
+              <p class="descricao">Para a temporada 2025, o Cruzeiro homenageia na sua camisa azul os 60 anos do hino oficial do time. A camisa o escudo do clube em destaque, envolto por uma textura de estrelas, que resplandecem a partir dele, simbolizando nossas conquistas (pois na realidade é um grande campeão). Além disso, a camisa traz na gola as cinco estrelas e o escrito "CRUZEIRO", em alusão a tradicional camisa dos anos 1990, década mais vitoriosa do clube. As mangas e ombro na cor branca, traz as listras da Adidas em diferentes tons de azul.</p>
+
+              <a href="https://loja.cruzeiro.com.br/lst/camisa-home?sort=review-stars&utm_source=oficial&utm_medium=bannersiteoficial&utm_campaign=add_camisahome2025_all" class="dropdown-btn cta-camisa">Ver na Loja</a>
+
+              <label for="dropdown-toggle" class="btn-fechar">Fechar</label>
+
+            </div>
+
+          </div>
+
+        </div>
+
+         
+
+        <div class="card-1">
+
+          <div class="card-titulo">
+
+            <h2 class="text-card-titulo">Camisa Branca</h2>
+
+          </div>
+
+          <input type="checkbox" id="dropdown-toggle-2" class="dropdown-toggle">
+
+          <div class="img-container">
+
+            <label for="dropdown-toggle-2">
+
+              <img class="img-destaque-camisa" src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Uniformes/2025/Camisa_2_Branca_2025.png" alt="Camisa Branca">
+
+            </label>
+
+            <div class="gold-arrow"></div>
+
+          </div>
+
+          <div class="card-dropdown">
+
+            <div class="dropdown-content">
+
+              <p class="caracteristicas"><strong>Temporada:</strong>2025</p>
+
+              <p class="caracteristicas"><strong>Cores:</strong> Branco e Azul</p>
+
+              <p class="caracteristicas"><strong>Tecnologia:</strong> Aeroready</p>
+
+              <p class="descricao">Assim como o uniforme azul, a camisa branca dessa temporada faz alusão aos 60 anos do Hino do Cruzeiro, composto pelo grande músico e maestro Jadir Ambrósio. Além do escudo oficial do Cruzeiro no lado esquerdo do peito, a parte frontal da camisa branca possui um grafismo com as ondas sonoras do hino do Cruzeiro, composto por Jadir e reproduzido em diversas versões por tantos outros músicos. No ombro, as listras da Adidas foram aplicadas em diferentes tons de azul, seguindo a característica da camisa azul. Nas costas, logo abaixo da gola, a camisa carrega um dos trechos mais icônicos do hino do Cruzeiro: "tão combatido, jamais vencido".</p>
+
+              <a href="https://loja.cruzeiro.com.br/lst/away-2526?utm_source=oficial&utm_medium=banneroficial&utm_campaign=add_camisaawaycruzeiro2526_250530" class="dropdown-btn cta-camisa">Ver na Loja</a>
+
+              <label for="dropdown-toggle-2" class="btn-fechar">Fechar</label>
+
+            </div>
+
+          </div>
+
+        </div>
+
+         
+
+
+
+         
+
+        <div class="card-1">
+
+          <div class="card-titulo">
+
+            <h2 class="text-card-titulo">Terceiro Uniforme</h2>
+
+          </div>
+
+          <input type="checkbox" id="dropdown-toggle-5" class="dropdown-toggle">
+
+          <div class="img-container">
+
+            <label for="dropdown-toggle-5">
+
+              <img class="img-destaque-camisa" src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Uniformes/2025/Camisa_3_Third_2025.png" alt="Camisa Dourada">
+
+            </label>
+
+            <div class="gold-arrow"></div>
+
+          </div>
+
+          <div class="card-dropdown">
+
+            <div class="dropdown-content">
+
+              <p class="caracteristicas"><strong>Temporada:</strong>2025</p>
+
+              <p class="caracteristicas"><strong>Cores:</strong> Azul e Dourado</p>
+
+              <p class="caracteristicas"><strong>Tecnologia:</strong> Aeroready</p>
+
+              <p class="descricao">A camisa 3 do Cruzeiro de 2025 faz homenagem ao Rio São Francisco, um dos maiores rios do Brasil. O terceiro uniforme do Cruzeiro é predominantemente azul, com variações entre tons mais escuros e claros. Em sua extensão, a camisa tem grafismos em alusão ao movimento da água fluvial do Velho Chico. Além disso, a camisa tem duas faixas laterais e outros detalhes, como a logo e as tradicionais três listras da adidas, em tom dourado, em alusão ao efeito quando o sol se põe nas águas do rio.</p>
+
+              <a href="https://loja.cruzeiro.com.br/lst/camisa-iii?genero=masculino&mi=hm_ger_mntop_UNI-THIRD-MASC&psn=Menu_Top" class="dropdown-btn cta-camisa">Ver na Loja</a>
+
+              <label for="dropdown-toggle-5" class="btn-fechar">Fechar</label>
+
+            </div>
+
+          </div>
+
+        </div>
+
+         
+
+        <div class="card-1">
+
+          <div class="card-titulo">
+
+            <h2 class="text-card-titulo">Camisa de Gigantes</h2>
+
+          </div>
+
+          <input type="checkbox" id="dropdown-toggle-6" class="dropdown-toggle">
+
+          <div class="img-container">
+
+            <label for="dropdown-toggle-6">
+
+              <img class="img-destaque-camisa" src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Uniformes/2025/Camisa_Goleiro_1_Cruzeiro_2025.png" alt="Camisa Retrô 1990">
+
+            </label>
+
+            <div class="gold-arrow"></div>
+
+          </div>
+
+          <div class="card-dropdown">
+
+            <div class="dropdown-content">
+
+              <p class="caracteristicas"><strong>Temporada:</strong>2025</p>
+
+              <p class="caracteristicas"><strong>Cores:</strong> Prata</p>
+
+              <p class="caracteristicas"><strong>Edição:</strong> Especial</p>
+
+              <p class="descricao">Batizada como "Camisa de Gigantes", a camisa de goleiro do Cruzeiro de 2025 celebra a tradição do Cruzeiro de revelar e consagrar grandes goleiros. A camisa foi construída com a participação do goleiro Cássio, que usou elementos de outros goleiros e antigos uniformes para o desenvolvimento do uniforme. O uniforme é predominantemente prata e ainda conta com detalhes especiais, como o escudo retrô e centralizado, além de um leve grafismo em losangos na barra frontal. Com estética marcante, a peça ainda traz detalhes em azul marinho e o patch da “Camisa de Gigantes”.</p>
+
+              <a href="https://loja.cruzeiro.com.br/p/camisa-goleiro-cruzeiro-especial-2526-sn-torcedor-adidas-masculina-FBA-82A3-310" class="dropdown-btn cta-camisa">Ver na Loja</a>
+
+              <label for="dropdown-toggle-6" class="btn-fechar">Fechar</label>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="card-1">
+
+          <div class="card-titulo">
+
+            <h2 class="text-card-titulo">Linha de Treino</h2>
+
+          </div>
+
+          <input type="checkbox" id="dropdown-toggle-3" class="dropdown-toggle">
+
+          <div class="img-container">
+
+            <label for="dropdown-toggle-3">
+
+              <img class="img-destaque-camisa" src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Uniformes/2026/Camisa_Treino(1)_Cruzeiro_2026.png" alt="Camisa de Treino">
+
+            </label>
+
+            <div class="gold-arrow"></div>
+
+          </div>
+
+          <div class="card-dropdown">
+
+            <div class="dropdown-content">
+
+              <p class="caracteristicas"><strong>Temporada:&nbsp;</strong>2026</p>
+
+              <p class="caracteristicas"><strong>Cores:</strong>Azul com detalhes azul claro e branco</p>
+
+              <p class="caracteristicas"><strong>Tecnologia:</strong> Climacool</p>
+
+              <p class="descricao">A linha de treino do Cruzeiro para a temporada 2026 volta a trazer o escudo oficial do Cruzeiro no lado esquerdo do peito. O modelo de jogador possui o tradicional azul do Cruzeiro, com detalhes em azul claro e branco. Já o modelo da comissão técnica possui um tom de azul marinho e também com detalhes em azul claro e branco.</p>
+
+              <a href="https://loja.cruzeiro.com.br/lst/linha-treino2627?utm_source=oficial&utm_medium=bannersiteoficial&utm_campaign=add_linhatreinocruzeiro2627_251212" class="dropdown-btn cta-camisa">Ver semelhantes na Loja</a>
+
+              <label for="dropdown-toggle-3" class="btn-fechar">Fechar</label>
+
+            </div>
+
+          </div>
+
+        </div>
+
+         
+
+        <div class="card-1">
+
+          <div class="card-titulo">
+
+            <h2 class="text-card-titulo">LINHA DE TREINO</h2>
+
+          </div>
+
+          <input type="checkbox" id="dropdown-toggle-4" class="dropdown-toggle">
+
+          <div class="img-container">
+
+            <label for="dropdown-toggle-4">
+
+              <img class="img-destaque-camisa" src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Uniformes/2026/Camisa_Treino(2)_Cruzeiro_2026.png" alt="Camisa Treino">
+
+            </label>
+
+            <div class="gold-arrow"></div>
+
+          </div>
+
+          <div class="card-dropdown">
+
+            <div class="dropdown-content">
+
+              <p class="caracteristicas"><strong>Temporada:</strong>2025</p>
+
+              <p class="caracteristicas"><strong>Cores:</strong> Azul marinho com detalhes azul claro e branco</p>
+
+              <p class="caracteristicas"><strong>Tecnologia:</strong> Climacool</p>
+
+              <p class="descricao">A linha de treino do Cruzeiro para a temporada 2026 volta a trazer o escudo oficial do Cruzeiro no lado esquerdo do peito. O modelo de jogador possui o tradicional azul do Cruzeiro, com detalhes em azul claro e branco. Já o modelo da comissão técnica possui um tom de azul marinho e também com detalhes em azul claro e branco.</p>
+
+              <a href="https://loja.cruzeiro.com.br/lst/linha-treino2627?utm_source=oficial&utm_medium=bannersiteoficial&utm_campaign=add_linhatreinocruzeiro2627_251212" class="dropdown-btn cta-camisa">Ver semelhantes na Loja</a>
+
+              <label for="dropdown-toggle-4" class="btn-fechar">Fechar</label>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!---
+
+        <div class="card-1">
+
+          <div class="card-titulo">
+
+            <h1 class="text-card-titulo" style="color: white !important;">Camisa Feminina</h1>
+
+          </div>
+
+          <input type="checkbox" id="dropdown-toggle-7" class="dropdown-toggle">
+
+          <div class="img-container">
+
+            <label for="dropdown-toggle-7">
+
+              <img class="img-destaque-camisa" src="https://via.placeholder.com/400x300/0099cc/ffffff?text=Feminina" alt="Camisa Feminina">
+
+            </label>
+
+            <div class="gold-arrow"></div>
+
+          </div>
+
+          <div class="card-dropdown">
+
+            <div class="dropdown-content">
+
+              <p class="caracteristicas"><strong>Temporada:</strong>2025</p>
+
+              <p class="caracteristicas"><strong>Cores:</strong> Azul Celeste</p>
+
+              <p class="caracteristicas"><strong>Corte:</strong> Feminino</p>
+
+              <p class="descricao">Camisa desenvolvida especialmente para as torcedoras celestes com modelagem feminina exclusiva. Mantém todos os elementos tradicionais do uniforme titular, mas com caimento e ajustes pensados para o público feminino. Tecnologia Aeroready garante conforto e estilo para torcer com elegância.</p>
+
+              <a href="#pagina de compra-feminina" class="dropdown-btn cta-camisa">Ver na Loja</a>
+
+            </div>
+
+          </div>
+
+        </div>-->
+
+      </div>
+
+    </article>
+
+  </section>
+
+   
+
+</body>
+
+</html>

@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História do Cruzeiro</title>
+    <style>
+        :root {
+            --cor-texto-main: #00003f;
+            --cor-detail: rgb(255, 217, 0);
+            --cor-texto-secundario: white;
+            --cor-elementos: rgb(0, 0, 94);
+            --cor-detail-elemento: rgb(0, 0, 155);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+body {
+    color: var(--cor-texto-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    padding: 0;
+    overflow-x: hidden;
+
+    background: linear-gradient(
+        to bottom,
+        #0b1d51,  /* noite */
+        #ffffff,  /* entardecer */
+        #3956ff,  /* meio-dia */
+        #fff9f0   /* alvorecer */
+    );
+    background-size: 400% 400%;
+    animation: cicloDoTempo 60s ease-in-out infinite;
+}
+
+@keyframes cicloDoTempo {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+        main {
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            min-height: 100vh;
+            padding-bottom: 180px;
+        }
+
+        section{
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        footer{
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 180px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .degrade-final-back{
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 6px;
+            height: 100%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        h1 {
+            text-align: center;
+            color:#055EED ;
+            font-size: 3rem;
+            margin-bottom: 80px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        /* Linha Central */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 100px;
+            width: 6px;
+            background: linear-gradient(180deg, rgb(0, 0, 84) 99%, rgba(0, 0, 84, 0) );
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 60px 0;
+            width: 45%;
+            clear: both;
+        }
+
+        .institucional {
+            float: left;
+            text-align: right;
+        }
+
+        .futebol {
+            float: right;
+            text-align: left;
+        }
+
+        /* Último item: centralizado e destacado */
+        .Final {
+            float: none;
+            width: 100%;
+            margin: 80px auto 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .Final::after {
+            display: none;
+        }
+
+        .Final .timeline-content {
+            background: var(--cor-elementos);
+            width: min(720px, 100%);
+        }
+
+        /* Marcador Circular na Linha */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--cor-texto-main);
+            border-radius: 50%;
+            top: 24px;
+            z-index: 5;
+        }
+
+        .institucional::after {
+            right: -11.1%;
+            transform: translateX(50%);
+        }
+
+        .futebol::after {
+            left: -11.1%;
+            transform: translateX(-50%);
+        }
+
+        .capa-item{
+            width: 100%;
+            height: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .timeline-content {
+            background: var(--cor-elementos);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            background: var(--cor-detail-elemento);
+        }
+
+        /* Ano fixado acima do card */
+        .timeline-year {
+            display: inline-block;
+            background: var(--cor-detail);
+            color: var(--cor-texto-main);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .timeline-title {
+            color: var(--cor-detail);
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .timeline-text {
+            color: var(--cor-texto-secundario);
+            font-size: 1.3rem;
+            text-align:start;
+        }
+
+/* Limpeza de floats */
+        .timeline::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .timeline-divisorias{
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 10%;
+        }
+
+        .timeline-divisoria{
+            margin-left: 15px;
+            margin-right: 15px;
+            align-self: center;
+            width: 80%;
+            background-color: #00164cac;
+            height: 3px;
+            display: none;
+        }
+
+        @media (max-width: 850px) {
+            body {
+                padding: 20px 10px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
+            }
+            .timeline-divisoria{
+                display: block;
+            }
+            .Final {
+                align-items: flex-start;
+            }
+
+            .Final::after {
+                display: none;
+            }
+
+            .Final .timeline-content {
+                width: 100%;
+            }
+
+            .degrade-final-back{
+                left: 20px;
+                transform: none;
+            }
+            
+            /* A linha centralizada passa a ficar na esquerda */
+            .timeline::before {
+                left: 20px; 
+                width: 6px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                float: none !important;
+                padding-left: 45px; /* Afasta o conteúdo para não sobrepor a linha */
+                margin: 40px 0;
+                text-align: left !important;
+            }
+
+            /* É necessário resetar o transform e o right dos itens pares e ímpares */
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after {
+                right: auto;
+                transform: none;
+                left: 10px; /* Centraliza a bolinha de 20px perfeitamente sobre a linha */
+                top: 20px;
+                width: 20px;
+                height: 20px;
+            }
+
+            .capa-item {
+                height: 150px;
+            }
+
+            .timeline-year {
+                margin-bottom: 10px;
+                font-size: 1rem;
+                padding: 5px 15px;
+            }
+            
+            .timeline-content {
+                padding: 20px;
+            }
+            
+            .timeline-title {
+                font-size: 1.3rem;
+            }
+            
+            .timeline-text {
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 5px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+
+            
+            .timeline-item {
+                padding-left: 45px;
+                margin: 30px 0;
+            }
+            
+            /* Ajuste fino para a bolinha menor na tela de 480px */
+/* É necessário resetar o transform e o right dos itens pares e ímpares */
+        .timeline-item:nth-child(odd)::after,
+        .timeline-item:nth-child(even)::after {
+            right: auto;
+            transform: none;
+            left: 10px; 
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            z-index: 2; /* Garante que o marcador fique acima da linha */
+        }
+            
+            .capa-item {
+                max-width: 200px;
+                height: 120px;
+            }
+            
+            .timeline-content {
+                padding: 15px;
+            }
+            
+            .timeline-title {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            
+            .timeline-text {
+                font-size: 0.9rem;
+            }
+            
+            .timeline-year {
+                font-size: 0.9rem;
+                padding: 4px 12px;
+            }
+        }
+
+        .timeline-creditos{
+            color: white;
+            font-size: small;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+                <h1>História do Cruzeiro</h1>
+                <div class="timeline">
+                <div class="timeline-item institucional">
+                    <h4 class="timeline-year">1921</h4>
+                    <img class="capa-item" src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1921-Historia-01.png" alt="">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Fundação do palestra</h3>
+                        <p class="timeline-text">Fundado no dia 2 de janeiro como Palestra Itália dentro da comunidade italiana de Belo Horizonte. Com as cores verde, vermelho e branco, o clube rapidamente se destacou pelo futebol ofensivo.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+
+                <div class="timeline-item futebol">
+                    <img class="capa-item" src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1921-Historia-02.png" alt="">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: Acervo da família nani lazzarotti</small>
+                        <h3 class="timeline-title">primeiro jogo do palestra</h3>
+                        <p class="timeline-text">Quatro meses após a sua fundação, o Palestra Itália realizava a sia primeira partida, contra um combinado do Villa Nova e o Palmeiras de Nova Lima. O resultado foi uma vitória  palestrina por 2 a 0, com dois gols de Nani.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <h4 class="timeline-year">1923</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1923-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: acervo da família nani lazzarotti</small>
+                        <h3 class="timeline-title">Inauguração do campo do barro preto</h3>
+                        <p class="timeline-text">No coração do Barro Preto, o Palestra Itália inaugurava o seu primeiro estádio, construído por jogadores e associados entre outros membros da colônia italiana, em sua maioria formados pela classe operária. O primeiro jogo foi um empate de 3 a 3 com o Flamengo, sendo o primeiro gol assinalado por Ninão</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <h4 class="timeline-year">1927</h4>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">triunfo do palestra</h3>
+                        <p class="timeline-text">
+                            O Palestra Itália reafirmou sua potência ao golear o Grêmio Ludopédio por 10 a 1, garantindo o troféu do Campeonato da Cidade de 1926. A conquista foi reconhecida pela CBD e pela imprensa, validando o clube como campeão oficial. Durante 1927, o sucesso técnico do time e o crescimento da AMET foram tão expressivos que forçaram a liga tradicional a propor uma fusão e a reintegração da equipe.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <h4 class="timeline-year">1928</h4>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Conquista do primeiro tricampeonato</h3>
+                        <p class="timeline-text">Entre 1928 e 1930 o Palestra Itália tem sua primeira conquista significativa: <br> O tricampeonato mineiro, sendo os dois últimos de forma invicta</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <h4 class="timeline-year">1929</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1929-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">primeiro jogador negro</h3>
+                        <p class="timeline-text">
+                            Nesta temporada, o meia Bento estreiava pelo Palestra. O jogador entrou para a História como o primeiro jogadore negro
+                            registrado na Federação Mineira e, consequentemente, primeiro jogador negro da história do Cruzeiro. Sua presença marcou uma quebra de barreiras raciais em uma época de forte exclusão
+                            no esporte, contribuindo não apenas dentro de campo, mas também para o ínicio da desconstrução do racismo
+                            na época.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+
+                <div class="timeline-item institucional">
+                    <h4 class="timeline-year">1942</h4>
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">Nasce o Cruzeiro</h3>
+                        <p class="timeline-text">Devido ao contexto da 2ª Guerra Mundial, o clube adota o nome Cruzeiro do Sul. A camisa torna-se azul com as estrelas, simbolizando a nova identidade nacional do clube.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <div class="timeline-year">1943</div>
+                    <img class="capa-item" src="https://imagens.cruzeiro.com.br/Imagens%20do%20Site%20(INSTITUCIONAL)/Historia/1943_Cruzeiro.png" alt="">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: acervo de lúcio souza</small>
+                        <h3 class="timeline-title">Estreia do uniforme azul e branco</h3>
+                        <p class="timeline-text">Em jogo contra o Villa Nova o Cruzeiro entro em campo pela primeira vez com o uniforme azul e um escudo fechado com as cinco estrelas dentro. <br>A equipe celeste venceu por 2 a 1, com gols de Niginho e Alcides.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <div class="timeline-year">1945</div>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1945-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: acervo diários associados - estado de minas</small>
+                        <h3 class="timeline-title">Reconstrução do estádio JK</h3>
+                        <p class="timeline-text">O campo do Barro Preto, chamado de Estádio Juscelino Kubitschek, passou por reformas, acrescentando arquibancada de concreto e vetiários. <br>O jogo inaugural foi em um empate por 1 a 1 com o Botafogo.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1945-Historia-02.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">Raposa, o novo mascote</h3>
+                        <p class="timeline-text">O cartunista Fernando Pieruccetti "Mangabeira" desenhod uma raposa como mascote do Cruzeiro. A ideia era homenagear o então presidente do clube, Mario Grosso, considerado astuto e esperto para negociar com jogadores, assim como uma raposa.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <h4 class="timeline-year">1965</h4>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Inauguração do Mineirão</h3>
+                        <p class="timeline-text">Em amistoso realizado entre a Seleção Mineira e o River Plate, o Mineirão era inaugurado.</p>
+                    </div>
+
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">primeiro clássico no mineirão</h3>
+                        <p class="timeline-text">No mesmo ano de inauguração do Mineirão, o Cruzeiro venceria o primeiro clássico do estádio por 1 a 0, com o gol de Tostão </p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Criação do Hino do Cruzeiro</h3>
+                        <p class="timeline-text">O maestro e cantor Jadir Ambrósio compôs o Hino do Cruzeiro usado até hoje. <br>A letra foi escolhida através de um concurso realizado na Rádio Inconfidência e idealizado pelo então presidente Felício Brandi.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <div class="timeline-year">1966</div>
+                    <img class="capa-item" src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1966-Historia-01.png" alt="">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: acervo estado de minas</small>
+
+                        <h3 class="timeline-title">Primeira Taça Brasil</h3>
+                        <p class="timeline-text">Liderado por Tostão e Dirceu Lopes, o Cruzeiro venceu o Santos de Pelé, conquistando seu primeiro título nacional e projetando o clube para o cenário internacional.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <h4 class="timeline-year">1973</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1973-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: acervo do cruzeiro</small>
+                        <h3 class="timeline-title">Inauguração da Toca da raposa 1</h3>
+                        <p class="timeline-text">No início da década de 1970 o Cruzeiro inagurou a Toca da Raposa 1, localizada ás margens da lago da Pampulha. O novo centro de treinamento do Cruzeiro viria a se tornar o primeiro CT porjetado exclusivamente para treino e concentração de uma equipe de futebol no Brasil, sendo um dos mais modernos e inovadores do país.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <div class="timeline-year">1976</div>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1976-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: acervo do cruzeiro</small>
+                        <h3 class="timeline-title">Conquista da América</h3>
+                        <p class="timeline-text">O Cruzeiro atinge o topo do continente ao conquistar a Copa Libertadores da América pela primeira vez, vencendo o River Plate em uma final histórica.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <h4 class="timeline-year">1991</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1991-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: acervo do cruzeiro</small>
+                        <h3 class="timeline-title">Conquista da supercopa</h3>
+                        <p class="timeline-text">A década de 1990 tornou-se uma das mais vitoriosas do Cruzeiro e começou com uma conquista histórica. A Supercopa de 1991 foi decidia entre Cruzeiro e River Plate e o primeiro jogo, no monumental de Nuñez, vitória dos argentinos por 2 a 0.<br> No jogo da volta, uma virada histórica do Cruzeiro de 3 a 0, com gols de Ademir e Tilico (2 gols de Tilico) e assim o time celeste se sagraria camprão da Supercopa pela primeira vez.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <h4 class="timeline-year">1992</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1992-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERvo do cruzeiro</small>
+                        <h3 class="timeline-title">O bicampeonato da supercopa</h3>
+                        <p class="timeline-text">No ano seguinte outra vez o Cruzeiro se sagraria campeão da Supercopa, desta vez superando outro Argentino (O Racing).<br>No primeiro jogo da decisão uma goleada celeste de 4 a 0, com dois gols de Roberto Gúcho, Luís Fernando e Boiadeiro.<br>No Jogo de volta o Cruzeiro só administrou e mesmo com a derrota por 1 a 0, conseguiu a sua segunda conquista da Supercopa.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <h4 class="timeline-year">1993</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1993-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: acervo do cruzeiro</small>
+                        <h3 class="timeline-title">A primeira copa do Brasil </h3>
+                        <p class="timeline-text">A primeira conquista da copa do Brasil veio em 1993, em um confronte diante do Grêmio.<br>No primeiro jogo no Olímpico em um empate por 0 a 0. No jogo da volta no Mineirão, o Cruzeiro venceu o Grêmio por 2 a 1, com gols de Roberto Gaúcho e Cleisson, e sagrou-se cmapeão da Copa do Brasil pela primeira vez.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <h4 class="timeline-year">1996</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1996-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO JORNAL ESTADO DE MINAS</small>
+                        <h3 class="timeline-title">O bicampeonato da copa do brasil</h3>
+                        <p class="timeline-text">Três anos depois, uma nova conquista heroica do Cruzeiro.<br>O bicampeão da Copa do Brasil veio a diante da forte equipe do Palmeiras. O primeiro jogo da decisão, empate por 1 a 0 no Mineirão. O segundo jogo, no Parque Ántartica, uma vitória do Cruzeiro por 2 a 1 garantindo o título, com gols de Roberto Gaúcho e Marcelo Ramos e uma atuação de gala do goleiro Dida.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <h4 class="timeline-year">1997</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1997-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">Recorde de público do Mineirão</h3>
+                        <p class="timeline-text">132.834 pessoas estiveram no Mineirão para assistir a decisão do campeonato mineiro de 1997 diante do Villa Nova.<br>Recorde do estádio até os dias de hoje. Otítulo ficou com o Cruzeiro, após vencer o Villa Nova por 1 a 0, com gol de Marcelo Ramos.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/1997-Historia-02.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">Mais uma vez campeão da américa</h3>
+                        <p class="timeline-text">A Libertadores viria a ser vencida pelo Cruzeiro mais uma vez em 1997. Após um início turbulento, os comandados de Paulo Autuori conseguiram se recuperar e vencer a competição éça segunda vez. A decisão foi diante do Sporting Cristal, do Peru, e após um 0 a 0 em Lima, o Cruzeiro vence em casa por 1 a 0, com gol de Elivelton e se sagra cmpeão da Libertadores diante de mais de 95 mil pessoas no Mineirão</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <h4 class="timeline-year">2000</h4>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">O histórico tri da copa do brasil</h3>
+                        <p class="timeline-text">O tricampeonato da Copa do Brasil veio de forma emocionante. Na final o cruzeiro enfrentaria o São Paulo e o primeiro jogo no Morumbi o placar ficou em branco. No jogo da volta no Mineirão foi o São Paulo quem abriu o placar, com Marcelinho Paríba. O gol de empate de Fábio Junior aos 34 do segundo tempo não era o suficiente para a conqueista e coube a Gerovanni marcar de falta, aos 44 minutos do segundo tempo, o gol fo título celeste.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <h4 class="timeline-year">2002</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2002-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">Foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">inauguração da toca da raposa 2</h3>
+                        <p class="timeline-text">No ínico do anos 200, em um projeto inovador o Cruzeiro inauguraria o seu segundo centro de treinamento:<br><strong>Toca Da Raposa 2</strong><br>O CT é um dos mais modernos do BRasil e contém quatro campos, hotel, academia e um centro médico para extrair o melhor de um time de futebol.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <h4 class="timeline-year">2003</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2003-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">Estreia do raposão</h3>
+                        <p class="timeline-text">Em 2003 entrava no Mineirão pela primeira vez uma figura imporante nos jogos do Cruzeiro:<br><strong>O Raposão</strong><br>Desde então o nosso mascote está sempre consco acompanhando os jogos do time e animando a torcida.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2003-Historia-02.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">O tetra da copa do brasil</h3>
+                        <p class="timeline-text">O ano de 2003 foi mágico para o Cruzeiro.<br>Após conquistar o Campeonato Mineiro a equipe celeste viria a conquistar também a Copa do Brasil, diante do Flamengo. O primeiro jogo, no Maracanã, um empate por 1 a 1, com direito a um gol de letra do capitão Alex. o jogo da volta, uma vitŕia com autoridade por 3 a 1, com gols de Deivid Arisizábel e Luisão e a conquista do quarto título.</p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2003-Historia-03.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">Campeonato brasileiro e a tríplice coroa</h3>
+                        <p class="timeline-text">No final do ano, o Cruzeiro se consolidou ainda mais no país e tornou-se campeão Braisleiro
+                            naquele ano após bater o Paysandu no Mineirão por 2 a 1. <br>
+                            Os gols celestes foram marcados por Zinho e Mota. Com o título do Brasileirão, o Cruzeiro confirmou também a conquista
+                            da tríplice coroa, por vencer no mesmo ano o Campeonato Mineiro, a Copa do Brasil e os cmapeonato Brasileiro.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+
+                <div class="timeline-item futebol">
+                    <h4 class="timeline-year">2013</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2013-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">tri campeonato brasileiro</h3>
+                        <p class="timeline-text">
+                            Depois de 10 anos o Cruzeiro voltaria a vencer o Campeonato Brasileiro com outro esquadrão. Os comandados de
+                            Marcelo Oliveira conseguiram a façanha de vencer todos os times do campeonato e o título veio a confirmar com
+                            um 3 a 1 diante do Vitória no Barradão, com gols de Willian, Júlio Baptista e Ricardo Goulart.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <h4 class="timeline-year">2014</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2014-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">milésima vitória no mineirão</h3>
+                        <p class="timeline-text">
+                            Diante do Santa Rita-AL, o Cruzeiro confirmou a sua milésima vitória no Mineirão.
+                            O placar final foi de 5 a 0, com gols de Marcelo Moreno (2 gols), Dedé, Júlio Baptista e Henrique.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2014-Historia-02.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">Logo depois do tetra</h3>
+                        <p class="timeline-text">
+                            No ano seguinte o Cruzeiro manteve a mesma base do time cmapeão Brasileiro de 2013.<br>
+                            Com três rodadas de antecedência, o time celeste foi confirmar o título Brasileiro diante do Goiás no Mineirão, debaixo de
+                            muita chuva, o Cruzeiro venceu a equipe Goiana por 2 a 1, com gols de Ricardo Goulart e Everton Ribeiro.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <h4 class="timeline-year">2017</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2017-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">penta da copa do brasil</h3>
+                        <p class="timeline-text">
+                            A quinta taça da Copa do Brasil chegou de forma dramática para o Cruzeiro. Após
+                            passar por São Paulo, Chapecoense, Palmeiras e Grêmio, o Cruzeiro enfrentaria o Flamengo na decisão.
+                            O primeiro jogo, no Maracanã, empata por 1 a 1, com gol de Arrascaeta para o Cruzeiro. No segundo jogo
+                            , no Mineirão outro empate, agora por 0 a 0, e a conquista veio na disputa dos pênaltis, com o Cruzeiro
+                            levando a melhor por 5 a 3.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <h4 class="timeline-year">2018</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2018-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">o hexa do rei de copas</h3>
+                        <p class="timeline-text">
+                            Um ano deposi o Cruzeiro viria a ser campeão da Copa do Brasil mais uma vez.
+                            Oadversário da vez era o Corinthians. O primeiro jogo, no Mineirão, vitória celeste
+                            por 1 a 0. <br>No jogo da volta, na Neo Química Arena, outra vitória do Cruzeiro por 2 a 1,
+                            com gols do Robinho e Arrascaeta, sangrando-se assim, Hexa campeão e o maior cencedor da competição.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <h4 class="timeline-year">2021</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2021-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content" style="text-align: center;">
+                        <div style="width: 100% ; text-align: left;">
+                            <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        </div>
+                        <h1 class="timeline-title" style="margin: 0; font-size: 2rem;">CEntenário do Cruzeiro</h1>
+                        <h2 class="timeline-title">aniversário de 100 anos do cabuloso</h2>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2021-Historia-02.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">Ronaldo assina prioridade e compra no cruzeiro saf</h3>
+                        <p class="timeline-text">
+                            Após aprovação do conselho deliberativo o Cruzeiro aprovou o modelo de Sociedade Anônima do futebol e
+                            , dias deposi, o ex aracante do Cruzeiro, Ronaldo Nazário, assinou prioridade de compra de 90% das ações da SAF.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <h4 class="timeline-year">2022</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2022-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">ronaldo oficializa compra da saf</h3>
+                        <p class="timeline-text">
+                            Em abril de 2022, Ronaldo oficializa de vez a compra da SAF Cruzeiro, tornando-se
+                            oficialmente detentor de 90% das ações do futebol do clube.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item futebol">
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2022-Historia-02.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">cruzeiro campeão da séire B chegando na série a</h3>
+                        <p class="timeline-text">
+                            Na 31ª rodada o Cruzeiro venceu o Vasco no Mineirão por 3 a 0 e confirmou o retorno para a série A. O resultado marcou o acesso com maior número de rodadas de antecedência de um time em uma edição da série B. Na rodada seguinte, uma semana depois do acesso, o Cruzeiro venceu a Ponte Preta em Campinas e, com os tropeços de Grêmio e Bahia, o Cruzeiro acabou se sagrando campeão da competição.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <h4 class="timeline-year">2023</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2023-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">novo raposão</h3>
+                        <p class="timeline-text">
+                            Com o apoio do Comitê de Torcedores, o Cruzeiro lançou o novo
+                            Raposão e Raposinho. A definição do novo modelo dos mascotes teve
+                            participação do Sócio 5 Estrelas que votou qual seria a versão definitiva.
+                            Os novos mascotes fizeram sua primeira aparição no jogo contra o Corinthians,
+                            no Mineirão.
+
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-divisorias">
+                    <span class="timeline-divisoria"></span>
+                </div>
+                <div class="timeline-item institucional">
+                    <h4 class="timeline-year">2024</h4>
+                    <img src="https://imagens.cruzeiro.com.br/HTML_PaginasSite/Historia/2024-Historia-01.png" alt="" class="capa-item">
+                    <div class="timeline-content">
+                        <small class="timeline-creditos">foto: ACERVO DO CRUZEIRO</small>
+                        <h3 class="timeline-title">Mudança na saf</h3>
+                        <p class="timeline-text">
+                            No meio de 2024, a Tara Sports, empresa acionista da Cruzeiro SAF, foi vendida à BPW Sports, do empresário Pedro Lourenço. Com isso, o empresário assumiu a gestão do Cruzeiro SAF no lugar do ex-jogador Ronaldo Nazário.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item Final">
+                    <h3 class="timeline-year">Hoje</h3>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Ainda há muito o que ser escrito</h3>
+                        <p class="timeline-text">Reconhecido pela sua história vitoriosa e por uma das torcidas mais apaixonadas do <strong> mundo</strong>, o Cruzeiro segue como um pilar fundamental do futebol brasileiro.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="degrade-final-back">
+            </div>
+        </footer>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Formação Felício Brandi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: #001159;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .page-title {
+            text-align: center;
+            color: #001159;
+            margin: 30px 0;
+            font-weight: bold;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+        .carousel-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: #e0e0e0;
+            aspect-ratio: 16/9;
+        }
+        .carousel-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .carousel-item {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .content-section{
+            font-size: 25px;
+            line-height: 1.6;
+            color: #001159;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        /* Show only the checked slide */
+        #slide0:checked ~ .carousel-container .carousel-item.slide0,
+        #slide1:checked ~ .carousel-container .carousel-item.slide1,
+        #slide2:checked ~ .carousel-container .carousel-item.slide2,
+        #slide3:checked ~ .carousel-container .carousel-item.slide3,
+        #slide4:checked ~ .carousel-container .carousel-item.slide4,
+        #slide5:checked ~ .carousel-container .carousel-item.slide5,
+        #slide6:checked ~ .carousel-container .carousel-item.slide6,
+        #slide7:checked ~ .carousel-container .carousel-item.slide7,
+        #slide8:checked ~ .carousel-container .carousel-item.slide8,
+        #slide9:checked ~ .carousel-container .carousel-item.slide9,
+        #slide10:checked ~ .carousel-container .carousel-item.slide10,
+        #slide11:checked ~ .carousel-container .carousel-item.slide11 {
+            opacity: 1;
+            pointer-events: auto;
+            position: relative;
+            z-index: 2;
+        }
+        /* Hide radio buttons */
+        .carousel-radio { display: none; }
+        /* Carousel controls (prev/next) */
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255,255,255,0.8);
+            color: #F0A500;
+            border: 2px solid #F0A500;
+            border-radius: 5px;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            user-select: none;
+        }
+        .carousel-control.prev { left: 10px; }
+        .carousel-control.next { right: 10px; }
+        /* Navigation buttons highlight */
+        #slide0:checked ~ .carousel-container .button-nav-item[data-index="0"],
+        #slide1:checked ~ .carousel-container .button-nav-item[data-index="1"],
+        #slide2:checked ~ .carousel-container .button-nav-item[data-index="2"],
+        #slide3:checked ~ .carousel-container .button-nav-item[data-index="3"],
+        #slide4:checked ~ .carousel-container .button-nav-item[data-index="4"],
+        #slide5:checked ~ .carousel-container .button-nav-item[data-index="5"],
+        #slide6:checked ~ .carousel-container .button-nav-item[data-index="6"],
+        #slide7:checked ~ .carousel-container .button-nav-item[data-index="7"],
+        #slide8:checked ~ .carousel-container .button-nav-item[data-index="8"],
+        #slide9:checked ~ .carousel-container .button-nav-item[data-index="9"],
+        #slide10:checked ~ .carousel-container .button-nav-item[data-index="10"],
+        #slide11:checked ~ .carousel-container .button-nav-item[data-index="11"] {
+            background-color: #001159;
+            color: white;
+        }
+        .button-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .button-nav-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .button-nav-item {
+            padding: 8px 15px;
+            background-color: white;
+            border: 1px solid #002e95;
+            color: #001060;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-family: 'Outfit', sans-serif !important;
+            border-radius: 5px;
+            display: inline-block;
+            text-align: center;
+            user-select: none;
+        }
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .content-section { font-size: 14px; }
+            .button-nav-row { display: none; }
+            .button-nav-item { padding: 6px 10px; font-size: 16px; margin-bottom: 5px; }
+        }
+        @media (max-width: 480px) {
+            .button-nav-item { padding: 5px 8px; font-size: 11px; }
+            .carousel-control { width: 30px; height: 30px; font-size: 16px; }
+        }
+        /* Esconde todos os controles por padrão */
+        .carousel-control { display: none; }
+
+        /* Exibe apenas os controles correspondentes ao slide ativo */
+        #slide0:checked ~ .carousel-container #prev0,
+        #slide0:checked ~ .carousel-container #next0 { display: flex; }
+        #slide1:checked ~ .carousel-container #prev1,
+        #slide1:checked ~ .carousel-container #next1 { display: flex; }
+        #slide2:checked ~ .carousel-container #prev2,
+        #slide2:checked ~ .carousel-container #next2 { display: flex; }
+        #slide3:checked ~ .carousel-container #prev3,
+        #slide3:checked ~ .carousel-container #next3 { display: flex; }
+        #slide4:checked ~ .carousel-container #prev4,
+        #slide4:checked ~ .carousel-container #next4 { display: flex; }
+        #slide5:checked ~ .carousel-container #prev5,
+        #slide5:checked ~ .carousel-container #next5 { display: flex; }
+        #slide6:checked ~ .carousel-container #prev6,
+        #slide6:checked ~ .carousel-container #next6 { display: flex; }
+        #slide7:checked ~ .carousel-container #prev7,
+        #slide7:checked ~ .carousel-container #next7 { display: flex; }
+        #slide8:checked ~ .carousel-container #prev8,
+        #slide8:checked ~ .carousel-container #next8 { display: flex; }
+        #slide9:checked ~ .carousel-container #prev9,
+        #slide9:checked ~ .carousel-container #next9 { display: flex; }
+        #slide10:checked ~ .carousel-container #prev10,
+        #slide10:checked ~ .carousel-container #next10 { display: flex; }
+        #slide11:checked ~ .carousel-container #prev11,
+        #slide11:checked ~ .carousel-container #next11 { display: flex; }
+    </style>
+</head>
+<body>
+    <h1 class="page-title">futebol profissional - tOCA DA RAPOSA 2&nbsp;</h1>
+    <!-- Carousel radios -->
+    <input type="radio" name="carousel" id="slide0" class="carousel-radio" checked>
+    <input type="radio" name="carousel" id="slide1" class="carousel-radio">
+    <input type="radio" name="carousel" id="slide2" class="carousel-radio">
+    <input type="radio" name="carousel" id="slide3" class="carousel-radio">
+    <input type="radio" name="carousel" id="slide4" class="carousel-radio">
+    <input type="radio" name="carousel" id="slide5" class="carousel-radio">
+    <input type="radio" name="carousel" id="slide6" class="carousel-radio">
+    <input type="radio" name="carousel" id="slide7" class="carousel-radio">
+    <input type="radio" name="carousel" id="slide8" class="carousel-radio">
+    <input type="radio" name="carousel" id="slide9" class="carousel-radio">
+    <input type="radio" name="carousel" id="slide10" class="carousel-radio">
+    <input type="radio" name="carousel" id="slide11" class="carousel-radio">
+
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item slide0">
+                    <img src="https://imagens.cruzeiro.com.br/Imagens%20do%20Site%20(INSTITUCIONAL)/Estrutura/toca2_carrousel/toca2_entrada1_carrousel.png" alt="ENTRADA">
+                </div>
+                <div class="carousel-item slide1">
+                    <img src="https://imagens.cruzeiro.com.br/Imagens%20do%20Site%20(INSTITUCIONAL)/Estrutura/toca2_carrousel/toca2_adm_carrousel.png" alt="HOTEL">
+                </div>
+                <div class="carousel-item slide2">
+                    <img src="https://placehold.co/800x450?text=ACADEMIA" alt="ACADEMIA">
+                </div>
+                <div class="carousel-item slide3">
+                    <img src="https://imagens.cruzeiro.com.br/Imagens%20do%20Site%20(INSTITUCIONAL)/Estrutura/toca2_carrousel/toca2_adm_carrousel.png" alt="ADMINISTRATIVO">
+                </div>
+                <div class="carousel-item slide4">
+                    <img src="https://placehold.co/800x450?text=SALAS+DE+REUNIAO" alt="SALAS DE REUNIÃO">
+                </div>
+                <div class="carousel-item slide5">
+                    <img src="https://placehold.co/800x450?text=CAMPOS+1+E+2" alt="CAMPOS (1 E 2)">
+                </div>
+                <div class="carousel-item slide6">
+                    <img src="https://placehold.co/800x450?text=CAMPOS+3+E+4" alt="CAMPOS (3 E 4)">
+                </div>
+                <div class="carousel-item slide7">
+                    <img src="https://placehold.co/800x450?text=SALA+DE+IMPRENSA" alt="SALA DE IMPRENSA">
+                </div>
+                <div class="carousel-item slide8">
+                    <img src="https://placehold.co/800x450?text=DEPTO+DE+FUTEBOL" alt="DEPTO DE FUTEBOL">
+                </div>
+                <div class="carousel-item slide9">
+                    <img src="https://placehold.co/800x450?text=SALA+PODCAST" alt="SALA PODCAST">
+                </div>
+                <div class="carousel-item slide10">
+                    <img src="https://placehold.co/800x450?text=SALAO+DE+JOGOS" alt="SALÃO DE JOGOS">
+                </div>
+                <div class="carousel-item slide11">
+                    <img src="https://placehold.co/800x450?text=DEPTO+MEDICO" alt="DEPTO MÉDICO">
+                </div>
+            </div>
+            <!-- Carousel controls for each slide -->
+            <label for="slide11" class="carousel-control prev" id="prev0">&lt;</label>
+            <label for="slide1" class="carousel-control next" id="next0">&gt;</label>
+            <label for="slide0" class="carousel-control prev" id="prev1">&lt;</label>
+            <label for="slide2" class="carousel-control next" id="next1">&gt;</label>
+            <label for="slide1" class="carousel-control prev" id="prev2">&lt;</label>
+            <label for="slide3" class="carousel-control next" id="next2">&gt;</label>
+            <label for="slide2" class="carousel-control prev" id="prev3">&lt;</label>
+            <label for="slide4" class="carousel-control next" id="next3">&gt;</label>
+            <label for="slide3" class="carousel-control prev" id="prev4">&lt;</label>
+            <label for="slide5" class="carousel-control next" id="next4">&gt;</label>
+            <label for="slide4" class="carousel-control prev" id="prev5">&lt;</label>
+            <label for="slide6" class="carousel-control next" id="next5">&gt;</label>
+            <label for="slide5" class="carousel-control prev" id="prev6">&lt;</label>
+            <label for="slide7" class="carousel-control next" id="next6">&gt;</label>
+            <label for="slide6" class="carousel-control prev" id="prev7">&lt;</label>
+            <label for="slide8" class="carousel-control next" id="next7">&gt;</label>
+            <label for="slide7" class="carousel-control prev" id="prev8">&lt;</label>
+            <label for="slide9" class="carousel-control next" id="next8">&gt;</label>
+            <label for="slide8" class="carousel-control prev" id="prev9">&lt;</label>
+            <label for="slide10" class="carousel-control next" id="next9">&gt;</label>
+            <label for="slide9" class="carousel-control prev" id="prev10">&lt;</label>
+            <label for="slide11" class="carousel-control next" id="next10">&gt;</label>
+            <label for="slide10" class="carousel-control prev" id="prev11">&lt;</label>
+            <label for="slide0" class="carousel-control next" id="next11">&gt;</label>
+        </div>
+        <!-- Navigation buttons as labels -->
+        <div class="button-nav">
+            <div class="button-nav-row">
+                <label class="button-nav-item" data-index="0" for="slide0">ENTRADA</label>
+                <label class="button-nav-item" data-index="1" for="slide1">HOTEL&nbsp;</label>
+                <label class="button-nav-item" data-index="2" for="slide2">ACADEMIA</label>
+                <label class="button-nav-item" data-index="3" for="slide3">ADMINISTRATIVO</label>
+                <label class="button-nav-item" data-index="4" for="slide4">SALAS DE REUNIÃO</label>
+                <label class="button-nav-item" data-index="5" for="slide5">CAMPOS (1 E 2)</label>
+            </div>
+            <div class="button-nav-row">
+                <label class="button-nav-item" data-index="6" for="slide6">CAMPOS (3 E 4)</label>
+                <label class="button-nav-item" data-index="7" for="slide7">SALA DE IMPRENSA</label>
+                <label class="button-nav-item" data-index="8" for="slide8">DEPTO DE FUTEBOL</label>
+                <label class="button-nav-item" data-index="9" for="slide9">SALA PODCAST</label>
+                <label class="button-nav-item" data-index="10" for="slide10">SALÃO DE JOGOS</label>
+                <label class="button-nav-item" data-index="11" for="slide11">DEPTO MÉDICO</label>
+            </div>
+        </div>
+    </div>
+    <div class="content-section">
+        <p>A Toca da Raposa 2 é o segundo centro de treinamento do Cruzeiro e um dos mais modernos do país. Com cerca de 83 mil metros quadrados e 4,2 mil metros quadrados em edificações, a Toca 2 é dedicada para preparação, treinamento e aperfeiçoamento da equipe profissional masculina e feminina, além do administrativo da SAF. A estrutura da Toca da Raposa 2 é composta por:</p>
+        ★ Quatro campos (sendo um de grama sintética)<br>
+        ★ Academia<br>
+        ★ Vestiários<br>
+        ★ Sala de Imprensa<br>
+        ★ Hotel com 17 apartamento, salão de jogos e barbearia<br>
+        ★ Refeitórios<br>
+        ★ Escritórios administrativos<br>
+        ★ Departamento Médico com consultórios de clínica geral, ortopedia, odontologia, fisioterapia e fisiologia<br>
+        <p>As obras para sua construção se iniciaram em junho de 1997, na gestão Zezé Perrella, e foi concluída em março de 2002, com a presença do então ministro da Cultura e Esporte (Carlos Melles) e do então técnico da Seleção Brasileira (Felipão). A Toca 2 foi escolhida como local de treinamento da Seleção Brasileira em algumas ocasiões em que jogou em Belo Horizonte (2004 e 2008). Além disso, a Toca da Raposa 2 foi escolhida para receber a Seleção Chilena durante a Copa do Mundo de 2014. No total, os chilenos utilizaram as dependências da Toca 2 para treinamento e concentração durante 17 dias da Copa do Mundo.</p>
+    </div>
+</body>
+</html>

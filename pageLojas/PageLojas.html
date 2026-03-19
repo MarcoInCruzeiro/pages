@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lojas Cruzeiro - Official Store</title>
+    <style>
+        html{
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Outfit', Arial, sans-serif;
+            background: #f4f8fc;
+            color: #001159;
+            margin: 0;
+            padding: 0;
+            font-size: 1.5rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 16px 32px 16px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #002e95;
+            margin-bottom: 32px;
+            font-size: 3.3rem;
+            letter-spacing: 1px;
+        }
+
+        .intro {
+            background: #eaf1fb;
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin-bottom: 32px;
+            font-size: 1.6rem;
+        }
+        .navigation-loja {
+            margin-bottom: 32px;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            max-width: fit-content;
+        }
+        .navigation-loja li {
+            margin: 0;
+        }
+        .btn-navigation-loja {
+            text-transform: uppercase;
+            margin:0 20px;
+            display: block;
+            width: 100%;
+            background: linear-gradient(180deg, #002c8b 0%, #001194 100%);
+            color: #fff;
+            padding: 12px 1px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 1.45rem;
+            font-weight: 700;
+            box-shadow: 0 6px 14px rgba(0,17,89,0.12);
+            border: 4px solid rgb(1, 1, 158);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .btn-navigation-loja:hover {
+            transition: all 0.3s ease;
+            filter: brightness(1.1);
+            border: gold 4px solid;
+            box-shadow: 0 10px 20px rgba(0,17,89,0.14);
+            opacity: 0.98;
+        }
+
+
+        .loja {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.06);
+            margin-bottom: 16px;
+        }
+
+        /* details-based dropdown styles (works without JS) */
+        details.loja {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.06);
+            margin-bottom: 16px;
+            overflow: visible;
+        }
+
+        details.loja summary.loja-summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 16px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 8px;
+        }
+
+        details.loja summary.loja-summary h2 {
+            margin: 0;
+            font-size: 2rem;
+            color: #001159;
+        }
+
+        details.loja summary.loja-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* details-based dropdown body: animate height and padding (CSS-only) */
+        details.loja .loja-body {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 18px;
+            transition: max-height 0.34s ease, padding 0.28s ease;
+        }
+
+        /* when open, expand. max-height kept large enough for iframe + content */
+        details.loja[open] .loja-body {
+            max-height: 1400px;
+            padding: 12px 18px 18px;
+        }
+
+        /* visual caret / chevron using borders (no images, no JS) */
+        details.loja summary.loja-summary::after {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid #001159;
+            border-bottom: 2px solid #001159;
+            transform: rotate(45deg);
+            transition: transform 0.22s ease;
+            margin-left: 12px;
+            display: inline-block;
+        }
+
+        /* rotate caret when open */
+        details.loja[open] summary.loja-summary::after {
+            transform: rotate(225deg);
+        }
+
+        /* focus-visible for keyboard users */
+        summary.loja-summary:focus-visible {
+            outline: 3px solid rgba(0,45,150,0.12);
+            outline-offset: 4px;
+            border-radius: 8px;
+        }
+
+        /* subtle hover and open background */
+        details.loja summary.loja-summary:hover {
+            background: linear-gradient(180deg,#fbfdff,#f2f6ff);
+        }
+        details.loja[open] summary.loja-summary {
+            background: linear-gradient(180deg,#f7f9ff,#ffffff);
+        }
+
+        /* respect user preference for reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            details.loja .loja-body,
+            details.loja summary.loja-summary::after {
+                transition: none !important;
+            }
+        }
+
+        .loja h2 {
+            color: #001159;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .loja .info {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .loja .social {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .loja .social-btn {
+            display: inline-block;
+            padding: 7px 16px;
+            margin-right: 12px;
+            margin-bottom: 6px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.4rem;
+            font-family: inherit;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+            transition: background 0.18s;
+        }
+
+        .social-btn.instagram {
+            background: linear-gradient(90deg, #f58529 0%, #dd2a7b 50%, #405de6 100%);
+        }
+
+        .social-btn.instagram:hover {
+            background: linear-gradient(90deg, #fd5949 0%, #d6249f 50%, #285AEB 100%);
+        }
+
+        .social-btn.whatsapp {
+            background: #25d366;
+            color: rgb(255, 255, 255);
+        }
+
+        .social-btn.whatsapp:hover {
+            background: #128c7e;
+            color: white;
+        }
+
+        .loja iframe {
+            width: 100%;
+            max-width: 100%;
+            height: 280px;
+            border: 0;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 12px 2vw;
+            }
+
+            .loja iframe {
+                height: 200px;
+            }
+            .navigation-loja {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Lojas Oficiais do Cruzeiro</h1>
+        <div class="intro">
+            As lojas físicas do Cruzeiro fazem parte do modelo de franquias estabelecido pelo clube. Ao todo são 31
+            unidades espalhadas por Minas Gerais, oferecendo produtos oficiais licenciados pela equipe celeste.<br><br>
+            Em 2024 as lojas oficiais (físicas e online) do Cruzeiro bateram um recorde histórico de quase 49 milhões de
+            reais em faturamento total, 63% superior ao ano de 2023. Esse resultado é essencial para o desenvolvimento
+            do clube e para a melhoria e crescimento das lojas oficiais.<br><br>
+            <b>Conheça nossas lojas!</b>
+        </div>
+        <h3><strong>UNIDADES:</strong></h3>
+        <nav aria-label="Unidades">
+            <ul class="navigation-loja">
+                <li><a href="#barro-preto" class="btn-navigation-loja">Barro Preto</a></li>
+                <li><a href="#bh-shopping" class="btn-navigation-loja">BH Shopping</a></li>
+                <li><a href="#boulevard-shopping" class="btn-navigation-loja">Boulevard Shopping</a></li>
+                <li><a href="#buritis-shopping-paragem" class="btn-navigation-loja">Buritis</a></li>
+                <li><a href="#campestre" class="btn-navigation-loja">Campestre</a></li>
+                <li><a href="#conselheiro-lafaiete" class="btn-navigation-loja">Conselheiro Lafaiete</a></li>
+                <li><a href="#diamantina" class="btn-navigation-loja">Diamantina</a></li>
+                <li><a href="#itabira" class="btn-navigation-loja">Itabira</a></li>
+                <li><a href="#lavras" class="btn-navigation-loja">Lavras</a></li>
+                <li><a href="#mineirao" class="btn-navigation-loja">Mineirão</a></li>
+                <li><a href="#patos-de-minas" class="btn-navigation-loja">Patos de Minas</a></li>
+                <li><a href="#sete-lagoas" class="btn-navigation-loja">Sete Lagoas</a></li>
+                <li><a href="#teofilo-otoni" class="btn-navigation-loja">Teófilo Otoni</a></li>
+                <li><a href="#varginha" class="btn-navigation-loja">Varginha</a></li>
+                <li><a href="#divinopolis" class="btn-navigation-loja">Divinópolis</a></li>
+                <li><a href="#governador-valadares-gv-shopping" class="btn-navigation-loja">Governador Valadares</a></li>
+                <li><a href="#ipatinga-shopping-vale-do-aco" class="btn-navigation-loja">Ipatinga</a></li>
+                <li><a href="#itau-power-shopping" class="btn-navigation-loja">Itaú Power Shopping</a></li>
+                <li><a href="#minas-shopping" class="btn-navigation-loja">Minas Shopping</a></li>
+                <li><a href="#montes-claros" class="btn-navigation-loja">Montes Claros</a></li>
+                <li><a href="#nova-serrana" class="btn-navigation-loja">Nova Serrana</a></li>
+                <li><a href="#outlet-bh" class="btn-navigation-loja">Outlet BH</a></li>
+                <li><a href="#outlet-contagem" class="btn-navigation-loja">Outlet Contagem</a></li>
+                <li><a href="#rodoviaria" class="btn-navigation-loja">Rodoviária</a></li>
+                <li><a href="#savassi" class="btn-navigation-loja">Savassi</a></li>
+                <li><a href="#shopping-cidade" class="btn-navigation-loja">Shopping Cidade</a></li>
+                <li><a href="#shopping-contagem" class="btn-navigation-loja">Shopping Contagem</a></li>
+                <li><a href="#shopping-del-rey" class="btn-navigation-loja">Shopping Del Rey</a></li>
+                <li><a href="#shopping-estacao-bh" class="btn-navigation-loja">Shopping Estação BH</a></li>
+                <li><a href="#via-shopping-barreiro" class="btn-navigation-loja">Via Shopping Barreiro</a></li>
+                <li><a href="#partage-betim" class="btn-navigation-loja">Partage Betim</a></li>
+            </ul>
+        </nav>
+
+        <details class="loja" id="barro-preto">
+            <summary class="loja-summary"><h2>Barro Preto</h2></summary>
+            <div class="loja-body">
+            <div class="info">Rua Araguari, 598 - Barro Preto, Belo Horizonte – MG<br>
+                Segunda a sexta: 09h às 19h | Sábado: 09h às 14h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/cruzeiroofficialstore" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531972011921" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.073473203076!2d-43.94785768509544!3d-19.92923298660909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sRua%20Araguari%2C%20598%20-%20Barro%20Preto%2C%20Belo%20Horizonte%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="bh-shopping">
+            <summary class="loja-summary"><h2>BH Shopping</h2></summary>
+            <div class="loja-body">
+            <div class="info">BR-356, 3049 - Belvedere, Belo Horizonte – MG<br>
+                Segunda a sábado: 10h às 22h | Domingos e feriados: 12h às 20h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/loja.cruzeiro.bhshopping" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531987700151" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.123456789012!2d-43.95123456789012!3d-19.95012345678901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sBR-356%2C%203049%20-%20Belvedere%2C%20Belo%20Horizonte%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="boulevard-shopping">
+            <summary class="loja-summary"><h2>Boulevard Shopping</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. dos Andradas, 3000 - Santa Efigênia, Belo Horizonte – MG<br>
+                Segunda a sábado: 10h às 22h | Domingos e feriados: 14h às 20h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/boulevard.loja.cruzeiro" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/553135825548" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sAv.%20dos%20Andradas%2C%203000%20-%20Santa%20Efig%C3%AAnia%2C%20Belo%20Horizonte%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="buritis-shopping-paragem">
+            <summary class="loja-summary"><h2>Buritis (Shopping Paragem)</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. Mário Werneck, 1360 - Buritis, Belo Horizonte – MG<br>
+                Segunda a sábado: 10h às 21h | Domingos e feriados: 12h às 17h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/loja.cruzeiro.buritis" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531972011921" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.123456789012!2d-43.97890123456789!3d-19.96456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sAv.%20M%C3%A1rio%20Werneck%2C%201360%20-%20Buritis%2C%20Belo%20Horizonte%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="campestre">
+            <summary class="loja-summary"><h2>Campestre</h2></summary>
+            <div class="loja-body">
+            <div class="info">Rua das Canárias, 254 - Santa Branca, Belo Horizonte – MG<br>
+                Segunda a sexta: 09h às 17h | Sábado: 09h às 16h | Domingo: 09h às 13h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/loja.cruzeiro.campestre" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531999517207" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sRua%20das%20Can%C3%A1rias%2C%20254%20-%20Santa%20Branca%2C%20Belo%20Horizonte%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="conselheiro-lafaiete">
+            <summary class="loja-summary"><h2>Conselheiro Lafaiete</h2></summary>
+            <div class="loja-body">
+            <div class="info">Rua Afonso Pena, 86A - Centro, Conselheiro Lafaiete – MG<br>
+                Segunda a sexta: 09h às 18h | Sábado: 09h às 13h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/loja.cruzeiro.lafaiete" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531996952449" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sRua%20Afonso%20Pena%2C%2086A%20-%20Centro%2C%20Conselheiro%20Lafaiete%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="diamantina">
+            <summary class="loja-summary"><h2>Diamantina</h2></summary>
+            <div class="loja-body">
+            <div class="info">Praça Barão do Guaicui, 96 (Mercado Velho) - Centro, Diamantina – MG<br>
+                Segunda a sexta: 09h às 18h | Sábado: 09h às 13h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://www.instagram.com/loja.cruzeiro_diamantina/" target="_blank" rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5538998551921" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2007.2868897181868!2d-43.598797751090466!3d-18.244214519984922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xaeb90010f94ba9%3A0x28bbab0c4e81b6c3!2sLoja%20do%20Cruzeiro%20Diamantina!5e0!3m2!1spt-BR!2sbr!4v1759168494205!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="itabira">
+            <summary class="loja-summary"><h2>Itabira</h2></summary>
+            <div class="loja-body">
+            <div class="info">Rua das Margaridas, 1635 - São Pedro, Itabira - MG<br>
+                Segunda a sábado: 9h às 21h | Domingo: 9h às 13h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://www.instagram.com/loja.cruzeiro.itabira/" target="_blank" rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531984767117" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3160.151289578171!2d-43.222735069674826!3d-19.624116831873458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa5a14bd366664f%3A0xff2540e200807a02!2sLoja%20do%20Cruzeiro%20Itabira!5e0!3m2!1spt-BR!2sbr!4v1764336658694!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="lavras">
+            <summary class="loja-summary"><h2>Lavras</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. Padre Dehon, 200 - Centro, Lavras – MG<br>
+                Segunda a sexta: 10h às 20h | Sábado: 10h às 16h | Domingo: 10h às 14h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://www.instagram.com/loja.cruzeiro.lavras/" target="_blank" rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531997186161" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3127.0395982515884!2d-44.99963709257147!3d-21.243831294965798!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9ffd1cde8b1211%3A0x39cf58a522f06cd0!2sLoja%20do%20Cruzeiro%20Lavras!5e0!3m2!1spt-BR!2sbr!4v1759168551235!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="mineirao">
+            <summary class="loja-summary"><h2>Mineirão</h2></summary>
+            <div class="loja-body">
+            <div class="info">Mineirão, Esplanada Sul, Lojas 1 e 2 - São José, Belo Horizonte – MG<br>
+                Terça a domingo: 12h às 20h | Dias de jogos: de acordo com os horários de abertura da esplanada pelo Mineirão.</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://www.instagram.com/loja.cruzeiro.mineirao/" target="_blank" rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531996096161" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3645.516077025155!2d-43.97366427652893!3d-19.867952001379194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa691cbff598f5f%3A0x183592857ab16797!2sLoja%20do%20Cruzeiro%20Mineir%C3%A3o!5e0!3m2!1spt-BR!2sbr!4v1758820002955!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="patos-de-minas">
+            <summary class="loja-summary"><h2>Patos de Minas</h2></summary>
+            <div class="loja-body">
+            <div class="info">Praça Alexina Cândida Conceição, 5 - Centro, Patos de Minas – MG<br>
+                Segunda a sábado: 10h às 22h | Domingos e feriados: 14h às 20h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://www.instagram.com/loja.cruzeiro.patosdeminas/" target="_blank" rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5534998161921" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.0956872067027!2d-46.515376962350544!3d-18.585649337471697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ae8ad253fef59b%3A0x2821e5b7779cfb8c!2sPra%C3%A7a%20Alexina%20C%C3%A2ndida%20Concei%C3%A7%C3%A3o%2C%205%20-%20Centro%2C%20Patos%20de%20Minas%20-%20MG%2C%2038700-022!5e0!3m2!1spt-BR!2sbr!4v1766151288095!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="sete-lagoas">
+            <summary class="loja-summary"><h2>Sete Lagoas</h2></summary>
+            <div class="loja-body">
+            <div class="info">Rua José Duarte de Paiva, 376 - Centro, Sete Lagoas – MG<br>
+                Segunda a sexta: 10h às 20h | Sábado: 10h às 16h | Domingo: 10h às 14h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://www.instagram.com/loja.cruzeiro.setelagoas/" target="_blank" rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531998126161" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.9941858547054!2d-44.25093262712249!3d-19.4558174877628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa651626540b71d%3A0x9b2c8aa493020f9!2sLoja%20do%20Cruzeiro%20Sete%20Lagoas!5e0!3m2!1spt-BR!2sbr!4v1758546597044!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="teofilo-otoni">
+            <summary class="loja-summary"><h2>Teófilo Otoni</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. Alfredo Sá, 2225 - Jardim das Acácias, Teófilo Otoni – MG<br>
+                Segunda a sábado: 10h às 22h | Domingos e feriados: 10h às 13h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://www.instagram.com/loja.cruzeiro.teoshopping/" target="_blank" rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5533997071921" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1596.6263863757265!2d-41.51826714308325!3d-17.86491867009136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb377801b084185%3A0xcf6631448c72fca!2sTe%C3%B3%20Shopping!5e0!3m2!1spt-BR!2sbr!4v1762888987386!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="varginha">
+            <summary class="loja-summary"><h2>Varginha</h2></summary>
+            <div class="loja-body">
+            <div class="info">Praça Champagnat, 19 - Centro, Varginha – MG<br>
+                Segunda a sexta: 9h às 18h30 | Sábado: 9h às 13h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://www.instagram.com/loja.cruzeiro.varginha/" target="_blank" rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5535999771921" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d927.6717718771672!2d-45.44155664727075!3d-21.559087358885165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ca928564b774a3%3A0xec46c7066c7e7331!2sPra%C3%A7a%20Champagnat!5e0!3m2!1spt-BR!2sbr!4v1763987125212!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="divinopolis">
+            <summary class="loja-summary"><h2>Divinópolis</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. Rio Grande do Sul, 320 - Centro, Divinópolis - MG<br>
+                Segunda a sexta: 09h às 18h30 | Sábado: 09h às 13h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/loja.cruzeiro.divinopolis" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/553732166161" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sAv.%20Rio%20Grande%20do%20Sul%2C%20320%20-%20Centro%2C%20Divin%C3%B3polis%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="governador-valadares-gv-shopping">
+            <summary class="loja-summary"><h2>Governador Valadares (GV Shopping)</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. Sete de Setembro, 3500 - Centro, Governador Valadares - MG<br>
+                Segunda a sábado: 10h às 22h | Domingo: 14h às 18h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/gv.loja.cruzeiro" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5533991386475" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sAv.%20Sete%20de%20Setembro%2C%203500%20-%20Centro%2C%20Governador%20Valadares%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="ipatinga-shopping-vale-do-aco">
+            <summary class="loja-summary"><h2>Ipatinga (Shopping Vale do Aço)</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. Pedro Linhares Gomes, 3900 - Industrial, Ipatinga - MG<br>
+                Segunda a sábado: 10h às 22h | Domingos e feriados: 12h às 18h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/valedoaco.loja.cruzeiro" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531993141928" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sAv.%20Pedro%20Linhares%20Gomes%2C%203900%20-%20Industrial%2C%20Ipatinga%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="itau-power-shopping">
+            <summary class="loja-summary"><h2>Itaú Power Shopping</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. General David Sarnoff, 5160 - Cidade Industrial, Contagem – MG<br>
+                Segunda a sábado: 10h às 22h | Domingos e feriados: 14h às 20h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/itau.loja.cruzeiro" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531995784386" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sAv.%20General%20David%20Sarnoff%2C%205160%20-%20Cidade%20Industrial%2C%20Contagem%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="minas-shopping">
+            <summary class="loja-summary"><h2>Minas Shopping</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. Cristiano Machado, 4000 - União, Belo Horizonte – MG<br>
+                Segunda a sábado: 10h às 22h | Domingos e feriados: 14h às 20h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/minasshopping.loja.cruzeiro" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531989592179" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sAv.%20Cristiano%20Machado%2C%204000%20-%20Uni%C3%A3o%2C%20Belo%20Horizonte%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="montes-claros">
+            <summary class="loja-summary"><h2>Montes Claros</h2></summary>
+            <div class="loja-body">
+            <div class="info">Rua Dom João Pimenta, 428 - Centro, Montes Claros - MG, 39400-003<br>
+                Segunda a sexta: 09h às 18h | Sábado: 08h30 às 13h30</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/loja.cruzeiro.moc" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/553841411921" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sRua%20Dom%20Jo%C3%A3o%20Pimenta%2C%20428%20-%20Centro%2C%20Montes%20Claros%20-%20MG%2C%2039400-003!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="nova-serrana">
+            <summary class="loja-summary"><h2>Nova Serrana</h2></summary>
+            <div class="loja-body">
+            <div class="info">Rua São Geraldo, 27 - Centro, Nova Serrana - MG<br>
+                Segunda a sexta: 09h às 19h | Sábado e feriados: 09h às 13h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/loja.cruzeironovaserrana" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5537999341921" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sRua%20Sao%20Geraldo%2C%2027%20-%20Centro%2C%20Nova%20Serrana%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="outlet-bh">
+            <summary class="loja-summary"><h2>Outlet BH</h2></summary>
+            <div class="loja-body">
+            <div class="info">BR-356, 7515 - Belvedere, Belo Horizonte – MG<br>
+                Segunda a sábado: 09h às 21h | Domingos e feriados: 10h às 20h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/outletbh.loja.cruzeiro" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531993765953" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sBR-356%2C%207515%20-%20Belvedere%2C%20Belo%20Horizonte%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="outlet-contagem">
+            <summary class="loja-summary"><h2>Outlet Contagem</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. Cardeal Eugênio Pacelli, 1336 - Cidade Industrial, Contagem – MG<br>
+                Segunda a sábado: 10h às 21h | Domingos e feriados: 10h às 19h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/loja.cruzeiro.outletcontagem"
+                    target="_blank" rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531972011921" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sAv.%20Cardeal%20Eugenio%20Pacelli%2C%201336%20-%20Cidade%20Industrial%2C%20Contagem%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="partage-betim">
+            <summary class="loja-summary"><h2>Partage Betim</h2></summary>
+            <div class="loja-body">
+            <div class="info">Rod. Fernão Dias, 601 - Km 492 - São João, Betim – MG<br>
+                Segunda a sábado: 10h às 22h | Domingos e feriados: 14h às 20h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/partagebetim.loja.cruzeiro" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531995273106" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sRod.%20Fern%C3%A3o%20Dias%2C%20601%20-%20Km%20492%20-%20S%C3%A3o%20Jo%C3%A3o%2C%20Betim%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="rodoviaria">
+            <summary class="loja-summary"><h2>Rodoviária</h2></summary>
+            <div class="loja-body">
+            <div class="info">Praça Rio Branco, 100 - Centro, Belo Horizonte – MG<br>
+                Segunda a sábado: 08h às 22h | Domingo: 08h às 16h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/loja.cruzeiro.rodoviaria" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531982338795" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sPra%C3%A7a%20Rio%20Branco%2C%20100%20-%20Centro%2C%20Belo%20Horizonte%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="savassi">
+            <summary class="loja-summary"><h2>Savassi</h2></summary>
+            <div class="loja-body">
+            <div class="info">Rua Alagoas, 1201 - Savassi, Belo Horizonte – MG<br>
+                Segunda a sexta: 09h às 19h | Sábado: 09h às 14h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/savassi.loja.cruzeiro" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531986952111" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sRua%20Alagoas%2C%201201%20-%20Savassi%2C%20Belo%20Horizonte%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="shopping-cidade">
+            <summary class="loja-summary"><h2>Shopping Cidade</h2></summary>
+            <div class="loja-body">
+            <div class="info">Rua Rio de Janeiro, 910 - Centro, Belo Horizonte - MG<br>
+                Segunda a sábado: 09h às 22h | Domingos e feriados: 10h às 16h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/cidade.loja.cruzeiro" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531993224857" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sRua%20Rio%20de%20Janeiro%2C%20910%20-%20Centro%2C%20Belo%20Horizonte%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="shopping-contagem">
+            <summary class="loja-summary"><h2>Shopping Contagem</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. Severino Ballesteros, 850 - Cabral, Contagem - MG<br>
+                Segunda a sábado: 10h às 22h | Domingos e feriados: 14h às 20h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/loja.cruzeiro.shoppingcontagem"
+                    target="_blank" rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531988188873" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sAv.%20Severino%20Ballesteros%2C%20850%20-%20Cabral%2C%20Contagem%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="shopping-del-rey">
+            <summary class="loja-summary"><h2>Shopping Del Rey</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. Presidente Carlos Luz, 3001 - Pampulha, Belo Horizonte – MG<br>
+                Segunda a sábado: 10h às 22h | Domingos e feriados: 14h às 20h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/delrey.loja.cruzeiro" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531984174997" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sAv.%20Presidente%20Carlos%20Luz%2C%203001%20-%20Pampulha%2C%20Belo%20Horizonte%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="shopping-estacao-bh">
+            <summary class="loja-summary"><h2>Shopping Estação BH</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. Cristiano Machado, 11833 - Vila Cloris, Belo Horizonte – MG<br>
+                Segunda a sábado: 10h às 22h | Domingos e feriados: 14h às 20h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/estacaobh.loja.cruzeiro" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/5531983297230" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sAv.%20Cristiano%20Machado%2C%2011833%20-%20Vila%20Cloris%2C%20Belo%20Horizonte%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+
+        <details class="loja" id="via-shopping-barreiro">
+            <summary class="loja-summary"><h2>Via Shopping Barreiro</h2></summary>
+            <div class="loja-body">
+            <div class="info">Av. Afonso Vaz de Melo, 640 - Barreiro, Belo Horizonte – MG<br>
+                Segunda a sábado: 10h às 22h | Domingos e feriados: 14h às 20h</div>
+            <div class="social">
+                <a class="social-btn instagram" href="https://instagram.com/viashopping.loja.cruzeiro" target="_blank"
+                    rel="noopener">Instagram</a>
+                <a class="social-btn whatsapp" href="https://wa.me/553136546944" target="_blank"
+                    rel="noopener">WhatsApp</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.987654321098!2d-43.93210987654321!3d-19.92456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690f3f7e2e1e1%3A0x2e1e1e1e1e1e1e1e!2sAv.%20Afonso%20Vaz%20de%20Melo%2C%20640%20-%20Barreiro%2C%20Belo%20Horizonte%20-%20MG!5e0!3m2!1spt-BR!2sbr!4vXXXXXXXXXXXX!5m2!1spt-BR!2sbr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </details>
+    </div>
+</body>
+
+</html>
