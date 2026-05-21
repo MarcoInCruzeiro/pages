@@ -1666,19 +1666,20 @@
             <div class="tabs">
               <!-- Inputs de controle -->
               <input type="radio" name="tabs-cabulosa" id="tab-cabulosa-info" class="tab-inputs" checked>
+              <label for=""></label>
               <input type="radio" name="tabs-cabulosa" id="tab-cabulosa-galeria" class="tab-inputs">
               <input type="radio" name="tabs-cabulosa" id="tab-cabulosa-feitos" class="tab-inputs">
 
 
               <!-- Labels das abas -->
-              <div class="tabs-labels" style="display: none;">
-                <label for="tab-cabulosa-info" class="tab-label label-cabulosa-info">
+              <div class="tabs-labels">
+                <label style="font-size: 18px !important; text-transform: uppercase;" for="tab-cabulosa-info" class="tab-label label-cabulosa-info">
                   <i class="fas fa-info-circle"></i> Informações
                 </label>
-                <!--<label for="tab-cabulosa-galeria" class="tab-label label-cabulosa-galeria">
-                  <i class="fas fa-image"></i> Galeria
+                <label style="font-size: 18px !important; text-transform: uppercase;" for="tab-cabulosa-galeria" class="tab-label label-cabulosa-galeria">
+                  <i class="fas fa-images"></i> Galeria
                 </label>
-                <label for="tab-cabulosa-feitos" class="tab-label label-cabulosa-feitos">
+                <!--<label for="tab-cabulosa-feitos" class="tab-label label-cabulosa-feitos">
                   <i class="fas fa-address-card"></i> Feitos
                 </label>-->
               </div>
@@ -1715,51 +1716,41 @@
                 </div>
 
 
-                <!-- Painel de Galeria com Bootstrap Carousel -->
+                <!-- Painel de Galeria da Cabulosa com scroll personalizado -->
                 <div id="cabulosa-galeria-panel" class="tab-panel">
-                  <div id="carouselCabulosa" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                      <li data-target="#carouselCabulosa" data-slide-to="0" class="active"></li>
-                      <li data-target="#carouselCabulosa" data-slide-to="1"></li>
-                      <li data-target="#carouselCabulosa" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img class="d-block w-100"
-                          src="https://via.placeholder.com/600x400/0a1a4f/ffc700?text=Cabulosa+1"
-                          alt="Cabulosa no jogo do time feminino">
-                        <div class="carousel-caption d-none d-md-block">
-                          <h5>Futebol Feminino</h5>
-                          <p>Cabulosa acompanhando o time feminino do Cruzeiro</p>
-                        </div>
-                      </div>
-                      <div class="carousel-item">
-                        <img class="d-block w-100"
-                          src="https://via.placeholder.com/600x400/0a1a4f/ffc700?text=Cabulosa+2"
-                          alt="Cabulosa com torcedoras">
-                        <div class="carousel-caption d-none d-md-block">
-                          <h5>Encontro com torcedoras</h5>
-                          <p>Evento especial com torcedoras cruzeirenses</p>
-                        </div>
-                      </div>
-                      <div class="carousel-item">
-                        <img class="d-block w-100"
-                          src="https://via.placeholder.com/600x400/0a1a4f/ffc700?text=Cabulosa+3"
-                          alt="Cabulosa em evento especial">
-                        <div class="carousel-caption d-none d-md-block">
-                          <h5>Empoderamento Feminino</h5>
-                          <p>Cabulosa em evento de valorização da mulher no esporte</p>
-                        </div>
+                  <h3 class="feitos-titulo">Galeria da Cabulosa</h3>
+                  <div class="galeria-timeline">
+
+                    <div class="galeria-item">
+                      <div class="galeria-conteudo">
+                        <img class="galeria-img"
+                          src="https://image.crm.cruzeiro.com.br/lib/fe34117371640478741c71/m/1/6c447480-d95d-4c77-a6bd-3ab2768617fc.png"
+                          alt="">
+                        <h4>A estreia!</h4>
+                        <p>O dia em que a Cabulosa foi apresentada para a Nação Azul!</p>
                       </div>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselCabulosa" role="button" data-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Anterior</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselCabulosa" role="button" data-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Próximo</span>
-                    </a>
+
+                    <div class="galeria-item">
+                      <div class="galeria-conteudo">
+                        <img class="galeria-img"
+                          src="https://image.crm.cruzeiro.com.br/lib/fe34117371640478741c71/m/1/be9001b8-a8b1-439b-a230-c0c1f0ebc0e1.png"
+                          alt="">
+                        <h4>Fazendo a festa!</h4>
+                        <p>A Cabulosa levantando a torcida numa partida do Cruzeiro Feminino.</p>
+                      </div>
+                    </div>
+
+                    <div class="galeria-item">
+                      <div class="galeria-conteudo">
+                        <img class="galeria-img"
+                          src="https://image.crm.cruzeiro.com.br/lib/fe34117371640478741c71/m/1/9133b90e-f5ab-41f8-86b0-afcefba9938a.png"
+                          alt="">
+                        <h4>A turma está completa!</h4>
+                        <p>Cabulosa, Raposão e Raposinho posando para foto. A turma de amigos está completa!</p>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
 
