@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #002e95;
+            --secondary-color: #f0f0f0;
+            --text-color: #010060;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            color: var(--text-color);
+            font-family: 'Outfit', sans-serif;
+            background-color: #f8faff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            padding: 40px 20px;
+            width: 85%;
+            max-width: 1200px;
+            align-self: center;
+        }
+
+        .destaque-texto-box {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            height: max-content;
+            border-left: 6px solid var(--primary-color);
+            background-color: rgba(0, 46, 149, 0.06);
+            border-radius: 0 16px 16px 0;
+            padding: 24px;
+        }
+
+        .destaque-texto-box p {
+            padding: 0;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin: 0;
+            color: #1e2d5a;
+        }
+
+        .destaque-texto-box h3 {
+            padding: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
+        p {
+            color: var(--text-color);
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            justify-content: left;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .section-container-box {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            padding: 10px 0;
+        }
+
+        .card {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 46, 149, 0.04);
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0, 46, 149, 0.08);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 46, 149, 0.1);
+        }
+
+        .toggle-trigger {
+            display: none;
+        }
+
+        .card-main-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .card-left-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            background: rgba(0, 46, 149, 0.05);
+            padding: 12px;
+            border-radius: 12px;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.4s ease, background-color 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.08);
+            background-color: rgba(0, 46, 149, 0.08);
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .card-title {
+            color: var(--text-color);
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .card-subtitle {
+            color: #5c6bc0;
+            font-size: 0.95rem;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .card-right-section {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .card-value {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 800;
+            background: rgba(0, 46, 149, 0.06);
+            padding: 6px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 24px;
+            font-size: 13px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 46, 149, 0.12);
+            white-space: nowrap;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .toggle-button:hover {
+            background-color: #002270;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(0, 46, 149, 0.22);
+        }
+
+        .toggle-trigger:checked~.card-main-row .toggle-button {
+            background-color: #4c6cb3;
+            box-shadow: none;
+        }
+
+        .toggle-content {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease, padding 0.5s ease;
+            width: 100%;
+            background-color: #fafbfc;
+            padding: 0 24px;
+        }
+
+        .toggle-trigger:checked~.toggle-content {
+            max-height: 1500px;
+            opacity: 1;
+            padding: 24px;
+            border-top: 1px solid rgba(0, 46, 149, 0.08);
+        }
+
+        .list-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .list-group-item {
+            padding: 14px 16px;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 46, 149, 0.06);
+            background-color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 46, 149, 0.01);
+            transition: background-color 0.2s ease;
+        }
+
+        .list-group-item:hover {
+            background-color: rgba(0, 46, 149, 0.01);
+        }
+
+        .list-group-item strong {
+            color: var(--primary-color);
+            display: inline-block;
+            margin-bottom: 6px;
+            font-size: 1rem;
+            text-transform: capitalize;
+        }
+
+        .licensee-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .licensee-tag {
+            display: inline-block;
+            background-color: rgba(0, 46, 149, 0.05);
+            color: var(--primary-color);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 46, 149, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .licensee-tag:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .divisoria {
+            width: 100%;
+            height: 1px;
+            background-color: rgba(0, 46, 149, 0.1);
+            margin: 40px 0;
+        }
+
+        .divisoria-box {
+            display: inline-block;
+            width: 100%;
+            height: 3px;
+            background-color: #002b8977;
+            margin: 12px 0;
+            border-radius: 2px;
+        }
+
+        .grande-titulo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: justify;
+            margin-bottom: 0.9rem;
+            padding: 10px;
+            border-left: 6px solid var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="introducao">
+            <h1 class="grande-titulo">Oque é a SAF?</h1>
+            <div class="destaque-texto-box">
+                <h3>O que é a SAF?</h3>
+                <p>A Sociedade Anônima do Futebol (SAF) é um novo tipo societário, criado pela Lei nº 14.193/21, que fez
+                    nascer uma nova política do futebol brasileiro, com o estabelecimento de normas de governança,
+                    controle e transparência, instituição de meios de financiamento da atividade futebolística e
+                    previsão de um sistema tributário próprio, permitindo-se, assim, não somente a mercantilização, a
+                    circulação de riquezas e o desenvolvimento social, mas também, o resgate dos valores dos clubes.<br>
+
+                    De forma reduzida, a SAF é uma empresa específica criada para gerenciar o Futebol dos clubes e
+                    receber vantagens tributárias e de mercado. Um exemplo, é a possibilidade de a SAF pagar apenas 5%
+                    de impostos sobre a receita nas cinco primeiras temporadas, passando 4% na sequência.</p>
+            </div>
+            <br>
+            <div class="destaque-texto-box">
+                <p>Para os clubes que eram associação e transformaram suas operações de Futebol em SAF, existe a
+                    obrigação de pagar os credores em até 10 anos. Entretanto, existe as obrigações de quitar 60% das
+                    suas dívidas cíveis e trabalhistas nos primeiros seis anos. É possível se renovar por mais quatro
+                    anos para finalizar os pagamentos e há vantagens para a negociação das dívidas. Para isso, a lei
+                    determina que essa SAF repasse à associação 20% da receita que obtiver e 50% do lucro. Essa receita
+                    será encaminhada para que a associação faça o pagamento dos credores.</p>
+            </div>
+            <p>A lei da SAF exige que a associação mantenha pelo menos 10% das ações que haja preservação do seu
+                patrimônio imaterial, como identidade, escudo, hino, mascote, bandeira e história.
+            </p>
+        </section>
+        <span class="divisoria"></span>
+        <section class="final">
+            <h1 class="grande-titulo">Cruzeiro Esporte Clube - Sociedade Anônima do Futebol</h1>
+            <div class="destaque-texto-box">
+                <p>Em novembro de 2021, foi aprovada a constituição da SAF, Sociedade Anônima do Futebol, regida por seu
+                    Estatuto Social, pela Lei n.° 14.193/2021 e demais dispositivos e instrumentos aplicáveis, sob
+                    denominação Cruzeiro Esporte Clube - Sociedade Anônima do Futebol.
+                </p>
+            </div>
+
+            <div class="destaque-texto-box">
+                <p>Em abril de 2022, foram assinados o Acordo de Acionistas e o Acordo de Investimentos e Outras
+                    Avenas, junto à <strong>Tara Sports Brasil Participações S.A.</strong> Em julho de 2024, a Tara foi vendida à <strong>BPW
+                    Sports Participações Ltda.</strong>, marcando o início da gestão do Sr. Pedro Lourenço, com a eleição do Sr.
+                    Pedro Junio para o cargo de Diretor Presidente da Companhia.
+                </p>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>
