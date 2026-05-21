@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolas Participantes - Caça Talentos Cinco Estrelas | Cruzeiro SAF</title>
+
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* CSS variables for Cruzeiro visual identity */
+        :root {
+            --azul-royal: #002e95;
+            --azul-escuro: #001159;
+            --azul-claro: #055eed;
+            --azul-suave: #f4f8fc;
+            --azul-intro: #eaf1fb;
+            --branco: #ffffff;
+            --dourado: #ffb300;
+            --dourado-hover: #e09e00;
+            --cinza-texto: #4a5568;
+            --whatsapp: #25d366;
+            --whatsapp-hover: #1ebd58;
+            --borda-suave: rgba(0, 17, 89, 0.08);
+            --sombra-card: 0 4px 15px rgba(0, 17, 89, 0.04);
+            --sombra-hover: 0 10px 30px rgba(0, 17, 89, 0.1);
+            --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Base Resets */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--azul-suave);
+            color: var(--azul-escuro);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero / Header Section */
+        header.hero {
+            background: linear-gradient(135deg, var(--azul-escuro) 0%, #001f6d 60%, var(--azul-royal) 100%);
+            color: var(--branco);
+            padding: 70px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 17, 89, 0.15);
+        }
+
+        /* Subtle stars pattern in background */
+        header.hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+            background-size: 25px 25px;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        /* Gold stars symbol of Cruzeiro */
+        .stars-container {
+            font-size: 1.5rem;
+            color: var(--dourado);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            text-shadow: 0 0 12px rgba(255, 179, 0, 0.8);
+            animation: pulseStars 3s infinite ease-in-out;
+        }
+
+        @keyframes pulseStars {
+
+            0%,
+            100% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        header.hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            background: linear-gradient(180deg, #ffffff 50%, #dbe7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+        }
+
+        header.hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #d2e0ff;
+            font-weight: 400;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 80px 20px;
+        }
+
+        /* Info Box / Intro block */
+        .intro-section {
+            background-color: var(--azul-intro);
+            border-left: 6px solid var(--azul-royal);
+            border-radius: 0 16px 16px 0;
+            padding: 24px 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--sombra-card);
+        }
+
+        .intro-section p {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #1e2d5a;
+        }
+
+        /* Fast Navigation Anchor Tabs */
+        .navigation-menu {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .navigation-menu h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--azul-claro);
+            margin-bottom: 20px;
+        }
+
+        .navigation-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .navigation-grid li {
+            margin: 0;
+        }
+
+        .btn-navigation {
+            text-transform: uppercase;
+            display: inline-block;
+            background: linear-gradient(180deg, #002c8b 0%, #001194 100%);
+            color: var(--branco);
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 700;
+            box-shadow: 0 6px 14px rgba(0, 17, 89, 0.12);
+            border: 3px solid #0018a8;
+            transition: var(--transicao);
+            text-align: center;
+        }
+
+        .btn-navigation:hover {
+            transform: translateY(-3px);
+            border-color: var(--dourado);
+            box-shadow: 0 10px 20px rgba(0, 17, 89, 0.2);
+            filter: brightness(1.08);
+        }
+
+        /* Region Grouping Section */
+        .region-block {
+            margin-bottom: 60px;
+            scroll-margin-top: 30px;
+        }
+
+        .region-header {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--azul-escuro);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 4px solid var(--borda-suave);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .region-header i {
+            color: var(--dourado);
+            filter: drop-shadow(0 2px 4px rgba(17, 0, 255, 0.3));
+        }
+
+        /* School Grid */
+        .school-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 28px;
+        }
+
+        /* School Card */
+        .school-card {
+            background-color: var(--branco);
+            border-radius: 16px;
+            border: 1px solid rgba(0, 17, 89, 0.05);
+            padding: 28px 24px;
+            box-shadow: var(--sombra-card);
+            transition: var(--transicao);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .school-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--azul-royal), var(--azul-claro));
+            opacity: 0.85;
+        }
+
+        .school-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--sombra-hover);
+            border-color: rgba(0, 17, 89, 0.12);
+        }
+
+        /* Card Header Elements */
+        .card-header-info {
+            margin-bottom: 22px;
+        }
+
+        .badge-uf {
+            display: inline-block;
+            background-color: rgba(0, 46, 149, 0.07);
+            color: var(--azul-royal);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .city-name {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--azul-escuro);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .district-name {
+            font-size: 1rem;
+            color: var(--cinza-texto);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .schedule-info {
+            font-size: 0.9rem;
+            color: var(--azul-escuro);
+            background-color: #f7fafc;
+            border-radius: 8px;
+            padding: 8px 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px dashed rgba(0, 17, 89, 0.1);
+        }
+
+        .schedule-info i {
+            color: var(--azul-claro);
+        }
+
+        /* WhatsApp Button styling */
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--whatsapp);
+            color: var(--branco);
+            padding: 14px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2);
+            transition: var(--transicao);
+            width: 100%;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: var(--whatsapp-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+        }
+
+        .whatsapp-btn i {
+            font-size: 1.3rem;
+        }
+
+        /* Floating Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--azul-royal);
+            color: var(--branco);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 17, 89, 0.25);
+            transition: var(--transicao);
+            z-index: 99;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-to-top:hover {
+            background-color: var(--azul-escuro);
+            transform: translateY(-5px);
+            color: var(--dourado);
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: var(--azul-escuro);
+            color: var(--branco);
+            padding: 50px 20px;
+            text-align: center;
+            border-top: 5px solid var(--dourado);
+            position: relative;
+        }
+
+        footer .footer-stars {
+            color: var(--dourado);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        footer p {
+            font-size: 0.95rem;
+            color: #a0aec0;
+            margin-bottom: 12px;
+        }
+
+        footer strong {
+            color: var(--branco);
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 900px) {
+            header.hero {
+                padding: 50px 15px;
+            }
+
+            header.hero h1 {
+                font-size: 2.2rem;
+            }
+
+            header.hero p {
+                font-size: 1.1rem;
+            }
+
+            .navigation-grid {
+                gap: 10px;
+            }
+
+            .btn-navigation {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+
+            .region-header {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px 10px 60px 10px;
+            }
+
+            .intro-section {
+                padding: 18px 20px;
+                margin-bottom: 30px;
+            }
+
+            .intro-section p {
+                font-size: 1.1rem;
+            }
+
+            .region-header {
+                font-size: 1.35rem;
+                margin-bottom: 18px;
+            }
+
+            .school-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .school-card {
+                padding: 24px 20px;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 44px;
+                height: 44px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <!-- Intro text block (Requested Text) -->
+        <div class="intro-section">
+            <p>Confira as escolas participantes do programa Caça Talentos Cinco Estrelas.</p>
+        </div>
+
+        <!-- Fast navigation panel -->
+        <nav class="navigation-menu" aria-label="Navegação Rápida">
+            <h3>Selecione a Região das Unidades:</h3>
+            <ul class="navigation-grid">
+                <li><a href="#bh" class="btn-navigation">Belo Horizonte</a></li>
+                <li><a href="#metropolitana" class="btn-navigation">Região Metropolitana</a></li>
+                <li><a href="#interior-mg" class="btn-navigation">Interior de Minas</a></li>
+                <li><a href="#outros-estados" class="btn-navigation">Outros Estados</a></li>
+            </ul>
+        </nav>
+
+        <!-- REGION: BELO HORIZONTE -->
+        <section class="region-block" id="bh">
+            <h2 class="region-header">
+                <i class="fas fa-map-marker-alt"></i> Belo Horizonte (MG)
+            </h2>
+            <div class="school-grid">
+
+                <!-- Barro Preto -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Belo Horizonte / MG</span>
+                        <h3 class="city-name">Barro Preto</h3>
+                        <p class="district-name">Unidade Barro Preto</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531990007156?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Barreiro -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Belo Horizonte / MG</span>
+                        <h3 class="city-name">Barreiro</h3>
+                        <p class="district-name">Unidade Barreiro</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531920004084?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Castelo -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Belo Horizonte / MG</span>
+                        <h3 class="city-name">Castelo</h3>
+                        <p class="district-name">Unidade Castelo</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531998786291?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Cidade Nova -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Belo Horizonte / MG</span>
+                        <h3 class="city-name">Cidade Nova</h3>
+                        <p class="district-name">Unidade Cidade Nova</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531983993029?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Estoril -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Belo Horizonte / MG</span>
+                        <h3 class="city-name">Estoril</h3>
+                        <p class="district-name">Unidade Estoril</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531993997570?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Santa Tereza -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Belo Horizonte / MG</span>
+                        <h3 class="city-name">Santa Tereza</h3>
+                        <p class="district-name">Unidade Santa Tereza</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531984882352?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- REGION: REGIÃO METROPOLITANA -->
+        <section class="region-block" id="metropolitana">
+            <h2 class="region-header">
+                <i class="fas fa-city"></i> Região Metropolitana (MG)
+            </h2>
+            <div class="school-grid">
+
+
+
+                <!-- Betim - Ingá -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Betim / MG</span>
+                        <h3 class="city-name">Betim</h3>
+                        <p class="district-name">Unidade Ingá</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531972503053?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Betim - Vila Cristina -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Betim / MG</span>
+                        <h3 class="city-name">Betim</h3>
+                        <p class="district-name">Unidade Vila Cristina</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531990006313?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Contagem - Arvoredo -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Contagem / MG</span>
+                        <h3 class="city-name">Contagem</h3>
+                        <p class="district-name">Unidade Arvoredo</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531998081921?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Contagem - Eldorado -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Contagem / MG</span>
+                        <h3 class="city-name">Contagem</h3>
+                        <p class="district-name">Unidade Eldorado</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531973526800?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Contagem - Jardim Riacho -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Contagem / MG</span>
+                        <h3 class="city-name">Contagem</h3>
+                        <p class="district-name">Unidade Jardim Riacho</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531986981610?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Contagem - Três Barras -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Contagem / MG</span>
+                        <h3 class="city-name">Contagem</h3>
+                        <p class="district-name">Unidade Três Barras</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531996305820?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+                
+                <!-- Lagoa Santa -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Lagoa Santa / MG</span>
+                        <h3 class="city-name">Lagoa Santa</h3>
+                        <p class="district-name">Unidade Lagoa Santa</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531972220635?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Pedro Leopoldo -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Pedro Leopoldo / MG</span>
+                        <h3 class="city-name">Pedro Leopoldo</h3>
+                        <p class="district-name">Unidade Pedro Leopoldo</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531993593792?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Ribeirão das Neves -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Ribeirão das Neves / MG</span>
+                        <h3 class="city-name">Ribeirão das Neves</h3>
+                        <p class="district-name">Unidade Ribeirão das Neves</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531971761332?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Santa Luzia -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Santa Luzia / MG</span>
+                        <h3 class="city-name">Santa Luzia</h3>
+                        <p class="district-name">Unidade Santa Luzia</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531972606183?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+
+
+            </div>
+        </section>
+
+        <!-- REGION: INTERIOR DE MINAS GERAIS -->
+        <section class="region-block" id="interior-mg">
+            <h2 class="region-header">
+                <i class="fas fa-map"></i> Interior de Minas Gerais
+            </h2>
+            <div class="school-grid">
+
+                <!-- Carmo do Cajuru -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Carmo do Cajuru / MG</span>
+                        <h3 class="city-name">Carmo do Cajuru</h3>
+                        <p class="district-name">Unidade Carmo do Cajuru</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531999526824?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Congonhas - Campinho -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Congonhas / MG</span>
+                        <h3 class="city-name">Congonhas</h3>
+                        <p class="district-name">Unidade Campinho</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531987043765?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Congonhas - Grand Park -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Congonhas / MG</span>
+                        <h3 class="city-name">Congonhas</h3>
+                        <p class="district-name">Unidade Grand Park</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531987043765?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Conselheiro Lafaiete -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Conselheiro Lafaiete / MG</span>
+                        <h3 class="city-name">Conselheiro Lafaiete</h3>
+                        <p class="district-name">Unidade Conselheiro Lafaiete</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531985451990?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Divinópolis -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Divinópolis / MG</span>
+                        <h3 class="city-name">Divinópolis</h3>
+                        <p class="district-name">Unidade Divinópolis</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5537991186651?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Entre Rios de Minas -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Entre Rios de Minas / MG</span>
+                        <h3 class="city-name">Entre Rios de Minas</h3>
+                        <p class="district-name">Unidade Entre Rios de Minas</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531997906572?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Governador Valadares -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Governador Valadares / MG</span>
+                        <h3 class="city-name">Governador Valadares</h3>
+                        <p class="district-name">Unidade Governador Valadares</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5533999358972?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Ibiá -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Ibiá / MG</span>
+                        <h3 class="city-name">Ibiá</h3>
+                        <p class="district-name">Unidade Ibiá</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5534992575305?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Ipatinga -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Ipatinga / MG</span>
+                        <h3 class="city-name">Ipatinga</h3>
+                        <p class="district-name">Unidade Ipatinga</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531971565686?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Itabira -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Itabira / MG</span>
+                        <h3 class="city-name">Itabira</h3>
+                        <p class="district-name">Unidade Itabira</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531971638107?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Itabirito -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Itabirito / MG</span>
+                        <h3 class="city-name">Itabirito</h3>
+                        <p class="district-name">Unidade Itabirito</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531987672775?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- João Monlevade -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">João Monlevade / MG</span>
+                        <h3 class="city-name">João Monlevade</h3>
+                        <p class="district-name">Unidade João Monlevade</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531996768762?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+
+                <!-- Lavras -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Lavras / MG</span>
+                        <h3 class="city-name">Lavras</h3>
+                        <p class="district-name">Unidade Lavras</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5535999193308?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Martinho Campos -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Martinho Campos / MG</span>
+                        <h3 class="city-name">Martinho Campos</h3>
+                        <p class="district-name">Unidade Martinho Campos</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5537999353769?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Mutum -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Mutum / MG</span>
+                        <h3 class="city-name">Mutum</h3>
+                        <p class="district-name">Unidade Mutum</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5533998675642?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Nova Serrana -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Nova Serrana / MG</span>
+                        <h3 class="city-name">Nova Serrana</h3>
+                        <p class="district-name">Unidade Nova Serrana</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5537991305311?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Pará de Minas -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Pará de Minas / MG</span>
+                        <h3 class="city-name">Pará de Minas</h3>
+                        <p class="district-name">Unidade Pará de Minas</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5537991236642?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Patrocínio -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Patrocínio / MG</span>
+                        <h3 class="city-name">Patrocínio</h3>
+                        <p class="district-name">Unidade Patrocínio</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5534991888690?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+
+                <!-- Sete Lagoas -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Sete Lagoas / MG</span>
+                        <h3 class="city-name">Sete Lagoas</h3>
+                        <p class="district-name">Unidade Sete Lagoas</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5531995163283?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Taparuba -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Taparuba / MG</span>
+                        <h3 class="city-name">Taparuba</h3>
+                        <p class="district-name">Unidade Taparuba</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5533998675642?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Teófilo Otoni -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Teófilo Otoni / MG</span>
+                        <h3 class="city-name">Teófilo Otoni</h3>
+                        <p class="district-name">Unidade Teófilo Otoni</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5533999358972?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Varginha -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Varginha / MG</span>
+                        <h3 class="city-name">Varginha</h3>
+                        <p class="district-name">Unidade Varginha</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5535999193308?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- REGION: OUTROS ESTADOS -->
+        <section class="region-block" id="outros-estados">
+            <h2 class="region-header">
+                <i class="fas fa-globe-americas"></i> Outros Estados (ES, DF, PR, PA, SP)
+            </h2>
+            <div class="school-grid">
+
+                <!-- Cariacica (ES) -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Cariacica / ES</span>
+                        <h3 class="city-name">Cariacica</h3>
+                        <p class="district-name">Unidade Cariacica</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5527992859595?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Ceilândia (DF) -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Ceilândia / DF</span>
+                        <h3 class="city-name">Ceilândia</h3>
+                        <p class="district-name">Unidade Ceilândia</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5561985306616?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Curitiba (PR) -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Curitiba / PR</span>
+                        <h3 class="city-name">Curitiba</h3>
+                        <p class="district-name">Unidade Curitiba</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5541988736480?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- Santarém (PA) -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">Santarém / PA</span>
+                        <h3 class="city-name">Santarém</h3>
+                        <p class="district-name">Unidade Santarém</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5593981163782?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+                <!-- São Joaquim da Barra (SP) -->
+                <div class="school-card">
+                    <div class="card-header-info">
+                        <span class="badge-uf">São Joaquim da Barra / SP</span>
+                        <h3 class="city-name">São Joaquim da Barra</h3>
+                        <p class="district-name">Unidade São Joaquim da Barra</p>
+                        <div class="schedule-info">
+                            <i class="far fa-calendar-alt"></i> Agendar pelo WhatsApp
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5516994512260?text=Ola%2C%20eu%20gostaria%20de%20saber%20mais%20sobre%20a%20escola%20de%20futebol%20e%20o%20projeto%20ca%C3%A7a%20talentos"
+                        target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+        <p>&copy; 2026 <strong>Cruzeiro Esporte Clube SAF</strong>. Todos os direitos reservados.</p>
+        <p>Desenvolvido com foco no futuro da nossa base.</p>
+    </footer>
+
+</body>
+
+</html>
