@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Socio Cruzeiro</title>
+    <style>
+        :root {
+            --azul-profundo: #061b56;
+            --azul-cruzeiro: #0033a0;
+            --azul-vivo: #0a63ff;
+            --azul-claro: #d9e8ff;
+            --branco: #ffffff;
+            --grafite: #12213f;
+            --cinza: #667085;
+            --linha: rgb(0, 10, 51);
+            --sombra: 0 24px 70px rgba(0, 19, 66, 0.466);
+            --raio: 28px;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--grafite);
+            font-family: "Outfit", sans-serif;
+            background:
+                radial-gradient(circle at 12% 10%, rgba(42, 127, 255, 0.48), transparent 28rem),
+                radial-gradient(circle at 88% 18%, rgba(255, 255, 255, 0.55), transparent 18rem),
+                linear-gradient(135deg, #04164a 0%, #0645bc 48%, #eaf3ff 48.2%, #f7fbff 100%);
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        .page {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 44px 0;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(330px, 0.95fr);
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .hero-card,
+        .quiz-card,
+        .result-card,
+        .plans-card {
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: var(--raio);
+            box-shadow: var(--sombra);
+            backdrop-filter: blur(18px);
+        }
+
+        .hero-card {
+            position: relative;
+            overflow: hidden;
+            min-height: 560px;
+            padding: clamp(28px, 5vw, 58px);
+            color: var(--branco);
+            background:
+                linear-gradient(140deg, rgba(0, 36, 122, 0.9), rgba(0, 78, 186, 0.72)),
+                repeating-linear-gradient(115deg, transparent 0 18px, rgba(255, 255, 255, 0.05) 18px 20px);
+        }
+
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            right: -90px;
+            bottom: -120px;
+            width: 360px;
+            height: 360px;
+            border: 42px solid rgba(255, 255, 255, 0.13);
+            border-radius: 50%;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 18px;
+            padding: 8px 12px;
+            color: var(--azul-claro);
+            border: 1px solid var(--linha);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            font-size: 0.86rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: 0;
+            font-family: "Outfit", sans-serif;
+            font-size: clamp(3rem, 7vw, 6.7rem);
+            line-height: 0.9;
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
+        }
+
+        .hero-copy {
+            position: relative;
+            z-index: 1;
+            max-width: 620px;
+            margin: 28px 0 0;
+            color: rgba(255, 255, 255, 0.82);
+            font-size: clamp(1rem, 2vw, 1.18rem);
+            line-height: 1.7;
+        }
+
+        .hero-stats {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 44px;
+        }
+
+        .stat {
+            padding: 18px;
+            border: 1px solid var(--linha);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.5rem;
+        }
+
+        .stat span {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.88rem;
+        }
+
+        .quiz-card {
+            display: none;
+            padding: 26px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .quiz-card.active {
+            display: block;
+        }
+
+        .progress {
+            height: 10px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #e6eefc;
+        }
+
+        .progress-bar {
+            width: 20%;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--azul-cruzeiro), var(--azul-vivo));
+            transition: width 0.25s ease;
+        }
+
+        .step-info {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 18px 0 16px;
+            color: var(--cinza);
+            font-size: 0.92rem;
+        }
+
+        .question {
+            margin: 0 0 22px;
+            font-size: clamp(1.55rem, 3vw, 2.25rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+        }
+
+        .options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option {
+            width: 100%;
+            padding: 17px 18px;
+            text-align: left;
+            color: var(--grafite);
+            border: 1px solid #d7e2f5;
+            border-radius: 18px;
+            background: #fff;
+            cursor: pointer;
+            transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .option:hover,
+        .option.selected {
+            transform: translateY(-2px);
+            border-color: var(--azul-vivo);
+            box-shadow: 0 14px 28px rgba(0, 51, 160, 0.12);
+        }
+
+        .option strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .option span {
+            color: var(--cinza);
+            font-size: 0.92rem;
+        }
+
+        .range-wrap {
+            display: grid;
+            gap: 14px;
+            padding: 20px;
+            border: 1px solid #d7e2f5;
+            border-radius: 20px;
+            background: #fff;
+        }
+
+        .range-value {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .range-value strong {
+            color: var(--azul-cruzeiro);
+            font-size: 2.2rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--azul-cruzeiro);
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0 20px;
+            border: 0;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: transform 0.18s ease, opacity 0.18s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.45;
+            transform: none;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background: linear-gradient(90deg, var(--azul-profundo), var(--azul-vivo));
+        }
+
+        .btn-secondary {
+            color: var(--azul-cruzeiro);
+            background: #eaf2ff;
+        }
+
+        .results {
+            display: none;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: 22px;
+            margin-top: 28px;
+        }
+
+        .result-card,
+        .plans-card {
+            padding: 26px;
+            color: var(--branco);
+            background: rgba(0, 7, 62, 0.94);
+        }
+
+        .result-badge {
+            display: inline-flex;
+            padding: 7px 12px;
+            color: var(--azul-cruzeiro);
+            border-radius: 999px;
+            background: var(--azul-claro);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .result-plan {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 22px 0;
+        }
+
+        .result-plan h2 {
+            color: var(--branco);
+        }
+
+        .result-plan img {
+            width: 160px;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 18px;
+
+        }
+
+        .plan img {
+            width: 100%;
+            object-fit: contain;
+            border-radius: 18px;
+        }
+
+        .result-plan h2 {
+            margin: 0;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            line-height: 1.2;
+            letter-spacing: -0.04em;
+            color: var(--branco);
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .price {
+            margin: 0;
+            color: var(--azul-cruzeiro);
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .reason-list,
+        .plan ul {
+            margin: 18px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .reason-list li,
+        .plan li {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            color: var(--branco);
+            line-height: 1.45;
+        }
+
+        .reason-list li::before,
+        .plan li::before {
+            content: "";
+            flex: 0 0 8px;
+            width: 8px;
+            height: 8px;
+            margin-top: 8px;
+            border-radius: 50%;
+            background: var(--azul-vivo);
+        }
+
+        .plans-title {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .plans-title h2 {
+            margin: 0;
+            font-size: 1.7rem;
+            letter-spacing: -0.04em;
+        }
+
+        .plans-title span {
+            color: var(--cinza);
+            font-size: 0.9rem;
+        }
+
+        .plans-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .plan {
+            display: block;
+            align-items: start;
+            padding: 16px;
+            border: 1px solid #d7e2f5;
+            border-radius: 20px;
+            color: #fefeff;
+            background: #06003f;
+        }
+
+        .plan h3 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--branco);
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #c9b037, #f4e58a, #c9b037);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: goldShine 3s ease-in-out infinite;
+        }
+
+        @keyframes goldShine {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .plan p,
+        .plan small {
+            color: var(--cinza);
+        }
+
+        .plan-score {
+            min-width: 88px;
+            padding: 8px 10px;
+            text-align: center;
+            color: var(--azul-cruzeiro);
+            border-radius: 14px;
+            background: #eef5ff;
+            font-weight: 800;
+        }
+
+        .hero-card.hidden {
+            display: none;
+        }
+
+        .start-button {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 56px;
+            padding: 0 32px;
+            margin-top: 32px;
+            border: 0;
+            border-radius: 999px;
+            color: #fff;
+            background: linear-gradient(90deg, var(--azul-profundo), var(--azul-vivo));
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(6, 27, 86, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+
+            .hero,
+            .results {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-card {
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .page {
+                width: min(100% - 20px, 1180px);
+                padding: 20px 0;
+            }
+
+            .hero-card,
+            .quiz-card,
+            .result-card,
+            .plans-card {
+                border-radius: 22px;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .actions,
+            .step-info,
+            .plans-title {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .plan {
+                grid-template-columns: 100px 1fr;
+            }
+
+            .plan-score {
+                grid-column: 1 / -1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page">
+        <section class="hero">
+            <div class="hero-card" id="heroCard">
+                <p class="eyebrow">Quiz Sócio 5 Estrelas</p>
+                <h1>Encontre o plano perfeito para viver o Cruzeiro mais de perto.</h1>
+                <p class="hero-copy">
+                    Em menos de 1 minuto, descubra qual plano oferece os benefícios que mais combinam com você.
+                    Responda algumas perguntas rápidas e receba uma recomendação personalizada para aproveitar
+                    vantagens exclusivas, economizar na escolha e fazer parte da Nação Azul da melhor forma possível.
+                </p>
+                <button class="start-button" id="startButton" type="button">Iniciar Quiz</button>
+            </div>
+
+            <section class="quiz-card" aria-labelledby="quizTitle">
+                <div class="progress" aria-hidden="true">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <div class="step-info">
+                    <span id="stepCounter">Pergunta 1 de 10</span>
+                    <span>Recomendação por custo-beneficio</span>
+                </div>
+                <h2 class="question" id="quizTitle"></h2>
+                <div class="options" id="options"></div>
+                <div class="actions">
+                    <button class="btn btn-secondary" id="backButton" type="button">Voltar</button>
+                    <button class="btn btn-primary" id="nextButton" type="button" disabled>Continuar</button>
+                </div>
+            </section>
+        </section>
+
+        <section class="results" id="results" aria-live="polite">
+            <article class="result-card">
+                <span class="result-badge">Plano recomendado</span>
+                <div class="result-plan">
+                    <img id="resultLogo" alt="">
+                    <div>
+                        <h2>Plano recomendado para você</h2>
+                        <p class="price" id="resultPrice"></p>
+                    </div>
+                </div>
+                <p id="resultSummary"></p>
+                <ul class="reason-list" id="resultReasons"></ul>
+                <div class="actions">
+                    <button class="btn btn-secondary" id="restartButton" type="button">Refazer quiz</button>
+                    <button class="btn btn-primary" id="subscribeButton" type="button">Assinar agora</button>
+                </div>
+            </article>
+
+            <aside class="plans-card">
+                <div class="plans-title">
+                    <h2>Melhores opções</h2>
+                    <span>Recomendações personalizadas</span>
+                </div>
+                <div class="plans-list" id="plansList"></div>
+            </aside>
+        </section>
+    </main>
+
+    <script>
+        const assinaturasSocios = {
+            meuCruzeiro: {
+                nome: "Meu Cruzeiro",
+                slug: "meu-cruzeiro",
+                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/21/foto/3693855dc5c6a6636e8716c34c4e6f18.png",
+                precoMensal: 12,
+                precoAnual: 144,
+                ingressoGratis: true,
+                carteirinhaDigital: true,
+                taxaDeAdesaoUnica: false,
+                descontoEmIngresso: false,
+                detalheDescontoEmIngresso: "Não oferece desconto por quantidade de jogos",
+                jogosFrequentes: undefined,
+                prioridadeNaCompra: {
+                    prioridade: 4
+                },
+                descontoNaLoja: {
+                    percentual: 0.1,
+                    texto: "Até 10% na Loja do Cruzeiro"
+                },
+                conteudoExclusivo: true,
+                participaçãoEmQuizzes: true,
+                votacaoEmDecisoesNoClube: true,
+                complementos: {
+                    kids: true,
+                    carteirinhaFisica: true
+                },
+                link: "https://socio.cruzeiro.com.br/planos/21/meu-cruzeiro"
+            },
+            timeDoPovo: {
+                nome: "Time do Povo",
+                slug: "time-do-povo",
+                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/34/foto/bf15cdf046e861c67766ed162817ff8b.png",
+                precoMensal: 40,
+                precoAnual: 480,
+                ingressoGratis: false,
+                carteirinhaDigital: true,
+                taxaDeAdesaoUnica: 30,
+                descontoEmIngresso: {
+                    ativo: true,
+                    detalhes: "Todo jogo do Cruzeiro dentro dos setores Amarelo e Laranja custa R$ 40,00",
+                    faixa: "setores Amarelo e Laranja"
+                },
+                jogosFrequentes: undefined,
+                prioridadeNaCompra: {
+                    prioridade: 3
+                },
+                descontoNaLoja: {
+                    percentual: 0.15,
+                    texto: "Até 15% na Loja do Cruzeiro"
+                },
+                conteudoExclusivo: false,
+                participaçãoEmQuizzes: true,
+                votacaoEmDecisoesNoClube: false,
+                complementos: {
+                    kids: true,
+                    carteirinhaFisica: true
+                },
+                link: "https://socio.cruzeiro.com.br/planos/34/time-do-povo"
+
+            },
+            cabuloso: {
+                nome: "Cabuloso",
+                slug: "cabuloso",
+                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/10/foto/2e8e230296468933e048a962156c1106.png",
+                precoMensal: 100,
+                precoAnual: 1200,
+                ingressoGratis: false,
+                carteirinhaDigital: true,
+                taxaDeAdesaoUnica: 30,
+                descontoEmIngresso: {
+                    ativo: true,
+                    descricao: "Desconto progressivo por jogos frequentados nos últimos 15 meses"
+                },
+                jogosFrequentes: {
+                    janelaMeses: 15,
+                    niveis: [
+                        {
+                            nome: "Cabuloso 1",
+                            jogosMinimos: 0,
+                            jogosMaximos: 9,
+                            descontoIngresso: 0.5
+                        },
+                        {
+                            nome: "Cabuloso 2",
+                            jogosMinimos: 10,
+                            jogosMaximos: 19,
+                            descontoIngresso: 0.55
+                        },
+                        {
+                            nome: "Cabuloso 3",
+                            jogosMinimos: 20,
+                            jogosMaximos: null,
+                            descontoIngresso: 0.6
+                        }
+                    ]
+                },
+                prioridadeNaCompra: {
+                    prioridade: [
+                        {
+                            nivel: 1,
+                            prioridade: 3
+                        },
+                        {
+                            nivel: 2,
+                            prioridade: 2
+                        },
+                        {
+                            nivel: 3,
+                            prioridade: 1
+                        }
+                    ]
+                },
+                descontoNaLoja: {
+                    percentual: 0.15,
+                    texto: "Até 15% na Loja do Cruzeiro"
+                },
+                conteudoExclusivo: true,
+                participaçãoEmQuizzes: true,
+                votacaoEmDecisoesNoClube: true,
+                complementos: {
+                    kids: true,
+                    carteirinhaFisica: true
+                },
+                link: "https://socio.cruzeiro.com.br/planos/10/cabuloso"
+            },
+            cabulosoMax: {
+                nome: "Cabuloso Max",
+                slug: "cabuloso-max",
+                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/11/foto/33957b4b049070ccf905ddcfda4d78af.png",
+                precoMensal: 200,
+                precoAnual: 2400,
+                ingressoGratis: false,
+                carteirinhaDigital: true,
+                taxaDeAdesaoUnica: 30,
+                descontoEmIngresso: {
+                    ativo: true,
+                    quantidadeIngressos: 2,
+                    descontoPercentual: 0.65,
+                    detalhes: "Até 2 ingressos por jogo com 65% de desconto"
+                },
+                jogosFrequentes: undefined,
+                prioridadeNaCompra: {
+                    prioridade: 1
+                },
+                descontoNaLoja: {
+                    percentual: 0.15,
+                    texto: "Até 15% na Loja do Cruzeiro"
+                },
+                conteudoExclusivo: true,
+                participaçãoEmQuizzes: true,
+                votacaoEmDecisoesNoClube: true,
+                complementos: {
+                    kids: true,
+                    carteirinhaFisica: true
+                },
+                link: "https://socio.cruzeiro.com.br/planos/11/cabuloso-max"
+            },
+            cabulosoCativo: {
+                nome: "Cabuloso Cativo",
+                slug: "cabuloso-cativo",
+                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/115/foto/45e830abb42fdfb77e210002d5d7c311.png",
+                precoMensal: 400,
+                precoAnual: 4800,
+                ingressoGratis: false,
+                carteirinhaDigital: true,
+                taxaDeAdesaoUnica: false,
+                descontoEmIngresso: {
+                    ativo: true,
+                    quantidadeIngressos: 1,
+                    descontoPercentual: null,
+                    detalhes: "1 ingresso garantido no Azul Inferior"
+                },
+                jogosFrequentes: undefined,
+                prioridadeNaCompra: {
+                    prioridade: null
+                },
+                descontoNaLoja: {
+                    percentual: 0.1,
+                    texto: "Até 10% na Loja do Cruzeiro"
+                },
+                conteudoExclusivo: true,
+                participaçãoEmQuizzes: true,
+                votacaoEmDecisoesNoClube: true,
+                complementos: {
+                    kids: true,
+                    carteirinhaFisica: false
+                },
+                link: "https://socio.cruzeiro.com.br/planos/115/cabuloso-cativo"
+            }
+        }
+
+        const plans = Object.values(assinaturasSocios);
+
+        const state = {
+            step: 0,
+            answers: {
+                gamesPerYear: 0,
+                wantsGuaranteedTicket: true,
+                buysTwoTickets: true,
+                needsPriority: true,
+                wantsParticipation: true,
+                wantsStoreDiscount: true,
+                gameFrequency: "always",
+                familyPlan: true,
+                digitalExperience: true,
+                loyaltyLevel: "veteran"
+            }
+        };
+
+        const questions = [
+            {
+                key: "gamesPerYear",
+                title: "Em quantos jogos do Cruzeiro você foi nos últimos meses?",
+                type: "range",
+                min: 0,
+                max: 30,
+                suffix: "jogos"
+            },
+            {
+                key: "wantsGuaranteedTicket",
+                title: "Você deseja ingresso garantido ou incluso?",
+                options: [
+                    {
+                        label: "Sim, quero garantir meu lugar",
+                        description: "Priorizo ter um ingresso gratuito ou garantido.",
+                        value: true
+                    },
+                    {
+                        label: "Não, apenas o desconto ja resolve",
+                        description: "Busco o menor preço com vantagens em ingressos.",
+                        value: false
+                    }
+                ]
+            },
+            {
+                key: "buysTwoTickets",
+                title: "Costuma comprar ingresso para você e mais alguém?",
+                options: [
+                    {
+                        label: "Sim, normalmente compro 2 ou mais",
+                        description: "Desejo conseguir beneficios para adquirir dois ingressos ou mais.",
+                        value: true
+                    },
+                    {
+                        label: "Não, compro apenas o meu",
+                        description: "Não quero pagar por mais um beneficio que não vou usar.",
+                        value: false
+                    }
+                ]
+            },
+            {
+                key: "needsPriority",
+                title: "Prioridade na compra e importante para você?",
+                options: [
+                    {
+                        label: "Sim, quero conseguir comprar antes",
+                        description: "Desejo ter acesso a ingressos antecipadamente.",
+                        value: true
+                    },
+                    {
+                        label: "Não me importo",
+                        description: "Não faço questão de comprar antes.",
+                        value: false
+                    }
+                ]
+            },
+            {
+                key: "wantsParticipation",
+                title: "Você deseja ter acesso a conteúdo exclusivo do Cruzeiro e conseguir participar de decisões do clube?",
+                options: [
+                    {
+                        label: "Sim, quero participar",
+                        description: "Desejo ter acesso a conteúdo exclusivo e participar de decisões do clube.",
+                        value: true
+                    },
+                    {
+                        label: "Não faço questão",
+                        description: "Não faço questão de participar nas decisões que o clube toma.",
+                        value: false
+                    }
+                ]
+            },
+            {
+                key: "wantsStoreDiscount",
+                title: "Deseja ter desconto na Loja do Cruzeiro?",
+                options: [
+                    {
+                        label: "Sim, gostaria de comprar os produtos oficiais",
+                        description: "Quero conseguir comprar os produtos do cruzeiro pelo melhor preço possível.",
+                        value: true
+                    },
+                    {
+                        label: "Não me interesso muito",
+                        description: "Não tenho interesse em comprar produtos da loja.",
+                        value: false
+                    }
+                ]
+            },
+            {
+                key: "gameFrequency",
+                title: "Com que frequência você assiste os jogos do Cruzeiro?",
+                options: [
+                    {
+                        label: "Todos os jogos possíveis",
+                        description: "Não perco nenhum jogo, seja presencial ou pela TV.",
+                        value: "always"
+                    },
+                    {
+                        label: "Maioria dos jogos importantes",
+                        description: "Assisto jogos decisivos e grandes classicos.",
+                        value: "frequent"
+                    },
+                    {
+                        label: "Alguns jogos por mês",
+                        description: "Acompanho quando posso, sem compromisso.",
+                        value: "occasional"
+                    }
+                ]
+            },
+            {
+                key: "familyPlan",
+                title: "Você tem interesse em incluir sua familía no plano?",
+                options: [
+                    {
+                        label: "Sim, amo minha familía",
+                        description: "Considero a inclusão da minha familía nos beneficios.",
+                        value: true
+                    },
+                    {
+                        label: "Não, vai só para mim",
+                        description: "Foco apenas no meu beneficio individual.",
+                        value: false
+                    }
+                ]
+            },
+            {
+                key: "digitalExperience",
+                title: "A acompanhar o conteúdo do clube em primeira mão é importante?",
+                options: [
+                    {
+                        label: "Muito importante",
+                        description: "Valorizo o app, conteúdo digital exclusivo e interações online.",
+                        value: true
+                    },
+                    {
+                        label: "Prefiro experiencias presenciais",
+                        description: "Prefiro participar de jogos e eventos fisicos.",
+                        value: false
+                    }
+                ]
+            },
+            {
+                key: "loyaltyLevel",
+                title: "Ha quanto tempo você é torcedor do Cruzeiro?",
+                options: [
+                    {
+                        label: "Mais de 10 anos",
+                        description: "Torcedor veterano, valoriza tradição e história.",
+                        value: "veteran"
+                    },
+                    {
+                        label: "Entre 3 e 10 anos",
+                        description: "Torcedor cabuloso, busca mais engajamento com o Time.",
+                        value: "experienced"
+                    },
+                    {
+                        label: "Menos de 3 anos",
+                        description: "Torcedor novato, deseja conhecer mais o clube.",
+                        value: "new"
+                    }
+                ]
+            }
+        ];
+
+        const quizTitle = document.getElementById("quizTitle");
+        const options = document.getElementById("options");
+        const progressBar = document.getElementById("progressBar");
+        const stepCounter = document.getElementById("stepCounter");
+        const backButton = document.getElementById("backButton");
+        const nextButton = document.getElementById("nextButton");
+        const results = document.getElementById("results");
+        const restartButton = document.getElementById("restartButton");
+        const subscribeButton = document.getElementById("subscribeButton");
+        const heroCard = document.getElementById("heroCard");
+        const quizCard = document.querySelector(".quiz-card");
+        const startButton = document.getElementById("startButton");
+
+        function formatMoney(value) {
+            return value.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+                maximumFractionDigits: 0
+            });
+        }
+
+        function getPriorityValue(plan, gamesPerYear) {
+            const priority = plan.prioridadeNaCompra.prioridade;
+
+            if (Array.isArray(priority)) {
+                const level = getFrequentLevel(plan, gamesPerYear);
+                const found = priority.find((item) => item.nivel === level);
+                return found ? found.prioridade : 4;
+            }
+
+            return priority || 4;
+        }
+
+        function getFrequentLevel(plan, gamesPerYear) {
+            if (!plan.jogosFrequentes) {
+                return null;
+            }
+
+            const level = plan.jogosFrequentes.niveis.find((item) => {
+                const max = item.jogosMaximos === null ? Infinity : item.jogosMaximos;
+                return gamesPerYear >= item.jogosMinimos && gamesPerYear <= max;
+            });
+
+            return level ? Number(level.nome.replace(/\D/g, "")) : 1;
+        }
+
+        function getTicketBenefit(plan, gamesPerYear) {
+            if (plan.ingressoGratis) {
+                return {
+                    score: 34,
+                    text: "oferece ingresso gratis"
+                };
+            }
+
+            if (!plan.descontoEmIngresso) {
+                return {
+                    score: 0,
+                    text: "não oferece desconto em ingresso"
+                };
+            }
+
+            if (plan.slug === "time-do-povo") {
+                return {
+                    score: gamesPerYear > 0 ? 22 : 10,
+                    text: plan.descontoEmIngresso.detalhes
+                };
+            }
+
+            if (plan.jogosFrequentes) {
+                const level = plan.jogosFrequentes.niveis.find((item) => {
+                    const max = item.jogosMaximos === null ? Infinity : item.jogosMaximos;
+                    return gamesPerYear >= item.jogosMinimos && gamesPerYear <= max;
+                });
+
+                return {
+                    score: level ? level.descontoIngresso * 50 : 25,
+                    text: level ? `${level.nome}: ${Math.round(level.descontoIngresso * 100)}% de desconto` : plan.descontoEmIngresso.descricao
+                };
+            }
+
+            if (plan.descontoEmIngresso.quantidadeIngressos) {
+                const score = plan.descontoEmIngresso.descontoPercentual
+                    ? plan.descontoEmIngresso.descontoPercentual * 58
+                    : 42;
+
+                return {
+                    score,
+                    text: plan.descontoEmIngresso.detalhes
+                };
+            }
+
+            return {
+                score: 12,
+                text: "possui beneficio em ingresso"
+            };
+        }
+
+        function calculateCompatibility(plan, answers) {
+            let compatibility = 0;
+            let maxPossible = 0;
+            const reasons = [];
+
+            // Frequência de jogos (peso: 30%)
+            maxPossible += 30;
+            if (answers.gamesPerYear > 0) {
+                if (answers.gamesPerYear >= 15) {
+                    // Torcedor assíduo - planos premium
+                    if (plan.slug === 'cabuloso' || plan.slug === 'cabuloso-max' || plan.slug === 'cabuloso-cativo') {
+                        compatibility += 30;
+                        reasons.push('ideal para torcedores cabulosos que não perdem um jogo');
+                    } else if (plan.slug === 'time-do-povo') {
+                        compatibility += 15;
+                    } else {
+                        compatibility += 5;
+                    }
+                } else if (answers.gamesPerYear >= 5) {
+                    // Torcedor moderado - planos intermediários
+                    if (plan.slug === 'time-do-povo' || plan.slug === 'cabuloso') {
+                        compatibility += 30;
+                        reasons.push('adequado para quem acompanha os jogos mais importantes');
+                    } else if (plan.slug === 'meu-cruzeiro') {
+                        compatibility += 20;
+                    } else {
+                        compatibility += 10;
+                    }
+                } else {
+                    // Torcedor esporádico - planos básicos
+                    if (plan.slug === 'meu-cruzeiro') {
+                        compatibility += 30;
+                        reasons.push('perfeito para quem quer acompanhar o Time do coração');
+                    } else {
+                        compatibility += 5;
+                    }
+                }
+            } else {
+                if (plan.slug === 'meu-cruzeiro') {
+                    compatibility += 25;
+                } else {
+                    compatibility += 3;
+                }
+            }
+
+            // Ingresso garantido (peso: 25%)
+            maxPossible += 25;
+            if (answers.wantsGuaranteedTicket) {
+                if (plan.ingressoGratis) {
+                    compatibility += 25;
+                    reasons.push('ingresso grátis incluído');
+                } else if (plan.slug === 'cabuloso-cativo') {
+                    compatibility += 23;
+                    reasons.push('1 ingresso garantido');
+                } else if (plan.descontoEmIngresso) {
+                    compatibility += 12;
+                } else {
+                    compatibility += 0;
+                }
+            } else {
+                if (!plan.ingressoGratis && plan.slug !== 'cabuloso-cativo') {
+                    compatibility += 25;
+                    reasons.push('foco em benefícios além de ingressos');
+                } else {
+                    compatibility += 15;
+                }
+            }
+
+            // Dois ingressos (peso: 20%)
+            maxPossible += 20;
+            if (answers.buysTwoTickets) {
+                if (plan.descontoEmIngresso && plan.descontoEmIngresso.quantidadeIngressos >= 2) {
+                    compatibility += 20;
+                    reasons.push('desconto para até 2 ingressos');
+                } else {
+                    compatibility += 3;
+                }
+            } else {
+                if (!plan.descontoEmIngresso || plan.descontoEmIngresso.quantidadeIngressos < 2) {
+                    compatibility += 20;
+                } else {
+                    compatibility += 15;
+                }
+            }
+
+            // Prioridade (peso: 15%)
+            maxPossible += 15;
+            const priority = getPriorityValue(plan, answers.gamesPerYear);
+            if (answers.needsPriority) {
+                const priorityScore = Math.max(0, 15 - (priority * 3));
+                compatibility += priorityScore;
+                if (priority <= 2) {
+                    reasons.push(`prioridade máxima (nível ${priority})`);
+                }
+            } else {
+                compatibility += 15; // Não penaliza se não se importa
+            }
+
+            // Participação (peso: 10%)
+            maxPossible += 10;
+            if (answers.wantsParticipation) {
+                let participationScore = 0;
+                if (plan.conteudoExclusivo) participationScore += 4;
+                if (plan.votacaoEmDecisoesNoClube) participationScore += 6;
+                compatibility += participationScore;
+                if (participationScore >= 8) {
+                    reasons.push('participação completa no clube');
+                }
+            } else {
+                compatibility += 10; // Não penaliza se não se importa
+            }
+
+            const percentage = Math.round((compatibility / maxPossible) * 100);
+            return {
+                plan,
+                compatibility: percentage,
+                reasons: reasons.slice(0, 4),
+                priority
+            };
+        }
+
+        function recommendPlans() {
+            const results = plans.map(plan => calculateCompatibility(plan, state.answers));
+
+            // Separar em duas categorias principais
+            const basicPlans = results.filter(r => ['meu-cruzeiro', 'time-do-povo'].includes(r.plan.slug));
+            const premiumPlans = results.filter(r => ['cabuloso', 'cabuloso-max', 'cabuloso-cativo'].includes(r.plan.slug));
+
+            // Pegar o melhor de cada categoria
+            const bestBasic = basicPlans.sort((a, b) => b.compatibility - a.compatibility)[0];
+            const bestPremium = premiumPlans.sort((a, b) => b.compatibility - a.compatibility)[0];
+
+            // Decidir qual recomendar baseado no perfil
+            const profileScore = calculateProfileScore();
+
+            if (profileScore >= 3) {
+                // Perfil premium - recomendar premium primeiro
+                return [bestPremium, bestBasic].filter(Boolean);
+            } else {
+                // Perfil básico - recomendar básico primeiro  
+                return [bestBasic, bestPremium].filter(Boolean);
+            }
+        }
+
+        function calculateProfileScore() {
+            let score = 0;
+            if (state.answers.gamesPerYear >= 10) score++;
+            if (state.answers.wantsGuaranteedTicket) score++;
+            if (state.answers.buysTwoTickets) score++;
+            if (state.answers.needsPriority) score++;
+            if (state.answers.wantsParticipation) score++;
+            return score;
+        }
+
+        function renderQuestion() {
+            const question = questions[state.step];
+            const progress = ((state.step + 1) / questions.length) * 100;
+
+            quizTitle.textContent = question.title;
+            stepCounter.textContent = `Pergunta ${state.step + 1} de ${questions.length}`;
+            progressBar.style.width = `${progress}%`;
+            backButton.disabled = state.step === 0;
+            nextButton.disabled = false;
+            nextButton.textContent = state.step === questions.length - 1 ? "Ver resultado" : "Continuar";
+            options.innerHTML = "";
+
+            if (question.type === "range") {
+                const wrap = document.createElement("div");
+                wrap.className = "range-wrap";
+                wrap.innerHTML = `
+                    <div class="range-value">
+                        <span>Frequencia estimada</span>
+                        <strong id="rangeOutput">${state.answers[question.key]} ${question.suffix}</strong>
+                    </div>
+                    <input id="rangeInput" type="range" min="${question.min}" max="${question.max}" value="${state.answers[question.key]}">
+                `;
+                options.appendChild(wrap);
+
+                const rangeInput = document.getElementById("rangeInput");
+                const rangeOutput = document.getElementById("rangeOutput");
+                rangeInput.addEventListener("input", () => {
+                    state.answers[question.key] = Number(rangeInput.value);
+                    rangeOutput.textContent = `${rangeInput.value} ${question.suffix}`;
+                    nextButton.disabled = false;
+                });
+
+                return;
+            }
+
+            question.options.forEach((item, index) => {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = "option";
+
+                // Sempre mostra como selecionada a opcao atual do state
+                const isSelected = state.answers[question.key] === item.value;
+                button.classList.toggle("selected", isSelected);
+
+                button.innerHTML = `<strong>${item.label}</strong><span>${item.description}</span>`;
+                button.addEventListener("click", () => {
+                    // Remove seleção anterior
+                    document.querySelectorAll('.option.selected').forEach(opt => opt.classList.remove('selected'));
+                    // Adiciona seleção atual
+                    button.classList.add('selected');
+
+                    state.answers[question.key] = item.value;
+                    nextButton.disabled = false;
+                });
+                options.appendChild(button);
+            });
+        }
+
+        function renderResults() {
+            const recommendations = recommendPlans();
+            const winner = recommendations[0];
+
+            document.getElementById("resultLogo").src = winner.plan.logo;
+            document.getElementById("resultLogo").alt = `Logo do plano ${winner.plan.nome}`;
+            document.getElementById("resultPrice").textContent = `${formatMoney(winner.plan.precoMensal)}/mes`;
+            document.getElementById("resultSummary").textContent = `Este plano tem ${winner.compatibility}% de compatibilidade com seu perfil e oferece os benefícios mais adequados.`;
+
+            const resultReasons = document.getElementById("resultReasons");
+            resultReasons.innerHTML = "";
+            winner.reasons.forEach((reason) => {
+                const item = document.createElement("li");
+                item.textContent = reason;
+                resultReasons.appendChild(item);
+            });
+
+            const plansList = document.getElementById("plansList");
+            plansList.innerHTML = "";
+
+            recommendations.forEach((result, index) => {
+                const { plan, compatibility, reasons, priority } = result;
+                const ticketBenefit = getTicketBenefit(plan, state.answers.gamesPerYear);
+                const card = document.createElement("article");
+                card.className = "plan";
+                const adhesion = plan.taxaDeAdesaoUnica ? `Taxa única: ${formatMoney(plan.taxaDeAdesaoUnica)}` : "Sem taxa de adesão única";
+
+                card.innerHTML = `
+                    <img src="${plan.logo}" alt="Logo do plano ${plan.nome}">
+                    <div>
+                        <h3>${index === 0 ? 'Recomendado' : 'Alternativa'}</h3>
+                        <p>${formatMoney(plan.precoMensal)}/mes ou ${formatMoney(plan.precoAnual)}/ano</p>
+                        <small>${adhesion}</small>
+                        <ul>
+                            <li>${ticketBenefit.text}</li>
+                            <li>Prioridade ${priority}</li>
+                            <li>${plan.descontoNaLoja.texto}</li>
+                            ${reasons[0] ? `<li>${reasons[0]}</li>` : ""}
+                        </ul>
+                    </div>
+                    <div class="plan-score">${compatibility}%</div>
+                `;
+                plansList.appendChild(card);
+            });
+
+            results.style.display = "grid";
+            results.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+
+
+        startButton.addEventListener("click", () => {
+            heroCard.classList.add("hidden");
+            quizCard.classList.add("active");
+            renderQuestion();
+        });
+
+        backButton.addEventListener("click", () => {
+            if (state.step === 0) {
+                return;
+            }
+
+            state.step -= 1;
+            renderQuestion();
+        });
+
+        nextButton.addEventListener("click", () => {
+            if (state.step === questions.length - 1) {
+                renderResults();
+                return;
+            }
+
+            state.step += 1;
+            renderQuestion();
+        });
+
+        restartButton.addEventListener("click", () => {
+            state.step = 0;
+            state.answers = {
+                gamesPerYear: 0,
+                wantsGuaranteedTicket: true,
+                buysTwoTickets: true,
+                needsPriority: true,
+                wantsParticipation: true,
+                wantsStoreDiscount: true,
+                gameFrequency: "always",
+                familyPlan: true,
+                digitalExperience: true,
+                loyaltyLevel: "veteran"
+            };
+            results.style.display = "none";
+            heroCard.classList.remove("hidden");
+            quizCard.classList.remove("active");
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        subscribeButton.addEventListener("click", () => {
+            const recommendations = recommendPlans();
+            const winner = recommendations[0];
+            const planSlug = winner.plan.slug;
+
+            const subscriptionUrls = {
+                'meu-cruzeiro': 'https://socio5estrelas.com.br/planos/21/meu-cruzeiro',
+                'time-do-povo': 'https://socio5estrelas.com.br/planos/34/time-do-povo',
+                'cabuloso': 'https://socio5estrelas.com.br/planos/10/cabuloso',
+                'cabuloso-max': 'https://socio5estrelas.com.br/planos/11/cabuloso-max',
+                'cabuloso-cativo': 'https://socio5estrelas.com.br/planos/115/cabuloso-cativo'
+            };
+
+            const url = subscriptionUrls[planSlug] || 'https://socio5estrelas.com.br';
+            window.open(url, '_blank');
+        });
+
+        renderQuestion();
+    </script>
+
+</body>
+
+</html>

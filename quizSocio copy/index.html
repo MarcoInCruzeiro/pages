@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const assinaturasSocios = {
+            meuCruzeiro: {
+                nome: "Meu Cruzeiro",
+                slug: "meu-cruzeiro",
+                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/21/foto/3693855dc5c6a6636e8716c34c4e6f18.png",
+                precoMensal: 12,
+                precoAnual: 144,
+                ingressoGratis: true,
+                carteirinhaDigital: true,
+                taxaDeAdesaoUnica: false,
+                descontoEmIngresso: false,
+                detalheDescontoEmIngresso: "Não oferece desconto por quantidade de jogos",
+                jogosFrequentes: undefined,
+                prioridadeNaCompra: {
+                    prioridade: 4
+                },
+                descontoNaLoja: {
+                    percentual: 0.1,
+                    texto: "Até 10% na Loja do Cruzeiro"
+                },
+                conteudoExclusivo: true,
+                participaçãoEmQuizzes: true,
+                votacaoEmDecisoesNoClube: true,
+                complementos: {
+                    kids: true,
+                    carteirinhaFisica: true
+                }
+            },
+            timeDoPovo: {
+                nome: "Time do Povo",
+                slug: "time-do-povo",
+                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/34/foto/bf15cdf046e861c67766ed162817ff8b.png",
+                precoMensal: 40,
+                precoAnual: 480,
+                ingressoGratis: false,
+                carteirinhaDigital: true,
+                taxaDeAdesaoUnica: 30,
+                descontoEmIngresso: {
+                    ativo: true,
+                    detalhes: "Todo jogo do Cruzeiro dentro dos setores Amarelo e Laranja custa R$ 40,00",
+                    faixa: "setores Amarelo e Laranja"
+                },
+                jogosFrequentes: undefined,
+                prioridadeNaCompra: {
+                    prioridade: 3
+                },
+                descontoNaLoja: {
+                    percentual: 0.15,
+                    texto: "Até 15% na Loja do Cruzeiro"
+                },
+                conteudoExclusivo: false,
+                participaçãoEmQuizzes: true,
+                votacaoEmDecisoesNoClube: false,
+                complementos: {
+                    kids: true,
+                    carteirinhaFisica: true
+                }
+            },
+            cabuloso: {
+                nome: "Cabuloso",
+                slug: "cabuloso",
+                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/10/foto/2e8e230296468933e048a962156c1106.png",
+                precoMensal: 100,
+                precoAnual: 1200,
+                ingressoGratis: false,
+                carteirinhaDigital: true,
+                taxaDeAdesaoUnica: 30,
+                descontoEmIngresso: {
+                    ativo: true,
+                    descricao: "Desconto progressivo por jogos frequentados nos últimos 15 meses"
+                },
+                jogosFrequentes: {
+                    janelaMeses: 15,
+                    niveis: [
+                        {
+                            nome: "Cabuloso 1",
+                            jogosMinimos: 0,
+                            jogosMaximos: 9,
+                            descontoIngresso: 0.5
+                        },
+                        {
+                            nome: "Cabuloso 2",
+                            jogosMinimos: 10,
+                            jogosMaximos: 19,
+                            descontoIngresso: 0.55
+                        },
+                        {
+                            nome: "Cabuloso 3",
+                            jogosMinimos: 20,
+                            jogosMaximos: null,
+                            descontoIngresso: 0.6
+                        }
+                    ]
+                },
+                prioridadeNaCompra: {
+                    prioridade: [
+                        {
+                            nivel: 1,
+                            prioridade: 3
+                        },
+                        {
+                            nivel: 2,
+                            prioridade: 2
+                        },
+                        {
+                            nivel: 3,
+                            prioridade: 1
+                        }
+                    ]
+                },
+                descontoNaLoja: {
+                    percentual: 0.15,
+                    texto: "Até 15% na Loja do Cruzeiro"
+                },
+                conteudoExclusivo: true,
+                participaçãoEmQuizzes: true,
+                votacaoEmDecisoesNoClube: true,
+                complementos: {
+                    kids: true,
+                    carteirinhaFisica: true
+                }
+            },
+            cabulosoMax: {
+                nome: "Cabuloso Max",
+                slug: "cabuloso-max",
+                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/11/foto/33957b4b049070ccf905ddcfda4d78af.png",
+                precoMensal: 200,
+                precoAnual: 2400,
+                ingressoGratis: false,
+                carteirinhaDigital: true,
+                taxaDeAdesaoUnica: 30,
+                descontoEmIngresso: {
+                    ativo: true,
+                    quantidadeIngressos: 2,
+                    descontoPercentual: 0.65,
+                    detalhes: "Até 2 ingressos por jogo com 65% de desconto"
+                },
+                jogosFrequentes: undefined,
+                prioridadeNaCompra: {
+                    prioridade: 1
+                },
+                descontoNaLoja: {
+                    percentual: 0.15,
+                    texto: "Até 15% na Loja do Cruzeiro"
+                },
+                conteudoExclusivo: true,
+                participaçãoEmQuizzes: true,
+                votacaoEmDecisoesNoClube: true,
+                complementos: {
+                    kids: true,
+                    carteirinhaFisica: true
+                }
+            },
+            cabulosoCativo: {
+                nome: "Cabuloso Cativo",
+                slug: "cabuloso-cativo",
+                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/115/foto/45e830abb42fdfb77e210002d5d7c311.png",
+                precoMensal: 400,
+                precoAnual: 4800,
+                ingressoGratis: false,
+                carteirinhaDigital: true,
+                taxaDeAdesaoUnica: false,
+                descontoEmIngresso: {
+                    ativo: true,
+                    quantidadeIngressos: 1,
+                    descontoPercentual: null,
+                    detalhes: "1 ingresso garantido no Azul Inferior"
+                },
+                jogosFrequentes: undefined,
+                prioridadeNaCompra: {
+                    prioridade: null
+                },
+                descontoNaLoja: {
+                    percentual: 0.1,
+                    texto: "Até 10% na Loja do Cruzeiro"
+                },
+                conteudoExclusivo: true,
+                participaçãoEmQuizzes: true,
+                votacaoEmDecisoesNoClube: true,
+                complementos: {
+                    kids: true,
+                    carteirinhaFisica: false
+                }
+            }
+        }
+    </script>
+    
+</body>
+
+</html>
