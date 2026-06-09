@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Socio Cruzeiro</title>
     <style>
+/* 
+ * Organized CSS Sections:
+ *  1. CSS Variables
+ *  2. Base Styles
+ *  3. Layout
+ *  4. Components
+ *  5. Utilities
+ *  6. Animations & Transitions
+ *  7. Media Queries
+ */
+
+
         :root {
             --azul-profundo: #061b56;
             --azul-cruzeiro: #0033a0;
@@ -151,6 +163,7 @@
         }
 
         .quiz-card {
+            display: none;
             padding: 26px;
             background: rgba(255, 255, 255, 0.9);
         }
@@ -286,7 +299,7 @@
         }
 
         .results {
-            display: grid;
+            display: none;
             grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
             gap: 22px;
             margin-top: 28px;
@@ -455,6 +468,14 @@
             font-weight: 800;
         }
 
+        .quiz-card.active {
+            display: block;
+        }
+
+        .results.active {
+            display: grid;
+        }
+
         .hero-card.hidden {
             display: none;
         }
@@ -481,12 +502,6 @@
         .start-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 24px rgba(6, 27, 86, 0.3);
-        }
-
-        .hidden {
-            display: none !important;
-            opacity: 0;
-            transform: translateY(12px);
         }
 
         /* Transições Suaves e Animações Minimalistas */
@@ -528,55 +543,32 @@
             transform: translateY(-2px) scale(1.01);
         }
 
-        @media (max-width: 900px) {
 
-            .hero,
-            .results {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-card {
-                min-height: auto;
-            }
-        }
-
-        @media (max-width: 620px) {
-            .page {
-                width: min(100% - 20px, 1180px);
-                padding: 20px 0;
-            }
-
-            .hero-card,
-            .quiz-card,
-            .result-card,
-            .plans-card {
-                border-radius: 22px;
-            }
-
-            .hero-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .actions,
-            .step-info,
-            .plans-title {
-                align-items: stretch;
+        @media (min-width: 1200px){
+            .page{
+                display: flex;
                 flex-direction: column;
             }
 
-            .btn {
-                width: 100%;
-            }
-
-            .plan {
-                grid-template-columns: 100px 1fr;
-            }
-
-            .plan-score {
-                grid-column: 1 / -1;
+            .hero-card {
+                min-height: 520px;
             }
         }
-    </style>
+
+        @media (min-width: 900px) {
+
+        }
+
+        @media (max-width: 768px) {
+
+        }
+
+        @media (max-width: 620px) {
+
+        }
+
+    
+</style>
 </head>
 
 <body>
@@ -639,6 +631,21 @@
     </main>
 
     <script>
+/*
+ * Organized JavaScript Sections:
+ *  1. Data
+ *  2. State
+ *  3. Questions
+ *  4. Helper Functions
+ *  5. Profile Building
+ *  6. Compatibility Calculation
+ *  7. Recommendation
+ *  8. Rendering Functions
+ *  9. Event Listeners
+ * 10. Initialization
+ */
+
+
         const assinaturasSocios = {
             meuCruzeiro: {
                 nome: "Meu Cruzeiro",
@@ -1463,7 +1470,7 @@
             // Exibir os 3 principais atributos com melhor alinhamento na recomendação
             winner.influences.slice(0, 3).forEach((inf) => {
                 const item = document.createElement("li");
-                item.textContent = `${ATTRIBUTE_LABELS[inf.key]}: excelente alinhamento (Afinidade: ${inf.alignment}/10)`;
+                item.textContent = `${ATTRIBUTE_LABELS[inf.key]}: excelente alinhamento`;
                 resultReasons.appendChild(item);
             });
 
@@ -1663,7 +1670,8 @@
         });
 
         renderQuestion();
-    </script>
+    
+</script>
 
 </body>
 
