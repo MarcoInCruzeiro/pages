@@ -19,16 +19,17 @@
 
 
         :root {
-            --azul-profundo: #061b56;
-            --azul-cruzeiro: #0033a0;
-            --azul-vivo: #0a63ff;
-            --azul-claro: #d9e8ff;
+            --azul-profundo: #021a3e; /* Mais escuro */
+            --azul-cruzeiro: #004080; /* Mais vibrante */
+            --azul-vivo: #007bff; /* Para acentos */
+            --azul-claro: #e0f2ff; /* Mais suave */
             --branco: #ffffff;
-            --grafite: #12213f;
-            --cinza: #667085;
-            --linha: rgb(0, 10, 51);
-            --sombra: 0 24px 70px rgba(0, 19, 66, 0.466);
-            --raio: 28px;
+            --grafite: #2c3e50; /* Texto mais escuro */
+            --cinza: #7f8c8d; /* Cinza médio */
+            --linha: rgba(255, 255, 255, 0.1); /* Linhas mais sutis */
+            --sombra: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+            --raio: 16px; /* Bordas mais suaves */
+            --gradient-background: linear-gradient(135deg, #04164a 0%, #0645bc 48%, #eaf3ff 48.2%, #f7fbff 100%);
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
@@ -43,9 +44,10 @@
             color: var(--grafite);
             font-family: "Outfit", sans-serif;
             background:
-                radial-gradient(circle at 12% 10%, rgba(42, 127, 255, 0.48), transparent 28rem),
-                radial-gradient(circle at 88% 18%, rgba(255, 255, 255, 0.55), transparent 18rem),
-                linear-gradient(135deg, #04164a 0%, #0645bc 48%, #eaf3ff 48.2%, #f7fbff 100%);
+                radial-gradient(circle at 12% 10%, rgba(0, 100, 255, 0.15), transparent 30rem),
+                radial-gradient(circle at 88% 18%, rgba(255, 255, 255, 0.1), transparent 20rem),
+                var(--gradient-background);
+            background-attachment: fixed; /* Fixa o background para um efeito mais elegante */
         }
 
         button,
@@ -55,85 +57,101 @@
         }
 
         .page {
-            width: min(1180px, calc(100% - 32px));
+            width: min(1200px, calc(100% - 40px)); /* Aumenta um pouco a largura e o padding */
             margin: 0 auto;
-            padding: 44px 0;
+            padding: 50px 0;
         }
 
         .hero {
             display: grid;
-            grid-template-columns: minmax(0, 1.05fr) minmax(330px, 0.95fr);
-            gap: 28px;
-            align-items: stretch;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            gap: 32px;
+            align-items: center;
         }
 
         .hero-card,
         .quiz-card,
         .result-card,
         .plans-card {
-            border: 1px solid rgba(255, 255, 255, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Borda mais suave */
             border-radius: var(--raio);
             box-shadow: var(--sombra);
-            backdrop-filter: blur(18px);
+            backdrop-filter: blur(12px); /* Blur mais suave */
+            background-color: rgba(255, 255, 255, 0.05); /* Um toque de cor para cards principais */
         }
 
         .hero-card {
+            grid-column: 1;
+            grid-row: 1;
             position: relative;
             overflow: hidden;
-            min-height: 560px;
-            padding: clamp(28px, 5vw, 58px);
+            min-height: 580px;
+            padding: clamp(30px, 6vw, 60px);
             color: var(--branco);
             background:
-                linear-gradient(140deg, rgba(0, 36, 122, 0.9), rgba(0, 78, 186, 0.72)),
-                repeating-linear-gradient(115deg, transparent 0 18px, rgba(255, 255, 255, 0.05) 18px 20px);
+                linear-gradient(140deg, rgba(0, 30, 80, 0.95), rgba(0, 60, 140, 0.8)),
+                repeating-linear-gradient(115deg, transparent 0 20px, rgba(255, 255, 255, 0.03) 20px 22px);
+            background-attachment: fixed;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        visibility 0.5s;
+            z-index: 2;
         }
 
         .hero-card::after {
             content: "";
             position: absolute;
-            right: -90px;
-            bottom: -120px;
-            width: 360px;
-            height: 360px;
-            border: 42px solid rgba(255, 255, 255, 0.13);
+            right: -100px;
+            bottom: -150px;
+            width: 400px;
+            height: 400px;
+            border: 50px solid rgba(255, 255, 255, 0.08); /* Círculo maior e mais sutil */
             border-radius: 50%;
+            pointer-events: none; /* Garante que não interfira com interações */
         }
 
         .eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            margin: 0 0 18px;
-            padding: 8px 12px;
+            gap: 10px; /* Aumenta o gap */
+            margin: 0 0 20px;
+            padding: 9px 14px; /* Padding ajustado */
             color: var(--azul-claro);
             border: 1px solid var(--linha);
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.08);
-            font-size: 0.86rem;
-            letter-spacing: 0.08em;
+            background: rgba(255, 255, 255, 0.06); /* Background mais suave */
+            font-size: 0.9rem;
+            letter-spacing: 0.1em; /* Mais espaçamento para elegância */
             text-transform: uppercase;
+            font-weight: 500;
         }
 
         h1 {
             position: relative;
             z-index: 1;
-            max-width: 720px;
+            max-width: 780px; /* Largura um pouco maior */
             margin: 0;
             font-family: "Outfit", sans-serif;
-            font-size: clamp(3rem, 7vw, 6.7rem);
-            line-height: 0.9;
-            letter-spacing: 0.01em;
+            font-size: clamp(3.2rem, 7.5vw, 7rem); /* Fonte ligeiramente maior */
+            line-height: 0.95; /* Line height ajustado */
+            letter-spacing: 0; /* Remove letter spacing para h1 */
             text-transform: uppercase;
+            font-weight: 700;
         }
 
         .hero-copy {
             position: relative;
             z-index: 1;
-            max-width: 620px;
-            margin: 28px 0 0;
-            color: rgba(255, 255, 255, 0.82);
-            font-size: clamp(1rem, 2vw, 1.18rem);
-            line-height: 1.7;
+            max-width: 680px; /* Largura um pouco maior */
+            margin: 32px 0 0;
+            color: rgba(255, 255, 255, 0.75); /* Cor mais suave */
+            font-size: clamp(1.05rem, 2.2vw, 1.25rem); /* Fonte ligeiramente maior */
+            line-height: 1.8; /* Line height ajustado */
         }
 
         .hero-stats {
@@ -141,103 +159,125 @@
             z-index: 1;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-top: 44px;
+            gap: 16px; /* Aumenta o gap */
+            margin-top: 50px; /* Margem superior ajustada */
         }
 
         .stat {
-            padding: 18px;
+            padding: 20px; /* Padding ajustado */
             border: 1px solid var(--linha);
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.09);
+            border-radius: 20px; /* Raio ajustado */
+            background: rgba(255, 255, 255, 0.07); /* Background mais suave */
         }
 
         .stat strong {
             display: block;
-            font-size: 1.5rem;
+            font-size: 1.6rem; /* Fonte ligeiramente maior */
+            font-weight: 600;
+            color: var(--azul-claro); /* Cor para destaque */
         }
 
         .stat span {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.6); /* Cor mais suave */
+            font-size: 0.9rem; /* Fonte ligeiramente maior */
         }
 
         .quiz-card {
-            display: none;
-            padding: 26px;
-            background: rgba(255, 255, 255, 0.9);
+            grid-column: 1;
+            grid-row: 1;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(15px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        visibility 0.5s;
+            z-index: 1;
         }
 
         .progress {
-            height: 10px;
+            height: 12px; /* Altura um pouco maior */
             overflow: hidden;
             border-radius: 999px;
-            background: #e6eefc;
+            background: #eef5ff; /* Fundo do progresso */
         }
 
         .progress-bar {
             width: 20%;
             height: 100%;
             border-radius: inherit;
-            background: linear-gradient(90deg, var(--azul-cruzeiro), var(--azul-vivo));
-            transition: width 0.25s ease;
+            background: linear-gradient(90deg, var(--azul-profundo), var(--azul-cruzeiro)); /* Gradiente mais forte */
+            transition: width 0.35s ease-out; /* Transição mais suave */
         }
 
         .step-info {
             display: flex;
             justify-content: space-between;
-            gap: 12px;
-            margin: 18px 0 16px;
+            gap: 16px; /* Aumenta o gap */
+            margin: 20px 0; /* Margem ajustada */
             color: var(--cinza);
-            font-size: 0.92rem;
+            font-size: 0.95rem; /* Fonte ligeiramente maior */
+            font-weight: 500;
         }
 
         .question {
-            margin: 0 0 22px;
-            font-size: clamp(1.55rem, 3vw, 2.25rem);
-            line-height: 1.1;
-            letter-spacing: -0.04em;
+            margin: 0 0 24px; /* Margem ajustada */
+            font-size: clamp(1.6rem, 3.2vw, 2.4rem); /* Fonte ligeiramente maior */
+            line-height: 1.2;
+            letter-spacing: -0.03em; /* Letter spacing ajustado */
+            color: var(--grafite);
+            font-weight: 600;
         }
 
         .options {
             display: grid;
-            gap: 12px;
+            gap: 14px; /* Aumenta o gap */
         }
 
         .option {
             width: 100%;
-            padding: 17px 18px;
+            padding: 18px 20px; /* Padding ajustado */
             text-align: left;
             color: var(--grafite);
-            border: 1px solid #d7e2f5;
+            border: 1px solid #dbe6f5; /* Borda mais suave */
             border-radius: 18px;
-            background: #fff;
+            background: #ffffff; /* Fundo branco */
             cursor: pointer;
-            transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .option:hover,
+        .option:hover {
+            transform: translateY(-3px); /* Efeito de hover mais pronunciado */
+            border-color: var(--azul-vivo);
+            box-shadow: 0 10px 25px rgba(0, 51, 160, 0.1); /* Sombra mais suave */
+        }
+
         .option.selected {
             transform: translateY(-2px);
-            border-color: var(--azul-vivo);
-            box-shadow: 0 14px 28px rgba(0, 51, 160, 0.12);
+            border-color: var(--azul-vivo) !important;
+            box-shadow: 0 8px 20px rgba(0, 51, 160, 0.15) !important;
+            background-color: var(--azul-claro) !important; /* Cor de fundo mais clara para selecionado */
         }
 
         .option strong {
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 6px; /* Margem ajustada */
+            font-size: 1.05rem;
         }
 
         .option span {
             color: var(--cinza);
-            font-size: 0.92rem;
+            font-size: 0.95rem; /* Fonte ligeiramente maior */
         }
 
         .range-wrap {
             display: grid;
-            gap: 14px;
-            padding: 20px;
-            border: 1px solid #d7e2f5;
+            gap: 16px; /* Aumenta o gap */
+            padding: 22px; /* Padding ajustado */
+            border: 1px solid #dbe6f5; /* Borda mais suave */
             border-radius: 20px;
             background: #fff;
         }
@@ -246,129 +286,168 @@
             display: flex;
             align-items: baseline;
             justify-content: space-between;
-            gap: 12px;
+            gap: 14px; /* Aumenta o gap */
         }
 
         .range-value strong {
             color: var(--azul-cruzeiro);
-            font-size: 2.2rem;
+            font-size: 2.4rem; /* Fonte ligeiramente maior */
+            font-weight: 700;
         }
 
         input[type="range"] {
             width: 100%;
             accent-color: var(--azul-cruzeiro);
+            height: 8px; /* Altura do slider */
+            cursor: grab;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--azul-vivo);
+            cursor: grab;
+            margin-top: -8px; /* Centraliza o thumb */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--azul-vivo);
+            cursor: grab;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .actions {
             display: flex;
             justify-content: space-between;
-            gap: 12px;
-            margin-top: 24px;
+            gap: 16px; /* Aumenta o gap */
+            margin-top: 30px; /* Margem superior ajustada */
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 48px;
-            padding: 0 20px;
+            min-height: 52px; /* Altura ligeiramente maior */
+            padding: 0 24px; /* Padding ajustado */
             border: 0;
             border-radius: 999px;
             cursor: pointer;
-            transition: transform 0.18s ease, opacity 0.18s ease;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            font-weight: 500;
         }
 
         .btn:hover {
-            transform: translateY(-1px);
+            transform: translateY(-2px); /* Efeito de hover mais pronunciado */
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
 
         .btn:disabled {
             cursor: not-allowed;
-            opacity: 0.45;
+            opacity: 0.5; /* Opacidade ajustada */
             transform: none;
+            box-shadow: none;
         }
 
         .btn-primary {
             color: #fff;
-            background: linear-gradient(90deg, var(--azul-profundo), var(--azul-vivo));
+            background: linear-gradient(90deg, var(--azul-profundo), var(--azul-vivo)); /* Gradiente mais forte */
+            font-weight: 600;
         }
 
         .btn-secondary {
             color: var(--azul-cruzeiro);
-            background: #eaf2ff;
+            background: #eff7ff; /* Fundo mais suave */
+            border: 1px solid var(--azul-claro);
+        }
+        .btn-secondary:hover {
+            background: var(--azul-claro);
         }
 
         .results {
-            display: none;
-            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-            gap: 22px;
-            margin-top: 28px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 28px;
+            margin-top: 32px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(15px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        visibility 0.6s;
         }
 
         .result-card,
         .plans-card {
-            padding: 26px;
+            padding: 30px; /* Padding ajustado */
             color: var(--branco);
-            background: rgba(0, 7, 62, 0.94);
+            background: linear-gradient(160deg, rgba(0, 20, 70, 0.95), rgba(0, 40, 100, 0.85)); /* Gradiente escuro para cards de resultado */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Borda sutil */
         }
 
         .result-badge {
             display: inline-flex;
-            padding: 7px 12px;
+            padding: 8px 14px; /* Padding ajustado */
             color: var(--azul-cruzeiro);
             border-radius: 999px;
             background: var(--azul-claro);
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             font-weight: 700;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
         }
 
         .result-plan {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin: 22px 0;
+            gap: 20px; /* Aumenta o gap */
+            margin: 25px 0; /* Margem ajustada */
         }
 
         .result-plan h2 {
             color: var(--branco);
+            margin: 0;
+            font-size: clamp(1.5rem, 3.2vw, 2.1rem); /* Fonte ajustada */
+            line-height: 1.25;
+            letter-spacing: -0.03em;
+            font-weight: 600;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
         }
 
         .result-plan img {
-            width: 160px;
-            height: 120px;
+            width: 140px; /* Largura ajustada */
+            height: 100px; /* Altura ajustada */
             object-fit: contain;
-            border-radius: 18px;
-
+            border-radius: 16px; /* Raio ajustado */
+            background-color: rgba(255,255,255,0.05); /* Fundo sutil para imagem */
+            padding: 5px; /* Padding interno */
         }
 
         .plan img {
             width: 100%;
+            height: 80px; /* Ajusta altura da imagem do plano */
             object-fit: contain;
-            border-radius: 18px;
-        }
-
-        .result-plan h2 {
-            margin: 0;
-            font-size: clamp(1.4rem, 3vw, 2rem);
-            line-height: 1.2;
-            letter-spacing: -0.04em;
-            color: var(--branco);
-            font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            border-radius: 14px; /* Raio ajustado */
+            margin-bottom: 10px; /* Margem para separar do texto */
+            background-color: rgba(255,255,255,0.05);
+            padding: 5px;
         }
 
         .price {
             margin: 0;
-            color: var(--azul-cruzeiro);
-            font-size: 1.8rem;
+            color: var(--azul-vivo); /* Cor mais viva para o preço */
+            font-size: 2rem; /* Fonte ligeiramente maior */
             font-weight: 800;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .reason-list,
         .plan ul {
-            margin: 18px 0 0;
+            margin: 20px 0 0; /* Margem ajustada */
             padding: 0;
             list-style: none;
         }
@@ -376,64 +455,73 @@
         .reason-list li,
         .plan li {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
-            color: var(--branco);
-            line-height: 1.45;
+            gap: 12px; /* Aumenta o gap */
+            margin-top: 12px; /* Margem ajustada */
+            color: rgba(255, 255, 255, 0.8); /* Cor mais suave */
+            line-height: 1.5;
+            font-size: 0.95rem;
         }
 
         .reason-list li::before,
         .plan li::before {
             content: "";
-            flex: 0 0 8px;
-            width: 8px;
-            height: 8px;
-            margin-top: 8px;
+            flex: 0 0 9px; /* Tamanho ajustado */
+            width: 9px;
+            height: 9px;
+            margin-top: 7px; /* Centraliza verticalmente */
             border-radius: 50%;
             background: var(--azul-vivo);
+            box-shadow: 0 0 5px var(--azul-vivo); /* Pequeno brilho */
         }
 
         .plans-title {
             display: flex;
-            align-items: end;
+            align-items: flex-end; /* Alinha ao final */
             justify-content: space-between;
-            gap: 14px;
-            margin-bottom: 16px;
+            gap: 16px; /* Aumenta o gap */
+            margin-bottom: 18px; /* Margem ajustada */
         }
 
         .plans-title h2 {
             margin: 0;
-            font-size: 1.7rem;
+            font-size: 1.8rem; /* Fonte ligeiramente maior */
             letter-spacing: -0.04em;
+            color: var(--branco);
+            font-weight: 600;
         }
 
         .plans-title span {
             color: var(--cinza);
-            font-size: 0.9rem;
+            font-size: 0.95rem; /* Fonte ligeiramente maior */
         }
 
         .plans-list {
             display: grid;
-            gap: 12px;
+            gap: 14px; /* Aumenta o gap */
         }
 
         .plan {
-            display: block;
-            align-items: start;
-            padding: 16px;
-            border: 1px solid #d7e2f5;
-            border-radius: 20px;
+            display: flex; /* Muda para flex para melhor alinhamento */
+            flex-direction: column;
+            padding: 18px; /* Padding ajustado */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais suave */
+            border-radius: 18px; /* Raio ajustado */
             color: #fefeff;
-            background: #06003f;
+            background: rgba(0, 10, 40, 0.7); /* Fundo mais escuro e transparente */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .plan:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .plan h3 {
-            margin: 0;
-            font-size: 1rem;
+            margin: 0 0 8px; /* Margem ajustada */
+            font-size: 1.1rem; /* Fonte ligeiramente maior */
             color: var(--branco);
-            font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-            background: linear-gradient(135deg, #c9b037, #f4e58a, #c9b037);
+            font-weight: 700; /* Mais peso */
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #FFD700, #FFEC8B, #FFD700); /* Dourado mais intenso */
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -455,29 +543,65 @@
 
         .plan p,
         .plan small {
-            color: var(--cinza);
+            color: rgba(255, 255, 255, 0.6); /* Cor mais suave */
+            font-size: 0.9rem;
         }
 
         .plan-score {
-            min-width: 88px;
-            padding: 8px 10px;
+            min-width: 90px; /* Largura ajustada */
+            padding: 10px 12px; /* Padding ajustado */
             text-align: center;
-            color: var(--azul-cruzeiro);
-            border-radius: 14px;
-            background: #eef5ff;
+            color: var(--azul-profundo); /* Cor mais profunda */
+            border-radius: 16px; /* Raio ajustado */
+            background: var(--azul-claro);
             font-weight: 800;
+            font-size: 1rem;
+            margin-top: auto; /* Empurra para baixo */
         }
 
-        .quiz-card.active {
-            display: block;
+        .hidden {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            position: absolute !important;
         }
 
-        .results.active {
-            display: grid;
+        /* Estados controlados pelo JS via transitionSection */
+        .hero-card.fade-out {
+            opacity: 0 !important;
+            transform: translateY(-15px) !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            z-index: 1;
         }
 
-        .hero-card.hidden {
-            display: none;
+        .quiz-card.fade-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            z-index: 2;
+        }
+
+        .quiz-card.fade-out {
+            opacity: 0 !important;
+            transform: translateY(-15px) !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        .results.fade-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+        }
+
+        .results.fade-out {
+            opacity: 0 !important;
+            transform: translateY(-15px) !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
         }
 
         .start-button {
@@ -486,22 +610,22 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 56px;
-            padding: 0 32px;
-            margin-top: 32px;
+            min-height: 60px; /* Altura maior */
+            padding: 0 36px; /* Padding ajustado */
+            margin-top: 40px; /* Margem superior ajustada */
             border: 0;
             border-radius: 999px;
             color: #fff;
-            background: linear-gradient(90deg, var(--azul-profundo), var(--azul-vivo));
-            font-size: 1.1rem;
-            font-weight: 600;
+            background: linear-gradient(90deg, var(--azul-vivo), var(--azul-cruzeiro)); /* Gradiente mais vivo */
+            font-size: 1.2rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .start-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(6, 27, 86, 0.3);
+            transform: translateY(-3px); /* Efeito de hover mais pronunciado */
+            box-shadow: 0 15px 30px rgba(0, 51, 160, 0.3); /* Sombra mais forte */
         }
 
         /* Transições Suaves e Animações Minimalistas */
@@ -509,38 +633,53 @@
         .quiz-card,
         .result-card,
         .plans-card {
-            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Classes para transições de entrada e saída */
+        .fade-out {
+            opacity: 0 !important;
+            transform: translateY(-15px) !important;
+        }
+
+        .fade-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .fade-init {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            transform: translateY(15px) !important;
         }
 
         /* Transição para a section de resultados */
         .results {
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Animação de entrada para os elementos internos do quiz */
         .question,
         .options,
         .step-info {
-            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Efeito de hover e clique para opções */
         .option {
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-                        border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-                        box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                        background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .option:active {
-            transform: scale(0.98) translateY(-1px) !important;
+            transform: scale(0.97) translateY(-1px) !important;
         }
 
         .option.selected {
             background-color: var(--azul-claro) !important;
             border-color: var(--azul-vivo) !important;
             box-shadow: 0 8px 20px rgba(0, 51, 160, 0.15) !important;
-            transform: translateY(-2px) scale(1.01);
+            transform: translateY(-2px);
         }
 
 
@@ -555,16 +694,60 @@
             }
         }
 
-        @media (min-width: 900px) {
-
-        }
-
-        @media (max-width: 768px) {
-
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr; /* Coluna única em telas menores */
+                gap: 40px;
+            }
+            .results {
+                grid-template-columns: 1fr;
+            }
+            .hero-card {
+                min-height: auto;
+                padding-bottom: 40px;
+            }
+            .hero-card::after {
+                display: none; /* Esconde o círculo em telas menores */
+            }
+            h1 {
+                font-size: clamp(2.5rem, 8vw, 4.5rem);
+            }
+            .hero-copy {
+                font-size: 1rem;
+            }
+            .hero-stats {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
         }
 
         @media (max-width: 620px) {
-
+            .page {
+                padding: 30px 0;
+            }
+            .quiz-card, .result-card, .plans-card {
+                padding: 20px;
+            }
+            .question {
+                font-size: clamp(1.4rem, 5vw, 2rem);
+            }
+            .actions {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+            }
+            .result-plan {
+                flex-direction: column;
+                text-align: center;
+            }
+            .result-plan img {
+                width: 120px;
+                height: 90px;
+            }
+            .plans-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
 
     
@@ -585,7 +768,7 @@
                 <button class="start-button" id="startButton" type="button">Iniciar Quiz</button>
             </div>
 
-            <section class="quiz-card hidden" aria-labelledby="quizTitle">
+            <section class="quiz-card" aria-labelledby="quizTitle">
                 <div class="progress" aria-hidden="true">
                     <div class="progress-bar" id="progressBar"></div>
                 </div>
@@ -602,7 +785,7 @@
             </section>
         </section>
 
-        <section class="results hidden" id="results" aria-live="polite">
+        <section class="results" id="results" aria-live="polite">
             <article class="result-card">
                 <span class="result-badge">Plano recomendado</span>
                 <div class="result-plan">
@@ -656,8 +839,10 @@
                 ingressoGratis: true,
                 carteirinhaDigital: true,
                 taxaDeAdesaoUnica: false,
-                descontoEmIngresso: false,
-                detalheDescontoEmIngresso: "Não oferece desconto por quantidade de jogos",
+                descontoEmIngresso: {
+                    ativo: false,
+                    detalhes: "Não oferece desconto por quantidade de jogos"
+                },
                 jogosFrequentes: undefined,
                 prioridadeNaCompra: {
                     prioridade: 4
@@ -718,7 +903,7 @@
                 taxaDeAdesaoUnica: 30,
                 descontoEmIngresso: {
                     ativo: true,
-                    descricao: "Desconto progressivo por jogos frequentados nos últimos 15 meses"
+                    detalhes: "Desconto progressivo por jogos frequentados nos últimos 15 meses"
                 },
                 jogosFrequentes: {
                     janelaMeses: 15,
@@ -1176,7 +1361,7 @@
 
                 return {
                     score: level ? level.descontoIngresso * 50 : 25,
-                    text: level ? `${level.nome}: ${Math.round(level.descontoIngresso * 100)}% de desconto` : plan.descontoEmIngresso.descricao
+                    text: level ? `${level.nome}: ${Math.round(level.descontoIngresso * 100)}% de desconto` : plan.descontoEmIngresso.detalhes
                 };
             }
 
@@ -1423,36 +1608,30 @@
         }
 
         function transitionSection(fromElement, toElement, callback) {
-            // Preparar o novo elemento para animar
-            toElement.classList.remove("hidden");
+            // Garantir que o elemento de destino está no estado inicial para animar
+            toElement.classList.remove("fade-out", "fade-in");
+            toElement.classList.add("fade-init");
             
-            // Esperar um frame para garantir que display: none foi removido
+            // Forçar reflow para garantir que o estado inicial seja aplicado
+            toElement.offsetHeight;
+            
+            // Iniciar animação de entrada
             requestAnimationFrame(() => {
-                // Setar estado inicial (já invisível pela CSS)
-                toElement.style.opacity = "0";
-                toElement.style.transform = "translateY(12px)";
+                toElement.classList.remove("fade-init");
+                toElement.classList.add("fade-in");
                 
-                // Forçar reflow
-                toElement.offsetHeight;
-                
-                // Animar entrada (a transição CSS vai cuidar da animação)
-                toElement.style.opacity = "1";
-                toElement.style.transform = "translateY(0)";
-                
-                // Animar saída do elemento anterior (a transição CSS vai cuidar da animação)
-                fromElement.style.opacity = "0";
-                fromElement.style.transform = "translateY(-12px)";
+                // Iniciar animação de saída do elemento anterior
+                fromElement.classList.add("fade-out");
             });
             
-            // Após 400ms (duração da transição CSS + margem), esconder o elemento anterior
+            // Após a duração da transição, NÃO remover fade-out do fromElement
+            // (ele deve permanecer oculto). Só limpar classes do toElement se necessário.
             setTimeout(() => {
-                fromElement.classList.add("hidden");
-                // Reset de estilos
-                fromElement.style.opacity = "";
-                fromElement.style.transform = "";
+                // fade-out permanece no fromElement para mantê-lo oculto
+                // fade-in permanece no toElement para mantê-lo visível
                 
                 if (callback) callback();
-            }, 400);
+            }, 500);
         }
 
         function renderResults() {
@@ -1461,7 +1640,7 @@
 
             document.getElementById("resultLogo").src = winner.plan.logo;
             document.getElementById("resultLogo").alt = `Logo do plano ${winner.plan.nome}`;
-            document.getElementById("resultPrice").textContent = `${formatMoney(winner.plan.precoMensal)}/mes`;
+            document.getElementById("resultPrice").textContent = `${formatMoney(winner.plan.precoMensal)} / mês`;
             document.getElementById("resultSummary").textContent = `Este plano tem ${winner.compatibilityPercent}% de compatibilidade com seu perfil e oferece os benefícios mais adequados.`;
 
             const resultReasons = document.getElementById("resultReasons");
@@ -1493,7 +1672,7 @@
                     <img src="${plan.logo}" alt="Logo do plano ${plan.nome}">
                     <div>
                         <h3>${index === 0 ? 'Recomendado' : 'Alternativa'}</h3>
-                        <p>${formatMoney(plan.precoMensal)}/mes ou ${formatMoney(plan.precoAnual)}/ano</p>
+                        <p>${formatMoney(plan.precoMensal)} / mês ou ${formatMoney(plan.precoAnual)} / ano</p>
                         <small>${adhesion}</small>
                         <ul>
                             <li>${ticketBenefit.text}</li>
@@ -1526,7 +1705,9 @@
                 stepCounter.textContent = `Pergunta ${state.step + 1} de ${questions.length}`;
                 progressBar.style.width = `${progress}%`;
                 backButton.disabled = state.step === 0;
-                nextButton.disabled = false;
+                
+                // CORREÇÃO CRÍTICA: sempre inicia DESABILITADO
+                nextButton.disabled = true;
                 nextButton.textContent = state.step === questions.length - 1 ? "Ver resultado" : "Continuar";
                 optionsContainer.innerHTML = "";
 
@@ -1549,15 +1730,24 @@
                         const value = Number(rangeInput.value);
                         state.answers[question.key] = value;
                         rangeOutput.textContent = `${value} ${question.suffix}`;
+                        // Habilita ao mexer no slider
+                        nextButton.disabled = false;
                     });
+                    
+                    // Se já tem valor salvo (navegação voltar/avançar), habilita
+                    if (state.answers[question.key] !== undefined && state.answers[question.key] !== question.min) {
+                        nextButton.disabled = false;
+                    }
                 } else {
                     question.options.forEach((item, idx) => {
                         const button = document.createElement("button");
                         button.type = "button";
                         button.className = "option";
 
+                        // Se já tem resposta salva, marca e habilita
                         if (state.answers[question.key] === item.value) {
                             button.classList.add("selected");
+                            nextButton.disabled = false;
                         }
 
                         button.innerHTML = `<strong>${item.label}</strong><span>${item.description}</span>`;
@@ -1570,6 +1760,8 @@
                             optionsContainer.querySelectorAll('.option.selected').forEach(opt => opt.classList.remove('selected'));
                             button.classList.add('selected');
                             state.answers[question.key] = item.value;
+                            // Habilita SOMENTE após clique do usuário
+                            nextButton.disabled = false;
                         });
 
                         optionsContainer.appendChild(button);
@@ -1643,8 +1835,8 @@
             };
             
             transitionSection(results, heroCard, () => {
-                quizCard.classList.add("hidden");
-                renderQuestion();
+                quizCard.classList.remove("fade-in");
+                quizCard.classList.add("fade-init");
             });
             window.scrollTo({
                 top: 0,
@@ -1655,23 +1847,11 @@
         subscribeButton.addEventListener("click", () => {
             const recommendations = recommendPlans();
             const winner = recommendations[0];
-            const planSlug = winner.plan.slug;
-
-            const subscriptionUrls = {
-                'meu-cruzeiro': 'https://socio5estrelas.com.br/planos/21/meu-cruzeiro',
-                'time-do-povo': 'https://socio5estrelas.com.br/planos/34/time-do-povo',
-                'cabuloso': 'https://socio5estrelas.com.br/planos/10/cabuloso',
-                'cabuloso-max': 'https://socio5estrelas.com.br/planos/11/cabuloso-max',
-                'cabuloso-cativo': 'https://socio5estrelas.com.br/planos/115/cabuloso-cativo'
-            };
-
-            const url = subscriptionUrls[planSlug] || 'https://socio5estrelas.com.br';
+            const url = winner.plan.link || 'https://socio5estrelas.com.br';
             window.open(url, '_blank');
         });
-
-        renderQuestion();
     
-</script>
+    </script>
 
 </body>
 
