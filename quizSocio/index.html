@@ -40,14 +40,12 @@
 
         body {
             margin: 0;
-            min-height: 100vh;
             color: var(--grafite);
             font-family: "Outfit", sans-serif;
             background:
                 radial-gradient(circle at 12% 10%, rgba(0, 100, 255, 0.15), transparent 30rem),
                 radial-gradient(circle at 88% 18%, rgba(255, 255, 255, 0.1), transparent 20rem),
                 var(--gradient-background);
-            background-attachment: fixed; /* Fixa o background para um efeito mais elegante */
         }
 
         button,
@@ -57,9 +55,9 @@
         }
 
         .page {
-            width: min(1200px, calc(100% - 40px)); /* Aumenta um pouco a largura e o padding */
+            width: min(1200px, calc(100% - 40px));
             margin: 0 auto;
-            padding: 50px 0;
+            padding: clamp(24px, 4vh, 48px) 0;
         }
 
         .hero {
@@ -86,13 +84,12 @@
             grid-row: 1;
             position: relative;
             overflow: hidden;
-            min-height: 580px;
-            padding: clamp(30px, 6vw, 60px);
+            min-height: clamp(420px, 70vh, 560px);
+            padding: clamp(24px, 5vw, 48px);
             color: var(--branco);
             background:
                 linear-gradient(140deg, rgba(0, 30, 80, 0.95), rgba(0, 60, 140, 0.8)),
                 repeating-linear-gradient(115deg, transparent 0 20px, rgba(255, 255, 255, 0.03) 20px 22px);
-            background-attachment: fixed;
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
@@ -118,15 +115,15 @@
         .eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 10px; /* Aumenta o gap */
-            margin: 0 0 20px;
-            padding: 9px 14px; /* Padding ajustado */
+            gap: 8px;
+            margin: 0 0 clamp(16px, 2.5vh, 20px);
+            padding: 8px 12px;
             color: var(--azul-claro);
             border: 1px solid var(--linha);
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.06); /* Background mais suave */
-            font-size: 0.9rem;
-            letter-spacing: 0.1em; /* Mais espaçamento para elegância */
+            background: rgba(255, 255, 255, 0.06);
+            font-size: clamp(0.85rem, 1.5vw, 0.9rem);
+            letter-spacing: 0.08em;
             text-transform: uppercase;
             font-weight: 500;
         }
@@ -147,11 +144,11 @@
         .hero-copy {
             position: relative;
             z-index: 1;
-            max-width: 680px; /* Largura um pouco maior */
-            margin: 32px 0 0;
-            color: rgba(255, 255, 255, 0.75); /* Cor mais suave */
-            font-size: clamp(1.05rem, 2.2vw, 1.25rem); /* Fonte ligeiramente maior */
-            line-height: 1.8; /* Line height ajustado */
+            max-width: 680px;
+            margin: clamp(20px, 3vh, 28px) 0 0;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+            line-height: 1.7;
         }
 
         .hero-stats {
@@ -159,42 +156,35 @@
             z-index: 1;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 16px; /* Aumenta o gap */
-            margin-top: 50px; /* Margem superior ajustada */
+            gap: 12px;
+            margin-top: clamp(24px, 4vh, 40px);
         }
 
         .stat {
-            padding: 20px; /* Padding ajustado */
+            padding: clamp(14px, 2.5vw, 18px);
             border: 1px solid var(--linha);
-            border-radius: 20px; /* Raio ajustado */
-            background: rgba(255, 255, 255, 0.07); /* Background mais suave */
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.07);
         }
 
         .stat strong {
             display: block;
-            font-size: 1.6rem; /* Fonte ligeiramente maior */
+            font-size: clamp(1.4rem, 2.5vw, 1.6rem);
             font-weight: 600;
-            color: var(--azul-claro); /* Cor para destaque */
+            color: var(--azul-claro);
         }
 
         .stat span {
-            color: rgba(255, 255, 255, 0.6); /* Cor mais suave */
-            font-size: 0.9rem; /* Fonte ligeiramente maior */
+            color: rgba(255, 255, 255, 0.6);
+            font-size: clamp(0.85rem, 1.5vw, 0.9rem);
         }
 
         .quiz-card {
             grid-column: 1;
             grid-row: 1;
-            padding: 30px;
+            padding: clamp(24px, 4vw, 32px);
             background: rgba(255, 255, 255, 0.98);
             border: 1px solid rgba(0, 0, 0, 0.05);
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transform: translateY(15px);
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        visibility 0.5s;
             z-index: 1;
         }
 
@@ -216,35 +206,35 @@
         .step-info {
             display: flex;
             justify-content: space-between;
-            gap: 16px; /* Aumenta o gap */
-            margin: 20px 0; /* Margem ajustada */
+            gap: clamp(12px, 2vw, 16px);
+            margin: clamp(16px, 2.5vh, 20px) 0;
             color: var(--cinza);
-            font-size: 0.95rem; /* Fonte ligeiramente maior */
+            font-size: clamp(0.9rem, 1.5vw, 0.95rem);
             font-weight: 500;
         }
 
         .question {
-            margin: 0 0 24px; /* Margem ajustada */
-            font-size: clamp(1.6rem, 3.2vw, 2.4rem); /* Fonte ligeiramente maior */
+            margin: 0 0 clamp(20px, 3vh, 28px);
+            font-size: clamp(1.6rem, 3.2vw, 2.4rem);
             line-height: 1.2;
-            letter-spacing: -0.03em; /* Letter spacing ajustado */
+            letter-spacing: -0.03em;
             color: var(--grafite);
             font-weight: 600;
         }
 
         .options {
             display: grid;
-            gap: 14px; /* Aumenta o gap */
+            gap: clamp(10px, 2vw, 14px);
         }
 
         .option {
             width: 100%;
-            padding: 18px 20px; /* Padding ajustado */
+            padding: clamp(14px, 2.5vw, 18px) clamp(16px, 3vw, 20px);
             text-align: left;
             color: var(--grafite);
-            border: 1px solid #dbe6f5; /* Borda mais suave */
-            border-radius: 18px;
-            background: #ffffff; /* Fundo branco */
+            border: 1px solid #dbe6f5;
+            border-radius: 16px;
+            background: #ffffff;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -275,10 +265,10 @@
 
         .range-wrap {
             display: grid;
-            gap: 16px; /* Aumenta o gap */
-            padding: 22px; /* Padding ajustado */
-            border: 1px solid #dbe6f5; /* Borda mais suave */
-            border-radius: 20px;
+            gap: clamp(12px, 2vw, 16px);
+            padding: clamp(16px, 3vw, 20px);
+            border: 1px solid #dbe6f5;
+            border-radius: 18px;
             background: #fff;
         }
 
@@ -323,8 +313,8 @@
         .actions {
             display: flex;
             justify-content: space-between;
-            gap: 16px; /* Aumenta o gap */
-            margin-top: 30px; /* Margem superior ajustada */
+            gap: clamp(12px, 2vw, 16px);
+            margin-top: clamp(20px, 3vh, 28px);
         }
 
         .btn {
@@ -370,42 +360,42 @@
         .results {
             display: grid;
             grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            gap: 28px;
-            margin-top: 32px;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transform: translateY(15px);
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                        visibility 0.6s;
+            gap: clamp(20px, 3vw, 28px);
+            margin-top: clamp(24px, 3vh, 32px);
         }
 
         .result-card,
         .plans-card {
-            padding: 30px; /* Padding ajustado */
+            padding: clamp(24px, 4vw, 32px);
             color: var(--branco);
-            background: linear-gradient(160deg, rgba(0, 20, 70, 0.95), rgba(0, 40, 100, 0.85)); /* Gradiente escuro para cards de resultado */
-            border: 1px solid rgba(255, 255, 255, 0.15); /* Borda sutil */
+            background: linear-gradient(160deg, rgba(0, 20, 70, 0.95), rgba(0, 40, 100, 0.85));
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .result-badge {
             display: inline-flex;
-            padding: 8px 14px; /* Padding ajustado */
+            padding: clamp(6px, 1vw, 8px) clamp(10px, 2vw, 14px);
             color: var(--azul-cruzeiro);
             border-radius: 999px;
             background: var(--azul-claro);
-            font-size: 0.85rem;
+            font-size: clamp(0.8rem, 1.3vw, 0.85rem);
             font-weight: 700;
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
 
+        .result-card > p:not(.price) {
+            margin: clamp(12px, 2vh, 16px) 0;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: clamp(0.95rem, 1.5vw, 1rem);
+        }
+
         .result-plan {
             display: flex;
             align-items: center;
-            gap: 20px; /* Aumenta o gap */
-            margin: 25px 0; /* Margem ajustada */
+            gap: clamp(16px, 3vw, 20px);
+            margin: clamp(20px, 3vh, 28px) 0;
         }
 
         .result-plan h2 {
@@ -419,35 +409,35 @@
         }
 
         .result-plan img {
-            width: 140px; /* Largura ajustada */
-            height: 100px; /* Altura ajustada */
+            width: clamp(100px, 18vw, 140px);
+            height: clamp(70px, 12vw, 100px);
             object-fit: contain;
-            border-radius: 16px; /* Raio ajustado */
-            background-color: rgba(255,255,255,0.05); /* Fundo sutil para imagem */
-            padding: 5px; /* Padding interno */
+            border-radius: 14px;
+            background-color: rgba(255,255,255,0.05);
+            padding: 4px;
         }
 
         .plan img {
             width: 100%;
-            height: 80px; /* Ajusta altura da imagem do plano */
+            height: clamp(60px, 12vw, 80px);
             object-fit: contain;
-            border-radius: 14px; /* Raio ajustado */
-            margin-bottom: 10px; /* Margem para separar do texto */
+            border-radius: 12px;
+            margin-bottom: clamp(8px, 1.5vw, 10px);
             background-color: rgba(255,255,255,0.05);
-            padding: 5px;
+            padding: 4px;
         }
 
         .price {
             margin: 0;
-            color: var(--azul-vivo); /* Cor mais viva para o preço */
-            font-size: 2rem; /* Fonte ligeiramente maior */
+            color: var(--azul-vivo);
+            font-size: clamp(1.6rem, 3vw, 2rem);
             font-weight: 800;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .reason-list,
         .plan ul {
-            margin: 20px 0 0; /* Margem ajustada */
+            margin: clamp(16px, 2.5vh, 20px) 0 0;
             padding: 0;
             list-style: none;
         }
@@ -455,11 +445,11 @@
         .reason-list li,
         .plan li {
             display: flex;
-            gap: 12px; /* Aumenta o gap */
-            margin-top: 12px; /* Margem ajustada */
-            color: rgba(255, 255, 255, 0.8); /* Cor mais suave */
+            gap: clamp(8px, 1.5vw, 12px);
+            margin-top: clamp(8px, 1.5vh, 12px);
+            color: rgba(255, 255, 255, 0.8);
             line-height: 1.5;
-            font-size: 0.95rem;
+            font-size: clamp(0.85rem, 1.5vw, 0.95rem);
         }
 
         .reason-list li::before,
@@ -476,15 +466,15 @@
 
         .plans-title {
             display: flex;
-            align-items: flex-end; /* Alinha ao final */
+            align-items: flex-end;
             justify-content: space-between;
-            gap: 16px; /* Aumenta o gap */
-            margin-bottom: 18px; /* Margem ajustada */
+            gap: clamp(12px, 2vw, 16px);
+            margin-bottom: clamp(14px, 2.5vh, 18px);
         }
 
         .plans-title h2 {
             margin: 0;
-            font-size: 1.8rem; /* Fonte ligeiramente maior */
+            font-size: clamp(1.5rem, 3vw, 1.8rem);
             letter-spacing: -0.04em;
             color: var(--branco);
             font-weight: 600;
@@ -492,22 +482,22 @@
 
         .plans-title span {
             color: var(--cinza);
-            font-size: 0.95rem; /* Fonte ligeiramente maior */
+            font-size: clamp(0.9rem, 1.5vw, 0.95rem);
         }
 
         .plans-list {
             display: grid;
-            gap: 14px; /* Aumenta o gap */
+            gap: clamp(10px, 2vw, 14px);
         }
 
         .plan {
-            display: flex; /* Muda para flex para melhor alinhamento */
+            display: flex;
             flex-direction: column;
-            padding: 18px; /* Padding ajustado */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais suave */
-            border-radius: 18px; /* Raio ajustado */
+            padding: clamp(14px, 2.5vw, 18px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
             color: #fefeff;
-            background: rgba(0, 10, 40, 0.7); /* Fundo mais escuro e transparente */
+            background: rgba(0, 10, 40, 0.7);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .plan:hover {
@@ -516,12 +506,12 @@
         }
 
         .plan h3 {
-            margin: 0 0 8px; /* Margem ajustada */
-            font-size: 1.1rem; /* Fonte ligeiramente maior */
+            margin: 0 0 clamp(6px, 1vw, 8px);
+            font-size: clamp(1rem, 1.8vw, 1.1rem);
             color: var(--branco);
-            font-weight: 700; /* Mais peso */
+            font-weight: 700;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(135deg, #FFD700, #FFEC8B, #FFD700); /* Dourado mais intenso */
+            background: linear-gradient(135deg, #FFD700, #FFEC8B, #FFD700);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -566,58 +556,20 @@
             position: absolute !important;
         }
 
-        /* Estados controlados pelo JS via transitionSection */
-        .hero-card.fade-out {
-            opacity: 0 !important;
-            transform: translateY(-15px) !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-            z-index: 1;
-        }
-
-        .quiz-card.fade-in {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-            visibility: visible !important;
-            pointer-events: auto !important;
-            z-index: 2;
-        }
-
-        .quiz-card.fade-out {
-            opacity: 0 !important;
-            transform: translateY(-15px) !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-        }
-
-        .results.fade-in {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-            visibility: visible !important;
-            pointer-events: auto !important;
-        }
-
-        .results.fade-out {
-            opacity: 0 !important;
-            transform: translateY(-15px) !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-        }
-
         .start-button {
             position: relative;
             z-index: 1;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 60px; /* Altura maior */
-            padding: 0 36px; /* Padding ajustado */
-            margin-top: 40px; /* Margem superior ajustada */
+            min-height: 56px;
+            padding: 0 clamp(28px, 4vw, 36px);
+            margin-top: clamp(24px, 4vh, 40px);
             border: 0;
             border-radius: 999px;
             color: #fff;
-            background: linear-gradient(90deg, var(--azul-vivo), var(--azul-cruzeiro)); /* Gradiente mais vivo */
-            font-size: 1.2rem;
+            background: linear-gradient(90deg, var(--azul-vivo), var(--azul-cruzeiro));
+            font-size: clamp(1.1rem, 2vw, 1.2rem);
             font-weight: 700;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -630,33 +582,59 @@
 
         /* Transições Suaves e Animações Minimalistas */
         .hero-card,
-        .quiz-card,
         .result-card,
         .plans-card {
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Classes para transições de entrada e saída */
-        .fade-out {
-            opacity: 0 !important;
-            transform: translateY(-15px) !important;
+        /* Estado base para seções injetadas dinamicamente */
+        .dynamic-section {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .fade-in {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
+        /* Estados de animação para seções dinâmicas */
+        .dynamic-section.is-entering {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .fade-init {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-            transform: translateY(15px) !important;
+        .dynamic-section.is-exiting {
+            opacity: 0;
+            transform: translateY(-15px);
+            pointer-events: none;
         }
 
-        /* Transição para a section de resultados */
-        .results {
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Hero card usa as mesmas classes para saída */
+        .hero-card.is-exiting {
+            opacity: 0;
+            transform: translateY(-15px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Hero card inicial visível */
+        .hero-card {
+            opacity: 1;
+            transform: translateY(0);
+            z-index: 2;
+        }
+
+        /* Hero section para transições de seção completa */
+        .hero {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero.is-exiting {
+            opacity: 0;
+            transform: translateY(-15px);
+            pointer-events: none;
+            z-index: 1;
         }
 
         /* Animação de entrada para os elementos internos do quiz */
@@ -690,24 +668,24 @@
             }
 
             .hero-card {
-                min-height: 520px;
+                min-height: clamp(480px, 65vh, 520px);
             }
         }
 
         @media (max-width: 900px) {
             .hero {
-                grid-template-columns: 1fr; /* Coluna única em telas menores */
-                gap: 40px;
+                grid-template-columns: 1fr;
+                gap: 32px;
             }
             .results {
                 grid-template-columns: 1fr;
             }
             .hero-card {
                 min-height: auto;
-                padding-bottom: 40px;
+                padding-bottom: clamp(24px, 4vh, 40px);
             }
             .hero-card::after {
-                display: none; /* Esconde o círculo em telas menores */
+                display: none;
             }
             h1 {
                 font-size: clamp(2.5rem, 8vw, 4.5rem);
@@ -722,7 +700,7 @@
 
         @media (max-width: 620px) {
             .page {
-                padding: 30px 0;
+                padding: clamp(16px, 3vh, 32px) 0;
             }
             .quiz-card, .result-card, .plans-card {
                 padding: 20px;
@@ -748,6 +726,15 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+            .hero-stats {
+                gap: 10px;
+            }
+            .stat {
+                padding: 16px;
+            }
+            .stat strong {
+                font-size: 1.4rem;
+            }
         }
 
     
@@ -767,49 +754,6 @@
                 </p>
                 <button class="start-button" id="startButton" type="button">Iniciar Quiz</button>
             </div>
-
-            <section class="quiz-card" aria-labelledby="quizTitle">
-                <div class="progress" aria-hidden="true">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
-                <div class="step-info">
-                    <span id="stepCounter">Pergunta 1 de 10</span>
-                    <span>Recomendação por custo-beneficio</span>
-                </div>
-                <h2 class="question" id="quizTitle"></h2>
-                <div class="options" id="options"></div>
-                <div class="actions">
-                    <button class="btn btn-secondary" id="backButton" type="button">Voltar</button>
-                    <button class="btn btn-primary" id="nextButton" type="button" disabled>Continuar</button>
-                </div>
-            </section>
-        </section>
-
-        <section class="results" id="results" aria-live="polite">
-            <article class="result-card">
-                <span class="result-badge">Plano recomendado</span>
-                <div class="result-plan">
-                    <img id="resultLogo" alt="">
-                    <div>
-                        <h2>Plano recomendado para você</h2>
-                        <p class="price" id="resultPrice"></p>
-                    </div>
-                </div>
-                <p id="resultSummary"></p>
-                <ul class="reason-list" id="resultReasons"></ul>
-                <div class="actions">
-                    <button class="btn btn-secondary" id="restartButton" type="button">Refazer quiz</button>
-                    <button class="btn btn-primary" id="subscribeButton" type="button">Assinar agora</button>
-                </div>
-            </article>
-
-            <aside class="plans-card">
-                <div class="plans-title">
-                    <h2>Melhores opções</h2>
-                    <span>Recomendações personalizadas</span>
-                </div>
-                <div class="plans-list" id="plansList"></div>
-            </aside>
         </section>
     </main>
 
@@ -858,7 +802,7 @@
                     kids: true,
                     carteirinhaFisica: true
                 },
-                link: "https://socio.cruzeiro.com.br/planos/21/meu-cruzeiro"
+                link: "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual",
             },
             timeDoPovo: {
                 nome: "Time do Povo",
@@ -889,7 +833,7 @@
                     kids: true,
                     carteirinhaFisica: true
                 },
-                link: "https://socio.cruzeiro.com.br/planos/34/time-do-povo"
+                link: "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=mensal&assinatura_id=&tipo=contrato"
 
             },
             cabuloso: {
@@ -955,7 +899,7 @@
                     kids: true,
                     carteirinhaFisica: true
                 },
-                link: "https://socio.cruzeiro.com.br/planos/10/cabuloso"
+                link: "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=mensal&assinatura_id=&tipo=contrato"
             },
             cabulosoMax: {
                 nome: "Cabuloso Max",
@@ -987,7 +931,7 @@
                     kids: true,
                     carteirinhaFisica: true
                 },
-                link: "https://socio.cruzeiro.com.br/planos/11/cabuloso-max"
+                link: "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11&intervalo_cobrancas=mensal&assinatura_id=&tipo=contrato"
             },
             cabulosoCativo: {
                 nome: "Cabuloso Cativo",
@@ -1019,7 +963,7 @@
                     kids: true,
                     carteirinhaFisica: false
                 },
-                link: "https://socio.cruzeiro.com.br/planos/115/cabuloso-cativo"
+                link: "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=115&intervalo_cobrancas=mensal&assinatura_id=&tipo=contrato"
             }
         }
 
@@ -1044,7 +988,7 @@
         const questions = [
             {
                 key: "gamesPerYear",
-                title: "Em quantos jogos do Cruzeiro você foi nos últimos meses?",
+                title: "Em quantos jogos do Cruzeiro você pretende ir futuramente?",
                 type: "range",
                 min: 0,
                 max: 30,
@@ -1056,11 +1000,11 @@
             },
             {
                 key: "wantsGuaranteedTicket",
-                title: "Você deseja ingresso garantido ou incluso?",
+                title: "Você prefere ir em todos os jogos ou somente em jogos importantes?",
                 options: [
                     {
-                        label: "Sim, quero garantir meu lugar",
-                        description: "Priorizo ter um ingresso gratuito ou garantido.",
+                        label: "Pretendo ir em todos os jogos",
+                        description: "Quero garantir meu lugar em todos os jogos possíveis.",
                         value: true,
                         effects: {
                             prioridadeIngressos: 9,
@@ -1069,8 +1013,8 @@
                         }
                     },
                     {
-                        label: "Não, apenas o desconto ja resolve",
-                        description: "Busco o menor preço com vantagens em ingressos.",
+                        label: "Pretendo ir apenas em jogos importantes",
+                        description: "Quero ir apenas nos jogos que considero mais importantes (Ex.: finais, jogos contra rivais etc).",
                         value: false,
                         effects: {
                             importanciaPreco: 8,
@@ -1081,11 +1025,11 @@
             },
             {
                 key: "buysTwoTickets",
-                title: "Costuma comprar ingresso para você e mais alguém?",
+                title: "Normalmente você compra ingressos para você e mais alguém?",
                 options: [
                     {
-                        label: "Sim, normalmente compro 2 ou mais",
-                        description: "Desejo conseguir beneficios para adquirir dois ingressos ou mais.",
+                        label: "Sim, normalmente compro levo alguém comigo",
+                        description: "Gostaria de facilidade para conseguir adquirir dois ingressos ou mais.",
                         value: true,
                         effects: {
                             levaAcompanhantes: 10,
@@ -1094,7 +1038,7 @@
                     },
                     {
                         label: "Não, compro apenas o meu",
-                        description: "Não quero pagar por mais um beneficio que não vou usar.",
+                        description: "Normalmente vou sozinho.",
                         value: false,
                         effects: {
                             levaAcompanhantes: 0
@@ -1104,19 +1048,19 @@
             },
             {
                 key: "needsPriority",
-                title: "Prioridade na compra e importante para você?",
+                title: "Você costuma ir comprar o ingresso assim que fica sabendo sobre o jogo?",
                 options: [
                     {
-                        label: "Sim, quero conseguir comprar antes",
-                        description: "Desejo ter acesso a ingressos antecipadamente.",
+                        label: "Sim, assim que vejo que vai ter jogo já quero comprar",
+                        description: "Deixo meu ingresso garantido assim que sei que vai ter algum jogo.",
                         value: true,
                         effects: {
                             prioridadeIngressos: 10
                         }
                     },
                     {
-                        label: "Não me importo",
-                        description: "Não faço questão de comprar antes.",
+                        label: "Não",
+                        description: "Não faço questão de ir em muitos jogos.",
                         value: false,
                         effects: {
                             prioridadeIngressos: 0
@@ -1126,11 +1070,11 @@
             },
             {
                 key: "wantsParticipation",
-                title: "Você deseja ter acesso a conteúdo exclusivo do Cruzeiro e conseguir participar de decisões do clube?",
+                title: "Gostaria de receber ofertas e promoções recorrentes?",
                 options: [
                     {
-                        label: "Sim, quero participar",
-                        description: "Desejo ter acesso a conteúdo exclusivo e participar de decisões do clube.",
+                        label: "Sim, quero receber ofertas e promoções exclusivas",
+                        description: "Desejo receber comunicados sobre ofertas e promoções especiais.",
                         value: true,
                         effects: {
                             interesseExperiencias: 10
@@ -1138,7 +1082,7 @@
                     },
                     {
                         label: "Não faço questão",
-                        description: "Não faço questão de participar nas decisões que o clube toma.",
+                        description: "Não faço questão de receber ofertas e promoções.",
                         value: false,
                         effects: {
                             interesseExperiencias: 0
@@ -1148,10 +1092,10 @@
             },
             {
                 key: "wantsStoreDiscount",
-                title: "Deseja ter desconto na Loja do Cruzeiro?",
+                title: "Quando lançamos uma camisa nova ou produto novo, qual sua reação?",
                 options: [
                     {
-                        label: "Sim, gostaria de comprar os produtos oficiais",
+                        label: "Compro sempre, gosto de fazer coleção",
                         description: "Quero conseguir comprar os produtos do cruzeiro pelo melhor preço possível.",
                         value: true,
                         effects: {
@@ -1161,7 +1105,7 @@
                     },
                     {
                         label: "Não me interesso muito",
-                        description: "Não tenho interesse em comprar produtos da loja.",
+                        description: "Não tenho interesse em comprar ou colecionar camisas e etc.",
                         value: false,
                         effects: {
                             interesseDescontos: 0,
@@ -1172,11 +1116,11 @@
             },
             {
                 key: "gameFrequency",
-                title: "Com que frequência você assiste os jogos do Cruzeiro?",
+                title: "Qual cenario melhor define a forma como você assiste os jogos?",
                 options: [
                     {
-                        label: "Todos os jogos possíveis",
-                        description: "Não perco nenhum jogo, seja presencial ou pela TV.",
+                        label: "Presencial sempre, sempre assisto os jogos no estádio",
+                        description: "Não perco nenhum jogo do cabuloso no Mineirão.",
                         value: "always",
                         effects: {
                             frequenciaEstadio: 10,
@@ -1193,8 +1137,8 @@
                         }
                     },
                     {
-                        label: "Alguns jogos por mês",
-                        description: "Acompanho quando posso, sem compromisso.",
+                        label: "Normalmente assisto pela TV, vou pouco no estádio",
+                        description: "Acompanho quando posso, não sou fã de ir ao estádio.",
                         value: "occasional",
                         effects: {
                             frequenciaEstadio: 2,
@@ -1285,17 +1229,7 @@
             }
         ];
 
-        const quizTitle = document.getElementById("quizTitle");
-        const options = document.getElementById("options");
-        const progressBar = document.getElementById("progressBar");
-        const stepCounter = document.getElementById("stepCounter");
-        const backButton = document.getElementById("backButton");
-        const nextButton = document.getElementById("nextButton");
-        const results = document.getElementById("results");
-        const restartButton = document.getElementById("restartButton");
-        const subscribeButton = document.getElementById("subscribeButton");
-        const heroCard = document.getElementById("heroCard");
-        const quizCard = document.querySelector(".quiz-card");
+        let heroSection = document.querySelector(".hero");
         const startButton = document.getElementById("startButton");
 
         function formatMoney(value) {
@@ -1307,7 +1241,7 @@
         }
 
         function getPriorityValue(plan, gamesPerYear) {
-            const priority = plan.prioridadeNaCompra.prioridade;
+            const priority = plan.prioridadeNaCompra?.prioridade;
 
             if (Array.isArray(priority)) {
                 const level = getFrequentLevel(plan, gamesPerYear);
@@ -1339,7 +1273,7 @@
                 };
             }
 
-            if (!plan.descontoEmIngresso) {
+            if (!plan.descontoEmIngresso?.ativo) {
                 return {
                     score: 0,
                     text: "não oferece desconto em ingresso"
@@ -1349,7 +1283,7 @@
             if (plan.slug === "time-do-povo") {
                 return {
                     score: gamesPerYear > 0 ? 22 : 10,
-                    text: plan.descontoEmIngresso.detalhes
+                    text: plan.descontoEmIngresso?.detalhes || "possui beneficio em ingresso"
                 };
             }
 
@@ -1361,18 +1295,18 @@
 
                 return {
                     score: level ? level.descontoIngresso * 50 : 25,
-                    text: level ? `${level.nome}: ${Math.round(level.descontoIngresso * 100)}% de desconto` : plan.descontoEmIngresso.detalhes
+                    text: level ? `${level.nome}: ${Math.round(level.descontoIngresso * 100)}% de desconto` : plan.descontoEmIngresso?.detalhes || "possui beneficio em ingresso"
                 };
             }
 
-            if (plan.descontoEmIngresso.quantidadeIngressos) {
-                const score = plan.descontoEmIngresso.descontoPercentual
+            if (plan.descontoEmIngresso?.quantidadeIngressos) {
+                const score = plan.descontoEmIngresso?.descontoPercentual
                     ? plan.descontoEmIngresso.descontoPercentual * 58
                     : 42;
 
                 return {
                     score,
-                    text: plan.descontoEmIngresso.detalhes
+                    text: plan.descontoEmIngresso?.detalhes || "possui beneficio em ingresso"
                 };
             }
 
@@ -1547,48 +1481,141 @@
         }
 
         /**
-         * Compara o perfil do usuário com o perfil de um plano usando a Distância L1 (Manhattan).
+         * Chaves de atributos que compõem o vetor geométrico de engajamento/benefícios.
+         * Exclui 'importanciaPreco' e variáveis de preço do cálculo vetorial.
+         * @type {string[]}
+         */
+        const ENGAGEMENT_ATTRIBUTES = [
+            'frequenciaEstadio',
+            'interesseDescontos',
+            'interesseExperiencias',
+            'levaAcompanhantes',
+            'prioridadeIngressos',
+            'consumoProdutosOficiais'
+        ];
+
+        /**
+         * Calcula a Similaridade do Cosseno entre dois perfis usando apenas atributos de engajamento.
+         * Função pura: não possui efeitos colaterais e não depende de estado externo.
+         *
          * @param {UserProfile} userProfile Perfil do usuário
          * @param {UserProfile} planProfile Perfil do plano
-         * @param {Object} plan Objeto original do plano
+         * @returns {number} Similaridade entre 0.0 e 1.0
          */
-        function calculateCompatibility(userProfile, planProfile, plan) {
-            let distance = 0;
-            const attributes = Object.keys(userProfile);
-            const influences = [];
+        function calculateCosineSimilarity(userProfile, planProfile) {
+            let dotProduct = 0;
+            let userMagnitudeSq = 0;
+            let planMagnitudeSq = 0;
 
-            attributes.forEach(attr => {
-                const diff = Math.abs(userProfile[attr] - planProfile[attr]);
-                distance += diff;
+            ENGAGEMENT_ATTRIBUTES.forEach(attr => {
+                const u = userProfile[attr] ?? 0;
+                const p = planProfile[attr] ?? 0;
 
-                // Definimos o alinhamento de 0 a 10 como a proximidade (10 - diferença)
-                const alignment = 10 - diff;
-                influences.push({
-                    key: attr,
-                    diff: diff,
-                    alignment: alignment,
-                    userValue: userProfile[attr],
-                    planValue: planProfile[attr]
-                });
+                dotProduct += u * p;
+                userMagnitudeSq += u * u;
+                planMagnitudeSq += p * p;
             });
 
-            // Distância máxima possível para 7 atributos: 7 * 10 = 70
-            const maxDistance = attributes.length * 10;
-            const compatibilityPercent = Math.round((1 - (distance / maxDistance)) * 100);
+            const userMagnitude = Math.sqrt(userMagnitudeSq);
+            const planMagnitude = Math.sqrt(planMagnitudeSq);
 
-            // Ordena os atributos de maior influência (menor diferença/maior proximidade)
+            // Prevenção de divisão por zero: se algum vetor for nulo, similaridade é 0
+            if (userMagnitude === 0 || planMagnitude === 0) {
+                return 0.0;
+            }
+
+            return dotProduct / (userMagnitude * planMagnitude);
+        }
+
+        /**
+         * Aplica a regra de negócio de penalidade de preço ao score de similaridade.
+         * Se o usuário tem alta sensibilidade ao preço (importanciaPreco > 7)
+         * e o plano custa mais que o limite (ex: R$ 100), reduz o score em 15%.
+         *
+         * @param {number} cosineScore Score bruto da similaridade do cosseno (0.0 a 1.0)
+         * @param {UserProfile} userProfile Perfil do usuário (para acessar importanciaPreco)
+         * @param {number} planPrice Preço mensal do plano
+         * @returns {number} Score final ajustado (0.0 a 1.0)
+         */
+        function applyPricePenalty(cosineScore, userProfile, planPrice) {
+            const PRICE_SENSITIVITY_THRESHOLD = 7;
+            const PLAN_PRICE_THRESHOLD = 100;
+            const PENALTY_FACTOR = 0.85;
+
+            const userPriceSensitivity = userProfile.importanciaPreco ?? 0;
+
+            if (userPriceSensitivity > PRICE_SENSITIVITY_THRESHOLD && planPrice > PLAN_PRICE_THRESHOLD) {
+                return cosineScore * PENALTY_FACTOR;
+            }
+
+            return cosineScore;
+        }
+
+        /**
+         * Orquestra o cálculo final de compatibilidade: cosseno + penalidade de preço + formatação.
+         *
+         * @param {UserProfile} userProfile Perfil do usuário
+         * @param {UserProfile} planProfile Perfil do plano
+         * @param {number} planPrice Preço mensal do plano
+         * @returns {Object} Resultado com score final em porcentagem (0-100, 1 casa decimal) e influências
+         */
+        function calculateFinalMatch(userProfile, planProfile, planPrice) {
+            // 1. Similaridade do Cosseno (vetor geométrico puro - sem preço)
+            const cosineScore = calculateCosineSimilarity(userProfile, planProfile);
+
+            // 2. Penalidade de preço (pós-processamento)
+            const adjustedScore = applyPricePenalty(cosineScore, userProfile, planPrice);
+
+            // 3. Formatação: 0.0-1.0 -> 0-100 com 1 casa decimal
+            const compatibilityPercent = Math.round(adjustedScore * 1000) / 10;
+
+            // 4. Cálculo de influências para explicabilidade (baseado em diferença absoluta nos atributos de engajamento)
+            const influences = ENGAGEMENT_ATTRIBUTES.map(attr => {
+                const userVal = userProfile[attr] ?? 0;
+                const planVal = planProfile[attr] ?? 0;
+                const diff = Math.abs(userVal - planVal);
+                // Alinhamento: 10 = perfeito, 0 = oposto
+                const alignment = 10 - diff;
+                return {
+                    key: attr,
+                    diff,
+                    alignment,
+                    userValue: userVal,
+                    planValue: planVal
+                };
+            });
+
+            // Ordena: maior alinhamento (menor diff) primeiro; desempate pelo interesse do usuário
             influences.sort((a, b) => {
-                if (a.diff !== b.diff) {
-                    return a.diff - b.diff; // Menor diferença primeiro
-                }
-                return b.userValue - a.userValue; // Prioriza onde o usuário demonstrou maior interesse
+                if (a.diff !== b.diff) return a.diff - b.diff;
+                return b.userValue - a.userValue;
             });
 
             return {
-                plan,
-                compatibilityPercent: compatibilityPercent,
-                distance,
+                compatibilityPercent,
+                rawCosineScore: cosineScore,
+                adjustedScore,
                 influences
+            };
+        }
+
+        /**
+         * Compara o perfil do usuário com o perfil de um plano usando Similaridade do Cosseno + Penalidade de Preço.
+         * Mantida para compatibilidade com código existente (renderResults, etc).
+         *
+         * @param {UserProfile} userProfile Perfil do usuário
+         * @param {UserProfile} planProfile Perfil do plano
+         * @param {Object} plan Objeto original do plano
+         * @returns {Object} Resultado de compatibilidade
+         */
+        function calculateCompatibility(userProfile, planProfile, plan) {
+            const result = calculateFinalMatch(userProfile, planProfile, plan.precoMensal);
+
+            return {
+                plan,
+                compatibilityPercent: result.compatibilityPercent,
+                distance: null, // Não aplicável com Cosseno
+                influences: result.influences
             };
         }
 
@@ -1607,89 +1634,79 @@
             .slice(0, 3);
         }
 
-        function transitionSection(fromElement, toElement, callback) {
-            // Garantir que o elemento de destino está no estado inicial para animar
-            toElement.classList.remove("fade-out", "fade-in");
-            toElement.classList.add("fade-init");
-            
-            // Forçar reflow para garantir que o estado inicial seja aplicado
-            toElement.offsetHeight;
-            
-            // Iniciar animação de entrada
-            requestAnimationFrame(() => {
-                toElement.classList.remove("fade-init");
-                toElement.classList.add("fade-in");
-                
-                // Iniciar animação de saída do elemento anterior
-                fromElement.classList.add("fade-out");
-            });
-            
-            // Após a duração da transição, NÃO remover fade-out do fromElement
-            // (ele deve permanecer oculto). Só limpar classes do toElement se necessário.
-            setTimeout(() => {
-                // fade-out permanece no fromElement para mantê-lo oculto
-                // fade-in permanece no toElement para mantê-lo visível
-                
-                if (callback) callback();
-            }, 500);
-        }
-
-        function renderResults() {
+        function renderResults(resultsSection) {
             const recommendations = recommendPlans();
             const winner = recommendations[0];
+            if (!resultsSection) return;
 
-            document.getElementById("resultLogo").src = winner.plan.logo;
-            document.getElementById("resultLogo").alt = `Logo do plano ${winner.plan.nome}`;
-            document.getElementById("resultPrice").textContent = `${formatMoney(winner.plan.precoMensal)} / mês`;
-            document.getElementById("resultSummary").textContent = `Este plano tem ${winner.compatibilityPercent}% de compatibilidade com seu perfil e oferece os benefícios mais adequados.`;
+            const resultLogo = resultsSection.querySelector("#resultLogo");
+            const resultPrice = resultsSection.querySelector("#resultPrice");
+            const resultSummary = resultsSection.querySelector("#resultSummary");
+            const resultReasons = resultsSection.querySelector("#resultReasons");
+            const plansList = resultsSection.querySelector("#plansList");
 
-            const resultReasons = document.getElementById("resultReasons");
-            resultReasons.innerHTML = "";
-            
-            // Exibir os 3 principais atributos com melhor alinhamento na recomendação
-            winner.influences.slice(0, 3).forEach((inf) => {
-                const item = document.createElement("li");
-                item.textContent = `${ATTRIBUTE_LABELS[inf.key]}: excelente alinhamento`;
-                resultReasons.appendChild(item);
-            });
+            if (resultLogo && winner?.plan?.logo) {
+                resultLogo.src = winner.plan.logo;
+                resultLogo.alt = `Logo do plano ${winner.plan.nome}`;
+            }
+            if (resultPrice && winner?.plan?.precoMensal) {
+                resultPrice.textContent = `${formatMoney(winner.plan.precoMensal)} / mês`;
+            }
+            if (resultSummary && winner?.compatibilityPercent !== undefined) {
+                resultSummary.textContent = `Este plano tem ${winner.compatibilityPercent}% de compatibilidade com seu perfil e oferece os benefícios mais adequados.`;
+            }
 
-            const plansList = document.getElementById("plansList");
-            plansList.innerHTML = "";
+            if (resultReasons) {
+                resultReasons.innerHTML = "";
+                winner.influences.slice(0, 3).forEach((inf) => {
+                    const item = document.createElement("li");
+                    item.textContent = `${ATTRIBUTE_LABELS[inf.key] ?? inf.key}: excelente alinhamento`;
+                    resultReasons.appendChild(item);
+                });
+            }
 
-            recommendations.forEach((result, index) => {
-                const { plan, compatibilityPercent, influences } = result;
-                const ticketBenefit = getTicketBenefit(plan, state.answers.gamesPerYear);
-                const priority = getPriorityValue(plan, state.answers.gamesPerYear);
-                const card = document.createElement("article");
-                card.className = "plan";
-                const adhesion = plan.taxaDeAdesaoUnica ? `Taxa única: ${formatMoney(plan.taxaDeAdesaoUnica)}` : "Sem taxa de adesão única";
+            if (plansList) {
+                plansList.innerHTML = "";
+                recommendations.forEach((result, index) => {
+                    const { plan, compatibilityPercent, influences } = result;
+                    const ticketBenefit = getTicketBenefit(plan, state.answers.gamesPerYear);
+                    const priority = getPriorityValue(plan, state.answers.gamesPerYear);
+                    const card = document.createElement("article");
+                    card.className = "plan";
+                    const adhesion = plan.taxaDeAdesaoUnica ? `Taxa única: ${formatMoney(plan.taxaDeAdesaoUnica)}` : "Sem taxa de adesão única";
+                    const topInfluence = influences?.[0];
+                    const keyLabel = ATTRIBUTE_LABELS[topInfluence?.key] ?? topInfluence?.key ?? "características do plano";
 
-                // Pega a principal característica de destaque para este plano
-                const topInfluence = influences[0];
-                const keyLabel = ATTRIBUTE_LABELS[topInfluence.key];
-
-                card.innerHTML = `
-                    <img src="${plan.logo}" alt="Logo do plano ${plan.nome}">
-                    <div>
-                        <h3>${index === 0 ? 'Recomendado' : 'Alternativa'}</h3>
-                        <p>${formatMoney(plan.precoMensal)} / mês ou ${formatMoney(plan.precoAnual)} / ano</p>
-                        <small>${adhesion}</small>
-                        <ul>
-                            <li>${ticketBenefit.text}</li>
-                            <li>Prioridade ${priority}</li>
-                            <li>${plan.descontoNaLoja?.texto || 'Até 10% na Loja do Cruzeiro'}</li>
-                            <li>Destaque: Forte alinhamento em ${keyLabel}</li>
-                        </ul>
-                    </div>
-                    <div class="plan-score">${compatibilityPercent}%</div>
-                `;
-                plansList.appendChild(card);
-            });
+                    card.innerHTML = `
+                        <img src="${plan.logo}" alt="Logo do plano ${plan.nome}">
+                        <div>
+                            <h3>${index === 0 ? 'Recomendado' : 'Alternativa'}</h3>
+                            <p>${formatMoney(plan.precoMensal)} / mês ou ${formatMoney(plan.precoAnual)} / ano</p>
+                            <small>${adhesion}</small>
+                            <ul>
+                                <li>${ticketBenefit.text}</li>
+                                <li>Prioridade ${priority}</li>
+                                <li>${plan.descontoNaLoja?.texto || 'Até 10% na Loja do Cruzeiro'}</li>
+                                <li>Destaque: Forte alinhamento em ${keyLabel}</li>
+                            </ul>
+                        </div>
+                        <div class="plan-score">${compatibilityPercent}%</div>
+                    `;
+                    plansList.appendChild(card);
+                });
+            }
         }
 
         function renderQuestion() {
-            const questionTitle = document.getElementById("quizTitle");
-            const optionsContainer = document.getElementById("options");
+            const quizSection = document.querySelector('.quiz-card');
+            if (!quizSection) return;
+            
+            const questionTitle = quizSection.querySelector("#quizTitle");
+            const optionsContainer = quizSection.querySelector("#options");
+            const stepCounterEl = quizSection.querySelector("#stepCounter");
+            const progressBarEl = quizSection.querySelector("#progressBar");
+            const backBtn = quizSection.querySelector("#backButton");
+            const nextBtn = quizSection.querySelector("#nextButton");
 
             // Efeito suave de saída temporária
             questionTitle.style.opacity = "0";
@@ -1702,13 +1719,13 @@
                 const progress = ((state.step + 1) / questions.length) * 100;
 
                 questionTitle.textContent = question.title;
-                stepCounter.textContent = `Pergunta ${state.step + 1} de ${questions.length}`;
-                progressBar.style.width = `${progress}%`;
-                backButton.disabled = state.step === 0;
+                stepCounterEl.textContent = `Pergunta ${state.step + 1} de ${questions.length}`;
+                progressBarEl.style.width = `${progress}%`;
+                backBtn.disabled = state.step === 0;
                 
                 // CORREÇÃO CRÍTICA: sempre inicia DESABILITADO
-                nextButton.disabled = true;
-                nextButton.textContent = state.step === questions.length - 1 ? "Ver resultado" : "Continuar";
+                nextBtn.disabled = true;
+                nextBtn.textContent = state.step === questions.length - 1 ? "Ver resultado" : "Continuar";
                 optionsContainer.innerHTML = "";
 
                 if (question.type === "range") {
@@ -1717,37 +1734,37 @@
                     wrap.innerHTML = `
                         <div class="range-value">
                             <span>Frequência estimada</span>
-                            <strong id="rangeOutput">${state.answers[question.key]}&nbsp;${question.suffix}</strong>
+                            <strong id="rangeOutput">${state.answers[question.key] ?? question.min}&nbsp;${question.suffix}</strong>
                         </div>
-                        <input id="rangeInput" type="range" min="${question.min}" max="${question.max}" value="${state.answers[question.key]}">
+                        <input id="rangeInput" type="range" min="${question.min}" max="${question.max}" value="${state.answers[question.key] ?? question.min}">
                     `;
                     optionsContainer.appendChild(wrap);
 
-                    const rangeInput = document.getElementById("rangeInput");
-                    const rangeOutput = document.getElementById("rangeOutput");
+                    const rangeInput = optionsContainer.querySelector("#rangeInput");
+                    const rangeOutput = optionsContainer.querySelector("#rangeOutput");
 
-                    rangeInput.addEventListener("input", () => {
-                        const value = Number(rangeInput.value);
+                    rangeInput.addEventListener("input", (e) => {
+                        const value = Number(e.target.value);
                         state.answers[question.key] = value;
                         rangeOutput.textContent = `${value} ${question.suffix}`;
-                        // Habilita ao mexer no slider
-                        nextButton.disabled = false;
+                        nextBtn.disabled = false;
                     });
                     
                     // Se já tem valor salvo (navegação voltar/avançar), habilita
                     if (state.answers[question.key] !== undefined && state.answers[question.key] !== question.min) {
-                        nextButton.disabled = false;
+                        nextBtn.disabled = false;
                     }
                 } else {
                     question.options.forEach((item, idx) => {
                         const button = document.createElement("button");
                         button.type = "button";
                         button.className = "option";
+                        button.dataset.value = item.value;
 
                         // Se já tem resposta salva, marca e habilita
                         if (state.answers[question.key] === item.value) {
                             button.classList.add("selected");
-                            nextButton.disabled = false;
+                            nextBtn.disabled = false;
                         }
 
                         button.innerHTML = `<strong>${item.label}</strong><span>${item.description}</span>`;
@@ -1755,14 +1772,6 @@
                         button.style.opacity = "0";
                         button.style.transform = "translateY(10px)";
                         button.style.transitionDelay = `${idx * 0.04}s`;
-
-                        button.addEventListener("click", () => {
-                            optionsContainer.querySelectorAll('.option.selected').forEach(opt => opt.classList.remove('selected'));
-                            button.classList.add('selected');
-                            state.answers[question.key] = item.value;
-                            // Habilita SOMENTE após clique do usuário
-                            nextButton.disabled = false;
-                        });
 
                         optionsContainer.appendChild(button);
 
@@ -1783,43 +1792,172 @@
         }
 
 
+        function createQuizSection() {
+            const section = document.createElement('section');
+            section.className = 'quiz-card dynamic-section';
+            section.setAttribute('aria-labelledby', 'quizTitle');
+            section.innerHTML = `
+                <div class="progress" aria-hidden="true">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <div class="step-info">
+                    <span id="stepCounter">Pergunta 1 de 10</span>
+                    <span>Recomendação por custo-beneficio</span>
+                </div>
+                <h2 class="question" id="quizTitle"></h2>
+                <div class="options" id="options"></div>
+                <div class="actions">
+                    <button class="btn btn-secondary" id="backButton" type="button">Voltar</button>
+                    <button class="btn btn-primary" id="nextButton" type="button" disabled>Continuar</button>
+                </div>
+            `;
+            return section;
+        }
 
+        function createResultsSection() {
+            const section = document.createElement('section');
+            section.className = 'results dynamic-section';
+            section.id = 'results';
+            section.setAttribute('aria-live', 'polite');
+            section.innerHTML = `
+                <article class="result-card">
+                    <span class="result-badge">Plano recomendado</span>
+                    <div class="result-plan">
+                        <img id="resultLogo" alt="">
+                        <div>
+                            <h2>Plano recomendado para você</h2>
+                            <p class="price" id="resultPrice"></p>
+                        </div>
+                    </div>
+                    <p id="resultSummary"></p>
+                    <ul class="reason-list" id="resultReasons"></ul>
+                    <div class="actions">
+                        <button class="btn btn-secondary" id="restartButton" type="button">Refazer quiz</button>
+                        <button class="btn btn-primary" id="subscribeButton" type="button">Assinar agora</button>
+                    </div>
+                </article>
+                <aside class="plans-card">
+                    <div class="plans-title">
+                        <h2>Melhores opções</h2>
+                        <span>Recomendações personalizadas</span>
+                    </div>
+                    <div class="plans-list" id="plansList"></div>
+                </aside>
+            `;
+            return section;
+        }
 
+        function transitionSection(fromElement, createToElementFn, onEnterCallback) {
+            const toElement = createToElementFn();
+            toElement.style.display = 'none';
+            
+            fromElement.parentNode.insertBefore(toElement, fromElement.nextSibling);
 
-        startButton.addEventListener("click", () => {
-            transitionSection(heroCard, quizCard, () => {
-                renderQuestion();
+            requestAnimationFrame(() => {
+                toElement.style.display = '';
+                toElement.offsetHeight;
+
+                toElement.classList.add('is-entering');
+                fromElement.classList.add('is-exiting');
+
+                const TRANSITION_DURATION = 500;
+                setTimeout(() => {
+                    fromElement.remove();
+                    if (onEnterCallback) onEnterCallback(toElement);
+                }, TRANSITION_DURATION);
             });
-        });
+        }
 
-        backButton.addEventListener("click", () => {
-            if (state.step === 0) {
-                return;
+        function bindSectionEvents(section, type) {
+            if (type === 'quiz') {
+                const backBtn = section.querySelector('#backButton');
+                const nextBtn = section.querySelector('#nextButton');
+                const optionsContainer = section.querySelector('#options');
+
+                backBtn.addEventListener('click', onBackClick);
+                nextBtn.addEventListener('click', () => onNextClick(nextBtn));
+                optionsContainer.addEventListener('click', (e) => {
+                    const option = e.target.closest('.option');
+                    if (option) onOptionClick(option, nextBtn);
+                });
+            } else if (type === 'results') {
+                section.querySelector('#restartButton').addEventListener('click', onRestartClick);
+                section.querySelector('#subscribeButton').addEventListener('click', onSubscribeClick);
             }
+        }
 
+        function onBackClick() {
+            if (state.step === 0) return;
             state.step -= 1;
             renderQuestion();
-        });
+        }
 
-        nextButton.addEventListener("click", () => {
+        function onNextClick(nextBtn) {
             if (state.step === questions.length - 1) {
-                transitionSection(quizCard, results, () => {
-                    renderResults();
-                    setTimeout(() => {
-                        results.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start"
-                        });
-                    }, 100);
+                const quizSection = document.querySelector('.quiz-card');
+                transitionSection(quizSection, createResultsSection, (resultsSection) => {
+                    bindSectionEvents(resultsSection, 'results');
+                    renderResults(resultsSection);
+                    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
                 return;
             }
-
             state.step += 1;
             renderQuestion();
-        });
+        }
 
-        restartButton.addEventListener("click", () => {
+        function onOptionClick(optionEl, nextBtn) {
+            const optionsContainer = optionEl.closest('.options');
+            optionsContainer.querySelectorAll('.option.selected').forEach(opt => opt.classList.remove('selected'));
+            optionEl.classList.add('selected');
+            const question = questions[state.step];
+            const value = optionEl.dataset.value;
+            state.answers[question.key] = value;
+            nextBtn.disabled = false;
+        }
+
+        function createHeroSection() {
+            const section = document.createElement('section');
+            section.className = 'hero';
+            section.innerHTML = `
+                <div class="hero-card" id="heroCard">
+                    <p class="eyebrow">Quiz Sócio 5 Estrelas</p>
+                    <h1>Encontre o plano perfeito para viver o Cruzeiro mais de perto.</h1>
+                    <p class="hero-copy">
+                        Em menos de 1 minuto, descubra qual plano oferece os benefícios que mais combinam com você.
+                        Responda algumas perguntas rápidas e receba uma recomendação personalizada para aproveitar
+                        vantagens exclusivas, economizar na escolha e fazer parte da Nação Azul da melhor forma possível.
+                    </p>
+                    <button class="start-button" id="startButton" type="button">Iniciar Quiz</button>
+                </div>
+            `;
+            return section;
+        }
+
+        function onRestartClick() {
+            resetState();
+            const resultsSection = document.querySelector('.results');
+            transitionSection(resultsSection, createHeroSection, (newHeroSection) => {
+                heroSection = newHeroSection;
+                const newStartButton = heroSection.querySelector('#startButton');
+                newStartButton.addEventListener('click', () => {
+                    transitionSection(heroSection, createQuizSection, (quizSection) => {
+                        bindSectionEvents(quizSection, 'quiz');
+                        renderQuestion();
+                    });
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        function onSubscribeClick() {
+            const recommendations = recommendPlans();
+            const winner = recommendations[0];
+            const url = winner.plan.link || 'https://socio5estrelas.com.br';
+            window.open(url, '_blank');
+        }
+
+        function resetState() {
             state.step = 0;
             state.answers = {
                 gamesPerYear: 0,
@@ -1833,22 +1971,16 @@
                 digitalExperience: null,
                 loyaltyLevel: null
             };
-            
-            transitionSection(results, heroCard, () => {
-                quizCard.classList.remove("fade-in");
-                quizCard.classList.add("fade-init");
-            });
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        });
+        }
 
-        subscribeButton.addEventListener("click", () => {
-            const recommendations = recommendPlans();
-            const winner = recommendations[0];
-            const url = winner.plan.link || 'https://socio5estrelas.com.br';
-            window.open(url, '_blank');
+        
+        
+        
+        startButton.addEventListener("click", () => {
+            transitionSection(heroSection, createQuizSection, (quizSection) => {
+                bindSectionEvents(quizSection, 'quiz');
+                renderQuestion();
+            });
         });
     
     </script>
