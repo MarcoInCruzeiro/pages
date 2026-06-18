@@ -4,9 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Socio Cruzeiro</title>
+    <meta name="description"
+        content="Descubra o plano de sócio ideal para você no Cruzeiro. Responda nosso quiz rápido e receba uma recomendação personalizada com os melhores benefícios.">
+    <meta name="keywords" content="Cruzeiro, sócio, plano, quiz, assinatura, benefits, torcedor">
+    <meta name="author" content="Cruzeiro Esporte Clube - SAF">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/x-icon" href="https://www.cruzeiro.com.br/favicon.ico">
+    <title>Quiz Sócio 5 Estrelas | Cruzeiro</title>
+
+    <meta property="og:title" content="Quiz Sócio 5 Estrelas | Cruzeiro">
+    <meta property="og:description"
+        content="Descubra o plano de sócio ideal para você no Cruzeiro. Responda nosso quiz rápido e receba uma recomendação personalizada.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://socio.cruzeiro.com.br/quiz">
+    <meta property="og:site_name" content="Cruzeiro Esporte Clube - SAF">
+    <meta property="og:locale" content="pt_BR">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Quiz Sócio 5 Estrelas | Cruzeiro">
+    <meta name="twitter:description"
+        content="Descubra o plano de sócio ideal para você no Cruzeiro. Responda nosso quiz rápido e receba uma recomendação personalizada.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
-/* 
+        /* 
  * Organized CSS Sections:
  *  1. CSS Variables
  *  2. Base Styles
@@ -19,17 +41,25 @@
 
 
         :root {
-            --azul-profundo: #021a3e; /* Mais escuro */
-            --azul-cruzeiro: #004080; /* Mais vibrante */
-            --azul-vivo: #007bff; /* Para acentos */
-            --azul-claro: #e0f2ff; /* Mais suave */
+            --azul-profundo: #021a3e;
+            --azul-cruzeiro: #004080;
+            --azul-vivo: #007bff;
+            --azul-claro: #e0f2ff;
             --branco: #ffffff;
-            --grafite: #2c3e50; /* Texto mais escuro */
-            --cinza: #7f8c8d; /* Cinza médio */
-            --linha: rgba(255, 255, 255, 0.1); /* Linhas mais sutis */
-            --sombra: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
-            --raio: 16px; /* Bordas mais suaves */
-            --gradient-background: linear-gradient(135deg, #04164a 0%, #0645bc 48%, #eaf3ff 48.2%, #f7fbff 100%);
+            --grafite: #2c3e50;
+            --cinza: #7f8c8d;
+            --linha: rgba(255, 255, 255, 0.1);
+            --sombra: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --raio: 16px;
+            --estrelas: radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.3), transparent),
+                radial-gradient(1px 1px at 30% 65%, rgba(255, 255, 255, 0.2), transparent),
+                radial-gradient(1.5px 1.5px at 50% 15%, rgba(255, 255, 255, 0.25), transparent),
+                radial-gradient(1px 1px at 70% 45%, rgba(255, 255, 255, 0.15), transparent),
+                radial-gradient(1.5px 1.5px at 85% 75%, rgba(255, 255, 255, 0.2), transparent),
+                radial-gradient(1px 1px at 15% 85%, rgba(255, 255, 255, 0.15), transparent),
+                radial-gradient(1px 1px at 60% 90%, rgba(255, 255, 255, 0.1), transparent),
+                radial-gradient(1.5px 1.5px at 90% 10%, rgba(255, 255, 255, 0.2), transparent),
+                radial-gradient(1px 1px at 40% 40%, rgba(255, 255, 255, 0.1), transparent);
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
@@ -43,9 +73,15 @@
             color: var(--grafite);
             font-family: "Outfit", sans-serif;
             background:
-                radial-gradient(circle at 12% 10%, rgba(0, 100, 255, 0.15), transparent 30rem),
-                radial-gradient(circle at 88% 18%, rgba(255, 255, 255, 0.1), transparent 20rem),
-                var(--gradient-background);
+                radial-gradient(ellipse at 15% 50%, rgba(0, 64, 128, 0.3), transparent 50%),
+                radial-gradient(ellipse at 80% 25%, rgba(0, 123, 255, 0.12), transparent 40%),
+                radial-gradient(ellipse at 50% 85%, rgba(0, 30, 80, 0.5), transparent 50%),
+                radial-gradient(ellipse at 50% 0%, rgba(0, 64, 128, 0.2), transparent 60%),
+                var(--estrelas),
+                linear-gradient(175deg, #000b22 0%, #021a3e 25%, #002a5e 50%, #001830 80%, #000d29 100%);
+            background-size: auto, auto, auto, auto, 300px 300px, auto;
+            background-attachment: fixed;
+            min-height: 100vh;
         }
 
         button,
@@ -55,9 +91,16 @@
         }
 
         .page {
+            display: grid;
+            grid-template-columns: 1fr;
             width: min(1200px, calc(100% - 40px));
             margin: 0 auto;
             padding: clamp(24px, 4vh, 48px) 0;
+        }
+
+        .page>section {
+            grid-column: 1;
+            grid-row: 1;
         }
 
         .hero {
@@ -72,11 +115,14 @@
         .quiz-card,
         .result-card,
         .plans-card {
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Borda mais suave */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            /* Borda mais suave */
             border-radius: var(--raio);
             box-shadow: var(--sombra);
-            backdrop-filter: blur(12px); /* Blur mais suave */
-            background-color: rgba(255, 255, 255, 0.05); /* Um toque de cor para cards principais */
+            backdrop-filter: blur(12px);
+            /* Blur mais suave */
+            background-color: rgba(255, 255, 255, 0.05);
+            /* Um toque de cor para cards principais */
         }
 
         .hero-card {
@@ -84,7 +130,7 @@
             grid-row: 1;
             position: relative;
             overflow: hidden;
-            min-height: clamp(420px, 70vh, 560px);
+            min-height: clamp(420px, 50vh, 560px);
             padding: clamp(24px, 5vw, 48px);
             color: var(--branco);
             background:
@@ -95,8 +141,7 @@
             pointer-events: auto;
             transform: translateY(0);
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        visibility 0.5s;
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 2;
         }
 
@@ -107,9 +152,11 @@
             bottom: -150px;
             width: 400px;
             height: 400px;
-            border: 50px solid rgba(255, 255, 255, 0.08); /* Círculo maior e mais sutil */
+            border: 50px solid rgba(255, 255, 255, 0.08);
+            /* Círculo maior e mais sutil */
             border-radius: 50%;
-            pointer-events: none; /* Garante que não interfira com interações */
+            pointer-events: none;
+            /* Garante que não interfira com interações */
         }
 
         .eyebrow {
@@ -131,12 +178,16 @@
         h1 {
             position: relative;
             z-index: 1;
-            max-width: 780px; /* Largura um pouco maior */
+            max-width: 780px;
+            /* Largura um pouco maior */
             margin: 0;
             font-family: "Outfit", sans-serif;
-            font-size: clamp(3.2rem, 7.5vw, 7rem); /* Fonte ligeiramente maior */
-            line-height: 0.95; /* Line height ajustado */
-            letter-spacing: 0; /* Remove letter spacing para h1 */
+            font-size: clamp(3.2rem, 7.5vw, 7rem);
+            /* Fonte ligeiramente maior */
+            line-height: 0.95;
+            /* Line height ajustado */
+            letter-spacing: 0;
+            /* Remove letter spacing para h1 */
             text-transform: uppercase;
             font-weight: 700;
         }
@@ -180,8 +231,6 @@
         }
 
         .quiz-card {
-            grid-column: 1;
-            grid-row: 1;
             padding: clamp(24px, 4vw, 32px);
             background: rgba(255, 255, 255, 0.98);
             border: 1px solid rgba(0, 0, 0, 0.05);
@@ -189,18 +238,22 @@
         }
 
         .progress {
-            height: 12px; /* Altura um pouco maior */
+            height: 12px;
+            /* Altura um pouco maior */
             overflow: hidden;
             border-radius: 999px;
-            background: #eef5ff; /* Fundo do progresso */
+            background: #eef5ff;
+            /* Fundo do progresso */
         }
 
         .progress-bar {
             width: 20%;
             height: 100%;
             border-radius: inherit;
-            background: linear-gradient(90deg, var(--azul-profundo), var(--azul-cruzeiro)); /* Gradiente mais forte */
-            transition: width 0.35s ease-out; /* Transição mais suave */
+            background: linear-gradient(90deg, var(--azul-profundo), var(--azul-cruzeiro));
+            /* Gradiente mais forte */
+            transition: width 0.35s ease-out;
+            /* Transição mais suave */
         }
 
         .step-info {
@@ -240,27 +293,32 @@
         }
 
         .option:hover {
-            transform: translateY(-3px); /* Efeito de hover mais pronunciado */
+            transform: translateY(-3px);
+            /* Efeito de hover mais pronunciado */
             border-color: var(--azul-vivo);
-            box-shadow: 0 10px 25px rgba(0, 51, 160, 0.1); /* Sombra mais suave */
+            box-shadow: 0 10px 25px rgba(0, 51, 160, 0.1);
+            /* Sombra mais suave */
         }
 
         .option.selected {
             transform: translateY(-2px);
             border-color: var(--azul-vivo) !important;
             box-shadow: 0 8px 20px rgba(0, 51, 160, 0.15) !important;
-            background-color: var(--azul-claro) !important; /* Cor de fundo mais clara para selecionado */
+            background-color: var(--azul-claro) !important;
+            /* Cor de fundo mais clara para selecionado */
         }
 
         .option strong {
             display: block;
-            margin-bottom: 6px; /* Margem ajustada */
+            margin-bottom: 6px;
+            /* Margem ajustada */
             font-size: 1.05rem;
         }
 
         .option span {
             color: var(--cinza);
-            font-size: 0.95rem; /* Fonte ligeiramente maior */
+            font-size: 0.95rem;
+            /* Fonte ligeiramente maior */
         }
 
         .range-wrap {
@@ -276,21 +334,25 @@
             display: flex;
             align-items: baseline;
             justify-content: space-between;
-            gap: 14px; /* Aumenta o gap */
+            gap: 14px;
+            /* Aumenta o gap */
         }
 
         .range-value strong {
             color: var(--azul-cruzeiro);
-            font-size: 2.4rem; /* Fonte ligeiramente maior */
+            font-size: 2.4rem;
+            /* Fonte ligeiramente maior */
             font-weight: 700;
         }
 
         input[type="range"] {
             width: 100%;
             accent-color: var(--azul-cruzeiro);
-            height: 8px; /* Altura do slider */
+            height: 8px;
+            /* Altura do slider */
             cursor: grab;
         }
+
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             width: 24px;
@@ -298,16 +360,18 @@
             border-radius: 50%;
             background: var(--azul-vivo);
             cursor: grab;
-            margin-top: -8px; /* Centraliza o thumb */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            margin-top: -8px;
+            /* Centraliza o thumb */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
+
         input[type="range"]::-moz-range-thumb {
             width: 24px;
             height: 24px;
             border-radius: 50%;
             background: var(--azul-vivo);
             cursor: grab;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .actions {
@@ -321,8 +385,10 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 52px; /* Altura ligeiramente maior */
-            padding: 0 24px; /* Padding ajustado */
+            min-height: 52px;
+            /* Altura ligeiramente maior */
+            padding: 0 24px;
+            /* Padding ajustado */
             border: 0;
             border-radius: 999px;
             cursor: pointer;
@@ -331,35 +397,40 @@
         }
 
         .btn:hover {
-            transform: translateY(-2px); /* Efeito de hover mais pronunciado */
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+            /* Efeito de hover mais pronunciado */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
         }
 
         .btn:disabled {
             cursor: not-allowed;
-            opacity: 0.5; /* Opacidade ajustada */
+            opacity: 0.5;
+            /* Opacidade ajustada */
             transform: none;
             box-shadow: none;
         }
 
         .btn-primary {
             color: #fff;
-            background: linear-gradient(90deg, var(--azul-profundo), var(--azul-vivo)); /* Gradiente mais forte */
+            background: linear-gradient(90deg, var(--azul-profundo), var(--azul-vivo));
+            /* Gradiente mais forte */
             font-weight: 600;
         }
 
         .btn-secondary {
             color: var(--azul-cruzeiro);
-            background: #eff7ff; /* Fundo mais suave */
+            background: #eff7ff;
+            /* Fundo mais suave */
             border: 1px solid var(--azul-claro);
         }
+
         .btn-secondary:hover {
             background: var(--azul-claro);
         }
 
         .results {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            grid-template-columns: 1fr;
             gap: clamp(20px, 3vw, 28px);
             margin-top: clamp(24px, 3vh, 32px);
         }
@@ -384,16 +455,18 @@
             text-transform: uppercase;
         }
 
-        .result-card > p:not(.price) {
+        .result-card>p:not(.price) {
             margin: clamp(12px, 2vh, 16px) 0;
             line-height: 1.6;
             color: rgba(255, 255, 255, 0.85);
-            font-size: clamp(0.95rem, 1.5vw, 1rem);
+            font-size: clamp(1.4rem, 1.5vw, 1rem);
         }
 
         .result-plan {
             display: flex;
+            flex-direction: column;
             align-items: center;
+            text-align: center;
             gap: clamp(16px, 3vw, 20px);
             margin: clamp(20px, 3vh, 28px) 0;
         }
@@ -401,7 +474,8 @@
         .result-plan h2 {
             color: var(--branco);
             margin: 0;
-            font-size: clamp(1.5rem, 3.2vw, 2.1rem); /* Fonte ajustada */
+            font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+            /* Fonte ajustada */
             line-height: 1.25;
             letter-spacing: -0.03em;
             font-weight: 600;
@@ -409,21 +483,19 @@
         }
 
         .result-plan img {
-            width: clamp(100px, 18vw, 140px);
-            height: clamp(70px, 12vw, 100px);
+            width: 100%;
+            height: clamp(84px, 14.4vw, 120px);
             object-fit: contain;
             border-radius: 14px;
-            background-color: rgba(255,255,255,0.05);
             padding: 4px;
         }
 
         .plan img {
             width: 100%;
-            height: clamp(60px, 12vw, 80px);
+            height: clamp(72px, 14.4vw, 96px);
             object-fit: contain;
             border-radius: 12px;
             margin-bottom: clamp(8px, 1.5vw, 10px);
-            background-color: rgba(255,255,255,0.05);
             padding: 4px;
         }
 
@@ -449,19 +521,22 @@
             margin-top: clamp(8px, 1.5vh, 12px);
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.5;
-            font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+            font-size: clamp(1.3rem, 1.5vw, 0.95rem);
         }
 
         .reason-list li::before,
         .plan li::before {
             content: "";
-            flex: 0 0 9px; /* Tamanho ajustado */
+            flex: 0 0 9px;
+            /* Tamanho ajustado */
             width: 9px;
             height: 9px;
-            margin-top: 7px; /* Centraliza verticalmente */
+            margin-top: 7px;
+            /* Centraliza verticalmente */
             border-radius: 50%;
             background: var(--azul-vivo);
-            box-shadow: 0 0 5px var(--azul-vivo); /* Pequeno brilho */
+            box-shadow: 0 0 5px var(--azul-vivo);
+            /* Pequeno brilho */
         }
 
         .plans-title {
@@ -497,9 +572,10 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             color: #fefeff;
-            background: rgba(0, 10, 40, 0.7);
+            background: rgb(0 42 167 / 70%);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
         .plan:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -533,20 +609,48 @@
 
         .plan p,
         .plan small {
-            color: rgba(255, 255, 255, 0.6); /* Cor mais suave */
-            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            /* Cor mais suave */
+            font-size: 1.1rem;
         }
 
         .plan-score {
-            min-width: 90px; /* Largura ajustada */
-            padding: 10px 12px; /* Padding ajustado */
+            min-width: 90px;
+            /* Largura ajustada */
+            padding: 10px 12px;
+            /* Padding ajustado */
             text-align: center;
-            color: var(--azul-profundo); /* Cor mais profunda */
-            border-radius: 16px; /* Raio ajustado */
+            color: var(--azul-profundo);
+            /* Cor mais profunda */
+            border-radius: 16px;
+            /* Raio ajustado */
             background: var(--azul-claro);
             font-weight: 800;
             font-size: 1rem;
-            margin-top: auto; /* Empurra para baixo */
+            margin-top: auto;
+            /* Empurra para baixo */
+        }
+
+        .plan-cta {
+            display: block;
+            width: 100%;
+            margin-top: 12px;
+            padding: 12px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            border: 0;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--azul-profundo), var(--azul-vivo));
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .plan-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
 
         .hidden {
@@ -576,8 +680,10 @@
         }
 
         .start-button:hover {
-            transform: translateY(-3px); /* Efeito de hover mais pronunciado */
-            box-shadow: 0 15px 30px rgba(0, 51, 160, 0.3); /* Sombra mais forte */
+            transform: translateY(-3px);
+            /* Efeito de hover mais pronunciado */
+            box-shadow: 0 15px 30px rgba(0, 51, 160, 0.3);
+            /* Sombra mais forte */
         }
 
         /* Transições Suaves e Animações Minimalistas */
@@ -592,7 +698,7 @@
             opacity: 0;
             transform: translateY(15px);
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Estados de animação para seções dinâmicas */
@@ -615,19 +721,12 @@
             z-index: 1;
         }
 
-        /* Hero card inicial visível */
-        .hero-card {
-            opacity: 1;
-            transform: translateY(0);
-            z-index: 2;
-        }
-
         /* Hero section para transições de seção completa */
         .hero {
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .hero.is-exiting {
@@ -661,12 +760,7 @@
         }
 
 
-        @media (min-width: 1200px){
-            .page{
-                display: flex;
-                flex-direction: column;
-            }
-
+        @media (min-width: 1200px) {
             .hero-card {
                 min-height: clamp(480px, 65vh, 520px);
             }
@@ -677,22 +771,24 @@
                 grid-template-columns: 1fr;
                 gap: 32px;
             }
-            .results {
-                grid-template-columns: 1fr;
-            }
+
             .hero-card {
                 min-height: auto;
                 padding-bottom: clamp(24px, 4vh, 40px);
             }
+
             .hero-card::after {
                 display: none;
             }
+
             h1 {
                 font-size: clamp(2.5rem, 8vw, 4.5rem);
             }
+
             .hero-copy {
                 font-size: 1rem;
             }
+
             .hero-stats {
                 grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             }
@@ -702,43 +798,48 @@
             .page {
                 padding: clamp(16px, 3vh, 32px) 0;
             }
-            .quiz-card, .result-card, .plans-card {
+
+            .quiz-card,
+            .result-card,
+            .plans-card {
                 padding: 20px;
             }
+
             .question {
                 font-size: clamp(1.4rem, 5vw, 2rem);
             }
+
             .actions {
                 flex-direction: column;
             }
+
             .btn {
                 width: 100%;
             }
-            .result-plan {
-                flex-direction: column;
-                text-align: center;
-            }
+
             .result-plan img {
-                width: 120px;
-                height: 90px;
+                width: clamp(100px, 30vw, 140px);
+                height: clamp(70px, 20vw, 100px);
             }
+
             .plans-title {
                 flex-direction: column;
                 align-items: flex-start;
             }
+
             .hero-stats {
                 gap: 10px;
             }
+
             .stat {
                 padding: 16px;
             }
+
             .stat strong {
                 font-size: 1.4rem;
             }
         }
-
-    
-</style>
+    </style>
 </head>
 
 <body>
@@ -758,19 +859,19 @@
     </main>
 
     <script>
-/*
- * Organized JavaScript Sections:
- *  1. Data
- *  2. State
- *  3. Questions
- *  4. Helper Functions
- *  5. Profile Building
- *  6. Compatibility Calculation
- *  7. Recommendation
- *  8. Rendering Functions
- *  9. Event Listeners
- * 10. Initialization
- */
+        /*
+         * Organized JavaScript Sections:
+         *  1. Data
+         *  2. State
+         *  3. Questions
+         *  4. Helper Functions
+         *  5. Profile Building
+         *  6. Compatibility Calculation
+         *  7. Recommendation
+         *  8. Rendering Functions
+         *  9. Event Listeners
+         * 10. Initialization
+         */
 
 
         const assinaturasSocios = {
@@ -981,7 +1082,7 @@
                 gameFrequency: null,
                 familyPlan: null,
                 digitalExperience: null,
-                loyaltyLevel: null
+                budget: null
             }
         };
 
@@ -1152,8 +1253,8 @@
                 title: "Você tem interesse em incluir sua familía no plano?",
                 options: [
                     {
-                        label: "Sim, amo minha familía",
-                        description: "Considero a inclusão da minha familía nos beneficios.",
+                        label: "Sim, levo minha familía e amigos comigo",
+                        description: "Considero a inclusão da minha familía e amigos nos beneficios.",
                         value: true,
                         effects: {
                             levaAcompanhantes: 8,
@@ -1161,8 +1262,8 @@
                         }
                     },
                     {
-                        label: "Não, vai só para mim",
-                        description: "Foco apenas no meu beneficio individual.",
+                        label: "Não, vai ser só para mim",
+                        description: "O plano será apenas para mim.",
                         value: false,
                         effects: {
                             levaAcompanhantes: 0
@@ -1172,11 +1273,11 @@
             },
             {
                 key: "digitalExperience",
-                title: "A acompanhar o conteúdo do clube em primeira mão é importante?",
+                title: "Acompanhar o conteúdo do clube em primeira mão é importante?",
                 options: [
                     {
                         label: "Muito importante",
-                        description: "Valorizo o app, conteúdo digital exclusivo e interações online.",
+                        description: "Valorizo o app, quero acesso a informações com antecedência.",
                         value: true,
                         effects: {
                             interesseExperiencias: 8,
@@ -1185,7 +1286,7 @@
                     },
                     {
                         label: "Prefiro experiencias presenciais",
-                        description: "Prefiro participar de jogos e eventos fisicos.",
+                        description: "Prefiro apenas participar de jogos e eventos presenciais.",
                         value: false,
                         effects: {
                             interesseExperiencias: 2,
@@ -1195,34 +1296,31 @@
                 ]
             },
             {
-                key: "loyaltyLevel",
-                title: "Ha quanto tempo você é torcedor do Cruzeiro?",
+                key: "budget",
+                title: "Qual seu orçamento mensal para o plano de sócio?",
                 options: [
                     {
-                        label: "Mais de 10 anos",
-                        description: "Torcedor veterano, valoriza tradição e história.",
-                        value: "veteran",
+                        label: "Até R$ 40/mês ou menos",
+                        description: "Busco a opção mais acessível.",
+                        value: 40,
                         effects: {
-                            prioridadeIngressos: 5,
-                            interesseExperiencias: 5
+                            importanciaPreco: 10
                         }
                     },
                     {
-                        label: "Entre 3 e 10 anos",
-                        description: "Torcedor cabuloso, busca mais engajamento com o Time.",
-                        value: "experienced",
+                        label: "Até R$ 200/mês ou menos",
+                        description: "Tenho flexibilidade para planos intermediários.",
+                        value: 200,
                         effects: {
-                            prioridadeIngressos: 3,
-                            interesseExperiencias: 3
+                            importanciaPreco: 5
                         }
                     },
                     {
-                        label: "Menos de 3 anos",
-                        description: "Torcedor novato, deseja conhecer mais o clube.",
-                        value: "new",
+                        label: "Até R$ 400/mês ou mais",
+                        description: "Quero o melhor plano possível independente do preço.",
+                        value: 400,
                         effects: {
-                            importanciaPreco: 4,
-                            interesseDescontos: 2
+                            importanciaPreco: 1
                         }
                     }
                 ]
@@ -1392,8 +1490,8 @@
             const maxPrice = Math.max(...prices);
 
             // 1. Sensibilidade ao preço: planos mais baratos são mais compatíveis com quem prioriza preço baixo (0 a 10)
-            const importanciaPreco = maxPrice === minPrice 
-                ? 5 
+            const importanciaPreco = maxPrice === minPrice
+                ? 5
                 : Math.round((1 - (plan.precoMensal - minPrice) / (maxPrice - minPrice)) * 10);
 
             // 2. Frequência no estádio: planos com ingressos grátis ou descontos recorrentes pontuam mais alto
@@ -1431,7 +1529,7 @@
             }
             interesseDescontos = Math.min(10, Math.round(interesseDescontos));
 
-            // 4. Interesse em experiências: baseado em conteúdos exclusivos, quizzes e votações
+            // 4. Interesse em experiências: baseado em conteúdos exclusivos, quizzes e etc
             let interesseExperiencias = 0;
             if (plan.conteudoExclusivo) interesseExperiencias += 3;
             if (plan.participaçãoEmQuizzes) interesseExperiencias += 3;
@@ -1465,7 +1563,7 @@
             }
 
             // 7. Consumo de produtos oficiais: com base no desconto disponível na loja oficial do clube
-            const consumoProdutosOficiais = plan.descontoNaLoja?.percentual 
+            const consumoProdutosOficiais = plan.descontoNaLoja?.percentual
                 ? Math.round(plan.descontoNaLoja.percentual * 66) // 0.15 * 66 = 10, 0.10 * 66 = 7
                 : 0;
 
@@ -1486,6 +1584,7 @@
          * @type {string[]}
          */
         const ENGAGEMENT_ATTRIBUTES = [
+            'importanciaPreco',
             'frequenciaEstadio',
             'interesseDescontos',
             'interesseExperiencias',
@@ -1538,17 +1637,11 @@
          * @returns {number} Score final ajustado (0.0 a 1.0)
          */
         function applyPricePenalty(cosineScore, userProfile, planPrice) {
-            const PRICE_SENSITIVITY_THRESHOLD = 7;
-            const PLAN_PRICE_THRESHOLD = 100;
-            const PENALTY_FACTOR = 0.85;
-
-            const userPriceSensitivity = userProfile.importanciaPreco ?? 0;
-
-            if (userPriceSensitivity > PRICE_SENSITIVITY_THRESHOLD && planPrice > PLAN_PRICE_THRESHOLD) {
-                return cosineScore * PENALTY_FACTOR;
-            }
-
-            return cosineScore;
+            const sensitivity = (userProfile.importanciaPreco ?? 0) / 10;
+            const maxPrice = Math.max(...plans.map(p => p.precoMensal));
+            const priceRatio = planPrice / maxPrice;
+            const penalty = 1 - (sensitivity * priceRatio * 0.45);
+            return cosineScore * Math.max(0.55, penalty);
         }
 
         /**
@@ -1625,13 +1718,24 @@
          */
         function recommendPlans() {
             const userProfile = buildUserProfile(state.answers);
-            
-            return plans.map(plan => {
+            const userBudget = state.answers.budget;
+
+            let eligiblePlans = plans;
+            if (userBudget !== null && userBudget !== undefined) {
+                eligiblePlans = plans.filter(plan => plan.precoMensal <= userBudget);
+            }
+
+            // Se nenhum plano couber no orçamento, mostra o mais barato como fallback
+            if (eligiblePlans.length === 0) {
+                eligiblePlans = [plans.reduce((a, b) => a.precoMensal < b.precoMensal ? a : b)];
+            }
+
+            return eligiblePlans.map(plan => {
                 const planProfile = generatePlanProfile(plan);
                 return calculateCompatibility(userProfile, planProfile, plan);
             })
-            .sort((a, b) => b.compatibilityPercent - a.compatibilityPercent)
-            .slice(0, 3);
+                .sort((a, b) => b.compatibilityPercent - a.compatibilityPercent)
+                .slice(0, 3);
         }
 
         function renderResults(resultsSection) {
@@ -1660,7 +1764,7 @@
                 resultReasons.innerHTML = "";
                 winner.influences.slice(0, 3).forEach((inf) => {
                     const item = document.createElement("li");
-                    item.textContent = `${ATTRIBUTE_LABELS[inf.key] ?? inf.key}: excelente alinhamento`;
+                    item.textContent = `Benefícios para: ${ATTRIBUTE_LABELS[inf.key] ?? inf.key}`;
                     resultReasons.appendChild(item);
                 });
             }
@@ -1687,10 +1791,11 @@
                                 <li>${ticketBenefit.text}</li>
                                 <li>Prioridade ${priority}</li>
                                 <li>${plan.descontoNaLoja?.texto || 'Até 10% na Loja do Cruzeiro'}</li>
-                                <li>Destaque: Forte alinhamento em ${keyLabel}</li>
+                                <li>Destaque: Benefícios para ${keyLabel}</li>
                             </ul>
                         </div>
                         <div class="plan-score">${compatibilityPercent}%</div>
+                        <a href="${plan.link}" target="_blank" class="plan-cta">Assinar agora</a>
                     `;
                     plansList.appendChild(card);
                 });
@@ -1700,7 +1805,7 @@
         function renderQuestion() {
             const quizSection = document.querySelector('.quiz-card');
             if (!quizSection) return;
-            
+
             const questionTitle = quizSection.querySelector("#quizTitle");
             const optionsContainer = quizSection.querySelector("#options");
             const stepCounterEl = quizSection.querySelector("#stepCounter");
@@ -1722,7 +1827,7 @@
                 stepCounterEl.textContent = `Pergunta ${state.step + 1} de ${questions.length}`;
                 progressBarEl.style.width = `${progress}%`;
                 backBtn.disabled = state.step === 0;
-                
+
                 // CORREÇÃO CRÍTICA: sempre inicia DESABILITADO
                 nextBtn.disabled = true;
                 nextBtn.textContent = state.step === questions.length - 1 ? "Ver resultado" : "Continuar";
@@ -1749,7 +1854,7 @@
                         rangeOutput.textContent = `${value} ${question.suffix}`;
                         nextBtn.disabled = false;
                     });
-                    
+
                     // Se já tem valor salvo (navegação voltar/avançar), habilita
                     if (state.answers[question.key] !== undefined && state.answers[question.key] !== question.min) {
                         nextBtn.disabled = false;
@@ -1823,11 +1928,11 @@
                 <article class="result-card">
                     <span class="result-badge">Plano recomendado</span>
                     <div class="result-plan">
-                        <img id="resultLogo" alt="">
                         <div>
                             <h2>Plano recomendado para você</h2>
                             <p class="price" id="resultPrice"></p>
                         </div>
+                        <img id="resultLogo" alt="">
                     </div>
                     <p id="resultSummary"></p>
                     <ul class="reason-list" id="resultReasons"></ul>
@@ -1850,7 +1955,7 @@
         function transitionSection(fromElement, createToElementFn, onEnterCallback) {
             const toElement = createToElementFn();
             toElement.style.display = 'none';
-            
+
             fromElement.parentNode.insertBefore(toElement, fromElement.nextSibling);
 
             requestAnimationFrame(() => {
@@ -1969,20 +2074,20 @@
                 gameFrequency: null,
                 familyPlan: null,
                 digitalExperience: null,
-                loyaltyLevel: null
+                budget: null
             };
         }
 
-        
-        
-        
+
+
+
         startButton.addEventListener("click", () => {
             transitionSection(heroSection, createQuizSection, (quizSection) => {
                 bindSectionEvents(quizSection, 'quiz');
                 renderQuestion();
             });
         });
-    
+
     </script>
 
 </body>
