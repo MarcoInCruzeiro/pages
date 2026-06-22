@@ -1079,247 +1079,246 @@
             }
         };
 
-        const questions = [
+const questions = [
+    {
+        key: "gamesPerYear",
+        title: "Em média, a quantos jogos do Cruzeiro você pretende ir por ano?",
+        type: "range",
+        min: 0,
+        max: 30,
+        suffix: "jogos",
+        getEffects: (val) => ({
+            frequenciaEstadio: Math.round((val / 30) * 10),
+            prioridadeIngressos: val >= 15 ? 8 : (val >= 5 ? 4 : 1)
+        })
+    },
+    {
+        key: "wantsGuaranteedTicket",
+        title: "Oque melhor te define como torcedor?",
+        options: [
             {
-                key: "gamesPerYear",
-                title: "Em quantos jogos do Cruzeiro você pretende ir futuramente?",
-                type: "range",
-                min: 0,
-                max: 30,
-                suffix: "jogos",
-                getEffects: (val) => ({
-                    frequenciaEstadio: Math.round((val / 30) * 10),
-                    prioridadeIngressos: val >= 15 ? 8 : (val >= 5 ? 4 : 1)
-                })
+                label: "Faço questão de ir a todos os jogos",
+                description: "Quero garantir meu lugar na arquibancada em todas as partidas possíveis.",
+                value: true,
+                effects: {
+                    prioridadeIngressos: 9,
+                    frequenciaEstadio: 7,
+                    importanciaPreco: 1
+                }
             },
             {
-                key: "wantsGuaranteedTicket",
-                title: "Você prefere ir em todos os jogos ou somente em jogos importantes?",
-                options: [
-                    {
-                        label: "Pretendo ir em todos os jogos",
-                        description: "Quero garantir meu lugar em todos os jogos possíveis.",
-                        value: true,
-                        effects: {
-                            prioridadeIngressos: 9,
-                            frequenciaEstadio: 7,
-                            importanciaPreco: 1
-                        }
-                    },
-                    {
-                        label: "Pretendo ir apenas em jogos importantes",
-                        description: "Quero ir apenas nos jogos que considero mais importantes (Ex.: finais, jogos contra rivais etc).",
-                        value: false,
-                        effects: {
-                            importanciaPreco: 8,
-                            prioridadeIngressos: 2
-                        }
-                    }
-                ]
-            },
-            {
-                key: "buysTwoTickets",
-                title: "Normalmente você compra ingressos para você e mais alguém?",
-                options: [
-                    {
-                        label: "Sim, normalmente compro levo alguém comigo",
-                        description: "Gostaria de facilidade para conseguir adquirir dois ingressos ou mais.",
-                        value: true,
-                        effects: {
-                            levaAcompanhantes: 10,
-                            interesseDescontos: 5
-                        }
-                    },
-                    {
-                        label: "Não, compro apenas o meu",
-                        description: "Normalmente vou sozinho.",
-                        value: false,
-                        effects: {
-                            levaAcompanhantes: 0
-                        }
-                    }
-                ]
-            },
-            {
-                key: "needsPriority",
-                title: "Você costuma ir comprar o ingresso assim que fica sabendo sobre o jogo?",
-                options: [
-                    {
-                        label: "Sim, assim que vejo que vai ter jogo já quero comprar",
-                        description: "Deixo meu ingresso garantido assim que sei que vai ter algum jogo.",
-                        value: true,
-                        effects: {
-                            prioridadeIngressos: 10
-                        }
-                    },
-                    {
-                        label: "Não",
-                        description: "Não faço questão de ir em muitos jogos.",
-                        value: false,
-                        effects: {
-                            prioridadeIngressos: 0
-                        }
-                    }
-                ]
-            },
-            {
-                key: "wantsParticipation",
-                title: "Gostaria de receber ofertas e promoções recorrentes?",
-                options: [
-                    {
-                        label: "Sim, quero receber ofertas e promoções exclusivas",
-                        description: "Desejo receber comunicados sobre ofertas e promoções especiais.",
-                        value: true,
-                        effects: {
-                            interesseExperiencias: 10
-                        }
-                    },
-                    {
-                        label: "Não faço questão",
-                        description: "Não faço questão de receber ofertas e promoções.",
-                        value: false,
-                        effects: {
-                            interesseExperiencias: 0
-                        }
-                    }
-                ]
-            },
-            {
-                key: "wantsStoreDiscount",
-                title: "Quando lançamos uma camisa nova ou produto novo, qual sua reação?",
-                options: [
-                    {
-                        label: "Compro sempre, gosto de fazer coleção",
-                        description: "Quero conseguir comprar os produtos do cruzeiro pelo melhor preço possível.",
-                        value: true,
-                        effects: {
-                            interesseDescontos: 8,
-                            consumoProdutosOficiais: 9
-                        }
-                    },
-                    {
-                        label: "Não me interesso muito",
-                        description: "Não tenho interesse em comprar ou colecionar camisas e etc.",
-                        value: false,
-                        effects: {
-                            interesseDescontos: 0,
-                            consumoProdutosOficiais: 0
-                        }
-                    }
-                ]
-            },
-            {
-                key: "gameFrequency",
-                title: "Qual cenario melhor define a forma como você assiste os jogos?",
-                options: [
-                    {
-                        label: "Presencial sempre, sempre assisto os jogos no estádio",
-                        description: "Não perco nenhum jogo do cabuloso no Mineirão.",
-                        value: "always",
-                        effects: {
-                            frequenciaEstadio: 10,
-                            interesseExperiencias: 6
-                        }
-                    },
-                    {
-                        label: "Maioria dos jogos importantes",
-                        description: "Assisto jogos decisivos e grandes classicos.",
-                        value: "frequent",
-                        effects: {
-                            frequenciaEstadio: 6,
-                            interesseExperiencias: 4
-                        }
-                    },
-                    {
-                        label: "Normalmente assisto pela TV, vou pouco no estádio",
-                        description: "Acompanho quando posso, não sou fã de ir ao estádio.",
-                        value: "occasional",
-                        effects: {
-                            frequenciaEstadio: 2,
-                            interesseExperiencias: 1
-                        }
-                    }
-                ]
-            },
-            {
-                key: "familyPlan",
-                title: "Você tem interesse em incluir sua familía no plano?",
-                options: [
-                    {
-                        label: "Sim, levo minha familía e amigos comigo",
-                        description: "Considero a inclusão da minha familía e amigos nos beneficios.",
-                        value: true,
-                        effects: {
-                            levaAcompanhantes: 8,
-                            importanciaPreco: 4
-                        }
-                    },
-                    {
-                        label: "Não, vai ser só para mim",
-                        description: "O plano será apenas para mim.",
-                        value: false,
-                        effects: {
-                            levaAcompanhantes: 0
-                        }
-                    }
-                ]
-            },
-            {
-                key: "digitalExperience",
-                title: "Acompanhar o conteúdo do clube em primeira mão é importante?",
-                options: [
-                    {
-                        label: "Muito importante",
-                        description: "Valorizo o app, quero acesso a informações com antecedência.",
-                        value: true,
-                        effects: {
-                            interesseExperiencias: 8,
-                            consumoProdutosOficiais: 3
-                        }
-                    },
-                    {
-                        label: "Prefiro experiencias presenciais",
-                        description: "Prefiro apenas participar de jogos e eventos presenciais.",
-                        value: false,
-                        effects: {
-                            interesseExperiencias: 2,
-                            frequenciaEstadio: 5
-                        }
-                    }
-                ]
-            },
-            {
-                key: "budget",
-                title: "Qual seu orçamento mensal para o plano de sócio?",
-                options: [
-                    {
-                        label: "Até R$ 40/mês ou menos",
-                        description: "Busco a opção mais acessível.",
-                        value: 40,
-                        effects: {
-                            importanciaPreco: 10
-                        }
-                    },
-                    {
-                        label: "Até R$ 200/mês ou menos",
-                        description: "Tenho flexibilidade para planos intermediários.",
-                        value: 200,
-                        effects: {
-                            importanciaPreco: 5
-                        }
-                    },
-                    {
-                        label: "Até R$ 400/mês ou mais",
-                        description: "Quero o melhor plano possível independente do preço.",
-                        value: 400,
-                        effects: {
-                            importanciaPreco: 1
-                        }
-                    }
-                ]
+                label: "Foco nos jogos mais decisivos",
+                description: "Prefiro guardar energia e orçamento para clássicos e fases finais.",
+                value: false,
+                effects: {
+                    importanciaPreco: 8,
+                    prioridadeIngressos: 2
+                }
             }
-        ];
-
+        ]
+    },
+    {
+        key: "buysTwoTickets",
+        title: "Quando vai ao estádio, você costuma levar acompanhantes?",
+        options: [
+            {
+                label: "Sim, quase sempre vou acompanhado",
+                description: "Preciso de facilidade para comprar dois ou mais ingressos juntos.",
+                value: true,
+                effects: {
+                    levaAcompanhantes: 10,
+                    interesseDescontos: 5
+                }
+            },
+            {
+                label: "Não, geralmente vou sozinho",
+                description: "Compro apenas o meu ingresso.",
+                value: false,
+                effects: {
+                    levaAcompanhantes: 0
+                }
+            }
+        ]
+    },
+    {
+        key: "needsPriority",
+        title: "Quando vai comprar ingressos para o jogo, como costuma agir?",
+        options: [
+            {
+                label: "Compro no primeiro minuto",
+                description: "Não gosto de correr riscos. Assim que abre, eu garanto o meu.",
+                value: true,
+                effects: {
+                    prioridadeIngressos: 10
+                }
+            },
+            {
+                label: "Compro com calma",
+                description: "Deixo para comprar depois, se ainda houver disponibilidade.",
+                value: false,
+                effects: {
+                    prioridadeIngressos: 0
+                }
+            }
+        ]
+    },
+    {
+        key: "wantsParticipation",
+        title: "Além dos jogos, o quanto você se interessa por experiências exclusivas?",
+        options: [
+            {
+                label: "Tenho muito interesse",
+                description: "Quero participar de sorteios, eventos do clube e receber ofertas especiais.",
+                value: true,
+                effects: {
+                    interesseExperiencias: 10
+                }
+            },
+            {
+                label: "Não faço questão",
+                description: "Meu foco é apenas assistir aos jogos, sem extras.",
+                value: false,
+                effects: {
+                    interesseExperiencias: 0
+                }
+            }
+        ]
+    },
+    {
+        key: "wantsStoreDiscount",
+        title: "Sempre que sai um novo manto ou produto oficial, o que você faz?",
+        options: [
+            {
+                label: "Sempre tento comprar",
+                description: "Gosto de colecionar ou renovar minhas camisas e busco descontos para isso.",
+                value: true,
+                effects: {
+                    interesseDescontos: 8,
+                    consumoProdutosOficiais: 9
+                }
+            },
+            {
+                label: "Raramente compro",
+                description: "Não costumo consumir muitos produtos na loja oficial.",
+                value: false,
+                effects: {
+                    interesseDescontos: 0,
+                    consumoProdutosOficiais: 0
+                }
+            }
+        ]
+    },
+    {
+        key: "gameFrequency",
+        title: "Como você costuma viver a paixão nos dias de jogo?",
+        options: [
+            {
+                label: "Sempre na arquibancada",
+                description: "O Mineirão é minha segunda casa.",
+                value: "always",
+                effects: {
+                    frequenciaEstadio: 10,
+                    interesseExperiencias: 6
+                }
+            },
+            {
+                label: "Fico divido entre estádio e TV",
+                description: "Vou em boa parte dos jogos, mas assisto a outros de casa ou do bar.",
+                value: "frequent",
+                effects: {
+                    frequenciaEstadio: 6,
+                    interesseExperiencias: 4
+                }
+            },
+            {
+                label: "Acompanho mais de casa mesmo",
+                description: "Vou pouco ao estádio, prefiro acompanhar pelas transmissões.",
+                value: "occasional",
+                effects: {
+                    frequenciaEstadio: 2,
+                    interesseExperiencias: 1
+                }
+            }
+        ]
+    },
+    {
+        key: "familyPlan",
+        title: "Você planeja incluir dependentes (filhos ou cônjuge) no seu plano?",
+        options: [
+            {
+                label: "Sim, quero um plano familiar",
+                description: "Preciso de benefícios estendidos para a minha família.",
+                value: true,
+                effects: {
+                    levaAcompanhantes: 8,
+                    importanciaPreco: 4
+                }
+            },
+            {
+                label: "Não, o plano será individual",
+                description: "Os benefícios serão utilizados apenas por mim.",
+                value: false,
+                effects: {
+                    levaAcompanhantes: 0
+                }
+            }
+        ]
+    },
+    {
+        key: "digitalExperience",
+        title: "O quanto você consome os conteúdos digitais e de bastidores do clube?",
+        options: [
+            {
+                label: "Acompanho tudo diariamente",
+                description: "Valorizo o aplicativo oficial e quero acesso a informações em primeira mão.",
+                value: true,
+                effects: {
+                    interesseExperiencias: 8,
+                    consumoProdutosOficiais: 3
+                }
+            },
+            {
+                label: "Foco apenas no campo",
+                description: "Meu interesse principal são os 90 minutos de bola rolando.",
+                value: false,
+                effects: {
+                    interesseExperiencias: 2,
+                    frequenciaEstadio: 5
+                }
+            }
+        ]
+    },
+    {
+        key: "budget",
+        title: "Qual é o seu orçamento mensal confortável para investir no Sócio?",
+        options: [
+            {
+                label: "Até R$ 40/mês",
+                description: "Busco a opção com o melhor custo-benefício inicial.",
+                value: 40,
+                effects: {
+                    importanciaPreco: 10
+                }
+            },
+            {
+                label: "Até R$ 200/mês",
+                description: "Tenho flexibilidade para investir em planos intermediários com mais vantagens.",
+                value: 200,
+                effects: {
+                    importanciaPreco: 5
+                }
+            },
+            {
+                label: "Sem limite definido",
+                description: "Quero o plano mais completo e com a melhor experiência, independente do valor.",
+                value: 400,
+                effects: {
+                    importanciaPreco: 1
+                }
+            }
+        ]
+    }
+];
         let heroSection = document.querySelector(".hero");
         const startButton = document.getElementById("startButton");
 
