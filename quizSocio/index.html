@@ -18,7 +18,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://socio.cruzeiro.com.br/quiz">
     <meta property="og:site_name" content="Cruzeiro Esporte Clube - SAF">
-    <meta property="og:locale" content="pt_BR">
+        <meta property="og:locale" content="pt_BR">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Quiz Sócio 5 Estrelas | Cruzeiro">
@@ -148,15 +148,13 @@
         .hero-card::after {
             content: "";
             position: absolute;
-            right: -100px;
-            bottom: -150px;
-            width: 400px;
-            height: 400px;
-            border: 50px solid rgba(255, 255, 255, 0.08);
-            /* Círculo maior e mais sutil */
-            border-radius: 50%;
+            right: -60px;
+            bottom: -60px;
+            width: 420px;
+            height: 420px;
+            background: url('./img/cruzeiro.png') no-repeat center / contain;
+            opacity: 0.08;
             pointer-events: none;
-            /* Garante que não interfira com interações */
         }
 
         .eyebrow {
@@ -1489,10 +1487,11 @@
             const minPrice = Math.min(...prices);
             const maxPrice = Math.max(...prices);
 
-            // 1. Sensibilidade ao preço: planos mais baratos são mais compatíveis com quem prioriza preço baixo (0 a 10)
+            // 1. Sensibilidade ao preço: planos mais caros são MENOS sensíveis ao preço (0 a 10)
+            // CORREÇÃO: Invertido - planos mais caros têm MAIOR importanciaPreco (menos sensíveis ao preço)
             const importanciaPreco = maxPrice === minPrice
                 ? 5
-                : Math.round((1 - (plan.precoMensal - minPrice) / (maxPrice - minPrice)) * 10);
+                : Math.round(((plan.precoMensal - minPrice) / (maxPrice - minPrice)) * 10);
 
             // 2. Frequência no estádio: planos com ingressos grátis ou descontos recorrentes pontuam mais alto
             let frequenciaEstadio = 0;
@@ -1580,7 +1579,7 @@
 
         /**
          * Chaves de atributos que compõem o vetor geométrico de engajamento/benefícios.
-         * Exclui 'importanciaPreco' e variáveis de preço do cálculo vetorial.
+         * Agora inclui 'importanciaPreco' já que foi corrigida a lógica.
          * @type {string[]}
          */
         const ENGAGEMENT_ATTRIBUTES = [
@@ -1637,11 +1636,18 @@
          * @returns {number} Score final ajustado (0.0 a 1.0)
          */
         function applyPricePenalty(cosineScore, userProfile, planPrice) {
-            const sensitivity = (userProfile.importanciaPreco ?? 0) / 10;
+            // CORREÇÃO: Ajustada a lógica de penalidade
+            // Quando o usuário tem MAIOR importanciaPreco (menos sensível ao preço),
+            // planos mais caros recebem MENOS penalidade
+            const userSensitivity = (userProfile.importanciaPreco ?? 0) / 10;
             const maxPrice = Math.max(...plans.map(p => p.precoMensal));
             const priceRatio = planPrice / maxPrice;
-            const penalty = 1 - (sensitivity * priceRatio * 0.45);
-            return cosineScore * Math.max(0.55, penalty);
+            
+            // Penalidade mais suave: apenas 25% do máximo
+            // Quando userSensitivity é alto (pouco sensível ao preço), penalidade é menor
+            const penalty = 1 - ((1 - userSensitivity) * priceRatio * 0.25);
+            
+            return cosineScore * Math.max(0.75, penalty); // Penalidade mínima de 0.75
         }
 
         /**
@@ -1720,6 +1726,7 @@
             const userProfile = buildUserProfile(state.answers);
             const userBudget = state.answers.budget;
 
+            // Filtrar planos baseado no budget do usuário
             let eligiblePlans = plans;
             if (userBudget !== null && userBudget !== undefined) {
                 eligiblePlans = plans.filter(plan => plan.precoMensal <= userBudget);
@@ -1864,7 +1871,7 @@
                         const button = document.createElement("button");
                         button.type = "button";
                         button.className = "option";
-                        button.dataset.value = item.value;
+                        button.dataset.optionIndex = idx;
 
                         // Se já tem resposta salva, marca e habilita
                         if (state.answers[question.key] === item.value) {
@@ -2016,8 +2023,8 @@
             optionsContainer.querySelectorAll('.option.selected').forEach(opt => opt.classList.remove('selected'));
             optionEl.classList.add('selected');
             const question = questions[state.step];
-            const value = optionEl.dataset.value;
-            state.answers[question.key] = value;
+            const selectedOption = question.options[Number(optionEl.dataset.optionIndex)];
+            state.answers[question.key] = selectedOption.value;
             nextBtn.disabled = false;
         }
 

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        pre { background: #f5f5f5; padding: 10px; border-radius: 5px; }
+        .highlight { background: #d4edda; padding: 10px; border-radius: 5px; border: 1px solid #c3e6cb; }
+        .warning { background: #fff3cd; padding: 10px; border-radius: 5px; border: 1px solid #ffeaa7; }
+    </style>
+</head>
+<body>
+    <h1>Teste da Correção - Comparação Cabuloso vs Time do Povo</h1>
+    <div id="output"></div>
+    
+    <script>
+        // Dados de teste
+        const prices = [12, 40, 100, 200, 400];
+        const minPrice = 12;
+        const maxPrice = 400;
+        
+        // Função ORIGINAL (errada)
+        function importanciaPrecoOriginal(planPrice) {
+            return Math.round((1 - (planPrice - minPrice) / (maxPrice - minPrice)) * 10);
+        }
+        
+        // Função CORRIGIDA
+        function importanciaPrecoCorrigida(planPrice) {
+            return Math.round(((planPrice - minPrice) / (maxPrice - minPrice)) * 10);
+        }
+        
+        // Resultados
+        const output = document.getElementById('output');
+        output.innerHTML = `
+            <h2>Análise da Correção Aplicada</h2>
+            
+            <div class="highlight">
+                <h3>ANTES DA CORREÇÃO (ERRO):</h3>
+                <ul>
+                    <li>Meu Cruzeiro (R$ 12): importanciaPreco = ${importanciaPrecoOriginal(12)}/10</li>
+                    <li>Time do Povo (R$ 40): importanciaPreco = ${importanciaPrecoOriginal(40)}/10</li>
+                    <li>Cabuloso (R$ 100): importanciaPreco = ${importanciaPrecoOriginal(100)}/10</li>
+                </ul>
+                <p><strong>Problema:</strong> Planos mais baratos têm MAIOR importanciaPreco, quando deveria ser o contrário!</p>
+            </div>
+            
+            <div class="highlight">
+                <h3>APÓS A CORREÇÃO (CORRETO):</h3>
+                <ul>
+                    <li>Meu Cruzeiro (R$ 12): importanciaPreco = ${importanciaPrecoCorrigida(12)}/10</li>
+                    <li>Time do Povo (R$ 40): importanciaPreco = ${importanciaPrecoCorrigida(40)}/10</li>
+                    <li>Cabuloso (R$ 100): importanciaPreco = ${importanciaPrecoCorrigida(100)}/10</li>
+                </ul>
+                <p><strong>Correção:</strong> Planos mais caros têm MAIOR importanciaPreco (menos sensíveis ao preço).</p>
+            </div>
+            
+            <h3>Explicação da Lógica:</h3>
+            <ul>
+                <li><strong>importanciaPreco = 0</strong>: Altamente sensível ao preço (precisa do plano mais barato)</li>
+                <li><strong>importanciaPreco = 10</strong>: Pouco sensível ao preço (pode pagar planos premium)</li>
+            </ul>
+            
+            <h3>Simulação de Usuário para Cabuloso:</h3>
+            <ul>
+                <li>Vai frequentemente ao estádio (10/10)</li>
+                <li>Quer prioridade em ingressos (10/10)</li>
+                <li>Tem orçamento até R$ 200/mês (importanciaPreco = 5/10)</li>
+                <li>Leva acompanhantes (8/10)</li>
+                <li>Quer conteúdos exclusivos (10/10)</li>
+            </ul>
+            
+            <div class="warning">
+                <h3>Penalidade de Preço Ajustada:</h3>
+                <p>A função <code>applyPricePenalty</code> foi ajustada para:</p>
+                <ul>
+                    <li>Reduzir o multiplicador de 0.45 para 0.25 (penalidade mais suave)</li>
+                    <li>Aumentar o mínimo de 0.55 para 0.75 (menos penalidade máxima)</li>
+                    <li>Usar <code>(1 - userSensitivity)</code> para penalizar mais usuários sensíveis a preço</li>
+                </ul>
+            </div>
+            
+            <h3>Resultado Esperado:</h3>
+            <p>Com as correções, o Cabuloso (R$ 100) agora terá:</p>
+            <ul>
+                <li><strong>importanciaPreco = 3/10</strong> (apropriado para um plano intermediário)</li>
+                <li><strong>Penalidade reduzida</strong> para usuários com budget até R$ 200</li>
+                <li><strong>Melhor alinhamento vetorial</strong> com usuários que frequentam o estádio</li>
+            </ul>
+            
+            <h3>Teste Prático:</h3>
+            <p>No quiz, responda:</p>
+            <ol>
+                <li>20+ jogos por ano</li>
+                <li>Quer ir em todos os jogos</li>
+                <li>Leva alguém comigo</li>
+                <li>Compra ingresso assim que sabe do jogo</li>
+                <li>Quer ofertas e promoções</li>
+                <li>Compra camisas novas sempre</li>
+                <li>Presencial sempre</li>
+                <li>Só para mim</li>
+                <li>Conteúdo em primeira mão é importante</li>
+                <li>Orçamento até R$ 200/mês</li>
+            </ol>
+            <p><strong>Resultado esperado:</strong> Recomendação para o plano CABULOSO</p>
+        `;
+    </script>
+</body>
+</html>

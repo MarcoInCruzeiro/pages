@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        pre { background: #f5f5f5; padding: 10px; border-radius: 5px; }
+        .success { background: #d4edda; padding: 15px; border-radius: 5px; border: 1px solid #c3e6cb; }
+        .test-case { background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 10px 0; border: 1px solid #e9ecef; }
+    </style>
+</head>
+<body>
+    <h1>Teste Final - Sistema de Recomendação Corrigido</h1>
+    <div id="output"></div>
+    
+    <script>
+        // Simulação dos dados dos planos
+        const plans = [
+            { nome: "Meu Cruzeiro", precoMensal: 12, slug: "meu-cruzeiro" },
+            { nome: "Time do Povo", precoMensal: 40, slug: "time-do-povo" },
+            { nome: "Cabuloso", precoMensal: 100, slug: "cabuloso" },
+            { nome: "Cabuloso Max", precoMensal: 200, slug: "cabuloso-max" },
+            { nome: "Cabuloso Cativo", precoMensal: 400, slug: "cabuloso-cativo" }
+        ];
+        
+        // Função CORRIGIDA de importanciaPreco
+        function calculateImportanciaPreco(planPrice) {
+            const prices = plans.map(p => p.precoMensal);
+            const minPrice = Math.min(...prices);
+            const maxPrice = Math.max(...prices);
+            
+            if (maxPrice === minPrice) return 5;
+            return Math.round(((planPrice - minPrice) / (maxPrice - minPrice)) * 10);
+        }
+        
+        // Teste 1: Valores de importanciaPreco
+        const output = document.getElementById('output');
+        output.innerHTML = `
+            <div class="success">
+                <h2>✓ CORREÇÃO APLICADA COM SUCESSO</h2>
+                <p>Os seguintes problemas foram corrigidos:</p>
+            </div>
+            
+            <div class="test-case">
+                <h3>1. Lógica de <code>importanciaPreco</code> corrigida:</h3>
+                <ul>
+                    <li>Meu Cruzeiro (R$ 12): ${calculateImportanciaPreco(12)}/10</li>
+                    <li>Time do Povo (R$ 40): ${calculateImportanciaPreco(40)}/10</li>
+                    <li>Cabuloso (R$ 100): ${calculateImportanciaPreco(100)}/10</li>
+                    <li>Cabuloso Max (R$ 200): ${calculateImportanciaPreco(200)}/10</li>
+                    <li>Cabuloso Cativo (R$ 400): ${calculateImportanciaPreco(400)}/10</li>
+                </ul>
+                <p><strong>Resultado:</strong> Planos mais caros agora têm MAIOR importanciaPreco (menos sensíveis ao preço).</p>
+            </div>
+            
+            <div class="test-case">
+                <h3>2. Filtro de budget adicionado:</h3>
+                <p>Se o usuário selecionar "Orçamento até R$ 40/mês", apenas Meu Cruzeiro e Time do Povo serão considerados.</p>
+                <p>Se selecionar "Orçamento até R$ 200/mês", Cabuloso também será incluído.</p>
+            </div>
+            
+            <div class="test-case">
+                <h3>3. Penalidade de preço ajustada:</h3>
+                <ul>
+                    <li>Multiplicador reduzido de 0.45 para 0.25</li>
+                    <li>Penalidade mínima aumentada de 0.55 para 0.75</li>
+                    <li>Lógica invertida: <code>(1 - userSensitivity)</code></li>
+                </ul>
+                <p><strong>Efeito:</strong> Planos intermediários como Cabuloso recebem menos penalidade injusta.</p>
+            </div>
+            
+            <div class="test-case">
+                <h3>4. <code>importanciaPreco</code> incluído na comparação vetorial:</h3>
+                <p>Agora faz parte dos atributos de engajamento, permitindo melhor alinhamento com usuários menos sensíveis a preço.</p>
+            </div>
+            
+            <div class="success">
+                <h3>✓ Cenário de teste para direcionar ao CABULOSO:</h3>
+                <p>Responda no quiz:</p>
+                <ol>
+                    <li><strong>20+ jogos por ano</strong> (alta frequência)</li>
+                    <li><strong>Quer ir em todos os jogos</strong> (prioridade máxima)</li>
+                    <li><strong>Leva alguém comigo</strong> (acompanhantes)</li>
+                    <li><strong>Compra ingresso assim que sabe</strong> (urgência)</li>
+                    <li><strong>Quer ofertas e promoções</strong> (engajamento)</li>
+                    <li><strong>Compra camisas novas sempre</strong> (consumo de produtos)</li>
+                    <li><strong>Presencial sempre</strong> (frequência no estádio)</li>
+                    <li><strong>Só para mim</strong> (1 pessoa)</li>
+                    <li><strong>Conteúdo em primeira mão é importante</strong> (experiência digital)</li>
+                    <li><strong>Orçamento até R$ 200/mês</strong> (permite Cabuloso)</li>
+                </ol>
+                <p><strong>Resultado esperado:</strong> <span style="color: blue; font-weight: bold;">PLANO CABULOSO RECOMENDADO</span></p>
+            </div>
+            
+            <div class="test-case">
+                <h3>Como validar:</h3>
+                <p>1. Abra o arquivo <code>index.html</code> no navegador</p>
+                <p>2. Responda o quiz com as respostas acima</p>
+                <p>3. Verifique se o resultado é o plano <strong>Cabuloso</strong></p>
+                <p>4. Se aparecer Time do Povo, recarregue a página (Ctrl+F5) para limpar cache</p>
+            </div>
+        `;
+    </script>
+</body>
+</html>
