@@ -27,6 +27,22 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Analytics 4 (mesma propriedade do socio.cruzeiro.com.br) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EF75QCTCTV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('set', 'allow_google_signals', false);
+        gtag('config', 'G-EF75QCTCTV');
+    </script>
+
+    <!-- Vercel Web Analytics (visitas) -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
     <style>
         /*
  * Organized CSS Sections:
@@ -2646,6 +2662,18 @@
         ];
         let heroSection = document.querySelector(".hero");
         const startButton = document.getElementById("startButton");
+        const isPreview = location.search.includes('preview') || location.hash === '#preview';
+
+        // Envia evento ao GA4; o modo preview usa respostas fictícias e fica de fora
+        function trackEvent(name, params = {}) {
+            if (isPreview || typeof gtag !== 'function') return;
+            gtag('event', name, params);
+        }
+
+        function getAnswerLabel(question, value) {
+            if (question.type === 'range') return `${value} ${question.suffix}`;
+            return question.options.find(o => o.value === value)?.label ?? String(value);
+        }
 
         function formatMoney(value) {
             return value.toLocaleString("pt-BR", {
@@ -3201,6 +3229,9 @@
                 a.rel = 'noopener noreferrer';
                 a.className = 'plan-cta';
                 a.textContent = getCTAText(plan);
+                a.addEventListener('click', () => {
+                    trackEvent('quiz_subscribe_click', { plan: plan.nome, cta_location: 'comparativo' });
+                });
                 td.appendChild(a);
                 footerRow.appendChild(td);
             });
@@ -3215,6 +3246,16 @@
             const winner = recommendations[0];
             if (!resultsSection) return;
 
+            const answerParams = {};
+            questions.forEach(q => {
+                answerParams[`answer_${q.key}`] = String(state.answers[q.key]);
+            });
+            trackEvent('quiz_complete', {
+                recommended_plan: winner.plan.nome,
+                compatibility: winner.compatibilityPercent,
+                ...answerParams
+            });
+
             const resultLogo = resultsSection.querySelector("#resultLogo");
             const resultPrice = resultsSection.querySelector("#resultPrice");
             const resultSummary = resultsSection.querySelector("#resultSummary");
@@ -3228,6 +3269,7 @@
             }
             if (subscribeButton && winner?.plan?.link) {
                 subscribeButton.dataset.subscribeUrl = winner.plan.link;
+                subscribeButton.dataset.plan = winner.plan.nome;
                 subscribeButton.setAttribute("aria-label", `Assinar o plano ${winner.plan.nome}`);
             }
             if (resultPrice && winner?.plan?.precoMensal) {
@@ -3273,9 +3315,13 @@
                             </ul>
                         </div>
                         <div class="plan-score">${compatibilityPercent}% de compatibilidade${index === 0 ? ' — a maior entre todos' : ''}</div>
-                        <a href="${plan.link}" target="_blank" rel="noopener noreferrer" class="plan-cta">${getCTAText(plan)}</a>
+                        <a href="${plan.link}" target="_blank" rel="noopener noreferrer" class="plan-cta" data-plan="${plan.nome}">${getCTAText(plan)}</a>
                     `;
                     plansList.appendChild(card);
+                });
+                plansList.addEventListener('click', (e) => {
+                    const cta = e.target.closest('.plan-cta');
+                    if (cta) trackEvent('quiz_subscribe_click', { plan: cta.dataset.plan, cta_location: 'lista' });
                 });
             }
         }
@@ -3505,6 +3551,16 @@
         }
 
         function onNextClick(nextBtn) {
+            // Registra a resposta só ao avançar, para não contar cada troca de opção ou arraste do slider
+            const question = questions[state.step];
+            const answer = state.answers[question.key];
+            trackEvent('quiz_answer', {
+                quiz_step: state.step + 1,
+                quiz_question: question.key,
+                quiz_answer: String(answer),
+                quiz_answer_label: getAnswerLabel(question, answer)
+            });
+
             if (state.step === questions.length - 1) {
                 const quizSection = document.querySelector('.quiz-card');
                 transitionSection(quizSection, createResultsSection, (resultsSection) => {
@@ -3548,6 +3604,7 @@
                 heroSection = newHeroSection;
                 const newStartButton = heroSection.querySelector('#startButton');
                 newStartButton.addEventListener('click', () => {
+                    trackEvent('quiz_start');
                     transitionSection(heroSection, createQuizSection, (quizSection) => {
                         bindSectionEvents(quizSection, 'quiz');
                         renderQuestion();
@@ -3560,6 +3617,7 @@
         function onSubscribeClick() {
             const button = document.querySelector('#subscribeButton');
             const url = button?.dataset.subscribeUrl || 'https://socio5estrelas.com.br';
+            trackEvent('quiz_subscribe_click', { plan: button?.dataset.plan, cta_location: 'resultado' });
             window.open(url, '_blank', 'noopener,noreferrer');
         }
 
@@ -3628,6 +3686,7 @@
 
 
         startButton.addEventListener("click", () => {
+            trackEvent('quiz_start');
             transitionSection(heroSection, createQuizSection, (quizSection) => {
                 bindSectionEvents(quizSection, 'quiz');
                 renderQuestion();
@@ -3635,7 +3694,7 @@
         });
 
         // preview mode: ?preview or #preview auto-shows results with preset answers
-        if (location.search.includes('preview') || location.hash === '#preview') {
+        if (isPreview) {
             state.answers = {
                 gamesPerYear: 15,
                 wantsGuaranteedTicket: true,
