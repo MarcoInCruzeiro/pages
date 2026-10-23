@@ -18,7 +18,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://socio.cruzeiro.com.br/quiz">
     <meta property="og:site_name" content="Cruzeiro Esporte Clube - SAF">
-        <meta property="og:locale" content="pt_BR">
+    <meta property="og:locale" content="pt_BR">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Quiz Sócio 5 Estrelas | Cruzeiro">
@@ -28,7 +28,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
-        /* 
+        /*
  * Organized CSS Sections:
  *  1. CSS Variables
  *  2. Base Styles
@@ -46,10 +46,10 @@
             --azul-vivo: #007bff;
             --azul-claro: #e0f2ff;
             --branco: #ffffff;
-            --grafite: #2c3e50;
+            --grafite: #0a1e3d;
             --cinza: #7f8c8d;
             --linha: rgba(255, 255, 255, 0.1);
-            --sombra: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --sombra: 0 10px 30px rgba(2, 26, 62, 0.15);
             --raio: 16px;
             --estrelas: radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.3), transparent),
                 radial-gradient(1px 1px at 30% 65%, rgba(255, 255, 255, 0.2), transparent),
@@ -64,7 +64,13 @@
 
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
-        * {
+        html {
+            overflow-x: hidden;
+        }
+
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
         }
 
@@ -72,16 +78,35 @@
             margin: 0;
             color: var(--grafite);
             font-family: "Outfit", sans-serif;
-            background:
-                radial-gradient(ellipse at 15% 50%, rgba(0, 64, 128, 0.3), transparent 50%),
-                radial-gradient(ellipse at 80% 25%, rgba(0, 123, 255, 0.12), transparent 40%),
-                radial-gradient(ellipse at 50% 85%, rgba(0, 30, 80, 0.5), transparent 50%),
-                radial-gradient(ellipse at 50% 0%, rgba(0, 64, 128, 0.2), transparent 60%),
-                var(--estrelas),
-                linear-gradient(175deg, #000b22 0%, #021a3e 25%, #002a5e 50%, #001830 80%, #000d29 100%);
-            background-size: auto, auto, auto, auto, 300px 300px, auto;
-            background-attachment: fixed;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            scrollbar-gutter: stable;
+        }
+
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(175deg,
+                    rgba(0, 11, 34, 0.9),
+                    rgba(2, 26, 62, 0.9),
+                    rgba(0, 42, 94, 0.8),
+                    rgba(0, 24, 48, 0.9),
+                    rgba(0, 13, 41, 0.9));
+            pointer-events: none;
+            z-index: 0;
         }
 
         button,
@@ -95,7 +120,11 @@
             grid-template-columns: 1fr;
             width: min(1200px, calc(100% - 40px));
             margin: 0 auto;
-            padding: clamp(24px, 4vh, 48px) 0;
+            padding: 24px 0;
+            position: relative;
+            z-index: 1;
+            min-height: 450px;
+            flex: 1;
         }
 
         .page>section {
@@ -109,6 +138,7 @@
             grid-template-rows: 1fr;
             gap: 32px;
             align-items: center;
+            justify-items: center;
         }
 
         .hero-card,
@@ -123,15 +153,18 @@
             /* Blur mais suave */
             background-color: rgba(255, 255, 255, 0.05);
             /* Um toque de cor para cards principais */
+
         }
 
         .hero-card {
             grid-column: 1;
             grid-row: 1;
             position: relative;
+            isolation: isolate;
             overflow: hidden;
-            min-height: clamp(420px, 50vh, 560px);
-            padding: clamp(24px, 5vw, 48px);
+            min-height: 560px;
+            max-width: 90%;
+            padding: 48px;
             color: var(--branco);
             background:
                 linear-gradient(140deg, rgba(0, 30, 80, 0.95), rgba(0, 60, 140, 0.8)),
@@ -151,23 +184,29 @@
             right: -60px;
             bottom: -60px;
             width: 420px;
-            height: 420px;
-            background: url('./img/cruzeiro.png') no-repeat center / contain;
+            height: 50%;
+            background: url('https://imagens.cruzeiro.com.br/Escudos/Cruzeiro.png') no-repeat center / contain;
             opacity: 0.08;
             pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-card>* {
+            position: relative;
+            z-index: 1;
         }
 
         .eyebrow {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin: 0 0 clamp(16px, 2.5vh, 20px);
+            margin: 0 0 20px;
             padding: 8px 12px;
             color: var(--azul-claro);
             border: 1px solid var(--linha);
             border-radius: 999px;
             background: rgba(255, 255, 255, 0.06);
-            font-size: clamp(0.85rem, 1.5vw, 0.9rem);
+            font-size: 0.9rem;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             font-weight: 500;
@@ -176,27 +215,23 @@
         h1 {
             position: relative;
             z-index: 1;
-            max-width: 780px;
-            /* Largura um pouco maior */
+            max-width: 100%;
             margin: 0;
             font-family: "Outfit", sans-serif;
-            font-size: clamp(3.2rem, 7.5vw, 7rem);
-            /* Fonte ligeiramente maior */
+            font-size: 5rem;
             line-height: 0.95;
-            /* Line height ajustado */
             letter-spacing: 0;
-            /* Remove letter spacing para h1 */
             text-transform: uppercase;
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .hero-copy {
             position: relative;
             z-index: 1;
             max-width: 680px;
-            margin: clamp(20px, 3vh, 28px) 0 0;
+            margin: 28px 0 0;
             color: rgba(255, 255, 255, 0.75);
-            font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+            font-size: 1.25rem;
             line-height: 1.7;
         }
 
@@ -206,11 +241,11 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            margin-top: clamp(24px, 4vh, 40px);
+            margin-top: 40px;
         }
 
         .stat {
-            padding: clamp(14px, 2.5vw, 18px);
+            padding: 18px;
             border: 1px solid var(--linha);
             border-radius: 18px;
             background: rgba(255, 255, 255, 0.07);
@@ -218,21 +253,23 @@
 
         .stat strong {
             display: block;
-            font-size: clamp(1.4rem, 2.5vw, 1.6rem);
+            font-size: 1.6rem;
             font-weight: 600;
             color: var(--azul-claro);
         }
 
         .stat span {
             color: rgba(255, 255, 255, 0.6);
-            font-size: clamp(0.85rem, 1.5vw, 0.9rem);
+            font-size: 0.9rem;
         }
 
         .quiz-card {
-            padding: clamp(24px, 4vw, 32px);
+            padding: 32px;
             background: rgba(255, 255, 255, 0.98);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(2, 26, 62, 0.08);
             z-index: 1;
+            max-height: fit-content;
+            overflow-y: auto;
         }
 
         .progress {
@@ -257,16 +294,16 @@
         .step-info {
             display: flex;
             justify-content: space-between;
-            gap: clamp(12px, 2vw, 16px);
-            margin: clamp(16px, 2.5vh, 20px) 0;
+            gap: 16px;
+            margin: 20px 0;
             color: var(--cinza);
-            font-size: clamp(0.9rem, 1.5vw, 0.95rem);
+            font-size: 0.95rem;
             font-weight: 500;
         }
 
         .question {
-            margin: 0 0 clamp(20px, 3vh, 28px);
-            font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+            margin: 0 0 28px;
+            font-size: 2.4rem;
             line-height: 1.2;
             letter-spacing: -0.03em;
             color: var(--grafite);
@@ -275,12 +312,12 @@
 
         .options {
             display: grid;
-            gap: clamp(10px, 2vw, 14px);
+            gap: 14px;
         }
 
         .option {
             width: 100%;
-            padding: clamp(14px, 2.5vw, 18px) clamp(16px, 3vw, 20px);
+            padding: 18px 20px;
             text-align: left;
             color: var(--grafite);
             border: 1px solid #dbe6f5;
@@ -321,8 +358,8 @@
 
         .range-wrap {
             display: grid;
-            gap: clamp(12px, 2vw, 16px);
-            padding: clamp(16px, 3vw, 20px);
+            gap: 16px;
+            padding: 20px;
             border: 1px solid #dbe6f5;
             border-radius: 18px;
             background: #fff;
@@ -338,7 +375,7 @@
 
         .range-value strong {
             color: var(--azul-cruzeiro);
-            font-size: 2.4rem;
+            font-size: 1.4rem;
             /* Fonte ligeiramente maior */
             font-weight: 700;
         }
@@ -358,9 +395,8 @@
             border-radius: 50%;
             background: var(--azul-vivo);
             cursor: grab;
-            margin-top: -8px;
             /* Centraliza o thumb */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 5px rgba(2, 26, 62, 0.25);
         }
 
         input[type="range"]::-moz-range-thumb {
@@ -369,14 +405,14 @@
             border-radius: 50%;
             background: var(--azul-vivo);
             cursor: grab;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 5px rgba(2, 26, 62, 0.25);
         }
 
         .actions {
             display: flex;
             justify-content: space-between;
-            gap: clamp(12px, 2vw, 16px);
-            margin-top: clamp(20px, 3vh, 28px);
+            gap: 16px;
+            margin-top: 28px;
         }
 
         .btn {
@@ -397,7 +433,7 @@
         .btn:hover {
             transform: translateY(-2px);
             /* Efeito de hover mais pronunciado */
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 15px rgba(2, 26, 62, 0.15);
         }
 
         .btn:disabled {
@@ -408,56 +444,163 @@
             box-shadow: none;
         }
 
-        .btn-primary {
-            color: #fff;
-            background: linear-gradient(90deg, var(--azul-profundo), var(--azul-vivo));
-            /* Gradiente mais forte */
-            font-weight: 600;
+        .btn-primary,
+        .plan-cta {
+            color: var(--azul-profundo);
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.35);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            max-width: 200px;
+        }
+
+        .btn-primary::after,
+        .plan-cta::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .btn-primary:hover,
+        .plan-cta:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn-primary:hover::after,
+        .plan-cta:hover::after {
+            transform: translateX(100%);
+        }
+
+        .btn-primary:active,
+        .plan-cta:active {
+            transform: translateY(-1px) scale(0.98);
         }
 
         .btn-secondary {
-            color: var(--azul-cruzeiro);
-            background: #eff7ff;
-            /* Fundo mais suave */
-            border: 1px solid var(--azul-claro);
+            color: #fff;
+            background: linear-gradient(90deg, var(--azul-vivo), var(--azul-cruzeiro));
+            border: 0;
+            font-weight: 600;
         }
 
         .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(2, 26, 62, 0.15);
+            background: linear-gradient(90deg, var(--azul-cruzeiro), var(--azul-profundo));
+        }
+
+        .btn-compare {
+            color: var(--branco);
+            background: transparent;
+            border: 3px solid rgb(255, 217, 0);
+            font-weight: 900;
+            font-size: 1rem;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-compare:hover {
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+        }
+
+        .actions-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        #backButton {
+            color: var(--azul-cruzeiro);
+            background: #eff7ff;
+            border: 1px solid var(--azul-claro);
+        }
+
+        #backButton:hover {
             background: var(--azul-claro);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(2, 26, 62, 0.15);
         }
 
         .results {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: clamp(20px, 3vw, 28px);
-            margin-top: clamp(24px, 3vh, 32px);
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            margin-top: 32px;
+            width: 100%;
+            max-width: 100%;
         }
 
         .result-card,
         .plans-card {
-            padding: clamp(24px, 4vw, 32px);
+            width: 100%;
+            max-width: 100%;
             color: var(--branco);
-            background: linear-gradient(160deg, rgba(0, 20, 70, 0.95), rgba(0, 40, 100, 0.85));
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: linear-gradient(145deg, rgba(2, 26, 62, 0.98), rgba(0, 40, 100, 0.92), rgba(2, 26, 62, 0.98));
+            border: 1px solid rgba(255, 215, 0, 0.18);
+            box-shadow:
+                0 0 0 1px rgba(255, 215, 0, 0.08) inset,
+                0 20px 40px rgba(2, 26, 62, 0.4),
+                0 0 60px rgba(0, 64, 128, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card,
+        .plans-card {
+            padding: 32px;
+        }
+
+        .result-card::before,
+        .plans-card::before,
+        .result-plan::before,
+        .plan::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    var(--azul-vivo) 20%,
+                    #FFD700 50%,
+                    var(--azul-vivo) 80%,
+                    transparent);
+            opacity: 0.8;
         }
 
         .result-badge {
             display: inline-flex;
-            padding: clamp(6px, 1vw, 8px) clamp(10px, 2vw, 14px);
-            color: var(--azul-cruzeiro);
+            padding: 8px 14px;
+            color: var(--azul-profundo);
             border-radius: 999px;
-            background: var(--azul-claro);
-            font-size: clamp(0.8rem, 1.3vw, 0.85rem);
+            background: linear-gradient(135deg, #FFD700, #FFEB3B, #FFD700);
+            background-size: 200% 200%;
+            animation: goldShine 3s ease-in-out infinite;
+            font-size: 0.85rem;
             font-weight: 700;
             letter-spacing: 0.05em;
             text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
         }
 
         .result-card>p:not(.price) {
-            margin: clamp(12px, 2vh, 16px) 0;
+            margin: 16px 0;
             line-height: 1.6;
-            color: rgba(255, 255, 255, 0.85);
-            font-size: clamp(1.4rem, 1.5vw, 1rem);
+            color: rgb(255, 255, 255);
+            font-size: 1.1rem;
         }
 
         .result-plan {
@@ -465,49 +608,49 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: clamp(16px, 3vw, 20px);
-            margin: clamp(20px, 3vh, 28px) 0;
-        }
-
-        .result-plan h2 {
-            color: var(--branco);
-            margin: 0;
-            font-size: clamp(1.5rem, 3.2vw, 2.1rem);
-            /* Fonte ajustada */
-            line-height: 1.25;
-            letter-spacing: -0.03em;
-            font-weight: 600;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-        }
-
-        .result-plan img {
-            width: 100%;
-            height: clamp(84px, 14.4vw, 120px);
-            object-fit: contain;
+            gap: 16px;
+            margin: 20px 0;
+            padding: 10px;
             border-radius: 14px;
-            padding: 4px;
+            background: rgb(255, 255, 255);
+            width: 100%;
+            max-width: 100%;
         }
 
-        .plan img {
-            width: 100%;
-            height: clamp(72px, 14.4vw, 96px);
+        .result-plan #resultLogo {
+            max-width: 100%;
+            max-height: 140px;
+            height: auto;
+            width: auto;
             object-fit: contain;
-            border-radius: 12px;
-            margin-bottom: clamp(8px, 1.5vw, 10px);
-            padding: 4px;
+        }
+
+        .result-plan .result-price {
+            margin: 0;
+            color: #0055e5;
+            font-size: 1.6rem;
+            font-weight: 700;
         }
 
         .price {
             margin: 0;
-            color: var(--azul-vivo);
-            font-size: clamp(1.6rem, 3vw, 2rem);
+            color: #FFD700;
+            font-size: 2.4rem;
             font-weight: 800;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            text-shadow:
+                0 2px 4px rgba(2, 26, 62, 0.4),
+                0 0 20px rgba(0, 106, 255, 0.3);
+            background: linear-gradient(135deg, #002fff, #ffffff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: goldShine 3s ease-in-out infinite;
         }
 
         .reason-list,
         .plan ul {
-            margin: clamp(16px, 2.5vh, 20px) 0 0;
+            margin: 20px 0 0;
             padding: 0;
             list-style: none;
         }
@@ -515,39 +658,52 @@
         .reason-list li,
         .plan li {
             display: flex;
-            gap: clamp(8px, 1.5vw, 12px);
-            margin-top: clamp(8px, 1.5vh, 12px);
-            color: rgba(255, 255, 255, 0.8);
+            gap: 12px;
+            margin-top: 12px;
+            color: rgba(255, 255, 255, 0.88);
             line-height: 1.5;
-            font-size: clamp(1.3rem, 1.5vw, 0.95rem);
+            font-size: 1.1rem;
         }
 
-        .reason-list li::before,
-        .plan li::before {
+        .reason-list li::before {
             content: "";
             flex: 0 0 9px;
-            /* Tamanho ajustado */
             width: 9px;
             height: 9px;
             margin-top: 7px;
-            /* Centraliza verticalmente */
             border-radius: 50%;
-            background: var(--azul-vivo);
-            box-shadow: 0 0 5px var(--azul-vivo);
-            /* Pequeno brilho */
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            box-shadow: 0 0 8px #FFD700;
+        }
+
+        .plan .benefits-list li::before {
+            content: ">";
+            flex: 0 0 18px;
+            width: 18px;
+            height: 18px;
+            margin-top: 3px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #021A3E;
+            font-weight: 800;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 8px #FFD700;
         }
 
         .plans-title {
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
-            gap: clamp(12px, 2vw, 16px);
-            margin-bottom: clamp(14px, 2.5vh, 18px);
+            gap: 16px;
+            margin-bottom: 18px;
         }
 
         .plans-title h2 {
             margin: 0;
-            font-size: clamp(1.5rem, 3vw, 1.8rem);
+            font-size: 1.8rem;
             letter-spacing: -0.04em;
             color: var(--branco);
             font-weight: 600;
@@ -555,42 +711,272 @@
 
         .plans-title span {
             color: var(--cinza);
-            font-size: clamp(0.9rem, 1.5vw, 0.95rem);
+            font-size: 0.95rem;
         }
 
         .plans-list {
-            display: grid;
-            gap: clamp(10px, 2vw, 14px);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 100%;
+            max-width: 100%;
         }
 
         .plan {
             display: flex;
             flex-direction: column;
-            padding: clamp(14px, 2.5vw, 18px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            align-items: center;
+            text-align: center;
+            gap: 18px;
+            padding: 18px;
+            border: 1px solid rgba(255, 215, 0, 0.12);
             border-radius: 16px;
-            color: #fefeff;
-            background: rgb(0 42 167 / 70%);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .plan:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .plan h3 {
-            margin: 0 0 clamp(6px, 1vw, 8px);
-            font-size: clamp(1rem, 1.8vw, 1.1rem);
             color: var(--branco);
-            font-weight: 700;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(135deg, #FFD700, #FFEC8B, #FFD700);
+            background: linear-gradient(145deg, rgba(2, 26, 62, 0.95), rgba(0, 40, 100, 0.88), rgba(2, 26, 62, 0.95));
+            box-shadow:
+                0 0 0 1px rgba(255, 215, 0, 0.08) inset,
+                0 20px 40px rgba(2, 26, 62, 0.4),
+                0 0 60px rgba(0, 64, 128, 0.15);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+            min-width: 0;
+        }
+
+        .plan .result-plan {
+            width: 100%;
+            margin: 0;
+        }
+
+        .plan img {
+            max-width: 100%;
+            max-height: 96px;
+            height: auto;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .plan-content {
+            text-align: left;
+            width: 100%;
+        }
+
+        .plan .price {
+            margin: 0;
+            font-size: 1.7rem;
+            line-height: 1.15;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFD700, #FFF8DC, #FFD700);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-size: 200% 200%;
             animation: goldShine 3s ease-in-out infinite;
+        }
+
+        .plan:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 0 0 1px rgba(255, 215, 0, 0.08) inset,
+                0 24px 48px rgba(2, 26, 62, 0.4),
+                0 0 70px rgba(0, 64, 128, 0.18);
+        }
+
+        .comparison-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: var(--raio);
+            border: 1px solid rgba(255, 215, 0, 0.12);
+            background: linear-gradient(145deg, rgba(2, 26, 62, 0.98), rgba(0, 40, 100, 0.92), rgba(2, 26, 62, 0.98));
+            box-shadow:
+                0 0 0 1px rgba(255, 215, 0, 0.08) inset,
+                0 20px 40px rgba(2, 26, 62, 0.4);
+            position: relative;
+        }
+
+        .comparison-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .comparison-wrapper::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        .comparison-wrapper::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.3);
+            border-radius: 3px;
+        }
+
+        .comparison-wrapper::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 215, 0, 0.5);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 14px 12px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            vertical-align: middle;
+        }
+
+        .comparison-table thead th {
+            border-bottom: 2px solid rgba(255, 215, 0, 0.15);
+            background: linear-gradient(145deg, rgba(2, 26, 62, 0.99), rgba(0, 40, 100, 0.95));
+            padding-top: 18px;
+            padding-bottom: 18px;
+        }
+
+        .comparison-table thead th .plan-logo {
+            max-width: 100%;
+            height: 56px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 10px;
+        }
+
+        .comparison-table thead th .plan-name {
+            display: block;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--branco);
+            margin-bottom: 2px;
+        }
+
+        .comparison-table thead th .plan-monthly {
+            display: block;
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .comparison-table thead th .plan-badge {
+            display: inline-flex;
+            padding: 2px 10px;
+            margin-top: 6px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #FFD700, #FFEB3B);
+            color: var(--azul-profundo);
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .comparison-feature-label {
+            text-align: left !important;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.75);
+            white-space: normal;
+            font-size: 0.88rem;
+            min-width: 100px;
+        }
+
+        .comparison-check {
+            color: #4CAF50;
+            font-weight: 700;
+            font-size: 1.15em;
+        }
+
+        .comparison-cross {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 1.15em;
+        }
+
+        .comparison-detail {
+            font-size: 0.85em;
+            color: rgba(255, 255, 255, 0.55);
+            display: block;
+            margin-top: 2px;
+            line-height: 1.35;
+        }
+
+        .comparison-table tbody tr:hover td {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .comparison-table tbody tr:hover .comparison-feature-label {
+            background: rgba(0, 64, 128, 0.25);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            position: relative;
+        }
+
+        .comparison-table .comparison-highlight {
+            background: rgba(255, 215, 0, 0.06);
+            box-shadow: inset 0 0 0 1px rgba(255, 215, 0, 0.12);
+        }
+
+        .comparison-table .comparison-highlight.comparison-feature-label {
+            box-shadow: none;
+        }
+
+        .comparison-table .comparison-highlight::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+        }
+
+        .comparison-table .comparison-compatibility {
+            font-weight: 700;
+            color: #FFD700;
+            font-size: 1.05rem;
+        }
+
+        .comparison-table tfoot td {
+            border-bottom: none;
+            padding: 18px 12px;
+        }
+
+        .comparison-table tfoot .plan-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            padding: 0 12px;
+            font-size: 0.8rem;
+            width: auto;
+            min-width: 80px;
+            white-space: nowrap;
+        }
+
+        /* Sticky first column */
+        .comparison-table th:first-child,
+        .comparison-table td:first-child {
+            position: sticky;
+            left: 0;
+            z-index: 2;
+            background: linear-gradient(145deg, rgba(2, 26, 62, 0.99), rgba(0, 40, 100, 0.95));
+        }
+
+        .comparison-table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 3;
+        }
+
+        .comparison-table thead th:first-child {
+            z-index: 4;
+        }
+
+        .comparison-table tbody tr:hover td:first-child {
+            background: rgba(0, 64, 128, 0.25);
         }
 
         @keyframes goldShine {
@@ -609,46 +995,182 @@
         .plan small {
             color: rgba(255, 255, 255, 0.6);
             /* Cor mais suave */
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            line-height: 1.45;
+            overflow-wrap: anywhere;
         }
 
         .plan-score {
             min-width: 90px;
-            /* Largura ajustada */
             padding: 10px 12px;
-            /* Padding ajustado */
             text-align: center;
             color: var(--azul-profundo);
-            /* Cor mais profunda */
             border-radius: 16px;
-            /* Raio ajustado */
             background: var(--azul-claro);
             font-weight: 800;
             font-size: 1rem;
-            margin-top: auto;
-            /* Empurra para baixo */
         }
 
         .plan-cta {
-            display: block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
             width: 100%;
-            margin-top: 12px;
-            padding: 12px;
+            max-width: 100%;
+            padding: 0 24px;
             text-align: center;
             text-decoration: none;
-            color: #fff;
             border: 0;
-            border-radius: 999px;
-            background: linear-gradient(90deg, var(--azul-profundo), var(--azul-vivo));
-            font-weight: 600;
+            border-radius: 10px;
             font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .plan-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            background: rgba(2, 26, 62, 0.85);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 820px;
+            max-height: 90vh;
+            margin: auto;
+            padding: 36px;
+            border-radius: var(--raio);
+            background: linear-gradient(145deg, rgba(2, 26, 62, 0.99), rgba(0, 40, 100, 0.95));
+            border: 1px solid rgba(255, 215, 0, 0.18);
+            box-shadow: 0 30px 60px rgba(2, 26, 62, 0.6), 0 0 80px rgba(0, 64, 128, 0.2);
+            transform: scale(0.92) translateY(12px);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-content::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--azul-vivo) 20%, #FFD700 50%, var(--azul-vivo) 80%, transparent);
+            opacity: 0.8;
+        }
+
+        .modal-overlay.is-open .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            margin: 0 0 24px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--branco);
+            padding-right: 40px;
+        }
+
+        .modal-body {
+            color: rgba(255, 255, 255, 0.88);
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-body .comparison-wrapper {
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            background: none;
+            margin: 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-body .comparison-table {
+            width: 100%;
+            min-width: 0;
+            font-size: 0.85rem;
+        }
+
+        .modal-body .comparison-detail {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            max-height: 2.8em;
+            word-break: break-word;
+        }
+
+        .modal-body .comparison-table th,
+        .modal-body .comparison-table td {
+            padding: 12px 10px;
+        }
+
+        .modal-body .comparison-table thead th .plan-logo {
+            height: 44px;
+        }
+
+        .modal-body .comparison-table thead th .plan-badge {
+            font-size: 0.6rem;
+            padding: 1px 8px;
+        }
+
+        .modal-body .comparison-table tfoot .plan-cta {
+            min-height: 34px;
+            font-size: 0.75rem;
+            min-width: 60px;
+            padding: 0 10px;
         }
 
         .hidden {
@@ -665,23 +1187,22 @@
             align-items: center;
             justify-content: center;
             min-height: 56px;
-            padding: 0 clamp(28px, 4vw, 36px);
-            margin-top: clamp(24px, 4vh, 40px);
+            padding: 0 36px;
+            margin-top: 40px;
             border: 0;
-            border-radius: 999px;
+            border-radius: 9px;
             color: #fff;
             background: linear-gradient(90deg, var(--azul-vivo), var(--azul-cruzeiro));
-            font-size: clamp(1.1rem, 2vw, 1.2rem);
+            font-size: 1.2rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            text-transform: uppercase;
         }
 
         .start-button:hover {
             transform: translateY(-3px);
-            /* Efeito de hover mais pronunciado */
             box-shadow: 0 15px 30px rgba(0, 51, 160, 0.3);
-            /* Sombra mais forte */
         }
 
         /* Transições Suaves e Animações Minimalistas */
@@ -696,7 +1217,8 @@
             opacity: 0;
             transform: translateY(15px);
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Estados de animação para seções dinâmicas */
@@ -758,9 +1280,372 @@
         }
 
 
+        /* ===== Header Styles ===== */
+        header.cruzeiro {
+            width: 100%;
+            color: #fff;
+            font-size: 0.85rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: url('./img/Estutura de Páginas_fundoestrelado_siteapp.jpeg') center / cover no-repeat;
+            padding: 0 20px;
+            font-family: "Phudu", "Trebuchet MS", Arial;
+        }
+
+        header.cruzeiro::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 26, 62, 0.85);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header.cruzeiro>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        header.cruzeiro a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .info-header .contador {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        .info-header .contador div:first-child {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+        }
+
+        .info-header .contador div:first-child span {
+            color: #FFD700;
+            font-weight: 700;
+        }
+
+        .info-header .links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .info-header .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.8rem;
+            transition: color 0.2s;
+        }
+
+        .info-header .links a:hover {
+            color: #fff;
+        }
+
+        .info-header .links a img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+        }
+
+        .info-header .sociais {
+            display: flex;
+            gap: 8px;
+        }
+
+        .info-header .sociais a img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .info-header .sociais a:hover img {
+            opacity: 1;
+        }
+
+        .main-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            gap: 10px;
+            max-height: 64px;
+            position: relative;
+        }
+
+        .main-header .menu {
+            display: flex;
+            gap: 4px;
+        }
+
+        .main-header .menu a {
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .main-header .menu a:hover,
+        .main-header .menu a.active {
+            background: rgba(255, 255, 255, 0.044);
+        }
+
+        .main-header .menu a.active {
+            color: #FFD700;
+        }
+
+        .main-header .mobile {
+            display: none;
+        }
+
+        .main-header .nav-toggle {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .main-header .nav-toggle .bar {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .main-header .nav-toggle.active .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .main-header .nav-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .main-header .nav-toggle.active .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .main-header .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .main-header .logo img {
+            display: block;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .main-header .actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-user-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logged-in {
+            display: flex;
+            margin-bottom: 20px;
+            margin-right: 10px;
+        }
+
+        .user-initials-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--azul-vivo);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .navbar-user-section .menu-link span {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .navbar-user-section .menu-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #0055e5 0%, #00abfa) #f3ae2a;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            transition: background 0.2s;
+
+        }
+
+        .navbar-user-section .menu-button:hover {
+            filter: brightness(1.2);
+            transform: translateY(-1px);
+        }
+
+        .navbar-user-section .menu-button svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        /* ===== Footer Styles ===== */
+        footer#rodape {
+            color: #fff;
+            font-size: 0.85rem;
+            background: url('./img/Estutura de Páginas_fundoestrelado_siteapp.jpeg') center / cover no-repeat;
+            position: relative;
+        }
+
+        footer#rodape::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 26, 62, 0.9);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        footer#rodape>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        footer#rodape a {
+            color: #fff;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        footer#rodape a:hover {
+            opacity: 0.8;
+        }
+
+        footer#rodape .container {
+            max-width: min(1200px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 40px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        footer#rodape .container:first-of-type {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer#rodape .logo img {
+            height: 40px;
+            object-fit: contain;
+        }
+
+        footer#rodape .redes-sociais {
+            display: flex;
+            gap: 12px;
+        }
+
+        footer#rodape .redes-sociais a img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        footer#rodape .redes-sociais a:hover img {
+            opacity: 1;
+        }
+
+        footer#rodape .atendimento {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        footer#rodape .atendimento div p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.82rem;
+        }
+
+        footer#rodape .atendimento .description {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        footer#rodape .termos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        footer#rodape .termos span {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.78rem;
+        }
+
+        footer#rodape .termos div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.78rem;
+        }
+
+        footer#rodape .termos div a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        footer#rodape .termos div a:hover {
+            color: #fff;
+        }
+
+        /* ===== Media Queries ===== */
+
+        @media (min-width: 1240px) {
+            header.cruzeiro {
+                padding: 0 40px;
+            }
+        }
+
         @media (min-width: 1200px) {
             .hero-card {
-                min-height: clamp(480px, 65vh, 520px);
+                min-height: 520px;
             }
         }
 
@@ -771,16 +1656,19 @@
             }
 
             .hero-card {
-                min-height: auto;
-                padding-bottom: clamp(24px, 4vh, 40px);
+                min-height: 0;
+                padding-bottom: 40px;
             }
 
             .hero-card::after {
-                display: none;
+                right: -80px;
+                bottom: -80px;
+                width: 360px;
+                height: 360px;
             }
 
             h1 {
-                font-size: clamp(2.5rem, 8vw, 4.5rem);
+                font-size: 4.5rem;
             }
 
             .hero-copy {
@@ -792,37 +1680,196 @@
             }
         }
 
+        @media (max-width: 768px) {
+            .info-header .sociais {
+                display: none;
+            }
+
+            .main-header .menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(2, 26, 62, 0.98);
+                padding: 16px;
+                gap: 4px;
+                z-index: 100;
+                border-radius: 0 0 12px 12px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-top: none;
+            }
+
+            .main-header .menu.open {
+                display: flex;
+            }
+
+            .main-header .mobile {
+                display: block;
+            }
+
+            .main-header {
+                position: relative;
+            }
+
+            .main-header .logo img {
+                height: 28px;
+            }
+
+            .navbar-user-section .menu-link span {
+                display: none;
+            }
+
+            footer#rodape .container {
+                flex-direction: column;
+                text-align: center;
+                padding: 24px 0;
+            }
+
+            footer#rodape .termos {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            footer#rodape .termos div {
+                justify-content: center;
+            }
+        }
+
         @media (max-width: 620px) {
+            .hero-card {
+                height: 550px;
+            }
+
+            .hero-card h1 {
+                font-size: 3.2rem;
+            }
+
             .page {
-                padding: clamp(16px, 3vh, 32px) 0;
+                width: calc(100% - 24px);
+                padding: 16px 12px;
+                margin: 0 auto;
             }
 
             .quiz-card,
             .result-card,
             .plans-card {
                 padding: 20px;
+                overflow: hidden;
             }
 
             .question {
-                font-size: clamp(1.4rem, 5vw, 2rem);
+                font-size: 1.4rem;
+            }
+
+            .comparison-table {
+                width: 100%;
+                min-width: auto;
+                font-size: 0.78rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 8px 6px;
+                min-width: max-content;
+            }
+
+            .comparison-table thead th .plan-logo {
+                height: 34px;
+            }
+
+            .comparison-feature-label {
+                min-width: 100px;
+                font-size: 0.75rem;
+            }
+
+            .comparison-table tfoot .plan-cta {
+                min-height: 36px;
+                font-size: 0.75rem;
+                min-width: 60px;
+                padding: 0 8px;
             }
 
             .actions {
                 flex-direction: column;
             }
 
+            .actions-group {
+                flex-direction: column;
+                width: 100%;
+            }
+
             .btn {
                 width: 100%;
             }
 
-            .result-plan img {
-                width: clamp(100px, 30vw, 140px);
-                height: clamp(70px, 20vw, 100px);
+            .btn-compare {
+                order: -1;
+            }
+
+            .result-plan #resultLogo {
+                max-width: 100%;
+                max-height: 70px;
+                height: auto;
+                width: auto;
+                object-fit: contain;
             }
 
             .plans-title {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+
+            .plans-card {
+                overflow: hidden;
+            }
+
+            .plan {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 12px;
+            }
+
+            .plan .result-plan {
+                width: 100%;
+                margin: 0;
+            }
+
+            .plan img {
+                max-width: 100%;
+                max-height: 68px;
+                height: auto;
+                width: auto;
+            }
+
+            .plan .price {
+                font-size: 1.15rem;
+            }
+
+            .plan p,
+            .plan small,
+            .plan li {
+                font-size: 0.92rem;
+            }
+
+            .plan li::before {
+                flex-basis: 8px;
+                width: 8px;
+                height: 8px;
+                margin-top: 6px;
+            }
+
+            .plan-score,
+            .plan-cta {
+                width: 100%;
+            }
+
+            .plan-cta {
+                margin-top: 0;
+                white-space: normal;
             }
 
             .hero-stats {
@@ -836,20 +1883,212 @@
             .stat strong {
                 font-size: 1.4rem;
             }
+
+            .step-info {
+                font-size: 0.85rem;
+            }
+
+            .modal-title {
+                font-size: 1.3rem;
+            }
+
+            .modal-overlay {
+                padding: 12px;
+                display: flex;
+            }
+
+            .modal-content {
+                padding: 20px 16px;
+                width: 90vw;
+                max-width: calc(100% - 24px);
+            }
+
+            .modal-body .comparison-table {
+                min-width: 100%;
+                font-size: 0.7rem;
+            }
+
+            .modal-body .comparison-table th,
+            .modal-body .comparison-table td {
+                padding: 6px 4px;
+            }
+
+            .modal-body .comparison-table thead th .plan-logo {
+                height: 28px;
+            }
+
+            .modal-body .comparison-table tfoot .plan-cta {
+                min-height: 30px;
+                font-size: 0.65rem;
+                min-width: 50px;
+                padding: 0 6px;
+            }
+        }
+
+        @media (max-width: 530px) {
+            .hero-card {
+                padding: 20px;
+                height: max-content;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .hero-card h1 {
+                font-size: 1rem;
+            }
+
+            .result-card,
+            .plans-card,
+            .quiz-card {
+                overflow: hidden;
+                word-wrap: break-word;
+            }
+
+            .comparison-table {
+                width: 100%;
+                min-width: 100%;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 6px 4px;
+            }
+
+            .comparison-feature-label {
+                min-width: 80px;
+                max-width: 80px;
+            }
+
+
+
+            .modal-overlay {
+                padding: 8px;
+            }
+
+            .modal-content {
+                padding: 16px 12px;
+                max-width: 95vw;
+            }
+
+            .modal-body .comparison-wrapper {
+                margin: 0;
+            }
+
+            .modal-body .comparison-table {
+                min-width: 100%;
+                font-size: 0.65rem;
+            }
         }
     </style>
 </head>
 
 <body>
+    <video id="bg-video" autoplay muted loop preload="metadata">
+        <source src="./img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4" type="video/mp4">
+    </video>
+    <header class="cruzeiro" id="nav">
+        <div class="info-header">
+            <div class="contador">
+                <div class="links"><a href="https://www.cruzeiro.com.br/"><img
+                            src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-oficial-ab1c760e9a477f26ab6d.png"
+                            alt="Ícone de site oficial">Site Oficial</a><a href="https://loja.cruzeiro.com.br/"><img
+                            src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-loja-9ef84c1a2fcdf75c75f2.png"
+                            alt="Ícone de loja">Loja</a></div>
+            </div>
+            <div class="sociais"><a href="https://www.facebook.com/cruzeirooficial" target="_blank"
+                    rel="noopener noreferrer" title="facebook"><img
+                        src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/facebook_icon-94e950311eb66faf3686.png"
+                        alt="Ícone do Facebook"></a><a href="https://www.instagram.com/cruzeiro" target="_blank"
+                    rel="noopener noreferrer" title="instagram"><img
+                        src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/instagram_icon-975c4138b57629c0b3f3.png"
+                        alt="Ícone do Instagram"></a><a href="https://x.com/cruzeiro" target="_blank"
+                    rel="noopener noreferrer" title="twitter"><img
+                        src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/x_icon-0cb02697682b758664e4.png"
+                        alt="Ícone do X"></a><a href="https://www.tiktok.com/@cruzeiro" target="_blank"
+                    rel="noopener noreferrer" title="tiktok"><img
+                        src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/tiktok_icon-302b8bad23fca898a772.png"
+                        alt="Ícone do TikTok"></a><a href="https://www.youtube.com/user/oficialcruzeiro" target="_blank"
+                    rel="noopener noreferrer" title="youtube"><img
+                        src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/youtube_icon-845711630bb5a2bd015c.png"
+                        alt="Ícone do YouTube"></a>
+            </div>
+        </div>
+        <div class="main-header">
+            <div class="menu"><a href="https://socio.cruzeiro.com.br/">INÍCIO</a><a
+                    href="https://socio.cruzeiro.com.br/planos">PLANOS</a><a
+                    href="https://socio.cruzeiro.com.br/jogos">PRÓXIMOS JOGOS</a><a
+                    href="https://socio.cruzeiro.com.br/duvidas">DÚVIDAS</a></div>
+            <div class="mobile">
+                <div class="nav-toggle"><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                </div>
+            </div><a class="logo" href="https://socio.cruzeiro.com.br/"><img
+                    src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/logo-site-60f55ac6e5da9ad26583.png"></a>
+            <div class="actions">
+                <div class="navbar-user-section logged-in">
+                    <a href="https://socio.cruzeiro.com.br/minha-conta" class="menu-link"><span>Olá Torcedor</span></a>
+                    <a class="menu-button" href="https://socio.cruzeiro.com.br/minha-conta">
+                        <span>MINHA CONTA</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
     <main class="page">
         <section class="hero">
             <div class="hero-card" id="heroCard">
                 <p class="eyebrow">Quiz Sócio 5 Estrelas</p>
                 <h1>Encontre o plano perfeito para viver o Cruzeiro mais de perto.</h1>
-                <button class="start-button" id="startButton" type="button">Iniciar Quiz</button>
+                <button class="start-button" id="startButton" type="button">Iniciar</button>
             </div>
         </section>
     </main>
+    <footer id="rodape">
+        <div class="container">
+            <div class="logo"><a href="https://socio.cruzeiro.com.br/"><img
+                        src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/logo-rodape-4badfb6988b9a00780ab.svg"
+                        alt="Cruzeiro logo" title="Cruzeiro logo"></a></div>
+            <div class="redes-sociais"><a href="https://www.facebook.com/cruzeirooficial" rel="noopener noreferrer"
+                    target="_blank"><img
+                        src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/facebook_icon-48d8b35fd74ce4cd95cb.svg"
+                        alt="Facebook" title="Facebook"></a><a href="https://www.instagram.com/cruzeiro"
+                    rel="noopener noreferrer" target="_blank"><img
+                        src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/instagram_icon-6b996608e02c1e84e224.svg"
+                        alt="Instagram" title="Instagram"></a><a href="https://x.com/cruzeiro" rel="noopener noreferrer"
+                    target="_blank"><img
+                        src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/x_icon-e57d61853ba24e10f61b.svg"
+                        alt="X" title="X"></a><a href="https://www.tiktok.com/@cruzeiro" rel="noopener noreferrer"
+                    target="_blank"><img
+                        src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/tiktok_icon-13ed59f7dad9ff5dd2ac.svg"
+                        alt="TikTok" title="TikTok"></a><a href="https://www.youtube.com/user/oficialcruzeiro"
+                    rel="noopener noreferrer" target="_blank"><img
+                        src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/youtube_icon-9a510453dec45685082d.svg"
+                        alt="YouTube" title="YouTube"></a></div>
+            <div class="atendimento">
+                <div>
+                    <p>Telefone e WhatsApp: <a class="description"
+                            href="https://api.whatsapp.com/send?phone=553140002161">31 4000-2161</a></p>
+                </div>
+                <div>
+                    <p>E-mail: <a class="description"
+                            href="mailto:socio5estrelas@cruzeiro.com.br">socio5estrelas@cruzeiro.com.br</a></p>
+                </div>
+                <div>
+                    <p>Central de Relacionamento: <span class="description">08h00 às 18h00 - Seg. a Sex.</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="termos"><span>© 2026 - CRUZEIRO ESPORTE CLUBE SAF</span>
+                <div><a data-turbo-frame="frame-modal"
+                        href="https://socio.cruzeiro.com.br/pt-BR/paginas/politica-de-privacidade">Política de
+                        privacidade</a> | <a data-turbo-frame="frame-modal"
+                        href="https://socio.cruzeiro.com.br/pt-BR/paginas/termo-de-uso">Termos de
+                        uso</a> | <a data-turbo-frame="frame-modal"
+                        href="https://socio.cruzeiro.com.br/pt-BR/paginas/termo-de-compra">Termo de
+                        compra de ingressos</a></div>
+            </div>
+        </div>
+    </footer>
 
     <script>
         /*
@@ -871,7 +2110,7 @@
             meuCruzeiro: {
                 nome: "Meu Cruzeiro",
                 slug: "meu-cruzeiro",
-                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/21/foto/3693855dc5c6a6636e8716c34c4e6f18.png",
+                logo: "./img/meuCruzeiro.png",
                 precoMensal: 12,
                 precoAnual: 144,
                 ingressoGratis: true,
@@ -887,21 +2126,26 @@
                 },
                 descontoNaLoja: {
                     percentual: 0.1,
-                    texto: "Até 10% na Loja do Cruzeiro"
+                    texto: "Até 10% na loja"
                 },
                 conteudoExclusivo: true,
-                participaçãoEmQuizzes: true,
+                descontoEmParceiros: true,
                 votacaoEmDecisoesNoClube: true,
                 complementos: {
                     kids: true,
                     carteirinhaFisica: true
                 },
+                beneficios: [
+                    "Ingresso grátis por temporada (economia de até R$ 150)",
+                    "Até 10% de desconto em produtos oficiais",
+                    "Apoie o seu Time Cabuloso",
+                ],
                 link: "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro",
             },
             timeDoPovo: {
                 nome: "Time do Povo",
                 slug: "time-do-povo",
-                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/34/foto/bf15cdf046e861c67766ed162817ff8b.png",
+                logo: "./img/timeDoPovo.png",
                 precoMensal: 40,
                 precoAnual: 480,
                 ingressoGratis: false,
@@ -909,7 +2153,7 @@
                 taxaDeAdesaoUnica: 30,
                 descontoEmIngresso: {
                     ativo: true,
-                    detalhes: "Todo jogo do Cruzeiro dentro dos setores Amarelo e Laranja custa R$ 40,00",
+                    detalhes: "R$40,00 por ingresso",
                     faixa: "setores Amarelo e Laranja"
                 },
                 jogosFrequentes: undefined,
@@ -918,22 +2162,27 @@
                 },
                 descontoNaLoja: {
                     percentual: 0.15,
-                    texto: "Até 15% na Loja do Cruzeiro"
+                    texto: "Até 15% na loja"
                 },
                 conteudoExclusivo: false,
-                participaçãoEmQuizzes: true,
+                descontoEmParceiros: true,
                 votacaoEmDecisoesNoClube: false,
                 complementos: {
                     kids: true,
                     carteirinhaFisica: true
                 },
+                beneficios: [
+                    "Ingresso de R$ 150 por apenas R$ 40 em todo jogo nos setores Laranja e amarelo",
+                    "Até 15% de desconto na Loja do Cruzeiro",
+                    "Faça parte da torcida que canta e vibra do início ao fim",
+                ],
                 link: "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=mensal&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo"
 
             },
             cabuloso: {
                 nome: "Cabuloso",
                 slug: "cabuloso",
-                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/10/foto/2e8e230296468933e048a962156c1106.png",
+                logo: "./img/cabuloso.png",
                 precoMensal: 100,
                 precoAnual: 1200,
                 ingressoGratis: false,
@@ -941,25 +2190,25 @@
                 taxaDeAdesaoUnica: 30,
                 descontoEmIngresso: {
                     ativo: true,
-                    detalhes: "Desconto progressivo por jogos frequentados nos últimos 15 meses"
+                    detalhes: "De 50% até 60%"
                 },
                 jogosFrequentes: {
                     janelaMeses: 15,
                     niveis: [
                         {
-                            nome: "Cabuloso 1",
+                            nome: "Cabuloso nível 1",
                             jogosMinimos: 0,
                             jogosMaximos: 9,
                             descontoIngresso: 0.5
                         },
                         {
-                            nome: "Cabuloso 2",
+                            nome: "Cabuloso nível 2",
                             jogosMinimos: 10,
                             jogosMaximos: 19,
                             descontoIngresso: 0.55
                         },
                         {
-                            nome: "Cabuloso 3",
+                            nome: "Cabuloso nível 3",
                             jogosMinimos: 20,
                             jogosMaximos: null,
                             descontoIngresso: 0.6
@@ -984,21 +2233,26 @@
                 },
                 descontoNaLoja: {
                     percentual: 0.15,
-                    texto: "Até 15% na Loja do Cruzeiro"
+                    texto: "Até 15% na loja"
                 },
                 conteudoExclusivo: true,
-                participaçãoEmQuizzes: true,
+                descontoEmParceiros: true,
                 votacaoEmDecisoesNoClube: true,
                 complementos: {
                     kids: true,
                     carteirinhaFisica: true
                 },
+                beneficios: [
+                    "Ingressos de R$ 150 por R$75 ou até R$60 (50% off ou até 60%off)",
+                    "Até 15% de desconto na Loja do Cruzeiro",
+                    "Prioridade na compra de ingressos, à frente de quem não é sócio",
+                ],
                 link: "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=mensal&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso"
             },
             cabulosoMax: {
                 nome: "Cabuloso Max",
                 slug: "cabuloso-max",
-                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/11/foto/33957b4b049070ccf905ddcfda4d78af.png",
+                logo: "./img/cabulosoMax.png",
                 precoMensal: 200,
                 precoAnual: 2400,
                 ingressoGratis: false,
@@ -1008,7 +2262,7 @@
                     ativo: true,
                     quantidadeIngressos: 2,
                     descontoPercentual: 0.65,
-                    detalhes: "Até 2 ingressos por jogo com 65% de desconto"
+                    detalhes: "2 ingressos com 65%"
                 },
                 jogosFrequentes: undefined,
                 prioridadeNaCompra: {
@@ -1016,15 +2270,20 @@
                 },
                 descontoNaLoja: {
                     percentual: 0.15,
-                    texto: "Até 15% na Loja do Cruzeiro"
+                    texto: "Até 15% na loja"
                 },
                 conteudoExclusivo: true,
-                participaçãoEmQuizzes: true,
+                descontoEmParceiros: true,
                 votacaoEmDecisoesNoClube: true,
                 complementos: {
                     kids: true,
                     carteirinhaFisica: true
                 },
+                beneficios: [
+                    "2 ingressos de R$ 150 por R$ 52 cada (65% off)",
+                    "Até 15% de desconto na Loja do Cruzeiro",
+                    "Prioridade máxima na compra: garanta o melhor lugar sempre",
+                ],
                 link: "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11&intervalo_cobrancas=mensal&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-max"
             },
             cabulosoCativo: {
@@ -1040,7 +2299,7 @@
                     ativo: true,
                     quantidadeIngressos: 1,
                     descontoPercentual: null,
-                    detalhes: "1 ingresso garantido no Azul Inferior"
+                    detalhes: "1 no Azul Inferior"
                 },
                 jogosFrequentes: undefined,
                 prioridadeNaCompra: {
@@ -1048,15 +2307,20 @@
                 },
                 descontoNaLoja: {
                     percentual: 0.1,
-                    texto: "Até 10% na Loja do Cruzeiro"
+                    texto: "Até 10% na loja "
                 },
                 conteudoExclusivo: true,
-                participaçãoEmQuizzes: true,
+                descontoEmParceiros: true,
                 votacaoEmDecisoesNoClube: true,
                 complementos: {
                     kids: true,
                     carteirinhaFisica: false
                 },
+                beneficios: [
+                    "Seu assento cativo no Azul Inferior em todos os jogos",
+                    "Até 10% de desconto na Loja do Cruzeiro",
+                    "Experiência premium: conteúdo exclusivo e voto nas decisões",
+                ],
                 link: "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=115&intervalo_cobrancas=mensal&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-cativo"
             }
         }
@@ -1075,250 +2339,311 @@
                 gameFrequency: null,
                 familyPlan: null,
                 digitalExperience: null,
-                budget: null
+                budget: null,
+                preferredSector: null
             }
         };
+        let heightResetTimer = null;
 
-const questions = [
-    {
-        key: "gamesPerYear",
-        title: "Em média, a quantos jogos do Cruzeiro você pretende ir por ano?",
-        type: "range",
-        min: 0,
-        max: 30,
-        suffix: "jogos",
-        getEffects: (val) => ({
-            frequenciaEstadio: Math.round((val / 30) * 10),
-            prioridadeIngressos: val >= 15 ? 8 : (val >= 5 ? 4 : 1)
-        })
-    },
-    {
-        key: "wantsGuaranteedTicket",
-        title: "Oque melhor te define como torcedor?",
-        options: [
+        const questions = [
             {
-                label: "Faço questão de ir a todos os jogos",
-                description: "Quero garantir meu lugar na arquibancada em todas as partidas possíveis.",
-                value: true,
-                effects: {
-                    prioridadeIngressos: 9,
-                    frequenciaEstadio: 7,
-                    importanciaPreco: 1
+                key: "gamesPerYear",
+                title: "Em média, a quantos jogos do Cruzeiro você pretende ir por ano?",
+                type: "range",
+                min: 0,
+                max: 30,
+                suffix: "jogos",
+                getEffects: (val) => {
+                    const base = {
+                        frequenciaEstadio: Math.round((val / 30) * 8),
+                        prioridadeIngressos: val === 0 ? 0 : (val >= 15 ? 8 : (val >= 5 ? 5 : 2))
+                    };
+                    if (val > 10) {
+                        base.interesseExperiencias = 3;
+                        base.consumoProdutosOficiais = 2;
+                        base.prioridadeIngressos += 2;
+                    }
+                    return base;
                 }
             },
             {
-                label: "Foco nos jogos mais decisivos",
-                description: "Prefiro guardar energia e orçamento para clássicos e fases finais.",
-                value: false,
-                effects: {
-                    importanciaPreco: 8,
-                    prioridadeIngressos: 2
-                }
+                key: "wantsGuaranteedTicket",
+                title: "O que melhor te define como torcedor?",
+                options: [
+                    {
+                        label: "Não frequento o estádio",
+                        description: "Não costumo frequentar os jogos presencialmente.",
+                        value: "never",
+                        effects: {
+                            importanciaPreco: 5,
+                            prioridadeIngressos: 0,
+                            frequenciaEstadio: 0
+                        }
+                    },
+                    {
+                        label: "Faço questão de ir a todos os jogos",
+                        description: "Quero garantir meu lugar na arquibancada em todas as partidas possíveis.",
+                        value: true,
+                        effects: {
+                            prioridadeIngressos: 5,
+                            frequenciaEstadio: 4,
+                            importanciaPreco: 2
+                        }
+                    },
+                    {
+                        label: "Foco nos jogos mais decisivos",
+                        description: "Prefiro guardar energia e orçamento para clássicos e fases finais.",
+                        value: false,
+                        effects: {
+                            importanciaPreco: 5,
+                            prioridadeIngressos: 3
+                        }
+                    }
+                ]
+            },
+            {
+                key: "buysTwoTickets",
+                title: "Quando vai ao estádio, você costuma levar acompanhantes?",
+                options: [
+                    {
+                        label: "Sim, quase sempre vou acompanhado",
+                        description: "Preciso de facilidade para comprar dois ou mais ingressos juntos.",
+                        value: true,
+                        effects: {
+                            levaAcompanhantes: 8,
+                            interesseDescontos: 5
+                        }
+                    },
+                    {
+                        label: "Não, geralmente vou sozinho",
+                        description: "Compro apenas o meu ingresso.",
+                        value: false,
+                        effects: {
+                            levaAcompanhantes: 0
+                        }
+                    }
+                ]
+            },
+            {
+                key: "needsPriority",
+                title: "Quando vai comprar ingressos para o jogo, como costuma agir?",
+                options: [
+                    {
+                        label: "Compro no primeiro minuto",
+                        description: "Não gosto de correr riscos. Assim que abre, eu garanto o meu.",
+                        value: true,
+                        effects: {
+                            prioridadeIngressos: 5
+                        }
+                    },
+                    {
+                        label: "Compro com calma",
+                        description: "Deixo para comprar depois, se ainda houver disponibilidade.",
+                        value: false,
+                        effects: {
+                            prioridadeIngressos: 0
+                        }
+                    }
+                ]
+            },
+            {
+                key: "wantsParticipation",
+                title: "Além dos jogos, o quanto você se interessa por experiências exclusivas?",
+                options: [
+                    {
+                        label: "Tenho muito interesse",
+                        description: "Quero participar de sorteios, eventos do clube e receber ofertas especiais.",
+                        value: true,
+                        effects: {
+                            interesseExperiencias: 6
+                        }
+                    },
+                    {
+                        label: "Não faço questão",
+                        description: "Meu foco é apenas assistir aos jogos, sem extras.",
+                        value: false,
+                        effects: {
+                            interesseExperiencias: 0
+                        }
+                    }
+                ]
+            },
+            {
+                key: "wantsStoreDiscount",
+                title: "Sempre que sai um novo manto ou produto oficial, o que você faz?",
+                options: [
+                    {
+                        label: "Sempre tento comprar",
+                        description: "Gosto de colecionar ou renovar minhas camisas e busco descontos para isso.",
+                        value: true,
+                        effects: {
+                            interesseDescontos: 7,
+                            consumoProdutosOficiais: 6
+                        }
+                    },
+                    {
+                        label: "Raramente compro",
+                        description: "Não costumo consumir muitos produtos na loja oficial.",
+                        value: false,
+                        effects: {
+                            interesseDescontos: 0,
+                            consumoProdutosOficiais: 0
+                        }
+                    }
+                ]
+            },
+            {
+                key: "gameFrequency",
+                title: "Como você costuma viver a paixão nos dias de jogo?",
+                options: [
+                    {
+                        label: "Sempre na arquibancada",
+                        description: "O Mineirão é minha segunda casa.",
+                        value: "always",
+                        effects: {
+                            frequenciaEstadio: 4,
+                            interesseExperiencias: 3
+                        }
+                    },
+                    {
+                        label: "Fico divido entre estádio e TV",
+                        description: "Vou em boa parte dos jogos, mas assisto a outros de casa ou do bar.",
+                        value: "frequent",
+                        effects: {
+                            frequenciaEstadio: 2,
+                            interesseExperiencias: 2
+                        }
+                    },
+                    {
+                        label: "Acompanho mais de casa mesmo",
+                        description: "Vou pouco ao estádio, prefiro acompanhar pelas transmissões.",
+                        value: "occasional",
+                        effects: {
+                            frequenciaEstadio: 1,
+                            interesseExperiencias: 1
+                        }
+                    }
+                ]
+            },
+            {
+                key: "familyPlan",
+                title: "Você planeja incluir dependentes (filhos ou cônjuge) no seu plano?",
+                options: [
+                    {
+                        label: "Sim, quero um plano familiar",
+                        description: "Preciso de benefícios estendidos para a minha família.",
+                        value: true,
+                        effects: {
+                            levaAcompanhantes: 7,
+                            importanciaPreco: 3
+                        }
+                    },
+                    {
+                        label: "Não, o plano será individual",
+                        description: "Os benefícios serão utilizados apenas por mim.",
+                        value: false,
+                        effects: {
+                            levaAcompanhantes: 0
+                        }
+                    }
+                ]
+            },
+            {
+                key: "digitalExperience",
+                title: "O quanto você consome os conteúdos digitais e de bastidores do clube?",
+                options: [
+                    {
+                        label: "Acompanho tudo diariamente",
+                        description: "Valorizo o aplicativo oficial e quero acesso a informações em primeira mão.",
+                        value: true,
+                        effects: {
+                            interesseExperiencias: 4,
+                            consumoProdutosOficiais: 3
+                        }
+                    },
+                    {
+                        label: "Foco apenas no campo",
+                        description: "Meu interesse principal são os 90 minutos de bola rolando.",
+                        value: false,
+                        effects: {
+                            interesseExperiencias: 2,
+                            frequenciaEstadio: 4
+                        }
+                    }
+                ]
+            },
+            {
+                key: "budget",
+                title: "Qual é o seu orçamento mensal confortável para investir no Sócio?",
+                options: [
+                    {
+                        label: "Até R$ 40/mês",
+                        description: "Busco a opção com o menor custo e quero apoiar o Time.",
+                        value: 40,
+                        effects: {
+                            importanciaPreco: 4
+                        }
+                    },
+                    {
+                        label: "Até R$ 100/mês",
+                        description: "Quero os benefícios dos planos intermediários com mais vantagens.",
+                        value: 100,
+                        effects: {
+                            importanciaPreco: 2
+                        }
+                    },
+                    {
+                        label: "Até R$ 200/mês",
+                        description: "Tenho flexibilidade para investir em planos melhores com mais vantagens.",
+                        value: 200,
+                        effects: {
+                            importanciaPreco: 1
+                        }
+                    },
+                    {
+                        label: "Sem limite definido",
+                        description: "Quero o plano mais completo e com a melhor experiência, independente do valor.",
+                        value: 400,
+                        effects: {
+                            importanciaPreco: 0
+                        }
+                    }
+                ]
+            },
+            {
+                key: "preferredSector",
+                title: "Em qual setor você se sente mais à vontade?",
+                options: [
+                    {
+                        label: "Setor Amarelo ou Laranja",
+                        description: "Torcida organizada, muito canto e festa. Melhor custo-benefício.",
+                        value: "yellow-orange",
+                        effects: {
+                            importanciaPreco: 6
+                        }
+                    },
+                    {
+                        label: "Setor Azul",
+                        description: "Visão central do campo, equilíbrio entre custo e conforto.",
+                        value: "blue",
+                        effects: {
+                            importanciaPreco: 2,
+                            interesseExperiencias: 2,
+                            consumoProdutosOficiais: 2
+                        }
+                    },
+                    {
+                        label: "Setor Roxo",
+                        description: "Cadeira premium, conforto máximo e experiência exclusiva.",
+                        value: "purple",
+                        effects: {
+                            interesseExperiencias: 4,
+                            consumoProdutosOficiais: 4
+                        }
+                    }
+                ]
             }
-        ]
-    },
-    {
-        key: "buysTwoTickets",
-        title: "Quando vai ao estádio, você costuma levar acompanhantes?",
-        options: [
-            {
-                label: "Sim, quase sempre vou acompanhado",
-                description: "Preciso de facilidade para comprar dois ou mais ingressos juntos.",
-                value: true,
-                effects: {
-                    levaAcompanhantes: 10,
-                    interesseDescontos: 5
-                }
-            },
-            {
-                label: "Não, geralmente vou sozinho",
-                description: "Compro apenas o meu ingresso.",
-                value: false,
-                effects: {
-                    levaAcompanhantes: 0
-                }
-            }
-        ]
-    },
-    {
-        key: "needsPriority",
-        title: "Quando vai comprar ingressos para o jogo, como costuma agir?",
-        options: [
-            {
-                label: "Compro no primeiro minuto",
-                description: "Não gosto de correr riscos. Assim que abre, eu garanto o meu.",
-                value: true,
-                effects: {
-                    prioridadeIngressos: 10
-                }
-            },
-            {
-                label: "Compro com calma",
-                description: "Deixo para comprar depois, se ainda houver disponibilidade.",
-                value: false,
-                effects: {
-                    prioridadeIngressos: 0
-                }
-            }
-        ]
-    },
-    {
-        key: "wantsParticipation",
-        title: "Além dos jogos, o quanto você se interessa por experiências exclusivas?",
-        options: [
-            {
-                label: "Tenho muito interesse",
-                description: "Quero participar de sorteios, eventos do clube e receber ofertas especiais.",
-                value: true,
-                effects: {
-                    interesseExperiencias: 10
-                }
-            },
-            {
-                label: "Não faço questão",
-                description: "Meu foco é apenas assistir aos jogos, sem extras.",
-                value: false,
-                effects: {
-                    interesseExperiencias: 0
-                }
-            }
-        ]
-    },
-    {
-        key: "wantsStoreDiscount",
-        title: "Sempre que sai um novo manto ou produto oficial, o que você faz?",
-        options: [
-            {
-                label: "Sempre tento comprar",
-                description: "Gosto de colecionar ou renovar minhas camisas e busco descontos para isso.",
-                value: true,
-                effects: {
-                    interesseDescontos: 8,
-                    consumoProdutosOficiais: 9
-                }
-            },
-            {
-                label: "Raramente compro",
-                description: "Não costumo consumir muitos produtos na loja oficial.",
-                value: false,
-                effects: {
-                    interesseDescontos: 0,
-                    consumoProdutosOficiais: 0
-                }
-            }
-        ]
-    },
-    {
-        key: "gameFrequency",
-        title: "Como você costuma viver a paixão nos dias de jogo?",
-        options: [
-            {
-                label: "Sempre na arquibancada",
-                description: "O Mineirão é minha segunda casa.",
-                value: "always",
-                effects: {
-                    frequenciaEstadio: 10,
-                    interesseExperiencias: 6
-                }
-            },
-            {
-                label: "Fico divido entre estádio e TV",
-                description: "Vou em boa parte dos jogos, mas assisto a outros de casa ou do bar.",
-                value: "frequent",
-                effects: {
-                    frequenciaEstadio: 6,
-                    interesseExperiencias: 4
-                }
-            },
-            {
-                label: "Acompanho mais de casa mesmo",
-                description: "Vou pouco ao estádio, prefiro acompanhar pelas transmissões.",
-                value: "occasional",
-                effects: {
-                    frequenciaEstadio: 2,
-                    interesseExperiencias: 1
-                }
-            }
-        ]
-    },
-    {
-        key: "familyPlan",
-        title: "Você planeja incluir dependentes (filhos ou cônjuge) no seu plano?",
-        options: [
-            {
-                label: "Sim, quero um plano familiar",
-                description: "Preciso de benefícios estendidos para a minha família.",
-                value: true,
-                effects: {
-                    levaAcompanhantes: 8,
-                    importanciaPreco: 4
-                }
-            },
-            {
-                label: "Não, o plano será individual",
-                description: "Os benefícios serão utilizados apenas por mim.",
-                value: false,
-                effects: {
-                    levaAcompanhantes: 0
-                }
-            }
-        ]
-    },
-    {
-        key: "digitalExperience",
-        title: "O quanto você consome os conteúdos digitais e de bastidores do clube?",
-        options: [
-            {
-                label: "Acompanho tudo diariamente",
-                description: "Valorizo o aplicativo oficial e quero acesso a informações em primeira mão.",
-                value: true,
-                effects: {
-                    interesseExperiencias: 8,
-                    consumoProdutosOficiais: 3
-                }
-            },
-            {
-                label: "Foco apenas no campo",
-                description: "Meu interesse principal são os 90 minutos de bola rolando.",
-                value: false,
-                effects: {
-                    interesseExperiencias: 2,
-                    frequenciaEstadio: 5
-                }
-            }
-        ]
-    },
-    {
-        key: "budget",
-        title: "Qual é o seu orçamento mensal confortável para investir no Sócio?",
-        options: [
-            {
-                label: "Até R$ 40/mês",
-                description: "Busco a opção com o melhor custo-benefício inicial.",
-                value: 40,
-                effects: {
-                    importanciaPreco: 10
-                }
-            },
-            {
-                label: "Até R$ 200/mês",
-                description: "Tenho flexibilidade para investir em planos intermediários com mais vantagens.",
-                value: 200,
-                effects: {
-                    importanciaPreco: 5
-                }
-            },
-            {
-                label: "Sem limite definido",
-                description: "Quero o plano mais completo e com a melhor experiência, independente do valor.",
-                value: 400,
-                effects: {
-                    importanciaPreco: 1
-                }
-            }
-        ]
-    }
-];
+        ];
         let heroSection = document.querySelector(".hero");
         const startButton = document.getElementById("startButton");
 
@@ -1359,21 +2684,21 @@ const questions = [
             if (plan.ingressoGratis) {
                 return {
                     score: 34,
-                    text: "oferece ingresso gratis"
+                    text: "oferece ingresso grátis"
                 };
             }
 
             if (!plan.descontoEmIngresso?.ativo) {
                 return {
                     score: 0,
-                    text: "não oferece desconto em ingresso"
+                    text: "não oferece desconto em ingressos"
                 };
             }
 
             if (plan.slug === "time-do-povo") {
                 return {
                     score: gamesPerYear > 0 ? 22 : 10,
-                    text: plan.descontoEmIngresso?.detalhes || "possui beneficio em ingresso"
+                    text: plan.descontoEmIngresso?.detalhes || "possui benefício em ingressos"
                 };
             }
 
@@ -1385,7 +2710,7 @@ const questions = [
 
                 return {
                     score: level ? level.descontoIngresso * 50 : 25,
-                    text: level ? `${level.nome}: ${Math.round(level.descontoIngresso * 100)}% de desconto` : plan.descontoEmIngresso?.detalhes || "possui beneficio em ingresso"
+                    text: level ? `${level.nome}: ${Math.round(level.descontoIngresso * 100)}% de desconto` : plan.descontoEmIngresso?.detalhes || "possui benefício em ingressos"
                 };
             }
 
@@ -1396,13 +2721,13 @@ const questions = [
 
                 return {
                     score,
-                    text: plan.descontoEmIngresso?.detalhes || "possui beneficio em ingresso"
+                    text: plan.descontoEmIngresso?.detalhes || "possui benefício em ingressos"
                 };
             }
 
             return {
                 score: 12,
-                text: "possui beneficio em ingresso"
+                text: "possui benefício em ingressos"
             };
         }
 
@@ -1418,13 +2743,13 @@ const questions = [
          */
 
         const ATTRIBUTE_LABELS = {
-            importanciaPreco: "Sensibilidade ao preço",
-            frequenciaEstadio: "Frequência no estádio",
-            interesseDescontos: "Interesse em descontos",
-            interesseExperiencias: "Interesse em experiências",
-            levaAcompanhantes: "Levar acompanhantes",
-            prioridadeIngressos: "Prioridade em ingressos",
-            consumoProdutosOficiais: "Consumo de produtos oficiais"
+            importanciaPreco: "Maior economia e custo-benefício",
+            frequenciaEstadio: "Facilidade em frequentar o estádio",
+            interesseDescontos: "Mais promoções e descontos",
+            interesseExperiencias: "Mais experiências",
+            levaAcompanhantes: "Levar companhia (família e amigos)",
+            prioridadeIngressos: "Maior desconto em ingressos",
+            consumoProdutosOficiais: "Facilidade em consumir produtos oficiais"
         };
 
         /**
@@ -1432,6 +2757,17 @@ const questions = [
          * @param {Object} answers Respostas do quiz
          * @returns {UserProfile} Perfil do usuário mapeado
          */
+        function getCTAText(plan) {
+            const ctas = {
+                'meu-cruzeiro': 'FAZER PARTE DOS CABULOSOS',
+                'time-do-povo': 'GARANTIR INGRESSO A R$ 40',
+                'cabuloso': 'GARANTIR MEU DESCONTO DE 50%',
+                'cabuloso-max': 'ATÉ 2 INGRESSOS COM 65%OFF',
+                'cabuloso-cativo': '"DE SANGUE AZUL EU SOU"'
+            };
+            return ctas[plan.slug] || 'ASSINAR AGORA';
+        }
+
         function buildUserProfile(answers) {
             const profile = {
                 importanciaPreco: 0,
@@ -1462,9 +2798,9 @@ const questions = [
                 }
             });
 
-            // Normaliza cada atributo para a escala de 0 a 10
+            // Normaliza cada atributo para a escala de 0 a 20
             for (const attr in profile) {
-                profile[attr] = Math.min(10, Math.max(0, profile[attr]));
+                profile[attr] = Math.min(20, Math.max(0, profile[attr]));
             }
 
             return profile;
@@ -1481,83 +2817,81 @@ const questions = [
             const minPrice = Math.min(...prices);
             const maxPrice = Math.max(...prices);
 
-            // 1. Sensibilidade ao preço: planos mais caros são MENOS sensíveis ao preço (0 a 10)
-            // CORREÇÃO: Invertido - planos mais caros têm MAIOR importanciaPreco (menos sensíveis ao preço)
+            // 1. Sensibilidade ao preço: quanto mais barato o plano, maior o score (0 a 20)
             const importanciaPreco = maxPrice === minPrice
-                ? 5
-                : Math.round(((plan.precoMensal - minPrice) / (maxPrice - minPrice)) * 10);
+                ? 10
+                : Math.round(((maxPrice - plan.precoMensal) / (maxPrice - minPrice)) * 20);
 
-            // 2. Frequência no estádio: planos com ingressos grátis ou descontos recorrentes pontuam mais alto
+            // 2. Frequência no estádio (0-20): do pior ao melhor benefício de acesso
             let frequenciaEstadio = 0;
-            if (plan.ingressoGratis) {
+            if (plan.slug === 'cabuloso-cativo') {
+                frequenciaEstadio = 20;
+            } else if (plan.slug === 'cabuloso-max') {
+                frequenciaEstadio = 16;
+            } else if (plan.slug === 'cabuloso') {
                 frequenciaEstadio = 10;
-            } else if (plan.slug === 'cabuloso-cativo') {
-                frequenciaEstadio = 10;
-            } else if (plan.descontoEmIngresso && plan.descontoEmIngresso.ativo) {
-                if (plan.slug === 'cabuloso-max') {
-                    frequenciaEstadio = 8;
-                } else if (plan.slug === 'cabuloso') {
-                    frequenciaEstadio = 7;
-                } else if (plan.slug === 'time-do-povo') {
-                    frequenciaEstadio = 5;
-                } else {
-                    frequenciaEstadio = 4;
-                }
+            } else if (plan.slug === 'time-do-povo') {
+                frequenciaEstadio = 6;
             } else {
-                frequenciaEstadio = 2; // Plano de entrada (Meu Cruzeiro)
+                frequenciaEstadio = 2; // Meu Cruzeiro: 1 ingresso grátis/ano
             }
 
-            // 3. Interesse em descontos: baseado nos percentuais de descontos de loja e ingressos
+            // 3. Interesse em descontos: baseado nos percentuais de descontos de loja e ingressos (0-20)
             let interesseDescontos = 0;
             const discountPercent = plan.descontoNaLoja?.percentual || 0;
-            interesseDescontos += discountPercent * 20; // e.g. 0.15 * 20 = 3
+            interesseDescontos += discountPercent * 40;
             if (plan.descontoEmIngresso?.ativo) {
                 if (plan.descontoEmIngresso.descontoPercentual) {
-                    interesseDescontos += plan.descontoEmIngresso.descontoPercentual * 10; // e.g. 0.65 * 10 = 6.5
+                    interesseDescontos += plan.descontoEmIngresso.descontoPercentual * 20;
                 } else if (plan.jogosFrequentes) {
-                    interesseDescontos += 6;
+                    interesseDescontos += 12;
                 } else {
-                    interesseDescontos += 4;
+                    interesseDescontos += 8;
                 }
             }
-            interesseDescontos = Math.min(10, Math.round(interesseDescontos));
+            interesseDescontos = Math.min(20, Math.round(interesseDescontos));
 
-            // 4. Interesse em experiências: baseado em conteúdos exclusivos, quizzes e etc
+            // 4. Interesse em experiências: baseado em conteúdos exclusivos, quizzes e etc (0-20)
             let interesseExperiencias = 0;
-            if (plan.conteudoExclusivo) interesseExperiencias += 3;
-            if (plan.participaçãoEmQuizzes) interesseExperiencias += 3;
-            if (plan.votacaoEmDecisoesNoClube) interesseExperiencias += 4;
-            interesseExperiencias = Math.min(10, interesseExperiencias);
+            if (plan.conteudoExclusivo) interesseExperiencias += 6;
+            if (plan.descontoEmParceiros) interesseExperiencias += 5;
+            if (plan.votacaoEmDecisoesNoClube) interesseExperiencias += 7;
+            if (plan.slug === 'cabuloso-cativo' || plan.slug === 'cabuloso-max') interesseExperiencias += 2;
+            interesseExperiencias = Math.min(20, interesseExperiencias);
 
-            // 5. Levar acompanhantes: quantidade de ingressos adicionais com desconto
+            // 5. Levar acompanhantes: quantidade de ingressos adicionais com desconto (0-20)
             let levaAcompanhantes = 0;
             if (plan.descontoEmIngresso?.quantidadeIngressos) {
-                levaAcompanhantes = plan.descontoEmIngresso.quantidadeIngressos * 4; // 2 * 4 = 8
+                levaAcompanhantes = plan.descontoEmIngresso.quantidadeIngressos * 8;
+            } else if (plan.slug === 'cabuloso') {
+                levaAcompanhantes = 5;
+            } else if (plan.slug === 'time-do-povo') {
+                levaAcompanhantes = 3;
             } else {
                 levaAcompanhantes = 1;
             }
-            levaAcompanhantes = Math.min(10, levaAcompanhantes);
+            levaAcompanhantes = Math.min(20, levaAcompanhantes);
 
-            // 6. Prioridade em ingressos: mapeado da escala de prioridade do clube (menor número = maior prioridade)
+            // 6. Prioridade em ingressos: mapeado da escala de prioridade do clube (0-20)
             let prioridadeIngressos = 0;
             const priority = plan.prioridadeNaCompra?.prioridade;
             if (plan.slug === 'cabuloso-cativo') {
-                prioridadeIngressos = 10;
+                prioridadeIngressos = 20;
             } else if (priority === 1) {
-                prioridadeIngressos = 9;
+                prioridadeIngressos = 16;
             } else if (Array.isArray(priority)) {
-                prioridadeIngressos = 7;
+                prioridadeIngressos = 10;
             } else if (priority === 3) {
-                prioridadeIngressos = 5;
+                prioridadeIngressos = 6;
             } else if (priority === 4) {
-                prioridadeIngressos = 3;
+                prioridadeIngressos = 2;
             } else {
                 prioridadeIngressos = 2;
             }
 
-            // 7. Consumo de produtos oficiais: com base no desconto disponível na loja oficial do clube
+            // 7. Consumo de produtos oficiais: com base no desconto disponível na loja oficial (0-20)
             const consumoProdutosOficiais = plan.descontoNaLoja?.percentual
-                ? Math.round(plan.descontoNaLoja.percentual * 66) // 0.15 * 66 = 10, 0.10 * 66 = 7
+                ? Math.round(plan.descontoNaLoja.percentual * 120)
                 : 0;
 
             return {
@@ -1620,9 +2954,9 @@ const questions = [
         }
 
         /**
-         * Aplica a regra de negócio de penalidade de preço ao score de similaridade.
-         * Se o usuário tem alta sensibilidade ao preço (importanciaPreco > 7)
-         * e o plano custa mais que o limite (ex: R$ 100), reduz o score em 15%.
+         * Aplica a penalidade de preço ao score de similaridade do cosseno.
+         * Usuários com alta sensibilidade a preço (importanciaPreco alto) recebem
+         * um desconto progressivo (até 25%) em planos caros.
          *
          * @param {number} cosineScore Score bruto da similaridade do cosseno (0.0 a 1.0)
          * @param {UserProfile} userProfile Perfil do usuário (para acessar importanciaPreco)
@@ -1630,18 +2964,17 @@ const questions = [
          * @returns {number} Score final ajustado (0.0 a 1.0)
          */
         function applyPricePenalty(cosineScore, userProfile, planPrice) {
-            // CORREÇÃO: Ajustada a lógica de penalidade
-            // Quando o usuário tem MAIOR importanciaPreco (menos sensível ao preço),
-            // planos mais caros recebem MENOS penalidade
-            const userSensitivity = (userProfile.importanciaPreco ?? 0) / 10;
+            // Penalidade de preço: reduz o score quando o usuário é sensível ao preço
+            // e o plano é caro (reforço adicional à similaridade do cosseno)
+            const userSensitivity = (userProfile.importanciaPreco ?? 0) / 20;
             const maxPrice = Math.max(...plans.map(p => p.precoMensal));
             const priceRatio = planPrice / maxPrice;
-            
-            // Penalidade mais suave: apenas 25% do máximo
-            // Quando userSensitivity é alto (pouco sensível ao preço), penalidade é menor
-            const penalty = 1 - ((1 - userSensitivity) * priceRatio * 0.25);
-            
-            return cosineScore * Math.max(0.75, penalty); // Penalidade mínima de 0.75
+
+            // Penalidade suave: até 25% de redução no pior caso
+            // userSensitivity alto (sensível a preço) + priceRatio alto (plano caro) → maior penalidade
+            const penalty = 1 - (userSensitivity * priceRatio * 0.25);
+
+            return cosineScore * Math.max(0.75, penalty);
         }
 
         /**
@@ -1668,7 +3001,7 @@ const questions = [
                 const planVal = planProfile[attr] ?? 0;
                 const diff = Math.abs(userVal - planVal);
                 // Alinhamento: 10 = perfeito, 0 = oposto
-                const alignment = 10 - diff;
+                const alignment = 20 - diff;
                 return {
                     key: attr,
                     diff,
@@ -1739,6 +3072,144 @@ const questions = [
                 .slice(0, 3);
         }
 
+        function renderComparisonTable(wrapper, recommendations) {
+            if (!wrapper) return;
+
+            const allPlans = Object.values(assinaturasSocios);
+
+            const compatibilityMap = {};
+            recommendations.forEach(r => {
+                compatibilityMap[r.plan.slug] = r.compatibilityPercent;
+            });
+
+            const userProfile = buildUserProfile(state.answers);
+            allPlans.forEach(plan => {
+                if (compatibilityMap[plan.slug] === undefined) {
+                    const planProfile = generatePlanProfile(plan);
+                    const result = calculateCompatibility(userProfile, planProfile, plan);
+                    compatibilityMap[plan.slug] = result.compatibilityPercent;
+                }
+            });
+
+            const winnerSlug = recommendations[0]?.plan?.slug;
+            const highlightClass = slug => slug === winnerSlug ? ' comparison-highlight' : '';
+
+            const features = [
+                {
+                    label: 'Preço',
+                    getValue: (plan) => formatMoney(plan.precoMensal) + ' /mês'
+                },
+
+                {
+                    label: 'Desconto em ingressos',
+                    getValue: (plan) => plan.descontoEmIngresso?.ativo
+                        ? '<span class="comparison-check">✓</span> <span class="comparison-detail">' + plan.descontoEmIngresso.detalhes + '</span>'
+                        : '<span class="comparison-cross">✗</span>'
+                },
+                {
+                    label: 'Desconto na loja',
+                    getValue: (plan) => '<span class="comparison-check">✓</span> <span class="comparison-detail">' + (plan.descontoNaLoja?.texto || '') + '</span>'
+                },
+
+                {
+                    label: 'Conteúdo exclusivo',
+                    getValue: (plan) => plan.conteudoExclusivo
+                        ? '<span class="comparison-check">✓</span>'
+                        : '<span class="comparison-cross">✗</span>'
+                },
+                {
+                    label: 'Desconto em parceiros',
+                    getValue: (plan) => plan.descontoEmParceiros
+                        ? '<span class="comparison-check">✓</span>'
+                        : '<span class="comparison-cross">✗</span>'
+                },
+
+            ];
+
+            const table = document.createElement('table');
+            table.className = 'comparison-table';
+
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+
+            const labelTh = document.createElement('th');
+            labelTh.className = 'comparison-feature-label';
+            labelTh.textContent = 'Planos';
+            headerRow.appendChild(labelTh);
+
+            allPlans.forEach(plan => {
+                const th = document.createElement('th');
+                th.className = highlightClass(plan.slug);
+                th.innerHTML = `
+                    <h1 class="plan-name">${plan.nome}</h1>
+                    ${plan.slug === winnerSlug ? '<span class="plan-badge">Recomendado</span>' : ''}
+                `;
+                headerRow.appendChild(th);
+            });
+
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+
+            features.forEach(feature => {
+                const tr = document.createElement('tr');
+                const labelTd = document.createElement('td');
+                labelTd.className = 'comparison-feature-label';
+                labelTd.textContent = feature.label;
+                tr.appendChild(labelTd);
+
+                allPlans.forEach(plan => {
+                    const td = document.createElement('td');
+                    td.className = highlightClass(plan.slug);
+                    td.innerHTML = feature.getValue(plan);
+                    tr.appendChild(td);
+                });
+
+                tbody.appendChild(tr);
+            });
+
+            const compatTr = document.createElement('tr');
+            const compatLabel = document.createElement('td');
+            compatLabel.className = 'comparison-feature-label';
+            compatLabel.textContent = 'Compatibilidade';
+            compatTr.appendChild(compatLabel);
+
+            allPlans.forEach(plan => {
+                const td = document.createElement('td');
+                td.className = 'comparison-compatibility' + highlightClass(plan.slug);
+                td.textContent = compatibilityMap[plan.slug] + '%';
+                compatTr.appendChild(td);
+            });
+
+            tbody.appendChild(compatTr);
+            table.appendChild(tbody);
+
+            const tfoot = document.createElement('tfoot');
+            const footerRow = document.createElement('tr');
+
+            const footerLabel = document.createElement('td');
+            footerLabel.className = 'comparison-feature-label';
+            footerRow.appendChild(footerLabel);
+
+            allPlans.forEach(plan => {
+                const td = document.createElement('td');
+                td.className = highlightClass(plan.slug);
+                const a = document.createElement('a');
+                a.href = plan.link;
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+                a.className = 'plan-cta';
+                a.textContent = getCTAText(plan);
+                td.appendChild(a);
+                footerRow.appendChild(td);
+            });
+
+            tfoot.appendChild(footerRow);
+            table.appendChild(tfoot);
+            wrapper.appendChild(table);
+        }
+
         function renderResults(resultsSection) {
             const recommendations = recommendPlans();
             const winner = recommendations[0];
@@ -1749,23 +3220,29 @@ const questions = [
             const resultSummary = resultsSection.querySelector("#resultSummary");
             const resultReasons = resultsSection.querySelector("#resultReasons");
             const plansList = resultsSection.querySelector("#plansList");
+            const subscribeButton = resultsSection.querySelector("#subscribeButton");
 
             if (resultLogo && winner?.plan?.logo) {
                 resultLogo.src = winner.plan.logo;
                 resultLogo.alt = `Logo do plano ${winner.plan.nome}`;
             }
+            if (subscribeButton && winner?.plan?.link) {
+                subscribeButton.dataset.subscribeUrl = winner.plan.link;
+                subscribeButton.setAttribute("aria-label", `Assinar o plano ${winner.plan.nome}`);
+            }
             if (resultPrice && winner?.plan?.precoMensal) {
                 resultPrice.textContent = `${formatMoney(winner.plan.precoMensal)} / mês`;
             }
             if (resultSummary && winner?.compatibilityPercent !== undefined) {
-                resultSummary.textContent = `Este plano tem ${winner.compatibilityPercent}% de compatibilidade com seu perfil e oferece os benefícios mais adequados.`;
+                resultSummary.textContent = `${winner.compatibilityPercent}% de compatibilidade com seu perfil — a maior entre todos os planos.`;
             }
 
             if (resultReasons) {
                 resultReasons.innerHTML = "";
-                winner.influences.slice(0, 3).forEach((inf) => {
+                const benefits = winner.plan.beneficios || [];
+                benefits.forEach((b) => {
                     const item = document.createElement("li");
-                    item.textContent = `Benefícios para: ${ATTRIBUTE_LABELS[inf.key] ?? inf.key}`;
+                    item.textContent = b;
                     resultReasons.appendChild(item);
                 });
             }
@@ -1783,20 +3260,20 @@ const questions = [
                     const keyLabel = ATTRIBUTE_LABELS[topInfluence?.key] ?? topInfluence?.key ?? "características do plano";
 
                     card.innerHTML = `
-                        <img src="${plan.logo}" alt="Logo do plano ${plan.nome}">
-                        <div>
-                            <h3>${index === 0 ? 'Recomendado' : 'Alternativa'}</h3>
-                            <p>${formatMoney(plan.precoMensal)} / mês ou ${formatMoney(plan.precoAnual)} / ano</p>
+                        <div class="result-badge">${index === 0 ? 'Recomendado' : 'Alternativo'}</div>
+                        <div class="result-plan">
+                            <img src="${plan.logo}" alt="Logo do plano ${plan.nome}">
+                            <p class="result-price">${formatMoney(plan.precoMensal)} / mês</p>
+                        </div>
+                        <div class="plan-content">
+                            <p>${formatMoney(plan.precoAnual)} / ano</p>
                             <small>${adhesion}</small>
-                            <ul>
-                                <li>${ticketBenefit.text}</li>
-                                <li>Prioridade ${priority}</li>
-                                <li>${plan.descontoNaLoja?.texto || 'Até 10% na Loja do Cruzeiro'}</li>
-                                <li>Destaque: Benefícios para ${keyLabel}</li>
+                            <ul class="benefits-list">
+                                ${(plan.beneficios || []).map(b => `<li>${b}</li>`).join('')}
                             </ul>
                         </div>
-                        <div class="plan-score">${compatibilityPercent}%</div>
-                        <a href="${plan.link}" target="_blank" class="plan-cta">Assinar agora</a>
+                        <div class="plan-score">${compatibilityPercent}% de compatibilidade${index === 0 ? ' — a maior entre todos' : ''}</div>
+                        <a href="${plan.link}" target="_blank" rel="noopener noreferrer" class="plan-cta">${getCTAText(plan)}</a>
                     `;
                     plansList.appendChild(card);
                 });
@@ -1813,6 +3290,14 @@ const questions = [
             const progressBarEl = quizSection.querySelector("#progressBar");
             const backBtn = quizSection.querySelector("#backButton");
             const nextBtn = quizSection.querySelector("#nextButton");
+
+            // Cancela reset anterior de altura se existir
+            clearTimeout(heightResetTimer);
+
+            // Captura altura atual e trava para transição suave
+            const currentHeight = quizSection.scrollHeight;
+            quizSection.style.height = currentHeight + "px";
+            quizSection.style.overflow = "hidden";
 
             // Efeito suave de saída temporária
             questionTitle.style.opacity = "0";
@@ -1889,6 +3374,17 @@ const questions = [
                     });
                 }
 
+                // Força reflow e anima para nova altura
+                quizSection.offsetHeight;
+                const newHeight = quizSection.scrollHeight;
+                quizSection.style.height = newHeight + "px";
+
+                // Remove trava após transição de altura
+                heightResetTimer = setTimeout(() => {
+                    quizSection.style.height = "auto";
+                    quizSection.style.overflow = "";
+                }, 500);
+
                 // Efeito suave de entrada
                 questionTitle.style.opacity = "1";
                 questionTitle.style.transform = "translateY(0)";
@@ -1907,14 +3403,13 @@ const questions = [
                     <div class="progress-bar" id="progressBar"></div>
                 </div>
                 <div class="step-info">
-                    <span id="stepCounter">Pergunta 1 de 10</span>
-                    <span>Recomendação por custo-beneficio</span>
+                    <span id="stepCounter">Pergunta 1 de 11</span>
                 </div>
                 <h2 class="question" id="quizTitle"></h2>
                 <div class="options" id="options"></div>
                 <div class="actions">
                     <button class="btn btn-secondary" id="backButton" type="button">Voltar</button>
-                    <button class="btn btn-primary" id="nextButton" type="button" disabled>Continuar</button>
+                    <button class="btn start-button" id="nextButton" type="button" disabled>Continuar</button>
                 </div>
             `;
             return section;
@@ -1929,17 +3424,17 @@ const questions = [
                 <article class="result-card">
                     <span class="result-badge">Plano recomendado</span>
                     <div class="result-plan">
-                        <div>
-                            <h2>Plano recomendado para você</h2>
-                            <p class="price" id="resultPrice"></p>
-                        </div>
                         <img id="resultLogo" alt="">
+                        <p class="result-price" id="resultPrice"></p>
                     </div>
                     <p id="resultSummary"></p>
                     <ul class="reason-list" id="resultReasons"></ul>
                     <div class="actions">
                         <button class="btn btn-secondary" id="restartButton" type="button">Refazer quiz</button>
-                        <button class="btn btn-primary" id="subscribeButton" type="button">Assinar agora</button>
+                        <div class="actions-group">
+                            <button class="btn btn-compare" id="compareButton" type="button">Comparar planos</button>
+                            <button class="btn btn-primary" id="subscribeButton" type="button">Assinar agora</button>
+                        </div>
                     </div>
                 </article>
                 <aside class="plans-card">
@@ -1989,6 +3484,17 @@ const questions = [
             } else if (type === 'results') {
                 section.querySelector('#restartButton').addEventListener('click', onRestartClick);
                 section.querySelector('#subscribeButton').addEventListener('click', onSubscribeClick);
+                const compareBtn = section.querySelector('#compareButton');
+                ensureComparisonModal();
+                const modal = document.getElementById('comparisonModal');
+                const closeBtn = document.getElementById('modalClose');
+                if (compareBtn && modal) {
+                    compareBtn.addEventListener('click', () => openComparisonModal(modal));
+                    closeBtn.addEventListener('click', closeComparisonModal);
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) closeComparisonModal();
+                    });
+                }
             }
         }
 
@@ -2052,10 +3558,53 @@ const questions = [
         }
 
         function onSubscribeClick() {
-            const recommendations = recommendPlans();
-            const winner = recommendations[0];
-            const url = winner.plan.link || 'https://socio5estrelas.com.br';
-            window.open(url, '_blank');
+            const button = document.querySelector('#subscribeButton');
+            const url = button?.dataset.subscribeUrl || 'https://socio5estrelas.com.br';
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+
+        function openComparisonModal(modal) {
+            const body = modal.querySelector('#modalComparisonBody');
+            if (body && !body.hasChildNodes()) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'comparison-wrapper';
+                body.appendChild(wrapper);
+                const recommendations = recommendPlans();
+                renderComparisonTable(wrapper, recommendations);
+            }
+            modal.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeComparisonModal() {
+            const modal = document.querySelector('#comparisonModal');
+            if (modal) {
+                modal.classList.remove('is-open');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function onModalEscape(e) {
+            if (e.key === 'Escape') closeComparisonModal();
+        }
+
+        function ensureComparisonModal() {
+            if (document.getElementById('comparisonModal')) return;
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.id = 'comparisonModal';
+            modal.setAttribute('role', 'dialog');
+            modal.setAttribute('aria-modal', 'true');
+            modal.setAttribute('aria-label', 'Comparativo de planos');
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
+                    <h2 class="modal-title">Comparativo de planos</h2>
+                    <small>Deslize para o lado para ver mais planos</small>
+                    <div class="modal-body" id="modalComparisonBody"></div>
+                </div>
+            `;
+            document.body.appendChild(modal);
         }
 
         function resetState() {
@@ -2070,7 +3619,8 @@ const questions = [
                 gameFrequency: null,
                 familyPlan: null,
                 digitalExperience: null,
-                budget: null
+                budget: null,
+                preferredSector: null
             };
         }
 
@@ -2083,6 +3633,38 @@ const questions = [
                 renderQuestion();
             });
         });
+
+        // preview mode: ?preview or #preview auto-shows results with preset answers
+        if (location.search.includes('preview') || location.hash === '#preview') {
+            state.answers = {
+                gamesPerYear: 15,
+                wantsGuaranteedTicket: true,
+                buysTwoTickets: true,
+                needsPriority: true,
+                wantsParticipation: true,
+                wantsStoreDiscount: true,
+                gameFrequency: 'always',
+                familyPlan: false,
+                digitalExperience: true,
+                budget: 200,
+                preferredSector: 'blue'
+            };
+            requestAnimationFrame(() => showResults());
+        }
+
+        // Header mobile menu toggle
+        document.addEventListener("DOMContentLoaded", function () {
+            const navToggle = document.querySelector(".nav-toggle");
+            const menu = document.querySelector(".main-header .menu");
+            if (navToggle && menu) {
+                navToggle.addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    menu.classList.toggle("open");
+                });
+            }
+        });
+
+        document.addEventListener('keydown', onModalEscape);
 
     </script>
 
