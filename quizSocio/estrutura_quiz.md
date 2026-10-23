@@ -211,7 +211,7 @@ Isso direciona torcedores frequentes (>10 jogos/ano) para planos como Time do Po
 
 | Opção | Descrição | Plano mais adequado | Efeitos |
 |---|---|---|---|
-| **Setor Amarelo ou Laranja** | Torcida organizada, muito canto e festa. Melhor custo-benefício. | Time do Povo | `importanciaPreco: +6` |
+| **Setor Amarelo ou Laranja** | Torcida organizada, muito canto e festa. Melhor custo-benefício. | Time do Povo | `importanciaPreco: +6` (e bônus de setor de 6 pontos no Time do Povo, ver seção 5) |
 | **Setor Azul** | Visão central do campo, equilíbrio entre custo e conforto. | Cabuloso | `importanciaPreco: +2`, `interesseExperiencias: +2`, `consumoProdutosOficiais: +2` |
 | **Setor Roxo** | Cadeira premium, conforto máximo e experiência exclusiva. | Cabuloso Max / Cativo | `interesseExperiencias: +4`, `consumoProdutosOficiais: +4` |
 
@@ -221,13 +221,15 @@ Isso direciona torcedores frequentes (>10 jogos/ano) para planos como Time do Po
 
 | Chave | Rótulo exibido ao usuário | Max contribuição |
 |---|---|---|
-| `importanciaPreco` | Maior economia e custo-benefício | 20 |
+| `importanciaPreco` | Maior economia e custo-benefício | 18 |
 | `frequenciaEstadio` | Facilidade em frequentar o estádio | 20 |
-| `interesseDescontos` | Mais promoções e descontos | 14 |
+| `interesseDescontos` | Mais promoções e descontos | 12 |
 | `interesseExperiencias` | Mais experiências | 20 |
-| `levaAcompanhantes` | Levar companhia (família e amigos) | 18 |
+| `levaAcompanhantes` | Levar companhia (família e amigos) | 15 |
 | `prioridadeIngressos` | Maior prioridade em ingressos | 20 |
-| `consumoProdutosOficiais` | Facilidade em consumir produtos oficiais | 16 |
+| `consumoProdutosOficiais` | Facilidade em consumir produtos oficiais | 15 |
+
+"Max contribuição" é a soma dos maiores efeitos possíveis de cada pergunta, limitada a 20.
 
 ---
 
@@ -263,6 +265,10 @@ Após o cálculo do cosseno, aplica-se um ajuste:
 - Score final = `cosineScore * Math.max(0.75, penalty)`
 - Máxima penalidade: 25%
 
+### Bônus de setor
+
+Quem escolhe o setor Amarelo ou Laranja soma 6 pontos à compatibilidade do Time do Povo, o plano desses setores (ingresso a R$ 40 neles). Os atributos do perfil não capturam essa relação: sem o bônus, o público do Time do Povo ficava mais compatível com planos caros. 6 pontos é o menor bônus que leva o perfil "família no Amarelo/Laranja" ao Time do Povo com margem acima do empate técnico. A compatibilidade exibida é limitada a 100%.
+
 ### Filtro por orçamento
 
 Planos com preço mensal acima do `budget` informado são excluídos. Se nenhum couber, o mais barato é usado como fallback.
@@ -270,6 +276,10 @@ Planos com preço mensal acima do `budget` informado são excluídos. Se nenhum 
 ### Resultado final
 
 Top 3 planos mais compatíveis são exibidos, ordenados do maior para o menor percentual de compatibilidade.
+
+- O texto do resultado diz "a maior entre todos os planos" só quando todos cabem no orçamento; caso contrário, "a maior entre os planos que cabem no seu orçamento". A tabela comparativa marca os planos fora do orçamento.
+- **Empate técnico:** se o 2º colocado ficar a menos de 1 ponto do 1º, os dois são apresentados como recomendados ("Também recomendado").
+- Os planos alternativos mostram quantos pontos estão abaixo do recomendado.
 
 ---
 

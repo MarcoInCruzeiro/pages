@@ -889,6 +889,11 @@
             letter-spacing: 0.05em;
         }
 
+        .comparison-table thead th .plan-badge.plan-badge-muted {
+            background: rgba(255, 255, 255, 0.14);
+            color: var(--branco);
+        }
+
         .comparison-feature-label {
             text-align: left !important;
             font-weight: 600;
@@ -2524,7 +2529,7 @@
                         }
                     },
                     {
-                        label: "Fico divido entre estádio e TV",
+                        label: "Fico dividido entre estádio e TV",
                         description: "Vou em boa parte dos jogos, mas assisto a outros de casa ou do bar.",
                         value: "frequent",
                         effects: {
@@ -2796,7 +2801,7 @@
             interesseDescontos: "Mais promoções e descontos",
             interesseExperiencias: "Mais experiências",
             levaAcompanhantes: "Levar companhia (família e amigos)",
-            prioridadeIngressos: "Maior desconto em ingressos",
+            prioridadeIngressos: "Maior prioridade em ingressos",
             consumoProdutosOficiais: "Facilidade em consumir produtos oficiais"
         };
 
@@ -3074,6 +3079,25 @@
         }
 
         /**
+         * Bônus de setor: o Time do Povo é o plano dos setores Amarelo e Laranja (ingresso a R$ 40 neles),
+         * algo que os atributos do perfil não capturam. 6 pontos é o menor bônus que leva o perfil
+         * "família no Amarelo/Laranja" ao Time do Povo com margem acima do empate técnico.
+         */
+        const SECTOR_BONUS = { slug: 'time-do-povo', sector: 'yellow-orange', points: 6 };
+
+        // Diferença (em pontos) abaixo da qual 1º e 2º colocados são apresentados como empate técnico
+        const CLOSE_CALL_POINTS = 1;
+
+        function getSectorBonus(plan, answers) {
+            return plan.slug === SECTOR_BONUS.slug && answers.preferredSector === SECTOR_BONUS.sector ? SECTOR_BONUS.points : 0;
+        }
+
+        function fitsBudget(plan) {
+            const budget = state.answers.budget;
+            return budget === null || budget === undefined || plan.precoMensal <= budget;
+        }
+
+        /**
          * Compara o perfil do usuário com o perfil de um plano usando Similaridade do Cosseno + Penalidade de Preço.
          * Mantida para compatibilidade com código existente (renderResults, etc).
          *
@@ -3084,10 +3108,11 @@
          */
         function calculateCompatibility(userProfile, planProfile, plan) {
             const result = calculateFinalMatch(userProfile, planProfile, plan.precoMensal);
+            const bonus = getSectorBonus(plan, state.answers);
 
             return {
                 plan,
-                compatibilityPercent: result.compatibilityPercent,
+                compatibilityPercent: Math.min(100, Math.round((result.compatibilityPercent + bonus) * 10) / 10),
                 distance: null, // Não aplicável com Cosseno
                 influences: result.influences
             };
@@ -3140,7 +3165,15 @@
             });
 
             const winnerSlug = recommendations[0]?.plan?.slug;
+            const runnerUpSlug = recommendations[1]?.plan?.slug;
+            const isCloseCall = recommendations[1] && recommendations[0].compatibilityPercent - recommendations[1].compatibilityPercent < CLOSE_CALL_POINTS;
             const highlightClass = slug => slug === winnerSlug ? ' comparison-highlight' : '';
+            const headerBadge = plan => {
+                if (plan.slug === winnerSlug) return '<span class="plan-badge">Recomendado</span>';
+                if (plan.slug === runnerUpSlug && isCloseCall) return '<span class="plan-badge">Também recomendado</span>';
+                if (!fitsBudget(plan)) return '<span class="plan-badge plan-badge-muted">Fora do orçamento</span>';
+                return '';
+            };
 
             const features = [
                 {
@@ -3190,7 +3223,7 @@
                 th.className = highlightClass(plan.slug);
                 th.innerHTML = `
                     <h1 class="plan-name">${plan.nome}</h1>
-                    ${plan.slug === winnerSlug ? '<span class="plan-badge">Recomendado</span>' : ''}
+                    ${headerBadge(plan)}
                 `;
                 headerRow.appendChild(th);
             });
@@ -3296,8 +3329,14 @@
             if (resultPrice && winner?.plan?.precoMensal) {
                 resultPrice.textContent = `${formatMoney(winner.plan.precoMensal)} / mês`;
             }
+            const runnerUp = recommendations[1];
+            const isCloseCall = runnerUp && winner.compatibilityPercent - runnerUp.compatibilityPercent < CLOSE_CALL_POINTS;
+            const allPlansFit = plans.every(fitsBudget);
+
             if (resultSummary && winner?.compatibilityPercent !== undefined) {
-                resultSummary.textContent = `${winner.compatibilityPercent}% de compatibilidade com seu perfil — a maior entre todos os planos.`;
+                resultSummary.textContent = isCloseCall
+                    ? `${winner.compatibilityPercent}% de compatibilidade com seu perfil — praticamente empatado com o ${runnerUp.plan.nome} (${runnerUp.compatibilityPercent}%). Os dois atendem bem ao seu perfil.`
+                    : `${winner.compatibilityPercent}% de compatibilidade com seu perfil — a maior entre ${allPlansFit ? 'todos os planos' : 'os planos que cabem no seu orçamento'}.`;
             }
 
             if (resultReasons) {
@@ -3321,9 +3360,14 @@
                     const adhesion = plan.taxaDeAdesaoUnica ? `Taxa única: ${formatMoney(plan.taxaDeAdesaoUnica)}` : "Sem taxa de adesão única";
                     const topInfluence = influences?.[0];
                     const keyLabel = ATTRIBUTE_LABELS[topInfluence?.key] ?? topInfluence?.key ?? "características do plano";
+                    const badge = index === 0 ? 'Recomendado' : (index === 1 && isCloseCall ? 'Também recomendado' : 'Alternativo');
+                    const pointsBehind = Math.round((winner.compatibilityPercent - compatibilityPercent) * 10) / 10;
+                    const scoreNote = index === 0
+                        ? ` — a maior ${allPlansFit ? 'entre todos' : 'no seu orçamento'}`
+                        : ` · ${pointsBehind} ${pointsBehind === 1 ? 'ponto' : 'pontos'} abaixo do recomendado`;
 
                     card.innerHTML = `
-                        <div class="result-badge">${index === 0 ? 'Recomendado' : 'Alternativo'}</div>
+                        <div class="result-badge">${badge}</div>
                         <div class="result-plan">
                             <img src="${plan.logo}" alt="Logo do plano ${plan.nome}">
                             <p class="result-price">${formatMoney(plan.precoMensal)} / mês</p>
@@ -3335,7 +3379,7 @@
                                 ${(plan.beneficios || []).map(b => `<li>${b}</li>`).join('')}
                             </ul>
                         </div>
-                        <div class="plan-score">${compatibilityPercent}% de compatibilidade${index === 0 ? ' — a maior entre todos' : ''}</div>
+                        <div class="plan-score">${compatibilityPercent}% de compatibilidade${scoreNote}</div>
                         <a href="${plan.link}" target="_blank" rel="noopener noreferrer" class="plan-cta" data-plan="${plan.nome}">${getCTAText(plan)}</a>
                     `;
                     plansList.appendChild(card);
@@ -3408,8 +3452,8 @@
                         nextBtn.disabled = false;
                     });
 
-                    // Se já tem valor salvo (navegação voltar/avançar), habilita
-                    if (state.answers[question.key] !== undefined && state.answers[question.key] !== question.min) {
+                    // Qualquer valor do slider é resposta válida, inclusive o mínimo (0 jogos)
+                    if (state.answers[question.key] !== undefined && state.answers[question.key] !== null) {
                         nextBtn.disabled = false;
                     }
                 } else {
@@ -3646,7 +3690,9 @@
 
         function openComparisonModal(modal) {
             const body = modal.querySelector('#modalComparisonBody');
-            if (body && !body.hasChildNodes()) {
+            // Remonta a cada abertura: depois de "Refazer quiz" as respostas e o recomendado mudam
+            if (body) {
+                body.textContent = '';
                 const wrapper = document.createElement('div');
                 wrapper.className = 'comparison-wrapper';
                 body.appendChild(wrapper);
@@ -3731,7 +3777,12 @@
                 budget: 200,
                 preferredSector: 'blue'
             };
-            requestAnimationFrame(() => showResults());
+            requestAnimationFrame(() => {
+                transitionSection(heroSection, createResultsSection, (resultsSection) => {
+                    bindSectionEvents(resultsSection, 'results');
+                    renderResults(resultsSection);
+                });
+            });
         }
 
         // Header mobile menu toggle
