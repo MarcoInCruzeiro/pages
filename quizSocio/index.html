@@ -2360,6 +2360,8 @@
             }
         };
         let heightResetTimer = null;
+        let quizStartedAt = 0;
+        let questionShownAt = 0;
 
         const questions = [
             {
@@ -2673,6 +2675,24 @@
         function getAnswerLabel(question, value) {
             if (question.type === 'range') return `${value} ${question.suffix}`;
             return question.options.find(o => o.value === value)?.label ?? String(value);
+        }
+
+        function secondsSince(start) {
+            return Math.round((performance.now() - start) / 100) / 10;
+        }
+
+        function trackQuizStart() {
+            quizStartedAt = performance.now();
+            trackEvent('quiz_start');
+        }
+
+        function trackSubscribeClick(planName, recommendedName, ctaLocation) {
+            trackEvent('quiz_subscribe_click', {
+                plan: planName,
+                recommended_plan: recommendedName,
+                clicked_recommended: String(planName === recommendedName),
+                cta_location: ctaLocation
+            });
         }
 
         function formatMoney(value) {
@@ -3230,7 +3250,7 @@
                 a.className = 'plan-cta';
                 a.textContent = getCTAText(plan);
                 a.addEventListener('click', () => {
-                    trackEvent('quiz_subscribe_click', { plan: plan.nome, cta_location: 'comparativo' });
+                    trackSubscribeClick(plan.nome, recommendations[0]?.plan.nome, 'comparativo');
                 });
                 td.appendChild(a);
                 footerRow.appendChild(td);
@@ -3253,6 +3273,7 @@
             trackEvent('quiz_complete', {
                 recommended_plan: winner.plan.nome,
                 compatibility: winner.compatibilityPercent,
+                total_time_sec: secondsSince(quizStartedAt),
                 ...answerParams
             });
 
@@ -3321,7 +3342,7 @@
                 });
                 plansList.addEventListener('click', (e) => {
                     const cta = e.target.closest('.plan-cta');
-                    if (cta) trackEvent('quiz_subscribe_click', { plan: cta.dataset.plan, cta_location: 'lista' });
+                    if (cta) trackSubscribeClick(cta.dataset.plan, winner.plan.nome, 'lista');
                 });
             }
         }
@@ -3436,6 +3457,7 @@
                 questionTitle.style.transform = "translateY(0)";
                 optionsContainer.style.opacity = "1";
                 optionsContainer.style.transform = "translateY(0)";
+                questionShownAt = performance.now();
             }, 180);
         }
 
@@ -3558,7 +3580,8 @@
                 quiz_step: state.step + 1,
                 quiz_question: question.key,
                 quiz_answer: String(answer),
-                quiz_answer_label: getAnswerLabel(question, answer)
+                quiz_answer_label: getAnswerLabel(question, answer),
+                answer_time_sec: secondsSince(questionShownAt)
             });
 
             if (state.step === questions.length - 1) {
@@ -3604,7 +3627,7 @@
                 heroSection = newHeroSection;
                 const newStartButton = heroSection.querySelector('#startButton');
                 newStartButton.addEventListener('click', () => {
-                    trackEvent('quiz_start');
+                    trackQuizStart();
                     transitionSection(heroSection, createQuizSection, (quizSection) => {
                         bindSectionEvents(quizSection, 'quiz');
                         renderQuestion();
@@ -3617,7 +3640,7 @@
         function onSubscribeClick() {
             const button = document.querySelector('#subscribeButton');
             const url = button?.dataset.subscribeUrl || 'https://socio5estrelas.com.br';
-            trackEvent('quiz_subscribe_click', { plan: button?.dataset.plan, cta_location: 'resultado' });
+            trackSubscribeClick(button?.dataset.plan, button?.dataset.plan, 'resultado');
             window.open(url, '_blank', 'noopener,noreferrer');
         }
 
@@ -3686,7 +3709,7 @@
 
 
         startButton.addEventListener("click", () => {
-            trackEvent('quiz_start');
+            trackQuizStart();
             transitionSection(heroSection, createQuizSection, (quizSection) => {
                 bindSectionEvents(quizSection, 'quiz');
                 renderQuestion();
