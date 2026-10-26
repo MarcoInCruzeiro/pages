@@ -1,349 +1,246 @@
-# Estrutura Completa — Quiz Sócio 5 Estrelas
+# Estrutura do Quiz Sócio 5 Estrelas
 
-> Documento de apoio para reunião — mapeamento de todos os textos, campos, perguntas, dados e lógicas do quiz.
+Documento de apoio do quiz publicado em [`index.html`](index.html). O catálogo comercial tem uma fonte própria, [`catalogo-comercial.md`](catalogo-comercial.md); este documento descreve como perguntas, perfil, ranking e interface usam esses dados.
 
----
+## 0. Visão geral
 
-## 0. Escala de Pontuação
-
-Todas as perguntas e planos usam **escala 0-20** para os atributos de perfil.
-
----
-
-## 1. PLANOS — Dados completos dos 5 planos
-
-### 1.1. Meu Cruzeiro — R$ 12/mês
-
-| Campo | Valor |
-|---|---|
-| **Preço anual** | R$ 144 |
-| **Ingresso grátis** | Sim (1 por temporada) |
-| **Carteirinha digital** | Sim |
-| **Taxa de adesão** | Não |
-| **Desconto loja** | Até 10% |
-| **Conteúdo exclusivo** | Sim |
-| **Participação em quizzes** | Sim |
-| **Votação em decisões** | Sim |
-| **Complementos disponíveis** | Kids, Carteirinha Física |
-| **Benefícios** | Ingresso grátis por temporada · Carteirinha digital · Até 10% na Loja · Participação em quizzes |
-
-### 1.2. Time do Povo — R$ 40/mês
-
-| Campo | Valor |
-|---|---|
-| **Preço anual** | R$ 480 |
-| **Ingresso grátis** | Não |
-| **Carteirinha digital** | Sim |
-| **Taxa de adesão** | R$ 30 única |
-| **Desconto ingresso** | Todo jogo nos setores Amarelo e Laranja custa R$ 40,00 |
-| **Desconto loja** | Até 15% |
-| **Conteúdo exclusivo** | Não |
-| **Participação em quizzes** | Sim |
-| **Votação em decisões** | Não |
-| **Complementos disponíveis** | Kids, Carteirinha Física |
-| **Benefícios** | Carteirinha digital · Ingresso a R$ 40 nos setores Amarelo e Laranja · Até 15% na Loja · Participação em quizzes |
-
-### 1.3. Cabuloso — R$ 100/mês
-
-| Campo | Valor |
-|---|---|
-| **Preço anual** | R$ 1.200 |
-| **Ingresso grátis** | Não |
-| **Carteirinha digital** | Sim |
-| **Taxa de adesão** | R$ 30 única |
-| **Desconto ingresso** | Desconto progressivo conforme frequência nos últimos 15 meses |
-| **Níveis de desconto** | Nível 1 (0-9 jogos): 50% · Nível 2 (10-19 jogos): 55% · Nível 3 (20+ jogos): 60% |
-| **Prioridade na compra** | Sim (varia por nível) |
-| **Desconto loja** | Até 15% |
-| **Conteúdo exclusivo** | Sim |
-| **Participação em quizzes** | Sim |
-| **Votação em decisões** | Sim |
-| **Complementos disponíveis** | Kids, Carteirinha Física |
-| **Benefícios** | Carteirinha digital · Desconto progressivo (50% a 60%) · Até 15% na Loja · Participação em quizzes |
-
-### 1.4. Cabuloso Max — R$ 200/mês
-
-| Campo | Valor |
-|---|---|
-| **Preço anual** | R$ 2.400 |
-| **Ingresso grátis** | Não |
-| **Carteirinha digital** | Sim |
-| **Taxa de adesão** | R$ 30 única |
-| **Desconto ingresso** | Até 2 ingressos por jogo com 65% de desconto |
-| **Prioridade na compra** | Prioridade máxima (nível 1) |
-| **Desconto loja** | Até 15% |
-| **Conteúdo exclusivo** | Sim |
-| **Participação em quizzes** | Sim |
-| **Votação em decisões** | Sim |
-| **Complementos disponíveis** | Kids, Carteirinha Física |
-| **Benefícios** | Carteirinha digital · 2 ingressos com 65% off · Até 15% na Loja · Participação em quizzes |
-
-### 1.5. Cabuloso Cativo — R$ 400/mês
-
-| Campo | Valor |
-|---|---|
-| **Preço anual** | R$ 4.800 |
-| **Ingresso grátis** | Não |
-| **Carteirinha digital** | Sim |
-| **Taxa de adesão** | Não |
-| **Desconto ingresso** | 1 ingresso garantido no Azul Inferior |
-| **Prioridade na compra** | Prioridade máxima (assento cativo) |
-| **Desconto loja** | Até 10% |
-| **Conteúdo exclusivo** | Sim |
-| **Participação em quizzes** | Sim |
-| **Votação em decisões** | Sim |
-| **Complementos disponíveis** | Kids |
-| **Benefícios** | Carteirinha digital · 1 ingresso garantido no Azul Inferior · Até 10% na Loja · Participação em quizzes |
-
----
-
-## 2. QUIZ — 11 Perguntas com opções e lógica de pontuação
-
-> Cada pergunta mapeia uma resposta a **efeitos numéricos** em atributos do perfil do usuário. Escala 0-20.
-
-### Q1 — `gamesPerYear` (Range)
-
-**Pergunta:** Em média, a quantos jogos do Cruzeiro você pretende ir por ano?
-
-| Tipo | Min | Max | Rótulo |
-|---|---|---|---|
-| Range | 0 | 30 | Frequência estimada |
-
-**Efeitos base (sempre aplicados):**
-- `frequenciaEstadio = Math.round(val/30 * 8)` → Normaliza 0-30 para escala 0-8
-- `prioridadeIngressos` = 0 se 0 jogos; 2 se 1-4 jogos; 5 se 5-14 jogos; 8 se 15+ jogos
-
-**Efeito condicional (val > 10):**
-- `interesseExperiencias: +3`
-- `consumoProdutosOficiais: +2`
-- `prioridadeIngressos: +2` (adicional)
-
-Isso direciona torcedores frequentes (>10 jogos/ano) para planos como Time do Povo ou superiores.
-
-### Q2 — `wantsGuaranteedTicket`
-
-**Pergunta:** O que melhor te define como torcedor?
-
-| Opção | Descrição | Efeitos |
+| Camada | Arquivo | Responsabilidade |
 |---|---|---|
-| **Não frequento o estádio** | Não costumo frequentar os jogos presencialmente. | `importanciaPreco: +5`, `prioridadeIngressos: 0`, `frequenciaEstadio: 0` |
-| **Faço questão de ir a todos os jogos** | Quero garantir meu lugar na arquibancada em todas as partidas possíveis. | `prioridadeIngressos: +5`, `frequenciaEstadio: +4`, `importanciaPreco: +2` |
-| **Foco nos jogos mais decisivos** | Prefiro guardar energia e orçamento para clássicos e fases finais. | `importanciaPreco: +5`, `prioridadeIngressos: +3` |
+| Catálogo, perguntas, validação e ranking | [`quiz-engine.js`](quiz-engine.js) | Funções puras, sem DOM, analytics ou estado global |
+| Interface | [`index.html`](index.html) | Renderização, navegação, confirmação de conflitos, analytics e CTAs |
+| Fonte comercial | [`catalogo-comercial.md`](catalogo-comercial.md) | Condições oficiais, divergências, pendências e data de consulta |
+| Testes | [`tests/`](tests/) | Motor, referência de qualidade e fluxo real de navegador |
 
-### Q3 — `buysTwoTickets`
+Fonte oficial consultada em 26/10/2026: https://socio.cruzeiro.com.br/pt-BR/paginas/termo-de-uso (publicação de 11/09/2026). O motor expõe `CATALOG_VERSION = 2026-09-11` e `RULES_VERSION = 2026-10-26` (regras de perfil e ranking).
 
-**Pergunta:** Quando vai ao estádio, você costuma levar acompanhantes?
+## 1. Planos — condições confirmadas
 
-| Opção | Descrição | Efeitos |
-|---|---|---|
-| **Sim, quase sempre vou acompanhado** | Preciso de facilidade para comprar dois ou mais ingressos juntos. | `levaAcompanhantes: +8`, `interesseDescontos: +5` |
-| **Não, geralmente vou sozinho** | Compro apenas o meu ingresso. | `levaAcompanhantes: 0` |
+A matriz completa, com taxa de adesão, setores, níveis, opcionais e divergências, está em [`catalogo-comercial.md`](catalogo-comercial.md). Resumo usado pelo quiz:
 
-### Q4 — `needsPriority`
-
-**Pergunta:** Quando vai comprar ingressos para o jogo, como costuma agir?
-
-| Opção | Descrição | Efeitos |
-|---|---|---|
-| **Compro no primeiro minuto** | Não gosto de correr riscos. Assim que abre, eu garanto o meu. | `prioridadeIngressos: +5` |
-| **Compro com calma** | Deixo para comprar depois, se ainda houver disponibilidade. | `prioridadeIngressos: 0` |
-
-### Q5 — `wantsParticipation`
-
-**Pergunta:** Além dos jogos, o quanto você se interessa por experiências exclusivas?
-
-| Opção | Descrição | Efeitos |
-|---|---|---|
-| **Tenho muito interesse** | Quero participar de sorteios, eventos do clube e receber ofertas especiais. | `interesseExperiencias: +6` |
-| **Não faço questão** | Meu foco é apenas assistir aos jogos, sem extras. | `interesseExperiencias: 0` |
-
-### Q6 — `wantsStoreDiscount`
-
-**Pergunta:** Sempre que sai um novo manto ou produto oficial, o que você faz?
-
-| Opção | Descrição | Efeitos |
-|---|---|---|
-| **Sempre tento comprar** | Gosto de colecionar ou renovar minhas camisas e busco descontos para isso. | `interesseDescontos: +7`, `consumoProdutosOficiais: +6` |
-| **Raramente compro** | Não costumo consumir muitos produtos na loja oficial. | `interesseDescontos: 0`, `consumoProdutosOficiais: 0` |
-
-### Q7 — `gameFrequency`
-
-**Pergunta:** Como você costuma viver a paixão nos dias de jogo?
-
-| Opção | Descrição | Efeitos |
-|---|---|---|
-| **Sempre na arquibancada** | O Mineirão é minha segunda casa. | `frequenciaEstadio: +4`, `interesseExperiencias: +3` |
-| **Fico dividido entre estádio e TV** | Vou em boa parte, mas assisto outros de casa ou do bar. | `frequenciaEstadio: +2`, `interesseExperiencias: +2` |
-| **Acompanho mais de casa mesmo** | Vou pouco ao estádio, prefiro transmissões. | `frequenciaEstadio: +1`, `interesseExperiencias: +1` |
-
-### Q8 — `familyPlan`
-
-**Pergunta:** Você planeja incluir dependentes (filhos ou cônjuge) no seu plano?
-
-| Opção | Descrição | Efeitos |
-|---|---|---|
-| **Sim, quero um plano familiar** | Preciso de benefícios estendidos para a minha família. | `levaAcompanhantes: +7`, `importanciaPreco: +3` |
-| **Não, o plano será individual** | Os benefícios serão utilizados apenas por mim. | `levaAcompanhantes: 0` |
-
-### Q9 — `digitalExperience`
-
-**Pergunta:** O quanto você consome os conteúdos digitais e de bastidores do clube?
-
-| Opção | Descrição | Efeitos |
-|---|---|---|
-| **Acompanho tudo diariamente** | Valorizo o app oficial e quero informações em primeira mão. | `interesseExperiencias: +4`, `consumoProdutosOficiais: +3` |
-| **Foco apenas no campo** | Meu interesse principal são os 90 minutos de bola rolando. | `interesseExperiencias: +2`, `frequenciaEstadio: +4` |
-
-### Q10 — `budget`
-
-**Pergunta:** Qual é o seu orçamento mensal confortável para investir no Sócio?
-
-| Opção | Descrição | Efeitos |
-|---|---|---|
-| **Até R$ 40/mês** | Busco a opção com o melhor custo-benefício inicial. | `importanciaPreco: +4` |
-| **Até R$ 100/mês** | Quero os beneficios dos planos intermediários com mais vantagens. | `importanciaPreco: +2` |
-| **Até R$ 200/mês** | Tenho flexibilidade para investir em planos melhores com mais vantagens. | `importanciaPreco: +1` |
-| **Sem limite definido** | Quero o plano mais completo, independente do valor. | `importanciaPreco: 0` |
-
-### Q11 (NOVA) — `preferredSector`
-
-**Pergunta:** Em qual setor você se sente mais à vontade?
-
-| Opção | Descrição | Plano mais adequado | Efeitos |
-|---|---|---|---|
-| **Setor Amarelo ou Laranja** | Torcida organizada, muito canto e festa. Melhor custo-benefício. | Time do Povo | `importanciaPreco: +6` (e bônus de setor de 6 pontos no Time do Povo, ver seção 5) |
-| **Setor Azul** | Visão central do campo, equilíbrio entre custo e conforto. | Cabuloso | `importanciaPreco: +2`, `interesseExperiencias: +2`, `consumoProdutosOficiais: +2` |
-| **Setor Roxo** | Cadeira premium, conforto máximo e experiência exclusiva. | Cabuloso Max / Cativo | `interesseExperiencias: +4`, `consumoProdutosOficiais: +4` |
-
----
-
-## 3. ATRIBUTOS DE PERFIL — Chaves e rótulos
-
-| Chave | Rótulo exibido ao usuário | Max contribuição |
-|---|---|---|
-| `importanciaPreco` | Maior economia e custo-benefício | 18 |
-| `frequenciaEstadio` | Facilidade em frequentar o estádio | 20 |
-| `interesseDescontos` | Mais promoções e descontos | 12 |
-| `interesseExperiencias` | Mais experiências | 20 |
-| `levaAcompanhantes` | Levar companhia (família e amigos) | 15 |
-| `prioridadeIngressos` | Maior prioridade em ingressos | 20 |
-| `consumoProdutosOficiais` | Facilidade em consumir produtos oficiais | 15 |
-
-"Max contribuição" é a soma dos maiores efeitos possíveis de cada pergunta, limitada a 20.
-
----
-
-## 4. PERFIS DOS PLANOS (escala 0-20)
-
-| Atributo | Meu Cruzeiro | Time do Povo | Cabuloso | Cabuloso Max | Cabuloso Cativo |
+| Plano | Contratação exibida | Ingresso | Prioridade/garantia | Loja | Conteúdo e votação |
 |---|---|---|---|---|---|
-| `importanciaPreco` | 20 | 19 | 15 | 10 | 0 |
-| `frequenciaEstadio` | 2 | 6 | 10 | 16 | 20 |
-| `interesseDescontos` | 4 | 14 | 18 | 19 | 12 |
-| `interesseExperiencias` | 18 | 5 | 18 | 20 | 20 |
-| `levaAcompanhantes` | 1 | 3 | 5 | 16 | 8 |
-| `prioridadeIngressos` | 2 | 6 | 10 | 16 | 20 |
-| `consumoProdutosOficiais` | 12 | 18 | 18 | 18 | 12 |
+| Meu Cruzeiro | R$ 12/mês de referência; cobrança semestral ou anual; sem adesão | 1 gratuito por temporada, Amarelo/Laranja, mediante disponibilidade | Prioridade 4 | Até 10% | Sim |
+| Time do Povo | R$ 40/mês de referência; cobrança semestral ou anual; adesão R$ 30 | 1 popular pelo menor valor online da arquibancada, Amarelo/Laranja | Prioridade 4 | Até 10% | Sim |
+| Cabuloso | R$ 100/mês de referência; cobrança semestral ou anual; adesão R$ 30 | 1 com desconto progressivo de 50% a 60% | Nível 1: prioridade 3; nível 2: 2; nível 3: 1 | Até 15% | Sim |
+| Cabuloso Max | R$ 200/mês de referência; cobrança semestral ou anual; adesão R$ 30 | Até 2 com 65% de desconto | Prioridade 1 | Até 15% | Sim |
+| Cabuloso Cativo | Anual: R$ 4.800 em 12x de R$ 400; sem adesão | 1 garantido por jogo no Sicoob — Leste Inferior, temporada 2026 | Ingresso garantido | Até 10% | Sim |
 
-Hierarquia: Meu Cruzeiro < Time do Povo < Cabuloso < Cabuloso Max < Cabuloso Cativo
+Regras que a interface deve preservar:
 
----
+- Garantia de ingresso não é o mesmo que prioridade. Só o Cativo tem garantia.
+- O Time do Povo não promete ingresso fixo de R$ 40; promete o menor valor online da arquibancada.
+- O Cativo é exclusivamente anual; card e checkout mostram 12x R$ 400 e `intervalo_cobrancas=anual`.
+- Os quatro demais planos usam R$ X/mês como referência, mas a cobrança vigente na tabela oficial é semestral ou anual; os CTAs usam `intervalo_cobrancas=anual`.
+- Campos não confirmados, como desconto em parceiros, não aparecem como benefício.
 
-## 5. LÓGICA DE RECOMENDAÇÃO — Algoritmo
+## 2. Perguntas — 12 respostas
 
-O quiz usa **Similaridade do Cosseno** entre dois vetores de 7 dimensões:
+| # | Chave | Tipo | Valores | Uso no perfil |
+|---|---|---|---|---|
+| 1 | `gamesPerYear` | Range 0–30 | 0 a 30 | Intenção anual de jogos; volume de uso e custo |
+| 2 | `gamesHistory` | Range 0–30 ou “não sei” | 0 a 30, `unknown` | Histórico de 15 meses; define nível do Cabuloso |
+| 3 | `wantsGuaranteedTicket` | Opção | `never`, `true`, `false` | Presença declarada; detecta conflito com jogos |
+| 4 | `buysTwoTickets` | Opção | `true`, `false` | Necessidade de acompanhante adulto |
+| 5 | `kidsCount` | Opção | 0, 1, 2, 3 | Quantidade de opcionais Kids |
+| 6 | `needsPriority` | Opção | `true`, `false` | Importância de prioridade na compra |
+| 7 | `wantsParticipation` | Opção | `true`, `false` | Interesse em experiências e conteúdo |
+| 8 | `wantsStoreDiscount` | Opção | `true`, `false` | Interesse em produtos oficiais |
+| 9 | `gameFrequency` | Opção | `always`, `frequent`, `occasional` | Frequência declarada; detecta conflito com jogos |
+| 10 | `digitalExperience` | Opção | `true`, `false` | Interesse em conteúdo digital |
+| 11 | `budget` | Opção | 40, 100, 200, 400 | Teto mensal da assinatura, não do uso |
+| 12 | `preferredSector` | Opção | `yellow-orange`, `blue`, `purple` | Preferência flexível de setor |
 
-1. **Perfil do usuário** → construído somando os efeitos de cada resposta (normalizado 0-20 por atributo)
-2. **Perfil de cada plano** → gerado dinamicamente a partir das características reais do plano
+Validação aceita `0` e `false` como respostas. `null`, `undefined`, valores fora do intervalo e opções inexistentes mantêm o usuário na pergunta. Ao finalizar, todas as respostas são verificadas e a primeira inválida é reaberta com mensagem visível.
 
-### Penalidade de preço
+### Conflitos e confirmação
 
-Após o cálculo do cosseno, aplica-se um ajuste:
-- `penalty = 1 - (userSensitivity * priceRatio * 0.25)`
-- `userSensitivity = importanciaPreco / 20`
-- `priceRatio = planPrice / maxPrice`
-- Score final = `cosineScore * Math.max(0.75, penalty)`
-- Máxima penalidade: 25%
+Combinações incompatíveis não são corrigidas em silêncio. A interface mostra os conflitos e exige confirmação ou revisão:
 
-### Bônus de setor
+- 0 jogo por ano + “faço questão de ir a todos os jogos”.
+- 0 jogo por ano + “sempre na arquibancada”.
+- 0 jogo por ano + “fico dividido entre estádio e TV”.
+- Mais de 0 jogo por ano + “não frequento o estádio”.
 
-Quem escolhe o setor Amarelo ou Laranja soma 6 pontos à compatibilidade do Time do Povo, o plano desses setores (ingresso a R$ 40 neles). Os atributos do perfil não capturam essa relação: sem o bônus, o público do Time do Povo ficava mais compatível com planos caros. 6 pontos é o menor bônus que leva o perfil "família no Amarelo/Laranja" ao Time do Povo com margem acima do empate técnico. A compatibilidade exibida é limitada a 100%.
+Ao confirmar, as duas respostas permanecem registradas. A intenção anual define o volume de jogos; a declaração de não frequentar o estádio zera a necessidade presencial. Revisar volta à primeira pergunta envolvida.
 
-### Filtro por orçamento
+## 3. Perfil do usuário — escala 0 a 10
 
-Planos com preço mensal acima do `budget` informado são excluídos. Se nenhum couber, o mais barato é usado como fallback.
+O perfil é reconstruído a cada resposta; voltar e editar não acumula efeitos.
 
-### Resultado final
+| Atributo | Cálculo |
+|---|---|
+| `frecuencia` | 0,4 × (`gamesPerYear` / 30 × 10) + 0,3 × presença (`never` 0, `true` 9, `false` 5) + 0,3 × declaração (`always` 10, `frequent` 7, `occasional` 2). É zero se `gamesPerYear = 0` ou presença `never` |
+| `prioridad` | `needsPriority = true` → 8; `false` → 2; ausente → 5 |
+| `experiencias` | `wantsParticipation = true` → 8; `false` → 1; ausente → 5; +2 se `digitalExperience = true` |
+| `descuentos` e `productos` | `wantsStoreDiscount = true` → 8; `false` → 1; ausente → 5 |
+| `importanciaPreco` | Orçamento 40 → 8; 100 → 5; 200 → 3; 400 → 1 |
+| `adultos` | 1 se `buysTwoTickets = true`; caso contrário 0 |
+| `kids` | `kidsCount`, limitado a 0–3 |
+| `setorPreferido` | `preferredSector` |
 
-Top 3 planos mais compatíveis são exibidos, ordenados do maior para o menor percentual de compatibilidade.
+Não há inferência de frequência presencial a partir de conteúdo digital, nem de consumo de produtos a partir de frequência. Cada efeito acima tem correspondência direta no texto da pergunta.
 
-- O texto do resultado diz "a maior entre todos os planos" só quando todos cabem no orçamento; caso contrário, "a maior entre os planos que cabem no seu orçamento". A tabela comparativa marca os planos fora do orçamento.
-- **Empate técnico:** se o 2º colocado ficar a menos de 1 ponto do 1º, os dois são apresentados como recomendados ("Também recomendado").
-- Os planos alternativos mostram quantos pontos estão abaixo do recomendado.
+## 4. Nível do Cabuloso
 
----
+Um único cálculo (`resolveLevel`) alimenta ranking, custo, prioridade e textos:
 
-## 6. SEÇÕES DINÂMICAS — Templates HTML
+| Histórico de 15 meses | Nível | Prioridade | Desconto |
+|---|---|---|---|
+| 0 a 9 jogos | 1 | 3 | 50% |
+| 10 a 19 jogos | 2 | 2 | 55% |
+| 20 ou mais | 3 | 1 | 60% |
+| `unknown`, nulo ou ausente | 1 (condição inicial) | 3 | 50% |
 
-### Quiz Section
+A intenção anual (`gamesPerYear`) não concede nível. Histórico desconhecido usa a condição inicial e o resultado identifica que se trata de projeção.
+
+## 5. Custo de uso estimado
+
+O orçamento limita apenas a assinatura (`precoMensalEquivalente`). Ingressos, adesão e opcionais são apresentados separadamente como custo de uso estimado, em horizonte mensal. O horizonte mensal e o significado do orçamento são decisões registradas no QUIZ-009 (26/10/2026): a adesão não entra no custo comparado pelo ranking e aparece como custo do primeiro mês.
 
 ```
-[████████████████]  (progress bar)
-Pergunta X de 11
+assinatura = preço mensal equivalente do plano
+kids = quantidade de crianças × R$ 30
+ingressos/mês = jogos por ano / 12 × valor do ingresso do titular
+acompanhante = jogos por ano / 12 × R$ 150, quando o plano não cobre o adulto extra
+custo estimado mensal = assinatura + kids + ingressos + acompanhante
+primeiro mês = custo estimado mensal + adesão
+```
+
+Regras por tipo de ingresso:
+
+- **Gratuito:** 1 ingresso por temporada; os demais jogos usam R$ 150 de referência.
+- **Popular:** usa R$ 40 de referência por jogo.
+- **Garantido:** ingresso do titular sem custo adicional; o benefício cobre 1 pessoa.
+- **Desconto:** R$ 150 × (1 − desconto do nível).
+- **Acompanhante:** um plano com 2 ingressos cobre o titular e no máximo 1 adulto; além disso, usa R$ 150 por jogo.
+
+Arredondamento: os cálculos usam valores sem arredondamento (ex.: Cabuloso nível 2 com 10 jogos = 100 + 10/12 × 150 × 0,45 = R$ 156,25). Só a exibição arredonda para centavos, com `toLocaleString('pt-BR')` (meio para cima). O índice de afinidade é arredondado a uma casa decimal.
+
+Premissas de simulação, exibidas no resultado: ingresso cheio R$ 150, ingresso popular R$ 40 e Kids R$ 30/mês por criança. Ingressos das crianças não entram no custo: o catálogo não confirma se o opcional Kids os cobre, e o resultado informa essa exclusão. Não são preços oficiais universais.
+
+## 6. Ranking — média ponderada transparente
+
+Cada plano recebe sete componentes normalizados entre 0 e 1:
+
+| Componente | Valor |
+|---|---|
+| `ticket` | Tipo de ingresso: gratuito 0,45; popular 0,75; garantido 1; desconto 0,80 (o percentual entra só pelo custo); sem benefício 0,10. Multiplicado por 1 (setor completo), 0,75 (parcial), 0,10 (fora do setor) ou 1 (sem preferência). +0,08 se leva acompanhante e o plano oferece 2 ingressos |
+| `priority` | Garantido → 1; caso contrário (`5 − prioridade`) / 4, limitado a 0–1 |
+| `sector` | Preferência completa → 1; parcial → 0,6; fora → 0; sem preferência → 0,7 |
+| `discount` | Percentual da loja / 0,15, limitado a 1 |
+| `experiences` | Conteúdo e votação → 1; apenas um → 0,7; nenhum → 0,1 |
+| `family` | Sem acompanhantes nem Kids → 0,6. Com família: 0,6 × cobertura de ingressos + 0,4 × suporte a Kids |
+| `price` | Normalização do custo estimado entre o menor e o maior dos cinco planos |
+
+Pesos:
+
+```
+presenca = 0,05 + 0,95 × (frecuencia / 10)
+pesoIngresso = presenca × (1 + 0,15 × prioridad / 10)
+pesoPrioridade = presenca × (0,2 + 0,8 × prioridad / 10)
+pesoSector = (0,8 com preferência; 0,1 sem) × presenca
+pesoDesconto = 0,2 + 0,8 × descuentos / 10
+pesoExperiencia = 0,2 + 0,8 × experiencias / 10
+pesoFamilia = 0,7 com acompanhantes ou Kids; 0,05 sem
+pesoPreco = 0,8 + 0,8 × importanciaPreco / 10
+```
+
+O índice de afinidade é a média ponderada dos componentes × 100, arredondada a uma casa. Não é probabilidade de acerto. A interface chama o número de “afinidade estimada”, explica os componentes e informa as premissas.
+
+### Papéis do preço e revisão de duplicações (QUIZ-010)
+
+- **Elegibilidade:** a assinatura mensal equivalente precisa caber no teto. É restrição, com tolerância zero.
+- **Utilidade:** o componente `price` compara o custo de uso estimado (assinatura + Kids + ingressos previstos). Não há outra penalização de preço.
+- **Desconto de ingresso:** entra só pelo custo. Até a calibração de 26/10/2026 ele também somava `0,5 × desconto` à utilidade do ingresso; o mesmo desconto era contado duas vezes. Removido sem mudança de acerto na calibração (12/12 → 12/12).
+- **Setor:** tem dois papéis distintos e mantidos. O multiplicador do `ticket` mede onde o benefício vale; o componente `sector` mede a preferência atendida. Sem o componente `sector`, a calibração cai para 11/12 (CAL-10). O peso do setor passou a escalar com a presença: antes, com zero jogos, a cobertura de um ingresso que não seria usado decidia o ranking (CAL-01: Cabuloso 93,1, Max 86,9, Meu Cruzeiro 66,6). Agora: Cabuloso 91,2, Meu Cruzeiro 85,2, Max 83,2; calibração mantida em 12/12.
+- **Consumo:** `descuentos` pesa apenas a loja. `productos` existe no perfil, mas não entra no ranking.
+- **Frequência:** pesa ingresso e prioridade, que são benefícios diferentes; não pesa loja nem conteúdo.
+- **Bônus de setor:** o bônus manual de 6 pontos do commit `2cecf81` foi substituído pela cobertura explícita de setores do catálogo.
+
+### Exemplo verificado (`tests/engine.test.js`)
+
+Entrada: 10 jogos por ano, histórico 10 (Cabuloso nível 2, 55%), foco nos jogos decisivos, sozinho, sem Kids, compra com calma, interesse em experiências, raramente compra produtos, acompanha mais de casa, sem conteúdo digital, teto R$ 100, Sicoob.
+
+| Plano | Custo estimado/mês | Setor | Índice | Elegível |
+|---|---|---|---|---|
+| Cabuloso | R$ 156,25 (100 + 10/12 × 150 × 0,45) | Completo | 86,4 | Sim — vencedor |
+| Cabuloso Max | R$ 243,75 | Completo | 77,3 | Não (R$ 200 > R$ 100) |
+| Time do Povo | R$ 73,33 | Fora | 72,6 | Sim |
+| Meu Cruzeiro | R$ 124,50 | Fora | 66,4 | Sim |
+| Cabuloso Cativo | R$ 400,00 | Parcial | 52,1 | Não |
+
+## 7. Filtro, setor e desempate
+
+- **Orçamento:** planos com assinatura acima do teto ficam fora da recomendação. Se nenhum couber, não há vencedor; os planos aparecem para comparação e o CTA é desativado.
+- **Setor:** a preferência é flexível. O vencedor pode não cobrir todo o setor, mas o resultado destaca a diferença e, se houver, oferece uma alternativa que cobre o setor dentro do orçamento.
+- **Empate:** diferença menor que 1 ponto no índice marca os dois primeiros como recomendados.
+- **Ordem determinística:** maior índice; em empate, menor assinatura; depois, slug do plano. A ordem do catálogo não influencia (`recommendPlans(respostas, catalogo)` recebe o catálogo explicitamente).
+- **Motivos:** o resultado lista avisos de setor, motivos positivos ligados às respostas e o custo estimado. Nenhum motivo é inventado para justificar o vencedor.
+
+## 8. Interface e fluxo
+
+### Quiz
+
+```
+[████████████████]  progresso
+Pergunta X de 12
   Título da pergunta
-  [Opção 1]
-  [Opção 2]
+  [opções ou slider]
   [Voltar]  [Continuar / Ver resultado]
 ```
 
-### Results Section
+- Um clique inicia a transição para o quiz.
+- Durante a troca de pergunta ou seção, a navegação fica bloqueada de forma síncrona. Cliques repetidos não pulam perguntas nem duplicam eventos.
+- Voltar preserva as respostas e o estado visual.
+- Conflitos exibem uma tela de revisão antes do resultado.
+- A finalização valida todas as respostas e garante uma única seção de resultado.
+
+### Resultado
 
 ```
-┌────────────────────────────────┐
-│  Plano recomendado             │
-│                                │
-│  [LOGO]                        │
-│  R$ XX / mês                   │
-│                                │
-│  "Este plano tem XX% de        │
-│   compatibilidade com seu      │
-│   perfil e oferece os          │
-│   benefícios mais adequados."  │
-│                                │
-│  • Benefício 1                 │
-│  • Benefício 2                 │
-│  • Benefício 3                 │
-│                                │
-│  [Refazer quiz]  [Assinar agora]│
-└────────────────────────────────┘
-┌────────────────────────────────┐
-│  Melhores opções               │
-│  Recomendações personalizadas  │
-│                                │
-│  ┌─────────────────────────┐   │
-│  │ Recomendado / Alternativo│   │
-│  │ [LOGO]                   │   │
-│  │ R$ XX / mês              │   │
-│  │ R$ XXX / ano             │   │
-│  │ Taxa única: R$ XX        │   │
-│  │ Vantagens:               │   │
-│  │ • Item                    │   │
-│  │ XX%                      │   │
-│  │ [Assinar agora]           │   │
-│  └─────────────────────────┘   │
-└────────────────────────────────┘
+Plano recomendado
+[LOGO]  R$ XX / mês (referência)   ·   Total anual: R$ XXX
+Contratação, adesão e custo de uso estimado
+Aviso de setor e alternativa, quando aplicável
+Motivos da recomendação
+[Como calculamos a afinidade estimada]
+[Refazer quiz]  [Comparar planos]  [Assinar agora]
 ```
 
----
+Os cards laterais mostram até três opções ordenadas pela afinidade, com indicação de “Acima do orçamento” quando aplicável. O comparativo abre em modal, lista os cinco planos, mostra contratação, preço, adesão, ingresso e setores, prioridade/garantia, loja, conteúdo/votação, Kids e afinidade. Fecha pelo botão, pelo fundo ou por `Escape`.
 
-## 7. FOOTER — Rodapé
+## 9. Analytics
+
+Eventos enviados ao GA4 somente fora do modo preview:
+
+| Evento | Campos principais |
+|---|---|
+| `quiz_start` | — |
+| `quiz_answer` | `quiz_step`, `quiz_question`, `quiz_answer`, `quiz_answer_label`, `answer_time_sec` |
+| `quiz_complete` | `recommended_plan`, `affinity_index`, `compatibility` (legado), `score_semantics`, `no_eligible_plan`, `catalog_version`, `total_time_sec` e `answer_*` |
+| `quiz_subscribe_click` | `plan`, `recommended_plan`, `clicked_recommended`, `cta_location` |
+
+`compatibility` é mantido como alias do índice para não quebrar consumidores existentes; `score_semantics = indice_afinidade_estimado` documenta a mudança de leitura. O modo preview (`?preview` ou `#preview`) renderiza um cenário fixo e não envia eventos.
+
+## 10. Verificação
+
+| Comando | Cobertura |
+|---|---|
+| `npm test` | Motor, referência e navegador |
+| `npm run test:unit` | Catálogo, validação, níveis, custos, setores, ranking e metas |
+| `npm run test:browser` | Navegação, conflitos, resultado único, modal, analytics, mobile e desktop |
+| `npm run baseline` | Regenera `tests/fixtures/baseline-reference.json` executando o ranking do commit `2cecf81` sobre a referência. Depende do histórico git; fora de `npm test` |
+
+Metas do QUIZ-009, definidas pelo responsável pelo quiz em 26/10/2026: zero violação de restrição comercial; pelo menos 80% de acerto no primeiro plano e 95% de opção aceitável entre as três primeiras na base reservada. A base tem 12 cenários de calibração, 12 reservados e 5 de contradição; os contraditórios precisam ser detectados e ficam fora das métricas. Linha de base `2cecf81`: 7/12 no top-1 da reserva; versão atual: 12/12. A referência é sintética; ela não mede satisfação, contratação ou retenção de usuários reais.
+
+## 11. Rodapé
 
 | Seção | Conteúdo |
 |---|---|
-| **Logo** | Link para `https://socio.cruzeiro.com.br/` |
-| **Redes sociais** | Facebook, Instagram, X (Twitter), TikTok, YouTube |
-| **Telefone / WhatsApp** | 31 4000-2161 |
-| **E-mail** | socio5estrelas@cruzeiro.com.br |
-| **Horário de atendimento** | 08h00 às 18h00 — Segunda a Sexta |
-| **Copyright** | © 2026 — CRUZEIRO ESPORTE CLUBE SAF |
-| **Links legais** | Política de privacidade \| Termos de uso \| Termo de compra de ingressos |
+| Logo | Link para https://socio.cruzeiro.com.br/ |
+| Redes sociais | Facebook, Instagram, X (Twitter), TikTok, YouTube |
+| Telefone / WhatsApp | 31 4000-2161 |
+| E-mail | socio5estrelas@cruzeiro.com.br |
+| Atendimento | 08h00 às 18h00 — segunda a sexta |
+| Copyright | © 2026 — CRUZEIRO ESPORTE CLUBE SAF |
+| Links legais | Política de privacidade, Termos de uso e Termo de compra de ingressos |

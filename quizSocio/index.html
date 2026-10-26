@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Descubra o plano de sócio ideal para você no Cruzeiro. Responda nosso quiz rápido e receba uma recomendação personalizada com os melhores benefícios.">
+        content="Descubra o plano de sócio com mais afinidade com o seu perfil no Cruzeiro. Responda nosso quiz rápido e veja uma estimativa personalizada com benefícios, setor e custo.">
     <meta name="keywords" content="Cruzeiro, sócio, plano, quiz, assinatura, benefits, torcedor">
     <meta name="author" content="Cruzeiro Esporte Clube - SAF">
     <meta name="robots" content="index, follow">
@@ -1072,6 +1072,8 @@
         .modal-overlay.is-open {
             opacity: 1;
             visibility: visible;
+            /* Visível de imediato ao abrir, para o foco entrar no diálogo. */
+            transition: opacity 0.3s ease, visibility 0s;
         }
 
         .modal-content {
@@ -1121,7 +1123,8 @@
             color: rgba(255, 255, 255, 0.7);
             font-size: 1.4rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            /* Sem `all`: transição de visibility impediria o foco ao abrir. */
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
             line-height: 1;
         }
 
@@ -2000,6 +2003,140 @@
                 font-size: 0.65rem;
             }
         }
+        /* Ajustes de clareza: afinidade estimada, custos e revisão de respostas */
+        .result-contract {
+            margin: 6px 0 0;
+            color: #44566b;
+            font-size: 0.95rem;
+            line-height: 1.45;
+        }
+
+        .plan-total {
+            margin: 0;
+            color: #ffffff !important;
+            font-weight: 700;
+        }
+
+        .plan-cost {
+            margin: 8px 0 0;
+            color: rgba(255, 255, 255, 0.82) !important;
+        }
+
+        .plan-sector-note {
+            margin: 10px 0 0;
+            color: #ffd27a !important;
+            font-weight: 600;
+        }
+
+        .plan-attention {
+            animation: planAttention 1.6s ease-in-out;
+        }
+
+        @keyframes planAttention {
+            0%, 100% { box-shadow: inherit; }
+            35% { box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.85); }
+        }
+
+        .sector-warning {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 16px 0;
+            padding: 14px 16px;
+            border-left: 4px solid #FFD700;
+            border-radius: 10px;
+            background: rgba(255, 215, 0, 0.12);
+            color: #fff8d6;
+            line-height: 1.5;
+        }
+
+        .sector-warning a {
+            color: #FFD700;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .score-explainer {
+            margin: 18px 0 8px;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 12px;
+            background: rgba(2, 26, 62, 0.35);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.98rem;
+            line-height: 1.55;
+        }
+
+        .score-explainer summary {
+            cursor: pointer;
+            font-weight: 700;
+            color: #FFD700;
+        }
+
+        .score-explainer p {
+            margin: 10px 0 0;
+        }
+
+        .field-error {
+            margin: 14px 0 0;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: rgba(255, 82, 82, 0.16);
+            border-left: 4px solid #ff5252;
+            color: #ffe3e3;
+            font-weight: 600;
+            line-height: 1.45;
+        }
+
+        .unknown-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .unknown-option input {
+            width: 18px;
+            height: 18px;
+            accent-color: #FFD700;
+            cursor: pointer;
+        }
+
+        .conflict-panel {
+            padding: 18px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 215, 0, 0.55);
+            background: rgba(255, 215, 0, 0.10);
+            color: rgba(255, 255, 255, 0.94);
+            line-height: 1.55;
+        }
+
+        .conflict-panel p {
+            margin: 0 0 10px;
+        }
+
+        .conflict-panel ul {
+            margin: 0 0 14px;
+            padding-left: 20px;
+        }
+
+        .conflict-panel li {
+            margin-top: 8px;
+        }
+
+        @media (max-width: 640px) {
+            .sector-warning,
+            .score-explainer {
+                font-size: 0.94rem;
+            }
+
+            .plan-score {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -2058,7 +2195,7 @@
         <section class="hero">
             <div class="hero-card" id="heroCard">
                 <p class="eyebrow">Quiz Sócio 5 Estrelas</p>
-                <h1>Encontre o plano perfeito para viver o Cruzeiro mais de perto.</h1>
+                <h1>Encontre o plano com mais afinidade com o seu jeito de torcer.</h1>
                 <button class="start-button" id="startButton" type="button">Iniciar</button>
             </div>
         </section>
@@ -2111,565 +2248,69 @@
         </div>
     </footer>
 
+    <script src="./quiz-engine.js"></script>
     <script>
         /*
-         * Organized JavaScript Sections:
-         *  1. Data
-         *  2. State
-         *  3. Questions
-         *  4. Helper Functions
-         *  5. Profile Building
-         *  6. Compatibility Calculation
-         *  7. Recommendation
-         *  8. Rendering Functions
-         *  9. Event Listeners
-         * 10. Initialization
+         * Interface do Quiz Sócio 5 Estrelas.
+         *
+         * Toda regra de catálogo, validação e ranking vive em quiz-engine.js.
+         * Este bloco cuida de estado de tela, acessibilidade, analytics e DOM.
          */
-
-
-        const assinaturasSocios = {
-            meuCruzeiro: {
-                nome: "Meu Cruzeiro",
-                slug: "meu-cruzeiro",
-                logo: "./img/meuCruzeiro.png",
-                precoMensal: 12,
-                precoAnual: 144,
-                ingressoGratis: true,
-                carteirinhaDigital: true,
-                taxaDeAdesaoUnica: false,
-                descontoEmIngresso: {
-                    ativo: false,
-                    detalhes: "Não oferece desconto por quantidade de jogos"
-                },
-                jogosFrequentes: undefined,
-                prioridadeNaCompra: {
-                    prioridade: 4
-                },
-                descontoNaLoja: {
-                    percentual: 0.1,
-                    texto: "Até 10% na loja"
-                },
-                conteudoExclusivo: true,
-                descontoEmParceiros: true,
-                votacaoEmDecisoesNoClube: true,
-                complementos: {
-                    kids: true,
-                    carteirinhaFisica: true
-                },
-                beneficios: [
-                    "Ingresso grátis por temporada (economia de até R$ 150)",
-                    "Até 10% de desconto em produtos oficiais",
-                    "Apoie o seu Time Cabuloso",
-                ],
-                link: "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro",
-            },
-            timeDoPovo: {
-                nome: "Time do Povo",
-                slug: "time-do-povo",
-                logo: "./img/timeDoPovo.png",
-                precoMensal: 40,
-                precoAnual: 480,
-                ingressoGratis: false,
-                carteirinhaDigital: true,
-                taxaDeAdesaoUnica: 30,
-                descontoEmIngresso: {
-                    ativo: true,
-                    detalhes: "R$40,00 por ingresso",
-                    faixa: "setores Amarelo e Laranja"
-                },
-                jogosFrequentes: undefined,
-                prioridadeNaCompra: {
-                    prioridade: 3
-                },
-                descontoNaLoja: {
-                    percentual: 0.15,
-                    texto: "Até 15% na loja"
-                },
-                conteudoExclusivo: false,
-                descontoEmParceiros: true,
-                votacaoEmDecisoesNoClube: false,
-                complementos: {
-                    kids: true,
-                    carteirinhaFisica: true
-                },
-                beneficios: [
-                    "Ingresso de R$ 150 por apenas R$ 40 em todo jogo nos setores Laranja e amarelo",
-                    "Até 15% de desconto na Loja do Cruzeiro",
-                    "Faça parte da torcida que canta e vibra do início ao fim",
-                ],
-                link: "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=mensal&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo"
-
-            },
-            cabuloso: {
-                nome: "Cabuloso",
-                slug: "cabuloso",
-                logo: "./img/cabuloso.png",
-                precoMensal: 100,
-                precoAnual: 1200,
-                ingressoGratis: false,
-                carteirinhaDigital: true,
-                taxaDeAdesaoUnica: 30,
-                descontoEmIngresso: {
-                    ativo: true,
-                    detalhes: "De 50% até 60%"
-                },
-                jogosFrequentes: {
-                    janelaMeses: 15,
-                    niveis: [
-                        {
-                            nome: "Cabuloso nível 1",
-                            jogosMinimos: 0,
-                            jogosMaximos: 9,
-                            descontoIngresso: 0.5
-                        },
-                        {
-                            nome: "Cabuloso nível 2",
-                            jogosMinimos: 10,
-                            jogosMaximos: 19,
-                            descontoIngresso: 0.55
-                        },
-                        {
-                            nome: "Cabuloso nível 3",
-                            jogosMinimos: 20,
-                            jogosMaximos: null,
-                            descontoIngresso: 0.6
-                        }
-                    ]
-                },
-                prioridadeNaCompra: {
-                    prioridade: [
-                        {
-                            nivel: 1,
-                            prioridade: 3
-                        },
-                        {
-                            nivel: 2,
-                            prioridade: 2
-                        },
-                        {
-                            nivel: 3,
-                            prioridade: 1
-                        }
-                    ]
-                },
-                descontoNaLoja: {
-                    percentual: 0.15,
-                    texto: "Até 15% na loja"
-                },
-                conteudoExclusivo: true,
-                descontoEmParceiros: true,
-                votacaoEmDecisoesNoClube: true,
-                complementos: {
-                    kids: true,
-                    carteirinhaFisica: true
-                },
-                beneficios: [
-                    "Ingressos de R$ 150 por R$75 ou até R$60 (50% off ou até 60%off)",
-                    "Até 15% de desconto na Loja do Cruzeiro",
-                    "Prioridade na compra de ingressos, à frente de quem não é sócio",
-                ],
-                link: "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=mensal&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso"
-            },
-            cabulosoMax: {
-                nome: "Cabuloso Max",
-                slug: "cabuloso-max",
-                logo: "./img/cabulosoMax.png",
-                precoMensal: 200,
-                precoAnual: 2400,
-                ingressoGratis: false,
-                carteirinhaDigital: true,
-                taxaDeAdesaoUnica: 30,
-                descontoEmIngresso: {
-                    ativo: true,
-                    quantidadeIngressos: 2,
-                    descontoPercentual: 0.65,
-                    detalhes: "2 ingressos com 65%"
-                },
-                jogosFrequentes: undefined,
-                prioridadeNaCompra: {
-                    prioridade: 1
-                },
-                descontoNaLoja: {
-                    percentual: 0.15,
-                    texto: "Até 15% na loja"
-                },
-                conteudoExclusivo: true,
-                descontoEmParceiros: true,
-                votacaoEmDecisoesNoClube: true,
-                complementos: {
-                    kids: true,
-                    carteirinhaFisica: true
-                },
-                beneficios: [
-                    "2 ingressos de R$ 150 por R$ 52 cada (65% off)",
-                    "Até 15% de desconto na Loja do Cruzeiro",
-                    "Prioridade máxima na compra: garanta o melhor lugar sempre",
-                ],
-                link: "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11&intervalo_cobrancas=mensal&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-max"
-            },
-            cabulosoCativo: {
-                nome: "Cabuloso Cativo",
-                slug: "cabuloso-cativo",
-                logo: "https://baladapp.s3.sa-east-1.amazonaws.com/assinaturas/plano/115/foto/45e830abb42fdfb77e210002d5d7c311.png",
-                precoMensal: 400,
-                precoAnual: 4800,
-                ingressoGratis: false,
-                carteirinhaDigital: true,
-                taxaDeAdesaoUnica: false,
-                descontoEmIngresso: {
-                    ativo: true,
-                    quantidadeIngressos: 1,
-                    descontoPercentual: null,
-                    detalhes: "1 no Azul Inferior"
-                },
-                jogosFrequentes: undefined,
-                prioridadeNaCompra: {
-                    prioridade: null
-                },
-                descontoNaLoja: {
-                    percentual: 0.1,
-                    texto: "Até 10% na loja "
-                },
-                conteudoExclusivo: true,
-                descontoEmParceiros: true,
-                votacaoEmDecisoesNoClube: true,
-                complementos: {
-                    kids: true,
-                    carteirinhaFisica: false
-                },
-                beneficios: [
-                    "Seu assento cativo no Azul Inferior em todos os jogos",
-                    "Até 10% de desconto na Loja do Cruzeiro",
-                    "Experiência premium: conteúdo exclusivo e voto nas decisões",
-                ],
-                link: "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=115&intervalo_cobrancas=mensal&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-cativo"
-            }
-        }
-
-        const plans = Object.values(assinaturasSocios);
+        const {
+            assinaturasSocios,
+            plans,
+            questions,
+            createInitialAnswers,
+            isAnswerValid,
+            getAnswerError,
+            validateAnswers,
+            detectConflicts,
+            getPriority,
+            getTicketBenefit,
+            getPlanCost,
+            getPlanContract,
+            getPlanBenefits,
+            getCTAText,
+            formatBRL,
+            recommendPlans: recommendPlansCore,
+            ASSUMPTIONS,
+            CATALOG_VERSION
+        } = window.QuizEngine;
 
         const state = {
             step: 0,
-            answers: {
-                gamesPerYear: 0,
-                wantsGuaranteedTicket: null,
-                buysTwoTickets: null,
-                needsPriority: null,
-                wantsParticipation: null,
-                wantsStoreDiscount: null,
-                gameFrequency: null,
-                familyPlan: null,
-                digitalExperience: null,
-                budget: null,
-                preferredSector: null
-            }
+            answers: createInitialAnswers(),
+            conflictsConfirmed: false,
+            awaitingConflictConfirmation: false,
+            conflicts: [],
+            pendingError: null,
+            resultRendered: false
         };
+
         let heightResetTimer = null;
         let quizStartedAt = 0;
         let questionShownAt = 0;
+        let isTransitioning = false;
+        let renderToken = 0;
 
-        const questions = [
-            {
-                key: "gamesPerYear",
-                title: "Em média, a quantos jogos do Cruzeiro você pretende ir por ano?",
-                type: "range",
-                min: 0,
-                max: 30,
-                suffix: "jogos",
-                getEffects: (val) => {
-                    const base = {
-                        frequenciaEstadio: Math.round((val / 30) * 8),
-                        prioridadeIngressos: val === 0 ? 0 : (val >= 15 ? 8 : (val >= 5 ? 5 : 2))
-                    };
-                    if (val > 10) {
-                        base.interesseExperiencias = 3;
-                        base.consumoProdutosOficiais = 2;
-                        base.prioridadeIngressos += 2;
-                    }
-                    return base;
-                }
-            },
-            {
-                key: "wantsGuaranteedTicket",
-                title: "O que melhor te define como torcedor?",
-                options: [
-                    {
-                        label: "Não frequento o estádio",
-                        description: "Não costumo frequentar os jogos presencialmente.",
-                        value: "never",
-                        effects: {
-                            importanciaPreco: 5,
-                            prioridadeIngressos: 0,
-                            frequenciaEstadio: 0
-                        }
-                    },
-                    {
-                        label: "Faço questão de ir a todos os jogos",
-                        description: "Quero garantir meu lugar na arquibancada em todas as partidas possíveis.",
-                        value: true,
-                        effects: {
-                            prioridadeIngressos: 5,
-                            frequenciaEstadio: 4,
-                            importanciaPreco: 2
-                        }
-                    },
-                    {
-                        label: "Foco nos jogos mais decisivos",
-                        description: "Prefiro guardar energia e orçamento para clássicos e fases finais.",
-                        value: false,
-                        effects: {
-                            importanciaPreco: 5,
-                            prioridadeIngressos: 3
-                        }
-                    }
-                ]
-            },
-            {
-                key: "buysTwoTickets",
-                title: "Quando vai ao estádio, você costuma levar acompanhantes?",
-                options: [
-                    {
-                        label: "Sim, quase sempre vou acompanhado",
-                        description: "Preciso de facilidade para comprar dois ou mais ingressos juntos.",
-                        value: true,
-                        effects: {
-                            levaAcompanhantes: 8,
-                            interesseDescontos: 5
-                        }
-                    },
-                    {
-                        label: "Não, geralmente vou sozinho",
-                        description: "Compro apenas o meu ingresso.",
-                        value: false,
-                        effects: {
-                            levaAcompanhantes: 0
-                        }
-                    }
-                ]
-            },
-            {
-                key: "needsPriority",
-                title: "Quando vai comprar ingressos para o jogo, como costuma agir?",
-                options: [
-                    {
-                        label: "Compro no primeiro minuto",
-                        description: "Não gosto de correr riscos. Assim que abre, eu garanto o meu.",
-                        value: true,
-                        effects: {
-                            prioridadeIngressos: 5
-                        }
-                    },
-                    {
-                        label: "Compro com calma",
-                        description: "Deixo para comprar depois, se ainda houver disponibilidade.",
-                        value: false,
-                        effects: {
-                            prioridadeIngressos: 0
-                        }
-                    }
-                ]
-            },
-            {
-                key: "wantsParticipation",
-                title: "Além dos jogos, o quanto você se interessa por experiências exclusivas?",
-                options: [
-                    {
-                        label: "Tenho muito interesse",
-                        description: "Quero participar de sorteios, eventos do clube e receber ofertas especiais.",
-                        value: true,
-                        effects: {
-                            interesseExperiencias: 6
-                        }
-                    },
-                    {
-                        label: "Não faço questão",
-                        description: "Meu foco é apenas assistir aos jogos, sem extras.",
-                        value: false,
-                        effects: {
-                            interesseExperiencias: 0
-                        }
-                    }
-                ]
-            },
-            {
-                key: "wantsStoreDiscount",
-                title: "Sempre que sai um novo manto ou produto oficial, o que você faz?",
-                options: [
-                    {
-                        label: "Sempre tento comprar",
-                        description: "Gosto de colecionar ou renovar minhas camisas e busco descontos para isso.",
-                        value: true,
-                        effects: {
-                            interesseDescontos: 7,
-                            consumoProdutosOficiais: 6
-                        }
-                    },
-                    {
-                        label: "Raramente compro",
-                        description: "Não costumo consumir muitos produtos na loja oficial.",
-                        value: false,
-                        effects: {
-                            interesseDescontos: 0,
-                            consumoProdutosOficiais: 0
-                        }
-                    }
-                ]
-            },
-            {
-                key: "gameFrequency",
-                title: "Como você costuma viver a paixão nos dias de jogo?",
-                options: [
-                    {
-                        label: "Sempre na arquibancada",
-                        description: "O Mineirão é minha segunda casa.",
-                        value: "always",
-                        effects: {
-                            frequenciaEstadio: 4,
-                            interesseExperiencias: 3
-                        }
-                    },
-                    {
-                        label: "Fico dividido entre estádio e TV",
-                        description: "Vou em boa parte dos jogos, mas assisto a outros de casa ou do bar.",
-                        value: "frequent",
-                        effects: {
-                            frequenciaEstadio: 2,
-                            interesseExperiencias: 2
-                        }
-                    },
-                    {
-                        label: "Acompanho mais de casa mesmo",
-                        description: "Vou pouco ao estádio, prefiro acompanhar pelas transmissões.",
-                        value: "occasional",
-                        effects: {
-                            frequenciaEstadio: 1,
-                            interesseExperiencias: 1
-                        }
-                    }
-                ]
-            },
-            {
-                key: "familyPlan",
-                title: "Você planeja incluir dependentes (filhos ou cônjuge) no seu plano?",
-                options: [
-                    {
-                        label: "Sim, quero um plano familiar",
-                        description: "Preciso de benefícios estendidos para a minha família.",
-                        value: true,
-                        effects: {
-                            levaAcompanhantes: 7,
-                            importanciaPreco: 3
-                        }
-                    },
-                    {
-                        label: "Não, o plano será individual",
-                        description: "Os benefícios serão utilizados apenas por mim.",
-                        value: false,
-                        effects: {
-                            levaAcompanhantes: 0
-                        }
-                    }
-                ]
-            },
-            {
-                key: "digitalExperience",
-                title: "O quanto você consome os conteúdos digitais e de bastidores do clube?",
-                options: [
-                    {
-                        label: "Acompanho tudo diariamente",
-                        description: "Valorizo o aplicativo oficial e quero acesso a informações em primeira mão.",
-                        value: true,
-                        effects: {
-                            interesseExperiencias: 4,
-                            consumoProdutosOficiais: 3
-                        }
-                    },
-                    {
-                        label: "Foco apenas no campo",
-                        description: "Meu interesse principal são os 90 minutos de bola rolando.",
-                        value: false,
-                        effects: {
-                            interesseExperiencias: 2,
-                            frequenciaEstadio: 4
-                        }
-                    }
-                ]
-            },
-            {
-                key: "budget",
-                title: "Qual é o seu orçamento mensal confortável para investir no Sócio?",
-                options: [
-                    {
-                        label: "Até R$ 40/mês",
-                        description: "Busco a opção com o menor custo e quero apoiar o Time.",
-                        value: 40,
-                        effects: {
-                            importanciaPreco: 4
-                        }
-                    },
-                    {
-                        label: "Até R$ 100/mês",
-                        description: "Quero os benefícios dos planos intermediários com mais vantagens.",
-                        value: 100,
-                        effects: {
-                            importanciaPreco: 2
-                        }
-                    },
-                    {
-                        label: "Até R$ 200/mês",
-                        description: "Tenho flexibilidade para investir em planos melhores com mais vantagens.",
-                        value: 200,
-                        effects: {
-                            importanciaPreco: 1
-                        }
-                    },
-                    {
-                        label: "Sem limite definido",
-                        description: "Quero o plano mais completo e com a melhor experiência, independente do valor.",
-                        value: 400,
-                        effects: {
-                            importanciaPreco: 0
-                        }
-                    }
-                ]
-            },
-            {
-                key: "preferredSector",
-                title: "Em qual setor você se sente mais à vontade?",
-                options: [
-                    {
-                        label: "Setor Amarelo ou Laranja",
-                        description: "Torcida organizada, muito canto e festa. Melhor custo-benefício.",
-                        value: "yellow-orange",
-                        effects: {
-                            importanciaPreco: 6
-                        }
-                    },
-                    {
-                        label: "Setor Azul",
-                        description: "Visão central do campo, equilíbrio entre custo e conforto.",
-                        value: "blue",
-                        effects: {
-                            importanciaPreco: 2,
-                            interesseExperiencias: 2,
-                            consumoProdutosOficiais: 2
-                        }
-                    },
-                    {
-                        label: "Setor Roxo",
-                        description: "Cadeira premium, conforto máximo e experiência exclusiva.",
-                        value: "purple",
-                        effects: {
-                            interesseExperiencias: 4,
-                            consumoProdutosOficiais: 4
-                        }
-                    }
-                ]
-            }
-        ];
         let heroSection = document.querySelector(".hero");
         const startButton = document.getElementById("startButton");
         const isPreview = location.search.includes('preview') || location.hash === '#preview';
+
+        const PREVIEW_ANSWERS = {
+            gamesPerYear: 15,
+            gamesHistory: 'unknown',
+            wantsGuaranteedTicket: true,
+            buysTwoTickets: true,
+            kidsCount: 0,
+            needsPriority: true,
+            wantsParticipation: true,
+            wantsStoreDiscount: true,
+            gameFrequency: 'always',
+            digitalExperience: true,
+            budget: 200,
+            preferredSector: 'blue'
+        };
 
         // Envia evento ao GA4; o modo preview usa respostas fictícias e fica de fora
         function trackEvent(name, params = {}) {
@@ -2678,8 +2319,12 @@
         }
 
         function getAnswerLabel(question, value) {
-            if (question.type === 'range') return `${value} ${question.suffix}`;
-            return question.options.find(o => o.value === value)?.label ?? String(value);
+            if (question.type === 'range') {
+                if (value === 'unknown') return question.unknownLabel || 'Não sei';
+                return `${value} ${question.suffix}`;
+            }
+            const option = (question.options || []).find(item => Object.is(item.value, value));
+            return option ? option.label : String(value);
         }
 
         function secondsSince(start) {
@@ -2701,697 +2346,67 @@
         }
 
         function formatMoney(value) {
-            return value.toLocaleString("pt-BR", {
+            return Number(value).toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL",
-                maximumFractionDigits: 0
+                maximumFractionDigits: Number.isInteger(value) ? 0 : 2
             });
         }
 
-        function getPriorityValue(plan, gamesPerYear) {
-            const priority = plan.prioridadeNaCompra?.prioridade;
-
-            if (Array.isArray(priority)) {
-                const level = getFrequentLevel(plan, gamesPerYear);
-                const found = priority.find((item) => item.nivel === level);
-                return found ? found.prioridade : 4;
-            }
-
-            return priority || 4;
+        function escapeHtml(value) {
+            return String(value)
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#39;');
         }
 
-        function getFrequentLevel(plan, gamesPerYear) {
-            if (!plan.jogosFrequentes) {
-                return null;
-            }
-
-            const level = plan.jogosFrequentes.niveis.find((item) => {
-                const max = item.jogosMaximos === null ? Infinity : item.jogosMaximos;
-                return gamesPerYear >= item.jogosMinimos && gamesPerYear <= max;
+        function answerParams() {
+            const params = {};
+            questions.forEach((question) => {
+                params[`answer_${question.key}`] = String(state.answers[question.key]);
             });
-
-            return level ? Number(level.nome.replace(/\D/g, "")) : 1;
+            return params;
         }
 
-        function getTicketBenefit(plan, gamesPerYear) {
-            if (plan.ingressoGratis) {
-                return {
-                    score: 34,
-                    text: "oferece ingresso grátis"
-                };
-            }
-
-            if (!plan.descontoEmIngresso?.ativo) {
-                return {
-                    score: 0,
-                    text: "não oferece desconto em ingressos"
-                };
-            }
-
-            if (plan.slug === "time-do-povo") {
-                return {
-                    score: gamesPerYear > 0 ? 22 : 10,
-                    text: plan.descontoEmIngresso?.detalhes || "possui benefício em ingressos"
-                };
-            }
-
-            if (plan.jogosFrequentes) {
-                const level = plan.jogosFrequentes.niveis.find((item) => {
-                    const max = item.jogosMaximos === null ? Infinity : item.jogosMaximos;
-                    return gamesPerYear >= item.jogosMinimos && gamesPerYear <= max;
-                });
-
-                return {
-                    score: level ? level.descontoIngresso * 50 : 25,
-                    text: level ? `${level.nome}: ${Math.round(level.descontoIngresso * 100)}% de desconto` : plan.descontoEmIngresso?.detalhes || "possui benefício em ingressos"
-                };
-            }
-
-            if (plan.descontoEmIngresso?.quantidadeIngressos) {
-                const score = plan.descontoEmIngresso?.descontoPercentual
-                    ? plan.descontoEmIngresso.descontoPercentual * 58
-                    : 42;
-
-                return {
-                    score,
-                    text: plan.descontoEmIngresso?.detalhes || "possui benefício em ingressos"
-                };
-            }
-
-            return {
-                score: 12,
-                text: "possui benefício em ingressos"
-            };
+        function setLocked(value) {
+            isTransitioning = value;
         }
 
-        /**
-         * @typedef {Object} UserProfile
-         * @property {number} importanciaPreco
-         * @property {number} frequenciaEstadio
-         * @property {number} interesseDescontos
-         * @property {number} interesseExperiencias
-         * @property {number} levaAcompanhantes
-         * @property {number} prioridadeIngressos
-         * @property {number} consumoProdutosOficiais
-         */
-
-        const ATTRIBUTE_LABELS = {
-            importanciaPreco: "Maior economia e custo-benefício",
-            frequenciaEstadio: "Facilidade em frequentar o estádio",
-            interesseDescontos: "Mais promoções e descontos",
-            interesseExperiencias: "Mais experiências",
-            levaAcompanhantes: "Levar companhia (família e amigos)",
-            prioridadeIngressos: "Maior prioridade em ingressos",
-            consumoProdutosOficiais: "Facilidade em consumir produtos oficiais"
-        };
-
-        /**
-         * Constrói o perfil comportamental do usuário com base nas respostas do quiz.
-         * @param {Object} answers Respostas do quiz
-         * @returns {UserProfile} Perfil do usuário mapeado
-         */
-        function getCTAText(plan) {
-            const ctas = {
-                'meu-cruzeiro': 'FAZER PARTE DOS CABULOSOS',
-                'time-do-povo': 'GARANTIR INGRESSO A R$ 40',
-                'cabuloso': 'GARANTIR MEU DESCONTO DE 50%',
-                'cabuloso-max': 'ATÉ 2 INGRESSOS COM 65%OFF',
-                'cabuloso-cativo': '"DE SANGUE AZUL EU SOU"'
-            };
-            return ctas[plan.slug] || 'ASSINAR AGORA';
+        function resetState() {
+            renderToken += 1;
+            state.step = 0;
+            state.answers = createInitialAnswers();
+            state.conflictsConfirmed = false;
+            state.awaitingConflictConfirmation = false;
+            state.conflicts = [];
+            state.pendingError = null;
+            state.resultRendered = false;
         }
 
-        function buildUserProfile(answers) {
-            const profile = {
-                importanciaPreco: 0,
-                frequenciaEstadio: 0,
-                interesseDescontos: 0,
-                interesseExperiencias: 0,
-                levaAcompanhantes: 0,
-                prioridadeIngressos: 0,
-                consumoProdutosOficiais: 0
-            };
-
-            questions.forEach(q => {
-                const val = answers[q.key];
-                if (q.type === "range") {
-                    if (q.getEffects) {
-                        const effects = q.getEffects(val);
-                        for (const attr in effects) {
-                            profile[attr] += effects[attr];
-                        }
-                    }
-                } else {
-                    const selectedOption = q.options.find(opt => opt.value === val);
-                    if (selectedOption && selectedOption.effects) {
-                        for (const attr in selectedOption.effects) {
-                            profile[attr] += selectedOption.effects[attr];
-                        }
-                    }
-                }
-            });
-
-            // Normaliza cada atributo para a escala de 0 a 20
-            for (const attr in profile) {
-                profile[attr] = Math.min(20, Math.max(0, profile[attr]));
+        function showFieldError(message) {
+            const error = document.querySelector('#fieldError');
+            if (error) {
+                error.textContent = message;
+                error.hidden = false;
             }
-
-            return profile;
+            const focusTarget = document.querySelector('#unknownToggle')
+                || document.querySelector('#rangeInput')
+                || document.querySelector('.option')
+                || document.querySelector('#nextButton');
+            if (focusTarget) focusTarget.focus({ preventScroll: true });
         }
 
-        /**
-         * Gera dinamicamente o perfil comportamental/vetorial de cada plano usando características reais do objeto de dados.
-         * @param {Object} plan Plano do Cruzeiro
-         * @returns {UserProfile} Perfil vetorial gerado para o plano
-         */
-        function generatePlanProfile(plan) {
-            const allPlans = Object.values(assinaturasSocios);
-            const prices = allPlans.map(p => p.precoMensal);
-            const minPrice = Math.min(...prices);
-            const maxPrice = Math.max(...prices);
-
-            // 1. Sensibilidade ao preço: quanto mais barato o plano, maior o score (0 a 20)
-            const importanciaPreco = maxPrice === minPrice
-                ? 10
-                : Math.round(((maxPrice - plan.precoMensal) / (maxPrice - minPrice)) * 20);
-
-            // 2. Frequência no estádio (0-20): do pior ao melhor benefício de acesso
-            let frequenciaEstadio = 0;
-            if (plan.slug === 'cabuloso-cativo') {
-                frequenciaEstadio = 20;
-            } else if (plan.slug === 'cabuloso-max') {
-                frequenciaEstadio = 16;
-            } else if (plan.slug === 'cabuloso') {
-                frequenciaEstadio = 10;
-            } else if (plan.slug === 'time-do-povo') {
-                frequenciaEstadio = 6;
-            } else {
-                frequenciaEstadio = 2; // Meu Cruzeiro: 1 ingresso grátis/ano
-            }
-
-            // 3. Interesse em descontos: baseado nos percentuais de descontos de loja e ingressos (0-20)
-            let interesseDescontos = 0;
-            const discountPercent = plan.descontoNaLoja?.percentual || 0;
-            interesseDescontos += discountPercent * 40;
-            if (plan.descontoEmIngresso?.ativo) {
-                if (plan.descontoEmIngresso.descontoPercentual) {
-                    interesseDescontos += plan.descontoEmIngresso.descontoPercentual * 20;
-                } else if (plan.jogosFrequentes) {
-                    interesseDescontos += 12;
-                } else {
-                    interesseDescontos += 8;
-                }
-            }
-            interesseDescontos = Math.min(20, Math.round(interesseDescontos));
-
-            // 4. Interesse em experiências: baseado em conteúdos exclusivos, quizzes e etc (0-20)
-            let interesseExperiencias = 0;
-            if (plan.conteudoExclusivo) interesseExperiencias += 6;
-            if (plan.descontoEmParceiros) interesseExperiencias += 5;
-            if (plan.votacaoEmDecisoesNoClube) interesseExperiencias += 7;
-            if (plan.slug === 'cabuloso-cativo' || plan.slug === 'cabuloso-max') interesseExperiencias += 2;
-            interesseExperiencias = Math.min(20, interesseExperiencias);
-
-            // 5. Levar acompanhantes: quantidade de ingressos adicionais com desconto (0-20)
-            let levaAcompanhantes = 0;
-            if (plan.descontoEmIngresso?.quantidadeIngressos) {
-                levaAcompanhantes = plan.descontoEmIngresso.quantidadeIngressos * 8;
-            } else if (plan.slug === 'cabuloso') {
-                levaAcompanhantes = 5;
-            } else if (plan.slug === 'time-do-povo') {
-                levaAcompanhantes = 3;
-            } else {
-                levaAcompanhantes = 1;
-            }
-            levaAcompanhantes = Math.min(20, levaAcompanhantes);
-
-            // 6. Prioridade em ingressos: mapeado da escala de prioridade do clube (0-20)
-            let prioridadeIngressos = 0;
-            const priority = plan.prioridadeNaCompra?.prioridade;
-            if (plan.slug === 'cabuloso-cativo') {
-                prioridadeIngressos = 20;
-            } else if (priority === 1) {
-                prioridadeIngressos = 16;
-            } else if (Array.isArray(priority)) {
-                prioridadeIngressos = 10;
-            } else if (priority === 3) {
-                prioridadeIngressos = 6;
-            } else if (priority === 4) {
-                prioridadeIngressos = 2;
-            } else {
-                prioridadeIngressos = 2;
-            }
-
-            // 7. Consumo de produtos oficiais: com base no desconto disponível na loja oficial (0-20)
-            const consumoProdutosOficiais = plan.descontoNaLoja?.percentual
-                ? Math.round(plan.descontoNaLoja.percentual * 120)
-                : 0;
-
-            return {
-                importanciaPreco,
-                frequenciaEstadio,
-                interesseDescontos,
-                interesseExperiencias,
-                levaAcompanhantes,
-                prioridadeIngressos,
-                consumoProdutosOficiais
-            };
-        }
-
-        /**
-         * Chaves de atributos que compõem o vetor geométrico de engajamento/benefícios.
-         * Agora inclui 'importanciaPreco' já que foi corrigida a lógica.
-         * @type {string[]}
-         */
-        const ENGAGEMENT_ATTRIBUTES = [
-            'importanciaPreco',
-            'frequenciaEstadio',
-            'interesseDescontos',
-            'interesseExperiencias',
-            'levaAcompanhantes',
-            'prioridadeIngressos',
-            'consumoProdutosOficiais'
-        ];
-
-        /**
-         * Calcula a Similaridade do Cosseno entre dois perfis usando apenas atributos de engajamento.
-         * Função pura: não possui efeitos colaterais e não depende de estado externo.
-         *
-         * @param {UserProfile} userProfile Perfil do usuário
-         * @param {UserProfile} planProfile Perfil do plano
-         * @returns {number} Similaridade entre 0.0 e 1.0
-         */
-        function calculateCosineSimilarity(userProfile, planProfile) {
-            let dotProduct = 0;
-            let userMagnitudeSq = 0;
-            let planMagnitudeSq = 0;
-
-            ENGAGEMENT_ATTRIBUTES.forEach(attr => {
-                const u = userProfile[attr] ?? 0;
-                const p = planProfile[attr] ?? 0;
-
-                dotProduct += u * p;
-                userMagnitudeSq += u * u;
-                planMagnitudeSq += p * p;
-            });
-
-            const userMagnitude = Math.sqrt(userMagnitudeSq);
-            const planMagnitude = Math.sqrt(planMagnitudeSq);
-
-            // Prevenção de divisão por zero: se algum vetor for nulo, similaridade é 0
-            if (userMagnitude === 0 || planMagnitude === 0) {
-                return 0.0;
-            }
-
-            return dotProduct / (userMagnitude * planMagnitude);
-        }
-
-        /**
-         * Aplica a penalidade de preço ao score de similaridade do cosseno.
-         * Usuários com alta sensibilidade a preço (importanciaPreco alto) recebem
-         * um desconto progressivo (até 25%) em planos caros.
-         *
-         * @param {number} cosineScore Score bruto da similaridade do cosseno (0.0 a 1.0)
-         * @param {UserProfile} userProfile Perfil do usuário (para acessar importanciaPreco)
-         * @param {number} planPrice Preço mensal do plano
-         * @returns {number} Score final ajustado (0.0 a 1.0)
-         */
-        function applyPricePenalty(cosineScore, userProfile, planPrice) {
-            // Penalidade de preço: reduz o score quando o usuário é sensível ao preço
-            // e o plano é caro (reforço adicional à similaridade do cosseno)
-            const userSensitivity = (userProfile.importanciaPreco ?? 0) / 20;
-            const maxPrice = Math.max(...plans.map(p => p.precoMensal));
-            const priceRatio = planPrice / maxPrice;
-
-            // Penalidade suave: até 25% de redução no pior caso
-            // userSensitivity alto (sensível a preço) + priceRatio alto (plano caro) → maior penalidade
-            const penalty = 1 - (userSensitivity * priceRatio * 0.25);
-
-            return cosineScore * Math.max(0.75, penalty);
-        }
-
-        /**
-         * Orquestra o cálculo final de compatibilidade: cosseno + penalidade de preço + formatação.
-         *
-         * @param {UserProfile} userProfile Perfil do usuário
-         * @param {UserProfile} planProfile Perfil do plano
-         * @param {number} planPrice Preço mensal do plano
-         * @returns {Object} Resultado com score final em porcentagem (0-100, 1 casa decimal) e influências
-         */
-        function calculateFinalMatch(userProfile, planProfile, planPrice) {
-            // 1. Similaridade do Cosseno (vetor geométrico puro - sem preço)
-            const cosineScore = calculateCosineSimilarity(userProfile, planProfile);
-
-            // 2. Penalidade de preço (pós-processamento)
-            const adjustedScore = applyPricePenalty(cosineScore, userProfile, planPrice);
-
-            // 3. Formatação: 0.0-1.0 -> 0-100 com 1 casa decimal
-            const compatibilityPercent = Math.round(adjustedScore * 1000) / 10;
-
-            // 4. Cálculo de influências para explicabilidade (baseado em diferença absoluta nos atributos de engajamento)
-            const influences = ENGAGEMENT_ATTRIBUTES.map(attr => {
-                const userVal = userProfile[attr] ?? 0;
-                const planVal = planProfile[attr] ?? 0;
-                const diff = Math.abs(userVal - planVal);
-                // Alinhamento: 10 = perfeito, 0 = oposto
-                const alignment = 20 - diff;
-                return {
-                    key: attr,
-                    diff,
-                    alignment,
-                    userValue: userVal,
-                    planValue: planVal
-                };
-            });
-
-            // Ordena: maior alinhamento (menor diff) primeiro; desempate pelo interesse do usuário
-            influences.sort((a, b) => {
-                if (a.diff !== b.diff) return a.diff - b.diff;
-                return b.userValue - a.userValue;
-            });
-
-            return {
-                compatibilityPercent,
-                rawCosineScore: cosineScore,
-                adjustedScore,
-                influences
-            };
-        }
-
-        /**
-         * Bônus de setor: o Time do Povo é o plano dos setores Amarelo e Laranja (ingresso a R$ 40 neles),
-         * algo que os atributos do perfil não capturam. 6 pontos é o menor bônus que leva o perfil
-         * "família no Amarelo/Laranja" ao Time do Povo com margem acima do empate técnico.
-         */
-        const SECTOR_BONUS = { slug: 'time-do-povo', sector: 'yellow-orange', points: 6 };
-
-        // Diferença (em pontos) abaixo da qual 1º e 2º colocados são apresentados como empate técnico
-        const CLOSE_CALL_POINTS = 1;
-
-        function getSectorBonus(plan, answers) {
-            return plan.slug === SECTOR_BONUS.slug && answers.preferredSector === SECTOR_BONUS.sector ? SECTOR_BONUS.points : 0;
-        }
-
-        function fitsBudget(plan) {
-            const budget = state.answers.budget;
-            return budget === null || budget === undefined || plan.precoMensal <= budget;
-        }
-
-        /**
-         * Compara o perfil do usuário com o perfil de um plano usando Similaridade do Cosseno + Penalidade de Preço.
-         * Mantida para compatibilidade com código existente (renderResults, etc).
-         *
-         * @param {UserProfile} userProfile Perfil do usuário
-         * @param {UserProfile} planProfile Perfil do plano
-         * @param {Object} plan Objeto original do plano
-         * @returns {Object} Resultado de compatibilidade
-         */
-        function calculateCompatibility(userProfile, planProfile, plan) {
-            const result = calculateFinalMatch(userProfile, planProfile, plan.precoMensal);
-            const bonus = getSectorBonus(plan, state.answers);
-
-            return {
-                plan,
-                compatibilityPercent: Math.min(100, Math.round((result.compatibilityPercent + bonus) * 10) / 10),
-                distance: null, // Não aplicável com Cosseno
-                influences: result.influences
-            };
-        }
-
-        /**
-         * Ordena e recomenda os 3 planos mais compatíveis com o usuário
-         * @returns {Array} Top 3 recomendações
-         */
-        function recommendPlans() {
-            const userProfile = buildUserProfile(state.answers);
-            const userBudget = state.answers.budget;
-
-            // Filtrar planos baseado no budget do usuário
-            let eligiblePlans = plans;
-            if (userBudget !== null && userBudget !== undefined) {
-                eligiblePlans = plans.filter(plan => plan.precoMensal <= userBudget);
-            }
-
-            // Se nenhum plano couber no orçamento, mostra o mais barato como fallback
-            if (eligiblePlans.length === 0) {
-                eligiblePlans = [plans.reduce((a, b) => a.precoMensal < b.precoMensal ? a : b)];
-            }
-
-            return eligiblePlans.map(plan => {
-                const planProfile = generatePlanProfile(plan);
-                return calculateCompatibility(userProfile, planProfile, plan);
-            })
-                .sort((a, b) => b.compatibilityPercent - a.compatibilityPercent)
-                .slice(0, 3);
-        }
-
-        function renderComparisonTable(wrapper, recommendations) {
-            if (!wrapper) return;
-
-            const allPlans = Object.values(assinaturasSocios);
-
-            const compatibilityMap = {};
-            recommendations.forEach(r => {
-                compatibilityMap[r.plan.slug] = r.compatibilityPercent;
-            });
-
-            const userProfile = buildUserProfile(state.answers);
-            allPlans.forEach(plan => {
-                if (compatibilityMap[plan.slug] === undefined) {
-                    const planProfile = generatePlanProfile(plan);
-                    const result = calculateCompatibility(userProfile, planProfile, plan);
-                    compatibilityMap[plan.slug] = result.compatibilityPercent;
-                }
-            });
-
-            const winnerSlug = recommendations[0]?.plan?.slug;
-            const runnerUpSlug = recommendations[1]?.plan?.slug;
-            const isCloseCall = recommendations[1] && recommendations[0].compatibilityPercent - recommendations[1].compatibilityPercent < CLOSE_CALL_POINTS;
-            const highlightClass = slug => slug === winnerSlug ? ' comparison-highlight' : '';
-            const headerBadge = plan => {
-                if (plan.slug === winnerSlug) return '<span class="plan-badge">Recomendado</span>';
-                if (plan.slug === runnerUpSlug && isCloseCall) return '<span class="plan-badge">Também recomendado</span>';
-                if (!fitsBudget(plan)) return '<span class="plan-badge plan-badge-muted">Fora do orçamento</span>';
-                return '';
-            };
-
-            const features = [
-                {
-                    label: 'Preço',
-                    getValue: (plan) => formatMoney(plan.precoMensal) + ' /mês'
-                },
-
-                {
-                    label: 'Desconto em ingressos',
-                    getValue: (plan) => plan.descontoEmIngresso?.ativo
-                        ? '<span class="comparison-check">✓</span> <span class="comparison-detail">' + plan.descontoEmIngresso.detalhes + '</span>'
-                        : '<span class="comparison-cross">✗</span>'
-                },
-                {
-                    label: 'Desconto na loja',
-                    getValue: (plan) => '<span class="comparison-check">✓</span> <span class="comparison-detail">' + (plan.descontoNaLoja?.texto || '') + '</span>'
-                },
-
-                {
-                    label: 'Conteúdo exclusivo',
-                    getValue: (plan) => plan.conteudoExclusivo
-                        ? '<span class="comparison-check">✓</span>'
-                        : '<span class="comparison-cross">✗</span>'
-                },
-                {
-                    label: 'Desconto em parceiros',
-                    getValue: (plan) => plan.descontoEmParceiros
-                        ? '<span class="comparison-check">✓</span>'
-                        : '<span class="comparison-cross">✗</span>'
-                },
-
-            ];
-
-            const table = document.createElement('table');
-            table.className = 'comparison-table';
-
-            const thead = document.createElement('thead');
-            const headerRow = document.createElement('tr');
-
-            const labelTh = document.createElement('th');
-            labelTh.className = 'comparison-feature-label';
-            labelTh.textContent = 'Planos';
-            headerRow.appendChild(labelTh);
-
-            allPlans.forEach(plan => {
-                const th = document.createElement('th');
-                th.className = highlightClass(plan.slug);
-                th.innerHTML = `
-                    <h1 class="plan-name">${plan.nome}</h1>
-                    ${headerBadge(plan)}
-                `;
-                headerRow.appendChild(th);
-            });
-
-            thead.appendChild(headerRow);
-            table.appendChild(thead);
-
-            const tbody = document.createElement('tbody');
-
-            features.forEach(feature => {
-                const tr = document.createElement('tr');
-                const labelTd = document.createElement('td');
-                labelTd.className = 'comparison-feature-label';
-                labelTd.textContent = feature.label;
-                tr.appendChild(labelTd);
-
-                allPlans.forEach(plan => {
-                    const td = document.createElement('td');
-                    td.className = highlightClass(plan.slug);
-                    td.innerHTML = feature.getValue(plan);
-                    tr.appendChild(td);
-                });
-
-                tbody.appendChild(tr);
-            });
-
-            const compatTr = document.createElement('tr');
-            const compatLabel = document.createElement('td');
-            compatLabel.className = 'comparison-feature-label';
-            compatLabel.textContent = 'Compatibilidade';
-            compatTr.appendChild(compatLabel);
-
-            allPlans.forEach(plan => {
-                const td = document.createElement('td');
-                td.className = 'comparison-compatibility' + highlightClass(plan.slug);
-                td.textContent = compatibilityMap[plan.slug] + '%';
-                compatTr.appendChild(td);
-            });
-
-            tbody.appendChild(compatTr);
-            table.appendChild(tbody);
-
-            const tfoot = document.createElement('tfoot');
-            const footerRow = document.createElement('tr');
-
-            const footerLabel = document.createElement('td');
-            footerLabel.className = 'comparison-feature-label';
-            footerRow.appendChild(footerLabel);
-
-            allPlans.forEach(plan => {
-                const td = document.createElement('td');
-                td.className = highlightClass(plan.slug);
-                const a = document.createElement('a');
-                a.href = plan.link;
-                a.target = '_blank';
-                a.rel = 'noopener noreferrer';
-                a.className = 'plan-cta';
-                a.textContent = getCTAText(plan);
-                a.addEventListener('click', () => {
-                    trackSubscribeClick(plan.nome, recommendations[0]?.plan.nome, 'comparativo');
-                });
-                td.appendChild(a);
-                footerRow.appendChild(td);
-            });
-
-            tfoot.appendChild(footerRow);
-            table.appendChild(tfoot);
-            wrapper.appendChild(table);
-        }
-
-        function renderResults(resultsSection) {
-            const recommendations = recommendPlans();
-            const winner = recommendations[0];
-            if (!resultsSection) return;
-
-            const answerParams = {};
-            questions.forEach(q => {
-                answerParams[`answer_${q.key}`] = String(state.answers[q.key]);
-            });
-            trackEvent('quiz_complete', {
-                recommended_plan: winner.plan.nome,
-                compatibility: winner.compatibilityPercent,
-                total_time_sec: secondsSince(quizStartedAt),
-                ...answerParams
-            });
-
-            const resultLogo = resultsSection.querySelector("#resultLogo");
-            const resultPrice = resultsSection.querySelector("#resultPrice");
-            const resultSummary = resultsSection.querySelector("#resultSummary");
-            const resultReasons = resultsSection.querySelector("#resultReasons");
-            const plansList = resultsSection.querySelector("#plansList");
-            const subscribeButton = resultsSection.querySelector("#subscribeButton");
-
-            if (resultLogo && winner?.plan?.logo) {
-                resultLogo.src = winner.plan.logo;
-                resultLogo.alt = `Logo do plano ${winner.plan.nome}`;
-            }
-            if (subscribeButton && winner?.plan?.link) {
-                subscribeButton.dataset.subscribeUrl = winner.plan.link;
-                subscribeButton.dataset.plan = winner.plan.nome;
-                subscribeButton.setAttribute("aria-label", `Assinar o plano ${winner.plan.nome}`);
-            }
-            if (resultPrice && winner?.plan?.precoMensal) {
-                resultPrice.textContent = `${formatMoney(winner.plan.precoMensal)} / mês`;
-            }
-            const runnerUp = recommendations[1];
-            const isCloseCall = runnerUp && winner.compatibilityPercent - runnerUp.compatibilityPercent < CLOSE_CALL_POINTS;
-            const allPlansFit = plans.every(fitsBudget);
-
-            if (resultSummary && winner?.compatibilityPercent !== undefined) {
-                resultSummary.textContent = isCloseCall
-                    ? `${winner.compatibilityPercent}% de compatibilidade com seu perfil — praticamente empatado com o ${runnerUp.plan.nome} (${runnerUp.compatibilityPercent}%). Os dois atendem bem ao seu perfil.`
-                    : `${winner.compatibilityPercent}% de compatibilidade com seu perfil — a maior entre ${allPlansFit ? 'todos os planos' : 'os planos que cabem no seu orçamento'}.`;
-            }
-
-            if (resultReasons) {
-                resultReasons.innerHTML = "";
-                const benefits = winner.plan.beneficios || [];
-                benefits.forEach((b) => {
-                    const item = document.createElement("li");
-                    item.textContent = b;
-                    resultReasons.appendChild(item);
-                });
-            }
-
-            if (plansList) {
-                plansList.innerHTML = "";
-                recommendations.forEach((result, index) => {
-                    const { plan, compatibilityPercent, influences } = result;
-                    const ticketBenefit = getTicketBenefit(plan, state.answers.gamesPerYear);
-                    const priority = getPriorityValue(plan, state.answers.gamesPerYear);
-                    const card = document.createElement("article");
-                    card.className = "plan";
-                    const adhesion = plan.taxaDeAdesaoUnica ? `Taxa única: ${formatMoney(plan.taxaDeAdesaoUnica)}` : "Sem taxa de adesão única";
-                    const topInfluence = influences?.[0];
-                    const keyLabel = ATTRIBUTE_LABELS[topInfluence?.key] ?? topInfluence?.key ?? "características do plano";
-                    const badge = index === 0 ? 'Recomendado' : (index === 1 && isCloseCall ? 'Também recomendado' : 'Alternativo');
-                    const pointsBehind = Math.round((winner.compatibilityPercent - compatibilityPercent) * 10) / 10;
-                    const scoreNote = index === 0
-                        ? ` — a maior ${allPlansFit ? 'entre todos' : 'no seu orçamento'}`
-                        : ` · ${pointsBehind} ${pointsBehind === 1 ? 'ponto' : 'pontos'} abaixo do recomendado`;
-
-                    card.innerHTML = `
-                        <div class="result-badge">${badge}</div>
-                        <div class="result-plan">
-                            <img src="${plan.logo}" alt="Logo do plano ${plan.nome}">
-                            <p class="result-price">${formatMoney(plan.precoMensal)} / mês</p>
-                        </div>
-                        <div class="plan-content">
-                            <p>${formatMoney(plan.precoAnual)} / ano</p>
-                            <small>${adhesion}</small>
-                            <ul class="benefits-list">
-                                ${(plan.beneficios || []).map(b => `<li>${b}</li>`).join('')}
-                            </ul>
-                        </div>
-                        <div class="plan-score">${compatibilityPercent}% de compatibilidade${scoreNote}</div>
-                        <a href="${plan.link}" target="_blank" rel="noopener noreferrer" class="plan-cta" data-plan="${plan.nome}">${getCTAText(plan)}</a>
-                    `;
-                    plansList.appendChild(card);
-                });
-                plansList.addEventListener('click', (e) => {
-                    const cta = e.target.closest('.plan-cta');
-                    if (cta) trackSubscribeClick(cta.dataset.plan, winner.plan.nome, 'lista');
-                });
+        function clearFieldError() {
+            const error = document.querySelector('#fieldError');
+            if (error) {
+                error.textContent = '';
+                error.hidden = true;
             }
         }
 
-        function renderQuestion() {
+        function renderQuestion(onDone) {
             const quizSection = document.querySelector('.quiz-card');
             if (!quizSection) return;
 
@@ -3402,58 +2417,91 @@
             const backBtn = quizSection.querySelector("#backButton");
             const nextBtn = quizSection.querySelector("#nextButton");
 
-            // Cancela reset anterior de altura se existir
             clearTimeout(heightResetTimer);
 
-            // Captura altura atual e trava para transição suave
             const currentHeight = quizSection.scrollHeight;
             quizSection.style.height = currentHeight + "px";
             quizSection.style.overflow = "hidden";
 
-            // Efeito suave de saída temporária
             questionTitle.style.opacity = "0";
             questionTitle.style.transform = "translateY(-4px)";
             optionsContainer.style.opacity = "0";
             optionsContainer.style.transform = "translateY(-4px)";
 
+            const capturedStep = state.step;
+            const token = ++renderToken;
+
             setTimeout(() => {
+                // Um render mais novo venceu este; não mexe no DOM nem libera
+                // o bloqueio (o render vencedor fará isso).
+                if (token !== renderToken || state.step !== capturedStep) return;
+
                 const question = questions[state.step];
+                if (!question) return;
+
+                state.awaitingConflictConfirmation = false;
+                state.conflicts = [];
                 const progress = ((state.step + 1) / questions.length) * 100;
 
                 questionTitle.textContent = question.title;
                 stepCounterEl.textContent = `Pergunta ${state.step + 1} de ${questions.length}`;
                 progressBarEl.style.width = `${progress}%`;
                 backBtn.disabled = state.step === 0;
+                backBtn.textContent = 'Voltar';
 
-                // CORREÇÃO CRÍTICA: sempre inicia DESABILITADO
                 nextBtn.disabled = true;
-                nextBtn.textContent = state.step === questions.length - 1 ? "Ver resultado" : "Continuar";
+                nextBtn.textContent = state.step === questions.length - 1 ? 'Ver resultado' : 'Continuar';
                 optionsContainer.innerHTML = "";
 
                 if (question.type === "range") {
+                    const current = state.answers[question.key];
+                    const isUnknown = current === 'unknown';
+                    const value = isUnknown ? question.min : (current ?? question.min);
                     const wrap = document.createElement("div");
                     wrap.className = "range-wrap";
                     wrap.innerHTML = `
                         <div class="range-value">
-                            <span>Frequência estimada</span>
-                            <strong id="rangeOutput">${state.answers[question.key] ?? question.min}&nbsp;${question.suffix}</strong>
+                            <span>${escapeHtml(question.help || 'Sua estimativa')}</span>
+                            <strong id="rangeOutput">${isUnknown ? escapeHtml(question.unknownLabel || 'Não sei') : `${value}&nbsp;${question.suffix}`}</strong>
                         </div>
-                        <input id="rangeInput" type="range" min="${question.min}" max="${question.max}" value="${state.answers[question.key] ?? question.min}">
+                        <input id="rangeInput" type="range" min="${question.min}" max="${question.max}" value="${value}" ${isUnknown ? 'disabled' : ''} aria-label="${escapeHtml(question.title)}">
+                        ${question.allowUnknown ? `<label class="unknown-option"><input type="checkbox" id="unknownToggle" ${isUnknown ? 'checked' : ''}> ${escapeHtml(question.unknownLabel || 'Não sei')}</label>` : ''}
                     `;
                     optionsContainer.appendChild(wrap);
 
                     const rangeInput = optionsContainer.querySelector("#rangeInput");
                     const rangeOutput = optionsContainer.querySelector("#rangeOutput");
+                    const unknownToggle = optionsContainer.querySelector("#unknownToggle");
 
                     rangeInput.addEventListener("input", (e) => {
-                        const value = Number(e.target.value);
-                        state.answers[question.key] = value;
-                        rangeOutput.textContent = `${value} ${question.suffix}`;
+                        const nextValue = Number(e.target.value);
+                        state.answers[question.key] = nextValue;
+                        state.conflictsConfirmed = false;
+                        state.pendingError = null;
+                        rangeOutput.textContent = `${nextValue} ${question.suffix}`;
                         nextBtn.disabled = false;
+                        clearFieldError();
                     });
 
-                    // Qualquer valor do slider é resposta válida, inclusive o mínimo (0 jogos)
-                    if (state.answers[question.key] !== undefined && state.answers[question.key] !== null) {
+                    if (unknownToggle) {
+                        unknownToggle.addEventListener("change", (e) => {
+                            if (e.target.checked) {
+                                state.answers[question.key] = 'unknown';
+                                rangeInput.disabled = true;
+                                rangeOutput.textContent = question.unknownLabel || 'Não sei';
+                            } else {
+                                state.answers[question.key] = Number(rangeInput.value);
+                                rangeInput.disabled = false;
+                                rangeOutput.textContent = `${rangeInput.value} ${question.suffix}`;
+                            }
+                            state.conflictsConfirmed = false;
+                            state.pendingError = null;
+                            nextBtn.disabled = false;
+                            clearFieldError();
+                        });
+                    }
+
+                    if (isAnswerValid(question, state.answers[question.key])) {
                         nextBtn.disabled = false;
                     }
                 } else {
@@ -3462,22 +2510,21 @@
                         button.type = "button";
                         button.className = "option";
                         button.dataset.optionIndex = idx;
+                        button.setAttribute('aria-pressed', 'false');
 
-                        // Se já tem resposta salva, marca e habilita
-                        if (state.answers[question.key] === item.value) {
+                        if (Object.is(state.answers[question.key], item.value)) {
                             button.classList.add("selected");
+                            button.setAttribute('aria-pressed', 'true');
                             nextBtn.disabled = false;
                         }
 
-                        button.innerHTML = `<strong>${item.label}</strong><span>${item.description}</span>`;
-
+                        button.innerHTML = `<strong>${escapeHtml(item.label)}</strong><span>${escapeHtml(item.description)}</span>`;
                         button.style.opacity = "0";
                         button.style.transform = "translateY(10px)";
                         button.style.transitionDelay = `${idx * 0.04}s`;
 
                         optionsContainer.appendChild(button);
 
-                        // Trigger stagger slide in
                         setTimeout(() => {
                             button.style.opacity = "1";
                             button.style.transform = "translateY(0)";
@@ -3485,26 +2532,29 @@
                     });
                 }
 
-                // Força reflow e anima para nova altura
+                if (state.pendingError) {
+                    showFieldError(state.pendingError);
+                } else {
+                    clearFieldError();
+                }
+
                 quizSection.offsetHeight;
                 const newHeight = quizSection.scrollHeight;
                 quizSection.style.height = newHeight + "px";
 
-                // Remove trava após transição de altura
                 heightResetTimer = setTimeout(() => {
                     quizSection.style.height = "auto";
                     quizSection.style.overflow = "";
                 }, 500);
 
-                // Efeito suave de entrada
                 questionTitle.style.opacity = "1";
                 questionTitle.style.transform = "translateY(0)";
                 optionsContainer.style.opacity = "1";
                 optionsContainer.style.transform = "translateY(0)";
                 questionShownAt = performance.now();
+                if (onDone) onDone();
             }, 180);
         }
-
 
         function createQuizSection() {
             const section = document.createElement('section');
@@ -3515,10 +2565,11 @@
                     <div class="progress-bar" id="progressBar"></div>
                 </div>
                 <div class="step-info">
-                    <span id="stepCounter">Pergunta 1 de 11</span>
+                    <span id="stepCounter">Pergunta 1 de ${questions.length}</span>
                 </div>
                 <h2 class="question" id="quizTitle"></h2>
                 <div class="options" id="options"></div>
+                <p class="field-error" id="fieldError" role="alert" hidden></p>
                 <div class="actions">
                     <button class="btn btn-secondary" id="backButton" type="button">Voltar</button>
                     <button class="btn start-button" id="nextButton" type="button" disabled>Continuar</button>
@@ -3537,10 +2588,23 @@
                     <span class="result-badge">Plano recomendado</span>
                     <div class="result-plan">
                         <img id="resultLogo" alt="">
-                        <p class="result-price" id="resultPrice"></p>
+                        <div>
+                            <p class="result-price" id="resultPrice"></p>
+                            <p class="result-contract" id="resultContract"></p>
+                        </div>
                     </div>
                     <p id="resultSummary"></p>
+                    <div id="sectorNotice"></div>
                     <ul class="reason-list" id="resultReasons"></ul>
+                    <details class="score-explainer" id="scoreExplainer">
+                        <summary>Como calculamos a afinidade estimada</summary>
+                        <div>
+                            <p>O índice de 0 a 100 é calculado a partir das suas respostas e das regras do quiz. Ele não é probabilidade de acerto nem garantia de adequação: é uma estimativa de afinidade com os benefícios, o setor e o custo do plano.</p>
+                            <p>Seu orçamento limita a assinatura. Ingressos, taxa de adesão e opcionais aparecem como custo de uso estimado, com premissas identificadas.</p>
+                            <p id="assumptionNote"></p>
+                            <p>Catálogo ${escapeHtml(CATALOG_VERSION)}. Condições sujeitas a disponibilidade e às regras oficiais do programa.</p>
+                        </div>
+                    </details>
                     <div class="actions">
                         <button class="btn btn-secondary" id="restartButton" type="button">Refazer quiz</button>
                         <div class="actions-group">
@@ -3552,7 +2616,7 @@
                 <aside class="plans-card">
                     <div class="plans-title">
                         <h2>Melhores opções</h2>
-                        <span>Recomendações personalizadas</span>
+                        <span>Ordenadas pela afinidade estimada</span>
                     </div>
                     <div class="plans-list" id="plansList"></div>
                 </aside>
@@ -3561,6 +2625,7 @@
         }
 
         function transitionSection(fromElement, createToElementFn, onEnterCallback) {
+            if (!fromElement || !fromElement.parentNode) return;
             const toElement = createToElementFn();
             toElement.style.display = 'none';
 
@@ -3588,7 +2653,7 @@
                 const optionsContainer = section.querySelector('#options');
 
                 backBtn.addEventListener('click', onBackClick);
-                nextBtn.addEventListener('click', () => onNextClick(nextBtn));
+                nextBtn.addEventListener('click', onNextClick);
                 optionsContainer.addEventListener('click', (e) => {
                     const option = e.target.closest('.option');
                     if (option) onOptionClick(option, nextBtn);
@@ -3610,16 +2675,55 @@
             }
         }
 
-        function onBackClick() {
-            if (state.step === 0) return;
-            state.step -= 1;
+        function renderQuestionAfterInvalid() {
+            state.awaitingConflictConfirmation = false;
             renderQuestion();
         }
 
-        function onNextClick(nextBtn) {
-            // Registra a resposta só ao avançar, para não contar cada troca de opção ou arraste do slider
+        function onBackClick() {
+            if (isTransitioning) return;
+
+            if (state.awaitingConflictConfirmation) {
+                state.awaitingConflictConfirmation = false;
+                state.conflictsConfirmed = false;
+                const firstKey = state.conflicts[0]?.firstKey;
+                const index = questions.findIndex((question) => question.key === firstKey);
+                state.step = index >= 0 ? index : questions.length - 1;
+                state.pendingError = null;
+                renderQuestion();
+                return;
+            }
+
+            if (state.step === 0) return;
+            setLocked(true);
+            state.step -= 1;
+            state.pendingError = null;
+            state.awaitingConflictConfirmation = false;
+            renderQuestion(() => setLocked(false));
+        }
+
+        function onNextClick() {
+            if (isTransitioning) return;
+
+            if (state.awaitingConflictConfirmation) {
+                state.awaitingConflictConfirmation = false;
+                state.conflictsConfirmed = true;
+                completeQuiz();
+                return;
+            }
+
             const question = questions[state.step];
+            if (!question) return;
             const answer = state.answers[question.key];
+
+            if (!isAnswerValid(question, answer)) {
+                state.pendingError = getAnswerError(question);
+                showFieldError(state.pendingError);
+                return;
+            }
+
+            // Só registra a resposta efetivamente aceita; cliques descartados
+            // pelo bloqueio de transição não geram evento.
             trackEvent('quiz_answer', {
                 quiz_step: state.step + 1,
                 quiz_question: question.key,
@@ -3629,26 +2733,426 @@
             });
 
             if (state.step === questions.length - 1) {
-                const quizSection = document.querySelector('.quiz-card');
-                transitionSection(quizSection, createResultsSection, (resultsSection) => {
-                    bindSectionEvents(resultsSection, 'results');
-                    renderResults(resultsSection);
-                    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                });
+                completeQuiz();
                 return;
             }
+
+            setLocked(true);
             state.step += 1;
-            renderQuestion();
+            state.pendingError = null;
+            state.awaitingConflictConfirmation = false;
+            renderQuestion(() => setLocked(false));
+        }
+
+        function showConflictGate(conflicts) {
+            const quizSection = document.querySelector('.quiz-card');
+            if (!quizSection) return;
+
+            state.awaitingConflictConfirmation = true;
+            state.conflicts = conflicts;
+
+            const title = quizSection.querySelector('#quizTitle');
+            const options = quizSection.querySelector('#options');
+            const stepCounter = quizSection.querySelector('#stepCounter');
+            const progressBar = quizSection.querySelector('#progressBar');
+            const backBtn = quizSection.querySelector('#backButton');
+            const nextBtn = quizSection.querySelector('#nextButton');
+
+            title.textContent = 'Antes de ver o resultado, confirme suas respostas';
+            stepCounter.textContent = 'Revisão de respostas';
+            progressBar.style.width = '100%';
+            backBtn.disabled = false;
+            backBtn.textContent = 'Revisar respostas';
+            nextBtn.disabled = false;
+            nextBtn.textContent = 'Confirmar e ver resultado';
+            clearFieldError();
+
+            const list = conflicts.map((conflict) => `<li>${escapeHtml(conflict.message)}</li>`).join('');
+            options.innerHTML = `
+                <div class="conflict-panel" role="alert">
+                    <p>Encontramos respostas que parecem incompatíveis:</p>
+                    <ul>${list}</ul>
+                    <p>Se você confirmar, mantemos as duas respostas: a intenção anual define o volume de jogos e a declaração de não frequentar o estádio zera a necessidade presencial. Se preferir, revise a primeira resposta.</p>
+                </div>
+            `;
+            quizSection.style.height = 'auto';
+            quizSection.style.overflow = '';
+        }
+
+        function completeQuiz() {
+            if (isTransitioning || state.resultRendered) return;
+
+            const invalid = validateAnswers(state.answers);
+            if (invalid.length) {
+                state.step = invalid[0].index;
+                state.pendingError = invalid[0].message;
+                renderQuestion();
+                return;
+            }
+
+            const conflicts = detectConflicts(state.answers);
+            if (conflicts.length && !state.conflictsConfirmed) {
+                showConflictGate(conflicts);
+                return;
+            }
+
+            const quizSection = document.querySelector('.quiz-card');
+            if (!quizSection || document.querySelector('.results')) return;
+
+            setLocked(true);
+            state.resultRendered = true;
+            state.awaitingConflictConfirmation = false;
+
+            transitionSection(quizSection, createResultsSection, (resultsSection) => {
+                bindSectionEvents(resultsSection, 'results');
+                renderResults(resultsSection);
+                setLocked(false);
+                resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+
+        function renderSectorNotice(container, result) {
+            if (!container) return;
+            container.innerHTML = '';
+            const winner = result.winner;
+            if (!winner || !state.answers.preferredSector || winner.sectorFit.level === 'full') return;
+
+            const alternative = result.sectorAlternativeRecommendation;
+            const notice = document.createElement('div');
+            notice.className = 'sector-warning';
+            notice.setAttribute('role', 'note');
+            notice.innerHTML = `
+                <strong>Atenção ao setor:</strong>
+                <span>${escapeHtml(winner.sectorFit.text)}</span>
+                ${alternative ? `<a class="sector-alternative-link" href="${escapeHtml(alternative.plan.contratacao.link)}" target="_blank" rel="noopener noreferrer" data-plan="${escapeHtml(alternative.plan.nome)}">Ver alternativa que atende ao setor: ${escapeHtml(alternative.plan.nome)} (${alternative.score} de 100)</a>` : '<span>Não há alternativa que atenda ao setor dentro do orçamento informado.</span>'}
+            `;
+            container.appendChild(notice);
+
+            const link = notice.querySelector('.sector-alternative-link');
+            if (link) {
+                link.addEventListener('click', () => {
+                    trackSubscribeClick(alternative.plan.nome, winner.plan.nome, 'alternativa-setor');
+                });
+            }
+        }
+
+        function renderPlanCard(result, rank, winner, isCloseCall) {
+            const plan = result.plan;
+            const contract = getPlanContract(plan);
+            const benefits = getPlanBenefits(plan, state.answers);
+            const badge = !result.eligibility.withinBudget
+                ? 'Acima do orçamento'
+                : rank === 0
+                    ? 'Recomendado'
+                    : (rank === 1 && isCloseCall ? 'Também recomendado' : 'Alternativo');
+            const pointsBehind = winner ? Math.round((winner.score - result.score) * 10) / 10 : null;
+            const scoreNote = !result.eligibility.withinBudget
+                ? ' · acima do orçamento de assinatura'
+                : rank === 0
+                    ? ' · maior afinidade estimada'
+                    : ` · ${pointsBehind} ${pointsBehind === 1 ? 'ponto' : 'pontos'} abaixo do recomendado`;
+            const sectorNote = result.sectorFit.level === 'partial'
+                ? `<p class="plan-sector-note">Cobre parte do setor ${escapeHtml(result.sectorFit.label)}.</p>`
+                : result.sectorFit.level === 'none'
+                    ? `<p class="plan-sector-note">Não cobre ${escapeHtml(result.sectorFit.label)}.</p>`
+                    : '';
+
+            const card = document.createElement('article');
+            card.className = 'plan';
+            card.id = `plan-${plan.slug}`;
+            card.innerHTML = `
+                <div class="result-badge">${badge}</div>
+                <div class="result-plan">
+                    <img src="${escapeHtml(plan.logo)}" alt="Logo do plano ${escapeHtml(plan.nome)}">
+                    <div>
+                        <p class="result-price">${escapeHtml(contract.priceText)}</p>
+                        <small>${escapeHtml(contract.detail)}</small>
+                    </div>
+                </div>
+                <div class="plan-content">
+                    <p class="plan-total">${escapeHtml(contract.totalText)}</p>
+                    <small>${plan.contratacao.taxaAdesao ? `Taxa única de adesão: ${formatMoney(plan.contratacao.taxaAdesao)}` : 'Sem taxa de adesão'}</small>
+                    <p class="plan-cost">Custo de uso estimado: <strong>${formatBRL(result.cost.estimatedMonthly)}/mês</strong></p>
+                    <ul class="benefits-list">
+                        ${benefits.map(b => `<li>${escapeHtml(b)}</li>`).join('')}
+                    </ul>
+                    ${sectorNote}
+                </div>
+                <div class="plan-score">${result.score} de 100 de afinidade estimada${scoreNote}</div>
+                <a href="${escapeHtml(plan.contratacao.link)}" target="_blank" rel="noopener noreferrer" class="plan-cta" data-plan="${escapeHtml(plan.nome)}">${escapeHtml(getCTAText(plan))}</a>
+            `;
+            return card;
+        }
+
+        function renderResults(resultsSection) {
+            if (!resultsSection) return;
+            const result = recommendPlansCore(state.answers);
+            const winner = result.winner;
+
+            trackEvent('quiz_complete', {
+                recommended_plan: winner ? winner.plan.nome : 'none',
+                affinity_index: winner ? winner.score : null,
+                compatibility: winner ? winner.score : null,
+                score_semantics: 'indice_afinidade_estimado',
+                no_eligible_plan: Boolean(result.noEligible),
+                catalog_version: CATALOG_VERSION,
+                total_time_sec: secondsSince(quizStartedAt),
+                ...answerParams()
+            });
+
+            const resultBadge = resultsSection.querySelector(".result-badge");
+            const resultLogo = resultsSection.querySelector("#resultLogo");
+            const resultPrice = resultsSection.querySelector("#resultPrice");
+            const resultContract = resultsSection.querySelector("#resultContract");
+            const resultSummary = resultsSection.querySelector("#resultSummary");
+            const resultReasons = resultsSection.querySelector("#resultReasons");
+            const sectorNotice = resultsSection.querySelector("#sectorNotice");
+            const plansList = resultsSection.querySelector("#plansList");
+            const subscribeButton = resultsSection.querySelector("#subscribeButton");
+            const assumptionNote = resultsSection.querySelector("#assumptionNote");
+
+            if (assumptionNote) {
+                assumptionNote.textContent = `Premissas de simulação: ${ASSUMPTIONS.labels.precoIngressoCheio}, ${ASSUMPTIONS.labels.precoIngressoPopular} e ${ASSUMPTIONS.labels.kids}; ${ASSUMPTIONS.labels.kidsIngressos}. Não são preços oficiais universais.`;
+            }
+
+            if (!winner) {
+                if (resultBadge) resultBadge.textContent = 'Nenhum plano no orçamento';
+                if (resultLogo) resultLogo.style.display = 'none';
+                if (resultPrice) resultPrice.textContent = '';
+                if (resultContract) resultContract.textContent = '';
+                if (resultSummary) {
+                    resultSummary.textContent = `Nenhum plano cabe no orçamento de assinatura de ${formatMoney(result.budget)} por mês. A opção de assinatura mais barata é ${result.cheapest.plan.nome}, em ${formatBRL(result.cheapest.cost.subscription)}/mês. Os planos abaixo aparecem para comparação, sem recomendação.`;
+                }
+                if (resultReasons) resultReasons.innerHTML = '';
+                if (sectorNotice) sectorNotice.innerHTML = '';
+                if (subscribeButton) {
+                    subscribeButton.disabled = true;
+                    subscribeButton.setAttribute('aria-disabled', 'true');
+                    subscribeButton.textContent = 'Sem plano no orçamento';
+                }
+            } else {
+                if (resultBadge) resultBadge.textContent = 'Plano recomendado';
+                if (resultLogo && winner.plan.logo) {
+                    resultLogo.style.display = '';
+                    resultLogo.src = winner.plan.logo;
+                    resultLogo.alt = `Logo do plano ${winner.plan.nome}`;
+                }
+                if (subscribeButton) {
+                    subscribeButton.disabled = false;
+                    subscribeButton.removeAttribute('aria-disabled');
+                    subscribeButton.dataset.subscribeUrl = winner.plan.contratacao.link;
+                    subscribeButton.dataset.plan = winner.plan.nome;
+                    subscribeButton.textContent = 'Assinar agora';
+                    subscribeButton.setAttribute("aria-label", `Assinar o plano ${winner.plan.nome}`);
+                }
+                const contract = getPlanContract(winner.plan);
+                if (resultPrice) resultPrice.textContent = contract.priceText;
+                if (resultContract) resultContract.textContent = `${contract.totalText} · ${contract.detail}`;
+                if (resultSummary) {
+                    const scope = result.allPlansFit ? 'entre todos os planos' : 'entre os planos que cabem no seu orçamento';
+                    resultSummary.textContent = result.closeCall
+                        ? `${winner.score} de 100 de afinidade estimada — praticamente empatado com ${result.runnerUp.plan.nome} (${result.runnerUp.score}). Os dois atendem bem ao seu perfil.`
+                        : `${winner.score} de 100 de afinidade estimada — a maior ${scope}.`;
+                }
+                if (resultReasons) {
+                    resultReasons.innerHTML = '';
+                    winner.reasons.forEach((reason) => {
+                        const item = document.createElement('li');
+                        item.textContent = reason;
+                        resultReasons.appendChild(item);
+                    });
+                }
+                renderSectorNotice(sectorNotice, result);
+            }
+
+            if (plansList) {
+                plansList.innerHTML = '';
+                result.recommendations.forEach((recommendation, index) => {
+                    plansList.appendChild(renderPlanCard(recommendation, index, winner, result.closeCall));
+                });
+                plansList.addEventListener('click', (event) => {
+                    const cta = event.target.closest('.plan-cta');
+                    if (cta) trackSubscribeClick(cta.dataset.plan, winner ? winner.plan.nome : 'none', 'lista');
+                });
+            }
+        }
+
+        function renderComparisonTable(wrapper, result) {
+            if (!wrapper) return;
+
+            const compatibilityMap = {};
+            result.all.forEach(item => {
+                compatibilityMap[item.plan.slug] = item.score;
+            });
+
+            const winnerSlug = result.winner?.plan?.slug;
+            const runnerUpSlug = result.runnerUp?.plan?.slug;
+            const highlightClass = slug => slug === winnerSlug ? ' comparison-highlight' : '';
+            const headerBadge = (plan) => {
+                const evaluated = result.all.find(item => item.plan.slug === plan.slug);
+                if (plan.slug === winnerSlug) return '<span class="plan-badge">Recomendado</span>';
+                if (plan.slug === runnerUpSlug && result.closeCall) return '<span class="plan-badge">Também recomendado</span>';
+                if (evaluated && !evaluated.eligibility.withinBudget) return '<span class="plan-badge plan-badge-muted">Acima do orçamento</span>';
+                return '';
+            };
+
+            const features = [
+                {
+                    label: 'Contratação',
+                    getValue: (plan) => {
+                        const contract = getPlanContract(plan);
+                        return `<span class="comparison-detail">${escapeHtml(contract.detail)}</span>`;
+                    }
+                },
+                {
+                    label: 'Preço',
+                    getValue: (plan) => {
+                        const contract = getPlanContract(plan);
+                        return `<strong>${escapeHtml(contract.priceText)}</strong><br><span class="comparison-detail">${escapeHtml(contract.totalText)}</span>`;
+                    }
+                },
+                {
+                    label: 'Taxa de adesão',
+                    getValue: (plan) => plan.contratacao.taxaAdesao
+                        ? `${formatMoney(plan.contratacao.taxaAdesao)} (única)`
+                        : 'Sem taxa'
+                },
+                {
+                    label: 'Benefício de ingresso',
+                    getValue: (plan) => {
+                        const ticket = getTicketBenefit(plan, state.answers);
+                        return `<span class="comparison-check">✓</span> <span class="comparison-detail">${escapeHtml(ticket.text)}<br>Setores: ${escapeHtml(ticket.setorTexto)}</span>`;
+                    }
+                },
+                {
+                    label: 'Prioridade / garantia',
+                    getValue: (plan) => {
+                        const priority = getPriority(plan, state.answers);
+                        return escapeHtml(priority.label);
+                    }
+                },
+                {
+                    label: 'Desconto na loja',
+                    getValue: (plan) => `<span class="comparison-check">✓</span> <span class="comparison-detail">${escapeHtml(plan.loja.texto)}</span>`
+                },
+                {
+                    label: 'Conteúdo e votação',
+                    getValue: (plan) => plan.conteudoExclusivo && plan.votacao
+                        ? '<span class="comparison-check">✓</span>'
+                        : '<span class="comparison-cross">✗</span>'
+                },
+                {
+                    label: 'Kids',
+                    getValue: (plan) => plan.opcionais.kids.disponivel
+                        ? `<span class="comparison-check">✓</span> <span class="comparison-detail">${formatBRL(plan.opcionais.kids.precoMensal)}/mês por criança (até ${plan.opcionais.kids.maxCriancas})</span>`
+                        : '<span class="comparison-cross">✗</span>'
+                }
+            ];
+
+            const table = document.createElement('table');
+            table.className = 'comparison-table';
+
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+
+            const labelTh = document.createElement('th');
+            labelTh.className = 'comparison-feature-label';
+            labelTh.textContent = 'Planos';
+            headerRow.appendChild(labelTh);
+
+            plans.forEach(plan => {
+                const th = document.createElement('th');
+                th.className = highlightClass(plan.slug);
+                th.innerHTML = `
+                    <h1 class="plan-name">${escapeHtml(plan.nome)}</h1>
+                    ${headerBadge(plan)}
+                `;
+                headerRow.appendChild(th);
+            });
+
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+
+            features.forEach(feature => {
+                const tr = document.createElement('tr');
+                const labelTd = document.createElement('td');
+                labelTd.className = 'comparison-feature-label';
+                labelTd.textContent = feature.label;
+                tr.appendChild(labelTd);
+
+                plans.forEach(plan => {
+                    const td = document.createElement('td');
+                    td.className = highlightClass(plan.slug);
+                    td.innerHTML = feature.getValue(plan);
+                    tr.appendChild(td);
+                });
+
+                tbody.appendChild(tr);
+            });
+
+            const compatTr = document.createElement('tr');
+            const compatLabel = document.createElement('td');
+            compatLabel.className = 'comparison-feature-label';
+            compatLabel.textContent = 'Afinidade estimada';
+            compatTr.appendChild(compatLabel);
+
+            plans.forEach(plan => {
+                const td = document.createElement('td');
+                td.className = 'comparison-compatibility' + highlightClass(plan.slug);
+                td.textContent = `${compatibilityMap[plan.slug]} de 100`;
+                compatTr.appendChild(td);
+            });
+
+            tbody.appendChild(compatTr);
+            table.appendChild(tbody);
+
+            const tfoot = document.createElement('tfoot');
+            const footerRow = document.createElement('tr');
+
+            const footerLabel = document.createElement('td');
+            footerLabel.className = 'comparison-feature-label';
+            footerRow.appendChild(footerLabel);
+
+            plans.forEach(plan => {
+                const td = document.createElement('td');
+                td.className = highlightClass(plan.slug);
+                const a = document.createElement('a');
+                a.href = plan.contratacao.link;
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+                a.className = 'plan-cta';
+                a.dataset.plan = plan.nome;
+                a.textContent = getCTAText(plan);
+                a.addEventListener('click', () => {
+                    trackSubscribeClick(plan.nome, result.winner?.plan?.nome || 'none', 'comparativo');
+                });
+                td.appendChild(a);
+                footerRow.appendChild(td);
+            });
+
+            tfoot.appendChild(footerRow);
+            table.appendChild(tfoot);
+            wrapper.appendChild(table);
         }
 
         function onOptionClick(optionEl, nextBtn) {
+            if (isTransitioning) return;
             const optionsContainer = optionEl.closest('.options');
-            optionsContainer.querySelectorAll('.option.selected').forEach(opt => opt.classList.remove('selected'));
+            optionsContainer.querySelectorAll('.option.selected').forEach(opt => {
+                opt.classList.remove('selected');
+                opt.setAttribute('aria-pressed', 'false');
+            });
             optionEl.classList.add('selected');
+            optionEl.setAttribute('aria-pressed', 'true');
             const question = questions[state.step];
             const selectedOption = question.options[Number(optionEl.dataset.optionIndex)];
             state.answers[question.key] = selectedOption.value;
+            state.conflictsConfirmed = false;
+            state.pendingError = null;
             nextBtn.disabled = false;
+            clearFieldError();
         }
 
         function createHeroSection() {
@@ -3657,7 +3161,7 @@
             section.innerHTML = `
                 <div class="hero-card" id="heroCard">
                     <p class="eyebrow">Quiz Sócio 5 Estrelas</p>
-                    <h1>Encontre o plano perfeito para viver o Cruzeiro mais de perto.</h1>
+                    <h1>Encontre o plano com mais afinidade com o seu jeito de torcer.</h1>
                     <button class="start-button" id="startButton" type="button">Iniciar Quiz</button>
                 </div>
             `;
@@ -3665,49 +3169,62 @@
         }
 
         function onRestartClick() {
+            if (isTransitioning) return;
+            setLocked(true);
             resetState();
             const resultsSection = document.querySelector('.results');
             transitionSection(resultsSection, createHeroSection, (newHeroSection) => {
                 heroSection = newHeroSection;
                 const newStartButton = heroSection.querySelector('#startButton');
-                newStartButton.addEventListener('click', () => {
-                    trackQuizStart();
-                    transitionSection(heroSection, createQuizSection, (quizSection) => {
-                        bindSectionEvents(quizSection, 'quiz');
-                        renderQuestion();
-                    });
-                });
+                newStartButton.addEventListener('click', startQuiz);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                setLocked(false);
+            });
+        }
+
+        function startQuiz() {
+            if (isTransitioning) return;
+            setLocked(true);
+            trackQuizStart();
+            transitionSection(heroSection, createQuizSection, (quizSection) => {
+                bindSectionEvents(quizSection, 'quiz');
+                renderQuestion(() => setLocked(false));
             });
         }
 
         function onSubscribeClick() {
             const button = document.querySelector('#subscribeButton');
-            const url = button?.dataset.subscribeUrl || 'https://socio5estrelas.com.br';
+            const url = button?.dataset.subscribeUrl;
+            if (!url) return;
             trackSubscribeClick(button?.dataset.plan, button?.dataset.plan, 'resultado');
             window.open(url, '_blank', 'noopener,noreferrer');
         }
 
         function openComparisonModal(modal) {
             const body = modal.querySelector('#modalComparisonBody');
-            // Remonta a cada abertura: depois de "Refazer quiz" as respostas e o recomendado mudam
             if (body) {
                 body.textContent = '';
                 const wrapper = document.createElement('div');
                 wrapper.className = 'comparison-wrapper';
                 body.appendChild(wrapper);
-                const recommendations = recommendPlans();
-                renderComparisonTable(wrapper, recommendations);
+                renderComparisonTable(wrapper, recommendPlansCore(state.answers));
             }
             modal.classList.add('is-open');
             document.body.style.overflow = 'hidden';
+            // Teclado: o foco entra no diálogo e volta ao botão de origem ao fechar.
+            modalReturnFocus = document.activeElement;
+            modal.querySelector('#modalClose')?.focus();
         }
+
+        let modalReturnFocus = null;
 
         function closeComparisonModal() {
             const modal = document.querySelector('#comparisonModal');
-            if (modal) {
+            if (modal && modal.classList.contains('is-open')) {
                 modal.classList.remove('is-open');
                 document.body.style.overflow = '';
+                if (modalReturnFocus && document.contains(modalReturnFocus)) modalReturnFocus.focus();
+                modalReturnFocus = null;
             }
         }
 
@@ -3734,49 +3251,11 @@
             document.body.appendChild(modal);
         }
 
-        function resetState() {
-            state.step = 0;
-            state.answers = {
-                gamesPerYear: 0,
-                wantsGuaranteedTicket: null,
-                buysTwoTickets: null,
-                needsPriority: null,
-                wantsParticipation: null,
-                wantsStoreDiscount: null,
-                gameFrequency: null,
-                familyPlan: null,
-                digitalExperience: null,
-                budget: null,
-                preferredSector: null
-            };
-        }
-
-
-
-
-        startButton.addEventListener("click", () => {
-            trackQuizStart();
-            transitionSection(heroSection, createQuizSection, (quizSection) => {
-                bindSectionEvents(quizSection, 'quiz');
-                renderQuestion();
-            });
-        });
+        startButton.addEventListener("click", startQuiz);
 
         // preview mode: ?preview or #preview auto-shows results with preset answers
         if (isPreview) {
-            state.answers = {
-                gamesPerYear: 15,
-                wantsGuaranteedTicket: true,
-                buysTwoTickets: true,
-                needsPriority: true,
-                wantsParticipation: true,
-                wantsStoreDiscount: true,
-                gameFrequency: 'always',
-                familyPlan: false,
-                digitalExperience: true,
-                budget: 200,
-                preferredSector: 'blue'
-            };
+            state.answers = { ...createInitialAnswers(), ...PREVIEW_ANSWERS };
             requestAnimationFrame(() => {
                 transitionSection(heroSection, createResultsSection, (resultsSection) => {
                     bindSectionEvents(resultsSection, 'results');

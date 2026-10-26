@@ -1,0 +1,1144 @@
+{
+  "commit": "2cecf81",
+  "label": "Ranking anterior (cosseno + penalidade de preço + bônus de setor) sobre a referência do QUIZ-009",
+  "generatedBy": "npm run baseline",
+  "mapping": {
+    "gamesHistory": "descartado: a versão antiga não perguntava histórico",
+    "kidsCount": "familyPlan = kidsCount > 0 (a pergunta antiga era “dependentes, filhos ou cônjuge”)",
+    "buysTwoTickets": "mantido: mesma chave e mesmos valores",
+    "demais": "mantidos: mesmas chaves e valores de opção"
+  },
+  "note": "A versão antiga não detectava contradições; nos cenários CON-* ela recomenda normalmente.",
+  "cases": [
+    {
+      "id": "CAL-01",
+      "split": "calibracao",
+      "category": "zero jogos com conteúdo",
+      "oldAnswers": {
+        "gamesPerYear": 0,
+        "wantsGuaranteedTicket": "never",
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "blue",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso",
+          "score": 92.1,
+          "withinBudget": true
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 89.8,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 82.7,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CAL-02",
+      "split": "calibracao",
+      "category": "orçamento 40 e setor popular",
+      "oldAnswers": {
+        "gamesPerYear": 10,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 40,
+        "preferredSector": "yellow-orange",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "time-do-povo",
+          "score": 71,
+          "withinBudget": true
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 67.5,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CAL-03",
+      "split": "calibracao",
+      "category": "loja e conteúdo",
+      "oldAnswers": {
+        "gamesPerYear": 8,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "frequent",
+        "digitalExperience": true,
+        "budget": 100,
+        "preferredSector": "blue",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso",
+          "score": 93.3,
+          "withinBudget": true
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 89.5,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 83.5,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CAL-04",
+      "split": "calibracao",
+      "category": "alta frequência no Sicoob",
+      "oldAnswers": {
+        "gamesPerYear": 30,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": true,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "always",
+        "digitalExperience": true,
+        "budget": 400,
+        "preferredSector": "blue",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso-cativo",
+          "score": 91.4,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso-max",
+          "score": 85,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 83,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CAL-05",
+      "split": "calibracao",
+      "category": "casal no Roxo",
+      "oldAnswers": {
+        "gamesPerYear": 20,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": true,
+        "needsPriority": true,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "always",
+        "digitalExperience": true,
+        "budget": 400,
+        "preferredSector": "purple",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso-cativo",
+          "score": 94.6,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso-max",
+          "score": 88.1,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 78.9,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CAL-06",
+      "split": "calibracao",
+      "category": "casal com dois Kids",
+      "oldAnswers": {
+        "gamesPerYear": 20,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": true,
+        "needsPriority": true,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "always",
+        "digitalExperience": true,
+        "budget": 200,
+        "preferredSector": "yellow-orange",
+        "familyPlan": true
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso-max",
+          "score": 89.5,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 86,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 81.3,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CAL-07",
+      "split": "calibracao",
+      "category": "histórico nível 3",
+      "oldAnswers": {
+        "gamesPerYear": 10,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 100,
+        "preferredSector": "blue",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 79.2,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 74.6,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 61.7,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CAL-08",
+      "split": "calibracao",
+      "category": "histórico nível 1",
+      "oldAnswers": {
+        "gamesPerYear": 10,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 100,
+        "preferredSector": "blue",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 79.2,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 74.6,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 61.7,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CAL-09",
+      "split": "calibracao",
+      "category": "novo sócio",
+      "oldAnswers": {
+        "gamesPerYear": 15,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": true,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "always",
+        "digitalExperience": true,
+        "budget": 400,
+        "preferredSector": "blue",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso-cativo",
+          "score": 90.1,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso-max",
+          "score": 85,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 83.9,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CAL-10",
+      "split": "calibracao",
+      "category": "Roxo com teto de 200",
+      "oldAnswers": {
+        "gamesPerYear": 15,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "frequent",
+        "digitalExperience": true,
+        "budget": 200,
+        "preferredSector": "purple",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso",
+          "score": 89.5,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso-max",
+          "score": 84.4,
+          "withinBudget": true
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 79.9,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CAL-11",
+      "split": "calibracao",
+      "category": "acompanhante adulto",
+      "oldAnswers": {
+        "gamesPerYear": 12,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": true,
+        "needsPriority": true,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "frequent",
+        "digitalExperience": false,
+        "budget": 100,
+        "preferredSector": "yellow-orange",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso",
+          "score": 72,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 69.6,
+          "withinBudget": true
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 55.2,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CAL-12",
+      "split": "calibracao",
+      "category": "baixa frequência e teto 40",
+      "oldAnswers": {
+        "gamesPerYear": 5,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 40,
+        "preferredSector": "yellow-orange",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "time-do-povo",
+          "score": 71.6,
+          "withinBudget": true
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 69.6,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "RES-01",
+      "split": "reserva",
+      "category": "zero jogos sem extras",
+      "oldAnswers": {
+        "gamesPerYear": 0,
+        "wantsGuaranteedTicket": "never",
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 40,
+        "preferredSector": "yellow-orange",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 75.3,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 70,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "RES-02",
+      "split": "reserva",
+      "category": "zero jogos com loja",
+      "oldAnswers": {
+        "gamesPerYear": 0,
+        "wantsGuaranteedTicket": "never",
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 100,
+        "preferredSector": "blue",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "time-do-povo",
+          "score": 94.3,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 89.9,
+          "withinBudget": true
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 86.3,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "RES-03",
+      "split": "reserva",
+      "category": "alta frequência no Amarelo",
+      "oldAnswers": {
+        "gamesPerYear": 30,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": true,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "always",
+        "digitalExperience": false,
+        "budget": 100,
+        "preferredSector": "yellow-orange",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso",
+          "score": 64.9,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 56.8,
+          "withinBudget": true
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 55.9,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "RES-04",
+      "split": "reserva",
+      "category": "alta frequência com teto 40",
+      "oldAnswers": {
+        "gamesPerYear": 30,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "always",
+        "digitalExperience": false,
+        "budget": 40,
+        "preferredSector": "yellow-orange",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "time-do-povo",
+          "score": 61.7,
+          "withinBudget": true
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 55,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "RES-05",
+      "split": "reserva",
+      "category": "Roxo sem cobertura do Cativo",
+      "oldAnswers": {
+        "gamesPerYear": 10,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "frequent",
+        "digitalExperience": true,
+        "budget": 400,
+        "preferredSector": "purple",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso-cativo",
+          "score": 87.7,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso-max",
+          "score": 77.7,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 75.5,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "RES-06",
+      "split": "reserva",
+      "category": "garantia no Sicoob",
+      "oldAnswers": {
+        "gamesPerYear": 20,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": true,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "always",
+        "digitalExperience": true,
+        "budget": 400,
+        "preferredSector": "blue",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso-cativo",
+          "score": 90.5,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso-max",
+          "score": 85.1,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 83.8,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "RES-07",
+      "split": "reserva",
+      "category": "um Kids com teto 100",
+      "oldAnswers": {
+        "gamesPerYear": 12,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": true,
+        "needsPriority": true,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "frequent",
+        "digitalExperience": true,
+        "budget": 100,
+        "preferredSector": "yellow-orange",
+        "familyPlan": true
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso",
+          "score": 87.2,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 84.6,
+          "withinBudget": true
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 73.1,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "RES-08",
+      "split": "reserva",
+      "category": "casal no Roxo com teto 200",
+      "oldAnswers": {
+        "gamesPerYear": 15,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": true,
+        "needsPriority": true,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "frequent",
+        "digitalExperience": true,
+        "budget": 200,
+        "preferredSector": "purple",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso-max",
+          "score": 87.8,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 79.7,
+          "withinBudget": true
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 62,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "RES-09",
+      "split": "reserva",
+      "category": "limite de nível 10 jogos",
+      "oldAnswers": {
+        "gamesPerYear": 10,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 100,
+        "preferredSector": "blue",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 79.2,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 74.6,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 61.7,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "RES-10",
+      "split": "reserva",
+      "category": "limite de nível 20 jogos",
+      "oldAnswers": {
+        "gamesPerYear": 10,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 100,
+        "preferredSector": "blue",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 79.2,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 74.6,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 61.7,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "RES-11",
+      "split": "reserva",
+      "category": "teto 40 no Sicoob",
+      "oldAnswers": {
+        "gamesPerYear": 8,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 40,
+        "preferredSector": "blue",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 74.8,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 69.7,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "RES-12",
+      "split": "reserva",
+      "category": "premium com família",
+      "oldAnswers": {
+        "gamesPerYear": 30,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": true,
+        "needsPriority": true,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "always",
+        "digitalExperience": true,
+        "budget": 400,
+        "preferredSector": "purple",
+        "familyPlan": true
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso-max",
+          "score": 94.5,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso-cativo",
+          "score": 90.9,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 86.5,
+          "withinBudget": true
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CON-01",
+      "split": "contradicao",
+      "category": "zero jogos e presença em todos",
+      "oldAnswers": {
+        "gamesPerYear": 0,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 100,
+        "preferredSector": "blue",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso",
+          "score": 70.8,
+          "withinBudget": true
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 66.9,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 62.6,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": false,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CON-02",
+      "split": "contradicao",
+      "category": "zero jogos e sempre na arquibancada",
+      "oldAnswers": {
+        "gamesPerYear": 0,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "always",
+        "digitalExperience": false,
+        "budget": 200,
+        "preferredSector": "yellow-orange",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 75.4,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 70.3,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 62.3,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": false,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CON-03",
+      "split": "contradicao",
+      "category": "zero jogos e dividido entre estádio e TV",
+      "oldAnswers": {
+        "gamesPerYear": 0,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "frequent",
+        "digitalExperience": false,
+        "budget": 40,
+        "preferredSector": "yellow-orange",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 76.7,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 72.3,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": false,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CON-04",
+      "split": "contradicao",
+      "category": "jogos previstos e não frequenta",
+      "oldAnswers": {
+        "gamesPerYear": 12,
+        "wantsGuaranteedTicket": "never",
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 100,
+        "preferredSector": "blue",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 81,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 78,
+          "withinBudget": true
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 70.9,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": false,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    },
+    {
+      "id": "CON-05",
+      "split": "contradicao",
+      "category": "dupla contradição",
+      "oldAnswers": {
+        "gamesPerYear": 0,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "always",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "purple",
+        "familyPlan": false
+      },
+      "ranking": [
+        {
+          "plan": "cabuloso-cativo",
+          "score": 85.6,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso-max",
+          "score": 74,
+          "withinBudget": true
+        },
+        {
+          "plan": "cabuloso",
+          "score": 69.6,
+          "withinBudget": true
+        }
+      ],
+      "top1": false,
+      "top3": false,
+      "budgetFallback": false,
+      "violation": false,
+      "conflictDetected": false
+    }
+  ]
+}

@@ -1,2 +1,8 @@
 # documento interno de apoio, versionado mas fora do site
 estrutura_quiz.md
+# fonte comercial e pendências internas, fora do site
+catalogo-comercial.md
+# backlog local de correções, fora do site
+tickets/
+# testes e ferramentas locais, fora do site
+tests/
