@@ -20,8 +20,8 @@
 
     const CATALOG_VERSION = '2026-09-11';
     const CATALOG_CONSULTED_AT = '2026-10-26';
-    // Versão das regras de perfil e ranking; mude ao alterar pesos ou componentes.
-    const RULES_VERSION = '2026-10-26';
+    // Versão das regras de perfil, custo e ranking; mude ao alterar o cálculo.
+    const RULES_VERSION = '2026-10-26.2';
 
     const CATALOG_SOURCE = {
         nome: 'Regulamento e Termo de Uso do Programa Sócio 5 Estrelas',
@@ -32,19 +32,14 @@
     };
 
     /*
-     * Premissas de simulação. Não são preços oficiais universais: servem para
-     * estimar custo de uso e são exibidas junto do resultado.
+     * Premissa dos exemplos de desconto por ingresso. Os valores de assinatura,
+     * adesão e opcionais vêm do catálogo, separados conforme a ADR-0001.
      */
     const ASSUMPTIONS = {
-        horizonteMeses: 1,
         precoIngressoCheio: 150,
-        precoIngressoPopular: 40,
-        kidsMensalidade: 30,
         labels: {
             precoIngressoCheio: 'R$ 150 por ingresso de referência',
-            precoIngressoPopular: 'R$ 40 por ingresso popular de referência',
-            kids: 'Kids R$ 30/mês por criança (até 3, menores de 12 anos)',
-            kidsIngressos: 'ingressos das crianças não incluídos na estimativa (cobertura do opcional Kids não confirmada)'
+            kidsIngressos: 'Kids depende de aprovação: ingresso da criança sem custo adicional no setor do titular, mediante disponibilidade e aquisição do ingresso do titular'
         }
     };
 
@@ -113,7 +108,7 @@
             conteudoExclusivo: true,
             votacao: true,
             opcionais: {
-                kids: { disponivel: true, precoMensal: 30, maxCriancas: 3, idadeMaxima: 12 },
+                kids: { disponivel: true, precoMensal: 30, maxCriancas: 3, idadeMaxima: 12, ingressoIncluido: true },
                 carteirinhaFisica: { situacao: 'opcional', preco: 30 },
                 pcd: false
             },
@@ -152,7 +147,7 @@
             conteudoExclusivo: true,
             votacao: true,
             opcionais: {
-                kids: { disponivel: true, precoMensal: 30, maxCriancas: 3, idadeMaxima: 12 },
+                kids: { disponivel: true, precoMensal: 30, maxCriancas: 3, idadeMaxima: 12, ingressoIncluido: true },
                 carteirinhaFisica: { situacao: 'incluida', preco: 0 },
                 pcd: false
             },
@@ -200,7 +195,7 @@
             conteudoExclusivo: true,
             votacao: true,
             opcionais: {
-                kids: { disponivel: true, precoMensal: 30, maxCriancas: 3, idadeMaxima: 12 },
+                kids: { disponivel: true, precoMensal: 30, maxCriancas: 3, idadeMaxima: 12, ingressoIncluido: true },
                 carteirinhaFisica: { situacao: 'incluida', preco: 0 },
                 pcd: true
             },
@@ -244,7 +239,7 @@
             conteudoExclusivo: true,
             votacao: true,
             opcionais: {
-                kids: { disponivel: true, precoMensal: 30, maxCriancas: 3, idadeMaxima: 12 },
+                kids: { disponivel: true, precoMensal: 30, maxCriancas: 3, idadeMaxima: 12, ingressoIncluido: true },
                 carteirinhaFisica: { situacao: 'incluida', preco: 0 },
                 pcd: false
             },
@@ -283,7 +278,7 @@
             conteudoExclusivo: true,
             votacao: true,
             opcionais: {
-                kids: { disponivel: true, precoMensal: 30, maxCriancas: 3, idadeMaxima: 12 },
+                kids: { disponivel: true, precoMensal: 30, maxCriancas: 3, idadeMaxima: 12, ingressoIncluido: true },
                 carteirinhaFisica: { situacao: 'virtual', preco: 0 },
                 pcd: false
             },
@@ -310,7 +305,7 @@
             min: 0,
             max: 30,
             suffix: 'jogos',
-            help: 'Esta é uma intenção para o próximo ano; não é o seu histórico.'
+            help: 'Frequência estimada'
         },
         {
             key: 'gamesHistory',
@@ -321,7 +316,7 @@
             suffix: 'jogos',
             allowUnknown: true,
             unknownLabel: 'Não sei ou sou novo sócio',
-            help: 'O histórico define o nível do Cabuloso. Sem histórico confirmado, usamos a condição inicial (nível 1).'
+            help: 'Não lembra ou ainda não é sócio? Marque a opção abaixo para continuar.'
         },
         {
             key: 'wantsGuaranteedTicket',
@@ -362,7 +357,7 @@
         },
         {
             key: 'kidsCount',
-            title: 'Quantas crianças de até 12 anos você pretende incluir no plano?',
+            title: 'Quantas crianças menores de 12 anos você pretende incluir no plano?',
             options: [
                 {
                     label: 'Nenhuma',
@@ -371,17 +366,17 @@
                 },
                 {
                     label: '1 criança',
-                    description: 'Uma criança elegível ao opcional Kids.',
+                    description: 'Quero incluir uma criança no Kids.',
                     value: 1
                 },
                 {
                     label: '2 crianças',
-                    description: 'Duas crianças elegíveis ao opcional Kids.',
+                    description: 'Quero incluir duas crianças no Kids.',
                     value: 2
                 },
                 {
                     label: '3 crianças',
-                    description: 'Três crianças, limite do opcional Kids.',
+                    description: 'Quero incluir três crianças no Kids.',
                     value: 3
                 }
             ]
@@ -473,11 +468,11 @@
         },
         {
             key: 'budget',
-            title: 'Qual é o seu orçamento mensal confortável para a assinatura?',
+            title: 'Qual é o seu orçamento mensal confortável para investir no Sócio?',
             options: [
                 {
                     label: 'Até R$ 40/mês',
-                    description: 'Busco a opção com o menor custo de assinatura e quero apoiar o Time.',
+                    description: 'Busco a opção com o menor custo e quero apoiar o Time.',
                     value: 40
                 },
                 {
@@ -590,7 +585,7 @@
             conflicts.push({
                 keys: ['gamesPerYear', 'wantsGuaranteedTicket'],
                 firstKey: 'gamesPerYear',
-                message: 'Você marcou 0 jogos por ano e também disse que faz questão de ir a todos os jogos.'
+                message: '0 jogos no ano, mas “Faço questão de ir a todos os jogos”.'
             });
         }
 
@@ -598,7 +593,7 @@
             conflicts.push({
                 keys: ['gamesPerYear', 'gameFrequency'],
                 firstKey: 'gamesPerYear',
-                message: 'Você marcou 0 jogos por ano e também disse que está sempre na arquibancada.'
+                message: '0 jogos no ano, mas “Sempre na arquibancada”.'
             });
         }
 
@@ -606,7 +601,7 @@
             conflicts.push({
                 keys: ['gamesPerYear', 'gameFrequency'],
                 firstKey: 'gamesPerYear',
-                message: 'Você marcou 0 jogos por ano e também disse que vai em boa parte dos jogos.'
+                message: '0 jogos no ano, mas “Fico dividido entre estádio e TV”.'
             });
         }
 
@@ -614,7 +609,7 @@
             conflicts.push({
                 keys: ['gamesPerYear', 'wantsGuaranteedTicket'],
                 firstKey: 'gamesPerYear',
-                message: `Você marcou ${games} jogos por ano e também disse que não frequenta o estádio.`
+                message: `${games} jogos no ano, mas “Não frequento o estádio”.`
             });
         }
 
@@ -784,8 +779,8 @@
             const example = (price * (1 - (discount || 0))).toFixed(2).replace('.', ',');
             const quantityText = plan.ingresso.quantidade > 1 ? `Até ${plan.ingresso.quantidade} ingressos` : '1 ingresso';
             text = `${quantityText} com ${discountText}% de desconto (ex.: R$ 150 por R$ ${example}), mediante disponibilidade`;
-            // O percentual já reduz o custo estimado (componente de preço);
-            // somá-lo aqui contaria o mesmo desconto duas vezes.
+            // A utilidade representa o tipo de benefício; o percentual é exibido
+            // no ingresso, separado do valor de assinatura (ADR-0001).
             score = 0.80;
         } else {
             text = 'Não inclui benefício de ingresso';
@@ -804,64 +799,12 @@
         };
     }
 
-    function getPlanCost(plan, answers) {
-        const profile = buildUserProfile(answers);
-        const subscription = plan.contratacao.precoMensalEquivalente;
-        const kids = profile.kids > 0 ? profile.kids * ASSUMPTIONS.kidsMensalidade : 0;
-        const gamesPerMonth = (Number.isFinite(answers.gamesPerYear) ? answers.gamesPerYear : 0) / 12;
-        const discount = getDiscount(plan, answers);
-
-        let holderTicket;
-        let ticketsMonthly;
-        if (plan.ingresso.tipo === 'gratuito') {
-            // O benefício é de 1 ingresso por temporada, não por jogo.
-            const games = Number.isFinite(answers.gamesPerYear) ? answers.gamesPerYear : 0;
-            const paidGames = Math.max(0, games - 1);
-            ticketsMonthly = (paidGames * ASSUMPTIONS.precoIngressoCheio) / 12;
-            holderTicket = ASSUMPTIONS.precoIngressoCheio;
-        } else if (plan.ingresso.tipo === 'garantido') {
-            holderTicket = 0;
-            ticketsMonthly = 0;
-        } else if (plan.ingresso.tipo === 'popular') {
-            holderTicket = ASSUMPTIONS.precoIngressoPopular;
-            ticketsMonthly = gamesPerMonth * holderTicket;
-        } else if (plan.ingresso.tipo === 'desconto') {
-            holderTicket = ASSUMPTIONS.precoIngressoCheio * (1 - (discount || 0));
-            ticketsMonthly = gamesPerMonth * holderTicket;
-        } else {
-            holderTicket = ASSUMPTIONS.precoIngressoCheio;
-            ticketsMonthly = gamesPerMonth * holderTicket;
-        }
-
-        // O ingresso do titular não vira capacidade de acompanhante. Um
-        // benefício de 2 ingressos cobre o titular e no máximo 1 adulto.
-        const coveredAdults = Math.max(0, plan.ingresso.quantidade - 1);
-        const uncoveredAdults = Math.max(0, profile.adultos - coveredAdults);
-        const extraAdultTicket = uncoveredAdults * ASSUMPTIONS.precoIngressoCheio;
-        if (extraAdultTicket > 0) {
-            ticketsMonthly += gamesPerMonth * extraAdultTicket;
-        }
-
-        const estimatedMonthly = subscription + kids + ticketsMonthly;
-        const adhesion = plan.contratacao.taxaAdesao;
-
+    // Valores independentes do catálogo; ADR-0001 exclui totais de uso e primeiro mês.
+    function getPlanPricing(plan) {
         return {
-            subscription,
-            kids,
-            ticketsMonthly,
-            estimatedMonthly,
-            adhesion,
-            firstMonth: estimatedMonthly + adhesion,
-            gamesPerMonth,
-            holderTicket,
-            extraAdultTicket,
-            assumptions: {
-                horizonteMeses: ASSUMPTIONS.horizonteMeses,
-                precoIngressoCheio: ASSUMPTIONS.precoIngressoCheio,
-                precoIngressoPopular: ASSUMPTIONS.precoIngressoPopular,
-                kidsMensalidade: ASSUMPTIONS.kidsMensalidade
-            },
-            partial: true
+            subscription: plan.contratacao.precoMensalEquivalente,
+            adhesion: plan.contratacao.taxaAdesao,
+            kidsUnitPrice: plan.opcionais.kids.disponivel ? plan.opcionais.kids.precoMensal : null
         };
     }
 
@@ -921,7 +864,7 @@
         if (card.situacao === 'opcional') benefits.push(`Carteirinha física opcional: ${formatBRL(card.preco)}`);
 
         if (ticket.nivel && ticket.nivel.origem === 'inicial') {
-            benefits.push('Nível 1 do Cabuloso aplicado como condição inicial; histórico não confirmado');
+            benefits.push('Já é sócio? Confira seu desconto atual na sua conta.');
         }
 
         if (plan.camposPendentes.includes('disponibilidadeCativo')) {
@@ -935,14 +878,14 @@
         const ctas = {
             'meu-cruzeiro': 'FAZER PARTE DOS CABULOSOS',
             'time-do-povo': 'QUERO O INGRESSO POPULAR',
-            cabuloso: 'GARANTIR MEU DESCONTO',
-            'cabuloso-max': 'ATÉ 2 INGRESSOS COM 65% OFF',
+            cabuloso: 'GARANTIR MEU DESCONTO DE 50%',
+            'cabuloso-max': 'ATÉ 2 INGRESSOS COM 65%OFF',
             'cabuloso-cativo': '"DE SANGUE AZUL EU SOU"'
         };
         return ctas[plan.slug] || 'ASSINAR AGORA';
     }
 
-    function scorePlan(plan, profile, answers, cost, sectorFit, priceRange) {
+    function scorePlan(plan, profile, answers, pricing, sectorFit, priceRange) {
         const ticket = getTicketBenefit(plan, answers);
         const priority = getPriority(plan, answers);
 
@@ -988,7 +931,7 @@
 
         const priceComponent = priceRange.max === priceRange.min
             ? 1
-            : clamp(1 - (cost.estimatedMonthly - priceRange.min) / (priceRange.max - priceRange.min), 0, 1);
+            : clamp(1 - (pricing.subscription - priceRange.min) / (priceRange.max - priceRange.min), 0, 1);
 
         const attendanceWeight = 0.05 + 0.95 * (profile.frecuencia / 10);
         const ticketWeight = attendanceWeight * (1 + 0.15 * (profile.prioridad / 10));
@@ -1001,8 +944,8 @@
         const discountWeight = 0.2 + 0.8 * (profile.descuentos / 10);
         const experienceWeight = 0.2 + 0.8 * (profile.experiencias / 10);
         const familyWeight = (profile.adultos > 0 || profile.kids > 0) ? 0.7 : 0.05;
-        // Custo sempre pesa, mesmo para quem declarou "sem limite": evitamos
-        // recomendar o plano mais caro quando benefícios não são usados.
+        // O componente de preço usa somente a assinatura; taxa e opcionais
+        // permanecem separados, conforme a ADR-0001.
         const priceWeight = 0.8 + 0.8 * (profile.importanciaPreco / 10);
 
         const components = [
@@ -1092,20 +1035,20 @@
                 : 'cobre 1 ingresso; o acompanhante paga o valor de referência';
             reasons.push({
                 tone: 'neutral',
-                text: `Você costuma ir acompanhado. ${plan.nome} ${coverage}${profile.kids > 0 ? `, e o Kids custa ${formatBRL(30)}/mês por criança` : ''}.`
+                text: `Você costuma ir acompanhado. ${plan.nome} ${coverage}${profile.kids > 0 ? `, e o Kids custa ${formatBRL(plan.opcionais.kids.precoMensal)}/mês por criança` : ''}.`
             });
         }
 
-        const costReason = {
+        const priceReason = {
             tone: 'neutral',
-            text: `Custo de uso estimado em ${formatBRL(result.cost.estimatedMonthly)}/mês: assinatura de ${formatBRL(result.cost.subscription)} mais ingressos e Kids previstos${result.cost.adhesion ? `; taxa de adesão de ${formatBRL(result.cost.adhesion)} à parte` : ''}.`
+            text: `Assinatura: ${formatBRL(result.pricing.subscription)}/mês de referência. Taxas e opcionais são informados separadamente.`
         };
 
         const warnings = reasons.filter((reason) => reason.tone === 'warning');
         const positives = reasons.filter((reason) => reason.tone === 'positive');
         const familyReason = reasons.find((reason) => reason.tone === 'neutral');
 
-        return [...warnings, ...positives.slice(0, 2), familyReason, costReason]
+        return [...warnings, ...positives.slice(0, 2), familyReason, priceReason]
             .filter(Boolean)
             .slice(0, 5)
             .map((reason) => reason.text);
@@ -1117,7 +1060,7 @@
      */
     function compareRanked(a, b) {
         if (b.score !== a.score) return b.score - a.score;
-        if (a.cost.subscription !== b.cost.subscription) return a.cost.subscription - b.cost.subscription;
+        if (a.pricing.subscription !== b.pricing.subscription) return a.pricing.subscription - b.pricing.subscription;
         return a.plan.slug < b.plan.slug ? -1 : a.plan.slug > b.plan.slug ? 1 : 0;
     }
 
@@ -1126,12 +1069,12 @@
         const budget = Number.isFinite(answers.budget) ? answers.budget : null;
 
         const scored = catalog.map((plan, index) => {
-            const cost = getPlanCost(plan, answers);
+            const pricing = getPlanPricing(plan);
             const sectorFit = getSectorFit(plan, answers);
             return {
                 plan,
                 index,
-                cost,
+                pricing,
                 sectorFit,
                 eligibility: {
                     withinBudget: budget === null || plan.contratacao.precoMensalEquivalente <= budget,
@@ -1141,12 +1084,12 @@
         });
 
         const priceRange = {
-            min: Math.min(...scored.map((item) => item.cost.estimatedMonthly)),
-            max: Math.max(...scored.map((item) => item.cost.estimatedMonthly))
+            min: Math.min(...scored.map((item) => item.pricing.subscription)),
+            max: Math.max(...scored.map((item) => item.pricing.subscription))
         };
 
         const evaluated = scored.map((item) => {
-            const scoredPlan = scorePlan(item.plan, profile, answers, item.cost, item.sectorFit, priceRange);
+            const scoredPlan = scorePlan(item.plan, profile, answers, item.pricing, item.sectorFit, priceRange);
             return {
                 ...item,
                 ...scoredPlan
@@ -1191,7 +1134,7 @@
             allPlansFit,
             noEligible: !winner,
             closest,
-            cheapest: evaluated.slice().sort((a, b) => a.cost.subscription - b.cost.subscription || compareRanked(a, b))[0],
+            cheapest: evaluated.slice().sort((a, b) => a.pricing.subscription - b.pricing.subscription || compareRanked(a, b))[0],
             sectorAlternative,
             sectorAlternativeRecommendation: sectorAlternative
                 ? {
@@ -1226,7 +1169,7 @@
         getDiscount,
         getPriority,
         getTicketBenefit,
-        getPlanCost,
+        getPlanPricing,
         getPlanContract,
         getPlanBenefits,
         getCTAText,

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Descubra o plano de sócio com mais afinidade com o seu perfil no Cruzeiro. Responda nosso quiz rápido e veja uma estimativa personalizada com benefícios, setor e custo.">
+        content="Descubra o plano de sócio ideal para você no Cruzeiro. Responda nosso quiz rápido e receba uma recomendação personalizada com os melhores benefícios.">
     <meta name="keywords" content="Cruzeiro, sócio, plano, quiz, assinatura, benefits, torcedor">
     <meta name="author" content="Cruzeiro Esporte Clube - SAF">
     <meta name="robots" content="index, follow">
@@ -29,13 +29,44 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Google Analytics 4 (mesma propriedade do socio.cruzeiro.com.br) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EF75QCTCTV"></script>
     <script>
+        /*
+         * Decisão de coleta tomada antes de qualquer inicialização (QUIZ-013):
+         * - Preview é reconhecido pelo nome do parâmetro (QUIZ-012): ?preview,
+         *   ?preview=1, ?preview=false e #preview. Outros parâmetros cujo valor
+         *   contenha "preview" abrem o quiz normalmente.
+         * - Desenvolvimento local: localhost, loopback IPv4 (127.0.0.0/8),
+         *   loopback IPv6 (::1 — o navegador reporta [::1], com colchetes) e
+         *   arquivos locais (file:). Nesses ambientes nem a tag carrega.
+         * - Ambientes habilitados: apenas hosts de produção, explicitados na
+         *   lista abaixo. A confirmação do domínio real segue no QUIZ-018.
+         */
+        const urlParams = new URLSearchParams(location.search);
+        window.isPreview = urlParams.has('preview') || location.hash === '#preview';
+
+        const hostnameNormalizado = location.hostname.replace(/^\[+|\]+$/g, '').toLowerCase();
+        const isLocalhost = hostnameNormalizado === 'localhost'
+            || hostnameNormalizado === '::1'
+            || hostnameNormalizado === '0:0:0:0:0:0:0:1'
+            || /^127(?:\.\d{1,3}){3}$/.test(hostnameNormalizado)
+            || location.protocol === 'file:';
+
+        const AMBIENTES_HABILITADOS = ['quiz-socio.vercel.app'];
+        const isAmbienteHabilitado = AMBIENTES_HABILITADOS.includes(hostnameNormalizado);
+
+        window.coletaHabilitada = isAmbienteHabilitado && !window.isPreview && !isLocalhost;
+
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('set', 'allow_google_signals', false);
-        gtag('config', 'G-EF75QCTCTV');
+        if (window.coletaHabilitada) {
+            gtag('js', new Date());
+            gtag('set', 'allow_google_signals', false);
+            gtag('config', 'G-EF75QCTCTV');
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-EF75QCTCTV';
+            document.head.appendChild(script);
+        }
     </script>
 
     <!-- Vercel Web Analytics (visitas) -->
@@ -43,6 +74,7 @@
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap">
     <style>
         /*
  * Organized CSS Sections:
@@ -58,12 +90,13 @@
 
         :root {
             --azul-profundo: #021a3e;
+            --azul-navy: #000080;
             --azul-cruzeiro: #004080;
             --azul-vivo: #007bff;
             --azul-claro: #e0f2ff;
             --branco: #ffffff;
             --grafite: #0a1e3d;
-            --cinza: #7f8c8d;
+            --cinza: #52627a;
             --linha: rgba(255, 255, 255, 0.1);
             --sombra: 0 10px 30px rgba(2, 26, 62, 0.15);
             --raio: 16px;
@@ -76,9 +109,14 @@
                 radial-gradient(1px 1px at 60% 90%, rgba(255, 255, 255, 0.1), transparent),
                 radial-gradient(1.5px 1.5px at 90% 10%, rgba(255, 255, 255, 0.2), transparent),
                 radial-gradient(1px 1px at 40% 40%, rgba(255, 255, 255, 0.1), transparent);
+            --duracao-secao: 400ms;
+            --duracao-pergunta: 220ms;
+            --duracao-modal: 220ms;
+            --duracao-botao: 150ms;
+            --ease-fade: ease-out;
+            --ease-modal: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
         html {
             overflow-x: hidden;
@@ -92,12 +130,13 @@
 
         body {
             margin: 0;
-            color: var(--grafite);
+            color: var(--azul-navy);
             font-family: "Outfit", sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             position: relative;
+            background: #061b37;
             scrollbar-gutter: stable;
         }
 
@@ -136,7 +175,7 @@
             grid-template-columns: 1fr;
             width: min(1200px, calc(100% - 40px));
             margin: 0 auto;
-            padding: 24px 0;
+            padding: 32px 0;
             position: relative;
             z-index: 1;
             min-height: 450px;
@@ -146,6 +185,8 @@
         .page>section {
             grid-column: 1;
             grid-row: 1;
+            min-width: 0;
+            scroll-margin-top: 120px;
         }
 
         .hero {
@@ -178,9 +219,10 @@
             position: relative;
             isolation: isolate;
             overflow: hidden;
-            min-height: 560px;
-            max-width: 90%;
-            padding: 48px;
+            min-height: 0;
+            width: min(100%, 960px);
+            max-width: 100%;
+            padding: clamp(28px, 5vw, 56px);
             color: var(--branco);
             background:
                 linear-gradient(140deg, rgba(0, 30, 80, 0.95), rgba(0, 60, 140, 0.8)),
@@ -201,7 +243,7 @@
             bottom: -60px;
             width: 420px;
             height: 50%;
-            background: url('https://imagens.cruzeiro.com.br/Escudos/Cruzeiro.png') no-repeat center / contain;
+            background: url('./img/cruzeiro.png') no-repeat center / contain;
             opacity: 0.08;
             pointer-events: none;
             z-index: 0;
@@ -234,10 +276,10 @@
             max-width: 100%;
             margin: 0;
             font-family: "Outfit", sans-serif;
-            font-size: 5rem;
-            line-height: 0.95;
+            font-size: clamp(2.25rem, 4.5vw, 3.6rem);
+            line-height: 1.12;
             letter-spacing: 0;
-            text-transform: uppercase;
+            text-transform: none;
             font-weight: 600;
         }
 
@@ -246,8 +288,8 @@
             z-index: 1;
             max-width: 680px;
             margin: 28px 0 0;
-            color: rgba(255, 255, 255, 0.75);
-            font-size: 1.25rem;
+            color: #d3e3f7;
+            font-size: 1.12rem;
             line-height: 1.7;
         }
 
@@ -280,17 +322,19 @@
         }
 
         .quiz-card {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
             padding: 32px;
-            background: rgba(255, 255, 255, 0.98);
-            border: 1px solid rgba(2, 26, 62, 0.08);
+            background: #fbfcfe;
+            border: 1px solid #dce5f1;
             z-index: 1;
-            max-height: fit-content;
-            overflow-y: auto;
+            align-self: start;
+            color: var(--azul-navy);
         }
 
         .progress {
-            height: 12px;
-            /* Altura um pouco maior */
+            height: 8px;
             overflow: hidden;
             border-radius: 999px;
             background: #eef5ff;
@@ -319,10 +363,10 @@
 
         .question {
             margin: 0 0 28px;
-            font-size: 2.4rem;
-            line-height: 1.2;
+            font-size: clamp(1.5rem, 2.8vw, 2rem);
+            line-height: 1.25;
             letter-spacing: -0.03em;
-            color: var(--grafite);
+            color: var(--azul-navy);
             font-weight: 600;
         }
 
@@ -335,7 +379,7 @@
             width: 100%;
             padding: 18px 20px;
             text-align: left;
-            color: var(--grafite);
+            color: var(--azul-navy);
             border: 1px solid #dbe6f5;
             border-radius: 16px;
             background: #ffffff;
@@ -344,8 +388,7 @@
         }
 
         .option:hover {
-            transform: translateY(-3px);
-            /* Efeito de hover mais pronunciado */
+            transform: translateY(-1px);
             border-color: var(--azul-vivo);
             box-shadow: 0 10px 25px rgba(0, 51, 160, 0.1);
             /* Sombra mais suave */
@@ -424,10 +467,12 @@
             box-shadow: 0 2px 5px rgba(2, 26, 62, 0.25);
         }
 
-        .actions {
+        .quiz-actions,
+        .result-actions {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            gap: 16px;
+            gap: 12px;
             margin-top: 28px;
         }
 
@@ -436,14 +481,16 @@
             align-items: center;
             justify-content: center;
             min-height: 52px;
-            /* Altura ligeiramente maior */
-            padding: 0 24px;
-            /* Padding ajustado */
-            border: 0;
+            margin: 0;
+            padding: 12px 24px;
+            border: 1px solid transparent;
             border-radius: 10px;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.35;
+            text-align: center;
+            transition: background var(--duracao-botao), border-color var(--duracao-botao), box-shadow var(--duracao-botao);
         }
 
         .btn:hover {
@@ -460,40 +507,38 @@
             box-shadow: none;
         }
 
-        .btn-primary,
-        .plan-cta {
-            color: var(--azul-profundo);
-            background: linear-gradient(90deg, #FFD700, #FFA500);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.35);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            max-width: 200px;
+        /* QUIZ-015: o CTA principal de contratação é um link com o desenho do botão. */
+        #subscribeButton {
+            text-decoration: none;
         }
 
-        .btn-primary::after,
-        .plan-cta::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.5s ease;
+        #subscribeButton[aria-disabled='true'] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
+
+        .btn-primary,
+        .plan-cta {
+            color: #fff;
+            background: linear-gradient(100deg, #0062c4, #004080);
+            font-weight: 600;
+            text-transform: none;
+            letter-spacing: 0;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 64, 128, 0.18);
+            max-width: 100%;
+        }
+
 
         .btn-primary:hover,
         .plan-cta:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+            background: linear-gradient(100deg, #0053a6, #003366);
+            transform: none;
+            box-shadow: 0 5px 14px rgba(0, 64, 128, 0.24);
         }
 
-        .btn-primary:hover::after,
-        .plan-cta:hover::after {
-            transform: translateX(100%);
-        }
 
         .btn-primary:active,
         .plan-cta:active {
@@ -501,34 +546,33 @@
         }
 
         .btn-secondary {
-            color: #fff;
-            background: linear-gradient(90deg, var(--azul-vivo), var(--azul-cruzeiro));
-            border: 0;
+            color: #164477;
+            background: #edf4fc;
+            border: 1px solid #cddff3;
             font-weight: 600;
         }
 
         .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(2, 26, 62, 0.15);
-            background: linear-gradient(90deg, var(--azul-cruzeiro), var(--azul-profundo));
+            background: #dfecfa;
+            border-color: #a7c7ec;
+            transform: none;
+            box-shadow: none;
         }
 
         .btn-compare {
-            color: var(--branco);
+            color: #fff;
             background: transparent;
-            border: 3px solid rgb(255, 217, 0);
-            font-weight: 900;
+            border: 1px solid #9bb7d9;
+            font-weight: 600;
             font-size: 1rem;
-            text-transform: uppercase;
-            white-space: nowrap;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            text-transform: none;
         }
 
         .btn-compare:hover {
-            border-color: #FFD700;
-            background: rgba(255, 215, 0, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+            border-color: #d5e6fa;
+            background: rgba(255, 255, 255, 0.08);
+            transform: none;
+            box-shadow: none;
         }
 
         .actions-group {
@@ -544,9 +588,10 @@
         }
 
         #backButton:hover {
-            background: var(--azul-claro);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(2, 26, 62, 0.15);
+            background: #dfecfa;
+            border-color: #a7c7ec;
+            transform: none;
+            box-shadow: none;
         }
 
         .results {
@@ -1047,9 +1092,7 @@
             font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            white-space: normal;
         }
 
         .modal-overlay {
@@ -1066,19 +1109,19 @@
             -webkit-backdrop-filter: blur(6px);
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            transition: opacity var(--duracao-modal) var(--ease-fade), visibility var(--duracao-modal) var(--ease-fade);
         }
 
         .modal-overlay.is-open {
             opacity: 1;
             visibility: visible;
             /* Visível de imediato ao abrir, para o foco entrar no diálogo. */
-            transition: opacity 0.3s ease, visibility 0s;
+            transition: opacity var(--duracao-modal) var(--ease-fade), visibility 0s;
         }
 
         .modal-content {
             width: 100%;
-            max-width: 820px;
+            max-width: 1200px;
             max-height: 90vh;
             margin: auto;
             padding: 36px;
@@ -1086,8 +1129,8 @@
             background: linear-gradient(145deg, rgba(2, 26, 62, 0.99), rgba(0, 40, 100, 0.95));
             border: 1px solid rgba(255, 215, 0, 0.18);
             box-shadow: 0 30px 60px rgba(2, 26, 62, 0.6), 0 0 80px rgba(0, 64, 128, 0.2);
-            transform: scale(0.92) translateY(12px);
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(0.98);
+            transition: transform var(--duracao-modal) var(--ease-modal);
             position: relative;
             display: flex;
             flex-direction: column;
@@ -1112,8 +1155,8 @@
             position: absolute;
             top: 18px;
             right: 18px;
-            width: 36px;
-            height: 36px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1131,11 +1174,11 @@
         .modal-close:hover {
             background: rgba(255, 215, 0, 0.2);
             color: #FFD700;
-            transform: rotate(90deg);
+            transform: none;
         }
 
         .modal-title {
-            margin: 0 0 24px;
+            margin: 0 0 12px;
             font-size: 1.6rem;
             font-weight: 700;
             color: var(--branco);
@@ -1162,18 +1205,20 @@
 
         .modal-body .comparison-table {
             width: 100%;
-            min-width: 0;
-            font-size: 0.85rem;
+            min-width: 1120px;
+            table-layout: fixed;
+            font-size: 0.9rem;
         }
 
         .modal-body .comparison-detail {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            max-height: 2.8em;
-            word-break: break-word;
+            display: block;
+            overflow: visible;
+            max-height: none;
+            word-break: normal;
+            overflow-wrap: break-word;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #c4d6ee;
         }
 
         .modal-body .comparison-table th,
@@ -1186,13 +1231,13 @@
         }
 
         .modal-body .comparison-table thead th .plan-badge {
-            font-size: 0.6rem;
-            padding: 1px 8px;
+            font-size: 0.75rem;
+            padding: 3px 8px;
         }
 
         .modal-body .comparison-table tfoot .plan-cta {
-            min-height: 34px;
-            font-size: 0.75rem;
+            min-height: 44px;
+            font-size: 0.875rem;
             min-width: 60px;
             padding: 0 10px;
         }
@@ -1210,18 +1255,18 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 56px;
-            padding: 0 36px;
-            margin-top: 40px;
+            min-height: 52px;
+            padding: 12px 28px;
+            margin-top: 28px;
             border: 0;
             border-radius: 9px;
             color: #fff;
-            background: linear-gradient(90deg, var(--azul-vivo), var(--azul-cruzeiro));
-            font-size: 1.2rem;
-            font-weight: 700;
+            background: linear-gradient(100deg, #0062c4, #004080);
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            text-transform: uppercase;
+            transition: background 0.2s, box-shadow 0.2s;
+            text-transform: none;
         }
 
         .start-button:hover {
@@ -1233,34 +1278,28 @@
         .hero-card,
         .result-card,
         .plans-card {
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity var(--duracao-secao) var(--ease-fade);
         }
 
         /* Estado base para seções injetadas dinamicamente */
         .dynamic-section {
             opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity var(--duracao-secao) var(--ease-fade);
         }
 
         /* Estados de animação para seções dinâmicas */
         .dynamic-section.is-entering {
             opacity: 1;
-            transform: translateY(0);
         }
 
         .dynamic-section.is-exiting {
             opacity: 0;
-            transform: translateY(-15px);
             pointer-events: none;
         }
 
         /* Hero card usa as mesmas classes para saída */
         .hero-card.is-exiting {
             opacity: 0;
-            transform: translateY(-15px);
             pointer-events: none;
             z-index: 1;
         }
@@ -1268,14 +1307,11 @@
         /* Hero section para transições de seção completa */
         .hero {
             opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity var(--duracao-secao) var(--ease-fade);
         }
 
         .hero.is-exiting {
             opacity: 0;
-            transform: translateY(-15px);
             pointer-events: none;
             z-index: 1;
         }
@@ -1284,12 +1320,12 @@
         .question,
         .options,
         .step-info {
-            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity var(--duracao-pergunta) var(--ease-fade);
         }
 
         /* Efeito de hover e clique para opções */
         .option {
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all var(--duracao-botao) var(--ease-fade);
         }
 
         .option:active {
@@ -1314,7 +1350,7 @@
             z-index: 100;
             background: url('./img/Estutura de Páginas_fundoestrelado_siteapp.jpeg') center / cover no-repeat;
             padding: 0 20px;
-            font-family: "Phudu", "Trebuchet MS", Arial;
+            font-family: inherit;
         }
 
         header.cruzeiro::before {
@@ -1406,16 +1442,18 @@
         }
 
         .main-header {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            justify-content: space-between;
+            min-height: 64px;
             padding: 12px 0;
-            gap: 10px;
-            max-height: 64px;
+            gap: 20px;
             position: relative;
         }
 
         .main-header .menu {
+            grid-column: 1;
+            grid-row: 1;
             display: flex;
             gap: 4px;
         }
@@ -1440,6 +1478,8 @@
         }
 
         .main-header .mobile {
+            grid-column: 1;
+            grid-row: 1;
             display: none;
         }
 
@@ -1448,7 +1488,13 @@
             flex-direction: column;
             gap: 5px;
             cursor: pointer;
-            padding: 8px;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: transparent;
         }
 
         .main-header .nav-toggle .bar {
@@ -1473,9 +1519,9 @@
         }
 
         .main-header .logo {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            grid-column: 2;
+            grid-row: 1;
+            justify-self: center;
         }
 
         .main-header .logo img {
@@ -1484,7 +1530,10 @@
             object-fit: contain;
         }
 
-        .main-header .actions {
+        .main-header .account-actions {
+            grid-column: 3;
+            grid-row: 1;
+            justify-self: end;
             display: flex;
             align-items: center;
         }
@@ -1523,10 +1572,12 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 8px 16px;
+            min-height: 44px;
+            padding: 10px 12px;
+            white-space: nowrap;
             border-radius: 6px;
             background: linear-gradient(90deg, #0055e5 0%, #00abfa) #f3ae2a;
-            font-size: 0.82rem;
+            font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.04em;
             transition: background 0.2s;
@@ -1669,7 +1720,7 @@
 
         @media (min-width: 1200px) {
             .hero-card {
-                min-height: 520px;
+                padding: 56px;
             }
         }
 
@@ -1692,7 +1743,7 @@
             }
 
             h1 {
-                font-size: 4.5rem;
+                font-size: clamp(2.25rem, 5vw, 3.6rem);
             }
 
             .hero-copy {
@@ -1704,7 +1755,7 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .info-header .sociais {
                 display: none;
             }
@@ -1763,16 +1814,16 @@
 
         @media (max-width: 620px) {
             .hero-card {
-                height: 550px;
+                height: auto;
             }
 
             .hero-card h1 {
-                font-size: 3.2rem;
+                font-size: clamp(2rem, 8vw, 2.8rem);
             }
 
             .page {
                 width: calc(100% - 24px);
-                padding: 16px 12px;
+                padding: 20px 0;
                 margin: 0 auto;
             }
 
@@ -1815,8 +1866,10 @@
                 padding: 0 8px;
             }
 
-            .actions {
+            .quiz-actions,
+            .result-actions {
                 flex-direction: column;
+                align-items: stretch;
             }
 
             .actions-group {
@@ -1923,13 +1976,14 @@
 
             .modal-content {
                 padding: 20px 16px;
-                width: 90vw;
-                max-width: calc(100% - 24px);
+                width: 100%;
+                max-width: 100%;
+                max-height: calc(100dvh - 24px);
             }
 
             .modal-body .comparison-table {
-                min-width: 100%;
-                font-size: 0.7rem;
+                min-width: 1120px;
+                font-size: 0.9rem;
             }
 
             .modal-body .comparison-table th,
@@ -1942,8 +1996,8 @@
             }
 
             .modal-body .comparison-table tfoot .plan-cta {
-                min-height: 30px;
-                font-size: 0.65rem;
+                min-height: 44px;
+                font-size: 0.875rem;
                 min-width: 50px;
                 padding: 0 6px;
             }
@@ -1958,7 +2012,7 @@
 
         @media (max-width: 390px) {
             .hero-card h1 {
-                font-size: 1rem;
+                font-size: 2rem;
             }
 
             .result-card,
@@ -1999,8 +2053,8 @@
             }
 
             .modal-body .comparison-table {
-                min-width: 100%;
-                font-size: 0.65rem;
+                min-width: 1120px;
+                font-size: 0.9rem;
             }
         }
         /* Ajustes de clareza: afinidade estimada, custos e revisão de respostas */
@@ -2017,7 +2071,7 @@
             font-weight: 700;
         }
 
-        .plan-cost {
+        .plan-fee {
             margin: 8px 0 0;
             color: rgba(255, 255, 255, 0.82) !important;
         }
@@ -2079,13 +2133,13 @@
 
         .field-error {
             margin: 14px 0 0;
-            padding: 10px 12px;
+            padding: 12px 14px;
             border-radius: 8px;
-            background: rgba(255, 82, 82, 0.16);
-            border-left: 4px solid #ff5252;
-            color: #ffe3e3;
+            background: #fff0f2;
+            border-left: 4px solid #bd3148;
+            color: #97253b;
             font-weight: 600;
-            line-height: 1.45;
+            line-height: 1.5;
         }
 
         .unknown-option {
@@ -2093,38 +2147,43 @@
             align-items: center;
             gap: 10px;
             margin-top: 14px;
-            color: rgba(255, 255, 255, 0.9);
+            color: #33465e;
             font-size: 1rem;
+            line-height: 1.5;
             cursor: pointer;
         }
 
         .unknown-option input {
             width: 18px;
             height: 18px;
-            accent-color: #FFD700;
+            accent-color: #0055bd;
             cursor: pointer;
         }
 
         .conflict-panel {
-            padding: 18px;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 215, 0, 0.55);
-            background: rgba(255, 215, 0, 0.10);
-            color: rgba(255, 255, 255, 0.94);
-            line-height: 1.55;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #e8cb82;
+            background: #fff8e6;
+            color: #493716;
+            line-height: 1.6;
+            font-size: 1rem;
         }
 
         .conflict-panel p {
-            margin: 0 0 10px;
+            margin: 0;
+            color: inherit;
         }
 
         .conflict-panel ul {
-            margin: 0 0 14px;
-            padding-left: 20px;
+            margin: 16px 0;
+            padding-left: 22px;
         }
 
         .conflict-panel li {
-            margin-top: 8px;
+            margin-top: 10px;
+            padding-left: 4px;
+            color: inherit;
         }
 
         @media (max-width: 640px) {
@@ -2137,11 +2196,34 @@
                 width: 100%;
             }
         }
+
+        .result-plan small { color: #465a73; line-height: 1.5; }
+        .plans-title span { color: #c0cee1; }
+        .result-actions .btn-secondary { color: #fff; background: transparent; border-color: #9bb7d9; }
+        .result-actions .btn-secondary:hover { background: rgba(255, 255, 255, 0.08); }
+        .conflict-panel .conflict-intro { font-weight: 600; }
+        .conflict-panel .conflict-help { color: #635132; font-size: 0.95rem; }
+        :where(button, a, input, summary):focus-visible { outline: 3px solid #78c6ff; outline-offset: 3px; }
+        .quiz-card :focus-visible { outline-color: #0055bd; }
+        .question:focus { outline: none; }
+        @media (max-width: 620px) {
+            .conflict-panel { padding: 18px; }
+            .plans-title { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .result-actions .actions-group { gap: 12px; }
+        }
+
+        .modal-hint { margin: 0 0 18px; color: #c4d6ee; font-size: 0.95rem; line-height: 1.5; }
+        .modal-body .comparison-feature-label { width: 124px; min-width: 124px; max-width: 124px; font-size: 0.875rem; }
+        .modal-body .comparison-table tfoot .plan-cta { min-height: 44px; font-size: 0.875rem; white-space: normal; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+            #bg-video { display: none; }
+        }
     </style>
 </head>
 
 <body>
-    <video id="bg-video" autoplay muted loop preload="metadata">
+    <video id="bg-video" autoplay muted loop playsinline preload="metadata" poster="./img/background.jpg" aria-hidden="true">
         <source src="./img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4" type="video/mp4">
     </video>
     <header class="cruzeiro" id="nav">
@@ -2172,18 +2254,16 @@
             </div>
         </div>
         <div class="main-header">
-            <div class="menu"><a href="https://socio.cruzeiro.com.br/">INÍCIO</a><a
+            <div class="menu" id="headerMenu"><a href="https://socio.cruzeiro.com.br/">INÍCIO</a><a
                     href="https://socio.cruzeiro.com.br/planos">PLANOS</a><a
                     href="https://socio.cruzeiro.com.br/jogos">PRÓXIMOS JOGOS</a><a
                     href="https://socio.cruzeiro.com.br/duvidas">DÚVIDAS</a></div>
             <div class="mobile">
-                <div class="nav-toggle"><span class="bar"></span><span class="bar"></span><span class="bar"></span>
-                </div>
-            </div><a class="logo" href="https://socio.cruzeiro.com.br/"><img
+                <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-controls="headerMenu" aria-expanded="false"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+            </div><a class="logo" href="https://socio.cruzeiro.com.br/" aria-label="Sócio 5 Estrelas — início"><img alt="Sócio 5 Estrelas"
                     src="https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/logo-site-60f55ac6e5da9ad26583.png"></a>
-            <div class="actions">
-                <div class="navbar-user-section logged-in">
-                    <a href="https://socio.cruzeiro.com.br/minha-conta" class="menu-link"><span>Olá Torcedor</span></a>
+            <div class="account-actions">
+                <div class="navbar-user-section">
                     <a class="menu-button" href="https://socio.cruzeiro.com.br/minha-conta">
                         <span>MINHA CONTA</span>
                     </a>
@@ -2195,7 +2275,7 @@
         <section class="hero">
             <div class="hero-card" id="heroCard">
                 <p class="eyebrow">Quiz Sócio 5 Estrelas</p>
-                <h1>Encontre o plano com mais afinidade com o seu jeito de torcer.</h1>
+                <h1>Encontre o plano perfeito para viver o Cruzeiro mais de perto.</h1>
                 <button class="start-button" id="startButton" type="button">Iniciar</button>
             </div>
         </section>
@@ -2267,7 +2347,6 @@
             detectConflicts,
             getPriority,
             getTicketBenefit,
-            getPlanCost,
             getPlanContract,
             getPlanBenefits,
             getCTAText,
@@ -2292,10 +2371,11 @@
         let questionShownAt = 0;
         let isTransitioning = false;
         let renderToken = 0;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         let heroSection = document.querySelector(".hero");
         const startButton = document.getElementById("startButton");
-        const isPreview = location.search.includes('preview') || location.hash === '#preview';
+        // isPreview é decidido no <head> e compartilhado com a instrumentação GA4 (window.isPreview)
 
         const PREVIEW_ANSWERS = {
             gamesPerYear: 15,
@@ -2312,9 +2392,9 @@
             preferredSector: 'blue'
         };
 
-        // Envia evento ao GA4; o modo preview usa respostas fictícias e fica de fora
+        // Envia evento ao GA4; preview e desenvolvimento local ficam de fora
         function trackEvent(name, params = {}) {
-            if (isPreview || typeof gtag !== 'function') return;
+            if (!window.coletaHabilitada || typeof gtag !== 'function') return;
             gtag('event', name, params);
         }
 
@@ -2351,6 +2431,10 @@
                 currency: "BRL",
                 maximumFractionDigits: Number.isInteger(value) ? 0 : 2
             });
+        }
+
+        function formatScore(value) {
+            return Number(value).toLocaleString('pt-BR', { maximumFractionDigits: 1 });
         }
 
         function escapeHtml(value) {
@@ -2424,9 +2508,7 @@
             quizSection.style.overflow = "hidden";
 
             questionTitle.style.opacity = "0";
-            questionTitle.style.transform = "translateY(-4px)";
             optionsContainer.style.opacity = "0";
-            optionsContainer.style.transform = "translateY(-4px)";
 
             const capturedStep = state.step;
             const token = ++renderToken;
@@ -2519,16 +2601,8 @@
                         }
 
                         button.innerHTML = `<strong>${escapeHtml(item.label)}</strong><span>${escapeHtml(item.description)}</span>`;
-                        button.style.opacity = "0";
-                        button.style.transform = "translateY(10px)";
-                        button.style.transitionDelay = `${idx * 0.04}s`;
 
                         optionsContainer.appendChild(button);
-
-                        setTimeout(() => {
-                            button.style.opacity = "1";
-                            button.style.transform = "translateY(0)";
-                        }, 20);
                     });
                 }
 
@@ -2548,12 +2622,10 @@
                 }, 500);
 
                 questionTitle.style.opacity = "1";
-                questionTitle.style.transform = "translateY(0)";
                 optionsContainer.style.opacity = "1";
-                optionsContainer.style.transform = "translateY(0)";
                 questionShownAt = performance.now();
                 if (onDone) onDone();
-            }, 180);
+            }, prefersReducedMotion ? 0 : 220);
         }
 
         function createQuizSection() {
@@ -2567,12 +2639,12 @@
                 <div class="step-info">
                     <span id="stepCounter">Pergunta 1 de ${questions.length}</span>
                 </div>
-                <h2 class="question" id="quizTitle"></h2>
+                <h2 class="question" id="quizTitle" tabindex="-1"></h2>
                 <div class="options" id="options"></div>
                 <p class="field-error" id="fieldError" role="alert" hidden></p>
-                <div class="actions">
+                <div class="quiz-actions">
                     <button class="btn btn-secondary" id="backButton" type="button">Voltar</button>
-                    <button class="btn start-button" id="nextButton" type="button" disabled>Continuar</button>
+                    <button class="btn btn-primary" id="nextButton" type="button" disabled>Continuar</button>
                 </div>
             `;
             return section;
@@ -2591,25 +2663,27 @@
                         <div>
                             <p class="result-price" id="resultPrice"></p>
                             <p class="result-contract" id="resultContract"></p>
+                            <p class="result-contract" id="resultAdhesion"></p>
                         </div>
                     </div>
                     <p id="resultSummary"></p>
                     <div id="sectorNotice"></div>
                     <ul class="reason-list" id="resultReasons"></ul>
                     <details class="score-explainer" id="scoreExplainer">
-                        <summary>Como calculamos a afinidade estimada</summary>
+                        <summary>Sobre a recomendação</summary>
                         <div>
-                            <p>O índice de 0 a 100 é calculado a partir das suas respostas e das regras do quiz. Ele não é probabilidade de acerto nem garantia de adequação: é uma estimativa de afinidade com os benefícios, o setor e o custo do plano.</p>
-                            <p>Seu orçamento limita a assinatura. Ingressos, taxa de adesão e opcionais aparecem como custo de uso estimado, com premissas identificadas.</p>
+                            <p>Comparamos suas respostas com os benefícios de cada plano. O resultado é uma sugestão para ajudar você a escolher; compare as opções antes de assinar.</p>
+                            <p>Seu orçamento limita a assinatura. Taxa de adesão, opcionais e benefícios de ingresso são informados separadamente.</p>
                             <p id="assumptionNote"></p>
-                            <p>Catálogo ${escapeHtml(CATALOG_VERSION)}. Condições sujeitas a disponibilidade e às regras oficiais do programa.</p>
+                            <p>Confira a disponibilidade e as condições dos benefícios no site do Sócio 5 Estrelas.</p>
                         </div>
                     </details>
-                    <div class="actions">
+                    <div class="result-actions">
                         <button class="btn btn-secondary" id="restartButton" type="button">Refazer quiz</button>
                         <div class="actions-group">
                             <button class="btn btn-compare" id="compareButton" type="button">Comparar planos</button>
-                            <button class="btn btn-primary" id="subscribeButton" type="button">Assinar agora</button>
+                            <!-- QUIZ-015: CTA principal como link real; href e estado definidos em renderResults -->
+                            <a class="btn btn-primary" id="subscribeButton" target="_blank" rel="noopener noreferrer">Assinar agora</a>
                         </div>
                     </div>
                 </article>
@@ -2631,6 +2705,17 @@
 
             fromElement.parentNode.insertBefore(toElement, fromElement.nextSibling);
 
+            const TRANSITION_DURATION = prefersReducedMotion ? 0 : 400;
+            const SAFETY_MARGIN = prefersReducedMotion ? 0 : 100;
+            let completed = false;
+
+            const finish = () => {
+                if (completed) return;
+                completed = true;
+                fromElement.remove();
+                if (onEnterCallback) onEnterCallback(toElement);
+            };
+
             requestAnimationFrame(() => {
                 toElement.style.display = '';
                 toElement.offsetHeight;
@@ -2638,11 +2723,26 @@
                 toElement.classList.add('is-entering');
                 fromElement.classList.add('is-exiting');
 
-                const TRANSITION_DURATION = 500;
+                if (prefersReducedMotion) {
+                    finish();
+                    return;
+                }
+
+                const handler = (e) => {
+                    if (e.target === fromElement || e.target === toElement) {
+                        toElement.removeEventListener('transitionend', handler);
+                        fromElement.removeEventListener('transitionend', handler);
+                        finish();
+                    }
+                };
+                toElement.addEventListener('transitionend', handler);
+                fromElement.addEventListener('transitionend', handler);
+
                 setTimeout(() => {
-                    fromElement.remove();
-                    if (onEnterCallback) onEnterCallback(toElement);
-                }, TRANSITION_DURATION);
+                    toElement.removeEventListener('transitionend', handler);
+                    fromElement.removeEventListener('transitionend', handler);
+                    finish();
+                }, TRANSITION_DURATION + SAFETY_MARGIN);
             });
         }
 
@@ -2758,25 +2858,26 @@
             const backBtn = quizSection.querySelector('#backButton');
             const nextBtn = quizSection.querySelector('#nextButton');
 
-            title.textContent = 'Antes de ver o resultado, confirme suas respostas';
+            title.textContent = 'Confira suas respostas';
             stepCounter.textContent = 'Revisão de respostas';
             progressBar.style.width = '100%';
             backBtn.disabled = false;
             backBtn.textContent = 'Revisar respostas';
             nextBtn.disabled = false;
-            nextBtn.textContent = 'Confirmar e ver resultado';
+            nextBtn.textContent = 'Manter e ver resultado';
             clearFieldError();
 
             const list = conflicts.map((conflict) => `<li>${escapeHtml(conflict.message)}</li>`).join('');
             options.innerHTML = `
                 <div class="conflict-panel" role="alert">
-                    <p>Encontramos respostas que parecem incompatíveis:</p>
+                    <p class="conflict-intro">Algumas escolhas parecem diferentes:</p>
                     <ul>${list}</ul>
-                    <p>Se você confirmar, mantemos as duas respostas: a intenção anual define o volume de jogos e a declaração de não frequentar o estádio zera a necessidade presencial. Se preferir, revise a primeira resposta.</p>
+                    <p class="conflict-help">Se estiver tudo certo, mantenha as respostas. Para ajustar, escolha “Revisar respostas”.</p>
                 </div>
             `;
             quizSection.style.height = 'auto';
             quizSection.style.overflow = '';
+            title.focus({ preventScroll: true });
         }
 
         function completeQuiz() {
@@ -2806,6 +2907,8 @@
             transitionSection(quizSection, createResultsSection, (resultsSection) => {
                 bindSectionEvents(resultsSection, 'results');
                 renderResults(resultsSection);
+                const resultFocus = resultsSection.querySelector('#resultSummary') || resultsSection.querySelector('.result-badge');
+                if (resultFocus) resultFocus.focus({ preventScroll: true });
                 setLocked(false);
                 resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
@@ -2824,7 +2927,7 @@
             notice.innerHTML = `
                 <strong>Atenção ao setor:</strong>
                 <span>${escapeHtml(winner.sectorFit.text)}</span>
-                ${alternative ? `<a class="sector-alternative-link" href="${escapeHtml(alternative.plan.contratacao.link)}" target="_blank" rel="noopener noreferrer" data-plan="${escapeHtml(alternative.plan.nome)}">Ver alternativa que atende ao setor: ${escapeHtml(alternative.plan.nome)} (${alternative.score} de 100)</a>` : '<span>Não há alternativa que atenda ao setor dentro do orçamento informado.</span>'}
+                ${alternative ? `<a class="sector-alternative-link" href="${escapeHtml(alternative.plan.contratacao.link)}" target="_blank" rel="noopener noreferrer" data-plan="${escapeHtml(alternative.plan.nome)}">Ver alternativa que atende ao setor: ${escapeHtml(alternative.plan.nome)} (${formatScore(alternative.score)} de 100)</a>` : '<span>Não há alternativa que atenda ao setor dentro do orçamento informado.</span>'}
             `;
             container.appendChild(notice);
 
@@ -2850,7 +2953,7 @@
                 ? ' · acima do orçamento de assinatura'
                 : rank === 0
                     ? ' · maior afinidade estimada'
-                    : ` · ${pointsBehind} ${pointsBehind === 1 ? 'ponto' : 'pontos'} abaixo do recomendado`;
+                    : ` · ${formatScore(pointsBehind)} ${pointsBehind === 1 ? 'ponto' : 'pontos'} abaixo do recomendado`;
             const sectorNote = result.sectorFit.level === 'partial'
                 ? `<p class="plan-sector-note">Cobre parte do setor ${escapeHtml(result.sectorFit.label)}.</p>`
                 : result.sectorFit.level === 'none'
@@ -2871,14 +2974,13 @@
                 </div>
                 <div class="plan-content">
                     <p class="plan-total">${escapeHtml(contract.totalText)}</p>
-                    <small>${plan.contratacao.taxaAdesao ? `Taxa única de adesão: ${formatMoney(plan.contratacao.taxaAdesao)}` : 'Sem taxa de adesão'}</small>
-                    <p class="plan-cost">Custo de uso estimado: <strong>${formatBRL(result.cost.estimatedMonthly)}/mês</strong></p>
+                    <p class="plan-fee">${result.pricing.adhesion ? `Taxa única de adesão: ${formatBRL(result.pricing.adhesion)} (cobrada separadamente)` : 'Sem taxa de adesão'}</p>
                     <ul class="benefits-list">
                         ${benefits.map(b => `<li>${escapeHtml(b)}</li>`).join('')}
                     </ul>
                     ${sectorNote}
                 </div>
-                <div class="plan-score">${result.score} de 100 de afinidade estimada${scoreNote}</div>
+                <div class="plan-score">${formatScore(result.score)} de 100 de afinidade estimada${scoreNote}</div>
                 <a href="${escapeHtml(plan.contratacao.link)}" target="_blank" rel="noopener noreferrer" class="plan-cta" data-plan="${escapeHtml(plan.nome)}">${escapeHtml(getCTAText(plan))}</a>
             `;
             return card;
@@ -2896,6 +2998,7 @@
                 score_semantics: 'indice_afinidade_estimado',
                 no_eligible_plan: Boolean(result.noEligible),
                 catalog_version: CATALOG_VERSION,
+                rules_version: result.rulesVersion,
                 total_time_sec: secondsSince(quizStartedAt),
                 ...answerParams()
             });
@@ -2904,6 +3007,7 @@
             const resultLogo = resultsSection.querySelector("#resultLogo");
             const resultPrice = resultsSection.querySelector("#resultPrice");
             const resultContract = resultsSection.querySelector("#resultContract");
+            const resultAdhesion = resultsSection.querySelector("#resultAdhesion");
             const resultSummary = resultsSection.querySelector("#resultSummary");
             const resultReasons = resultsSection.querySelector("#resultReasons");
             const sectorNotice = resultsSection.querySelector("#sectorNotice");
@@ -2912,7 +3016,7 @@
             const assumptionNote = resultsSection.querySelector("#assumptionNote");
 
             if (assumptionNote) {
-                assumptionNote.textContent = `Premissas de simulação: ${ASSUMPTIONS.labels.precoIngressoCheio}, ${ASSUMPTIONS.labels.precoIngressoPopular} e ${ASSUMPTIONS.labels.kids}; ${ASSUMPTIONS.labels.kidsIngressos}. Não são preços oficiais universais.`;
+                assumptionNote.textContent = `Exemplos de desconto usam ${ASSUMPTIONS.labels.precoIngressoCheio}; o preço real varia por jogo e setor. ${ASSUMPTIONS.labels.kidsIngressos}.`;
             }
 
             if (!winner) {
@@ -2920,15 +3024,20 @@
                 if (resultLogo) resultLogo.style.display = 'none';
                 if (resultPrice) resultPrice.textContent = '';
                 if (resultContract) resultContract.textContent = '';
+                if (resultAdhesion) resultAdhesion.textContent = '';
                 if (resultSummary) {
-                    resultSummary.textContent = `Nenhum plano cabe no orçamento de assinatura de ${formatMoney(result.budget)} por mês. A opção de assinatura mais barata é ${result.cheapest.plan.nome}, em ${formatBRL(result.cheapest.cost.subscription)}/mês. Os planos abaixo aparecem para comparação, sem recomendação.`;
+                    resultSummary.textContent = `Nenhum plano cabe no orçamento de assinatura de ${formatMoney(result.budget)} por mês. A opção de assinatura mais barata é ${result.cheapest.plan.nome}, em ${formatBRL(result.cheapest.pricing.subscription)}/mês. Os planos abaixo aparecem para comparação, sem recomendação.`;
                 }
                 if (resultReasons) resultReasons.innerHTML = '';
                 if (sectorNotice) sectorNotice.innerHTML = '';
+                // QUIZ-015: sem plano elegível, o CTA é um link sem href —
+                // não navega, não gera evento e sai da navegação por Tab.
                 if (subscribeButton) {
-                    subscribeButton.disabled = true;
-                    subscribeButton.setAttribute('aria-disabled', 'true');
+                    subscribeButton.removeAttribute('href');
+                    subscribeButton.removeAttribute('data-plan');
                     subscribeButton.textContent = 'Sem plano no orçamento';
+                    subscribeButton.setAttribute('aria-disabled', 'true');
+                    subscribeButton.setAttribute('aria-label', 'Sem plano elegível para contratação');
                 }
             } else {
                 if (resultBadge) resultBadge.textContent = 'Plano recomendado';
@@ -2938,21 +3047,26 @@
                     resultLogo.alt = `Logo do plano ${winner.plan.nome}`;
                 }
                 if (subscribeButton) {
-                    subscribeButton.disabled = false;
-                    subscribeButton.removeAttribute('aria-disabled');
-                    subscribeButton.dataset.subscribeUrl = winner.plan.contratacao.link;
+                    // QUIZ-015: link real com o destino do catálogo; a
+                    // navegação usa o comportamento do link (nova aba, sem
+                    // opener) e o evento é emitido no clique.
+                    subscribeButton.href = winner.plan.contratacao.link;
                     subscribeButton.dataset.plan = winner.plan.nome;
                     subscribeButton.textContent = 'Assinar agora';
                     subscribeButton.setAttribute("aria-label", `Assinar o plano ${winner.plan.nome}`);
+                    subscribeButton.removeAttribute('aria-disabled');
                 }
                 const contract = getPlanContract(winner.plan);
                 if (resultPrice) resultPrice.textContent = contract.priceText;
                 if (resultContract) resultContract.textContent = `${contract.totalText} · ${contract.detail}`;
+                if (resultAdhesion) resultAdhesion.textContent = winner.pricing.adhesion
+                    ? `Taxa única de adesão: ${formatBRL(winner.pricing.adhesion)} (cobrada separadamente)`
+                    : 'Sem taxa de adesão';
                 if (resultSummary) {
                     const scope = result.allPlansFit ? 'entre todos os planos' : 'entre os planos que cabem no seu orçamento';
                     resultSummary.textContent = result.closeCall
-                        ? `${winner.score} de 100 de afinidade estimada — praticamente empatado com ${result.runnerUp.plan.nome} (${result.runnerUp.score}). Os dois atendem bem ao seu perfil.`
-                        : `${winner.score} de 100 de afinidade estimada — a maior ${scope}.`;
+                        ? `${formatScore(winner.score)} de 100 de afinidade estimada — praticamente empatado com ${result.runnerUp.plan.nome} (${formatScore(result.runnerUp.score)}). Os dois atendem bem ao seu perfil.`
+                        : `${formatScore(winner.score)} de 100 de afinidade estimada — a maior ${scope}.`;
                 }
                 if (resultReasons) {
                     resultReasons.innerHTML = '';
@@ -3014,7 +3128,7 @@
                 {
                     label: 'Taxa de adesão',
                     getValue: (plan) => plan.contratacao.taxaAdesao
-                        ? `${formatMoney(plan.contratacao.taxaAdesao)} (única)`
+                        ? `${formatBRL(plan.contratacao.taxaAdesao)} (única)`
                         : 'Sem taxa'
                 },
                 {
@@ -3101,7 +3215,7 @@
             plans.forEach(plan => {
                 const td = document.createElement('td');
                 td.className = 'comparison-compatibility' + highlightClass(plan.slug);
-                td.textContent = `${compatibilityMap[plan.slug]} de 100`;
+                td.textContent = `${formatScore(compatibilityMap[plan.slug])} de 100`;
                 compatTr.appendChild(td);
             });
 
@@ -3161,8 +3275,8 @@
             section.innerHTML = `
                 <div class="hero-card" id="heroCard">
                     <p class="eyebrow">Quiz Sócio 5 Estrelas</p>
-                    <h1>Encontre o plano com mais afinidade com o seu jeito de torcer.</h1>
-                    <button class="start-button" id="startButton" type="button">Iniciar Quiz</button>
+                    <h1>Encontre o plano perfeito para viver o Cruzeiro mais de perto.</h1>
+                    <button class="start-button" id="startButton" type="button">Iniciar</button>
                 </div>
             `;
             return section;
@@ -3177,6 +3291,7 @@
                 heroSection = newHeroSection;
                 const newStartButton = heroSection.querySelector('#startButton');
                 newStartButton.addEventListener('click', startQuiz);
+                newStartButton.focus({ preventScroll: true });
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 setLocked(false);
             });
@@ -3188,16 +3303,25 @@
             trackQuizStart();
             transitionSection(heroSection, createQuizSection, (quizSection) => {
                 bindSectionEvents(quizSection, 'quiz');
-                renderQuestion(() => setLocked(false));
+                renderQuestion(() => {
+                    const quizTitle = quizSection.querySelector('#quizTitle');
+                    if (quizTitle) quizTitle.focus({ preventScroll: true });
+                    setLocked(false);
+                });
             });
         }
 
-        function onSubscribeClick() {
-            const button = document.querySelector('#subscribeButton');
-            const url = button?.dataset.subscribeUrl;
-            if (!url) return;
-            trackSubscribeClick(button?.dataset.plan, button?.dataset.plan, 'resultado');
-            window.open(url, '_blank', 'noopener,noreferrer');
+        function onSubscribeClick(event) {
+            const link = event.currentTarget;
+            if (!link || !link.hasAttribute('href') || link.getAttribute('aria-disabled') === 'true') {
+                // Estado indisponível: sem navegação e sem evento de intenção.
+                if (event) event.preventDefault();
+                return;
+            }
+            // QUIZ-015: o clique se propaga para a biblioteca de medição antes
+            // da navegação; a abertura usa o comportamento do link (sem
+            // window.open), em nova aba e com proteção de opener.
+            trackSubscribeClick(link.dataset.plan, link.dataset.plan, 'resultado');
         }
 
         function openComparisonModal(modal) {
@@ -3244,7 +3368,7 @@
                 <div class="modal-content">
                     <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
                     <h2 class="modal-title">Comparativo de planos</h2>
-                    <small>Deslize para o lado para ver mais planos</small>
+                    <p class="modal-hint">Deslize para o lado para comparar os cinco planos.</p>
                     <div class="modal-body" id="modalComparisonBody"></div>
                 </div>
             `;
@@ -3260,6 +3384,8 @@
                 transitionSection(heroSection, createResultsSection, (resultsSection) => {
                     bindSectionEvents(resultsSection, 'results');
                     renderResults(resultsSection);
+                    const resultFocus = resultsSection.querySelector('#resultSummary') || resultsSection.querySelector('.result-badge');
+                    if (resultFocus) resultFocus.focus({ preventScroll: true });
                 });
             });
         }
@@ -3269,9 +3395,18 @@
             const navToggle = document.querySelector(".nav-toggle");
             const menu = document.querySelector(".main-header .menu");
             if (navToggle && menu) {
-                navToggle.addEventListener("click", function () {
-                    this.classList.toggle("active");
-                    menu.classList.toggle("open");
+                const setMenuOpen = (open) => {
+                    navToggle.classList.toggle('active', open);
+                    navToggle.setAttribute('aria-expanded', String(open));
+                    navToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+                    menu.classList.toggle('open', open);
+                };
+                navToggle.addEventListener('click', () => setMenuOpen(navToggle.getAttribute('aria-expanded') !== 'true'));
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true') {
+                        setMenuOpen(false);
+                        navToggle.focus();
+                    }
                 });
             }
         });

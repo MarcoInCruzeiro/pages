@@ -1,0 +1,206 @@
+{
+  "method": "Original HTML in Chrome; all requests intercepted before transmission; only HTML and quiz-engine.js fulfilled from local files",
+  "cases": [
+    {
+      "address": "https://quiz-audit.invalid/?preview",
+      "hostname": "quiz-audit.invalid",
+      "preview": true,
+      "collection": false,
+      "commands": [],
+      "tagCount": 0,
+      "results": 1
+    },
+    {
+      "address": "https://quiz-audit.invalid/?preview=1",
+      "hostname": "quiz-audit.invalid",
+      "preview": true,
+      "collection": false,
+      "commands": [],
+      "tagCount": 0,
+      "results": 1
+    },
+    {
+      "address": "https://quiz-audit.invalid/?preview=false",
+      "hostname": "quiz-audit.invalid",
+      "preview": true,
+      "collection": false,
+      "commands": [],
+      "tagCount": 0,
+      "results": 1
+    },
+    {
+      "address": "https://quiz-audit.invalid/#preview",
+      "hostname": "quiz-audit.invalid",
+      "preview": true,
+      "collection": false,
+      "commands": [],
+      "tagCount": 0,
+      "results": 1
+    },
+    {
+      "address": "https://quiz-audit.invalid/?utm_campaign=preview_newsletter",
+      "hostname": "quiz-audit.invalid",
+      "preview": false,
+      "collection": true,
+      "commands": [
+        [
+          "js",
+          {}
+        ],
+        [
+          "set",
+          "allow_google_signals",
+          false
+        ],
+        [
+          "config",
+          "G-EF75QCTCTV"
+        ]
+      ],
+      "tagCount": 1,
+      "results": 0
+    },
+    {
+      "address": "https://quiz-audit.invalid/?utm_content=preview",
+      "hostname": "quiz-audit.invalid",
+      "preview": false,
+      "collection": true,
+      "commands": [
+        [
+          "js",
+          {}
+        ],
+        [
+          "set",
+          "allow_google_signals",
+          false
+        ],
+        [
+          "config",
+          "G-EF75QCTCTV"
+        ]
+      ],
+      "tagCount": 1,
+      "results": 0
+    },
+    {
+      "address": "https://quiz-audit.invalid/?notpreview=1",
+      "hostname": "quiz-audit.invalid",
+      "preview": false,
+      "collection": true,
+      "commands": [
+        [
+          "js",
+          {}
+        ],
+        [
+          "set",
+          "allow_google_signals",
+          false
+        ],
+        [
+          "config",
+          "G-EF75QCTCTV"
+        ]
+      ],
+      "tagCount": 1,
+      "results": 0
+    },
+    {
+      "address": "http://localhost/",
+      "hostname": "localhost",
+      "preview": false,
+      "collection": false,
+      "commands": [],
+      "tagCount": 0,
+      "results": 0
+    },
+    {
+      "address": "http://127.0.0.1/",
+      "hostname": "127.0.0.1",
+      "preview": false,
+      "collection": false,
+      "commands": [],
+      "tagCount": 0,
+      "results": 0
+    },
+    {
+      "address": "http://127.0.0.2/",
+      "hostname": "127.0.0.2",
+      "preview": false,
+      "collection": true,
+      "commands": [
+        [
+          "js",
+          {}
+        ],
+        [
+          "set",
+          "allow_google_signals",
+          false
+        ],
+        [
+          "config",
+          "G-EF75QCTCTV"
+        ]
+      ],
+      "tagCount": 1,
+      "results": 0
+    },
+    {
+      "address": "http://[::1]/",
+      "hostname": "[::1]",
+      "preview": false,
+      "collection": true,
+      "commands": [
+        [
+          "js",
+          {}
+        ],
+        [
+          "set",
+          "allow_google_signals",
+          false
+        ],
+        [
+          "config",
+          "G-EF75QCTCTV"
+        ]
+      ],
+      "tagCount": 1,
+      "results": 0
+    }
+  ],
+  "errors": [],
+  "normalFlow": {
+    "eventCounts": {
+      "quiz_start": 1,
+      "quiz_answer": 12,
+      "quiz_complete": 1
+    },
+    "complete": {
+      "recommended_plan": "Cabuloso Max",
+      "affinity_index": 86.3,
+      "compatibility": 86.3,
+      "score_semantics": "indice_afinidade_estimado",
+      "no_eligible_plan": false,
+      "catalog_version": "2026-09-11",
+      "rules_version": "2026-10-26.2",
+      "total_time_sec": 0.1,
+      "answer_gamesPerYear": "15",
+      "answer_gamesHistory": "unknown",
+      "answer_wantsGuaranteedTicket": "true",
+      "answer_buysTwoTickets": "false",
+      "answer_kidsCount": "0",
+      "answer_needsPriority": "true",
+      "answer_wantsParticipation": "true",
+      "answer_wantsStoreDiscount": "true",
+      "answer_gameFrequency": "always",
+      "answer_digitalExperience": "true",
+      "answer_budget": "200",
+      "answer_preferredSector": "blue"
+    },
+    "customParamCount": 20
+  },
+  "analyticsResponses": []
+}

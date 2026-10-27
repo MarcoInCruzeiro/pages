@@ -1,0 +1,47 @@
+[
+  {
+    "urlSolicitada": "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro",
+    "verificadoEm": "2026-10-26",
+    "urlFinal": "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro",
+    "statusHttp": 403,
+    "titulo": "Just a moment...",
+    "desafioCloudflare": true,
+    "ofertaConfirmada": false
+  },
+  {
+    "urlSolicitada": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo",
+    "verificadoEm": "2026-10-26",
+    "urlFinal": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo",
+    "statusHttp": 403,
+    "titulo": "Just a moment...",
+    "desafioCloudflare": true,
+    "ofertaConfirmada": false
+  },
+  {
+    "urlSolicitada": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso",
+    "verificadoEm": "2026-10-26",
+    "urlFinal": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso",
+    "statusHttp": 403,
+    "titulo": "Just a moment...",
+    "desafioCloudflare": true,
+    "ofertaConfirmada": false
+  },
+  {
+    "urlSolicitada": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-max",
+    "verificadoEm": "2026-10-26",
+    "urlFinal": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-max",
+    "statusHttp": 403,
+    "titulo": "Just a moment...",
+    "desafioCloudflare": true,
+    "ofertaConfirmada": false
+  },
+  {
+    "urlSolicitada": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=115&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-cativo",
+    "verificadoEm": "2026-10-26",
+    "urlFinal": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=115&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-cativo",
+    "statusHttp": 403,
+    "titulo": "Just a moment...",
+    "desafioCloudflare": true,
+    "ofertaConfirmada": false
+  }
+]

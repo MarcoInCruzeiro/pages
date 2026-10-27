@@ -1,0 +1,27 @@
+{
+  "verified_at": "2026-10-26T20:10:47.562404+00:00",
+  "method": "HTTP GET only; no public page scripts executed",
+  "pages": [
+    {
+      "url": "https://quiz-socio.vercel.app/",
+      "status": 200,
+      "sha256": "5d46a63533ff3c8d369886bc97b80bc834569efc6f920e1c66fd8ee475b30147",
+      "source_contains": {
+        "G-EF75QCTCTV": true,
+        "quiz_start": true,
+        "quiz_answer": true,
+        "quiz_complete": true,
+        "quiz_subscribe_click": true,
+        "affinity_index": false,
+        "score_semantics": false,
+        "catalog_version": false,
+        "quiz-engine.js": false
+      },
+      "quiz_complete_excerpt": "trackEvent('quiz_complete', {\n                recommended_plan: winner.plan.nome,\n                compatibility: winner.compatibilityPercent,\n                total_time_sec: secondsSince(quizStartedAt),\n                ...answerParams\n            });"
+    },
+    {
+      "url": "https://socio.cruzeiro.com.br/",
+      "error": "HTTP Error 403: Forbidden"
+    }
+  ]
+}

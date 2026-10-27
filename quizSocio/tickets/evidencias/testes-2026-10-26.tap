@@ -1,0 +1,366 @@
+
+> quiz-socio-5-estrelas@2.0.0 test
+> node --test tests/engine.test.js tests/reference.test.js tests/browser.test.js
+
+TAP version 13
+# Subtest: Quiz Sócio — fluxo de navegador
+    # Subtest: clique duplo em Continuar avança exatamente uma pergunta
+    ok 1 - clique duplo em Continuar avança exatamente uma pergunta
+      ---
+      duration_ms: 1210.817624
+      type: 'test'
+      ...
+    # Subtest: alternar rapidamente Voltar e Continuar mantém a pergunta correta
+    ok 2 - alternar rapidamente Voltar e Continuar mantém a pergunta correta
+      ---
+      duration_ms: 1513.454748
+      type: 'test'
+      ...
+    # Subtest: Voltar preserva as respostas e a seleção visual
+    ok 3 - Voltar preserva as respostas e a seleção visual
+      ---
+      duration_ms: 2153.7429
+      type: 'test'
+      ...
+    # Subtest: resposta ausente não avança e mostra orientação
+    ok 4 - resposta ausente não avança e mostra orientação
+      ---
+      duration_ms: 1509.757878
+      type: 'test'
+      ...
+    # Subtest: zero jogos e opções false são respostas válidas
+    ok 5 - zero jogos e opções false são respostas válidas
+      ---
+      duration_ms: 1490.910305
+      type: 'test'
+      ...
+    # Subtest: conflito pede confirmação e produz um único resultado
+    ok 6 - conflito pede confirmação e produz um único resultado
+      ---
+      duration_ms: 3702.772925
+      type: 'test'
+      ...
+    # Subtest: revisar respostas a partir do conflito volta à primeira pergunta
+    ok 7 - revisar respostas a partir do conflito volta à primeira pergunta
+      ---
+      duration_ms: 3422.34695
+      type: 'test'
+      ...
+    # Subtest: resultado único mantém o contrato de analytics e o CTA
+    ok 8 - resultado único mantém o contrato de analytics e o CTA
+      ---
+      duration_ms: 3705.376497
+      type: 'test'
+      ...
+    # Subtest: Refazer quiz limpa o estado e permite nova conclusão
+    ok 9 - Refazer quiz limpa o estado e permite nova conclusão
+      ---
+      duration_ms: 7845.996115
+      type: 'test'
+      ...
+    # Subtest: orçamento restrito, setor incompatível e custo de uso aparecem separados
+    ok 10 - orçamento restrito, setor incompatível e custo de uso aparecem separados
+      ---
+      duration_ms: 3986.65649
+      type: 'test'
+      ...
+    # Subtest: casal no Max vê o custo dos dois ingressos no resultado
+    ok 11 - casal no Max vê o custo dos dois ingressos no resultado
+      ---
+      duration_ms: 3718.919403
+      type: 'test'
+      ...
+    # Subtest: comparativo apresenta a matriz oficial, contrato anual e checkout correto
+    ok 12 - comparativo apresenta a matriz oficial, contrato anual e checkout correto
+      ---
+      duration_ms: 859.138981
+      type: 'test'
+      ...
+    # Subtest: teclado seleciona uma opção e libera Continuar
+    ok 13 - teclado seleciona uma opção e libera Continuar
+      ---
+      duration_ms: 1471.004626
+      type: 'test'
+      ...
+    # Subtest: teclado abre e fecha o comparativo a partir do resultado
+    ok 14 - teclado abre e fecha o comparativo a partir do resultado
+      ---
+      duration_ms: 822.77479
+      type: 'test'
+      ...
+    # Subtest: mobile e desktop não têm rolagem horizontal inesperada
+    ok 15 - mobile e desktop não têm rolagem horizontal inesperada
+      ---
+      duration_ms: 1854.408322
+      type: 'test'
+      ...
+    1..15
+ok 1 - Quiz Sócio — fluxo de navegador
+  ---
+  duration_ms: 39697.886106
+  type: 'suite'
+  ...
+# Subtest: catálogo concilia os cinco planos com o regulamento
+ok 2 - catálogo concilia os cinco planos com o regulamento
+  ---
+  duration_ms: 13.058427
+  type: 'test'
+  ...
+# Subtest: exemplo de desconto do Max respeita 65% de R$ 150
+ok 3 - exemplo de desconto do Max respeita 65% de R$ 150
+  ---
+  duration_ms: 0.255753
+  type: 'test'
+  ...
+# Subtest: validação aceita zero e false e rejeita ausentes ou inválidos
+ok 4 - validação aceita zero e false e rejeita ausentes ou inválidos
+  ---
+  duration_ms: 0.136246
+  type: 'test'
+  ...
+# Subtest: validação aponta a primeira pergunta sem resposta
+ok 5 - validação aponta a primeira pergunta sem resposta
+  ---
+  duration_ms: 0.189032
+  type: 'test'
+  ...
+# Subtest: conteúdo digital não acrescenta frequência nem consumo de produtos
+ok 6 - conteúdo digital não acrescenta frequência nem consumo de produtos
+  ---
+  duration_ms: 0.281809
+  type: 'test'
+  ...
+# Subtest: frequência declarada não implica interesse em produtos ou experiências
+ok 7 - frequência declarada não implica interesse em produtos ou experiências
+  ---
+  duration_ms: 0.118929
+  type: 'test'
+  ...
+# Subtest: zero jogos ou não frequentar resultam em necessidade presencial nula
+ok 8 - zero jogos ou não frequentar resultam em necessidade presencial nula
+  ---
+  duration_ms: 0.086294
+  type: 'test'
+  ...
+# Subtest: contradições são detectadas sem correção silenciosa
+ok 9 - contradições são detectadas sem correção silenciosa
+  ---
+  duration_ms: 0.199644
+  type: 'test'
+  ...
+# Subtest: níveis do Cabuloso usam histórico e seguem os limites oficiais
+ok 10 - níveis do Cabuloso usam histórico e seguem os limites oficiais
+  ---
+  duration_ms: 0.348394
+  type: 'test'
+  ...
+# Subtest: desconto e prioridade derivam do mesmo nível
+ok 11 - desconto e prioridade derivam do mesmo nível
+  ---
+  duration_ms: 0.364503
+  type: 'test'
+  ...
+# Subtest: cobertura de setor distingue completo, parcial e ausente
+ok 12 - cobertura de setor distingue completo, parcial e ausente
+  ---
+  duration_ms: 0.234702
+  type: 'test'
+  ...
+# Subtest: preferência pelo Roxo não apresenta o Cativo como benefício no setor
+ok 13 - preferência pelo Roxo não apresenta o Cativo como benefício no setor
+  ---
+  duration_ms: 1.382918
+  type: 'test'
+  ...
+# Subtest: custo separa assinatura, adesão, Kids e ingressos
+ok 14 - custo separa assinatura, adesão, Kids e ingressos
+  ---
+  duration_ms: 0.235054
+  type: 'test'
+  ...
+# Subtest: Cabuloso Max cobra os dois ingressos com desconto ao ir acompanhado
+ok 15 - Cabuloso Max cobra os dois ingressos com desconto ao ir acompanhado
+  ---
+  duration_ms: 0.725915
+  type: 'test'
+  ...
+# Subtest: acompanhante paga o preço do benefício ou a inteira em cada plano
+ok 16 - acompanhante paga o preço do benefício ou a inteira em cada plano
+  ---
+  duration_ms: 0.165314
+  type: 'test'
+  ...
+# Subtest: custo do casal no Max acompanha o volume de jogos sem cobrar ingressos em zero jogos
+ok 17 - custo do casal no Max acompanha o volume de jogos sem cobrar ingressos em zero jogos
+  ---
+  duration_ms: 0.110899
+  type: 'test'
+  ...
+# Subtest: um ingresso gratuito por temporada não zera todos os jogos
+ok 18 - um ingresso gratuito por temporada não zera todos os jogos
+  ---
+  duration_ms: 0.052075
+  type: 'test'
+  ...
+# Subtest: ranking é determinístico, finito e respeita o orçamento
+ok 19 - ranking é determinístico, finito e respeita o orçamento
+  ---
+  duration_ms: 0.848068
+  type: 'test'
+  ...
+# Subtest: enumeração representativa recalcula o espaço finito de respostas
+ok 20 - enumeração representativa recalcula o espaço finito de respostas
+  ---
+  duration_ms: 1312.170439
+  type: 'test'
+  ...
+# espaço nominal: 13713408; combinações executadas: 3082; combinações categoriais com conflito confirmável: 10752
+# Subtest: ausência de plano elegível é explícita e não recomenda acima do teto
+ok 21 - ausência de plano elegível é explícita e não recomenda acima do teto
+  ---
+  duration_ms: 0.597081
+  type: 'test'
+  ...
+# Subtest: motivos do resultado citam respostas e condições comerciais
+ok 22 - motivos do resultado citam respostas e condições comerciais
+  ---
+  duration_ms: 0.565802
+  type: 'test'
+  ...
+# Subtest: zero jogos reduz o peso do benefício de ingresso
+ok 23 - zero jogos reduz o peso do benefício de ingresso
+  ---
+  duration_ms: 0.489136
+  type: 'test'
+  ...
+# Subtest: ordem do catálogo não altera ranking nem índices
+ok 24 - ordem do catálogo não altera ranking nem índices
+  ---
+  duration_ms: 16.376483
+  type: 'test'
+  ...
+# Subtest: empate de índice e assinatura é resolvido pelo slug
+ok 25 - empate de índice e assinatura é resolvido pelo slug
+  ---
+  duration_ms: 0.702892
+  type: 'test'
+  ...
+# Subtest: exemplo documentado da fórmula: 10 jogos, histórico 10, Sicoob, teto 100
+ok 26 - exemplo documentado da fórmula: 10 jogos, histórico 10, Sicoob, teto 100
+  ---
+  duration_ms: 0.508104
+  type: 'test'
+  ...
+# Subtest: desconto do ingresso entra só pelo custo, não pela utilidade
+ok 27 - desconto do ingresso entra só pelo custo, não pela utilidade
+  ---
+  duration_ms: 0.594767
+  type: 'test'
+  ...
+# Subtest: motivos seguem as regras que classificaram o plano
+ok 28 - motivos seguem as regras que classificaram o plano
+  ---
+  duration_ms: 0.477869
+  type: 'test'
+  ...
+# Subtest: a referência sintética atende às metas de regressão, sem comprovar avaliação independente
+ok 29 - a referência sintética atende às metas de regressão, sem comprovar avaliação independente
+  ---
+  duration_ms: 14.508878
+  type: 'test'
+  ...
+# top-1 12/12; top-3 12/12; avaliação independente: pendente
+# Subtest: a base de calibração também é consistente
+ok 30 - a base de calibração também é consistente
+  ---
+  duration_ms: 3.211113
+  type: 'test'
+  ...
+# Subtest: a partição é disjunta e os cenários válidos não contêm contradições
+ok 31 - a partição é disjunta e os cenários válidos não contêm contradições
+  ---
+  duration_ms: 1.366235
+  type: 'test'
+  ...
+# Subtest: cenários contraditórios são detectados e ficam fora das métricas
+ok 32 - cenários contraditórios são detectados e ficam fora das métricas
+  ---
+  duration_ms: 0.299115
+  type: 'test'
+  ...
+# Subtest: premissas de preço da referência são as mesmas do motor
+ok 33 - premissas de preço da referência são as mesmas do motor
+  ---
+  duration_ms: 0.119519
+  type: 'test'
+  ...
+# Subtest: cada plano tem cenário em que é aceitável
+ok 34 - cada plano tem cenário em que é aceitável
+  ---
+  duration_ms: 0.10547
+  type: 'test'
+  ...
+# Subtest: cenários ambíguos aceitam mais de um plano e não exigem vencedor fixo
+ok 35 - cenários ambíguos aceitam mais de um plano e não exigem vencedor fixo
+  ---
+  duration_ms: 0.136186
+  type: 'test'
+  ...
+# Subtest: mudar apenas o histórico cruza o nível e altera o benefício atual
+ok 36 - mudar apenas o histórico cruza o nível e altera o benefício atual
+  ---
+  duration_ms: 0.669981
+  type: 'test'
+  ...
+# Subtest: mudar apenas a intenção futura não concede nível superior
+ok 37 - mudar apenas a intenção futura não concede nível superior
+  ---
+  duration_ms: 0.784397
+  type: 'test'
+  ...
+# Subtest: comparação com a linha de base registra as mudanças intencionais
+ok 38 - comparação com a linha de base registra as mudanças intencionais
+  ---
+  duration_ms: 1.830958
+  type: 'test'
+  ...
+# Subtest: linha de base do ranking anterior cobre toda a referência, por segmento
+ok 39 - linha de base do ranking anterior cobre toda a referência, por segmento
+  ---
+  duration_ms: 9.1935
+  type: 'test'
+  ...
+# calibracao · zero jogos com conteúdo: antes ok (cabuloso) → agora ok (cabuloso)
+# calibracao · orçamento 40 e setor popular: antes ok (time-do-povo) → agora ok (time-do-povo)
+# calibracao · loja e conteúdo: antes ok (cabuloso) → agora ok (cabuloso)
+# calibracao · alta frequência no Sicoob: antes ok (cabuloso-cativo) → agora ok (cabuloso)
+# calibracao · casal no Roxo: antes falha (cabuloso-cativo) → agora ok (cabuloso-max)
+# calibracao · casal com dois Kids: antes ok (cabuloso-max) → agora ok (cabuloso-max)
+# calibracao · histórico nível 3: antes falha (meu-cruzeiro) → agora ok (cabuloso)
+# calibracao · histórico nível 1: antes falha (meu-cruzeiro) → agora ok (cabuloso)
+# calibracao · novo sócio: antes ok (cabuloso-cativo) → agora ok (cabuloso-max)
+# calibracao · Roxo com teto de 200: antes falha (cabuloso) → agora ok (cabuloso-max)
+# calibracao · acompanhante adulto: antes ok (cabuloso) → agora ok (cabuloso)
+# calibracao · baixa frequência e teto 40: antes ok (time-do-povo) → agora ok (time-do-povo)
+# reserva · zero jogos sem extras: antes ok (meu-cruzeiro) → agora ok (meu-cruzeiro)
+# reserva · zero jogos com loja: antes falha (time-do-povo) → agora ok (cabuloso)
+# reserva · alta frequência no Amarelo: antes ok (cabuloso) → agora ok (cabuloso)
+# reserva · alta frequência com teto 40: antes ok (time-do-povo) → agora ok (time-do-povo)
+# reserva · Roxo sem cobertura do Cativo: antes falha (cabuloso-cativo) → agora ok (cabuloso-max)
+# reserva · garantia no Sicoob: antes ok (cabuloso-cativo) → agora ok (cabuloso)
+# reserva · um Kids com teto 100: antes ok (cabuloso) → agora ok (cabuloso)
+# reserva · casal no Roxo com teto 200: antes ok (cabuloso-max) → agora ok (cabuloso-max)
+# reserva · limite de nível 10 jogos: antes falha (meu-cruzeiro) → agora ok (cabuloso)
+# reserva · limite de nível 20 jogos: antes falha (meu-cruzeiro) → agora ok (cabuloso)
+# reserva · teto 40 no Sicoob: antes falha (meu-cruzeiro) → agora ok (time-do-povo)
+# reserva · premium com família: antes ok (cabuloso-max) → agora ok (cabuloso-max)
+# reserva top-1: antes 7/12, agora 12/12
+1..39
+# tests 53
+# suites 1
+# pass 53
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 54732.379552
