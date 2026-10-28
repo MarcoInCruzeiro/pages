@@ -1,0 +1,604 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quiz-socio.vercel.app/config/pesos/pesos.schema.json",
+  "$defs": {
+    "ranking": {
+      "type": "object",
+      "properties": {
+        "presenca": {
+          "type": "object",
+          "properties": {
+            "base": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "escala": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "base",
+            "escala"
+          ],
+          "additionalProperties": false
+        },
+        "ticket": {
+          "type": "object",
+          "properties": {
+            "base": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "bonusPrioridade": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "bonusAcompanhante": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "utilidades": {
+              "type": "object",
+              "properties": {
+                "gratuito": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "popular": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "garantido": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "desconto": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "semBeneficio": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "gratuito",
+                "popular",
+                "garantido",
+                "desconto",
+                "semBeneficio"
+              ],
+              "additionalProperties": false
+            },
+            "cobertura": {
+              "type": "object",
+              "properties": {
+                "full": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "partial": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "none": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "notPreferred": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "full",
+                "partial",
+                "none",
+                "notPreferred"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "base",
+            "bonusPrioridade",
+            "bonusAcompanhante",
+            "utilidades",
+            "cobertura"
+          ],
+          "additionalProperties": false
+        },
+        "priority": {
+          "type": "object",
+          "properties": {
+            "base": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "escala": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "pior": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "intervalo": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "base",
+            "escala",
+            "pior",
+            "intervalo"
+          ],
+          "additionalProperties": false
+        },
+        "sector": {
+          "type": "object",
+          "properties": {
+            "comPreferencia": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "semPreferencia": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "cobertura": {
+              "type": "object",
+              "properties": {
+                "full": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "partial": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "none": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "notPreferred": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "full",
+                "partial",
+                "none",
+                "notPreferred"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "comPreferencia",
+            "semPreferencia",
+            "cobertura"
+          ],
+          "additionalProperties": false
+        },
+        "discount": {
+          "type": "object",
+          "properties": {
+            "base": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "escala": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "referencia": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "base",
+            "escala",
+            "referencia"
+          ],
+          "additionalProperties": false
+        },
+        "experiences": {
+          "type": "object",
+          "properties": {
+            "base": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "escala": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "ambos": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "um": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "nenhum": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "base",
+            "escala",
+            "ambos",
+            "um",
+            "nenhum"
+          ],
+          "additionalProperties": false
+        },
+        "family": {
+          "type": "object",
+          "properties": {
+            "comFamilia": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "semFamilia": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "base": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "capacidade": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "kids": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "comFamilia",
+            "semFamilia",
+            "base",
+            "capacidade",
+            "kids"
+          ],
+          "additionalProperties": false
+        },
+        "price": {
+          "type": "object",
+          "properties": {
+            "base": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "escala": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "base",
+            "escala"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "presenca",
+        "ticket",
+        "priority",
+        "sector",
+        "discount",
+        "experiences",
+        "family",
+        "price"
+      ],
+      "additionalProperties": false
+    },
+    "perfil": {
+      "type": "object",
+      "properties": {
+        "frecuencia": {
+          "type": "object",
+          "properties": {
+            "volume": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "presenca": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "declaracao": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "maxJogos": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "padrao": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "presencas": {
+              "type": "object",
+              "properties": {
+                "never": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "true": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "false": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "never",
+                "true",
+                "false"
+              ],
+              "additionalProperties": false
+            },
+            "declaracoes": {
+              "type": "object",
+              "properties": {
+                "always": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "frequent": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "occasional": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "always",
+                "frequent",
+                "occasional"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "volume",
+            "presenca",
+            "declaracao",
+            "maxJogos",
+            "padrao",
+            "presencas",
+            "declaracoes"
+          ],
+          "additionalProperties": false
+        },
+        "prioridad": {
+          "type": "object",
+          "properties": {
+            "true": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "false": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "padrao": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "true",
+            "false",
+            "padrao"
+          ],
+          "additionalProperties": false
+        },
+        "experiencias": {
+          "type": "object",
+          "properties": {
+            "true": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "false": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "padrao": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "bonusDigital": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "true",
+            "false",
+            "padrao",
+            "bonusDigital"
+          ],
+          "additionalProperties": false
+        },
+        "descuentos": {
+          "type": "object",
+          "properties": {
+            "true": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "false": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "padrao": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "true",
+            "false",
+            "padrao"
+          ],
+          "additionalProperties": false
+        },
+        "importanciaPreco": {
+          "type": "object",
+          "properties": {
+            "40": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "100": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "200": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "400": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "40",
+            "100",
+            "200",
+            "400"
+          ],
+          "additionalProperties": false
+        },
+        "adultos": {
+          "type": "object",
+          "properties": {
+            "true": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "false": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "true",
+            "false"
+          ],
+          "additionalProperties": false
+        },
+        "kids": {
+          "type": "object",
+          "properties": {
+            "max": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "max"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "frecuencia",
+        "prioridad",
+        "experiencias",
+        "descuentos",
+        "importanciaPreco",
+        "adultos",
+        "kids"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -13,7 +13,7 @@ Os testes atuais substituem `gtag` depois da navegação. Eles verificam os even
 - Instalar observação e interceptação antes de navegar, distinguindo fila de comandos, tentativa de coleta e recebimento externo.
 - Manter os testes determinísticos e executar a verificação normal sem baixar uma biblioteca remota mutável. Se houver teste adicional com biblioteca real, documentar sua execução e manter bloqueio de coletores antes da transmissão.
 
-Pontos de entrada: [tests/browser.test.js](../tests/browser.test.js), [tests/cdp.js](../tests/cdp.js) e scripts de [package.json](../package.json).
+Pontos de entrada: [tests/browser.test.js](../../tests/browser.test.js), [tests/cdp.js](../../tests/cdp.js) e scripts de [package.json](../../package.json).
 
 ## Critérios de aceite
 
@@ -60,3 +60,7 @@ Comandos executados: `npm test` (71/71), `npm run test:browser` (32/32).
 Resultados: todos os critérios de aceite atendidos; suíte verde e logs salvos.
 Limitações: acima.
 Status: Concluído.
+
+## Reexecução na consolidação — 27/10/2026
+
+Os critérios locais foram reexecutados na suíte de **82 testes**, sem falhas, no workspace e em uma cópia isolada. Não houve nova alteração da aplicação neste ticket. Evidências: [workspace](../evidencias/011-consolidacao-2026-10-27/npm-test-workspace.tap) e [snapshot isolado](../evidencias/011-consolidacao-2026-10-27/npm-test-isolado.tap). O recebimento real no GA4 continua sendo aceite separado do QUIZ-017.

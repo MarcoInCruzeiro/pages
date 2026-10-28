@@ -27,7 +27,7 @@ Mapear cada resposta somente para necessidades que seu texto sustenta. Identific
 ## Bloqueadores
 
 - Nenhum para remover inferências sem relação com a resposta.
-- Decisão de produto para concluir: política de contradições e necessidade de manter perguntas redundantes, registrada no [QUIZ-009](../009-referencia-de-qualidade.md).
+- Decisão de produto para concluir: política de contradições e necessidade de manter perguntas redundantes, registrada no [QUIZ-009](009-referencia-de-qualidade.md).
 
 ## Verificação
 
@@ -41,9 +41,9 @@ Versão verificada: commit `01f6d20`, branch local `quiz-socio/tickets-correcoes
 
 **Arquivos:** [quiz-engine.js](../../quiz-engine.js) (`buildUserProfile`, `detectConflicts`), [index.html](../../index.html) (tela de revisão de conflitos), [estrutura_quiz.md](../../estrutura_quiz.md) (seções 2 e 3).
 
-**Decisões aplicadas:** cada resposta afeta só o atributo que seu texto sustenta; conteúdo digital soma apenas a experiências; frequência não gera consumo; zero jogos ou “não frequento” zeram a necessidade presencial; contradições exigem confirmação ou revisão (política aprovada no [QUIZ-009](../009-referencia-de-qualidade.md)), e confirmadas mantêm as duas respostas; perfil reconstruído a cada resposta. Atributos são somados e limitados a 0–10, sem normalização de escala, como descrito no documento de apoio.
+**Decisões aplicadas:** cada resposta afeta só o atributo que seu texto sustenta; conteúdo digital soma apenas a experiências; frequência não gera consumo; zero jogos ou “não frequento” zeram a necessidade presencial; contradições exigem confirmação ou revisão (política aprovada no [QUIZ-009](009-referencia-de-qualidade.md)), e confirmadas mantêm as duas respostas; perfil reconstruído a cada resposta. Atributos são somados e limitados a 0–10, sem normalização de escala, como descrito no documento de apoio.
 
-**Evidência:** `tests/engine.test.js` (“conteúdo digital não acrescenta frequência nem consumo de produtos”, “frequência declarada não implica interesse…”, “zero jogos ou não frequentar resultam em necessidade presencial nula”, “contradições são detectadas sem correção silenciosa”); `tests/reference.test.js` (CON-01 a CON-05); `tests/browser.test.js` (“conflito pede confirmação…”, “revisar respostas a partir do conflito…”, “Voltar preserva as respostas…”). Cenário de referência deste ticket = CAL-01; resultado tratado no [QUIZ-010](../010-recalibracao-do-ranking.md).
+**Evidência:** `tests/engine.test.js` (“conteúdo digital não acrescenta frequência nem consumo de produtos”, “frequência declarada não implica interesse…”, “zero jogos ou não frequentar resultam em necessidade presencial nula”, “contradições são detectadas sem correção silenciosa”); `tests/reference.test.js` (CON-01 a CON-05); `tests/browser.test.js` (“conflito pede confirmação…”, “revisar respostas a partir do conflito…”, “Voltar preserva as respostas…”). Cenário de referência deste ticket = CAL-01; resultado tratado no [QUIZ-010](010-recalibracao-do-ranking.md).
 
 ```
 npm test   # 49/49 ok em 26/10/2026 (35 unitários + 14 de navegador)

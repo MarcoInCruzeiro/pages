@@ -1,0 +1,275 @@
+[
+  {
+    "slug": "meu-cruzeiro",
+    "nome": "Meu Cruzeiro",
+    "logo": "./img/meuCruzeiro.png",
+    "contratacao": {
+      "modalidadePrincipal": "mensal",
+      "modalidades": [
+        "semestral",
+        "anual"
+      ],
+      "precoMensal": 12,
+      "precoMensalEquivalente": 12,
+      "valorTotal": null,
+      "parcelas": 1,
+      "valorParcela": 12,
+      "taxaAdesao": 0,
+      "vigenciaMeses": 12,
+      "link": "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro"
+    },
+    "ingresso": {
+      "tipo": "gratuito",
+      "quantidade": 1,
+      "setores": [
+        "amarelo-inferior",
+        "amarelo-superior",
+        "laranja-inferior",
+        "laranja-superior"
+      ],
+      "setorTexto": "Amarelo (inferior ou superior) ou Laranja (inferior ou superior)",
+      "niveis": null,
+      "descontoFixo": null,
+      "periodicidade": "temporada",
+      "detalhes": "1 ingresso gratuito por temporada, mediante disponibilidade"
+    },
+    "prioridade": 4,
+    "garantiaIngresso": false,
+    "loja": {
+      "percentual": 0.1,
+      "texto": "Até 10% em produtos e serviços oficiais"
+    },
+    "conteudoExclusivo": true,
+    "votacao": true,
+    "opcionais": {
+      "kids": {
+        "disponivel": true,
+        "precoMensal": 30,
+        "maxCriancas": 3,
+        "idadeMaxima": 12,
+        "ingressoIncluido": true
+      },
+      "carteirinhaFisica": {
+        "situacao": "opcional",
+        "preco": 30
+      },
+      "pcd": false
+    },
+    "camposPendentes": [
+      "descontoEmParceiros"
+    ],
+    "id": 21
+  },
+  {
+    "slug": "time-do-povo",
+    "nome": "Time do Povo",
+    "logo": "./img/timeDoPovo.png",
+    "contratacao": {
+      "modalidadePrincipal": "mensal",
+      "modalidades": [
+        "semestral",
+        "anual"
+      ],
+      "precoMensal": 40,
+      "precoMensalEquivalente": 40,
+      "valorTotal": null,
+      "parcelas": 1,
+      "valorParcela": 40,
+      "taxaAdesao": 30,
+      "vigenciaMeses": 12,
+      "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo"
+    },
+    "ingresso": {
+      "tipo": "popular",
+      "quantidade": 1,
+      "setores": [
+        "amarelo-inferior",
+        "amarelo-superior",
+        "laranja-inferior",
+        "laranja-superior"
+      ],
+      "setorTexto": "Amarelo (inferior ou superior) ou Laranja (inferior ou superior)",
+      "niveis": null,
+      "descontoFixo": null,
+      "periodicidade": "por-jogo",
+      "detalhes": "1 ingresso popular — menor valor de venda online da arquibancada — mediante disponibilidade"
+    },
+    "prioridade": 4,
+    "garantiaIngresso": false,
+    "loja": {
+      "percentual": 0.1,
+      "texto": "Até 10% em produtos e serviços oficiais"
+    },
+    "conteudoExclusivo": true,
+    "votacao": true,
+    "opcionais": {
+      "kids": {
+        "disponivel": true,
+        "precoMensal": 30,
+        "maxCriancas": 3,
+        "idadeMaxima": 12,
+        "ingressoIncluido": true
+      },
+      "carteirinhaFisica": {
+        "situacao": "incluida",
+        "preco": 0
+      },
+      "pcd": false
+    },
+    "camposPendentes": [
+      "descontoEmParceiros"
+    ],
+    "id": 34
+  },
+  {
+    "slug": "cabuloso",
+    "nome": "Cabuloso",
+    "logo": "./img/cabuloso.png",
+    "contratacao": {
+      "modalidadePrincipal": "mensal",
+      "modalidades": [
+        "semestral",
+        "anual"
+      ],
+      "precoMensal": 100,
+      "precoMensalEquivalente": 100,
+      "valorTotal": null,
+      "parcelas": 1,
+      "valorParcela": 100,
+      "taxaAdesao": 30,
+      "vigenciaMeses": 12,
+      "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso"
+    },
+    "ingresso": {
+      "tipo": "desconto",
+      "quantidade": 1,
+      "setores": [
+        "amarelo-inferior",
+        "amarelo-superior",
+        "laranja-inferior",
+        "laranja-superior",
+        "sicoob-inferior",
+        "sicoob-superior",
+        "roxo-superior"
+      ],
+      "setorTexto": "Amarelo, Laranja, Sicoob (Leste) e Roxo Superior",
+      "niveis": [
+        {
+          "nivel": 1,
+          "jogosMinimos": 0,
+          "jogosMaximos": 9,
+          "prioridade": 3,
+          "desconto": 0.5
+        },
+        {
+          "nivel": 2,
+          "jogosMinimos": 10,
+          "jogosMaximos": 19,
+          "prioridade": 2,
+          "desconto": 0.55
+        },
+        {
+          "nivel": 3,
+          "jogosMinimos": 20,
+          "jogosMaximos": null,
+          "prioridade": 1,
+          "desconto": 0.6
+        }
+      ],
+      "descontoFixo": null,
+      "periodicidade": "por-jogo",
+      "detalhes": "1 ingresso com desconto progressivo de 50% a 60%, conforme histórico de 15 meses"
+    },
+    "prioridade": null,
+    "garantiaIngresso": false,
+    "loja": {
+      "percentual": 0.15,
+      "texto": "Até 15% em produtos e serviços oficiais"
+    },
+    "conteudoExclusivo": true,
+    "votacao": true,
+    "opcionais": {
+      "kids": {
+        "disponivel": true,
+        "precoMensal": 30,
+        "maxCriancas": 3,
+        "idadeMaxima": 12,
+        "ingressoIncluido": true
+      },
+      "carteirinhaFisica": {
+        "situacao": "incluida",
+        "preco": 0
+      },
+      "pcd": true
+    },
+    "camposPendentes": [
+      "descontoEmParceiros"
+    ],
+    "id": 10
+  },
+  {
+    "slug": "cabuloso-max",
+    "nome": "Cabuloso Max",
+    "logo": "./img/cabulosoMax.png",
+    "contratacao": {
+      "modalidadePrincipal": "mensal",
+      "modalidades": [
+        "semestral",
+        "anual"
+      ],
+      "precoMensal": 200,
+      "precoMensalEquivalente": 200,
+      "valorTotal": null,
+      "parcelas": 1,
+      "valorParcela": 200,
+      "taxaAdesao": 30,
+      "vigenciaMeses": 12,
+      "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-max"
+    },
+    "ingresso": {
+      "tipo": "desconto",
+      "quantidade": 2,
+      "setores": [
+        "amarelo-inferior",
+        "amarelo-superior",
+        "laranja-inferior",
+        "laranja-superior",
+        "sicoob-inferior",
+        "sicoob-superior",
+        "roxo-inferior",
+        "roxo-superior"
+      ],
+      "setorTexto": "Amarelo, Laranja, Sicoob (Leste) e Roxo (inferior e superior)",
+      "niveis": null,
+      "descontoFixo": 0.65,
+      "periodicidade": "por-jogo",
+      "detalhes": "Até 2 ingressos com 65% de desconto, mediante disponibilidade"
+    },
+    "prioridade": 1,
+    "garantiaIngresso": false,
+    "loja": {
+      "percentual": 0.15,
+      "texto": "Até 15% em produtos e serviços oficiais"
+    },
+    "conteudoExclusivo": true,
+    "votacao": true,
+    "opcionais": {
+      "kids": {
+        "disponivel": true,
+        "precoMensal": 30,
+        "maxCriancas": 3,
+        "idadeMaxima": 12,
+        "ingressoIncluido": true
+      },
+      "carteirinhaFisica": {
+        "situacao": "incluida",
+        "preco": 0
+      },
+      "pcd": false
+    },
+    "camposPendentes": [
+      "descontoEmParceiros"
+    ],
+    "id": 11
+  }
+]

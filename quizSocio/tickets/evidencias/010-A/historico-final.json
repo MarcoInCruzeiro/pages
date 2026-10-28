@@ -1,0 +1,905 @@
+{
+  "evaluatedAt": "2026-10-27T14:31:33.925Z",
+  "kind": "synthetic-regression",
+  "reference": "historical",
+  "referenceSha256": "922518db19abf890461ce4ebb75638b5eae888b2115a3ea91493e59ca63c56c5",
+  "independentValidation": false,
+  "engineSha256": "d2bc8591724b44773b9641bafac0f305f2b4396ed652b76db15b167b0c8486e5",
+  "rulesVersion": "2026-10-26.2",
+  "catalogVersion": "2026-09-11",
+  "sourceProposedByUser": "https://socio.cruzeiro.com.br/planos",
+  "limitation": "Referências sintéticas; métricas não representam avaliação externa, cega ou desempenho com usuários reais.",
+  "thresholds": {
+    "top1": 0.8,
+    "top3": 0.95,
+    "budgetViolations": 0
+  },
+  "groups": {
+    "calibracao": {
+      "total": 12,
+      "top1": 12,
+      "top3": 12,
+      "budgetViolations": 0,
+      "scoreViolations": 0,
+      "top1Rate": 1,
+      "top3Rate": 1,
+      "passed": true
+    },
+    "reserva": {
+      "total": 12,
+      "top1": 11,
+      "top3": 12,
+      "budgetViolations": 0,
+      "scoreViolations": 0,
+      "top1Rate": 0.9166666666666666,
+      "top3Rate": 1,
+      "passed": true
+    }
+  },
+  "passed": true,
+  "rows": [
+    {
+      "id": "CAL-01",
+      "split": "calibracao",
+      "profileId": null,
+      "category": "zero jogos com conteúdo",
+      "acceptable": [
+        "cabuloso",
+        "meu-cruzeiro"
+      ],
+      "reason": "Sem jogos, o benefício de ingresso é secundário; conteúdo e desconto de loja sustentam Cabuloso ou Meu Cruzeiro.",
+      "ranking": [
+        "cabuloso",
+        "meu-cruzeiro",
+        "cabuloso-max",
+        "time-do-povo",
+        "cabuloso-cativo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 91.2
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 85.2
+        },
+        {
+          "plan": "cabuloso-max",
+          "score": 83.2
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 82.9
+        },
+        {
+          "plan": "cabuloso-cativo",
+          "score": 55.5
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "CAL-02",
+      "split": "calibracao",
+      "profileId": null,
+      "category": "orçamento 40 e setor popular",
+      "acceptable": [
+        "time-do-povo"
+      ],
+      "reason": "Com 10 jogos e teto de assinatura de R$ 40, o ingresso popular do Time do Povo atende ao uso e ao setor.",
+      "ranking": [
+        "time-do-povo",
+        "meu-cruzeiro"
+      ],
+      "scores": [
+        {
+          "plan": "time-do-povo",
+          "score": 85.5
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 85.1
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "CAL-03",
+      "split": "calibracao",
+      "profileId": null,
+      "category": "loja e conteúdo",
+      "acceptable": [
+        "cabuloso"
+      ],
+      "reason": "Quem quer desconto de loja e conteúdo encontra no Cabuloso o maior desconto confirmado dentro de R$ 100.",
+      "ranking": [
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 88.4
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 68.5
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 66.8
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "CAL-04",
+      "split": "calibracao",
+      "profileId": null,
+      "category": "alta frequência no Sicoob",
+      "acceptable": [
+        "cabuloso",
+        "cabuloso-cativo",
+        "cabuloso-max"
+      ],
+      "reason": "Alta frequência e orçamento amplo admitem desconto progressivo, dois ingressos ou garantia no Sicoob.",
+      "ranking": [
+        "cabuloso",
+        "cabuloso-max",
+        "cabuloso-cativo",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 92
+        },
+        {
+          "plan": "cabuloso-max",
+          "score": 87.8
+        },
+        {
+          "plan": "cabuloso-cativo",
+          "score": 67.7
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 50
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 49.4
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "CAL-05",
+      "split": "calibracao",
+      "profileId": null,
+      "category": "casal no Roxo",
+      "acceptable": [
+        "cabuloso-max"
+      ],
+      "reason": "Casal no Roxo exige cobertura do setor e capacidade para dois ingressos; o Max atende ambos.",
+      "ranking": [
+        "cabuloso-max",
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo",
+        "cabuloso-cativo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso-max",
+          "score": 89.6
+        },
+        {
+          "plan": "cabuloso",
+          "score": 79.6
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 53.5
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 52.8
+        },
+        {
+          "plan": "cabuloso-cativo",
+          "score": 47.8
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "CAL-06",
+      "split": "calibracao",
+      "profileId": null,
+      "category": "casal com dois Kids",
+      "acceptable": [
+        "cabuloso-max",
+        "cabuloso"
+      ],
+      "reason": "Dois adultos e duas crianças no Amarelo/Laranja admitem Max (dois ingressos) ou Cabuloso com Kids.",
+      "ranking": [
+        "cabuloso-max",
+        "cabuloso",
+        "time-do-povo",
+        "meu-cruzeiro"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso-max",
+          "score": 89.6
+        },
+        {
+          "plan": "cabuloso",
+          "score": 86.3
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 77.4
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 73.9
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "CAL-07",
+      "split": "calibracao",
+      "profileId": null,
+      "category": "histórico nível 3",
+      "acceptable": [
+        "cabuloso"
+      ],
+      "reason": "Histórico de 25 jogos confirma nível 3 e o maior desconto do Cabuloso.",
+      "ranking": [
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 88.4
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 72.3
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 69.9
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "CAL-08",
+      "split": "calibracao",
+      "profileId": null,
+      "category": "histórico nível 1",
+      "acceptable": [
+        "cabuloso"
+      ],
+      "reason": "Mesmo plano do CAL-07, mas com histórico de nível 1: o benefício atual é menor.",
+      "ranking": [
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 86.3
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 72.3
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 69.9
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "CAL-09",
+      "split": "calibracao",
+      "profileId": null,
+      "category": "novo sócio",
+      "acceptable": [
+        "cabuloso",
+        "cabuloso-max",
+        "cabuloso-cativo"
+      ],
+      "reason": "Sem histórico confirmado, aplica-se o nível 1 inicial; planos com benefício fixo também são aceitáveis.",
+      "ranking": [
+        "cabuloso-max",
+        "cabuloso",
+        "cabuloso-cativo",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso-max",
+          "score": 87.4
+        },
+        {
+          "plan": "cabuloso",
+          "score": 85.3
+        },
+        {
+          "plan": "cabuloso-cativo",
+          "score": 66.5
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 54.3
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 53.5
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "CAL-10",
+      "split": "calibracao",
+      "profileId": null,
+      "category": "Roxo com teto de 200",
+      "acceptable": [
+        "cabuloso-max"
+      ],
+      "reason": "O Max é o único até R$ 200 que cobre Roxo inferior e superior.",
+      "ranking": [
+        "cabuloso-max",
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso-max",
+          "score": 84.7
+        },
+        {
+          "plan": "cabuloso",
+          "score": 82.5
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 64.4
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 63.1
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "CAL-11",
+      "split": "calibracao",
+      "profileId": null,
+      "category": "acompanhante adulto",
+      "acceptable": [
+        "cabuloso"
+      ],
+      "reason": "Com teto de R$ 100 e acompanhante, o desconto do Cabuloso é a opção viável no setor.",
+      "ranking": [
+        "cabuloso",
+        "time-do-povo",
+        "meu-cruzeiro"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 82
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 76.9
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 73.7
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "CAL-12",
+      "split": "calibracao",
+      "profileId": null,
+      "category": "baixa frequência e teto 40",
+      "acceptable": [
+        "time-do-povo",
+        "meu-cruzeiro"
+      ],
+      "reason": "Com poucos jogos e teto de R$ 40, o ingresso popular ou o ingresso gratuito anual podem ser suficientes.",
+      "ranking": [
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 86.3
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 86
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "RES-01",
+      "split": "reserva",
+      "profileId": null,
+      "category": "zero jogos sem extras",
+      "acceptable": [
+        "meu-cruzeiro"
+      ],
+      "reason": "Sem jogos e sem interesse em extras, o menor custo de assinatura é o critério dominante.",
+      "ranking": [
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 92.8
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 88.7
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "RES-02",
+      "split": "reserva",
+      "profileId": null,
+      "category": "zero jogos com loja",
+      "acceptable": [
+        "cabuloso",
+        "meu-cruzeiro"
+      ],
+      "reason": "Sem jogos, o desconto de loja e o custo definem; Cabuloso tem 15%, Meu Cruzeiro é mais barato.",
+      "ranking": [
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 87.4
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 83.8
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 80.3
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "RES-03",
+      "split": "reserva",
+      "profileId": null,
+      "category": "alta frequência no Amarelo",
+      "acceptable": [
+        "cabuloso",
+        "time-do-povo"
+      ],
+      "reason": "No Amarelo, o desconto progressivo do Cabuloso e o ingresso popular do Time do Povo são alternativas coerentes.",
+      "ranking": [
+        "cabuloso",
+        "time-do-povo",
+        "meu-cruzeiro"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 89.9
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 78.5
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 73.8
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "RES-04",
+      "split": "reserva",
+      "profileId": null,
+      "category": "alta frequência com teto 40",
+      "acceptable": [
+        "time-do-povo"
+      ],
+      "reason": "Com trinta jogos e teto de R$ 40, o ingresso popular é o único benefício compatível com o uso.",
+      "ranking": [
+        "time-do-povo",
+        "meu-cruzeiro"
+      ],
+      "scores": [
+        {
+          "plan": "time-do-povo",
+          "score": 82.5
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 77.8
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "RES-05",
+      "split": "reserva",
+      "profileId": null,
+      "category": "Roxo sem cobertura do Cativo",
+      "acceptable": [
+        "cabuloso-max"
+      ],
+      "reason": "O Cativo cobre apenas Sicoob Leste Inferior; para Roxo, o Max é a alternativa compatível.",
+      "ranking": [
+        "cabuloso-max",
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo",
+        "cabuloso-cativo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso-max",
+          "score": 84
+        },
+        {
+          "plan": "cabuloso",
+          "score": 81
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 60.7
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 59.5
+        },
+        {
+          "plan": "cabuloso-cativo",
+          "score": 42
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "RES-06",
+      "split": "reserva",
+      "profileId": null,
+      "category": "garantia no Sicoob",
+      "acceptable": [
+        "cabuloso",
+        "cabuloso-cativo",
+        "cabuloso-max"
+      ],
+      "reason": "No Sicoob, o Cativo garante o ingresso; Cabuloso e Max oferecem desconto e prioridade.",
+      "ranking": [
+        "cabuloso",
+        "cabuloso-max",
+        "cabuloso-cativo",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 92
+        },
+        {
+          "plan": "cabuloso-max",
+          "score": 87.5
+        },
+        {
+          "plan": "cabuloso-cativo",
+          "score": 66.9
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 52.7
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 52
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "RES-07",
+      "split": "reserva",
+      "profileId": null,
+      "category": "um Kids com teto 100",
+      "acceptable": [
+        "cabuloso"
+      ],
+      "reason": "Com teto de R$ 100, um adulto acompanhante e um Kids, o Cabuloso é o plano viável no setor.",
+      "ranking": [
+        "cabuloso",
+        "time-do-povo",
+        "meu-cruzeiro"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 86.2
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 78.8
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 76.4
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "RES-08",
+      "split": "reserva",
+      "profileId": null,
+      "category": "casal no Roxo com teto 200",
+      "acceptable": [
+        "cabuloso-max"
+      ],
+      "reason": "Casal no Roxo e teto de R$ 200 apontam para o Max.",
+      "ranking": [
+        "cabuloso-max",
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso-max",
+          "score": 87.9
+        },
+        {
+          "plan": "cabuloso",
+          "score": 77.2
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 58.7
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 57.6
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "RES-09",
+      "split": "reserva",
+      "profileId": null,
+      "category": "limite de nível 10 jogos",
+      "acceptable": [
+        "cabuloso"
+      ],
+      "reason": "Dez jogos históricos colocam o Cabuloso no nível 2.",
+      "ranking": [
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 87.4
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 72.3
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 69.9
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "RES-10",
+      "split": "reserva",
+      "profileId": null,
+      "category": "limite de nível 20 jogos",
+      "acceptable": [
+        "cabuloso"
+      ],
+      "reason": "Vinte jogos históricos colocam o Cabuloso no nível 3.",
+      "ranking": [
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 88.4
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 72.3
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 69.9
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "RES-11",
+      "split": "reserva",
+      "profileId": null,
+      "category": "teto 40 no Sicoob",
+      "acceptable": [
+        "time-do-povo"
+      ],
+      "reason": "Com teto de R$ 40, o Time do Povo é o único com benefício de ingresso por jogo; o setor preferido fica sinalizado como não coberto.",
+      "ranking": [
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 70.4
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 67.1
+        }
+      ],
+      "top1": false,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "RES-12",
+      "split": "reserva",
+      "profileId": null,
+      "category": "premium com família",
+      "acceptable": [
+        "cabuloso-max"
+      ],
+      "reason": "Casal, três Kids e preferência por Roxo exigem capacidade de dois ingressos e cobertura do setor.",
+      "ranking": [
+        "cabuloso-max",
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo",
+        "cabuloso-cativo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso-max",
+          "score": 90.9
+        },
+        {
+          "plan": "cabuloso",
+          "score": 81.1
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 52.2
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 51.7
+        },
+        {
+          "plan": "cabuloso-cativo",
+          "score": 48.8
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    }
+  ]
+}

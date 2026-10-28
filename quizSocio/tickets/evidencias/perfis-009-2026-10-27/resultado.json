@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-27",
+  "commercialAcceptance": {
+    "ticket": "QUIZ-003",
+    "validatedBy": "Usuário",
+    "source": "Confirmação expressa na conversa de que o ticket foi validado e os preços estão corretos.",
+    "automatedRevalidationRequired": false
+  },
+  "profileReference": {
+    "kind": "agent-authored-synthetic-reference",
+    "createdOn": "2026-10-27",
+    "author": "Assistente, por autorização expressa do usuário em 27/10/2026",
+    "independentValidation": false,
+    "rankingEvaluationTicket": "QUIZ-010-A",
+    "source": "quiz-engine.js, referência comercial aceita e políticas do QUIZ-009",
+    "profileCount": 8,
+    "scenarioCount": 16,
+    "sha256": "a3f73bebe683b37c55efa6cf96b07815d2d4a311da79b1ef68ad8062dad53270",
+    "frozenBefore": "Avaliação dos vencedores e eventual ajuste do ranking no QUIZ-010-A",
+    "limitation": "Calibração e validação são partições sintéticas elaboradas pelo mesmo agente; não constituem avaliação externa, cega ou com usuários reais."
+  },
+  "reviewedFunctions": [
+    "buildUserProfile",
+    "resolveLevel",
+    "getSectorFit",
+    "scorePlan",
+    "recommendPlans"
+  ],
+  "engineChanged": false,
+  "tests": {
+    "passed": 79,
+    "failed": 0
+  },
+  "rankingEvaluation": "Planejada no QUIZ-010-A; novos cenários não foram avaliados para escolher vencedores nesta etapa."
+}

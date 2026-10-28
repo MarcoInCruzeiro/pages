@@ -5,7 +5,7 @@ Prioridade: P1
 
 ## Reabertura — 27/10/2026
 
-Reaberto após a [revisão dos tickets de GA4](../docs/revisao-tickets-ga4-2026-10-27.md). A coleta continua habilitada em `[::1]` e `127.0.0.2`. A alteração em `setup()` também passa uma função à API de avaliação que espera texto, fazendo os 17 testes de navegador falharem. Corrigir os dois defeitos antes de encerrar novamente.
+Reaberto após a [revisão dos tickets de GA4](../../docs/revisao-tickets-ga4-2026-10-27.md). A coleta continua habilitada em `[::1]` e `127.0.0.2`. A alteração em `setup()` também passa uma função à API de avaliação que espera texto, fazendo os 17 testes de navegador falharem. Corrigir os dois defeitos antes de encerrar novamente.
 
 ## Descrição
 
@@ -71,3 +71,7 @@ Comandos executados: `npm test` (71/71), `npm run test:browser` (32/32).
 Resultados: todos os critérios de aceite atendidos; 17 testes de navegador não falham mais no `setup()`; isolamento verificado em 8 ambientes + produção.
 Limitações: acima.
 Status: Concluído.
+
+## Reexecução na consolidação — 27/10/2026
+
+Os critérios locais foram reexecutados na suíte de **82 testes**, sem falhas, no workspace e em uma cópia isolada. Não houve nova alteração da aplicação neste ticket. Evidências: [workspace](../evidencias/011-consolidacao-2026-10-27/npm-test-workspace.tap) e [snapshot isolado](../evidencias/011-consolidacao-2026-10-27/npm-test-isolado.tap). O recebimento real no GA4 continua sendo aceite separado do QUIZ-017.

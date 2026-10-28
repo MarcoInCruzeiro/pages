@@ -5,7 +5,7 @@ Prioridade: P1
 
 ## Reabertura — 27/10/2026
 
-Reaberto após a [revisão dos tickets de GA4](../docs/revisao-tickets-ga4-2026-10-27.md). A detecção explícita funcionou na verificação isolada, mas faltam os testes permanentes e a evidência de navegador exigidos para encerrar. Preservar a implementação e completar os critérios pendentes.
+Reaberto após a [revisão dos tickets de GA4](../../docs/revisao-tickets-ga4-2026-10-27.md). A detecção explícita funcionou na verificação isolada, mas faltam os testes permanentes e a evidência de navegador exigidos para encerrar. Preservar a implementação e completar os critérios pendentes.
 
 ## Descrição
 
@@ -67,3 +67,7 @@ Comandos executados: `npm test` (71/71), `npm run test:browser` (32/32).
 Resultados: todos os critérios de aceite atendidos; testes permanentes de navegador cobrem modos explícitos e falsos positivos; log vinculado acima.
 Limitações: acima.
 Status: Concluído.
+
+## Reexecução na consolidação — 27/10/2026
+
+Os critérios locais foram reexecutados na suíte de **82 testes**, sem falhas, no workspace e em uma cópia isolada. Não houve nova alteração da aplicação neste ticket. Evidências: [workspace](../evidencias/011-consolidacao-2026-10-27/npm-test-workspace.tap) e [snapshot isolado](../evidencias/011-consolidacao-2026-10-27/npm-test-isolado.tap). O recebimento real no GA4 continua sendo aceite separado do QUIZ-017.

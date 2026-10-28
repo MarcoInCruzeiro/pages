@@ -15,7 +15,7 @@ Representar os setores cobertos por cada benefício e distinguir preferência de
 ## Critérios de aceite
 
 - [x] Cada benefício de ingresso utiliza os setores confirmados no cadastro, incluindo restrições entre superior e inferior.
-- [x] A política escolhida para preferência ou exigência está registrada no [QUIZ-009](../009-referencia-de-qualidade.md) e corresponde ao texto da pergunta.
+- [x] A política escolhida para preferência ou exigência está registrada no [QUIZ-009](009-referencia-de-qualidade.md) e corresponde ao texto da pergunta.
 - [x] Preferência pelo Roxo não apresenta o ingresso garantido do Cativo como benefício naquele setor.
 - [x] Sob preferência flexível, uma incompatibilidade do vencedor aparece de forma visível, com alternativa compatível quando disponível.
 - [N/A] Sob setor obrigatório, apenas benefícios que atendem ao setor participam como compatíveis; ausência de plano viável produz orientação explícita, sem afirmar atendimento inexistente.
@@ -41,7 +41,7 @@ Versão verificada: commit `01f6d20`, branch local `quiz-socio/tickets-correcoes
 
 **Critério N/A:** “Sob setor obrigatório…” não se aplica, porque a política aprovada é de preferência flexível.
 
-**Decisões aplicadas:** preferência flexível, aprovada no [QUIZ-009](../009-referencia-de-qualidade.md); cobertura por subdivisão (inferior/superior) derivada do catálogo; Cativo só no Sicoob — Leste Inferior; Amarelo/Laranja coberto por Meu Cruzeiro, Time do Povo, Cabuloso e Max pelo cadastro, não por bônus. O bônus manual de 6 pontos foi removido; o tratamento de setor no ranking foi revisado no [QUIZ-010](../010-recalibracao-do-ranking.md) (peso escalado pela presença). Sem plano no orçamento, não há vencedor e o CTA é desativado; o teto nunca é excedido em silêncio.
+**Decisões aplicadas:** preferência flexível, aprovada no [QUIZ-009](009-referencia-de-qualidade.md); cobertura por subdivisão (inferior/superior) derivada do catálogo; Cativo só no Sicoob — Leste Inferior; Amarelo/Laranja coberto por Meu Cruzeiro, Time do Povo, Cabuloso e Max pelo cadastro, não por bônus. O bônus manual de 6 pontos foi removido; o tratamento de setor no ranking foi revisado no [QUIZ-010](010-recalibracao-do-ranking.md) (peso escalado pela presença). Sem plano no orçamento, não há vencedor e o CTA é desativado; o teto nunca é excedido em silêncio.
 
 **Evidência:** `tests/engine.test.js` (“cobertura de setor distingue completo, parcial e ausente”, “preferência pelo Roxo não apresenta o Cativo como benefício no setor”, “ausência de plano elegível é explícita…”); referência CAL-05, CAL-10, RES-05, RES-08, RES-11, RES-12; `tests/browser.test.js` (“orçamento restrito, setor incompatível e custo de uso aparecem separados”).
 

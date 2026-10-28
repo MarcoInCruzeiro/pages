@@ -13,7 +13,7 @@ Há UTMs nos destinos comerciais e um evento local de clique, mas a identificaç
 - Conferir a decoração de URL quando aplicável e a continuidade dos identificadores de medição após redirecionamentos.
 - Identificar se o destino já mede contratação concluída e registrar seu contrato, separando essa medição da intenção capturada pelo quiz.
 
-Este ticket comprova atribuição. A conferência de plano, modalidade e preço continua no [QUIZ-003](003-modalidade-e-checkout.md).
+Este ticket comprova atribuição. A conferência de plano, modalidade e preço continua no [QUIZ-003](concluidos/003-modalidade-e-checkout.md).
 
 ## Critérios de aceite
 
@@ -27,7 +27,7 @@ Este ticket comprova atribuição. A conferência de plano, modalidade e preço 
 
 ## Bloqueadores
 
-- Dependências: [QUIZ-015](015-cta-principal-com-link.md), [QUIZ-017](017-configuracao-e-validacao-ga4.md) e [QUIZ-018](018-alinhamento-publicado-ga4.md), para validar o comportamento final no domínio confirmado.
+- Dependências: [QUIZ-015](concluidos/015-cta-principal-com-link.md), [QUIZ-017](017-configuracao-e-validacao-ga4.md) e [QUIZ-018](018-alinhamento-publicado-ga4.md), para validar o comportamento final no domínio confirmado.
 - Externo atual: o destino de sócios retornou 403 na auditoria. **Responsável:** plataforma de sócios e administrador de analytics. **Desbloqueio:** permitir uma navegação de validação e a conferência da medição no destino, sem compra.
 
 ## Verificação
@@ -37,3 +37,11 @@ Executar o mesmo roteiro para resultado, lista e comparativo, anotando origem, d
 ## Registro de conclusão
 
 Pendente: versão/ambiente, responsáveis, matriz por origem de CTA e evidências da continuidade ou dos impedimentos.
+
+## Execução da preparação e diagnóstico — 27/10/2026
+
+O [roteiro de continuidade](../docs/validacao-e-entrega.md#5-conferir-continuidade-no-checkout--quiz-019) está preparado para as três origens de CTA, com comparação de identidade e sessão nas duas pontas e registro sem tokens ou cookies brutos. Os testes locais exercitam links e eventos de intenção, conforme QUIZ-015 e QUIZ-016.
+
+Na [nova consulta dos destinos](evidencias/execucao-2026-10-27/externos.json), os cinco links terminaram em `fila.cruzeiro.com.br` com resposta 429 e desafio, sem alcançar a oferta. A URL da fila, isoladamente, não comprova perda definitiva de atribuição: a plataforma pode manter estado fora da URL. É necessário verificar o retorno da fila e a medição no destino.
+
+Sem navegador conectado ou acesso à propriedade/destino, os critérios de identidade, redirecionamentos e contratação real permanecem pendentes. Nenhuma compra ou transmissão de dados fictícios à propriedade foi realizada.

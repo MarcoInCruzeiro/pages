@@ -1,0 +1,85 @@
+TAP version 13
+# Subtest: Quiz Sócio — fluxo de navegador
+    # Subtest: Voltar preserva as respostas e a seleção visual
+    not ok 1 - Voltar preserva as respostas e a seleção visual
+      ---
+      duration_ms: 10462.054014
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:304:5'
+      failureType: 'testCodeFailure'
+      error: "Timeout esperando: document.querySelector('#stepCounter')?.textContent.trim() === 'Pergunta 3 de 12' && document.querySelector('#quizTitle')?.textContent.trim().length > 0 && (document.querySelectorAll('#options > *').length > 0 || document.querySelector('#rangeInput'))"
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        Page.waitFor (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:321:15)
+        async waitStep (/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:133:5)
+        async TestContext.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:312:9)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async Promise.all (index 2)
+        async Suite.run (node:internal/test_runner/test:1442:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: resultado único mantém o contrato de analytics e o CTA
+    not ok 2 - resultado único mantém o contrato de analytics e o CTA
+      ---
+      duration_ms: 10207.160107
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:485:5'
+      failureType: 'testCodeFailure'
+      error: "Timeout esperando: document.querySelector('#stepCounter')?.textContent.trim() === 'Pergunta 3 de 12' && document.querySelector('#quizTitle')?.textContent.trim().length > 0 && (document.querySelectorAll('#options > *').length > 0 || document.querySelector('#rangeInput'))"
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        Page.waitFor (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:321:15)
+        async waitStep (/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:133:5)
+        async runQuiz (/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:184:41)
+        async TestContext.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:488:9)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async Suite.processPendingSubtests (node:internal/test_runner/test:744:7)
+      ...
+    1..2
+not ok 1 - Quiz Sócio — fluxo de navegador
+  ---
+  duration_ms: 21780.557349
+  type: 'suite'
+  location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:235:1'
+  failureType: 'subtestsFailed'
+  error: '2 subtests failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: Quiz Sócio — isolamento da coleta GA4
+    # Subtest: preview observa a decisão original da página e não inicializa a coleta
+    not ok 1 - preview observa a decisão original da página e não inicializa a coleta
+      ---
+      duration_ms: 12530.180457
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:877:5'
+      failureType: 'testCodeFailure'
+      error: "Timeout esperando: document.querySelectorAll('.results').length === 1 && document.querySelector('#resultSummary')?.textContent.trim().length > 0"
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        Page.waitFor (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:321:15)
+        async waitResults (/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:149:5)
+        async TestContext.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:879:9)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async Promise.all (index 0)
+        async Suite.run (node:internal/test_runner/test:1442:7)
+        async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+      ...
+    1..1
+not ok 2 - Quiz Sócio — isolamento da coleta GA4
+  ---
+  duration_ms: 13410.634049
+  type: 'suite'
+  location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:823:1'
+  failureType: 'subtestsFailed'
+  error: '1 subtest failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..2
+# tests 3
+# suites 2
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 50469.747851

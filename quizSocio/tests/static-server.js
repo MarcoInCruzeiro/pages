@@ -8,6 +8,9 @@
  * TLS (certificado próprio de teste em fixtures/certs) existe para simular o
  * host de produção publicado: quiz-socio.vercel.app é um TLD .app sujeito ao
  * HSTS do Chrome e não responde por HTTP simples.
+ *
+ * O chamador escolhe explicitamente a raiz (dist ou um pacote isolado).
+ * Nunca troca essa raiz por outra cópia do projeto de forma implícita.
  */
 const fs = require('node:fs');
 const http = require('node:http');
@@ -17,7 +20,9 @@ const path = require('node:path');
 const MIME = {
     '.html': 'text/html; charset=utf-8',
     '.js': 'text/javascript; charset=utf-8',
+    '.mjs': 'text/javascript; charset=utf-8',
     '.css': 'text/css; charset=utf-8',
+    '.json': 'application/json; charset=utf-8',
     '.png': 'image/png',
     '.jpg': 'image/jpeg',
     '.jpeg': 'image/jpeg',
@@ -73,15 +78,16 @@ function listen(server, preferredPort) {
  * tls=true usa fixtures/certs (SAN cobre quiz-socio.vercel.app e quiz-test.local).
  */
 function startServer(root, preferredPort = 0, { tls = false } = {}) {
+    const raiz = path.resolve(root);
     return new Promise(async (resolve, reject) => {
         let server;
         if (tls) {
             server = https.createServer({
                 key: fs.readFileSync(path.join(__dirname, 'fixtures', 'certs', 'quiz-test.key')),
                 cert: fs.readFileSync(path.join(__dirname, 'fixtures', 'certs', 'quiz-test.crt'))
-            }, staticHandler(root));
+            }, staticHandler(raiz));
         } else {
-            server = http.createServer(staticHandler(root));
+            server = http.createServer(staticHandler(raiz));
         }
         server.on('connection', (socket) => {
             if (!isLoopbackAddress(socket.remoteAddress)) {
@@ -111,7 +117,7 @@ function startServer(root, preferredPort = 0, { tls = false } = {}) {
 module.exports = { startServer };
 
 if (require.main === module) {
-    const root = path.resolve(__dirname, '..');
+    const root = path.resolve(__dirname, '..', 'dist');
     const preferredPort = Number(process.env.PORT) || 0;
     startServer(root, preferredPort).then(({ baseUrl, close }) => {
         console.log(`Quiz disponível em ${baseUrl}/index.html`);

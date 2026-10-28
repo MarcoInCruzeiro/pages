@@ -1,0 +1,60 @@
+{
+  "preparedAt": "2026-10-27T16:05:58.796Z",
+  "commit": "8250641b854ab489d60a283eb17106114f0790bd",
+  "workingTreeHasChanges": true,
+  "rulesVersion": "2026-10-26.2",
+  "catalogVersion": "2026-09-11",
+  "scope": "Candidato local; publicação e aceite externo permanecem pendentes.",
+  "files": [
+    {
+      "path": "img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4",
+      "bytes": 36348058,
+      "sha256": "4eb26dc66597b449aeb9c53dcf14f9631419f8b6032ab5781a280675d482a661"
+    },
+    {
+      "path": "img/Estutura de Páginas_fundoestrelado_siteapp.jpeg",
+      "bytes": 3216121,
+      "sha256": "283f3c94fa8e464152f3439f70d48accfbf5b9f9c2415354a590768c8dbf3fd8"
+    },
+    {
+      "path": "img/background.jpg",
+      "bytes": 866124,
+      "sha256": "8fe2198e0933396db1db667fb9d18b05daf2984b2a2f282fbc118ff9d3130485"
+    },
+    {
+      "path": "img/cabuloso.png",
+      "bytes": 201799,
+      "sha256": "4547f0d037a200fe4cb7b4f35ef5ee04e80fe634cd3f71d84405451e9ddc4ee9"
+    },
+    {
+      "path": "img/cabulosoMax.png",
+      "bytes": 227593,
+      "sha256": "76333900f6031023e20f612a3db0606cb1e0ce97156b47466f6b5031cdda7c19"
+    },
+    {
+      "path": "img/cruzeiro.png",
+      "bytes": 179121,
+      "sha256": "c10e65a3b7610cf8987bcd428ac6b0fb3f10ece5bc40d4435fb6729b37842e8c"
+    },
+    {
+      "path": "img/meuCruzeiro.png",
+      "bytes": 193740,
+      "sha256": "10171f7eda9b7b434d180aeb13be6ecafd8df7d9da40d7ed21ca5eff6de9804e"
+    },
+    {
+      "path": "img/timeDoPovo.png",
+      "bytes": 203894,
+      "sha256": "08f1ec74ae633a47b07490599a8a614d5d790c412095b6469739e9b4de4dea8b"
+    },
+    {
+      "path": "index.html",
+      "bytes": 120728,
+      "sha256": "5460bce5a118c77c543244d7b94407482af0382dc43b11c1de4f1be513482d02"
+    },
+    {
+      "path": "quiz-engine.js",
+      "bytes": 47894,
+      "sha256": "d2bc8591724b44773b9641bafac0f305f2b4396ed652b76db15b167b0c8486e5"
+    }
+  ]
+}

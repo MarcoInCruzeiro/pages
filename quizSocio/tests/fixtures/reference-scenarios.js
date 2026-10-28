@@ -2,21 +2,21 @@
  * Base sintética de referência do QUIZ-009.
  *
  * Cada cenário registra respostas completas, planos aceitáveis e o motivo.
- * `calibracao` pode orientar ajustes; `reserva` só é usado para medir a versão
- * final. Não há vencedor obrigatório: mais de um plano pode ser aceitável.
+ * Os rótulos `calibracao` e `reserva` preservam a partição histórica, mas ambos
+ * os conjuntos já foram consultados e hoje servem como regressão sintética.
+ * A situação da avaliação independente está em reference-provenance.json.
+ * Não há vencedor obrigatório: mais de um plano pode ser aceitável.
  * `contradicao` reúne respostas incompatíveis: elas devem ser detectadas e
  * confirmadas pelo usuário, e não entram nas métricas de recomendação.
  *
  * Restrições comuns a todos os cenários válidos: o teto de `budget` limita a
  * assinatura (tolerância zero de violação) e o setor é preferência flexível
  * (diferença visível, sem eliminar o plano). Os valores de ingresso são as
- * premissas abaixo, as mesmas do motor; não são preços oficiais.
+ * premissas abaixo, as mesmas do motor; não são preços oficiais. A ADR-0001
+ * mantém valores separados e usa apenas a assinatura no componente de preço.
  */
 const premissas = {
-    precoIngressoCheio: 150,
-    precoIngressoPopular: 40,
-    kidsMensalidade: 30,
-    horizonteMeses: 1
+    precoIngressoCheio: 150
 };
 
 // `wantsGuaranteedTicket: false` é coerente com qualquer quantidade de jogos;

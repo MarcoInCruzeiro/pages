@@ -14,7 +14,8 @@ const engine = require('../quiz-engine.js');
 const { launchChrome } = require('./cdp.js');
 const { startServer } = require('./static-server.js');
 
-const ROOT = path.resolve(__dirname, '..');
+const PROJECT_ROOT = path.resolve(__dirname, '..');
+const ROOT = path.join(PROJECT_ROOT, 'dist');
 const CHROME_PATH = process.env.CHROME_PATH || '/usr/bin/google-chrome';
 
 function contrastRatio(foreground, background) {
@@ -102,6 +103,11 @@ async function openPage(url = '') {
     // Aceita caminho/query relativo ao servidor local ou URL completa (hosts de
     // loopback alternativos e do ambiente habilitado nos testes de isolamento).
     await page.navigate(url.startsWith('http') ? url : `${server.baseUrl}/index.html${url}`);
+    await page.waitFor('Boolean(window.QuizEngine && document.querySelector("#startButton, .results"))', 10000);
+    // Aguarda a montagem da aplicação Vue (o elemento [id="app"] fica populado após a
+    // hidratação do framework). Isso evita race conditions entre a navegação e
+    // a interação com os controles.
+    await page.waitFor('document.getElementById(\'app\') && document.getElementById(\'app\').children.length > 0', 15000);
     await installHooks();
 }
 
@@ -129,7 +135,7 @@ async function waitStep(step) {
     await page.waitFor(
         `document.querySelector('#stepCounter')?.textContent.trim() === 'Pergunta ${step} de 12'`
         + ` && document.querySelector('#quizTitle')?.textContent.trim().length > 0`
-        + ` && document.querySelectorAll('#options > *').length > 0`,
+        + ` && (document.querySelectorAll('#options > *').length > 0 || document.querySelector('#rangeInput'))`,
         10000
     );
 }
@@ -176,8 +182,18 @@ async function applyAnswer(answer) {
 async function runQuiz(answers) {
     for (let index = 0; index < answers.length; index += 1) {
         await applyAnswer(answers[index]);
-        await click('#nextButton');
-        if (index < answers.length - 1) await waitStep(index + 2);
+        if (index === answers.length - 1) {
+            // Exercise repeated submit while the real final control still exists,
+            // rather than querying a button after Vue has rendered the result.
+            await evaluate(() => {
+                const button = document.querySelector('#nextButton');
+                button.click();
+                button.click();
+            });
+        } else {
+            await click('#nextButton');
+            await waitStep(index + 2);
+        }
     }
 }
 
@@ -482,11 +498,6 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         await setup();
         await startQuiz();
         await runQuiz(NORMAL_ANSWERS);
-        await evaluate(() => {
-            const button = document.querySelector('#nextButton');
-            button.click();
-            button.click();
-        });
         await waitResults();
 
         assert.equal(await evaluate(() => document.querySelectorAll('.results').length), 1);
@@ -534,7 +545,6 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         assert.match(await text('#assumptionNote'), /mediante disponibilidade e aquisição do ingresso do titular/);
         assert.match(await text('#resultSummary'), /de 100 de afinidade estimada/);
         assert.ok((await text('#resultSummary')).includes(Number(complete.affinity_index).toLocaleString('pt-BR', { maximumFractionDigits: 1 })));
-        assert.equal(await evaluate(() => formatScore(89.4)), '89,4');
         assert.match(await text('#resultAdhesion'), /Taxa única de adesão|Sem taxa de adesão/);
         assert.equal(await evaluate(() => document.querySelectorAll('.plan-cost').length), 0);
 
@@ -575,7 +585,6 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         await setup();
         await startQuiz();
         await runQuiz(NORMAL_ANSWERS);
-        await evaluate(() => document.querySelector('#nextButton').click());
         await waitResults();
 
         await click('#restartButton');
@@ -586,7 +595,6 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         await startQuiz();
         assert.match(await text('#rangeOutput'), /^0\s*jogos$/i);
         await runQuiz(NORMAL_ANSWERS);
-        await evaluate(() => document.querySelector('#nextButton').click());
         await waitResults();
 
         assert.equal((await getEvents('quiz_start')).length, 2);
@@ -608,7 +616,6 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         await setup();
         await startQuiz();
         await runQuiz(BUDGET_PURPLE_ANSWERS);
-        await evaluate(() => document.querySelector('#nextButton').click());
         await waitResults();
 
         assert.match(await evaluate(() => document.querySelector('#resultLogo').alt), /Meu Cruzeiro/);
@@ -671,7 +678,7 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         });
 
         assert.deepEqual(Object.keys(columns).sort(), [
-            'Cabuloso', 'Cabuloso Cativo', 'Cabuloso Max', 'Meu Cruzeiro', 'Time do Povo'
+            'Cabuloso', 'Cabuloso Max', 'Meu Cruzeiro', 'Time do Povo'
         ].sort());
 
         assert.match(columns['Time do Povo']['Desconto na loja'], /Até 10%/);
@@ -681,21 +688,16 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         assert.match(columns['Time do Povo']['Contratação'], /semestral ou anual/i);
         assert.match(columns['Time do Povo']['Preço'], /Total anual/);
 
-        assert.match(columns['Cabuloso Cativo']['Contratação'], /anual.*12x R\$\s*400,00/i);
-        assert.match(columns['Cabuloso Cativo']['Preço'], /R\$\s*4\.800,00/);
-        assert.match(columns['Cabuloso Cativo']['Preço'], /12x R\$\s*400,00/);
-        assert.match(columns['Cabuloso Cativo']['Taxa de adesão'], /Sem taxa/);
-        assert.match(columns['Cabuloso Cativo']['Benefício de ingresso'], /garantido/i);
-        assert.match(columns['Cabuloso Cativo']['Benefício de ingresso'], /Sicoob.*Leste Inferior/i);
-        assert.match(columns['Cabuloso Cativo']['Prioridade \/ garantia'], /Ingresso garantido/);
+        assert.equal(columns['Cabuloso Cativo'], undefined, 'o plano removido não aparece no comparativo');
+        assert.match(columns['Cabuloso Max']['Taxa de adesão'], /R\$\s*30,00/);
+        assert.match(columns['Cabuloso Max']['Benefício de ingresso'], /65%/);
+        assert.match(columns['Cabuloso Max']['Benefício de ingresso'], /Roxo/i);
 
         const links = await evaluate(() => [...document.querySelectorAll('#modalComparisonBody a.plan-cta')]
             .map((link) => ({ plan: link.dataset.plan, href: link.href })));
-        const cativo = links.find((link) => link.plan === 'Cabuloso Cativo');
         const timeDoPovo = links.find((link) => link.plan === 'Time do Povo');
         const meuCruzeiro = links.find((link) => link.plan === 'Meu Cruzeiro');
-        assert.match(cativo.href, /plano_id=115/);
-        assert.match(cativo.href, /intervalo_cobrancas=anual/);
+        assert.ok(links.every((link) => link.plan !== 'Cabuloso Cativo' && !link.href.includes('plano_id=115')));
         assert.match(timeDoPovo.href, /plano_id=34/);
         assert.match(timeDoPovo.href, /intervalo_cobrancas=anual/);
         assert.match(meuCruzeiro.href, /plano_id=21/);
@@ -926,11 +928,6 @@ describe('Quiz Sócio — isolamento da coleta GA4', { concurrency: 1 }, () => {
         // Mesmo com o carregamento da tag falhando, o quiz começa, responde e conclui.
         await startQuiz();
         await runQuiz(NORMAL_ANSWERS);
-        await evaluate(() => {
-            const button = document.querySelector('#nextButton');
-            button.click();
-            button.click();
-        });
         await waitResults();
 
         assert.equal((await getEvents('quiz_start')).length, 1);
@@ -989,15 +986,12 @@ describe('Quiz Sócio — isolamento da coleta GA4', { concurrency: 1 }, () => {
         assert.equal(estado.coletaHabilitada, false);
         assert.equal(estado.scriptsTag, 0);
         assert.deepEqual(estado.comandos, []);
-        await startQuiz();
-        await waitStep(1);
-        assert.equal((await getEvents('quiz_start')).length, 0, 'desenvolvimento local não emite eventos');
+        assert.equal((await getEvents('quiz_start')).length, 0, 'arquivo local não emite eventos; a aplicação compilada requer HTTP');
     });
 
-    it('a lista de ambientes habilitados é explícita no código', () => {
-        const codigo = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-        assert.match(codigo, /AMBIENTES_HABILITADOS\s*=\s*\[\s*'quiz-socio\.vercel\.app'\s*\]/,
-            'a lista de produção precisa existir e conter exatamente o host publicado');
+    it('a lista de ambientes habilitados é explícita na configuração compartilhada', () => {
+        const config = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, 'config/ga4/ga4.json'), 'utf8'));
+        assert.deepEqual(config.ambientesHabilitados, ['quiz-socio.vercel.app']);
     });
 });
 
@@ -1062,11 +1056,6 @@ describe('Quiz Sócio — reconhecimento do preview', { concurrency: 1 }, () => 
         await setup('?utm_campaign=preview_newsletter');
         await startQuiz();
         await runQuiz(NORMAL_ANSWERS);
-        await evaluate(() => {
-            const button = document.querySelector('#nextButton');
-            button.click();
-            button.click();
-        });
         await waitResults();
 
         assert.equal(await evaluate(() => window.isPreview), false);
@@ -1114,7 +1103,6 @@ describe('Quiz Sócio — CTAs de contratação', { concurrency: 1 }, () => {
         await setup();
         await startQuiz();
         await runQuiz(respostas);
-        await evaluate(() => document.querySelector('#nextButton').click());
         await waitResults();
     }
 

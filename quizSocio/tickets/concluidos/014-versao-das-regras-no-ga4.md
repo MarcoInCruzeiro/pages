@@ -5,7 +5,7 @@ Prioridade: P2
 
 ## Reabertura — 27/10/2026
 
-Reaberto após a [revisão dos tickets de GA4](../docs/revisao-tickets-ga4-2026-10-27.md). O campo foi confirmado no roteiro isolado, mas falta o teste permanente exigido contra o resultado do motor. Preservar o campo implementado e completar as verificações antes de encerrar.
+Reaberto após a [revisão dos tickets de GA4](../../docs/revisao-tickets-ga4-2026-10-27.md). O campo foi confirmado no roteiro isolado, mas falta o teste permanente exigido contra o resultado do motor. Preservar o campo implementado e completar as verificações antes de encerrar.
 
 ## Descrição
 
@@ -59,3 +59,7 @@ Comandos executados: `npm test` (71/71).
 Resultados: todos os critérios de aceite atendidos; versão das regras rastreável entre motor, página e evento GA4.
 Limitações: acima.
 Status: Concluído.
+
+## Reexecução na consolidação — 27/10/2026
+
+Os critérios locais foram reexecutados na suíte de **82 testes**, sem falhas, no workspace e em uma cópia isolada. Não houve nova alteração da aplicação neste ticket. Evidências: [workspace](../evidencias/011-consolidacao-2026-10-27/npm-test-workspace.tap) e [snapshot isolado](../evidencias/011-consolidacao-2026-10-27/npm-test-isolado.tap). O recebimento real no GA4 continua sendo aceite separado do QUIZ-017.

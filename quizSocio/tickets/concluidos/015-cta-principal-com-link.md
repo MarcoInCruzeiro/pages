@@ -5,7 +5,7 @@ Prioridade: P2
 
 ## Descrição
 
-O CTA principal usa `window.open()`, enquanto lista e comparativo usam links HTML. Essa diferença pode impedir a decoração automática da URL para medição entre domínios. Trata-se de um risco identificado; a perda efetiva de atribuição ainda não foi comprovada. Origem: [análise de GA4](../docs/analise-ga4.md#4-p2--a-continuidade-até-o-checkout-está-em-risco).
+O CTA principal usa `window.open()`, enquanto lista e comparativo usam links HTML. Essa diferença pode impedir a decoração automática da URL para medição entre domínios. Trata-se de um risco identificado; a perda efetiva de atribuição ainda não foi comprovada. Origem: [análise de GA4](../../docs/analise-ga4.md#4-p2--a-continuidade-até-o-checkout-está-em-risco).
 
 ## Escopo
 
@@ -14,7 +14,7 @@ O CTA principal usa `window.open()`, enquanto lista e comparativo usam links HTM
 - Permitir que o clique no link se propague para a biblioteca de medição antes da navegação.
 - Manter um estado sem navegação quando não houver plano elegível.
 
-Pontos de entrada: criação do resultado, `renderResults()`, `onSubscribeClick()` e seus vínculos em [index.html](../index.html).
+Pontos de entrada: criação do resultado, `renderResults()`, `onSubscribeClick()` e seus vínculos em [index.html](../../index.html).
 
 ## Critérios de aceite
 
@@ -59,3 +59,7 @@ Comandos executados: `npm run test:browser` (32/32), `npm test` (71/71).
 Resultados: todos os critérios de aceite atendidos; 3 locais de CTA + estado indisponível cobertos.
 Limitações: acima.
 Status: Concluído.
+
+## Reexecução na consolidação — 27/10/2026
+
+Os critérios locais foram reexecutados na suíte de **82 testes**, sem falhas, no workspace e em uma cópia isolada. Não houve nova alteração da aplicação neste ticket. Evidências: [workspace](../evidencias/011-consolidacao-2026-10-27/npm-test-workspace.tap) e [snapshot isolado](../evidencias/011-consolidacao-2026-10-27/npm-test-isolado.tap). O recebimento real no GA4 continua sendo aceite separado do QUIZ-017.

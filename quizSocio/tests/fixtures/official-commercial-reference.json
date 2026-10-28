@@ -1,0 +1,30 @@
+{
+  "kind": "official-commercial-reference",
+  "checkedOn": "2026-10-27",
+  "primarySourceProvidedByUser": "https://socio.cruzeiro.com.br/planos",
+  "supplementarySources": [
+    "https://socio.cruzeiro.com.br/",
+    "https://socio.cruzeiro.com.br/pt-BR/paginas/termo-de-uso",
+    "https://socio.cruzeiro.com.br/duvidas",
+    "https://socio.cruzeiro.com.br/kids"
+  ],
+  "independentRankingValidation": false,
+  "limitation": "Referência documental de condições comerciais. Não fornece rótulos independentes de melhor plano por combinação de respostas; disponibilidade operacional exige conferir o checkout.",
+  "plans": [
+    { "slug": "meu-cruzeiro", "subscriptionEquivalent": 12, "adhesion": 0, "ticketType": "gratuito", "ticketQuantity": 1, "publishedModalities": ["mensal", "semestral", "anual"] },
+    { "slug": "time-do-povo", "subscriptionEquivalent": 40, "adhesion": 30, "ticketType": "popular", "ticketQuantity": 1, "publishedModalities": ["mensal", "semestral", "anual"] },
+    { "slug": "cabuloso", "subscriptionEquivalent": 100, "adhesion": 30, "ticketType": "desconto", "ticketQuantity": 1, "publishedModalities": ["mensal", "semestral", "anual"] },
+    { "slug": "cabuloso-max", "subscriptionEquivalent": 200, "adhesion": 30, "ticketType": "desconto", "ticketQuantity": 2, "publishedModalities": ["mensal", "semestral", "anual"] },
+    { "slug": "cabuloso-cativo", "subscriptionEquivalent": 400, "adhesion": 0, "ticketType": "garantido", "ticketQuantity": 1, "publishedModalities": ["anual"] }
+  ],
+  "cativoContract": { "total": 4800, "installments": 12, "installmentValue": 400 },
+  "cabulosoLevels": [
+    { "games": 0, "discount": 0.5, "priority": 3 },
+    { "games": 9, "discount": 0.5, "priority": 3 },
+    { "games": 10, "discount": 0.55, "priority": 2 },
+    { "games": 19, "discount": 0.55, "priority": 2 },
+    { "games": 20, "discount": 0.6, "priority": 1 }
+  ],
+  "maxDiscount": 0.65,
+  "kids": { "monthlyUnitPrice": 30, "maxChildren": 3, "ageExclusiveUpperBound": 12 }
+}

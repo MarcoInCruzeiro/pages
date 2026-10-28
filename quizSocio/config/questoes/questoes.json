@@ -1,0 +1,229 @@
+[
+  {
+    "key": "gamesPerYear",
+    "title": "Em média, a quantos jogos do Cruzeiro você pretende ir por ano?",
+    "type": "range",
+    "min": 0,
+    "max": 30,
+    "suffix": "jogos",
+    "help": "Frequência estimada",
+    "options": null
+  },
+  {
+    "key": "gamesHistory",
+    "title": "Nos últimos 15 meses, a quantos jogos do Cruzeiro você foi no Mineirão?",
+    "type": "range",
+    "min": 0,
+    "max": 30,
+    "suffix": "jogos",
+    "help": "Não lembra ou ainda não é sócio? Marque a opção abaixo para continuar.",
+    "allowUnknown": true,
+    "unknownLabel": "Não sei ou sou novo sócio",
+    "options": null
+  },
+  {
+    "key": "wantsGuaranteedTicket",
+    "title": "O que melhor te define como torcedor?",
+    "options": [
+      {
+        "label": "Não frequento o estádio",
+        "description": "Não costumo frequentar os jogos presencialmente.",
+        "value": "never"
+      },
+      {
+        "label": "Faço questão de ir a todos os jogos",
+        "description": "Quero garantir meu lugar na arquibancada em todas as partidas possíveis.",
+        "value": true
+      },
+      {
+        "label": "Foco nos jogos mais decisivos",
+        "description": "Prefiro guardar energia e orçamento para clássicos e fases finais.",
+        "value": false
+      }
+    ],
+    "type": "option"
+  },
+  {
+    "key": "buysTwoTickets",
+    "title": "Quando vai ao estádio, você costuma levar um acompanhante adulto?",
+    "options": [
+      {
+        "label": "Sim, quase sempre vou acompanhado",
+        "description": "Preciso de facilidade para comprar dois ingressos juntos.",
+        "value": true
+      },
+      {
+        "label": "Não, geralmente vou sozinho",
+        "description": "Compro apenas o meu ingresso.",
+        "value": false
+      }
+    ],
+    "type": "option"
+  },
+  {
+    "key": "kidsCount",
+    "title": "Quantas crianças menores de 12 anos você pretende incluir no plano?",
+    "options": [
+      {
+        "label": "Nenhuma",
+        "description": "O plano será usado só por adultos.",
+        "value": 0
+      },
+      {
+        "label": "1 criança",
+        "description": "Quero incluir uma criança no Kids.",
+        "value": 1
+      },
+      {
+        "label": "2 crianças",
+        "description": "Quero incluir duas crianças no Kids.",
+        "value": 2
+      },
+      {
+        "label": "3 crianças",
+        "description": "Quero incluir três crianças no Kids.",
+        "value": 3
+      }
+    ],
+    "type": "option"
+  },
+  {
+    "key": "needsPriority",
+    "title": "Quando vai comprar ingressos para o jogo, como costuma agir?",
+    "options": [
+      {
+        "label": "Compro no primeiro minuto",
+        "description": "Não gosto de correr riscos. Assim que abre, eu garanto o meu.",
+        "value": true
+      },
+      {
+        "label": "Compro com calma",
+        "description": "Deixo para comprar depois, se ainda houver disponibilidade.",
+        "value": false
+      }
+    ],
+    "type": "option"
+  },
+  {
+    "key": "wantsParticipation",
+    "title": "Além dos jogos, o quanto você se interessa por experiências exclusivas?",
+    "options": [
+      {
+        "label": "Tenho muito interesse",
+        "description": "Quero participar de sorteios, eventos do clube e receber ofertas especiais.",
+        "value": true
+      },
+      {
+        "label": "Não faço questão",
+        "description": "Meu foco é apenas assistir aos jogos, sem extras.",
+        "value": false
+      }
+    ],
+    "type": "option"
+  },
+  {
+    "key": "wantsStoreDiscount",
+    "title": "Sempre que sai um novo manto ou produto oficial, o que você faz?",
+    "options": [
+      {
+        "label": "Sempre tento comprar",
+        "description": "Gosto de colecionar ou renovar minhas camisas e busco descontos para isso.",
+        "value": true
+      },
+      {
+        "label": "Raramente compro",
+        "description": "Não costumo consumir muitos produtos na loja oficial.",
+        "value": false
+      }
+    ],
+    "type": "option"
+  },
+  {
+    "key": "gameFrequency",
+    "title": "Como você costuma viver a paixão nos dias de jogo?",
+    "options": [
+      {
+        "label": "Sempre na arquibancada",
+        "description": "O Mineirão é minha segunda casa.",
+        "value": "always"
+      },
+      {
+        "label": "Fico dividido entre estádio e TV",
+        "description": "Vou em boa parte dos jogos, mas assisto a outros de casa ou do bar.",
+        "value": "frequent"
+      },
+      {
+        "label": "Acompanho mais de casa mesmo",
+        "description": "Vou pouco ao estádio, prefiro acompanhar pelas transmissões.",
+        "value": "occasional"
+      }
+    ],
+    "type": "option"
+  },
+  {
+    "key": "digitalExperience",
+    "title": "O quanto você consome os conteúdos digitais e de bastidores do clube?",
+    "options": [
+      {
+        "label": "Acompanho tudo diariamente",
+        "description": "Valorizo o aplicativo oficial e quero acesso a informações em primeira mão.",
+        "value": true
+      },
+      {
+        "label": "Foco apenas no campo",
+        "description": "Meu interesse principal são os 90 minutos de bola rolando.",
+        "value": false
+      }
+    ],
+    "type": "option"
+  },
+  {
+    "key": "budget",
+    "title": "Qual é o seu orçamento mensal confortável para investir no Sócio?",
+    "options": [
+      {
+        "label": "Até R$ 40/mês",
+        "description": "Busco a opção com o menor custo e quero apoiar o Time.",
+        "value": 40
+      },
+      {
+        "label": "Até R$ 100/mês",
+        "description": "Quero os benefícios dos planos intermediários com mais vantagens.",
+        "value": 100
+      },
+      {
+        "label": "Até R$ 200/mês",
+        "description": "Tenho flexibilidade para investir em planos melhores com mais vantagens.",
+        "value": 200
+      },
+      {
+        "label": "Sem limite definido",
+        "description": "Quero o plano mais completo e com a melhor experiência, independente do valor.",
+        "value": 400
+      }
+    ],
+    "type": "option"
+  },
+  {
+    "key": "preferredSector",
+    "title": "Em qual setor você se sente mais à vontade?",
+    "options": [
+      {
+        "label": "Setor Amarelo ou Laranja",
+        "description": "Torcida organizada, muito canto e festa. Melhor custo-benefício.",
+        "value": "yellow-orange"
+      },
+      {
+        "label": "Setor Sicoob (Leste, antigo Azul)",
+        "description": "Visão central do campo, equilíbrio entre custo e conforto.",
+        "value": "blue"
+      },
+      {
+        "label": "Setor Roxo",
+        "description": "Cadeira premium, conforto máximo e experiência exclusiva.",
+        "value": "purple"
+      }
+    ],
+    "type": "option"
+  }
+]

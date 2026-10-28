@@ -1,0 +1,100 @@
+{
+  "descricao": "Configuração de medição GA4",
+  "versao": "2026-10-27",
+  "propriedade": {
+    "measurementId": "G-EF75QCTCTV",
+    "nome": "Quiz Sócio 5 Estrelas (mesma propriedade do socio.cruzeiro.com.br)"
+  },
+  "ambientesHabilitados": [
+    "quiz-socio.vercel.app"
+  ],
+  "eventos": [
+    {
+      "nome": "quiz_start",
+      "quando": "Ao iniciar, inclusive depois de refazer",
+      "camposPrincipais": [],
+      "interpretacao": "Inícios de tentativa; uma pessoa pode gerar vários",
+      "chave": "quiz_start",
+      "tipos": {}
+    },
+    {
+      "nome": "quiz_answer",
+      "quando": "Ao aceitar uma resposta e avançar",
+      "camposPrincipais": [
+        "quiz_step",
+        "quiz_question",
+        "quiz_answer",
+        "quiz_answer_label",
+        "answer_time_sec"
+      ],
+      "interpretacao": "Respostas aceitas, incluindo reenvios após voltar",
+      "chave": "quiz_answer",
+      "tipos": {
+        "quiz_step": "number",
+        "quiz_question": "string",
+        "quiz_answer": "string",
+        "quiz_answer_label": "string",
+        "answer_time_sec": "number"
+      }
+    },
+    {
+      "nome": "quiz_complete",
+      "quando": "Ao renderizar o resultado após a validação",
+      "camposPrincipais": [
+        "recommended_plan",
+        "affinity_index",
+        "compatibility",
+        "score_semantics",
+        "no_eligible_plan",
+        "catalog_version",
+        "rules_version",
+        "total_time_sec",
+        "answer_*"
+      ],
+      "interpretacao": "Conclusões do quiz; afinidade representa o índice do modelo",
+      "chave": "quiz_complete",
+      "tipos": {
+        "recommended_plan": "string",
+        "affinity_index": "number|null",
+        "compatibility": "number|null",
+        "score_semantics": "string",
+        "no_eligible_plan": "boolean",
+        "catalog_version": "string",
+        "rules_version": "string",
+        "total_time_sec": "number",
+        "answer_*": "string"
+      }
+    },
+    {
+      "nome": "quiz_subscribe_click",
+      "quando": "Ao clicar no CTA do resultado, lista ou comparativo",
+      "camposPrincipais": [
+        "plan",
+        "recommended_plan",
+        "clicked_recommended",
+        "cta_location"
+      ],
+      "interpretacao": "Intenção de contratar; não comprova compra ou assinatura concluída",
+      "chave": "quiz_subscribe_click",
+      "tipos": {
+        "plan": "string",
+        "recommended_plan": "string",
+        "clicked_recommended": "string",
+        "cta_location": "string"
+      }
+    }
+  ],
+  "isolamento": {
+    "camada1": "trackEvent só despacha quando coletaHabilitada é verdadeira",
+    "camada2": "Tag gtag.js e config só injetados quando coletaHabilitada é verdadeira",
+    "ambientesExcluidos": [
+      "localhost",
+      "loopback IPv4/IPv6 (127.0.0.0/8, ::1)",
+      "file://",
+      "preview (?preview, ?preview=1, ?preview=false, #preview)"
+    ],
+    "nota": "_vercel/insights não é coleta GA4 e fica fora do escopo do isolamento"
+  },
+  "limiteParametrosPersonalizados": 20,
+  "observacao": "O teto técnico publicado pelo Google é 25. A política interna é 20."
+}

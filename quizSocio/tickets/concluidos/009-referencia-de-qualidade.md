@@ -1,10 +1,14 @@
 # QUIZ-009 — Definir referência e metas de qualidade
 
-Status: Bloqueado
+Status: Concluído
 
-Decisão vigente sobre valores: [ADR-0001](../docs/adr/0001-valores-e-taxas-separados.md). O usuário substituiu as somas de custos por assinatura, adesão, opcionais e ingressos separados; apenas a assinatura compõe o preço no ranking.
+## Decisão vigente — 27/10/2026
 
-Reaberto na correção de 26/10/2026: o critério de separar a avaliação antes de ajustar o motor não possui evidência suficiente. As métricas existentes passam como regressão sintética; o aceite de validação independente permanece pendente.
+O usuário autorizou o agente a verificar o `quiz-engine.js`, refinar dados/perfis quando necessário e criar os perfis de referência. O aceite passa a usar referência sintética elaborada pelo agente, com autoria e limitações explícitas. A exigência anterior de um autor externo deixa de bloquear este ticket. A avaliação de vencedores e eventuais ajustes do ranking seguem no [QUIZ-010-A](010-A-referencia.md).
+
+Decisão vigente sobre valores: [ADR-0001](../../docs/adr/0001-valores-e-taxas-separados.md). O usuário substituiu as somas de custos por assinatura, adesão, opcionais e ingressos separados; apenas a assinatura compõe o preço no ranking.
+
+Histórico: reaberto em 26/10/2026 por falta de evidência de separação da avaliação. A decisão de 27/10/2026 acima substitui a pendência externa; a base histórica continua sendo regressão sintética.
 
 ## Descrição
 
@@ -37,16 +41,16 @@ Propostas são insumos de planejamento. O responsável pelo produto registra a d
 - [x] Todas as decisões da tabela têm definição final e justificativa identificável.
 - [x] Cada cenário registra respostas completas, premissas de preço, planos aceitáveis, restrições e motivo; casos ambíguos podem aceitar mais de um plano.
 - [x] A base cobre os cinco planos, zero jogos, frequência elevada, orçamento restrito, setores, níveis históricos, casal, Kids e contradições.
-- [ ] Cenários de calibração e avaliação são separados antes de ajustar o ranking; a partição fica versionada. A base atual já foi consultada e não atende à independência exigida.
+- [x] A nova referência contém partições distintas de calibração e validação, congeladas antes da avaliação no QUIZ-010-A e de qualquer novo ajuste. É sintética e não é apresentada como avaliação externa ou cega.
 - [x] Metas de acerto no primeiro resultado, presença de opção aceitável entre alternativas e tolerância de empates são fixadas antes da avaliação final.
 - [x] Restrições comerciais têm tolerância zero de violação; a meta estatística de adequação é definida pelo produto, sem derivá-la da pontuação do próprio algoritmo.
 - [x] Cada plano é coberto por cenário em que é aceitável, ou existe justificativa comercial para sua ausência; não se exige distribuição uniforme de vencedores.
 - [x] O relatório distingue desempenho contra referência sintética de satisfação, contratação ou retenção observadas em usuários reais.
 
-## Bloqueadores
+## Bloqueadores anteriores e resolução
 
-- Dependência parcial: [QUIZ-002](concluidos/002-catalogo-comercial.md), para concluir os resultados esperados com condições comerciais vigentes.
-- Externo: o responsável pelo quiz precisa definir objetivo, políticas e metas. Agentes podem preparar propostas e cenários; a validação de negócio deve identificar quem decidiu e quando.
+- Dependência parcial: [QUIZ-002](002-catalogo-comercial.md), para concluir os resultados esperados com condições comerciais vigentes.
+- A criação de perfis pelo agente foi autorizada pelo usuário em 27/10/2026. Objetivos, políticas e metas desta tabela foram preservados. Não há bloqueador externo para concluir esta referência sintética.
 - Dados de usuários reais são necessários para alegações sobre precisão real, mas não bloqueiam a criação da referência sintética ou as correções funcionais.
 
 ## Verificação
@@ -61,12 +65,12 @@ Versão verificada: commit `01f6d20`, branch local `quiz-socio/tickets-correcoes
 
 **Arquivos alterados**
 
-- [tests/fixtures/reference-scenarios.js](../tests/fixtures/reference-scenarios.js) — 29 cenários: 12 de calibração, 12 reservados e 5 de contradição; premissas de preço compartilhadas; restrições comuns documentadas no cabeçalho.
-- [tests/baseline.js](../tests/baseline.js) — gerador reprodutível da linha de base (`npm run baseline`): executa o `index.html` do commit `2cecf81` em `vm` do Node sobre toda a referência.
-- [tests/fixtures/baseline-reference.json](../tests/fixtures/baseline-reference.json) — resultado versionável da linha de base, com o mapeamento das respostas.
-- [tests/reference.test.js](../tests/reference.test.js) — metas, partição disjunta, ausência de contradição nos válidos, detecção nos contraditórios, premissas iguais às do motor, comparação por segmento com a linha de base.
-- [package.json](../package.json) — script `baseline`.
-- [estrutura_quiz.md](../estrutura_quiz.md) — decisões, horizonte mensal e verificação.
+- [tests/fixtures/reference-scenarios.js](../../tests/fixtures/reference-scenarios.js) — 29 cenários: 12 de calibração, 12 reservados e 5 de contradição; premissas de preço compartilhadas; restrições comuns documentadas no cabeçalho.
+- [tests/baseline.js](../../tests/baseline.js) — gerador reprodutível da linha de base (`npm run baseline`): executa o `index.html` do commit `2cecf81` em `vm` do Node sobre toda a referência.
+- [tests/fixtures/baseline-reference.json](../../tests/fixtures/baseline-reference.json) — resultado versionável da linha de base, com o mapeamento das respostas.
+- [tests/reference.test.js](../../tests/reference.test.js) — metas, partição disjunta, ausência de contradição nos válidos, detecção nos contraditórios, premissas iguais às do motor, comparação por segmento com a linha de base.
+- [package.json](../../package.json) — script `baseline`.
+- [estrutura_quiz.md](../../estrutura_quiz.md) — decisões, horizonte mensal e verificação.
 
 **Decisões aplicadas:** tabela acima.
 
@@ -99,7 +103,7 @@ Falhas da linha de base por segmento: Cativo vencendo no Roxo (CAL-05, RES-05); 
 
 ## Ação corretiva desta rodada
 
-O [registro de proveniência](../tests/fixtures/reference-provenance.json) identifica a base como `synthetic-regression` e mantém `independentValidation: false`. O cabeçalho dos cenários e o diagnóstico do teste agora descrevem a mesma limitação. Os IDs e planos aceitáveis existentes foram preservados: a correção de custo não modifica as expectativas para obter aprovação.
+O [registro de proveniência](../../tests/fixtures/reference-provenance.json) identifica a base como `synthetic-regression` e mantém `independentValidation: false`. O cabeçalho dos cenários e o diagnóstico do teste agora descrevem a mesma limitação. Os IDs e planos aceitáveis existentes foram preservados: a correção de custo não modifica as expectativas para obter aprovação.
 
 **Bloqueador para conclusão:** o responsável pelo produto deve obter uma nova referência de negócio ou revisão independente, com autoria, data e planos aceitáveis definidos sem consultar as saídas do motor. Congelar essa referência antes de nova calibração e registrar sua identidade. Depois, executar a avaliação final sem usá-la para ajustar pesos; se orientar ajustes, ela passa a servir para calibração e será necessária outra avaliação independente.
 
@@ -108,4 +112,26 @@ A correção técnica e a documentação estão disponíveis para revisão. Sem 
 
 ## Reavaliação após a ADR-0001
 
-A referência existente foi executada sem alterar planos aceitáveis: calibração top-1 12/12; reserva histórica top-1 11/12 e top-3 12/12. CAL-12 e RES-11 mudaram para Meu Cruzeiro ao comparar apenas assinatura; CAL-12 já o aceitava e RES-11 não. O caso RES-11 permanece como divergência para revisão de negócio. [Relatório](../tests/fixtures/separate-prices-results.json). A avaliação independente continua pendente.
+A referência existente foi executada sem alterar planos aceitáveis: calibração top-1 12/12; reserva histórica top-1 11/12 e top-3 12/12. CAL-12 e RES-11 mudaram para Meu Cruzeiro ao comparar apenas assinatura; CAL-12 já o aceitava e RES-11 não. O caso RES-11 permanece como divergência para revisão de negócio. [Relatório](../../tests/fixtures/separate-prices-results.json). A avaliação independente continua pendente.
+
+## Execução com a fonte indicada pelo usuário — 27/10/2026
+
+O usuário indicou `https://socio.cruzeiro.com.br/planos` como referência de negócio. A conferência foi registrada em [official-commercial-reference.json](../../tests/fixtures/official-commercial-reference.json), complementada pelas páginas oficiais de entrada, regulamento, dúvidas e Kids. O teste permanente verifica valores e condições do catálogo contra esses fatos publicados.
+
+A fonte não publica planos aceitáveis para cada combinação de respostas do quiz. A referência documental não foi promovida a avaliação independente do ranking e a proveniência histórica continua com `independentValidation: false`. Nenhuma expectativa antiga foi alterada para obter aprovação.
+
+O comando `npm run reference:evaluate -- --output CAMINHO.json` gera a avaliação histórica por cenário e a identifica como regressão sintética. [Execução anterior](../evidencias/execucao-2026-10-27/ranking.json) e [roteiro vigente](../../docs/validacao-e-entrega.md#2-conferir-a-referência-de-negócio--quiz-009-e-quiz-010). A pendência externa daquela etapa foi substituída pela autorização de criar perfis, conforme a decisão vigente no início deste ticket.
+
+## Registro de conclusão — referência de perfis
+
+Foram revisadas as perguntas, a transformação `buildUserProfile`, o uso de histórico em `resolveLevel`, os componentes de `scorePlan` e as restrições/desempate de `recommendPlans`. A modelagem existente já separa intenção, histórico, prioridade, adulto acompanhante, Kids e orçamento. Não foi identificado defeito que exigisse alterar o cálculo nesta etapa; preços, pesos e `RULES_VERSION` foram preservados.
+
+Criados oito perfis com 16 cenários completos: apoio econômico, popular frequente, titular progressivo, casal no Roxo, presença intensa no Sicoob, família com Kids, loja/conteúdo sem estádio e Roxo com teto intermediário. Cada perfil possui um caso de calibração e outro de validação, expectativas e justificativa; os cinco planos aparecem entre os aceitáveis.
+
+- [Referência criada](../../tests/fixtures/reference-profiles.js).
+- [Autoria, hash e limites de validação](../../tests/fixtures/reference-profiles-provenance.json).
+- [Testes permanentes de completude e transformação](../../tests/reference-profiles.test.js).
+
+Os testes desta etapa verificam dados e necessidades, sem escolher vencedores por chamada a `recommendPlans`. A referência foi congelada para o QUIZ-010-A. A confirmação de conformidade comercial foi dada pelo usuário no QUIZ-003. A validação externa não é alegada; `independentValidation` permanece `false`.
+
+Verificação final: `npm test`, **79/79**, sem falhas, cancelamentos ou testes ignorados. [Log da execução](../evidencias/perfis-009-2026-10-27/npm-test.tap) e [registro da revisão](../evidencias/perfis-009-2026-10-27/resultado.json). O ticket foi movido para `concluidos/`; a avaliação dos vencedores fica no subticket, sem bloquear a conclusão dos dados de referência.

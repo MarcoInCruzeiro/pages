@@ -1,0 +1,63 @@
+{
+  "presenca": {
+    "base": 0.05,
+    "escala": 0.95
+  },
+  "ticket": {
+    "base": 1,
+    "bonusPrioridade": 0.15,
+    "bonusAcompanhante": 0.08,
+    "utilidades": {
+      "gratuito": 0.45,
+      "popular": 0.75,
+      "garantido": 1,
+      "desconto": 0.8,
+      "semBeneficio": 0.1
+    },
+    "cobertura": {
+      "full": 1,
+      "partial": 0.75,
+      "none": 0.1,
+      "notPreferred": 1
+    }
+  },
+  "priority": {
+    "base": 0.2,
+    "escala": 0.8,
+    "pior": 5,
+    "intervalo": 4
+  },
+  "sector": {
+    "comPreferencia": 0.8,
+    "semPreferencia": 0.1,
+    "cobertura": {
+      "full": 1,
+      "partial": 0.6,
+      "none": 0,
+      "notPreferred": 0.7
+    }
+  },
+  "discount": {
+    "base": 0.2,
+    "escala": 0.8,
+    "referencia": 0.15
+  },
+  "experiences": {
+    "base": 0.2,
+    "escala": 0.8,
+    "ambos": 1,
+    "um": 0.7,
+    "nenhum": 0.1
+  },
+  "family": {
+    "comFamilia": 0.7,
+    "semFamilia": 0.05,
+    "base": 0.6,
+    "capacidade": 0.6,
+    "kids": 0.4
+  },
+  "price": {
+    "base": 0.8,
+    "escala": 0.8
+  }
+}

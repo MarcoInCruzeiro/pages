@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-27",
+  "scope": "QUIZ-010-A até QUIZ-017",
+  "newlyCompleted": [
+    "QUIZ-010-A",
+    "QUIZ-010",
+    "QUIZ-011"
+  ],
+  "reverified": [
+    "QUIZ-012",
+    "QUIZ-013",
+    "QUIZ-014",
+    "QUIZ-015",
+    "QUIZ-016"
+  ],
+  "keptBlockedAtUserRequest": [
+    "QUIZ-017"
+  ],
+  "workspaceTests": 82,
+  "isolatedTests": 82,
+  "failedTests": 0,
+  "ticketStatuses": {
+    "Bloqueado": 3,
+    "Concluído": 17
+  },
+  "engineChanged": false,
+  "expectationsChanged": false,
+  "independentValidation": false
+}

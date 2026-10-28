@@ -1,0 +1,23 @@
+{
+  "checkedOn": "2026-10-27",
+  "ticket": "QUIZ-017",
+  "measurementId": "G-EF75QCTCTV",
+  "propertyId": null,
+  "webStreamId": null,
+  "authenticatedBrowserAvailable": false,
+  "connectedAnalyticsToolAvailable": false,
+  "discoveredConnector": {
+    "name": "Windsor.ai",
+    "installed": false
+  },
+  "googleCliAvailable": false,
+  "googleCredentialPathConfigured": false,
+  "googleAccessTokenAvailable": false,
+  "adminSettingsRead": false,
+  "adminSettingsChanged": false,
+  "debugViewVerified": false,
+  "status": "blocked-awaiting-authenticated-ga4",
+  "required": "Sessão autenticada com acesso à propriedade, conexão GA4 autorizada ou execução do inventário pelo administrador. O ID de medição no código não comprova acesso ao Admin.",
+  "keptBlockedAtUserRequest": true,
+  "userInstruction": "Manter QUIZ-017 bloqueado e fornecer detalhes relacionados à tarefa."
+}

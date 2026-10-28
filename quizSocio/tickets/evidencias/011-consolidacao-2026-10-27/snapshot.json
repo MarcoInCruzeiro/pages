@@ -1,0 +1,16 @@
+{
+  "snapshotPath": "/tmp/quizSocio-011-isolado-cyagv82k",
+  "sourceDirectories": [
+    "img",
+    "tests",
+    "scripts"
+  ],
+  "sourceFiles": [
+    "index.html",
+    "quiz-engine.js",
+    "package.json"
+  ],
+  "environmentFilesCopied": false,
+  "userGitHistoryChanged": false,
+  "purpose": "Verifica\u00e7\u00e3o isolada do QUIZ-011; metadados Git locais m\u00ednimos; baseline hist\u00f3rico usa JSON j\u00e1 versionado."
+}

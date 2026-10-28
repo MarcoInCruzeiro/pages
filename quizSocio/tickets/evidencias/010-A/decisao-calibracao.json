@@ -1,0 +1,12 @@
+{
+  "decidedOn": "2026-10-27",
+  "rulesVersion": "2026-10-26.2",
+  "engineSha256": "d2bc8591724b44773b9641bafac0f305f2b4396ed652b76db15b167b0c8486e5",
+  "referenceSha256": "a3f73bebe683b37c55efa6cf96b07815d2d4a311da79b1ef68ad8062dad53270",
+  "calibrationTop1": 8,
+  "calibrationTotal": 8,
+  "decision": "Manter o cálculo vigente: todos os casos de calibração atendem às expectativas. Executar a validação sem ajustes.",
+  "engineChanged": false,
+  "expectationsChanged": false,
+  "independentValidation": false
+}

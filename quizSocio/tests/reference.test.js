@@ -3,7 +3,8 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const engine = require('../quiz-engine.js');
-const { premissas, scenarios } = require('./fixtures/reference-scenarios.js');
+const { premissas, scenarios } = require('./fixtures/four-plans/historical.json');
+const provenance = require('./fixtures/reference-provenance.json');
 const { toOldAnswers } = require('./baseline.js');
 
 const reserved = scenarios.filter((scenario) => scenario.split === 'reserva');
@@ -18,7 +19,7 @@ function metrics(list) {
         const top1 = scenario.acceptable.includes(ranking[0]);
         const top3 = ranking.slice(0, 3).some((slug) => scenario.acceptable.includes(slug));
         const violations = result.eligible.some((item) => !item.eligibility.withinBudget)
-            || (result.winner !== null && result.winner.cost.subscription > scenario.answers.budget);
+            || (result.winner !== null && result.winner.pricing.subscription > scenario.answers.budget);
         return { scenario, result, ranking, top1, top3, violations };
     });
 
@@ -31,14 +32,15 @@ function metrics(list) {
     };
 }
 
-test('a referência reservada atinge as metas registradas no QUIZ-009', () => {
+test('a referência sintética atende às metas de regressão, sem comprovar avaliação independente', (t) => {
     const result = metrics(reserved);
     const top1Rate = result.top1 / result.total;
     const top3Rate = result.top3 / result.total;
 
-    assert.equal(result.violations, 0, 'nenhuma restrição obrigatória pode ser violada');
-    assert.ok(top1Rate >= 0.80, `top-1 ${result.top1}/${result.total} abaixo de 80%`);
-    assert.ok(top3Rate >= 0.95, `top-3 ${result.top3}/${result.total} abaixo de 95%`);
+    assert.equal(result.violations, provenance.thresholds.violations, 'nenhuma restrição obrigatória pode ser violada');
+    assert.ok(top1Rate >= provenance.thresholds.top1, `top-1 ${result.top1}/${result.total} abaixo da meta`);
+    assert.ok(top3Rate >= provenance.thresholds.top3, `top-3 ${result.top3}/${result.total} abaixo da meta`);
+    t.diagnostic(`top-1 ${result.top1}/${result.total}; top-3 ${result.top3}/${result.total}; avaliação independente: ${provenance.independentValidation ? 'confirmada' : 'pendente'}`);
 
     result.rows.forEach((row) => {
         assert.ok(Number.isFinite(row.result.winner.score), `${row.scenario.id} sem score finito`);
@@ -49,7 +51,7 @@ test('a referência reservada atinge as metas registradas no QUIZ-009', () => {
 test('a base de calibração também é consistente', () => {
     const result = metrics(calibration);
     assert.equal(result.violations, 0);
-    assert.ok(result.top1 / result.total >= 0.90);
+    assert.ok(result.top1 / result.total >= provenance.thresholds.top1);
 });
 
 test('a partição é disjunta e os cenários válidos não contêm contradições', () => {

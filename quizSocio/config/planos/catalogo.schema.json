@@ -1,0 +1,331 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quiz-socio.vercel.app/config/planos/catalogo.schema.json",
+  "title": "Catálogo de planos ativos",
+  "description": "Planos ativos do recomendador (sem Cabuloso Cativo). 4 slugs únicos obrigatórios.",
+  "type": "array",
+  "minItems": 4,
+  "maxItems": 4,
+  "items": {
+    "type": "object",
+    "required": [
+      "slug",
+      "nome",
+      "logo",
+      "contratacao",
+      "ingresso",
+      "prioridade",
+      "garantiaIngresso",
+      "loja",
+      "conteudoExclusivo",
+      "votacao",
+      "opcionais",
+      "camposPendentes",
+      "id"
+    ],
+    "properties": {
+      "slug": {
+        "type": "string",
+        "enum": [
+          "meu-cruzeiro",
+          "time-do-povo",
+          "cabuloso",
+          "cabuloso-max"
+        ]
+      },
+      "nome": {
+        "type": "string",
+        "minLength": 1
+      },
+      "logo": {
+        "type": "string"
+      },
+      "contratacao": {
+        "type": "object",
+        "required": [
+          "modalidadePrincipal",
+          "modalidades",
+          "precoMensal",
+          "precoMensalEquivalente",
+          "valorTotal",
+          "parcelas",
+          "valorParcela",
+          "taxaAdesao",
+          "vigenciaMeses",
+          "link"
+        ],
+        "properties": {
+          "modalidadePrincipal": {
+            "type": "string",
+            "enum": [
+              "mensal",
+              "anual"
+            ]
+          },
+          "modalidades": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "semestral",
+                "anual"
+              ]
+            },
+            "minItems": 1
+          },
+          "precoMensal": {
+            "type": "number",
+            "minimum": 0
+          },
+          "precoMensalEquivalente": {
+            "type": "number",
+            "minimum": 0
+          },
+          "valorTotal": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "parcelas": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "valorParcela": {
+            "type": "number",
+            "minimum": 0
+          },
+          "taxaAdesao": {
+            "type": "number",
+            "minimum": 0
+          },
+          "vigenciaMeses": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "link": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://socio\\.cruzeiro\\.com\\.br/"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ingresso": {
+        "type": "object",
+        "required": [
+          "tipo",
+          "quantidade",
+          "setores",
+          "setorTexto",
+          "niveis",
+          "descontoFixo",
+          "periodicidade",
+          "detalhes"
+        ],
+        "properties": {
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "gratuito",
+              "popular",
+              "garantido",
+              "desconto"
+            ]
+          },
+          "quantidade": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "setores": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "setorTexto": {
+            "type": "string"
+          },
+          "niveis": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "object",
+              "required": [
+                "nivel",
+                "jogosMinimos",
+                "jogosMaximos",
+                "prioridade",
+                "desconto"
+              ],
+              "properties": {
+                "nivel": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "jogosMinimos": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "jogosMaximos": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "prioridade": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 4
+                },
+                "desconto": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "descontoFixo": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "periodicidade": {
+            "type": "string"
+          },
+          "detalhes": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "prioridade": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "minimum": 1,
+        "maximum": 4
+      },
+      "garantiaIngresso": {
+        "type": "boolean"
+      },
+      "loja": {
+        "type": "object",
+        "required": [
+          "percentual",
+          "texto"
+        ],
+        "properties": {
+          "percentual": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "texto": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "conteudoExclusivo": {
+        "type": "boolean"
+      },
+      "votacao": {
+        "type": "boolean"
+      },
+      "opcionais": {
+        "type": "object",
+        "required": [
+          "kids",
+          "carteirinhaFisica",
+          "pcd"
+        ],
+        "properties": {
+          "kids": {
+            "type": "object",
+            "required": [
+              "disponivel",
+              "precoMensal",
+              "maxCriancas",
+              "idadeMaxima",
+              "ingressoIncluido"
+            ],
+            "properties": {
+              "disponivel": {
+                "type": "boolean"
+              },
+              "precoMensal": {
+                "type": "number",
+                "minimum": 0
+              },
+              "maxCriancas": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "idadeMaxima": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "ingressoIncluido": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false
+          },
+          "carteirinhaFisica": {
+            "type": "object",
+            "required": [
+              "situacao",
+              "preco"
+            ],
+            "properties": {
+              "situacao": {
+                "type": "string",
+                "enum": [
+                  "opcional",
+                  "incluida",
+                  "virtual"
+                ]
+              },
+              "preco": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false
+          },
+          "pcd": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "camposPendentes": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "id": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "additionalProperties": false
+  },
+  "uniqueItems": true
+}
