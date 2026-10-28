@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: catálogo atende à referência documental oficial sem alegar validação independente do ranking
+ok 1 - catálogo atende à referência documental oficial sem alegar validação independente do ranking
+  ---
+  duration_ms: 9.42501
+  type: 'test'
+  ...
+# Subtest: HTTP 200 e uma tag presente não comprovam oferta nem recebimento GA4
+ok 2 - HTTP 200 e uma tag presente não comprovam oferta nem recebimento GA4
+  ---
+  duration_ms: 33.17309
+  type: 'test'
+  ...
+# Subtest: desafio 403 e falha de rede são registrados sem inventar confirmação
+ok 3 - desafio 403 e falha de rede são registrados sem inventar confirmação
+  ---
+  duration_ms: 0.553125
+  type: 'test'
+  ...
+# Subtest: candidato de entrega contém somente arquivos públicos e recusa sobrescrita
+ok 4 - candidato de entrega contém somente arquivos públicos e recusa sobrescrita
+  ---
+  duration_ms: 210.430257
+  type: 'test'
+  ...
+# Subtest: preparo de entrega bloqueia regressões sem aceite explícito
+ok 5 - preparo de entrega bloqueia regressões sem aceite explícito
+  ---
+  duration_ms: 66.435855
+  type: 'test'
+  ...
+# Subtest: servidor de teste respeita a raiz solicitada mesmo com dist existente
+ok 6 - servidor de teste respeita a raiz solicitada mesmo com dist existente
+  ---
+  duration_ms: 36.482742
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 645.630321

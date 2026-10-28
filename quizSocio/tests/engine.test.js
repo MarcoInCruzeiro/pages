@@ -467,6 +467,13 @@ test('motivos seguem as regras que classificaram o plano', () => {
     assert.doesNotMatch(purple.winner.reasons.join(' '), /Custo de uso|primeiro mês|mais ingressos/i);
 });
 
+test('benefícios não anunciam carteirinha, pois quase todos os planos a incluem', () => {
+    engine.plans.forEach((plan) => {
+        const benefits = engine.getPlanBenefits(plan, fullAnswers);
+        assert.doesNotMatch(benefits.join(' | '), /carteirinha/i, plan.slug);
+    });
+});
+
 test('resultado do motor identifica a versão das regras vigentes', () => {
     const result = engine.recommendPlans(fullAnswers);
     assert.equal(result.rulesVersion, engine.RULES_VERSION,

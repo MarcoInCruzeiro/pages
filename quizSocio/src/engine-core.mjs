@@ -423,11 +423,8 @@ export function createEngine(configuration) {
             benefits.push(`Opcional Kids: ${formatBRL(plan.opcionais.kids.precoMensal)}/mês por criança, até ${plan.opcionais.kids.maxCriancas} menores de ${plan.opcionais.kids.idadeMaxima} anos`);
         }
 
-        const card = plan.opcionais.carteirinhaFisica;
-        if (card.situacao === 'incluida') benefits.push('Carteirinha física incluída');
-        if (card.situacao === 'virtual') benefits.push('Carteirinha virtual');
-        if (card.situacao === 'opcional') benefits.push(`Carteirinha física opcional: ${formatBRL(card.preco)}`);
-
+        // Carteirinha não entra nos benefícios: quase todos os planos a incluem,
+        // então o texto não diferencia a escolha (ADR de catálogo 2026-10-28).
         if (ticket.nivel && ticket.nivel.origem === 'inicial') {
             benefits.push('Já é sócio? Confira seu desconto atual na sua conta.');
         }

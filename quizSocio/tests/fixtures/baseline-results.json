@@ -20,12 +20,25 @@
         "preferredSector": "blue"
       },
       "baselineRanking": [
-        { "plan": "Cabuloso Cativo", "score": 91.4 },
-        { "plan": "Cabuloso Max", "score": 85.0 },
-        { "plan": "Cabuloso", "score": 83.0 }
+        {
+          "plan": "Cabuloso",
+          "score": 82.0
+        },
+        {
+          "plan": "Cabuloso Max",
+          "score": 80.5
+        },
+        {
+          "plan": "Time do Povo",
+          "score": 76.1
+        },
+        {
+          "plan": "Meu Cruzeiro",
+          "score": 73.9
+        }
       ],
       "mappedScenario": "CAL-04",
-      "observedChange": "O ranking novo coloca Cabuloso à frente; o Cativo deixa de vencer por bônus manual e passa a ser avaliado por cobertura parcial do Sicoob e custo."
+      "observedChange": "O Cativo foi removido do catálogo ativo. O Cabuloso passa a vencer por cobertura do Sicoob e desconto progressivo."
     },
     {
       "id": "zero-jogos",
@@ -43,9 +56,18 @@
         "preferredSector": "blue"
       },
       "baselineRanking": [
-        { "plan": "Cabuloso", "score": 92.1 },
-        { "plan": "Meu Cruzeiro", "score": 89.8 },
-        { "plan": "Time do Povo", "score": 82.7 }
+        {
+          "plan": "Cabuloso",
+          "score": 92.1
+        },
+        {
+          "plan": "Meu Cruzeiro",
+          "score": 89.8
+        },
+        {
+          "plan": "Time do Povo",
+          "score": 82.7
+        }
       ],
       "mappedScenario": "CAL-01",
       "observedChange": "O Cabuloso continua vencedor no cenário equivalente, mas o ingresso passa a ter peso residual e os motivos citam explicitamente a ausência de ida ao estádio."
@@ -66,8 +88,14 @@
         "preferredSector": "yellow-orange"
       },
       "baselineRanking": [
-        { "plan": "Time do Povo", "score": 71.0 },
-        { "plan": "Meu Cruzeiro", "score": 67.5 }
+        {
+          "plan": "Time do Povo",
+          "score": 71.0
+        },
+        {
+          "plan": "Meu Cruzeiro",
+          "score": 67.5
+        }
       ],
       "mappedScenario": "CAL-02",
       "observedChange": "O Time do Povo permanece; a diferença aumenta porque o ingresso popular por jogo passa a ser modelado no custo de uso, em vez de um atributo genérico."
@@ -88,9 +116,18 @@
         "preferredSector": "purple"
       },
       "baselineRanking": [
-        { "plan": "Cabuloso Cativo", "score": 94.6 },
-        { "plan": "Cabuloso Max", "score": 88.1 },
-        { "plan": "Cabuloso", "score": 78.9 }
+        {
+          "plan": "Cabuloso Cativo",
+          "score": 94.6
+        },
+        {
+          "plan": "Cabuloso Max",
+          "score": 88.1
+        },
+        {
+          "plan": "Cabuloso",
+          "score": 78.9
+        }
       ],
       "mappedScenario": "CAL-05",
       "observedChange": "Mudança intencional: o Cativo cobre apenas Sicoob Leste Inferior e não pode vencer como benefício no Roxo. O Max, que cobre Roxo inferior e superior, passa a vencer."
@@ -111,9 +148,18 @@
         "preferredSector": "blue"
       },
       "baselineRanking": [
-        { "plan": "Cabuloso", "score": 93.3 },
-        { "plan": "Meu Cruzeiro", "score": 89.5 },
-        { "plan": "Time do Povo", "score": 83.5 }
+        {
+          "plan": "Cabuloso",
+          "score": 93.3
+        },
+        {
+          "plan": "Meu Cruzeiro",
+          "score": 89.5
+        },
+        {
+          "plan": "Time do Povo",
+          "score": 83.5
+        }
       ],
       "mappedScenario": "CAL-03",
       "observedChange": "O Cabuloso permanece; a pontuação cai porque o índice agora é uma média ponderada explícita, não uma porcentagem de compatibilidade."

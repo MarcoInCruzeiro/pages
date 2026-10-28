@@ -1,0 +1,287 @@
+{
+  "date": "2026-10-26",
+  "adr": "ADR-0001",
+  "beforeRules": "2026-10-26.1",
+  "afterRules": "2026-10-26.2",
+  "independentValidation": false,
+  "summary": {
+    "calibracao": {
+      "total": 12,
+      "top1": 12,
+      "top3": 12,
+      "violations": 0
+    },
+    "reserva": {
+      "total": 12,
+      "top1": 11,
+      "top3": 12,
+      "violations": 0
+    }
+  },
+  "rows": [
+    {
+      "id": "CAL-01",
+      "split": "calibracao",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 91.2,
+      "afterScore": 91.2,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "CAL-02",
+      "split": "calibracao",
+      "beforeWinner": "time-do-povo",
+      "afterWinner": "time-do-povo",
+      "beforeScore": 89.2,
+      "afterScore": 85.5,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "CAL-03",
+      "split": "calibracao",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 87.8,
+      "afterScore": 88.4,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "CAL-04",
+      "split": "calibracao",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 88.8,
+      "afterScore": 92,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "CAL-05",
+      "split": "calibracao",
+      "beforeWinner": "cabuloso-max",
+      "afterWinner": "cabuloso-max",
+      "beforeScore": 96.8,
+      "afterScore": 89.6,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "CAL-06",
+      "split": "calibracao",
+      "beforeWinner": "cabuloso-max",
+      "afterWinner": "cabuloso-max",
+      "beforeScore": 97,
+      "afterScore": 89.6,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "CAL-07",
+      "split": "calibracao",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 88.1,
+      "afterScore": 88.4,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "CAL-08",
+      "split": "calibracao",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 84.6,
+      "afterScore": 86.3,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "CAL-09",
+      "split": "calibracao",
+      "beforeWinner": "cabuloso-max",
+      "afterWinner": "cabuloso-max",
+      "beforeScore": 85.9,
+      "afterScore": 87.4,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "CAL-10",
+      "split": "calibracao",
+      "beforeWinner": "cabuloso-max",
+      "afterWinner": "cabuloso-max",
+      "beforeScore": 82.7,
+      "afterScore": 84.7,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "CAL-11",
+      "split": "calibracao",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 80.7,
+      "afterScore": 82,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "CAL-12",
+      "split": "calibracao",
+      "beforeWinner": "time-do-povo",
+      "afterWinner": "meu-cruzeiro",
+      "beforeScore": 89.8,
+      "afterScore": 86.3,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "RES-01",
+      "split": "reserva",
+      "beforeWinner": "meu-cruzeiro",
+      "afterWinner": "meu-cruzeiro",
+      "beforeScore": 92.8,
+      "afterScore": 92.8,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "RES-02",
+      "split": "reserva",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 87.4,
+      "afterScore": 87.4,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "RES-03",
+      "split": "reserva",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 85.2,
+      "afterScore": 89.9,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "RES-04",
+      "split": "reserva",
+      "beforeWinner": "time-do-povo",
+      "afterWinner": "time-do-povo",
+      "beforeScore": 85,
+      "afterScore": 82.5,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "RES-05",
+      "split": "reserva",
+      "beforeWinner": "cabuloso-max",
+      "afterWinner": "cabuloso-max",
+      "beforeScore": 83.1,
+      "afterScore": 84,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "RES-06",
+      "split": "reserva",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 90.4,
+      "afterScore": 92,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "RES-07",
+      "split": "reserva",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 85.2,
+      "afterScore": 86.2,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "RES-08",
+      "split": "reserva",
+      "beforeWinner": "cabuloso-max",
+      "afterWinner": "cabuloso-max",
+      "beforeScore": 94.5,
+      "afterScore": 87.9,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "RES-09",
+      "split": "reserva",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 86.4,
+      "afterScore": 87.4,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "RES-10",
+      "split": "reserva",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 88.1,
+      "afterScore": 88.4,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "RES-11",
+      "split": "reserva",
+      "beforeWinner": "time-do-povo",
+      "afterWinner": "meu-cruzeiro",
+      "beforeScore": 70.8,
+      "afterScore": 70.4,
+      "acceptable": false,
+      "top3": true,
+      "violations": false
+    },
+    {
+      "id": "RES-12",
+      "split": "reserva",
+      "beforeWinner": "cabuloso-max",
+      "afterWinner": "cabuloso-max",
+      "beforeScore": 97.9,
+      "afterScore": 90.9,
+      "acceptable": true,
+      "top3": true,
+      "violations": false
+    }
+  ]
+}

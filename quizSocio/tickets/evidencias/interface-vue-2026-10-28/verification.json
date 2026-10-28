@@ -1,0 +1,26 @@
+{
+  "referenceUrl": "https://quiz-socio.vercel.app/",
+  "comparedOn": "2026-10-28",
+  "referenceHtmlSha256": "5460bce5a118c77c543244d7b94407482af0382dc43b11c1de4f1be513482d02",
+  "referenceEngineSha256": "d2bc8591724b44773b9641bafac0f305f2b4396ed652b76db15b167b0c8486e5",
+  "rendering": "Chrome local, fonte de fallback do harness CDP, recursos externos interceptados e movimento reduzido para capturas estáveis. A referência HTML/JS foi obtida por GET e servida localmente.",
+  "checks": {
+    "1280": {
+      "heroGeometryEqual": true,
+      "optionsCaptureIdentical": true,
+      "questionSha256": "0cd9fd1d10dcc7bca9b5897014d6be28fcfd756a54fe01269ca29ec48d859f17"
+    },
+    "390": {
+      "heroGeometryEqual": true,
+      "optionsCaptureIdentical": true,
+      "questionSha256": "3b885c1c81ad1658531a52baf17119076acd4e66258920f9fafb84a37339b852"
+    }
+  },
+  "tests": {
+    "command": "npm test",
+    "passed": 125,
+    "failed": 0
+  },
+  "businessLogicChanged": false,
+  "productionChanged": false
+}
