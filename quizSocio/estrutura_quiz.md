@@ -25,13 +25,11 @@ A matriz completa, com taxa de adesão, setores, níveis, opcionais e divergênc
 | Time do Povo | R$ 40/mês de referência; cobrança semestral ou anual; adesão R$ 30 | 1 popular pelo menor valor online da arquibancada, Amarelo/Laranja | Prioridade 4 | Até 10% | Sim |
 | Cabuloso | R$ 100/mês de referência; cobrança semestral ou anual; adesão R$ 30 | 1 com desconto progressivo de 50% a 60% | Nível 1: prioridade 3; nível 2: 2; nível 3: 1 | Até 15% | Sim |
 | Cabuloso Max | R$ 200/mês de referência; cobrança semestral ou anual; adesão R$ 30 | Até 2 com 65% de desconto | Prioridade 1 | Até 15% | Sim |
-| Cabuloso Cativo | Anual: R$ 4.800 em 12x de R$ 400; sem adesão | 1 garantido por jogo no Sicoob — Leste Inferior, temporada 2026 | Ingresso garantido | Até 10% | Sim |
 
 Regras que a interface deve preservar:
 
-- Garantia de ingresso não é o mesmo que prioridade. Só o Cativo tem garantia.
+- Prioridade de compra depende de disponibilidade; os quatro planos ativos não prometem ingresso garantido por jogo.
 - O Time do Povo não promete ingresso fixo de R$ 40; promete o menor valor online da arquibancada.
-- O Cativo é exclusivamente anual; card e checkout mostram 12x R$ 400 e `intervalo_cobrancas=anual`.
 - Os quatro demais planos usam R$ X/mês como referência, mas a cobrança vigente na tabela oficial é semestral ou anual; os CTAs usam `intervalo_cobrancas=anual`.
 - Campos não confirmados, como desconto em parceiros, não aparecem como benefício.
 
@@ -43,7 +41,7 @@ Regras que a interface deve preservar:
 | 2 | `gamesHistory` | Range 0–30 ou “não sei” | 0 a 30, `unknown` | Histórico de 15 meses; define nível do Cabuloso |
 | 3 | `wantsGuaranteedTicket` | Opção | `never`, `true`, `false` | Presença declarada; detecta conflito com jogos |
 | 4 | `buysTwoTickets` | Opção | `true`, `false` | Necessidade de acompanhante adulto |
-| 5 | `kidsCount` | Opção | 0, 1, 2, 3 | Quantidade de opcionais Kids |
+| 5 | `kidsCount` | Opção | 0 (Não), 1 (Sim) | Interesse em incluir uma criança no plano |
 | 6 | `needsPriority` | Opção | `true`, `false` | Importância de prioridade na compra |
 | 7 | `wantsParticipation` | Opção | `true`, `false` | Interesse em experiências e conteúdo |
 | 8 | `wantsStoreDiscount` | Opção | `true`, `false` | Interesse em produtos oficiais |
@@ -77,7 +75,7 @@ O perfil é reconstruído a cada resposta; voltar e editar não acumula efeitos.
 | `descuentos` e `productos` | `wantsStoreDiscount = true` → 8; `false` → 1; ausente → 5 |
 | `importanciaPreco` | Orçamento 40 → 8; 100 → 5; 200 → 3; 400 → 1 |
 | `adultos` | 1 se `buysTwoTickets = true`; caso contrário 0 |
-| `kids` | `kidsCount`, limitado a 0–3 |
+| `kids` | 0 ou 1 conforme o interesse declarado; não estima a quantidade total de crianças da família |
 | `setorPreferido` | `preferredSector` |
 
 Não há inferência de frequência presencial a partir de conteúdo digital, nem de consumo de produtos a partir de frequência. Cada efeito acima tem correspondência direta no texto da pergunta.
@@ -120,7 +118,7 @@ Cada plano recebe sete componentes normalizados entre 0 e 1:
 | `discount` | Percentual da loja / 0,15, limitado a 1 |
 | `experiences` | Conteúdo e votação → 1; apenas um → 0,7; nenhum → 0,1 |
 | `family` | Sem acompanhantes nem Kids → 0,6. Com família: 0,6 × cobertura de ingressos + 0,4 × suporte a Kids |
-| `price` | Normalização do valor mensal equivalente da assinatura entre o menor e o maior dos cinco planos |
+| `price` | Normalização do valor mensal equivalente da assinatura entre o menor e o maior dos quatro planos ativos |
 
 Pesos:
 
@@ -137,7 +135,9 @@ pesoPreco = 0,8 + 0,8 × importanciaPreco / 10
 
 O índice de afinidade é a média ponderada dos componentes × 100, arredondada a uma casa. Não é probabilidade de acerto. A interface chama o número de “afinidade estimada”, explica os componentes e informa as premissas.
 
-### Papéis do preço e revisão de duplicações (QUIZ-010)
+### Papéis do preço e revisão histórica de duplicações (QUIZ-010)
+
+Os índices e métricas citados nesta subseção descrevem a revisão anterior de cinco planos. A avaliação vigente de quatro planos preserva expectativas e registra as mudanças separadamente; consulte a [spec](docs/spec-port-vue.md) e o [avaliador](scripts/evaluate-reference.mjs).
 
 - **Elegibilidade:** a assinatura mensal equivalente precisa caber no teto. É restrição, com tolerância zero.
 - **Preço:** o componente `price` compara apenas a assinatura mensal equivalente. Taxa de adesão, Kids e ingressos são campos separados e não compõem um total para o ranking, conforme a ADR-0001.
@@ -147,17 +147,16 @@ O índice de afinidade é a média ponderada dos componentes × 100, arredondada
 - **Frequência:** pesa ingresso e prioridade, que são benefícios diferentes; não pesa loja nem conteúdo.
 - **Bônus de setor:** o bônus manual de 6 pontos do commit `2cecf81` foi substituído pela cobertura explícita de setores do catálogo.
 
-### Exemplo verificado (`tests/engine.test.js`)
+### Exemplo verificado com quatro planos (`tests/engine.test.js`)
 
 Entrada: 10 jogos por ano, histórico 10 (Cabuloso nível 2, 55%), foco nos jogos decisivos, sozinho, sem Kids, compra com calma, interesse em experiências, raramente compra produtos, acompanha mais de casa, sem conteúdo digital, teto R$ 100, Sicoob.
 
 | Plano | Assinatura/mês de referência | Adesão única separada | Setor | Índice | Elegível |
 |---|---|---|---|---|---|
-| Cabuloso | R$ 100 | R$ 30 | Completo | 87,4 | Sim — vencedor |
-| Cabuloso Max | R$ 200 | R$ 30 | Completo | 78,7 | Não (R$ 200 > R$ 100) |
+| Cabuloso | R$ 100 | R$ 30 | Completo | 78,3 | Sim — vencedor |
+| Cabuloso Max | R$ 200 | R$ 30 | Completo | 59,4 | Não (R$ 200 > R$ 100) |
 | Meu Cruzeiro | R$ 12 | Sem taxa | Fora | 72,3 | Sim |
-| Time do Povo | R$ 40 | R$ 30 | Fora | 69,9 | Sim |
-| Cabuloso Cativo | 12x de R$ 400, contrato anual | Sem taxa | Parcial | 52,1 | Não |
+| Time do Povo | R$ 40 | R$ 30 | Fora | 67,0 | Sim |
 
 ## 7. Filtro, setor e desempate
 
@@ -189,15 +188,18 @@ Pergunta X de 12
 
 ```
 Plano recomendado
-[LOGO]  R$ XX / mês (referência)   ·   Total anual: R$ XXX
-Contratação, valor da assinatura e adesão em campo separado
+[LOGO]  R$ XX / mês
+Valor mensal de referência para comparação e orçamento
+Adesão e opcionais em campos separados
 Aviso de setor e alternativa, quando aplicável
 Motivos da recomendação
 [Sobre a recomendação]
 [Refazer quiz]  [Comparar planos]  [Assinar agora]
 ```
 
-Os cards laterais mostram até três opções ordenadas pela afinidade, com indicação de “Acima do orçamento” quando aplicável. O comparativo abre em modal, lista os cinco planos, mostra contratação, preço da assinatura, adesão separada, ingresso e setores, prioridade/garantia, loja, conteúdo/votação, Kids e afinidade. Fecha pelo botão, pelo fundo ou por `Escape`.
+Os cards laterais mostram até três opções ordenadas pela afinidade, com indicação de “Acima do orçamento” quando aplicável. O comparativo abre em modal, lista os quatro planos ativos, mostra contratação, preço da assinatura, adesão separada, ingresso e setores, prioridade/garantia, loja, conteúdo/votação, Kids e afinidade. Fecha pelo botão, pelo fundo ou por `Escape`.
+
+Resultado, cards e comparativo exibem apenas a referência mensal, sem total anual ou parcelamento. Os dados comerciais completos e a modalidade real de checkout continuam no catálogo. A pergunta binária não altera o limite comercial do opcional Kids nem soma seu preço à assinatura.
 
 ### Consistência visual e textual
 
@@ -244,7 +246,7 @@ O evento `quiz_subscribe_click` é emitido no clique do link de contratação, q
 
 Metas do QUIZ-009: zero violação de orçamento de assinatura, pelo menos 80% de acerto no primeiro plano e 95% de opção aceitável entre as três primeiras. A referência contém 12 cenários de calibração, 12 na partição histórica chamada reserva e 5 de contradição. Com a ADR-0001, calibração: 12/12 no top-1; reserva histórica: 11/12 no top-1 e 12/12 no top-3. A mudança foi registrada sem alterar os planos aceitáveis em `tests/fixtures/separate-prices-results.json`.
 
-Esses resultados são regressão sintética; a base já foi consultada e não comprova avaliação independente ou desempenho real. `tests/fixtures/reference-provenance.json` registra essa limitação. QUIZ-009 e QUIZ-010 continuam pendentes da referência independente. Os relatórios `cost-fix-results.json` e o log anterior dos tickets pertencem às regras anteriores à ADR, não à apresentação vigente.
+Esses resultados são regressão sintética; a base histórica já foi consultada e não comprova avaliação externa ou desempenho real. Sua proveniência continua registrada. Em 27/10/2026, o usuário autorizou criar a referência do QUIZ-009: `tests/fixtures/reference-profiles.js` contém oito perfis e 16 cenários, com hash e limites em `reference-profiles-provenance.json`. O [QUIZ-010-A](tickets/concluidos/010-A-referencia.md) avaliou calibração e validação, ambas com top-1/top-3 8/8 e zero violações, sem modificar motor ou expectativas. `tests/evaluation.test.mjs` mantém essas verificações e a divergência histórica RES-11. QUIZ-003, 009, 010-A/010 e 011 estão concluídos; o aceite de GA4 continua no QUIZ-017. Relatórios anteriores à ADR permanecem históricos.
 
 ## 11. Rodapé
 

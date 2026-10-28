@@ -17,7 +17,7 @@ const fullAnswers = {
     preferredSector: 'blue'
 };
 
-test('catálogo concilia os cinco planos com o regulamento', () => {
+test('catálogo mantém quatro planos ativos e as condições comerciais aceitas', () => {
     const tdp = engine.assinaturasSocios.timeDoPovo;
     assert.equal(tdp.loja.percentual, 0.10);
     assert.equal(tdp.prioridade, 4);
@@ -30,23 +30,16 @@ test('catálogo concilia os cinco planos com o regulamento', () => {
     ]);
     assert.equal(tdp.contratacao.taxaAdesao, 30);
     assert.deepEqual(tdp.contratacao.modalidades, ['semestral', 'anual']);
-    assert.match(engine.getPlanContract(tdp).totalText, /Total anual: R\$\s*480,00/);
-    assert.match(engine.getPlanContract(tdp).detail, /semestral ou anual/);
+    assert.match(engine.getPlanContract(tdp).priceText, /R\$\s*40,00 \/ mês/);
+    assert.match(engine.getPlanContract(tdp).detail, /Valor mensal de referência/);
 
-    const cativo = engine.assinaturasSocios.cabulosoCativo;
-    assert.deepEqual(cativo.contratacao.modalidades, ['anual']);
-    assert.equal(cativo.contratacao.valorTotal, 4800);
-    assert.equal(cativo.contratacao.parcelas, 12);
-    assert.equal(cativo.contratacao.valorParcela, 400);
-    assert.deepEqual(cativo.ingresso.setores, ['sicoob-inferior']);
-    assert.equal(cativo.garantiaIngresso, true);
-    assert.equal(cativo.contratacao.link.includes('intervalo_cobrancas=anual'), true);
+    assert.equal(engine.plans.length, 4);
+    assert.equal(engine.assinaturasSocios.cabulosoCativo, undefined);
 
     engine.plans.forEach((plan) => {
         assert.equal(plan.contratacao.link.includes('intervalo_cobrancas=anual'), true, plan.slug);
     });
 
-    assert.deepEqual(cativo.camposPendentes, ['descontoEmParceiros', 'disponibilidadeCativo']);
     assert.equal(engine.CATALOG_SOURCE.consulta, '2026-10-26');
 });
 
@@ -72,6 +65,29 @@ test('validação aceita zero e false e rejeita ausentes ou inválidos', () => {
     assert.equal(engine.isAnswerValid(presence, undefined), false);
     assert.equal(engine.isAnswerValid(games, undefined), false);
     assert.equal(engine.isAnswerValid(presence, 'false'), false);
+});
+
+test('Kids é uma escolha binária numérica e mantém limites de defesa do perfil', () => {
+    const question = engine.QUESTION_BY_KEY.kidsCount;
+    assert.deepEqual(question.options.map(({ label, value }) => [label, value]), [['Não', 0], ['Sim', 1]]);
+    for (const value of [0, 1]) {
+        assert.equal(engine.isAnswerValid(question, value), true);
+        assert.equal(engine.buildUserProfile({ ...fullAnswers, kidsCount: value }).kids, value);
+    }
+    for (const value of [2, 3, true, false, '1', null]) assert.equal(engine.isAnswerValid(question, value), false);
+    assert.equal(engine.buildUserProfile({ ...fullAnswers, kidsCount: true }).kids, 1, 'compatibilidade do perfil não amplia respostas válidas');
+    assert.equal(engine.buildUserProfile({ ...fullAnswers, kidsCount: -1 }).kids, 0);
+    assert.equal(engine.buildUserProfile({ ...fullAnswers, kidsCount: 100 }).kids, engine.getDefaultConfiguration().pesosPerfil.kids.max);
+});
+
+test('apresentação de todos os planos usa referência mensal sem total anual ou parcelas', () => {
+    for (const plan of engine.plans) {
+        const contract = engine.getPlanContract(plan);
+        assert.equal(contract.modalidade, plan.contratacao.modalidadePrincipal);
+        assert.equal(contract.priceText, `${engine.formatBRL(plan.contratacao.precoMensalEquivalente)} / mês`);
+        assert.match(contract.detail, /Valor mensal de referência/);
+        assert.doesNotMatch([contract.priceText, contract.totalText, contract.detail].join(' '), /anual|parcel|\d+x\s*R\$/i);
+    }
 });
 
 test('validação aponta a primeira pergunta sem resposta', () => {
@@ -176,22 +192,21 @@ test('desconto e prioridade derivam do mesmo nível', () => {
 });
 
 test('cobertura de setor distingue completo, parcial e ausente', () => {
-    const cativo = engine.assinaturasSocios.cabulosoCativo;
     const max = engine.assinaturasSocios.cabulosoMax;
     const cabuloso = engine.assinaturasSocios.cabuloso;
     const tdp = engine.assinaturasSocios.timeDoPovo;
 
-    assert.equal(engine.getSectorFit(cativo, { ...fullAnswers, preferredSector: 'blue' }).level, 'partial');
-    assert.equal(engine.getSectorFit(cativo, { ...fullAnswers, preferredSector: 'purple' }).level, 'none');
+    assert.equal(engine.getSectorFit(cabuloso, { ...fullAnswers, preferredSector: 'blue' }).level, 'full');
+    assert.equal(engine.getSectorFit(tdp, { ...fullAnswers, preferredSector: 'purple' }).level, 'none');
     assert.equal(engine.getSectorFit(max, { ...fullAnswers, preferredSector: 'purple' }).level, 'full');
     assert.equal(engine.getSectorFit(cabuloso, { ...fullAnswers, preferredSector: 'purple' }).level, 'partial');
     assert.equal(engine.getSectorFit(tdp, { ...fullAnswers, preferredSector: 'yellow-orange' }).level, 'full');
 });
 
-test('preferência pelo Roxo não apresenta o Cativo como benefício no setor', () => {
+test('preferência pelo Roxo oferece cobertura ativa sem reintroduzir o Cativo', () => {
     const result = engine.recommendPlans({ ...fullAnswers, preferredSector: 'purple' });
     const cativo = result.all.find((item) => item.plan.slug === 'cabuloso-cativo');
-    assert.equal(cativo.sectorFit.level, 'none');
+    assert.equal(cativo, undefined);
     assert.equal(result.winner.plan.slug, 'cabuloso-max');
     assert.ok(result.winner.reasons.some((reason) => /Roxo|setor/i.test(reason)) === false);
 });
@@ -199,9 +214,6 @@ test('preferência pelo Roxo não apresenta o Cativo como benefício no setor', 
 test('valores de assinatura, adesão e Kids são independentes, sem totais combinados', () => {
     assert.deepEqual(engine.getPlanPricing(engine.assinaturasSocios.cabulosoMax), {
         subscription: 200, adhesion: 30, kidsUnitPrice: 30
-    });
-    assert.deepEqual(engine.getPlanPricing(engine.assinaturasSocios.cabulosoCativo), {
-        subscription: 400, adhesion: 0, kidsUnitPrice: 30
     });
     assert.deepEqual(engine.getPlanPricing(engine.assinaturasSocios.meuCruzeiro), {
         subscription: 12, adhesion: 0, kidsUnitPrice: 30
@@ -211,8 +223,8 @@ test('valores de assinatura, adesão e Kids são independentes, sem totais combi
 test('frequência, acompanhantes e Kids não somam valores à assinatura apresentada', () => {
     const profiles = [
         { gamesPerYear: 0, buysTwoTickets: false, kidsCount: 0 },
-        { gamesPerYear: 12, buysTwoTickets: true, kidsCount: 2 },
-        { gamesPerYear: 30, buysTwoTickets: true, kidsCount: 3 }
+        { gamesPerYear: 12, buysTwoTickets: true, kidsCount: 1 },
+        { gamesPerYear: 30, buysTwoTickets: true, kidsCount: 1 }
     ];
     profiles.forEach((profile) => {
         const max = engine.recommendPlans({ ...fullAnswers, ...profile }).all
@@ -229,7 +241,7 @@ test('exemplo de desconto do Max permanece unitário para titular e acompanhante
     assert.equal(ticket.desconto, 0.65);
     assert.match(ticket.text, /Até 2 ingressos/);
     assert.match(ticket.text, /R\$ 150 por R\$ 52,50/);
-    assert.equal(engine.getTicketBenefit(plan, { ...fullAnswers, gamesPerYear: 30, kidsCount: 3 }).text, ticket.text);
+    assert.equal(engine.getTicketBenefit(plan, { ...fullAnswers, gamesPerYear: 30, kidsCount: 1 }).text, ticket.text);
 });
 
 test('taxas e preços de opcionais não entram no componente de preço nem no índice', () => {
@@ -351,10 +363,9 @@ test('ausência de plano elegível é explícita e não recomenda acima do teto'
     const result = engine.recommendPlans({ ...fullAnswers, budget: 5 });
     assert.equal(result.noEligible, true);
     assert.equal(result.winner, null);
-    assert.equal(result.recommendations.length, 3);
-    result.recommendations.forEach((item) => {
-        assert.equal(item.eligibility.withinBudget, false);
-    });
+    assert.deepEqual(result.recommendations, []);
+    assert.equal(result.all.length, 4);
+    assert.ok(result.all.every((item) => !item.eligibility.withinBudget));
     assert.equal(result.cheapest.plan.slug, 'meu-cruzeiro');
 });
 
@@ -419,13 +430,14 @@ test('exemplo documentado da fórmula: 10 jogos, histórico 10, Sicoob, teto 100
     const byslug = Object.fromEntries(result.all.map((item) => [item.plan.slug, item]));
 
     assert.deepEqual(result.eligible.map((item) => item.plan.slug), ['cabuloso', 'meu-cruzeiro', 'time-do-povo']);
-    assert.equal(byslug.cabuloso.score, 87.4);
-    assert.equal(byslug['time-do-povo'].score, 69.9);
+    // A retirada comercial muda somente a normalização de preço (máximo ativo 200).
+    assert.equal(byslug.cabuloso.score, 78.3);
+    assert.equal(byslug['time-do-povo'].score, 67);
     assert.equal(byslug['meu-cruzeiro'].score, 72.3);
-    assert.equal(byslug['cabuloso-max'].score, 78.7);
+    assert.equal(byslug['cabuloso-max'].score, 59.4);
     assert.equal(byslug['cabuloso-max'].eligibility.withinBudget, false);
     assert.equal(byslug.cabuloso.pricing.subscription, 100);
-    assert.equal(byslug['cabuloso-cativo'].sectorFit.level, 'partial');
+    assert.equal(byslug['cabuloso-cativo'], undefined);
 
     // O índice é exatamente a média ponderada dos componentes.
     result.all.forEach((item) => {

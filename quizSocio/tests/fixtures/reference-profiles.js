@@ -61,11 +61,11 @@ const profiles = [
         reason: 'A declaração expressa desejo de presença, não uma restrição obrigatória de garantia; garantia do Cativo e descontos com prioridade de Max/Cabuloso são alternativas aceitáveis.'
     },
     {
-        id: 'familia-kids', name: 'Um adulto e três crianças no setor popular',
-        answers: { gamesPerYear: 16, wantsGuaranteedTicket: false, kidsCount: 3, gameFrequency: 'frequent', budget: 100 },
+        id: 'familia-kids', name: 'Um adulto com interesse em incluir uma criança no setor popular',
+        answers: { gamesPerYear: 16, wantsGuaranteedTicket: false, kidsCount: 1, gameFrequency: 'frequent', budget: 100 },
         validationChanges: { gamesPerYear: 24, gamesHistory: 15 },
         acceptable: ['time-do-povo', 'cabuloso'],
-        expectedNeeds: { attendance: 'positive', adults: 0, kids: 3 },
+        expectedNeeds: { attendance: 'positive', adults: 0, kids: 1 },
         reason: 'Presença recorrente e Kids elegível admitem benefício popular ou desconto progressivo; o teto limita só a assinatura e o opcional é exposto por criança.'
     },
     {

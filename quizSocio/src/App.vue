@@ -1,6 +1,8 @@
 <template>
     <SiteFrame>
-        <main class="page">
+        <main class="page" ref="pageElement"
+            :class="{ 'page--results': section === 'results' }"
+            :style="{ '--question-space': questionSpace + 'px' }">
             <section v-if="section === 'hero'" class="hero quiz-screen">
                 <div class="hero-card" id="heroCard">
                     <p class="eyebrow">Quiz Sócio 5 Estrelas</p>
@@ -8,10 +10,14 @@
                     <button class="start-button" id="startButton" type="button" @click="startQuiz">Iniciar</button>
                 </div>
             </section>
-            <section v-else-if="section === 'quiz' || section === 'conflict'" class="quiz-card dynamic-section is-entering quiz-screen" aria-labelledby="quizTitle">
-                <div class="progress" aria-hidden="true"><div class="progress-bar" id="progressBar" :style="{ width: progress + '%' }"></div></div>
-                <div class="step-info"><span id="stepCounter">{{ section === 'conflict' ? 'Revisão de respostas' : `Pergunta ${step + 1} de ${motor.questions.length}` }}</span></div>
-                <h2 class="question" id="quizTitle" tabindex="-1">{{ section === 'conflict' ? 'Confira suas respostas' : question.title }}</h2>
+            <QuizCard v-else-if="section === 'quiz' || section === 'conflict'" class="quiz-screen"
+                :title="section === 'conflict' ? 'Confira suas respostas' : question.title"
+                :step-label="section === 'conflict' ? 'Revisão de respostas' : `Pergunta ${step + 1} de ${motor.questions.length}`"
+                :progress="progress" :error="error" :back-disabled="locked || (section === 'quiz' && step === 0)"
+                :next-disabled="locked || (section === 'quiz' && !validAnswer)"
+                :back-label="section === 'conflict' ? 'Revisar respostas' : 'Voltar'"
+                :next-label="section === 'conflict' ? 'Manter e ver resultado' : step === motor.questions.length - 1 ? 'Ver resultado' : 'Continuar'"
+                @back="back" @next="advance">
                 <div v-if="section === 'conflict'" class="options" id="options">
                     <div class="conflict-panel" role="alert">
                         <p class="conflict-intro">Algumas escolhas parecem diferentes:</p>
@@ -20,16 +26,7 @@
                     </div>
                 </div>
                 <QuizQuestion v-else :key="question.key" :question="question" :value="answers[question.key]" @answer="selectAnswer" />
-                <p class="field-error" id="fieldError" role="alert" :hidden="!error">{{ error }}</p>
-                <div class="quiz-actions">
-                    <button class="btn btn-secondary" id="backButton" type="button" :disabled="locked || (section === 'quiz' && step === 0)" @click="back">
-                        {{ section === 'conflict' ? 'Revisar respostas' : 'Voltar' }}
-                    </button>
-                    <button class="btn btn-primary" id="nextButton" type="button" :disabled="locked || (section === 'quiz' && !validAnswer)" @click="advance">
-                        {{ section === 'conflict' ? 'Manter e ver resultado' : step === motor.questions.length - 1 ? 'Ver resultado' : 'Continuar' }}
-                    </button>
-                </div>
-            </section>
+            </QuizCard>
             <section v-else-if="section === 'results'" class="results dynamic-section is-entering quiz-screen" id="results" aria-live="polite">
                 <article class="result-card">
                     <span class="result-badge">{{ winner ? 'Plano recomendado' : 'Nenhum plano no orçamento' }}</span>
@@ -37,7 +34,7 @@
                         <img id="resultLogo" :src="winner.plan.logo" :alt="`Logo do plano ${winner.plan.nome}`">
                         <div>
                             <p class="result-price" id="resultPrice">{{ contract.priceText }}</p>
-                            <p class="result-contract" id="resultContract">{{ contract.totalText }} · {{ contract.detail }}</p>
+                            <p class="result-contract" id="resultContract">{{ contract.detail }}</p>
                             <p class="result-contract" id="resultAdhesion">{{ winner.pricing.adhesion ? `Taxa única de adesão: ${motor.formatBRL(winner.pricing.adhesion)} (cobrada separadamente)` : 'Sem taxa de adesão' }}</p>
                         </div>
                     </div>
@@ -91,9 +88,12 @@
 import { computed, inject, nextTick, onMounted, ref } from 'vue';
 import SiteFrame from './components/SiteFrame.vue';
 import QuizQuestion from './components/QuizQuestion.vue';
+import QuizCard from './components/QuizCard.vue';
 import PlanCard from './components/PlanCard.vue';
 import ComparisonModal from './components/ComparisonModal.vue';
 import { createEventDispatcher } from './analytics.mjs';
+import { useQuizTransitions } from './composables/useQuizTransitions.js';
+import { useQuestionSpace } from './composables/useQuestionSpace.js';
 
 const motor = inject('motor');
 const config = inject('config');
@@ -106,6 +106,9 @@ const error = ref('');
 const conflicts = ref([]);
 const locked = ref(false);
 const comparisonOpen = ref(false);
+const pageElement = ref(null);
+const questionSpace = useQuestionSpace(pageElement, motor.questions, motor.getAnswerError);
+const transitions = useQuizTransitions(pageElement);
 let startedAt = 0;
 let shownAt = 0;
 
@@ -128,9 +131,15 @@ const summary = computed(() => {
 async function changeView(change, focus = '#quizTitle') {
     if (locked.value) return;
     locked.value = true;
+    const screenChange = section.value === 'hero' || section.value === 'results'
+        || (section.value === 'conflict' && focus === '#resultSummary');
+    const previous = await transitions.leave(screenChange);
     change();
-    await nextTick();
+    await transitions.enter(previous);
     document.querySelector(focus)?.focus({ preventScroll: true });
+    const behavior = transitions.reduceMotion() ? 'instant' : 'smooth';
+    if (section.value === 'results') pageElement.value?.querySelector('#results')?.scrollIntoView({ behavior, block: 'start' });
+    else if (section.value === 'hero') window.scrollTo({ top: 0, behavior });
     shownAt = performance.now();
     locked.value = false;
 }
@@ -162,6 +171,7 @@ function advance() {
     const value = answers.value[current.key];
     if (!motor.isAnswerValid(current, value)) {
         error.value = motor.getAnswerError(current);
+        nextTick(() => document.querySelector('#unknownToggle, #rangeInput, #options .option')?.focus({ preventScroll: true }));
         return;
     }
     return changeView(() => {

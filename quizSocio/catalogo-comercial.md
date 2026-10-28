@@ -1,6 +1,6 @@
 # Catálogo comercial — Sócio 5 Estrelas
 
-Fonte única das condições comerciais usadas pelo quiz, pelo motor de recomendação, pelos cards, pela tabela comparativa e pelos CTAs. Alterações de preço, setor, prioridade ou benefício devem começar aqui e depois ser refletidas em [`quiz-engine.js`](quiz-engine.js).
+Referência documental das condições comerciais aceitas. A fonte operacional é o [catálogo JSON](config/planos/catalogo.json), validado e incorporado ao build do quiz. Alterações comerciais exigem justificativa documental e revisão da configuração; assinatura, adesão e opcionais permanecem separados.
 
 ## Fonte e vigência
 
@@ -12,7 +12,7 @@ Fonte única das condições comerciais usadas pelo quiz, pelo motor de recomend
 | Consulta | 26/10/2026 |
 | Complemento | https://socio.cruzeiro.com.br/duvidas |
 | Tabela operacional de planos | https://socio.cruzeiro.com.br/planos (consultada em 26/10/2026) |
-| Versão no motor | `CATALOG_VERSION = 2026-09-11` |
+| Revisão operacional | [Manifesto da configuração](config/revision.json), independente da data da fonte oficial |
 
 Condições comerciais podem mudar sem aviso. Antes de publicar uma alteração, repetir a conferência na fonte oficial e atualizar a data de consulta neste documento e no motor.
 
@@ -20,12 +20,15 @@ Condições comerciais podem mudar sem aviso. Antes de publicar uma alteração,
 
 1. Só campos confirmados na fonte vigente entram em recomendação, cards, comparativo e CTA.
 2. Campos sem confirmação ficam registrados em **Campos pendentes** e não são promovidos a benefício.
-3. Garantia de ingresso é diferente de prioridade de compra. O Cabuloso Cativo tem ingresso garantido; os demais planos têm prioridade, sempre sujeita a disponibilidade.
+3. Garantia de ingresso é diferente de prioridade de compra. Os quatro planos ativos oferecem prioridade sujeita à disponibilidade; nenhum deles promete ingresso garantido por jogo.
 4. O ingresso do Time do Povo é **popular** (menor valor de venda online da arquibancada), não um ingresso fixo de R$ 40.
-5. A modalidade exibida é a modalidade de cobrança vigente na tabela operacional. Em 26/10/2026, os quatro planos mensais só permitiam cobrança semestral ou anual; o valor mensal é referência. O Cativo é exclusivamente anual.
-6. Valores de ingresso usados no custo de uso (`R$ 150` cheio e `R$ 40` popular) são **premissas de simulação**, não preços oficiais universais. O resultado identifica essas premissas.
+5. O recomendador exibe o valor mensal de referência, sem total anual ou parcelamento. Em 26/10/2026, os quatro planos só permitiam cobrança semestral ou anual; a referência mensal não representa uma modalidade de cobrança mensal. A modalidade real e os valores contratuais permanecem registrados no catálogo e no checkout.
+6. A [ADR-0001](docs/adr/0001-valores-e-taxas-separados.md) mantém assinatura, adesão, opcionais e ingressos separados. R$ 150 é apenas base do exemplo unitário de desconto; não existe projeção de gasto mensal nem ingresso popular fixado em R$ 40.
+7. O item 12.2 do Termo de Uso confirma ingresso de Kids aprovado sem custo adicional, no setor do titular, mediante disponibilidade e aquisição do ingresso do titular. O opcional é apresentado separadamente por R$ 30/mês por criança, com essas condições; elegibilidade é para menores de 12 anos.
 
 ## Matriz comercial confirmada
+
+A revisão de quatro planos foi solicitada pelo usuário na spec de migração. A [revisão histórica de cinco planos](docs/history/catalogo-comercial-cinco-planos-2026-10-27.md) foi preservada; o plano retirado não permanece como oferta pendente ou invisível.
 
 ### Meu Cruzeiro
 
@@ -92,23 +95,6 @@ Condições comerciais podem mudar sem aviso. Antes de publicar uma alteração,
 | Kids | Opcional: R$ 30/mês por criança, até 3 menores de 12 anos |
 | PcD | Não |
 
-### Cabuloso Cativo
-
-| Campo | Condição |
-|---|---|
-| Preço | R$ 4.800 no total, em até 12x de R$ 400 sem juros |
-| Modalidade | Exclusivamente anual (à vista ou parcelado) |
-| Taxa de adesão | Sem taxa |
-| Ingresso | 1 ingresso garantido por jogo, de uso pessoal e intransferível, no Sicoob — Leste Inferior, temporada 2026 |
-| Setores | Sicoob — Leste Inferior |
-| Prioridade | Não se aplica: ingresso garantido e carregado automaticamente |
-| Loja | Até 10% em produtos e serviços oficiais |
-| Conteúdo, quiz e votação | Sim |
-| Carteirinha | Virtual |
-| Kids | Opcional: R$ 30/mês por criança, até 3 menores de 12 anos |
-| PcD | Não |
-| Cancelamento | Multa de 30% sobre a vigência restante, além da diferença entre ingressos utilizados e o valor do plano |
-
 ## Conferência operacional da oferta
 
 A tabela pública de planos (`/planos`, consultada em 26/10/2026) expõe os seguintes dados:
@@ -120,7 +106,7 @@ A tabela pública de planos (`/planos`, consultada em 26/10/2026) expõe os segu
 | Cabuloso | 10 | R$ 100 | R$ 1.200 | Não permitida | Permitida | Permitida | Anual |
 | Cabuloso Max | 11 | R$ 200 | R$ 2.400 | Não permitida | Permitida | Permitida | Anual |
 
-A mesma tabela confirma Time do Povo com prioridade 4, loja de até 10% e “1 ingresso popular”. O Cabuloso Cativo (`plano_id=115`) não apareceu na tabela pública nessa consulta; suas condições continuam as do Termo de Uso, mas a disponibilidade da oferta deve ser conferida no checkout.
+A mesma tabela confirma Time do Povo com prioridade 4, loja de até 10% e “1 ingresso popular”.
 
 O Termo de Uso descreve as modalidades mensal, semestral e anual, mas o item 1.2.2 atribui ao usuário a conferência das modalidades disponíveis no momento da adesão e o item 1.2.3 admite indisponibilidade temporária. Por isso, a interface apresenta a cobrança vigente (semestral ou anual) e mantém o valor mensal apenas como referência de comparação e de orçamento.
 
@@ -133,12 +119,9 @@ Os destinos de contratação usam o plano e o intervalo vigentes. A abertura dos
 | Time do Povo — loja | Até 15% | Até 10% | Reduz o componente de desconto; deixa de empatar com Cabuloso e Max nesse atributo |
 | Time do Povo — prioridade | 3 | 4 | Piora relativa na compra; deixa de ser apresentado como vantagem sobre o Meu Cruzeiro |
 | Time do Povo — conteúdo e votação | Não | Sim | Passa a pontuar em experiências e conteúdo como os demais planos |
-| Time do Povo — ingresso | “Todo jogo por R$ 40” | 1 ingresso popular pelo menor valor online, mediante disponibilidade | Remove a promessa de preço fixo; o custo usa premissa de R$ 40 apenas como exemplo |
+| Time do Povo — ingresso | “Todo jogo por R$ 40” | 1 ingresso popular pelo menor valor online, mediante disponibilidade | Remove a promessa de preço fixo; informa benefício popular com valor variável por jogo |
 | Meu Cruzeiro — link | Checkout com `intervalo_cobrancas=anual` e preço mensal | Cobrança anual, com valor mensal apenas como referência | Alinha o destino à modalidade vigente e evita anunciar mensalidade como cobrança disponível |
 | Modalidade dos quatro planos | “Mensal, semestral ou anual” | Cobrança semestral ou anual; valor mensal de referência | Corrige a disponibilidade operacional sem perder a comparação mensal usada no orçamento |
-| Cabuloso Cativo — preço | R$ 400/mês | R$ 4.800 em 12x de R$ 400, somente anual | Corrige a modalidade e deixa o compromisso anual explícito no card e no comparativo |
-| Cabuloso Cativo — link | `intervalo_cobrancas=mensal` | `intervalo_cobrancas=anual` | Alinha o checkout à única modalidade confirmada |
-| Cabuloso Cativo — setor | “Azul Inferior” genérico | Sicoob — Leste Inferior | Permite comparar com a preferência de setor e sinalizar incompatibilidade |
 | Cabuloso — prioridade | Lista de níveis sem uso no ranking | Prioridade derivada do nível 1/2/3 | Torna prioridade e desconto coerentes com o histórico informado |
 | Cabuloso Max — exemplo de preço | “R$ 150 por R$ 52” | 65% sobre R$ 150 = R$ 52,50 | Corrige arredondamento; o card usa o percentual e o valor calculado |
 | Todos — desconto em parceiros | `true` sem confirmação | Não confirmado na fonte | Removido dos benefícios e mantido como campo pendente |
@@ -148,14 +131,25 @@ Os destinos de contratação usam o plano e o intervalo vigentes. A abertura dos
 | Campo | Situação | Tratamento |
 |---|---|---|
 | Desconto em parceiros | Não confirmado no Termo de Uso consultado | Registrado em `camposPendentes`; não é exibido nem pontuado |
-| Disponibilidade do Cabuloso Cativo | Plano não listado na tabela pública `/planos` em 26/10/2026 | Condições mantidas pelo Termo; CTA sujeito à oferta e disponibilidade no checkout. Decisão do responsável pelo quiz em 26/10/2026: manter com aviso até a confirmação do responsável comercial |
 | Disponibilidade de setores por jogo | Definida pelo clube e variável | Textos usam “mediante disponibilidade”; o quiz não promete setor esgotado |
-| Preço efetivo do ingresso popular | Varia por jogo e venda | Custo de uso usa premissa de R$ 40, identificada como simulação |
-| Preço efetivo do ingresso inteiro | Varia por jogo e setor | Custo de uso usa premissa de R$ 150, identificada como simulação |
-| Cobertura de ingresso pelo opcional Kids | O Termo descreve o opcional e o preço, mas não se inclui ingresso da criança | Custo de uso não inclui ingresso das crianças; o resultado informa a exclusão |
+| Preço efetivo do ingresso popular | Varia por jogo e venda | Valor variável por jogo; o quiz apresenta a condição popular sem fixar preço |
+| Preço efetivo do ingresso inteiro | Varia por jogo e setor | R$ 150 aparece somente na base identificada do exemplo unitário de desconto |
+
+## Reconferência do opcional Kids em 26/10/2026
+
+O item 12.2 do [Termo de Uso](https://socio.cruzeiro.com.br/pt-BR/paginas/termo-de-uso) confirma o ingresso sem custo adicional após aprovação do opcional, sujeito à disponibilidade e ao ingresso do titular no mesmo setor. A pendência anterior sobre cobertura foi resolvida pela fonte. O quiz informa o preço por criança e o benefício de ingresso separadamente, sem somá-los à assinatura; aprovação e disponibilidade real continuam a cargo do programa.
 
 ## Conferência rápida
 
+### Fonte indicada pelo usuário — 27/10/2026
+
+O usuário indicou a [página oficial de planos](https://socio.cruzeiro.com.br/planos) como referência comercial. Sua leitura acessível exibiu a estrutura da página; os detalhes foram complementados pelas páginas oficiais de entrada, Termo de Uso, dúvidas e Kids. A [referência documental versionada](tests/fixtures/official-commercial-reference.json) registra os fatos conferidos e é comparada com o catálogo em `tests/verification.test.mjs`.
+
+O regulamento admite mensal, semestral e anual para os quatro planos de assinatura. As tentativas automatizadas anteriores terminaram em fila, mas o usuário confirmou posteriormente a validação do QUIZ-003 e os preços corretos. O [aceite vigente](tickets/concluidos/003-modalidade-e-checkout.md#aceite-vigente--27102026) encerra essa pendência; valores e URLs foram preservados.
+
+### Comandos
+
 - `node --test tests/engine.test.js` valida catálogo, níveis, setores, custos e vínculos de checkout.
 - `node --test tests/reference.test.js` valida as metas de qualidade definidas no QUIZ-009.
+- `node --test tests/verification.test.mjs` verifica a referência documental e os comandos de diagnóstico/preparo.
 - A tabela comparativa e os cards devem ser conferidos contra esta matriz em qualquer alteração comercial.

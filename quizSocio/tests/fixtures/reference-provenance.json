@@ -1,0 +1,16 @@
+{
+  "kind": "synthetic-regression",
+  "independentValidation": false,
+  "reason": "Cenários e motor foram elaborados na mesma etapa e o conjunto chamado reserva já foi consultado durante a evolução do ranking. A partição atual permite regressão, mas não comprova avaliação independente.",
+  "thresholds": {
+    "top1": 0.8,
+    "top3": 0.95,
+    "violations": 0
+  },
+  "pending": null,
+  "currentReference": "reference-profiles.js",
+  "currentReferenceProvenance": "reference-profiles-provenance.json",
+  "evaluationCompletedOn": "2026-10-27",
+  "evaluationReport": "tickets/evidencias/010-A/perfis-final.json",
+  "validationStatus": "synthetic-evaluated"
+}

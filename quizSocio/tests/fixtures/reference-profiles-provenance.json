@@ -7,10 +7,14 @@
   "source": "quiz-engine.js, referência comercial aceita e políticas do QUIZ-009",
   "profileCount": 8,
   "scenarioCount": 16,
-  "sha256": "a3f73bebe683b37c55efa6cf96b07815d2d4a311da79b1ef68ad8062dad53270",
+  "sha256": "a6e5122518a1392835e2574375cae543378c370caac329969a4ef7571e0bcd97",
   "frozenBefore": "Avaliação dos vencedores e eventual ajuste do ranking no QUIZ-010-A",
   "limitation": "Calibração e validação são partições sintéticas elaboradas pelo mesmo agente; não constituem avaliação externa, cega ou com usuários reais.",
   "evaluationCompletedOn": "2026-10-27",
   "evaluationReport": "tickets/evidencias/010-A/perfis-final.json",
-  "validationStatus": "synthetic-evaluated"
+  "validationStatus": "synthetic-reference-revised-requires-evaluation",
+  "previousSha256": "a3f73bebe683b37c55efa6cf96b07815d2d4a311da79b1ef68ad8062dad53270",
+  "previousReference": "tests/fixtures/history/before-binary-kids/reference-profiles.cjs",
+  "revisedOn": "2026-10-28",
+  "revision": "Pergunta binária autorizada: interesse em incluir uma criança. Aceitáveis e partições preservados; nenhum resultado do motor foi usado para mudar expectativas."
 }

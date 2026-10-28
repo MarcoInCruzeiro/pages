@@ -1,16 +1,16 @@
 {
-  "catalogVersion": "2026-10-28.1",
-  "rulesVersion": "2026-10-28.2",
-  "ga4Version": "2026-10-28.2",
+  "catalogVersion": "2026-10-28.2",
+  "rulesVersion": "2026-10-28.4",
+  "ga4Version": "2026-10-28.3",
   "hashes": {
     "catalog": "8deb97d4dc4e561e9c054be01866965615c1b08d51c851cecc56af8543952b1e",
-    "questions": "3f7a46263d2c95e3634c2974e505bb170af6bf26b4902b1d9570f59a48177478",
+    "questions": "b240eb9e9c8630f26875643e240e8a3e36ead785180261ac9b5cda9fb9dea20e",
     "ranking": "919d5fd87b99316c905f3bec49f3cd4ce79056a939ed8a5b808c7b75ecdd1b97",
     "profile": "58dcecda5c785370632e834fff121200222aa57b7770867408863ddb3813dcdb",
     "ga4": "07cacb43a39652c5d2786fd8823659545bdd1fc3b913401d7b0e752c45a93824",
-    "engine": "ddb4b8374a08628e46229535fc5d8fc7a5ebe959ddc072f8f8c2140560391751",
+    "engine": "6651ee254f759585e88add4b034d19c4bd0cb4bb0247f38a2911ffd4e5857fc4",
     "schemas": "bee191332bd0320ec3b6622b862586d867af7efefd792f226a8d7f071ac64b8b",
-    "rules": "daab5a214ca4a565cbf75f20a60dd8cf25b102df6172c16338b7cabd35361666",
-    "aggregate": "d1bf02c59bdd94f5d38a588418289b738d6662301daa288c128da62fa35b65a6"
+    "rules": "334a7f1ab4347ce44d5d52e4f6775cf4115e7bec2f0fbff931b556f954e52f7e",
+    "aggregate": "5378e5392ae34ec9f724807850bdc0f85702c3221a3b0268931e048a50550669"
   }
 }

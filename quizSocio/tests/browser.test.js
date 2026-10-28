@@ -620,13 +620,36 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
 
         assert.match(await evaluate(() => document.querySelector('#resultLogo').alt), /Meu Cruzeiro/);
         assert.match(await text('#resultPrice'), /R\$\s*12,00.*mês/);
-        assert.match(await text('#resultContract'), /Total anual/);
+        assert.match(await text('#resultContract'), /Valor mensal de referência/);
         assert.match(await text('#results'), /ingresso gratuito por temporada/i);
         assert.match(await text('#resultAdhesion'), /Taxa única de adesão|Sem taxa de adesão/);
-        assert.doesNotMatch(await text('#results'), /Custo de uso estimado|primeiro mês|custo total/i);
+        assert.doesNotMatch(await text('#results'), /Custo de uso estimado|primeiro mês|custo total|total anual|\d+x\s*R\$/i);
         assert.match(await text('.sector-warning'), /Atenção ao setor/);
         assert.match(await text('.sector-warning'), /Não cobre Roxo/i);
         assert.match(await text('.sector-warning'), /Não há alternativa que atenda ao setor dentro do orçamento/i);
+    });
+
+    it('Kids oferece Sim/Não, preserva a escolha ao voltar e registra valores 0/1', async () => {
+        await setup();
+        await startQuiz();
+        for (let index = 0; index < 4; index++) {
+            await applyAnswer(NORMAL_ANSWERS[index]);
+            await click('#nextButton');
+            await waitStep(index + 2);
+        }
+        assert.deepEqual(await evaluate(() => [...document.querySelectorAll('.option-label')].map((label) => label.textContent)), ['Não', 'Sim']);
+        for (const index of [1, 0]) {
+            await applyAnswer({ type: 'option', index });
+            await click('#nextButton');
+            await waitStep(6);
+            const event = (await getEvents('quiz_answer')).at(-1);
+            assert.equal(event.params.quiz_question, 'kidsCount');
+            assert.equal(event.params.quiz_answer, String(index));
+            assert.equal(event.params.quiz_answer_label, index ? 'Sim' : 'Não');
+            await click('#backButton');
+            await waitStep(5);
+            assert.equal(await evaluate(() => document.querySelector('.option.selected').dataset.optionIndex), String(index));
+        }
     });
 
     it('casal com Kids vê assinatura, adesão, opcional e exemplo de ingresso separados', async () => {
@@ -635,7 +658,7 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         const answers = NORMAL_ANSWERS.map((answer) => ({ ...answer }));
         answers[0] = { type: 'range', value: 12 };
         answers[3] = { type: 'option', index: 0 };
-        answers[4] = { type: 'option', index: 2 };
+        answers[4] = { type: 'option', index: 1 };
         answers[11] = { type: 'option', index: 2 };
         await runQuiz(answers);
         await waitResults();
@@ -652,7 +675,7 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         assert.equal(await evaluate(() => document.querySelectorAll('.plan-cost').length), 0);
     });
 
-    it('comparativo apresenta a matriz oficial, contrato anual e checkout correto', async () => {
+    it('comparativo apresenta a matriz oficial, referência mensal e checkout correto', async () => {
         await openPage('?preview');
         await waitResults();
 
@@ -685,8 +708,11 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         assert.match(columns['Time do Povo']['Prioridade / garantia'], /Prioridade 4/);
         assert.match(columns['Time do Povo']['Conteúdo e votação'], /✓/);
         assert.match(columns['Time do Povo']['Benefício de ingresso'], /popular/i);
-        assert.match(columns['Time do Povo']['Contratação'], /semestral ou anual/i);
-        assert.match(columns['Time do Povo']['Preço'], /Total anual/);
+        assert.match(columns['Time do Povo']['Contratação'], /Valor mensal de referência/i);
+        for (const column of Object.values(columns)) {
+            assert.match(column['Preço'], /R\$\s*[\d,.]+ \/ mês/);
+            assert.doesNotMatch(Object.values(column).join(' '), /total anual|\d+x\s*R\$/i);
+        }
 
         assert.equal(columns['Cabuloso Cativo'], undefined, 'o plano removido não aparece no comparativo');
         assert.match(columns['Cabuloso Max']['Taxa de adesão'], /R\$\s*30,00/);
@@ -753,6 +779,204 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         // navegação existe mas o evento permanece suprimido (coleta desligada).
         const foco = await evaluate(() => getComputedStyle(document.querySelector('#subscribeButton')).outlineWidth);
         assert.notEqual(foco, '0px', 'foco do CTA deve ser visível');
+    });
+
+    it('abertura mantém o rodapé abaixo da área reservada às perguntas', async () => {
+        await page.send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 1000, deviceScaleFactor: 1, mobile: false });
+        try {
+            await setup();
+            const geometry = await evaluate(() => ({
+                footerBottom: document.querySelector('#rodape').getBoundingClientRect().bottom,
+                footerTop: document.querySelector('#rodape').getBoundingClientRect().top,
+                mainBottom: document.querySelector('main').getBoundingClientRect().bottom,
+                documentBottom: document.documentElement.scrollHeight,
+                viewport: innerHeight,
+                appDisplay: getComputedStyle(document.querySelector('#app')).display,
+                appDirection: getComputedStyle(document.querySelector('#app')).flexDirection
+            }));
+            assert.equal(geometry.appDisplay, 'flex');
+            assert.equal(geometry.appDirection, 'column');
+            assert.ok(geometry.footerTop >= geometry.mainBottom, 'rodapé deve ficar abaixo do conteúdo reservado');
+            assert.ok(geometry.footerBottom >= geometry.viewport - 1, 'página deve preencher pelo menos a tela');
+            assert.ok(Math.abs(geometry.footerBottom - geometry.documentBottom) <= 1, 'não deve sobrar faixa vazia abaixo do rodapé');
+        } finally {
+            await page.send('Emulation.clearDeviceMetricsOverride');
+        }
+    });
+
+    it('rodapé mantém a posição nas 12 perguntas e libera a altura no resultado', async () => {
+        await page.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
+        try {
+            for (const viewport of [{ width: 1280, height: 900, mobile: false }, { width: 390, height: 844, mobile: true }]) {
+                await page.send('Emulation.setDeviceMetricsOverride', { ...viewport, deviceScaleFactor: 1 });
+                await setup();
+                const footerPosition = () => evaluate(() => document.querySelector('#rodape').getBoundingClientRect().top + scrollY);
+                const initial = await footerPosition();
+                await startQuiz();
+                for (let index = 0; index < NORMAL_ANSWERS.length; index++) {
+                    await waitStep(index + 1);
+                    assert.ok(Math.abs(await footerPosition() - initial) <= 1,
+                        `rodapé deve permanecer no mesmo ponto na pergunta ${index + 1}, largura ${viewport.width}`);
+                    const space = await evaluate(() => {
+                        const main = document.querySelector('main');
+                        const style = getComputedStyle(main);
+                        return { main: main.getBoundingClientRect().height,
+                            card: document.querySelector('.quiz-card').getBoundingClientRect().height,
+                            padding: parseFloat(style.paddingTop) + parseFloat(style.paddingBottom) };
+                    });
+                    assert.ok(space.main >= space.card + space.padding - 1, 'o espaço reservado deve conter o card e seus paddings');
+                    await applyAnswer(NORMAL_ANSWERS[index]);
+                    await click('#nextButton');
+                }
+                await waitResults();
+                assert.ok(await footerPosition() > initial, 'resultado deve expandir a página conforme seu conteúdo');
+                assert.equal(await evaluate(() => {
+                    const footer = document.querySelector('#rodape').getBoundingClientRect();
+                    const results = document.querySelector('#results').getBoundingClientRect();
+                    return footer.top >= results.bottom;
+                }), true, 'rodapé não sobrepõe o resultado');
+                await click('#restartButton');
+                await page.waitFor('Boolean(document.querySelector("#startButton")) && document.activeElement.id === "startButton"');
+                // Focus follows Vue's DOM update; geometry is checked after the
+                // browser has painted the restored height, even with reduced motion.
+                await page.evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))', true);
+                const restarted = await footerPosition();
+                assert.ok(Math.abs(restarted - initial) <= 1,
+                    `refazer recupera a altura reservada: início ${initial}, retorno ${restarted}, largura ${viewport.width}`);
+            }
+        } finally {
+            await page.send('Emulation.clearDeviceMetricsOverride');
+            await page.send('Emulation.setEmulatedMedia', { features: [] });
+        }
+    });
+
+    it('altura reservada se adapta ao redimensionar durante as perguntas', async () => {
+        await page.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
+        try {
+            await page.send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false });
+            await setup();
+            await startQuiz();
+            for (let index = 0; index < 4; index++) {
+                await applyAnswer(NORMAL_ANSWERS[index]);
+                await click('#nextButton');
+                await waitStep(index + 2);
+            }
+            const footerPosition = () => evaluate(() => document.querySelector('#rodape').getBoundingClientRect().top + scrollY);
+            const desktop = await footerPosition();
+            const desktopSpace = await evaluate(() => document.querySelector('main').getBoundingClientRect().height);
+            await page.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+            // ResizeObserver measures the new wrapping and Vue then applies the
+            // reservation. Wait for that update before comparing painted geometry.
+            await page.waitFor(`parseFloat(getComputedStyle(document.querySelector('main')).getPropertyValue('--question-space')) > ${desktopSpace}`);
+            await page.evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))', true);
+            const mobile = await footerPosition();
+            assert.ok(mobile > desktop, 'quebras de linha no celular exigem mais espaço');
+            await click('#backButton');
+            await waitStep(4);
+            await page.evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))', true);
+            const shorterQuestion = await footerPosition();
+            assert.ok(Math.abs(shorterQuestion - mobile) <= 1,
+                `a reserva recalculada é mantida na pergunta mais curta: ${mobile} → ${shorterQuestion}`);
+            await page.send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false });
+            await page.waitFor(`parseFloat(getComputedStyle(document.querySelector('main')).getPropertyValue('--question-space')) === ${desktopSpace}`);
+            await page.evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))', true);
+            assert.ok(Math.abs(await footerPosition() - desktop) <= 1, 'voltar ao desktop recupera a reserva adequada');
+        } finally {
+            await page.send('Emulation.clearDeviceMetricsOverride');
+            await page.send('Emulation.setEmulatedMedia', { features: [] });
+        }
+    });
+
+    it('opções preservam título destacado e descrição em outra linha', async () => {
+        await setup();
+        await startQuiz();
+        await click('#nextButton');
+        await waitStep(2);
+        await applyAnswer({ type: 'unknown' });
+        await click('#nextButton');
+        await waitStep(3);
+        const hierarchy = await evaluate(() => [...document.querySelectorAll('.option')].map((option) => {
+            const title = option.querySelector('strong');
+            const description = option.querySelector('.option-description');
+            return {
+                title: title?.textContent,
+                block: title && getComputedStyle(title).display,
+                titleColor: title && getComputedStyle(title).color,
+                mainColor: getComputedStyle(option).color,
+                weight: title && parseInt(getComputedStyle(title).fontWeight),
+                separateLine: title && description.getBoundingClientRect().top >= title.getBoundingClientRect().bottom
+            };
+        }));
+        assert.equal(hierarchy.length, 3);
+        for (const option of hierarchy) {
+            assert.ok(option.title);
+            assert.equal(option.block, 'block');
+            assert.equal(option.titleColor, option.mainColor);
+            assert.ok(option.weight >= 600);
+            assert.equal(option.separateLine, true);
+        }
+    });
+
+    it('desmarcar histórico desconhecido recupera a quantidade anterior', async () => {
+        await setup();
+        await startQuiz();
+        await click('#nextButton');
+        await waitStep(2);
+        await applyAnswer({ type: 'range', value: 17 });
+        await click('#unknownToggle');
+        assert.equal(await evaluate(() => document.querySelector('#rangeInput').disabled), true);
+        assert.equal(await evaluate(() => document.querySelector('#rangeInput').value), '17');
+        await click('#unknownToggle');
+        assert.equal(await evaluate(() => document.querySelector('#rangeInput').disabled), false);
+        assert.match(await text('#rangeOutput'), /^17\s*jogos$/i);
+        await click('#nextButton');
+        await waitStep(3);
+        assert.equal((await getEvents('quiz_answer')).at(-1).params.quiz_answer, '17');
+    });
+
+    it('comparativo mantém preços destacados e avisos discretos acima do orçamento', async () => {
+        await setup();
+        await startQuiz();
+        await runQuiz(BUDGET_PURPLE_ANSWERS);
+        await waitResults();
+        await click('#compareButton');
+        await page.waitFor('document.querySelector("#comparisonModal")?.classList.contains("is-open")', 5000);
+        const cells = await evaluate(() => {
+            const rows = [...document.querySelectorAll('.comparison-table tbody tr')];
+            const price = rows.find((row) => row.firstElementChild.textContent.trim() === 'Preço');
+            const ticket = rows.find((row) => row.firstElementChild.textContent.trim() === 'Benefício de ingresso');
+            return {
+                prices: price.querySelectorAll('strong').length,
+                totals: price.querySelectorAll('br + .comparison-detail').length,
+                ticketChecks: ticket.querySelectorAll('.comparison-check').length,
+                sectorBreaks: ticket.querySelectorAll('.comparison-detail br').length,
+                muted: [...document.querySelectorAll('.plan-badge-muted')].map((badge) => badge.textContent.trim())
+            };
+        });
+        assert.equal(cells.prices, 4);
+        assert.equal(cells.totals, 4);
+        assert.equal(cells.ticketChecks, 4);
+        assert.equal(cells.sectorBreaks, 4);
+        assert.deepEqual(cells.muted, ['Acima do orçamento', 'Acima do orçamento']);
+    });
+
+    it('concluir e refazer reposicionam a leitura no celular', async () => {
+        await page.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 600, deviceScaleFactor: 1, mobile: true });
+        try {
+            await setup();
+            await startQuiz();
+            await runQuiz(NORMAL_ANSWERS);
+            await waitResults();
+            await page.waitFor('document.querySelector("#results").getBoundingClientRect().top <= 125', 5000);
+            await evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+            assert.ok(await evaluate(() => window.scrollY > 100));
+            await click('#restartButton');
+            await page.waitFor('Boolean(document.querySelector("#startButton"))', 5000);
+            await page.waitFor('window.scrollY <= 1', 5000);
+            assert.equal(await evaluate(() => document.activeElement.id), 'startButton');
+        } finally {
+            await page.send('Emulation.clearDeviceMetricsOverride');
+        }
     });
 
     it('mobile e desktop não têm rolagem horizontal inesperada', async () => {

@@ -4,5 +4,10 @@ estrutura_quiz.md
 catalogo-comercial.md
 # backlog local de correções, fora do site
 tickets/
-# testes e ferramentas locais, fora do site
-tests/
+# Os testes/fixtures e scripts são insumos do build validado.
+# Somente dist/ é servido; eles não entram na saída pública.
+# decisões e vocabulário internos, fora do site
+docs/
+GLOSSARY.md
+# Snapshots, rascunhos e backups locais não são enviados ao build remoto.
+.scratch/

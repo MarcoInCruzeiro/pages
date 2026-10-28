@@ -1,4 +1,6 @@
 .vercel
 .env*
 node_modules/
-tickets
+
+dist/
+.scratch/port-vue/config-candidates/

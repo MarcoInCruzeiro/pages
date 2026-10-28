@@ -24,7 +24,7 @@ const validators = {
 };
 const allowedValues = {
     wantsGuaranteedTicket: ['never', true, false], buysTwoTickets: [true, false],
-    kidsCount: [0, 1, 2, 3], needsPriority: [true, false], wantsParticipation: [true, false],
+    kidsCount: [0, 1], needsPriority: [true, false], wantsParticipation: [true, false],
     wantsStoreDiscount: [true, false], gameFrequency: ['always', 'frequent', 'occasional'],
     digitalExperience: [true, false], budget: [40, 100, 200, 400],
     preferredSector: ['yellow-orange', 'blue', 'purple']

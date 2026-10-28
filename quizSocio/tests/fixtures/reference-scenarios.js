@@ -81,10 +81,10 @@ const scenarios = [
     {
         id: 'CAL-06',
         split: 'calibracao',
-        category: 'casal com dois Kids',
-        answers: { ...base, gamesPerYear: 20, gamesHistory: 15, wantsGuaranteedTicket: true, buysTwoTickets: true, kidsCount: 2, needsPriority: true, wantsParticipation: true, wantsStoreDiscount: true, gameFrequency: 'always', digitalExperience: true, budget: 200, preferredSector: 'yellow-orange' },
+        category: 'casal com interesse em Kids',
+        answers: { ...base, gamesPerYear: 20, gamesHistory: 15, wantsGuaranteedTicket: true, buysTwoTickets: true, kidsCount: 1, needsPriority: true, wantsParticipation: true, wantsStoreDiscount: true, gameFrequency: 'always', digitalExperience: true, budget: 200, preferredSector: 'yellow-orange' },
         acceptable: ['cabuloso-max', 'cabuloso'],
-        reason: 'Dois adultos e duas crianças no Amarelo/Laranja admitem Max (dois ingressos) ou Cabuloso com Kids.'
+        reason: 'Dois adultos e interesse em incluir uma criança no Amarelo/Laranja admitem Max (dois ingressos) ou Cabuloso com Kids.'
     },
     {
         id: 'CAL-07',
@@ -228,9 +228,9 @@ const scenarios = [
         id: 'RES-12',
         split: 'reserva',
         category: 'premium com família',
-        answers: { ...base, gamesPerYear: 30, gamesHistory: 30, wantsGuaranteedTicket: true, buysTwoTickets: true, kidsCount: 3, needsPriority: true, wantsParticipation: true, wantsStoreDiscount: true, gameFrequency: 'always', digitalExperience: true, budget: 400, preferredSector: 'purple' },
+        answers: { ...base, gamesPerYear: 30, gamesHistory: 30, wantsGuaranteedTicket: true, buysTwoTickets: true, kidsCount: 1, needsPriority: true, wantsParticipation: true, wantsStoreDiscount: true, gameFrequency: 'always', digitalExperience: true, budget: 400, preferredSector: 'purple' },
         acceptable: ['cabuloso-max'],
-        reason: 'Casal, três Kids e preferência por Roxo exigem capacidade de dois ingressos e cobertura do setor.'
+        reason: 'Casal, interesse em incluir uma criança e preferência por Roxo exigem capacidade de dois ingressos e cobertura do setor.'
     },
 
     // -------------------------------------------------------------- contradição

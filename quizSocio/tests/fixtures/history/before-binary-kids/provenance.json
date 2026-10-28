@@ -1,0 +1,17 @@
+{
+  "kind": "derived-synthetic-reference",
+  "independentValidation": false,
+  "createdOn": "2026-10-28",
+  "change": "Remover exclusivamente cabuloso-cativo das listas de aceitáveis; respostas, razões, partições e necessidades permanecem históricas.",
+  "removedSlug": "cabuloso-cativo",
+  "references": {
+    "historical": {
+      "sourceSha256": "922518db19abf890461ce4ebb75638b5eae888b2115a3ea91493e59ca63c56c5",
+      "derivedSha256": "0c41aca5f5ceb669a9ec5e6d596998595d3f37a836e27b6c6b35f702f9f1dc73"
+    },
+    "profiles": {
+      "sourceSha256": "a3f73bebe683b37c55efa6cf96b07815d2d4a311da79b1ef68ad8062dad53270",
+      "derivedSha256": "8084a5a1768f4eee7eb947200a48c398a5fc35dbf3673ed40094489cbb9154a6"
+    }
+  }
+}

@@ -236,7 +236,7 @@ export function createEngine(configuration) {
             productos: clamp(productos, 0, 10),
             importanciaPreco: PRICE_IMPORTANCE_BY_BUDGET[answers.budget] ?? perfil.frecuencia.padrao,
             adultos: answers.buysTwoTickets === true ? perfil.adultos.true : perfil.adultos.false,
-            kids: Number.isInteger(answers.kidsCount) ? clamp(answers.kidsCount, 0, perfil.kids.max) : 0,
+            kids: answers.kidsCount === true ? 1 : (Number.isInteger(answers.kidsCount) ? clamp(answers.kidsCount, 0, perfil.kids.max) : 0),
             setorPreferido: answers.preferredSector || null
         };
     }
@@ -381,19 +381,13 @@ export function createEngine(configuration) {
 
     function getPlanContract(plan) {
         const c = plan.contratacao;
-        if (c.modalidadePrincipal === 'anual') {
-            return {
-                modalidade: 'anual',
-                priceText: `${c.parcelas}x ${formatBRL(c.valorParcela)}`,
-                totalText: `Total ${formatBRL(c.valorTotal)}`,
-                detail: `Contratação anual em ${c.parcelas}x ${formatBRL(c.valorParcela)} sem juros`
-            };
-        }
+        // Sempre exibe apenas o valor mensal de referência; nunca exibe
+        // valor anual nem parcelamento, independentemente da modalidade.
         return {
-            modalidade: 'anual',
-            priceText: `${formatBRL(c.precoMensal)} / mês (referência)`,
-            totalText: `Total anual: ${formatBRL(c.precoMensal * 12)}`,
-            detail: 'Cobrança semestral ou anual; valor mensal de referência'
+            modalidade: c.modalidadePrincipal,
+            priceText: `${formatBRL(c.precoMensalEquivalente)} / mês`,
+            totalText: 'Valor mensal de referência',
+            detail: 'Valor mensal de referência para comparação e orçamento'
         };
     }
 

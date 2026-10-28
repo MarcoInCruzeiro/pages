@@ -101,8 +101,12 @@
             padding: 32px 0;
             position: relative;
             z-index: 1;
-            min-height: 450px;
+            min-height: max(450px, var(--question-space, 450px));
             flex: 1;
+        }
+
+        .page--results {
+            min-height: 450px;
         }
 
         .page>section {
@@ -834,7 +838,9 @@
             font-weight: 700;
             font-size: 1rem;
             color: var(--branco);
-            margin-bottom: 2px;
+            margin: 0 0 2px;
+            line-height: 1.12;
+            letter-spacing: 0;
         }
 
         .comparison-table thead th .plan-monthly {
@@ -2144,8 +2150,6 @@
         }
     
 /* Vue maintains the accepted layout while the view state changes. */
-#app { min-height: 100vh; }
-.quiz-screen { animation: quizFadeIn 180ms ease-out; }
-@keyframes quizFadeIn { from { opacity: 0; } to { opacity: 1; } }
+#app { min-height: 100vh; display: flex; flex-direction: column; }
 .modal-overlay:not(.is-open) { visibility: hidden; pointer-events: none; }
 .modal-overlay.is-open { visibility: visible; }

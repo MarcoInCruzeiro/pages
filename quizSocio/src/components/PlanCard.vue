@@ -6,7 +6,6 @@
             <div><p class="result-price">{{ contract.priceText }}</p><small>{{ contract.detail }}</small></div>
         </div>
         <div class="plan-content">
-            <p class="plan-total">{{ contract.totalText }}</p>
             <p class="plan-fee">{{ evaluation.pricing.adhesion ? `Taxa única de adesão: ${motor.formatBRL(evaluation.pricing.adhesion)} (cobrada separadamente)` : 'Sem taxa de adesão' }}</p>
             <ul class="benefits-list"><li v-for="benefit in motor.getPlanBenefits(plan, answers)" :key="benefit">{{ benefit }}</li></ul>
             <p v-if="evaluation.sectorFit.level === 'partial'" class="plan-sector-note">Cobre parte do setor {{ evaluation.sectorFit.label }}.</p>
@@ -29,9 +28,11 @@ const contract = computed(() => motor.getPlanContract(plan.value));
 const score = (value) => Number(value).toLocaleString('pt-BR', { maximumFractionDigits: 1 });
 const badge = computed(() => !props.evaluation.eligibility.withinBudget ? 'Acima do orçamento'
     : props.index === 0 ? 'Recomendado' : props.index === 1 && props.result.closeCall ? 'Também recomendado' : 'Alternativo');
+const pointsBehind = computed(() => props.result.winner
+    ? Math.round((props.result.winner.score - props.evaluation.score) * 10) / 10 : null);
 const scoreNote = computed(() => !props.evaluation.eligibility.withinBudget ? ' · acima do orçamento de assinatura'
     : props.index === 0 ? ' · maior afinidade estimada'
-        : ` · ${score(props.result.winner.score - props.evaluation.score)} pontos abaixo do recomendado`);
+        : ` · ${score(pointsBehind.value)} ${pointsBehind.value === 1 ? 'ponto' : 'pontos'} abaixo do recomendado`);
 function subscribe(event) {
     if (!event.currentTarget.hasAttribute('href')) return event.preventDefault();
     emit('subscribe', plan.value, 'lista');

@@ -12,15 +12,25 @@
                         <thead><tr>
                             <th class="comparison-feature-label">Planos</th>
                             <th v-for="plan in motor.plans" :key="plan.slug" :class="highlight(plan)">
-                                <h2 class="plan-name">{{ plan.nome }}</h2>
-                                <span v-if="badge(plan)" class="plan-badge">{{ badge(plan) }}</span>
+                                <h3 class="plan-name">{{ plan.nome }}</h3>
+                                <span v-if="badge(plan)" class="plan-badge" :class="{ 'plan-badge-muted': aboveBudget(plan) }">{{ badge(plan) }}</span>
                             </th>
                         </tr></thead>
                         <tbody>
                             <tr v-for="feature in features" :key="feature.label">
                                 <td class="comparison-feature-label">{{ feature.label }}</td>
-                                <td v-for="plan in motor.plans" :key="plan.slug" :class="highlight(plan)">
-                                    <span class="comparison-detail">{{ feature.value(plan) }}</span>
+                                <td v-for="cell in feature.cells" :key="cell.slug" :class="cell.highlight">
+                                    <template v-if="cell.kind === 'price'">
+                                        <strong>{{ cell.text }}</strong><br>
+                                        <span class="comparison-detail">{{ cell.detail }}</span>
+                                    </template>
+                                    <span v-else-if="cell.kind === 'detail'" class="comparison-detail">{{ cell.text }}</span>
+                                    <template v-else-if="cell.kind === 'availability'">
+                                        <span :class="cell.available ? 'comparison-check' : 'comparison-cross'"
+                                            role="img" :aria-label="cell.available ? 'Disponível' : 'Não disponível'">{{ cell.available ? '✓' : '✗' }}</span>
+                                        <span v-if="cell.text" class="comparison-detail">{{ cell.text }}<template v-if="cell.detail"><br>{{ cell.detail }}</template></span>
+                                    </template>
+                                    <template v-else>{{ cell.text }}</template>
                                 </td>
                             </tr>
                             <tr><td class="comparison-feature-label">Afinidade estimada</td>
@@ -51,25 +61,36 @@ const motor = inject('motor');
 const formatScore = (value) => Number(value).toLocaleString('pt-BR', { maximumFractionDigits: 1 });
 const evaluated = (plan) => props.result?.all.find((item) => item.plan.slug === plan.slug);
 const highlight = (plan) => plan.slug === props.result?.winner?.plan.slug ? 'comparison-highlight' : '';
+const aboveBudget = (plan) => evaluated(plan)?.eligibility.withinBudget === false;
 function badge(plan) {
     if (plan.slug === props.result?.winner?.plan.slug) return 'Recomendado';
     if (props.result?.closeCall && plan.slug === props.result.runnerUp?.plan.slug) return 'Também recomendado';
-    if (!evaluated(plan)?.eligibility.withinBudget) return 'Acima do orçamento';
+    if (aboveBudget(plan)) return 'Acima do orçamento';
     return '';
 }
-const features = computed(() => [
-    { label: 'Contratação', value: (plan) => motor.getPlanContract(plan).detail },
-    { label: 'Preço', value: (plan) => `${motor.getPlanContract(plan).priceText}\n${motor.getPlanContract(plan).totalText}` },
-    { label: 'Taxa de adesão', value: (plan) => plan.contratacao.taxaAdesao ? `${motor.formatBRL(plan.contratacao.taxaAdesao)} (única)` : 'Sem taxa' },
-    { label: 'Benefício de ingresso', value: (plan) => {
-        const ticket = motor.getTicketBenefit(plan, props.answers);
-        return `✓ ${ticket.text}\nSetores: ${ticket.setorTexto}`;
+const featureDefinitions = [
+    { label: 'Contratação', cell: (plan) => ({ kind: 'detail', text: motor.getPlanContract(plan).detail }) },
+    { label: 'Preço', cell: (plan) => {
+        const contract = motor.getPlanContract(plan);
+        return { kind: 'price', text: contract.priceText, detail: contract.totalText };
     } },
-    { label: 'Prioridade / garantia', value: (plan) => motor.getPriority(plan, props.answers).label },
-    { label: 'Desconto na loja', value: (plan) => `✓ ${plan.loja.texto}` },
-    { label: 'Conteúdo e votação', value: (plan) => plan.conteudoExclusivo && plan.votacao ? '✓' : '✗' },
-    { label: 'Kids', value: (plan) => plan.opcionais.kids.disponivel ? `✓ ${motor.formatBRL(plan.opcionais.kids.precoMensal)}/mês por criança (até ${plan.opcionais.kids.maxCriancas})` : '✗' }
-]);
+    { label: 'Taxa de adesão', cell: (plan) => ({ kind: 'text', text: plan.contratacao.taxaAdesao ? `${motor.formatBRL(plan.contratacao.taxaAdesao)} (única)` : 'Sem taxa' }) },
+    { label: 'Benefício de ingresso', cell: (plan) => {
+        const ticket = motor.getTicketBenefit(plan, props.answers);
+        return { kind: 'availability', available: true, text: ticket.text, detail: `Setores: ${ticket.setorTexto}` };
+    } },
+    { label: 'Prioridade / garantia', cell: (plan) => ({ kind: 'text', text: motor.getPriority(plan, props.answers).label }) },
+    { label: 'Desconto na loja', cell: (plan) => ({ kind: 'availability', available: true, text: plan.loja.texto }) },
+    { label: 'Conteúdo e votação', cell: (plan) => ({ kind: 'availability', available: plan.conteudoExclusivo && plan.votacao }) },
+    { label: 'Kids', cell: (plan) => ({
+        kind: 'availability', available: plan.opcionais.kids.disponivel,
+        text: plan.opcionais.kids.disponivel ? `${motor.formatBRL(plan.opcionais.kids.precoMensal)}/mês por criança (até ${plan.opcionais.kids.maxCriancas})` : ''
+    }) }
+];
+const features = computed(() => featureDefinitions.map((feature) => ({
+    label: feature.label,
+    cells: motor.plans.map((plan) => ({ slug: plan.slug, highlight: highlight(plan), ...feature.cell(plan) }))
+})));
 let returnFocus;
 let previousOverflow = '';
 watch(() => props.open, async (opened) => {

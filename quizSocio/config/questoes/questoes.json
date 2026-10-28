@@ -62,27 +62,17 @@
   },
   {
     "key": "kidsCount",
-    "title": "Quantas crianças menores de 12 anos você pretende incluir no plano?",
+    "title": "Você tem interesse em incluir uma criança no plano?",
     "options": [
       {
-        "label": "Nenhuma",
+        "label": "Não",
         "description": "O plano será usado só por adultos.",
         "value": 0
       },
       {
-        "label": "1 criança",
+        "label": "Sim",
         "description": "Quero incluir uma criança no Kids.",
         "value": 1
-      },
-      {
-        "label": "2 crianças",
-        "description": "Quero incluir duas crianças no Kids.",
-        "value": 2
-      },
-      {
-        "label": "3 crianças",
-        "description": "Quero incluir três crianças no Kids.",
-        "value": 3
       }
     ],
     "type": "option"
