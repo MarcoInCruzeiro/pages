@@ -61,7 +61,8 @@ export function inspectConfiguration({ configuration, date = today() } = {}) {
 /** Bind the package to the actual application inputs, not merely to ranking configuration. */
 export function inspectBuildInputs() {
     const files = ['index.html', 'vite.config.mjs', 'package.json', 'package-lock.json', 'config/adapter.js',
-        'scripts/config-release.mjs', 'scripts/release-vite-plugin.mjs'];
+        'scripts/config-release.mjs', 'scripts/release-vite-plugin.mjs',
+        'config/validadores-ajv.js', 'config/validadores-compilados.mjs', 'scripts/gerar-validadores.mjs'];
     function collect(directory) {
         for (const entry of fs.readdirSync(path.join(projectRoot, directory), { withFileTypes: true })) {
             const name = path.join(directory, entry.name);

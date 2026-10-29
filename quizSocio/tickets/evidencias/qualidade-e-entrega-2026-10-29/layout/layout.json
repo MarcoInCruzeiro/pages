@@ -1,0 +1,438 @@
+{
+  "rows": [
+    {
+      "width": 320,
+      "step": 1,
+      "footer": 1084,
+      "cardHeight": 483,
+      "reserve": 983,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "step": 2,
+      "footer": 1084,
+      "cardHeight": 633,
+      "reserve": 983,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "step": 3,
+      "footer": 1084,
+      "cardHeight": 737,
+      "reserve": 983,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "step": 4,
+      "footer": 1084,
+      "cardHeight": 615,
+      "reserve": 983,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "step": 5,
+      "footer": 1084,
+      "cardHeight": 575,
+      "reserve": 983,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "step": 6,
+      "footer": 1084,
+      "cardHeight": 613,
+      "reserve": 983,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "step": 7,
+      "footer": 1084,
+      "cardHeight": 621,
+      "reserve": 983,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "step": 8,
+      "footer": 1084,
+      "cardHeight": 593,
+      "reserve": 983,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "step": 9,
+      "footer": 1084,
+      "cardHeight": 765,
+      "reserve": 983,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "step": 10,
+      "footer": 1084,
+      "cardHeight": 613,
+      "reserve": 983,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "step": 11,
+      "footer": 1084,
+      "cardHeight": 857,
+      "reserve": 983,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "step": 12,
+      "footer": 1084,
+      "cardHeight": 735,
+      "reserve": 983,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "step": 1,
+      "footer": 1048,
+      "cardHeight": 457,
+      "reserve": 947,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "step": 2,
+      "footer": 1048,
+      "cardHeight": 545,
+      "reserve": 947,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "step": 3,
+      "footer": 1048,
+      "cardHeight": 699,
+      "reserve": 947,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "step": 4,
+      "footer": 1048,
+      "cardHeight": 577,
+      "reserve": 947,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "step": 5,
+      "footer": 1048,
+      "cardHeight": 511,
+      "reserve": 947,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "step": 6,
+      "footer": 1048,
+      "cardHeight": 575,
+      "reserve": 947,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "step": 7,
+      "footer": 1048,
+      "cardHeight": 575,
+      "reserve": 947,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "step": 8,
+      "footer": 1048,
+      "cardHeight": 575,
+      "reserve": 947,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "step": 9,
+      "footer": 1048,
+      "cardHeight": 643,
+      "reserve": 947,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "step": 10,
+      "footer": 1048,
+      "cardHeight": 575,
+      "reserve": 947,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "step": 11,
+      "footer": 1048,
+      "cardHeight": 821,
+      "reserve": 947,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "step": 12,
+      "footer": 1048,
+      "cardHeight": 661,
+      "reserve": 947,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "step": 1,
+      "footer": 896,
+      "cardHeight": 395,
+      "reserve": 795,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "step": 2,
+      "footer": 896,
+      "cardHeight": 449,
+      "reserve": 795,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "step": 3,
+      "footer": 896,
+      "cardHeight": 543,
+      "reserve": 795,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "step": 4,
+      "footer": 896,
+      "cardHeight": 477,
+      "reserve": 795,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "step": 5,
+      "footer": 896,
+      "cardHeight": 447,
+      "reserve": 795,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "step": 6,
+      "footer": 896,
+      "cardHeight": 477,
+      "reserve": 795,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "step": 7,
+      "footer": 896,
+      "cardHeight": 477,
+      "reserve": 795,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "step": 8,
+      "footer": 896,
+      "cardHeight": 477,
+      "reserve": 795,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "step": 9,
+      "footer": 896,
+      "cardHeight": 543,
+      "reserve": 795,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "step": 10,
+      "footer": 896,
+      "cardHeight": 477,
+      "reserve": 795,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "step": 11,
+      "footer": 896,
+      "cardHeight": 669,
+      "reserve": 795,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "step": 12,
+      "footer": 896,
+      "cardHeight": 543,
+      "reserve": 795,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "step": 1,
+      "footer": 916,
+      "cardHeight": 415,
+      "reserve": 815,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "step": 2,
+      "footer": 916,
+      "cardHeight": 469,
+      "reserve": 815,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "step": 3,
+      "footer": 916,
+      "cardHeight": 553,
+      "reserve": 815,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "step": 4,
+      "footer": 916,
+      "cardHeight": 497,
+      "reserve": 815,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "step": 5,
+      "footer": 916,
+      "cardHeight": 457,
+      "reserve": 815,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "step": 6,
+      "footer": 916,
+      "cardHeight": 497,
+      "reserve": 815,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "step": 7,
+      "footer": 916,
+      "cardHeight": 497,
+      "reserve": 815,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "step": 8,
+      "footer": 916,
+      "cardHeight": 497,
+      "reserve": 815,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "step": 9,
+      "footer": 916,
+      "cardHeight": 553,
+      "reserve": 815,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "step": 10,
+      "footer": 916,
+      "cardHeight": 497,
+      "reserve": 815,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "step": 11,
+      "footer": 916,
+      "cardHeight": 689,
+      "reserve": 815,
+      "clipped": false,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "step": 12,
+      "footer": 916,
+      "cardHeight": 553,
+      "reserve": 815,
+      "clipped": false,
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "missingAssets": []
+}

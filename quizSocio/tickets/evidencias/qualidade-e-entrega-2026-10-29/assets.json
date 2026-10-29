@@ -1,0 +1,143 @@
+{
+  "before": [
+    {
+      "path": "assets/Estutura de P\u00e1ginas_fundoestrelado_siteapp-HMPcoXkV.jpeg",
+      "bytes": 3216121,
+      "sha256": "283f3c94fa8e464152f3439f70d48accfbf5b9f9c2415354a590768c8dbf3fd8"
+    },
+    {
+      "path": "assets/cruzeiro-CZVfysJ_.png",
+      "bytes": 179121,
+      "sha256": "c10e65a3b7610cf8987bcd428ac6b0fb3f10ece5bc40d4435fb6729b37842e8c"
+    },
+    {
+      "path": "assets/index-ErbaHg88.css",
+      "bytes": 30944,
+      "sha256": "9d706652abcbd174a8aeaa870dfb3eefb42bfa33b35034ab37a3f18e6d94bd58"
+    },
+    {
+      "path": "assets/index-GzJwdGDL.js",
+      "bytes": 298060,
+      "sha256": "c7b4709aca470e665ffb4633d5319118ad7812b868c28f00c6753273774efda4"
+    },
+    {
+      "path": "build-manifest.json",
+      "bytes": 997,
+      "sha256": "f361327d5ce38030b44999463a8203e6daad861eab3d96d46547722419e881e0"
+    },
+    {
+      "path": "img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4",
+      "bytes": 36348058,
+      "sha256": "4eb26dc66597b449aeb9c53dcf14f9631419f8b6032ab5781a280675d482a661"
+    },
+    {
+      "path": "img/Estutura de P\u00e1ginas_fundoestrelado_siteapp.jpeg",
+      "bytes": 3216121,
+      "sha256": "283f3c94fa8e464152f3439f70d48accfbf5b9f9c2415354a590768c8dbf3fd8"
+    },
+    {
+      "path": "img/background.jpg",
+      "bytes": 866124,
+      "sha256": "8fe2198e0933396db1db667fb9d18b05daf2984b2a2f282fbc118ff9d3130485"
+    },
+    {
+      "path": "img/cabuloso.png",
+      "bytes": 201799,
+      "sha256": "4547f0d037a200fe4cb7b4f35ef5ee04e80fe634cd3f71d84405451e9ddc4ee9"
+    },
+    {
+      "path": "img/cabulosoMax.png",
+      "bytes": 227593,
+      "sha256": "76333900f6031023e20f612a3db0606cb1e0ce97156b47466f6b5031cdda7c19"
+    },
+    {
+      "path": "img/cruzeiro.png",
+      "bytes": 179121,
+      "sha256": "c10e65a3b7610cf8987bcd428ac6b0fb3f10ece5bc40d4435fb6729b37842e8c"
+    },
+    {
+      "path": "img/meuCruzeiro.png",
+      "bytes": 193740,
+      "sha256": "10171f7eda9b7b434d180aeb13be6ecafd8df7d9da40d7ed21ca5eff6de9804e"
+    },
+    {
+      "path": "img/timeDoPovo.png",
+      "bytes": 203894,
+      "sha256": "08f1ec74ae633a47b07490599a8a614d5d790c412095b6469739e9b4de4dea8b"
+    },
+    {
+      "path": "index.html",
+      "bytes": 2465,
+      "sha256": "c5d1c2dde0f55f827cd891d72aa7c7f548e4447f0ccf421c6972bb4d81245ff0"
+    }
+  ],
+  "after": [
+    {
+      "path": "assets/index-B-nb6OAm.css",
+      "bytes": 30908,
+      "sha256": "320f2dc58182cb4fe0fcefc9f292548aca8ff369db2fd1fdee9d399dc6913a6b"
+    },
+    {
+      "path": "assets/index-Co-ADlzB.js",
+      "bytes": 299220,
+      "sha256": "17f32516ff292e606cf7c60d2fef35f8a36fb6c59fe9b603944724643cd7506b"
+    },
+    {
+      "path": "build-manifest.json",
+      "bytes": 997,
+      "sha256": "1ee32674b14f16fd9b45c2412f0f48070d8cfe7d13b4f953b1c4bfb9f7b602af"
+    },
+    {
+      "path": "img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4",
+      "bytes": 13830472,
+      "sha256": "60997beb61445b58b13e259708cf687db4da98ee868df184dc8fa4f4c227a938"
+    },
+    {
+      "path": "img/Estutura de P\u00e1ginas_fundoestrelado_siteapp.jpeg",
+      "bytes": 69166,
+      "sha256": "2b710a0e705bb42b691b22b3eb184389e8e49deb59fbefbd80010c45e4cf1fa3"
+    },
+    {
+      "path": "img/background.jpg",
+      "bytes": 95196,
+      "sha256": "311c7283c6b22807769c9662573c2bb95a96ba87702b4306d621c132856ca8a9"
+    },
+    {
+      "path": "img/cabuloso.png",
+      "bytes": 201799,
+      "sha256": "4547f0d037a200fe4cb7b4f35ef5ee04e80fe634cd3f71d84405451e9ddc4ee9"
+    },
+    {
+      "path": "img/cabulosoMax.png",
+      "bytes": 227593,
+      "sha256": "76333900f6031023e20f612a3db0606cb1e0ce97156b47466f6b5031cdda7c19"
+    },
+    {
+      "path": "img/cruzeiro.png",
+      "bytes": 179121,
+      "sha256": "c10e65a3b7610cf8987bcd428ac6b0fb3f10ece5bc40d4435fb6729b37842e8c"
+    },
+    {
+      "path": "img/meuCruzeiro.png",
+      "bytes": 193740,
+      "sha256": "10171f7eda9b7b434d180aeb13be6ecafd8df7d9da40d7ed21ca5eff6de9804e"
+    },
+    {
+      "path": "img/timeDoPovo.png",
+      "bytes": 203894,
+      "sha256": "08f1ec74ae633a47b07490599a8a614d5d790c412095b6469739e9b4de4dea8b"
+    },
+    {
+      "path": "index.html",
+      "bytes": 2465,
+      "sha256": "9df8bd126345ed35fbe6a0fe423f3a506a66ac1608a855e41b6529a2d40c24a6"
+    }
+  ],
+  "totalBefore": 45164158,
+  "totalAfter": 15334571,
+  "videoBefore": 36348058,
+  "videoAfter": 13830472,
+  "distReduction": 0.6604703446480724,
+  "videoReduction": 0.6194990114740105,
+  "duplicateImages": []
+}

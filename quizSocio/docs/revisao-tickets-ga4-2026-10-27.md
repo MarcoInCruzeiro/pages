@@ -44,9 +44,9 @@ O QUIZ-014 original exigia comparar o campo com o motor vigente em um teste. Ess
 
 Foram encontrados estes destinos inexistentes:
 
-- No [QUIZ-016](../tickets/016-regressao-da-integracao-ga4.md), os links para QUIZ-012, QUIZ-013 e QUIZ-014 continuam apontando para a raiz de `tickets/`, em vez de `concluidos/`.
+- No [QUIZ-016](../tickets/concluidos/016-regressao-da-integracao-ga4.md), os links para QUIZ-012, QUIZ-013 e QUIZ-014 continuam apontando para a raiz de `tickets/`, em vez de `concluidos/`.
 - No [QUIZ-017](../tickets/017-configuracao-e-validacao-ga4.md), o link para QUIZ-014 tem o mesmo problema.
-- No [QUIZ-012](../tickets/012-preview-explicito.md), o link de evidência usava `evidencias/...` a partir de `concluidos/`, sem subir um diretório. O retorno à raiz na reabertura restaura esse destino.
+- No [QUIZ-012](../tickets/concluidos/012-preview-explicito.md), o link de evidência usava `evidencias/...` a partir de `concluidos/`, sem subir um diretório. O retorno à raiz na reabertura restaura esse destino.
 
 **Correção necessária:** atualizar os caminhos após mover os arquivos e conferir a existência dos destinos. O log apontado pelo QUIZ-012 também deve corresponder à verificação dos critérios desse ticket.
 

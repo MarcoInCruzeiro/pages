@@ -515,66 +515,66 @@ export function createEngine(configuration) {
         if (result.sectorFit.level === 'none') {
             reasons.push({
                 tone: 'warning',
-                text: `Seu setor preferido é ${result.sectorFit.label}, mas ${plan.nome} oferece ingresso em ${plan.ingresso.setorTexto}.`
+                text: `Seu setor preferido é ${result.sectorFit.label}, mas o benefício de ingresso do ${plan.nome} vale para ${plan.ingresso.setorTexto}.`
             });
         } else if (result.sectorFit.level === 'partial') {
             reasons.push({
                 tone: 'warning',
-                text: `${plan.nome} cobre apenas parte do setor ${result.sectorFit.label}: ${result.sectorFit.text}`
+                text: `O ${plan.nome} cobre só parte do setor ${result.sectorFit.label}: ${result.sectorFit.text}`
             });
         }
 
         if (profile.frecuencia > 0) {
             reasons.push({
                 tone: 'positive',
-                text: `Você pretende ir a ${answers.gamesPerYear} jogos por ano. ${plan.nome} oferece ${lowerFirst(ticket.text)}.`
+                text: `Você quer ir a ${answers.gamesPerYear} ${answers.gamesPerYear === 1 ? 'jogo' : 'jogos'} por ano, e o ${plan.nome} oferece ${lowerFirst(ticket.text)}.`
             });
         } else {
             reasons.push({
                 tone: 'neutral',
-                text: 'Você indicou que não pretende ir ao estádio. Por isso, o benefício de ingresso pesa pouco na sua recomendação.'
+                text: 'Como você não pretende ir ao estádio, o benefício de ingresso pesou pouco nesta recomendação.'
             });
         }
 
         if (result.priority.garantido) {
             reasons.push({
                 tone: 'positive',
-                text: `${plan.nome} oferece ingresso garantido em ${plan.ingresso.setorTexto}, sem depender da janela de prioridade.`
+                text: `O ${plan.nome} garante seu ingresso em ${plan.ingresso.setorTexto}, sem precisar disputar a abertura das vendas.`
             });
         } else if (profile.prioridad >= 6) {
             reasons.push({
                 tone: 'positive',
-                text: `Você prefere comprar no primeiro minuto; ${plan.nome} tem ${result.priority.label.toLowerCase()}.`
+                text: `Você gosta de comprar assim que as vendas abrem, e o ${plan.nome} tem prioridade ${result.priority.value} na compra de ingressos (a 1 é a mais alta).`
             });
         }
 
         if (profile.descuentos >= 6 && plan.loja.percentual > 0) {
             reasons.push({
                 tone: 'positive',
-                text: `Você valoriza produtos oficiais; ${plan.nome} oferece ${lowerFirst(plan.loja.texto)}.`
+                text: `Você valoriza produtos oficiais, e o ${plan.nome} oferece ${lowerFirst(plan.loja.texto)}.`
             });
         }
 
         if (profile.experiencias >= 6 && plan.conteudoExclusivo && plan.votacao) {
             reasons.push({
                 tone: 'positive',
-                text: 'Você se interessa por experiências; o plano inclui conteúdo exclusivo, quiz e votações online.'
+                text: 'Você curte experiências com o clube, e o plano inclui conteúdo exclusivo, quiz e votações online.'
             });
         }
 
         if (profile.adultos > 0) {
             const coverage = plan.ingresso.quantidade >= 2
-                ? 'cobre até 2 ingressos'
-                : 'cobre 1 ingresso; o acompanhante paga o valor de referência';
+                ? 'o benefício vale para até 2 ingressos, o seu e o de quem vai com você'
+                : 'o benefício vale para 1 ingresso; o de quem vai com você é pago à parte';
             reasons.push({
                 tone: 'neutral',
-                text: `Você costuma ir acompanhado. ${plan.nome} ${coverage}${profile.kids > 0 ? `, e o Kids custa ${formatBRL(plan.opcionais.kids.precoMensal)}/mês por criança` : ''}.`
+                text: `Você costuma ir com companhia: no ${plan.nome}, ${coverage}.${profile.kids > 0 ? ` Para as crianças, o opcional Kids custa ${formatBRL(plan.opcionais.kids.precoMensal)}/mês por criança.` : ''}`
             });
         }
 
         const priceReason = {
             tone: 'neutral',
-            text: `Assinatura: ${formatBRL(result.pricing.subscription)}/mês de referência. Taxas e opcionais são informados separadamente.`
+            text: `Assinatura de ${formatBRL(result.pricing.subscription)}/mês (valor de referência). ${result.pricing.adhesion ? 'Taxa de adesão e opcionais são cobrados à parte.' : 'Sem taxa de adesão; opcionais são cobrados à parte.'}`
         };
 
         const warnings = reasons.filter((reason) => reason.tone === 'warning');

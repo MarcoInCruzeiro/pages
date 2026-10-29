@@ -1,0 +1,41 @@
+name: Quiz Socio CI
+
+on:
+  push:
+    paths: ['quizSocio/**', '.github/workflows/quiz-socio.yml']
+  # O check obrigatório precisa existir em todo PR do monorepo.
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quiz-socio-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Quiz Socio / testes
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: quizSocio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: quizSocio/package-lock.json
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: stable
+      - name: Instalar dependências travadas
+        run: npm ci
+      - name: Validar, compilar e testar
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+        run: npm test

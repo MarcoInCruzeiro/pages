@@ -34,8 +34,8 @@
                         <img id="resultLogo" :src="winner.plan.logo" :alt="`Logo do plano ${winner.plan.nome}`">
                         <div>
                             <p class="result-price" id="resultPrice">{{ contract.priceText }}</p>
-                            <p class="result-contract" id="resultContract">{{ contract.detail }}</p>
-                            <p class="result-contract" id="resultAdhesion">{{ winner.pricing.adhesion ? `Taxa única de adesão: ${motor.formatBRL(winner.pricing.adhesion)} (cobrada separadamente)` : 'Sem taxa de adesão' }}</p>
+                            <p class="result-contract" id="resultContract">{{ contract.totalText }}</p>
+                            <p class="result-contract" id="resultAdhesion">{{ winner.pricing.adhesion ? `Taxa única de adesão de ${motor.formatBRL(winner.pricing.adhesion)}, cobrada à parte` : 'Sem taxa de adesão' }}</p>
                         </div>
                     </div>
                     <p id="resultSummary" tabindex="-1">{{ summary }}</p>
@@ -44,19 +44,19 @@
                             <strong>Atenção ao setor:</strong> <span>{{ winner.sectorFit.text }}</span>
                             <a v-if="result.sectorAlternativeRecommendation" class="sector-alternative-link" :href="result.sectorAlternativeRecommendation.plan.contratacao.link"
                                 target="_blank" rel="noopener noreferrer" @click="subscribe(result.sectorAlternativeRecommendation.plan, 'alternativa-setor')">
-                                Ver alternativa que atende ao setor: {{ result.sectorAlternativeRecommendation.plan.nome }} ({{ formatScore(result.sectorAlternativeRecommendation.score) }} de 100)
+                                Ver opção que inclui esse setor: {{ result.sectorAlternativeRecommendation.plan.nome }} ({{ formatScore(result.sectorAlternativeRecommendation.score) }} de 100)
                             </a>
-                            <span v-else>Não há alternativa que atenda ao setor dentro do orçamento informado.</span>
+                            <span v-else>Nenhum plano dentro do seu orçamento inclui esse setor.</span>
                         </div>
                     </div>
                     <ul class="reason-list" id="resultReasons"><li v-for="(reason, index) in winner?.reasons || []" :key="index">{{ reason.text || reason }}</li></ul>
                     <details class="score-explainer" id="scoreExplainer">
                         <summary>Sobre a recomendação</summary>
                         <div>
-                            <p>Comparamos suas respostas com os benefícios de cada plano. O resultado é uma sugestão para ajudar você a escolher; compare as opções antes de assinar.</p>
-                            <p>Seu orçamento limita a assinatura. Taxa de adesão, opcionais e benefícios de ingresso são informados separadamente.</p>
-                            <p id="assumptionNote">Exemplos de desconto usam {{ motor.ASSUMPTIONS.labels.precoIngressoCheio }}; o preço real varia por jogo e setor. {{ motor.ASSUMPTIONS.labels.kidsIngressos }}.</p>
-                            <p>Confira a disponibilidade e as condições dos benefícios no site do Sócio 5 Estrelas.</p>
+                            <p>Cruzamos suas respostas com os benefícios de cada plano para chegar a esta sugestão. Ela é um ponto de partida: vale comparar as opções antes de assinar.</p>
+                            <p>Só recomendamos planos cuja assinatura cabe no orçamento que você informou. Taxa de adesão, opcionais e ingressos não entram nessa conta.</p>
+                            <p id="assumptionNote">Os exemplos de desconto consideram {{ motor.ASSUMPTIONS.labels.precoIngressoCheio }}; o preço real muda conforme o jogo e o setor. {{ motor.ASSUMPTIONS.labels.kidsIngressos }}.</p>
+                            <p>Disponibilidade e condições de cada benefício estão no site do Sócio 5 Estrelas.</p>
                         </div>
                     </details>
                     <div class="result-actions">
@@ -122,10 +122,10 @@ const formatScore = (value) => Number(value).toLocaleString('pt-BR', { maximumFr
 const secondsSince = (time) => Math.round((performance.now() - time) / 100) / 10;
 const summary = computed(() => {
     if (!result.value) return '';
-    if (!winner.value) return `Nenhum plano cabe no orçamento de assinatura de ${motor.formatBRL(result.value.budget)} por mês. A opção de assinatura mais barata é ${result.value.cheapest.plan.nome}, em ${motor.formatBRL(result.value.cheapest.pricing.subscription)}/mês. Os planos abaixo aparecem para comparação, sem recomendação.`;
-    if (result.value.closeCall) return `${formatScore(winner.value.score)} de 100 de afinidade estimada — praticamente empatado com ${result.value.runnerUp.plan.nome} (${formatScore(result.value.runnerUp.score)}). Os dois atendem bem ao seu perfil.`;
+    if (!winner.value) return `Nenhuma assinatura cabe no orçamento de ${motor.formatBRL(result.value.budget)} por mês que você informou. A mais em conta é a do ${result.value.cheapest.plan.nome}, por ${motor.formatBRL(result.value.cheapest.pricing.subscription)}/mês. Os planos abaixo aparecem só para comparação.`;
+    if (result.value.closeCall) return `Afinidade estimada de ${formatScore(winner.value.score)} de 100 com o seu perfil. O ${result.value.runnerUp.plan.nome} ficou logo atrás, com ${formatScore(result.value.runnerUp.score)}: os dois combinam com você, então vale comparar antes de decidir.`;
     const scope = result.value.allPlansFit ? 'entre todos os planos' : 'entre os planos que cabem no seu orçamento';
-    return `${formatScore(winner.value.score)} de 100 de afinidade estimada — a maior ${scope}.`;
+    return `Afinidade estimada de ${formatScore(winner.value.score)} de 100 com o seu perfil, a maior ${scope}.`;
 });
 
 async function changeView(change, focus = '#quizTitle') {

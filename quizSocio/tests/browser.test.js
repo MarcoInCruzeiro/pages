@@ -538,12 +538,12 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         // máximo 20 (campos principais + answer_*).
         assert.ok(Object.keys(complete).length <= 20, `contrato de quiz_complete excedeu 20 parâmetros: ${Object.keys(complete).length}`);
 
-        assert.match(await text('#scoreExplainer'), /resultado é uma sugestão/i);
+        assert.match(await text('#scoreExplainer'), /esta sugestão/i);
         assert.doesNotMatch(await text('#scoreExplainer'), /Catálogo \d{4}|índice de 0 a 100/i);
         assert.match(await text('#assumptionNote'), /R\$\s*150/);
         assert.match(await text('#assumptionNote'), /Kids depende de aprovação/);
         assert.match(await text('#assumptionNote'), /mediante disponibilidade e aquisição do ingresso do titular/);
-        assert.match(await text('#resultSummary'), /de 100 de afinidade estimada/);
+        assert.match(await text('#resultSummary'), /Afinidade estimada de .+ de 100/);
         assert.ok((await text('#resultSummary')).includes(Number(complete.affinity_index).toLocaleString('pt-BR', { maximumFractionDigits: 1 })));
         assert.match(await text('#resultAdhesion'), /Taxa única de adesão|Sem taxa de adesão/);
         assert.equal(await evaluate(() => document.querySelectorAll('.plan-cost').length), 0);
@@ -626,7 +626,7 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         assert.doesNotMatch(await text('#results'), /Custo de uso estimado|primeiro mês|custo total|total anual|\d+x\s*R\$/i);
         assert.match(await text('.sector-warning'), /Atenção ao setor/);
         assert.match(await text('.sector-warning'), /Não cobre Roxo/i);
-        assert.match(await text('.sector-warning'), /Não há alternativa que atenda ao setor dentro do orçamento/i);
+        assert.match(await text('.sector-warning'), /Nenhum plano dentro do seu orçamento inclui esse setor/i);
     });
 
     it('Kids oferece Sim/Não, preserva a escolha ao voltar e registra valores 0/1', async () => {
@@ -668,7 +668,7 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
             return cta?.closest('.plan')?.textContent || '';
         });
         assert.match(maxCard, /R\$\s*200,00 \/ mês/);
-        assert.match(maxCard, /adesão:\s*R\$\s*30(?:,00)?/i);
+        assert.match(maxCard, /adesão de\s*R\$\s*30(?:,00)?/i);
         assert.match(maxCard, /Kids:\s*R\$\s*30,00\/mês por criança/);
         assert.match(maxCard, /R\$ 150 por R\$ 52,50/);
         assert.doesNotMatch(maxCard, /Custo de uso|R\$\s*305|R\$\s*335|primeiro mês/i);
@@ -807,7 +807,8 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
     it('rodapé mantém a posição nas 12 perguntas e libera a altura no resultado', async () => {
         await page.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
         try {
-            for (const viewport of [{ width: 1280, height: 900, mobile: false }, { width: 390, height: 844, mobile: true }]) {
+            for (const viewport of [{ width: 1280, height: 900, mobile: false }, { width: 768, height: 900, mobile: false },
+                { width: 390, height: 844, mobile: true }, { width: 320, height: 844, mobile: true }]) {
                 await page.send('Emulation.setDeviceMetricsOverride', { ...viewport, deviceScaleFactor: 1 });
                 await setup();
                 const footerPosition = () => evaluate(() => document.querySelector('#rodape').getBoundingClientRect().top + scrollY);

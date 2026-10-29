@@ -2,11 +2,17 @@
 
 Backlog local criado em 26/10/2026 a partir da avaliação do projeto no commit `2cecf81`, ampliado pela análise de GA4. O escopo abrange navegação, dados comerciais, qualidade das recomendações e confiabilidade da medição.
 
-## Situação em 27/10/2026
+## Situação vigente em 29/10/2026
+
+A branch ativa é `quiz/port-vue`, ainda sem merge na `main` nem publicação da versão Vue. O frontend é Vue 3 + Vite; a fonte operacional é `config/*.json` nos subdiretórios de catálogo, questões, pesos e GA4. Revisões: catálogo `2026-10-28.2`, regras `2026-10-29.2` e GA4 `2026-10-28.3`, conforme [revision.json](../config/revision.json).
+
+O [tracker de qualidade e entrega](qualidade-e-entrega/README.md) centraliza a fotografia vigente dos testes, evidências, CI e bloqueios. Os [tickets da migração Vue](port-vue/README.md) são versionados. O [dossiê de perdas](evidencias/qualidade-e-entrega-2026-10-29/decisao-ranking.md) não cria aceite: CAL-02, CAL-10, PER-02-C e RES-05 continuam pendentes, com `releaseApproved: false`. Os QUIZ-017, 018 e 019 mantêm seus bloqueios externos. As contagens e commits nas seções datadas abaixo são históricos.
+
+## Histórico em 27/10/2026
 
 O backlog tem **20 registros: 19 tickets principais e o subticket QUIZ-010-A**. São **17 concluídos e três bloqueados (QUIZ-017, 018 e 019)**. QUIZ-010-A, seu pai QUIZ-010 e a consolidação QUIZ-011 foram concluídos e arquivados nesta rodada. O usuário solicitou manter QUIZ-017 bloqueado e receber seu detalhamento.
 
-Última execução, em 27/10/2026: `npm test` teve **82 aprovações e 0 falhas** (46 de motor/referência/perfis/avaliação, quatro verificações de referência documental/ferramentas e 32 de navegador). [Log do workspace](evidencias/011-consolidacao-2026-10-27/npm-test-workspace.tap) e [da cópia isolada, também 82/82](evidencias/011-consolidacao-2026-10-27/npm-test-isolado.tap). As execuções anteriores permanecem históricas.
+Execução histórica, em 27/10/2026: `npm test` teve **82 aprovações e 0 falhas** (46 de motor/referência/perfis/avaliação, quatro verificações de referência documental/ferramentas e 32 de navegador). [Log do workspace](evidencias/011-consolidacao-2026-10-27/npm-test-workspace.tap) e [da cópia isolada, também 82/82](evidencias/011-consolidacao-2026-10-27/npm-test-isolado.tap). As execuções anteriores permanecem históricas.
 
 O código local de GA4 está no commit `8250641`, na branch `quiz-socio/tickets-correcoes`, com alterações adicionais de catálogo, referência e verificação no workspace. Em 27/10/2026, o pacote público do workspace foi publicado em produção em [quiz-socio.vercel.app](https://quiz-socio.vercel.app/), após 82/82 testes. A Vercel confirmou `READY` e o alias de produção; [registro, manifesto e limites da verificação](evidencias/deploy-2026-10-27/deploy.json). Não houve commit ou push. A revisão anterior de interface passou 55/55; seu registro histórico está no [QUIZ-011](concluidos/011-regressao-e-entrega.md#revisão-visual-e-textual).
 
@@ -20,7 +26,7 @@ Os tickets abertos ficam nesta pasta. Os concluídos foram movidos para [`conclu
 
 Complemento visual em 28/10/2026: a interface foi comparada à versão publicada e corrigida em hierarquia das opções, layout, comparativo, slider, rolagem e transições. O build e **125 testes** passaram. [Relatório e capturas antes/depois](../docs/paridade-vue-original-2026-10-28.md). As regras e os bloqueios de entrega foram preservados; não houve deploy.
 
-A branch `quiz/port-vue` foi criada a partir de `quiz-socio/tickets-correcoes`, preservando as alterações locais. A [spec](../docs/spec-port-vue.md) cobre migração do quiz público para Vue 3 + Vite, configuração JSON e retirada do Cabuloso Cativo. O painel administrativo foi adiado por decisão do usuário. Os [oito tickets locais individuais](../.scratch/port-vue/README.md) têm critérios de aceite e bloqueadores. Após a correção em 28/10/2026, 01–05 estão concluídos tecnicamente e 06–08 aguardam revisão das regressões de ranking; a revisão técnica inicial registrou 120 aprovações e zero falhas, antes do complemento visual descrito acima. [Relatório da revisão](../docs/revisao-port-vue-2026-10-28.md). A numeração 01–08 pertence à feature `port-vue` e sua contagem é separada dos 20 registros `QUIZ-*` deste índice. A aprovação técnica dos testes não libera as perdas de qualidade documentadas no ticket 06. Os QUIZ-017, 018 e 019 continuam bloqueados.
+A branch `quiz/port-vue` foi criada a partir de `quiz-socio/tickets-correcoes`, preservando as alterações locais. A [spec](../docs/spec-port-vue.md) cobre migração do quiz público para Vue 3 + Vite, configuração JSON e retirada do Cabuloso Cativo. O painel administrativo foi adiado por decisão do usuário. Os [oito tickets locais individuais](../tickets/port-vue/README.md) têm critérios de aceite e bloqueadores. Após a correção em 28/10/2026, 01–05 estão concluídos tecnicamente e 06–08 aguardam revisão das regressões de ranking; a revisão técnica inicial registrou 120 aprovações e zero falhas, antes do complemento visual descrito acima. [Relatório da revisão](../docs/revisao-port-vue-2026-10-28.md). A numeração 01–08 pertence à feature `port-vue` e sua contagem é separada dos 20 registros `QUIZ-*` deste índice. A aprovação técnica dos testes não libera as perdas de qualidade documentadas no ticket 06. Os QUIZ-017, 018 e 019 continuam bloqueados.
 
 | Ordem | Ticket | Prioridade | Status |
 | --- | --- | --- | --- |
@@ -74,7 +80,7 @@ O aceite comercial do QUIZ-003 está encerrado. A referência, a avaliação e a
 | Conferir Admin, definições, filtros e recebimento real | QUIZ-017 | Administrador GA4 | Disponibilizar sessão/conexão autorizada ou executar o inventário; mantido bloqueado a pedido do usuário |
 | Conferir contrato e recebimento da versão publicada | QUIZ-018 | Mantenedor do site + analytics | Executar a validação em produção e concluir o aceite GA4; deploy Vercel já realizado |
 | Comprovar identidade e sessão até o checkout | QUIZ-019 | Plataforma de sócios + analytics | Observação nas duas pontas após entrega/configuração, sem concluir compra |
-| Merge e push da branch `quiz-socio/tickets-correcoes` | — | Responsável pelo quiz | Sincronizar posteriormente o Git com a entrega direta realizada pela CLI |
+| Integração da branch `quiz/port-vue` e publicação Vue | [ticket 09](qualidade-e-entrega/issues/09-merge-e-publicacao.md) | Responsável pelo quiz | Depende de aceite, candidato aprovado e CI verde; publicação exige ação posterior |
 
 ## Onde ficam as definições
 
@@ -85,7 +91,9 @@ Cada definição tem uma única fonte. Novas regras devem apontar para ela.
 | Condições comerciais, divergências e campos pendentes | [catalogo-comercial.md](../catalogo-comercial.md) |
 | Objetivo do ranking, políticas de setor, contradições, orçamento, horizonte e metas | [QUIZ-009](concluidos/009-referencia-de-qualidade.md), decidido em 26/10/2026 |
 | Perguntas, perfil, fórmula do ranking, valores e interface | [estrutura_quiz.md](../estrutura_quiz.md) |
-| Catálogo, validação, valores e ranking em código | [quiz-engine.js](../quiz-engine.js) (`CATALOG_VERSION = 2026-09-11`, `RULES_VERSION = 2026-10-26.2`) |
+| Catálogo e perguntas operacionais | [catálogo JSON](../config/planos/catalogo.json) e [questões JSON](../config/questoes/questoes.json) |
+| Pesos, validação e motor | [pesos](../config/pesos), [adapter.js](../config/adapter.js) e [engine-core.mjs](../src/engine-core.mjs) |
+| Identidade vigente | [revision.json](../config/revision.json): catálogo `2026-10-28.2`, regras `2026-10-29.2`, GA4 `2026-10-28.3` |
 | Cenários de referência e linha de base | [tests/fixtures/](../tests/fixtures) |
 | Perfis sintéticos autorizados e expectativas para o QUIZ-010-A | [reference-profiles.js](../tests/fixtures/reference-profiles.js) |
 | Autoria, identidade e limites da nova referência | [reference-profiles-provenance.json](../tests/fixtures/reference-profiles-provenance.json) |

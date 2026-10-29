@@ -1,27 +1,13 @@
 /** Configuração compartilhada por Node e Vite. Os JSONs são a fonte operacional. */
-import Ajv2020 from 'ajv/dist/2020.js';
-import addFormats from 'ajv-formats';
 import catalogo from './planos/catalogo.json' with { type: 'json' };
-import catalogoSchema from './planos/catalogo.schema.json' with { type: 'json' };
 import questoes from './questoes/questoes.json' with { type: 'json' };
-import questoesSchema from './questoes/questoes.schema.json' with { type: 'json' };
 import pesosRanking from './pesos/ranking.json' with { type: 'json' };
 import pesosPerfil from './pesos/perfil.json' with { type: 'json' };
-import pesosSchema from './pesos/pesos.schema.json' with { type: 'json' };
 import ga4 from './ga4/ga4.json' with { type: 'json' };
-import ga4Schema from './ga4/ga4.schema.json' with { type: 'json' };
 import metadata from './revision.json' with { type: 'json' };
+// O Node usa o Ajv real (validadores-ajv.js); o Vite troca por validadores pré-compilados.
+import { validadores, errosTexto, carregarConfiguracao } from './validadores-ajv.js';
 
-const ajv = new Ajv2020({ allErrors: true, strict: true });
-addFormats(ajv);
-ajv.addSchema(pesosSchema);
-const validators = {
-    catalogo: ajv.compile(catalogoSchema),
-    questoes: ajv.compile(questoesSchema),
-    pesosRanking: ajv.compile({ $ref: `${pesosSchema.$id}#/$defs/ranking` }),
-    pesosPerfil: ajv.compile({ $ref: `${pesosSchema.$id}#/$defs/perfil` }),
-    ga4: ajv.compile(ga4Schema)
-};
 const allowedValues = {
     wantsGuaranteedTicket: ['never', true, false], buysTwoTickets: [true, false],
     kidsCount: [0, 1], needsPriority: [true, false], wantsParticipation: [true, false],
@@ -33,11 +19,7 @@ const knownSectors = new Set(['amarelo-inferior', 'amarelo-superior', 'laranja-i
 const knownSlugs = ['meu-cruzeiro', 'time-do-povo', 'cabuloso', 'cabuloso-max'];
 const fail = (domain, field, reason) => { throw new Error(`Configuração inválida [${domain}] ${field}: ${reason}`); };
 
-export function carregarConfiguracao(dados, schema) {
-    const validate = ajv.getSchema(schema.$id) || ajv.compile(schema);
-    if (!validate(dados)) fail(schema.title || 'schema', '', ajv.errorsText(validate.errors, { dataVar: 'configuração' }));
-    return dados;
-}
+export { carregarConfiguracao };
 
 export function validarSlugsUnicos(plans) {
     if (new Set(plans.map((p) => p.slug)).size !== plans.length) fail('catalogo', 'slug', 'slugs duplicados');
@@ -50,8 +32,8 @@ export function validarPrecosNaoNegativos(plans) {
 }
 
 export function validateConfiguration(configuration) {
-    for (const [domain, validate] of Object.entries(validators)) {
-        if (!validate(configuration?.[domain])) fail(domain, '', ajv.errorsText(validate.errors, { dataVar: domain }));
+    for (const [domain, validate] of Object.entries(validadores)) {
+        if (!validate(configuration?.[domain])) fail(domain, '', errosTexto(validate.errors, domain));
     }
     const { catalogo: plans, questoes: questions, pesosRanking: ranking, pesosPerfil: profile, ga4: analytics } = configuration;
     validarSlugsUnicos(plans);

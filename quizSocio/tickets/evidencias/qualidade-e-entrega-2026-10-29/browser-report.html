@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diagnóstico local de vídeo e fluidez</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#061b37;color:#fff;font:14px system-ui}header{height:76px;padding:8px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}button,select{font:inherit;padding:8px;border-radius:6px;border:1px solid #7294b8}button{cursor:pointer}button:disabled{opacity:.5;cursor:default}#site{width:100%;height:calc(100dvh - 76px);border:0;display:block;background:#061b37}dialog{width:min(900px,96vw);max-height:90dvh;border:0;border-radius:8px;padding:20px}dialog::backdrop{background:#000b}textarea{width:100%;height:45vh;font:12px monospace}p{line-height:1.5}#status{margin:0}dialog button{margin-top:10px}
+</style>
+<header>
+<button id="record" disabled>Medir por 20 segundos</button>
+<label>Travou? <select id="perceived"><option value="unknown">Ainda não sei</option><option value="yes">Sim</option><option value="no">Não</option></select></label>
+<button id="show" disabled>Ver relatório</button>
+<p id="status" role="status" aria-live="polite">Carregando o quiz…</p>
+</header>
+<iframe id="site" src="/" title="Quiz local para reprodução do problema"></iframe>
+<dialog id="reportDialog"><h1>Relatório local</h1><p>Selecione e copie o JSON abaixo para a conversa. Ele contém apenas métricas técnicas; não captura respostas do quiz, cookies, armazenamento, cabeçalhos de rede ou credenciais. Nenhum relatório é transmitido automaticamente.</p><textarea id="report" readonly aria-label="Relatório JSON"></textarea><br><button id="selectReport">Selecionar relatório</button> <button id="close">Fechar</button></dialog>
+<script>
+const frame=document.querySelector('#site'),record=document.querySelector('#record'),show=document.querySelector('#show'),status=document.querySelector('#status'),dialog=document.querySelector('dialog'),output=document.querySelector('textarea');
+let running=false,report=null,reloads=0;
+frame.addEventListener('load',()=>{record.disabled=false;if(running)reloads++;status.textContent=running?'O quiz recarregou durante a medição.':'Pronto. Clique em medir e use o quiz como normalmente, mantendo esta aba visível.'});
+const round=x=>Math.round(x*10)/10;
+const stats=values=>{const sorted=[...values].sort((a,b)=>a-b);return{count:values.length,maxMs:round(sorted.at(-1)||0),p95Ms:round(sorted[Math.floor(sorted.length*.95)]||0),gapsOver150ms:values.filter(x=>x>150).length,gapsOver250ms:values.filter(x=>x>250).length}};
+record.onclick=()=>{
+ if(running)return;const win=frame.contentWindow,doc=frame.contentDocument,video=doc.querySelector('video');if(!video){status.textContent='Não encontrei o vídeo no quiz. Aguarde a página carregar.';return}
+ running=true;reloads=0;record.disabled=true;show.disabled=true;report=null;
+ const initial=video.getVideoPlaybackQuality?.(),start=performance.now(),raf=[],frames=[],tasks=[],waits=[],stalls=[],states=[],hidden=[];
+ let active=true,lastRaf=win.performance.now(),lastVideo,rafId,videoId,observer;
+ const onFrame=t=>{if(!active)return;raf.push(t-lastRaf);lastRaf=t;rafId=win.requestAnimationFrame(onFrame)};
+ rafId=win.requestAnimationFrame(onFrame);
+ const onVideo=t=>{if(!active)return;if(lastVideo!==undefined)frames.push(t-lastVideo);lastVideo=t;videoId=video.requestVideoFrameCallback(onVideo)};
+ if(video.requestVideoFrameCallback)videoId=video.requestVideoFrameCallback(onVideo);
+ if(win.PerformanceObserver?.supportedEntryTypes.includes('longtask')){observer=new win.PerformanceObserver(list=>{for(const e of list.getEntries())tasks.push(round(e.duration))});observer.observe({type:'longtask'})}
+ const onWaiting=()=>waits.push(round(performance.now()-start)),onStalled=()=>stalls.push(round(performance.now()-start)),onVisibility=()=>hidden.push({ms:round(performance.now()-start),state:document.visibilityState});
+ video.addEventListener('waiting',onWaiting);video.addEventListener('stalled',onStalled);document.addEventListener('visibilitychange',onVisibility);
+ const timer=setInterval(()=>{const elapsed=performance.now()-start;status.textContent=`Medindo… ${Math.min(20,Math.floor(elapsed/1000))}/20 s. Você pode navegar e rolar o quiz.`;states.push({ms:round(elapsed),time:round(video.currentTime),ready:video.readyState,paused:video.paused});if(elapsed>=20000)finish()},1000);
+ function finish(){
+  if(!active)return;active=false;running=false;clearInterval(timer);win.cancelAnimationFrame(rafId);if(videoId!==undefined)video.cancelVideoFrameCallback?.(videoId);observer?.disconnect();video.removeEventListener('waiting',onWaiting);video.removeEventListener('stalled',onStalled);document.removeEventListener('visibilitychange',onVisibility);
+  const final=video.getVideoPlaybackQuality?.(),total=final&&initial?final.totalVideoFrames-initial.totalVideoFrames:null,dropped=final&&initial?final.droppedVideoFrames-initial.droppedVideoFrames:null;
+  report={kind:'local-quiz-performance',userAgent:navigator.userAgent,viewport:{width:frame.clientWidth,height:frame.clientHeight,devicePixelRatio},durationMs:round(performance.now()-start),perceived:document.querySelector('#perceived').value,appReloads:reloads,visibilityChanges:hidden,ui:{...stats(raf),longTasksMs:tasks},video:{width:video.videoWidth,height:video.videoHeight,duration:round(video.duration),totalFrames:total,droppedFrames:dropped,dropPercent:total?round(dropped/total*100):null,...stats(frames),waitingAtMs:waits,stalledAtMs:stalls,states},limits:'Iframe same-origin no navegador real; não identifica sozinho o decoder ou a causa. Nenhum dado pessoal, resposta do quiz ou credencial capturado.'};
+  output.value=JSON.stringify(report,null,2);record.disabled=false;show.disabled=false;status.textContent='Medição concluída. Marque se percebeu travadas e clique em Ver relatório.';
+ }
+};
+show.onclick=()=>{if(!report)return;report.perceived=document.querySelector('#perceived').value;output.value=JSON.stringify(report,null,2);dialog.showModal()};
+document.querySelector('#selectReport').onclick=()=>{output.focus();output.select()};document.querySelector('#close').onclick=()=>dialog.close();
+</script>
+</html>

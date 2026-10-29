@@ -179,7 +179,7 @@ Mudaram sete dos 24 vencedores históricos e quatro dos 16 vencedores de perfis.
 ### Proveniência e orientação consultada
 
 - [Glossário do projeto](../GLOSSARY.md) e [ADR-0001 — valores e taxas separados](adr/0001-valores-e-taxas-separados.md).
-- [Backlog local](../tickets/README.md), [registro da publicação atual](../tickets/evidencias/deploy-2026-10-27/deploy.json) e [tickets locais desta feature](../.scratch/port-vue/README.md).
+- [Backlog local](../tickets/README.md), [registro da publicação atual](../tickets/evidencias/deploy-2026-10-27/deploy.json) e [tickets locais desta feature](../tickets/port-vue/README.md).
 - [Vue: tooling](https://vuejs.org/guide/scaling-up/tooling.html): Vite recomendado para projetos novos; Vue CLI em manutenção. Consulta em 27/10/2026.
 - [Vite: requisitos e build](https://vite.dev/guide/): verificar Node compatível; a documentação atual exige 20.19+ ou 22.12+. Manter Node 24 da Vercel e declarar um mínimo local compatível, em vez do atual limite genérico de Node 22.
 - [Google: limites de coleta](https://support.google.com/analytics/answer/9267744?hl=en-ES): 25 parâmetros por evento. O teto de 20 nesta spec é uma política interna explícita.

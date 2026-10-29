@@ -1,4 +1,5 @@
 {
+  "git": { "deploymentEnabled": { "quiz/*": false } },
   "framework": "vite",
   "installCommand": "npm ci",
   "buildCommand": "npm run vercel-build",

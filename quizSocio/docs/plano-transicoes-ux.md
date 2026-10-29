@@ -1,6 +1,6 @@
 # Plano de transições do quiz
 
-Status: proposto, sem implementação das animações nesta etapa.
+Status: implementado. O texto abaixo preserva as decisões do plano. A execução vigente está em [useQuizTransitions.js](../src/composables/useQuizTransitions.js), [App.vue](../src/App.vue), [ComparisonModal.vue](../src/components/ComparisonModal.vue) e [style.css](../src/style.css), com testes de navegação, movimento reduzido, foco e rodapé em [browser.test.js](../tests/browser.test.js). Evidências: [paridade Vue](paridade-vue-original-2026-10-28.md) e [fechamento atual](../tickets/qualidade-e-entrega/README.md).
 
 ## Objetivo e decisões
 
@@ -18,7 +18,7 @@ Os limites de troca incluem saída e entrada. Por exemplo, uma troca de pergunta
 
 ## Escopo
 
-Implementar as transições em [index.html](../index.html): seções principais, perguntas, confirmação de respostas, botões e modal de comparação. Preservar os textos vigentes, as respostas preenchidas, as regras do recomendador e a apresentação de valores e taxas separados.
+Transições implementadas nos componentes Vue e no composable acima: seções principais, perguntas, confirmação de respostas, botões e modal de comparação. Preservar os textos vigentes, as respostas preenchidas, as regras do recomendador e a apresentação de valores e taxas separados.
 
 ## Etapas em ordem de execução
 
@@ -77,15 +77,15 @@ Dependências: etapas 1 a 4.
 
 ## Cenários de aceite
 
-- [ ] Percorrer início → 12 perguntas → resultado → reinício, preservando as respostas ao voltar.
-- [ ] Alternar entre perguntas curtas, opções extensas e controles de faixa sem recortes ou colapso do cartão.
-- [ ] Validar erro de resposta ausente e confirmação de respostas incompatíveis, mantendo mensagens legíveis e foco previsível.
-- [ ] Repetir cliques rápidos em avançar, voltar e confirmar: nenhuma pergunta é pulada e há um único resultado.
-- [ ] Abrir e fechar o comparativo repetidamente, inclusive com Escape, sem perder foco ou deixar uma camada invisível bloqueando a página.
-- [ ] Repetir o fluxo com movimento reduzido e ativar essa preferência durante uma transição.
-- [ ] Inspecionar larguras de 320, 390, 768 e 1280 px: página sem overflow horizontal; rolagem do comparativo restrita à sua área.
-- [ ] Confirmar os limites de duração e a apresentação simultânea das opções definidos na tabela de decisões.
-- [ ] Confirmar que textos, preços, taxas e resultados dos cenários existentes permanecem preservados.
+- [x] Percorrer início → 12 perguntas → resultado → reinício, preservando as respostas ao voltar.
+- [x] Alternar entre perguntas curtas, opções extensas e controles de faixa sem recortes ou colapso do cartão.
+- [x] Validar erro de resposta ausente e confirmação de respostas incompatíveis, mantendo mensagens legíveis e foco previsível.
+- [x] Repetir cliques rápidos em avançar, voltar e confirmar: nenhuma pergunta é pulada e há um único resultado.
+- [x] Abrir e fechar o comparativo repetidamente, inclusive com Escape, sem perder foco ou deixar uma camada invisível bloqueando a página.
+- [x] Repetir o fluxo com movimento reduzido e ativar essa preferência durante uma transição.
+- [x] Inspecionar larguras de 320, 390, 768 e 1280 px: página sem overflow horizontal; rolagem do comparativo restrita à sua área.
+- [x] Confirmar os limites de duração e a apresentação simultânea das opções definidos na tabela de decisões.
+- [x] Confirmar que textos, preços, taxas e resultados dos cenários existentes permanecem preservados.
 
 ## Dependências e bloqueadores
 

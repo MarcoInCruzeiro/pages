@@ -4,8 +4,8 @@
   "private": true,
   "description": "Quiz de recomendação de planos do Sócio 5 Estrelas do Cruzeiro",
   "scripts": {
-    "test": "node --test tests/engine.test.js tests/configuration.test.mjs tests/analytics.test.mjs tests/config-release.test.mjs tests/reference.test.js tests/reference-profiles.test.js tests/evaluation.test.mjs tests/verification.test.mjs tests/browser.test.js",
-    "test:unit": "node --test tests/engine.test.js tests/configuration.test.mjs tests/analytics.test.mjs tests/config-release.test.mjs tests/reference.test.js tests/reference-profiles.test.js tests/evaluation.test.mjs tests/verification.test.mjs",
+    "test": "node --test tests/engine.test.js tests/configuration.test.mjs tests/analytics.test.mjs tests/config-release.test.mjs tests/reference.test.js tests/reference-profiles.test.js tests/evaluation.test.mjs tests/verification.test.mjs tests/validadores-compilados.test.mjs tests/dev-startup.test.mjs tests/browser.test.js",
+    "test:unit": "node --test tests/engine.test.js tests/configuration.test.mjs tests/analytics.test.mjs tests/config-release.test.mjs tests/reference.test.js tests/reference-profiles.test.js tests/evaluation.test.mjs tests/verification.test.mjs tests/validadores-compilados.test.mjs",
     "test:browser": "npm run build && node --test tests/browser.test.js",
     "preview": "vite preview --host 127.0.0.1",
     "baseline": "node tests/baseline.js",
@@ -16,7 +16,8 @@
     "build": "npm run config:check && vite build",
     "build:preview": "vite preview --host 127.0.0.1",
     "pretest": "npm run build",
-    "config:check": "node scripts/config-check.mjs",
+    "config:check": "node scripts/config-check.mjs && node scripts/gerar-validadores.mjs --check",
+    "config:validators": "node scripts/gerar-validadores.mjs",
     "config:prepare": "node scripts/config-release.mjs prepare",
     "config:restore": "node scripts/config-release.mjs restore",
     "vercel-build": "node scripts/check-delivery.mjs && npm run build"

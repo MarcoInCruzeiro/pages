@@ -8,7 +8,8 @@ Documento de apoio do quiz publicado em [`index.html`](index.html). O catálogo 
 
 | Camada | Arquivo | Responsabilidade |
 |---|---|---|
-| Catálogo, perguntas, validação e ranking | [`quiz-engine.js`](quiz-engine.js) | Funções puras, sem DOM, analytics ou estado global |
+| Catálogo e perguntas | [`config/`](config) | JSONs validados; identidade em `config/revision.json` |
+| Validação e ranking | [`adapter.js`](config/adapter.js) e [`engine-core.mjs`](src/engine-core.mjs) | Funções puras; `quiz-engine.js` é a fachada Node |
 | Interface | [`index.html`](index.html) | Renderização, navegação, confirmação de conflitos, analytics e CTAs |
 | Fonte comercial | [`catalogo-comercial.md`](catalogo-comercial.md) | Condições oficiais, divergências, pendências e data de consulta |
 | Testes | [`tests/`](tests/) | Motor, referência de qualidade e fluxo real de navegador |
@@ -189,7 +190,7 @@ Pergunta X de 12
 ```
 Plano recomendado
 [LOGO]  R$ XX / mês
-Valor mensal de referência para comparação e orçamento
+Valor mensal de referência
 Adesão e opcionais em campos separados
 Aviso de setor e alternativa, quando aplicável
 Motivos da recomendação

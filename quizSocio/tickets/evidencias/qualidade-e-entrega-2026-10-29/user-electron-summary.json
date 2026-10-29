@@ -1,0 +1,35 @@
+{
+  "source": "Relatório enviado pelo usuário em 2026-10-28; resumo dos campos técnicos, sem respostas do quiz",
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.143.0 Chrome/150.0.7871.250 Electron/43.7.7 Safari/537.36",
+  "viewport": { "width": 634, "height": 1115, "devicePixelRatio": 0.800000011920929 },
+  "durationMs": 20000.7,
+  "perceived": "no",
+  "appReloads": 0,
+  "visibilityChanges": [],
+  "ui": {
+    "count": 1084,
+    "maxMs": 66.7,
+    "p95Ms": 33.3,
+    "gapsOver150ms": 0,
+    "gapsOver250ms": 0,
+    "longTasksMs": []
+  },
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "duration": 60.8,
+    "totalFrames": 481,
+    "droppedFrames": 4,
+    "dropPercent": 0.8,
+    "count": 446,
+    "maxMs": 133.4,
+    "p95Ms": 66.8,
+    "gapsOver150ms": 0,
+    "gapsOver250ms": 0,
+    "waitingAtMs": [],
+    "stalledAtMs": [],
+    "firstState": { "ms": 1032.7, "time": 36.2, "ready": 4, "paused": false },
+    "lastState": { "ms": 20000.2, "time": 55.2, "ready": 4, "paused": false }
+  },
+  "conclusion": "Sintoma persistente não reproduzido nesta captura. Ela não cobre a abertura nem a passagem pelo fim do loop. User agent identifica Code/Electron; a causa das travadas relatadas continua sem confirmação."
+}

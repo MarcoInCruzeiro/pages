@@ -1,6 +1,16 @@
 # Validação externa e entrega do quiz
 
-Situação vigente: QUIZ-003 foi validado pelo usuário; QUIZ-009, QUIZ-010-A/010 e QUIZ-011 estão concluídos. A avaliação sintética e a consolidação passaram, sem mudança no cálculo. A publicação em produção na Vercel foi realizada em 27/10/2026; seguem pendentes a validação do contrato publicado, o recebimento no GA4 e a continuidade no checkout. A configuração dos eventos continua em [estrutura_quiz.md](../estrutura_quiz.md#9-analytics); os status ficam no [backlog](../tickets/README.md).
+Registro histórico da versão estática (27/10/2026): QUIZ-003 foi validado pelo usuário; QUIZ-009, QUIZ-010-A/010 e QUIZ-011 estão concluídos. A avaliação sintética e a consolidação passaram, sem mudança no cálculo. A publicação em produção na Vercel foi realizada em 27/10/2026; seguem pendentes a validação do contrato publicado, o recebimento no GA4 e a continuidade no checkout. A configuração dos eventos continua em [estrutura_quiz.md](../estrutura_quiz.md#9-analytics); os status ficam no [backlog](../tickets/README.md).
+
+## Estado vigente em 29/10/2026
+
+A implementação local usa Vue 3 + Vite na branch `quiz/port-vue`, ainda sem merge ou publicação da versão Vue. A configuração operacional está em `config/planos/catalogo.json`, `config/questoes/questoes.json`, `config/pesos/{ranking,perfil}.json` e `config/ga4/ga4.json`; [revision.json](../config/revision.json) identifica catálogo `2026-10-28.2`, regras `2026-10-29.2` e GA4 `2026-10-28.3`.
+
+A fotografia atual de testes e os resultados dos tickets ficam no [fechamento de qualidade e entrega](../tickets/qualidade-e-entrega/README.md). A avaliação dos quatro planos está no [dossiê de decisão](../tickets/evidencias/qualidade-e-entrega-2026-10-29/decisao-ranking.md): histórico 10/12 no top-1 e 12/12 no top-3 por partição; perfis 7/8 e 8/8 no top-1, ambos 8/8 no top-3; zero violações de orçamento. `releaseApproved: false`: as perdas CAL-02, CAL-10, PER-02-C e RES-05 exigem decisão do responsável. As evidências anteriores abaixo são históricas.
+
+Verificação local e no CI: Node 22, `npm ci` e `npm test`, com Chrome indicado por `CHROME_PATH` quando necessário. O workflow [Quiz Socio CI](../../.github/workflows/quiz-socio.yml) usa cache npm pelo lockfile, instala Chrome e executa a mesma suíte, sem passos de publicação. A regra Git da Vercel desativa publicação automática nas branches `quiz/*`; não há deploy nesta fase. Para manter os validadores atualizados, execute `npm run config:validators` após alterar schemas; o build verifica identidade sem reescrever fontes.
+
+Candidatos e backups locais ficam em `.scratch/port-vue/config-candidates/` (ignorado), e pacotes isolados ficam fora do projeto. Para registrar o diagnóstico: `npm run build` e `npm run release:prepare -- --diagnostic --output DIRETORIO_VAZIO_EXTERNO`. A publicação permanece uma ação específica posterior, após aceite e CI verde. O alvo histórico de rollback é `dpl_5aGzo4F5S9RtEUWzbGWdV9xZWoKh`; antes de publicar, conferir na Vercel se ele ainda é o deployment anterior e registrar seu URL. O comando de promoção é `vercel promote URL_DO_DEPLOYMENT_ANTERIOR`; não foi executado.
 
 ## 1. Conferir as ofertas — QUIZ-003
 
@@ -16,7 +26,7 @@ O usuário indicou [a página oficial de planos](https://socio.cruzeiro.com.br/p
 
 A [referência documental](../tests/fixtures/official-commercial-reference.json) fixa os valores de assinatura, adesão, modalidades publicadas, benefícios de ingresso, limites de nível e Kids. Seus testes verificam o catálogo contra esses fatos. O aceite comercial vigente está no QUIZ-003.
 
-Executar `npm run reference:evaluate -- --output CAMINHO_DO_RELATORIO.json` para registrar a regressão atual por cenário. Na rodada atual: calibração 12/12 no top-1; reserva histórica 11/12 no top-1 e 12/12 no top-3, sem violação de orçamento. RES-11 continua divergente; as expectativas foram preservadas.
+Executar `npm run reference:evaluate -- --output CAMINHO_DO_RELATORIO.json` para registrar a regressão atual por cenário. Na rodada histórica de cinco planos: calibração 12/12 no top-1; reserva histórica 11/12 no top-1 e 12/12 no top-3, sem violação de orçamento. RES-11 continua divergente; as expectativas foram preservadas.
 
 O usuário autorizou o agente a criar a referência do QUIZ-009. Foram criados [oito perfis e 16 cenários completos](../tests/fixtures/reference-profiles.js), com expectativas, partições distintas e [hash registrado](../tests/fixtures/reference-profiles-provenance.json). A transformação de necessidades do engine foi verificada e não exigiu alteração do cálculo nesta etapa. A referência permanece declarada como sintética, sem alegar validação externa ou cega.
 
@@ -56,7 +66,7 @@ As contagens pressupõem ausência de revisão/retorno: respostas reenviadas leg
 
 **Publicação realizada em 27/10/2026:** [quiz-socio.vercel.app](https://quiz-socio.vercel.app/), deployment `dpl_5aGzo4F5S9RtEUWzbGWdV9xZWoKh`, alvo `production`, estado `READY` e alias confirmados na Vercel. Foram enviados dez arquivos públicos, conferidos contra o workspace após 82/82 testes. [Registro e limites da verificação](../tickets/evidencias/deploy-2026-10-27/deploy.json) e [manifesto entregue](../tickets/evidencias/deploy-2026-10-27/release-manifest.json). A publicação direta não executou commit ou push; o Git ainda precisa ser sincronizado com o workspace. O aceite do contrato em execução e do recebimento permanece pendente.
 
-Executar `npm run release:prepare -- --output DIRETORIO_VAZIO_FORA_DO_PROJETO`. O comando copia exclusivamente `index.html`, `quiz-engine.js` e `img/` para `public/`, e escreve um manifesto de versões e hashes fora dessa pasta pública. Arquivos de ambiente, credenciais, `.vercel`, testes e documentos internos ficam fora do candidato.
+Executar `npm run release:prepare -- --output DIRETORIO_VAZIO_FORA_DO_PROJETO`. O comando vigente copia somente o build Vite de `dist/` (HTML compilado, `assets/`, `img/` e `build-manifest.json`) para `public/`, e escreve `manifest.json` com commit, versões, hashes e lista de arquivos fora da pasta pública. O HTML-fonte e o motor legado não são entregues. Sem aceite das perdas, use `--diagnostic`; um pacote diagnóstico nunca é aprovado para produção. Arquivos de ambiente, credenciais, `.vercel`, testes e documentos internos ficam fora do candidato.
 
 O candidato desta execução está em `/tmp/quizSocio-release-2026-10-27/public/`. O [manifesto persistido](../tickets/evidencias/execucao-2026-10-27/release-manifest.json) identifica os dez arquivos públicos e suas versões. É um candidato do workspace com alterações locais, não uma publicação concluída. Rodar o preparo novamente exige um novo diretório vazio; o comando recusa sobrescrita.
 
