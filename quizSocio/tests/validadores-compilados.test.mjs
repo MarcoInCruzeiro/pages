@@ -71,13 +71,13 @@ test('carregarConfiguracao pré-compilado valida o catálogo e falha com o prefi
     assert.throws(() => carregarConfiguracao({}, { $id: 'https://dominio.invalido/schema.json' }), /pré-compilado indisponível/);
 });
 
-test('bundle do navegador tem os validadores gerados e não tem o compilador Ajv', async () => {
+test('bundle do navegador tem os validadores gerados e não tem o compilador Ajv', async (t) => {
     const dist = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'dist', 'assets');
     let arquivos;
     try {
         arquivos = (await readdir(dist)).filter((f) => f.endsWith('.js'));
     } catch {
-        assert.skip('dist ausente: rode npm run build antes');
+        t.skip('dist ausente: rode npm run build antes');
         return;
     }
     assert.ok(arquivos.length > 0, 'bundle precisa ter JavaScript');

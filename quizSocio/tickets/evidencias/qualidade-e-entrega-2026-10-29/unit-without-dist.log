@@ -1,0 +1,96 @@
+Antes: FAIL assert.skip is not a function
+Depois:
+TAP version 13
+# Subtest: validadores compilados aceitam a configuração ativa como o Ajv
+ok 1 - validadores compilados aceitam a configuração ativa como o Ajv
+  ---
+  duration_ms: 12.936953
+  type: 'test'
+  ...
+# Subtest: erro idêntico: catalogo — sem slug
+ok 2 - erro idêntico: catalogo — sem slug
+  ---
+  duration_ms: 3.317264
+  type: 'test'
+  ...
+# Subtest: erro idêntico: catalogo — preço negativo
+ok 3 - erro idêntico: catalogo — preço negativo
+  ---
+  duration_ms: 0.572897
+  type: 'test'
+  ...
+# Subtest: erro idêntico: catalogo — campo desconhecido
+ok 4 - erro idêntico: catalogo — campo desconhecido
+  ---
+  duration_ms: 0.498729
+  type: 'test'
+  ...
+# Subtest: erro idêntico: catalogo — URI inválida
+ok 5 - erro idêntico: catalogo — URI inválida
+  ---
+  duration_ms: 0.631263
+  type: 'test'
+  ...
+# Subtest: erro idêntico: questoes — menos de 12
+ok 6 - erro idêntico: questoes — menos de 12
+  ---
+  duration_ms: 0.591667
+  type: 'test'
+  ...
+# Subtest: erro idêntico: questoes — tipo trocado
+ok 7 - erro idêntico: questoes — tipo trocado
+  ---
+  duration_ms: 2.45703
+  type: 'test'
+  ...
+# Subtest: erro idêntico: pesosRanking — divisor com tipo inválido
+ok 8 - erro idêntico: pesosRanking — divisor com tipo inválido
+  ---
+  duration_ms: 0.882195
+  type: 'test'
+  ...
+# Subtest: erro idêntico: pesosPerfil — propriedade não permitida
+ok 9 - erro idêntico: pesosPerfil — propriedade não permitida
+  ---
+  duration_ms: 0.946457
+  type: 'test'
+  ...
+# Subtest: erro idêntico: ga4 — measurementId fora do padrão
+ok 10 - erro idêntico: ga4 — measurementId fora do padrão
+  ---
+  duration_ms: 1.455201
+  type: 'test'
+  ...
+# Subtest: erro idêntico: ga4 — teto de parâmetros estourado
+ok 11 - erro idêntico: ga4 — teto de parâmetros estourado
+  ---
+  duration_ms: 0.548708
+  type: 'test'
+  ...
+# Subtest: último estado de errors limpo depois de dado válido
+ok 12 - último estado de errors limpo depois de dado válido
+  ---
+  duration_ms: 0.420228
+  type: 'test'
+  ...
+# Subtest: carregarConfiguracao pré-compilado valida o catálogo e falha com o prefixo canônico
+ok 13 - carregarConfiguracao pré-compilado valida o catálogo e falha com o prefixo canônico
+  ---
+  duration_ms: 1.098111
+  type: 'test'
+  ...
+# Subtest: bundle do navegador tem os validadores gerados e não tem o compilador Ajv
+ok 14 - bundle do navegador tem os validadores gerados e não tem o compilador Ajv # SKIP dist ausente: rode npm run build antes
+  ---
+  duration_ms: 12.143031
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 0
+# duration_ms 362.458746

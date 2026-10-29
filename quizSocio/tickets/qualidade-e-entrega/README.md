@@ -44,3 +44,15 @@ Local canônico: `tickets/qualidade-e-entrega/`; migração preservada em `ticke
 Fotografia vigente: **147 testes aprovados, zero falhas**, com build Vite, motor, referências, configuração, startup dev e navegador. Contagens de outras datas são históricas. [Evidências desta execução](../evidencias/qualidade-e-entrega-2026-10-29/README.md).
 
 O aceite comercial das quatro perdas é separado do pedido de executar tickets. Os tickets 08 e 09 permanecem bloqueados; nenhum arquivo `quality-approval.json` é criado sem a decisão do responsável. A publicação continua dependendo de ação explícita posterior.
+
+| Ticket | Fechamento |
+| --- | --- |
+| 01 | Concluído: dossiê e hashes, sem aceite |
+| 02 | Concluído: tickets versionados, snapshots ignorados, clone e diagnóstico com árvore limpa |
+| 03 | Concluído: validadores gerados, gate de identidade e medição de abertura |
+| 04 | Concluído: poucos estados Vue medidos, reservas reutilizadas e geometria preservada; ganho isolado de tempo não demonstrado |
+| 05 | Concluído: vídeo −62%, artefato −66%, sem duplicação de imagens |
+| 06 | Concluído: CI verde/vermelho no GitHub e check obrigatório na main |
+| 07 | Concluído: backlog, configuração, entrega, links e transições atualizados |
+| 08 | Bloqueado: falta aceite explícito das quatro perdas, com nome do responsável |
+| 09 | Bloqueado: depende de 08 e autorização posterior de publicação |

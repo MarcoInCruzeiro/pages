@@ -25,3 +25,5 @@ Inspeção do JSON de aceite, do manifesto e dos hashes; jornada completa no pac
 ## Registro de execução
 
 Pendente: depende do aceite explícito do responsável.
+
+Preparação técnica em 29/10/2026: dossiê disponível, CI hospedado aprovado e protegido, clone limpo e pacote diagnóstico verificados nas [evidências](../../evidencias/qualidade-e-entrega-2026-10-29/README.md). Não houve aceite, merge ou publicação. O manifesto diagnóstico não atende ao requisito de candidato aprovado deste ticket.

@@ -5,17 +5,17 @@
 **Bloqueado por:** Nenhum (pode começar imediatamente).
 
 **Status:** ready-for-agent
-**Situação da execução:** Em andamento
+**Situação da execução:** Concluído
 **Prioridade:** P2
 
 ## Critérios de aceite
 
-- [ ] Os tickets locais referenciados por documentos versionados estão em local versionado ou o link foi removido; um clone limpo resolve todos os links.
-- [ ] `.scratch/perf` e os candidatos gerados têm política explícita — versionar ou ignorar — e nenhum snapshot ou backup entra na saída pública.
-- [ ] `percentual-chamativo.html` é removido, arquivado fora do projeto ou vinculado a um ticket; não fica órfão.
-- [ ] `git status --porcelain` fica limpo ao final, considerando apenas arquivos intencionais.
-- [ ] `release:prepare -- --diagnostic` registra `workingTreeHasChanges: false`.
-- [ ] Nenhum comportamento do quiz, configuração ou build é alterado.
+- [x] Os tickets locais referenciados por documentos versionados estão em local versionado ou o link foi removido; um clone limpo resolve todos os links.
+- [x] `.scratch/perf` e os candidatos gerados têm política explícita — versionar ou ignorar — e nenhum snapshot ou backup entra na saída pública.
+- [x] `percentual-chamativo.html` é removido, arquivado fora do projeto ou vinculado a um ticket; não fica órfão.
+- [x] `git status --porcelain` fica limpo ao final, considerando apenas arquivos intencionais.
+- [x] `release:prepare -- --diagnostic` registra `workingTreeHasChanges: false`.
+- [x] Nenhum comportamento do quiz, configuração ou build é alterado.
 
 ## Verificação
 
@@ -24,3 +24,5 @@ Conferir `git status`, executar o preparo diagnóstico e validar os links a part
 ## Registro de execução
 
 Execução em 29/10/2026: [evidências, comandos e limitações](../../evidencias/qualidade-e-entrega-2026-10-29/README.md). A verificação final e os critérios individuais são registrados no fechamento desta execução.
+
+Clone limpo da revisão registrada em [clean-checkout.json](../../evidencias/qualidade-e-entrega-2026-10-29/clean-checkout.json): dependências travadas, build, links e pacote diagnóstico com árvore limpa e jornada aprovada. Snapshots permanecem ignorados em `.scratch/port-vue/config-candidates/`. As alterações de comportamento pertencem aos tickets 03–05; este ticket apenas organiza e registra.

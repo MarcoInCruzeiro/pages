@@ -25,3 +25,5 @@ Histórico do Git, execução do CI, inspeção do deployment, leitura do HTML e
 ## Registro de execução
 
 Execução em 29/10/2026: [evidências, comandos e limitações](../../evidencias/qualidade-e-entrega-2026-10-29/README.md). A verificação final e os critérios individuais são registrados no fechamento desta execução.
+
+Preparação técnica em 29/10/2026: dossiê disponível, CI hospedado aprovado e protegido, clone limpo e pacote diagnóstico verificados nas [evidências](../../evidencias/qualidade-e-entrega-2026-10-29/README.md). Não houve aceite, merge ou publicação. O manifesto diagnóstico não atende ao requisito de candidato aprovado deste ticket.

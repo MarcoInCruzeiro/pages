@@ -1,0 +1,8 @@
+2026-10-29T17:50:52.7743956Z npm cache is not found
+2026-10-29T17:52:45.4474213Z not ok 39 - servidor de desenvolvimento renderiza a entrada e inicia o quiz sem erros
+2026-10-29T17:52:45.4477268Z     -   'CONTROLE NEGATIVO DO CI — falha intencional'
+2026-10-29T17:52:45.4478769Z     0: 'CONTROLE NEGATIVO DO CI — falha intencional'
+2026-10-29T17:52:45.4625569Z # tests 147
+2026-10-29T17:52:45.4625920Z # pass 146
+2026-10-29T17:52:45.4626086Z # fail 1
+2026-10-29T17:52:45.4626777Z # duration_ms 102608.185694

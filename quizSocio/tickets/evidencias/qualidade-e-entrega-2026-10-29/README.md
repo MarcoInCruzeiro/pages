@@ -35,7 +35,7 @@ A pré-compilação reduziu a mediana de 534 para 185 ms (−65,4%). Na compara�
 
 ## Artefato público e mídia
 
-[Inventário antes/depois, tamanhos e hashes](assets.json). Total: 45.164.158 → 15.334.571 bytes (−66,0%). Vídeo: 36.348.058 → 13.830.472 bytes (−62,0%). Zero grupos de imagens duplicadas no build final. Os arquivos usados no CSS e por referências estáticas compartilham o mesmo caminho `img/`; o plugin só emite os ainda ausentes e só roda no build.
+[Inventário antes/depois, tamanhos e hashes](assets.json). Total: 45.164.158 → 15.334.997 bytes (−66,0%). Vídeo: 36.348.058 → 13.830.472 bytes (−62,0%). Zero grupos de imagens duplicadas no build final. Os arquivos usados no CSS e por referências estáticas compartilham o mesmo caminho `img/`; o plugin só emite os ainda ausentes e só roda no build.
 
 [Metadados anteriores](video-antes.txt) e [atuais](video-depois.txt): H.264, 60,75 s, 24 fps, proporção 9:16; resolução 1080×1920 → 720×1280. `autoplay`, `muted`, `loop`, `playsinline`, pôster e `preload=metadata` foram preservados no componente. A faixa de áudio não é necessária no fundo mudo. Pôster JPEG: 866.124 → 95.196 bytes. Fundo estrelado JPEG: 3.216.121 → 69.166 bytes. Catálogo, planos, regras e medição não foram alterados por esta otimização.
 
@@ -52,3 +52,14 @@ Referências do workflow: [setup-node](https://github.com/actions/setup-node/tre
 Os registros finais de testes, CI e checkout limpo complementam esta evidência. Os tickets 08 e 09 aguardam decisão do responsável, CI/candidato e autorização específica de publicação; nenhum arquivo de aceite foi criado. QUIZ-017, 018 e 019 continuam com seus bloqueios externos.
 
 Verificação local final: `npm test` aprovou **147 testes**, zero falhas, em 109,8 s ([log](npm-test.log)). Capturas e geometria: [layout/layout.json](layout/layout.json), com início, pergunta 11 e comparativo em 390 e 1280 px. Os ícones externos do site de sócios aparecem bloqueados nas capturas por política do harness; os assets locais têm zero falhas HTTP. A reprodução automática real e os atributos do vídeo são registrados em [video-browser.json](video-browser.json).
+
+Checkout limpo verificado: [clean-checkout.json](clean-checkout.json), com `npm ci`, build, links e jornada no pacote isolado. [Manifesto diagnóstico](diagnostic-manifest.json): 12 arquivos, `workingTreeHasChanges: false`, `diagnostic: true`, `releaseApproved: false`. O escopo da árvore limpa é `quizSocio/` e o workflow do monorepo; diretórios alheios não rastreados do workspace original foram preservados.
+
+## CI hospedado e bloqueio de merge
+
+- [Execução verde](https://github.com/MarcoInCruzeiro/pages/actions/runs/40925172854): commit `5a29253`, **147 passam, zero falhas**, suíte em 108,6 s; job completo em 129 s. [Metadados](ci-green.json), [etapas](ci-green-jobs.json) e [sinal do log](ci-green-signal.log).
+- [Controle negativo](https://github.com/MarcoInCruzeiro/pages/actions/runs/40925195956): commit temporário `c9c710c`, 146 passam e exatamente uma falha intencional no teste de startup. O teste exigiu uma exceção inexistente, comprovando que a falha do teste torna o workflow vermelho. [Metadados](ci-red.json), [etapas](ci-red-jobs.json) e [sinal do log](ci-red-signal.log). A mutação ficou apenas na branch descartável `quiz/ci-negative-control-2026-10-29`, sem entrar na branch de trabalho nem na main; a branch foi removida após a verificação.
+- Cache npm configurado por `package-lock.json`; as duas primeiras execuções foram frias (`npm cache is not found`). O cache da execução verde foi salvo ao final. O Chrome é provisionado por `browser-actions/setup-chrome`, sem dependência do navegador instalado no runner.
+- [Proteção da main](main-protection.json): exige `Quiz Socio / testes`, branch atualizada e aplica a regra a administradores; force push e exclusão da main estão desabilitados. Não foi realizado merge.
+
+Correção complementar de testes: sem `dist/`, a inspeção do bundle usa `t.skip`, preservando os 13 testes de validação em vez de lançar `assert.skip is not a function`. [Vermelho/verde em checkout descartável](unit-without-dist.log). Com o build presente, os 14 testes do arquivo passam.

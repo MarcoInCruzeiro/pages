@@ -78,14 +78,14 @@
       "sha256": "320f2dc58182cb4fe0fcefc9f292548aca8ff369db2fd1fdee9d399dc6913a6b"
     },
     {
-      "path": "assets/index-Co-ADlzB.js",
-      "bytes": 299220,
-      "sha256": "17f32516ff292e606cf7c60d2fef35f8a36fb6c59fe9b603944724643cd7506b"
+      "path": "assets/index-C7ddryUC.js",
+      "bytes": 299646,
+      "sha256": "e080b4c1922d25cd63235fdea864ceabb325bd655471c21169282d70ac6c03de"
     },
     {
       "path": "build-manifest.json",
       "bytes": 997,
-      "sha256": "1ee32674b14f16fd9b45c2412f0f48070d8cfe7d13b4f953b1c4bfb9f7b602af"
+      "sha256": "902896be53e40c6f6c80daae2064284afa8862a5e33db0b0a438d9cc51d0a2e3"
     },
     {
       "path": "img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4",
@@ -130,14 +130,14 @@
     {
       "path": "index.html",
       "bytes": 2465,
-      "sha256": "9df8bd126345ed35fbe6a0fe423f3a506a66ac1608a855e41b6529a2d40c24a6"
+      "sha256": "a71dcbb33e0cda02f492dc32113bb8302bc4afe483f48d6f1df2750e7b159ae0"
     }
   ],
   "totalBefore": 45164158,
-  "totalAfter": 15334571,
+  "totalAfter": 15334997,
   "videoBefore": 36348058,
   "videoAfter": 13830472,
-  "distReduction": 0.6604703446480724,
+  "distReduction": 0.6604609123898646,
   "videoReduction": 0.6194990114740105,
   "duplicateImages": []
 }
