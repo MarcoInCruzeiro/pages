@@ -29,26 +29,26 @@ test('GA4 inicializa uma vez e despacha um evento sem duplicar a fila', () => {
     initializeAnalytics(config, target);
     assert.equal(target.inserted.length, 1);
     assert.deepEqual(target.dataLayer.map((command) => command[0]), ['js', 'set', 'config']);
-    assert.equal(createEventDispatcher(config, target)('quiz_start'), true);
+    assert.equal(createEventDispatcher(config, target)('inicio_do_quiz'), true);
     assert.equal(target.dataLayer.length, 4);
-    assert.equal(target.dataLayer[3][1], 'quiz_start');
+    assert.equal(target.dataLayer[3][1], 'inicio_do_quiz');
 });
 
 test('GA4 usa nome configurado por identidade semântica e respeita supressão no despachante', () => {
     const altered = structuredClone(config);
-    altered.eventos.find((event) => event.chave === 'quiz_start').nome = 'quiz_inicio_v2';
+    altered.eventos.find((event) => event.chave === 'inicio_do_quiz').nome = 'inicio_do_quiz_v2';
     const target = browser('https://quiz-socio.vercel.app/');
     initializeAnalytics(altered, target);
     const emit = createEventDispatcher(altered, target);
-    assert.equal(emit('quiz_start'), true);
-    assert.equal(target.dataLayer.at(-1)[1], 'quiz_inicio_v2');
+    assert.equal(emit('inicio_do_quiz'), true);
+    assert.equal(target.dataLayer.at(-1)[1], 'inicio_do_quiz_v2');
     const count = target.dataLayer.length;
     target.coletaHabilitada = false;
-    assert.equal(emit('quiz_start'), false);
+    assert.equal(emit('inicio_do_quiz'), false);
     assert.equal(target.dataLayer.length, count);
     target.coletaHabilitada = true;
     target.isPreview = true;
-    assert.equal(emit('quiz_start'), false);
+    assert.equal(emit('inicio_do_quiz'), false);
     assert.equal(target.dataLayer.length, count);
 });
 
@@ -57,11 +57,11 @@ test('GA4 falha fechado sem interromper o chamador e rejeita payload acima do te
     initializeAnalytics(config, target);
     const emit = createEventDispatcher(config, target);
     const count = target.dataLayer.length;
-    assert.equal(emit('quiz_complete', Object.fromEntries(Array.from({ length: 21 }, (_, index) => ['param' + index, index]))), false);
+    assert.equal(emit('quiz_concluido', Object.fromEntries(Array.from({ length: 21 }, (_, index) => ['param' + index, index]))), false);
     assert.equal(emit('evento_desconhecido'), false);
     assert.equal(target.dataLayer.length, count);
     target.gtag = () => { throw new Error('medição indisponível'); };
-    assert.equal(emit('quiz_start'), false);
+    assert.equal(emit('inicio_do_quiz'), false);
     const unavailable = browser('https://quiz-socio.vercel.app/');
     unavailable.gtag = target.gtag;
     assert.doesNotThrow(() => initializeAnalytics(config, unavailable));

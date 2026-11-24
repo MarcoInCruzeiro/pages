@@ -2,6 +2,10 @@
 
 Tracker versionado da fase de fechamento após a migração Vue. São nove tickets numerados por dependência; esta numeração é separada dos `QUIZ-*` e dos tickets 01–08 da feature `port-vue`.
 
+Estado corrente em 04/11/2026: o bloqueio de ranking foi resolvido pela correção, sem aceite das quatro perdas. As referências congeladas atingem 40/40 no primeiro lugar; a suíte atual passou 161 testes. O contrato GA4 local está em português, revisão `2026-11-03.1`. Os oito tickets técnicos da migração Vue estão concluídos; nesta fase, 08 continua pendente de candidato com árvore limpa e demais critérios, e 09 depende desse candidato/CI para publicar. QUIZ-017 e 018 estão em andamento; QUIZ-019 continua bloqueado externamente. [Verificação e limites atuais](../../docs/correcao-documentacao-2026-11-04.md).
+
+Atualização em 03/11/2026: o usuário rejeitou o aceite das quatro perdas. A [correção do ranking](../../docs/correcao-ranking-sem-preco-2026-11-03.md), regras `2026-11-03.2`, remove preferência por preço e zera benefícios presenciais sem uso declarado. As referências congeladas atingem 40/40 no primeiro lugar, sem regressões; o gate dispensa aceite de perdas nessa revisão. O ticket 08 ainda exige o candidato com árvore limpa e os demais critérios; o 09 não foi executado. A sequência baseada em aceite abaixo é o planejamento histórico.
+
 **Contexto histórico do planejamento:** branch `quiz/port-vue`, 132 testes aprovados naquele momento, `releaseApproved: false` pelas perdas `CAL-02`, `CAL-10`, `PER-02-C` e `RES-05`. Produção ainda serve a versão estática anterior. Os QUIZ-017, 018 e 019 permanecem bloqueados externamente e não são resolvidos por este tracker.
 
 A numeração segue a ordem de dependência: primeiro os tickets sem bloqueio, depois os que dependem deles.
@@ -15,7 +19,7 @@ A numeração segue a ordem de dependência: primeiro os tickets sem bloqueio, d
 | 05 | [Reduzir o peso do artefato público](issues/05-peso-do-artefato.md) | — | Menos duplicação e mídia mais leve |
 | 06 | [Adicionar CI de testes](issues/06-ci-de-testes.md) | — | Suíte completa em push/PR |
 | 07 | [Documentação do estado vigente](issues/07-documentacao-do-estado-vigente.md) | 01, 02 | Backlog e docs alinhados ao Vue/JSON |
-| 08 | [Registrar aceite e preparar candidato aprovado](issues/08-aceite-e-candidato.md) | 01, 02 + aceite do responsável | Candidato aprovado, não diagnóstico |
+| 08 | [Preparar candidato aprovado após corrigir o ranking](issues/08-aceite-e-candidato.md) | 02 + candidato com árvore limpa e critérios de entrega | Candidato aprovado, não diagnóstico |
 | 09 | [Fundir a branch e publicar a versão Vue](issues/09-merge-e-publicacao.md) | 06, 08 | Produção na versão Vue atual |
 
 ## Sequência
@@ -23,7 +27,7 @@ A numeração segue a ordem de dependência: primeiro os tickets sem bloqueio, d
 ```
 01 ─┐
 02 ─┴─> 07
-01,02 + aceite ─> 08 ─┐
+02 + candidato ─> 08 ─┐
                      ├─> 09
 06 ──────────────────┘
 03, 04, 05 independentes
@@ -33,7 +37,7 @@ Os tickets 03–05 não bloqueiam o candidato 08 por decisão do responsável. S
 
 ## Limites
 
-- O aceite das perdas é decisão do responsável; nenhum ticket cria esse aceite por conta própria.
+- As perdas originais foram corrigidas após rejeição do usuário. Se surgir regressão futura, sua resolução ou eventual aceite específico permanece separada dos pisos agregados; nenhum ticket cria aprovação por conta própria.
 - O ticket 09 entrega a versão; a comprovação de recebimento no GA4 e a continuidade no checkout continuam nos QUIZ-017, 018 e 019.
 - Nenhum ticket autoriza deploy automático. A publicação do 09 exige ação explícita posterior.
 
@@ -41,7 +45,7 @@ Os tickets 03–05 não bloqueiam o candidato 08 por decisão do responsável. S
 
 Local canônico: `tickets/qualidade-e-entrega/`; migração preservada em `tickets/port-vue/`. `.scratch/` é apenas diagnóstico e snapshots ignorados. O protótipo de percentual está arquivado em `docs/prototypes/` e fora do build.
 
-Fotografia vigente: **147 testes aprovados, zero falhas**, com build Vite, motor, referências, configuração, startup dev e navegador. Contagens de outras datas são históricas. [Evidências desta execução](../evidencias/qualidade-e-entrega-2026-10-29/README.md).
+Fotografia daquela execução: **147 testes aprovados, zero falhas**, com build Vite, motor, referências, configuração, startup dev e navegador. A tabela abaixo conserva o fechamento histórico de 29/10; o estado atual de 04/11 está no início deste arquivo. [Evidências de 29/10](../evidencias/qualidade-e-entrega-2026-10-29/README.md).
 
 O aceite comercial das quatro perdas é separado do pedido de executar tickets. Os tickets 08 e 09 permanecem bloqueados; nenhum arquivo `quality-approval.json` é criado sem a decisão do responsável. A publicação continua dependendo de ação explícita posterior.
 

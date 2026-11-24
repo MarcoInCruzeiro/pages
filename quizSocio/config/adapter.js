@@ -11,8 +11,8 @@ import { validadores, errosTexto, carregarConfiguracao } from './validadores-ajv
 const allowedValues = {
     wantsGuaranteedTicket: ['never', true, false], buysTwoTickets: [true, false],
     kidsCount: [0, 1], needsPriority: [true, false], wantsParticipation: [true, false],
-    wantsStoreDiscount: [true, false], gameFrequency: ['always', 'frequent', 'occasional'],
-    digitalExperience: [true, false], budget: [40, 100, 200, 400],
+    wantsStoreDiscount: [true, 'sometimes', false], gameFrequency: ['always', 'frequent', 'occasional'],
+    digitalExperience: [true, 'sometimes', false], budget: [40, 100, 200, 400],
     preferredSector: ['yellow-orange', 'blue', 'purple']
 };
 const knownSectors = new Set(['amarelo-inferior', 'amarelo-superior', 'laranja-inferior', 'laranja-superior', 'sicoob-inferior', 'sicoob-superior', 'roxo-inferior', 'roxo-superior']);
@@ -55,7 +55,8 @@ export function validateConfiguration(configuration) {
     if (questions.find((q) => q.key === 'gamesPerYear').max !== profile.frecuencia.maxJogos) fail('perfil', 'frecuencia.maxJogos', 'deve corresponder ao máximo da pergunta de intenção');
     if (profile.frecuencia.volume + profile.frecuencia.presenca + profile.frecuencia.declaracao <= 0) fail('perfil', 'frecuencia', 'soma de pesos precisa ser positiva');
     if (ranking.priority.intervalo <= 0 || ranking.discount.referencia <= 0) fail('ranking', 'normalização', 'divisores precisam ser positivos');
-    const minimumTotalWeight = ranking.presenca.base * (ranking.ticket.base + ranking.priority.base + Math.min(ranking.sector.comPreferencia, ranking.sector.semPreferencia)) + ranking.discount.base + ranking.experiences.base + Math.min(ranking.family.comFamilia, ranking.family.semFamilia) + ranking.price.base;
+    // A presença pode zerar: os benefícios restantes precisam sustentar o índice.
+    const minimumTotalWeight = ranking.discount.base + ranking.experiences.base + Math.min(ranking.family.comFamilia, ranking.family.semFamilia);
     if (minimumTotalWeight <= 0) fail('ranking', 'pesos', 'soma residual de pesos precisa ser positiva para todo perfil');
     if (ranking.family.capacidade + ranking.family.kids !== 1) fail('ranking', 'family', 'capacidade e Kids devem somar 1');
     if (profile.adultos.true !== 1 || profile.adultos.false !== 0 || profile.kids.max !== 3) fail('perfil', 'família', 'cardinalidades de adultos e Kids são parte do contrato');
@@ -81,18 +82,25 @@ export function validateConfiguration(configuration) {
     for (const host of analytics.ambientesHabilitados) {
         if (host !== host.toLowerCase() || /[/:*]/.test(host)) fail('ga4', 'ambientesHabilitados', 'use hostname exato e normalizado');
     }
+    const responseFields = keys.map((key) => {
+        const slug = analytics.respostas?.[key];
+        if (typeof slug !== 'string') fail('ga4', 'respostas', `a pergunta ${key} precisa de um nome de parâmetro`);
+        return `resposta_${slug}`;
+    });
+    if (new Set(Object.values(analytics.respostas)).size !== keys.length) fail('ga4', 'respostas', 'nomes de parâmetro das respostas precisam ser únicos');
     const requiredFields = {
-        quiz_start: [],
-        quiz_answer: ['quiz_step', 'quiz_question', 'quiz_answer', 'quiz_answer_label', 'answer_time_sec'],
-        quiz_complete: ['recommended_plan', 'affinity_index', 'compatibility', 'score_semantics', 'no_eligible_plan', 'catalog_version', 'rules_version', 'total_time_sec', 'answer_*'],
-        quiz_subscribe_click: ['plan', 'recommended_plan', 'clicked_recommended', 'cta_location']
+        inicio_do_quiz: [],
+        resposta_do_quiz: ['etapa_do_quiz', 'pergunta_do_quiz', 'valor_da_resposta', 'rotulo_da_resposta', 'tempo_de_resposta_seg'],
+        quiz_concluido: ['plano_recomendado', 'indice_de_afinidade', 'compatibilidade', 'semantica_do_score', 'sem_plano_elegivel', 'versao_do_catalogo', 'versao_das_regras', 'tempo_total_seg', 'resposta_*'],
+        clique_de_assinatura: ['plano', 'plano_recomendado', 'clicou_no_recomendado', 'local_do_cta']
     };
     for (const event of analytics.eventos) {
+        if (!requiredFields[event.chave]) fail('ga4', event.chave, 'identidade de evento desconhecida');
         if (requiredFields[event.chave].some((field) => !event.camposPrincipais.includes(field))) fail('ga4', event.chave, 'campos obrigatórios do contrato ausentes; alteração exige migração explícita');
         if (Object.keys(event.tipos).length !== event.camposPrincipais.length || event.camposPrincipais.some((field) => !Object.hasOwn(event.tipos, field))) fail('ga4', event.chave, 'todos os campos precisam de uma definição de tipo correspondente');
-        const fields = event.camposPrincipais.flatMap((field) => field === 'answer_*' ? keys.map((key) => `answer_${key}`) : [field]);
+        const fields = event.camposPrincipais.flatMap((field) => field === 'resposta_*' ? responseFields : [field]);
         if (new Set(fields).size !== fields.length || fields.length > analytics.limiteParametrosPersonalizados) fail('ga4', event.chave, 'payload excede teto interno ou contém campos duplicados');
-        if (event.chave === 'quiz_complete' && !fields.includes('rules_version')) fail('ga4', event.chave, 'rules_version é obrigatório; remoção exige migração explícita');
+        if (event.chave === 'quiz_concluido' && !fields.includes('versao_das_regras')) fail('ga4', event.chave, 'versao_das_regras é obrigatório; remoção exige migração explícita');
         if (fields.some((field) => !/^[A-Za-z][A-Za-z0-9_]{0,39}$/.test(field))) fail('ga4', event.chave, 'nome de parâmetro inválido');
     }
     return configuration;

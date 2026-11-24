@@ -14,7 +14,7 @@
 - [x] Extrair os parâmetros do perfil e os sete componentes do ranking, incluindo escalas, fatores de cobertura, utilidades de ingresso e mistura familiar pertinentes.
 - [x] Configurar presença como modulador existente, sem acrescentar um oitavo componente nem criar campos de perfil inexistentes.
 - [x] Validar ranking e perfil contra as definições corretas do schema compartilhado, rejeitando campos desconhecidos, expressões e combinações inválidas.
-- [x] Com os coeficientes originais e cinco planos, preservar resultados e métricas da referência; manter assinatura como única entrada financeira do componente de preço.
+- [x] Paridade da extração inicial preservada nas evidências históricas. Na revisão vigente, a ADR-0003 remove preço da afinidade e do desempate, conservando orçamento como filtro; as expectativas congeladas e as invariantes de necessidades continuam verificadas.
 - [x] Uma configuração alternativa válida produz o comportamento previsto em cenário controlado, sem contaminar outra instância.
 - [x] O avaliador aceita a instância configurada e informa os insumos usados; comparação não depende de dados capturados em uma instância global diferente.
 - [x] Orçamento e desempate permanecem invariantes do algoritmo, fora dos controles editáveis.
@@ -22,6 +22,8 @@
 ## Verificação
 
 avaliação das referências pelas entradas públicas do motor, além de casos de rejeição e isolamento de instâncias; nenhuma calibração comercial integra esta extração.
+
+Atualização em 04/11/2026: a fórmula financeira original foi substituída pela [ADR-0003](../../../docs/adr/0003-orcamento-sem-prioridade-de-preco.md). O registro abaixo é histórico.
 
 ## Registro de execução
 

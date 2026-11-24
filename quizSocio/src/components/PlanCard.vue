@@ -3,19 +3,18 @@
         <div class="result-badge">{{ badge }}</div>
         <div class="result-plan">
             <img :src="plan.logo" :alt="`Logo do plano ${plan.nome}`">
-            <div><p class="result-price">{{ contract.priceText }}</p><small>{{ contract.detail }}</small></div>
+            <div><p class="result-price">{{ contract.priceText }}</p><small>{{ contract.totalText }}</small></div>
         </div>
         <div class="plan-content">
-            <p class="plan-fee">{{ evaluation.pricing.adhesion ? `Taxa única de adesão de ${motor.formatBRL(evaluation.pricing.adhesion)}, cobrada à parte` : 'Sem taxa de adesão' }}</p>
+            <p class="plan-fee">{{ evaluation.pricing.adhesion ? `Taxa única de adesão de ${motor.formatBRL(evaluation.pricing.adhesion)}, à parte` : 'Sem taxa de adesão' }}</p>
             <ul class="benefits-list"><li v-for="benefit in motor.getPlanBenefits(plan, answers)" :key="benefit">{{ benefit }}</li></ul>
-            <p v-if="evaluation.sectorFit.level === 'partial'" class="plan-sector-note">Cobre parte do setor {{ evaluation.sectorFit.label }}.</p>
-            <p v-if="evaluation.sectorFit.level === 'none'" class="plan-sector-note">Não inclui o setor {{ evaluation.sectorFit.label }}.</p>
+            <p v-if="evaluation.sectorFit.level !== 'full'" class="plan-sector-note">Atenção ao setor: {{ evaluation.sectorFit.text }}</p>
         </div>
-        <div class="plan-score">Afinidade estimada: {{ score(evaluation.score) }} de 100{{ scoreNote }}</div>
+        <div class="plan-score">{{ scoreNote }}</div>
         <a :href="evaluation.eligibility.withinBudget ? plan.contratacao.link : undefined"
             :aria-disabled="evaluation.eligibility.withinBudget ? undefined : 'true'"
             target="_blank" rel="noopener noreferrer" class="plan-cta" :data-plan="plan.nome"
-            @click="subscribe">{{ motor.getCTAText(plan) }}</a>
+            @click="subscribe">{{ motor.getCTAText(plan, answers) }}</a>
     </article>
 </template>
 <script setup>
@@ -25,14 +24,10 @@ const emit = defineEmits(['subscribe']);
 const motor = inject('motor');
 const plan = computed(() => props.evaluation.plan);
 const contract = computed(() => motor.getPlanContract(plan.value));
-const score = (value) => Number(value).toLocaleString('pt-BR', { maximumFractionDigits: 1 });
 const badge = computed(() => !props.evaluation.eligibility.withinBudget ? 'Acima do orçamento'
-    : props.index === 0 ? 'Recomendado' : props.index === 1 && props.result.closeCall ? 'Também recomendado' : 'Alternativo');
-const pointsBehind = computed(() => props.result.winner
-    ? Math.round((props.result.winner.score - props.evaluation.score) * 10) / 10 : null);
-const scoreNote = computed(() => !props.evaluation.eligibility.withinBudget ? ' · acima do seu orçamento'
-    : props.index === 0 ? ' · a maior entre as opções'
-        : ` · ${score(pointsBehind.value)} ${pointsBehind.value < 2 ? 'ponto' : 'pontos'} abaixo do recomendado`);
+    : props.index === 0 ? 'Recomendado' : 'Outra opção');
+const scoreNote = computed(() => !props.evaluation.eligibility.withinBudget ? 'Acima do seu orçamento'
+    : props.index === 0 ? 'Indicado para o seu perfil' : 'Compare os benefícios com o plano indicado');
 function subscribe(event) {
     if (!event.currentTarget.hasAttribute('href')) return event.preventDefault();
     emit('subscribe', plan.value, 'lista');

@@ -1,0 +1,72 @@
+{
+  "checkedAt": "2026-11-03T17:16:01.463Z",
+  "method": "HTTP GET; sem login, execução de scripts, formulário ou compra.",
+  "rulesVersion": "2026-10-29.2",
+  "catalogVersion": "2026-10-28.2",
+  "published": {
+    "requestedUrl": "https://quiz-socio.vercel.app/",
+    "finalUrl": "https://quiz-socio.vercel.app/",
+    "status": 200,
+    "title": "Quiz Sócio 5 Estrelas | Cruzeiro",
+    "sha256": "5460bce5a118c77c543244d7b94407482af0382dc43b11c1de4f1be513482d02",
+    "challenge": false,
+    "matchesLocalSource": false,
+    "contractMarkers": {
+      "affinity_index": true,
+      "score_semantics": true,
+      "catalog_version": true,
+      "rules_version": true,
+      "quiz-engine.js": true,
+      "AMBIENTES_HABILITADOS": true
+    }
+  },
+  "checkouts": [
+    {
+      "plan": "meu-cruzeiro",
+      "requestedUrl": "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro",
+      "finalUrl": "https://fila.cruzeiro.com.br/queue?redirect_to=https://socio.cruzeiro.com.br/complementos?plano_id=21",
+      "status": 429,
+      "title": "Just a moment...",
+      "sha256": "2ec9f6f3ea0784ff12e60e3f6846f2fc2e5a542ee97f68684b21c90161ea5ee0",
+      "challenge": true,
+      "offerConfirmed": false,
+      "remaining": "Conferir plano, modalidade e preço visíveis antes de qualquer contratação."
+    },
+    {
+      "plan": "time-do-povo",
+      "requestedUrl": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo",
+      "finalUrl": "https://fila.cruzeiro.com.br/queue?redirect_to=https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34",
+      "status": 429,
+      "title": "Just a moment...",
+      "sha256": "30005d3f4f93159d0b131319dca6aaa5584c43fb786827c5d63ec09cbf35956a",
+      "challenge": true,
+      "offerConfirmed": false,
+      "remaining": "Conferir plano, modalidade e preço visíveis antes de qualquer contratação."
+    },
+    {
+      "plan": "cabuloso",
+      "requestedUrl": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso",
+      "finalUrl": "https://fila.cruzeiro.com.br/queue?redirect_to=https://socio.cruzeiro.com.br/assinar/checkout?tipo=contrato",
+      "status": 429,
+      "title": "Just a moment...",
+      "sha256": "589538575a398395f19bacb677022bef779100547d69a2a2fa2442279de8b869",
+      "challenge": true,
+      "offerConfirmed": false,
+      "remaining": "Conferir plano, modalidade e preço visíveis antes de qualquer contratação."
+    },
+    {
+      "plan": "cabuloso-max",
+      "requestedUrl": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-max",
+      "finalUrl": "https://fila.cruzeiro.com.br/queue?redirect_to=https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11",
+      "status": 429,
+      "title": "Just a moment...",
+      "sha256": "0658c283a3a013fe3af662a429dea0484de06e1b6a17bb2756652793fcff9410",
+      "challenge": true,
+      "offerConfirmed": false,
+      "remaining": "Conferir plano, modalidade e preço visíveis antes de qualquer contratação."
+    }
+  ],
+  "ga4IngestionConfirmed": false,
+  "crossDomainIdentityConfirmed": false,
+  "remaining": "Ofertas e identidade requerem observação no destino; recebimento requer GA4."
+}

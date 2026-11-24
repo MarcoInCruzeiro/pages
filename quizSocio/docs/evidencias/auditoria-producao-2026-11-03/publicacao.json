@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-11-03T17:20:08.937Z",
+  "url": "https://quiz-socio.vercel.app/",
+  "status": 200,
+  "htmlBytes": 120728,
+  "scriptSources": [
+    "/_vercel/insights/script.js",
+    "./quiz-engine.js"
+  ],
+  "manifestStatus": 404,
+  "headers": {
+    "content-security-policy": null,
+    "x-frame-options": null,
+    "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+    "x-content-type-options": null,
+    "referrer-policy": null
+  }
+}

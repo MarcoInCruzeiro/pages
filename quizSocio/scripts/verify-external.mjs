@@ -12,7 +12,7 @@ export async function inspectPage(url, { fetchImpl = fetch, expectedSource = nul
     try {
         const response = await fetchImpl(url, {
             method: 'GET', redirect: 'follow', signal: AbortSignal.timeout(20000),
-            headers: { 'User-Agent': 'QuizSocio-Verification/1.0' }
+            headers: { 'User-Agent': 'SeuPlanoIdeal-Verification/1.0' }
         });
         const html = await response.text();
         const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.replace(/\s+/g, ' ').trim() ?? null;

@@ -25,6 +25,15 @@
                                         <span class="comparison-detail">{{ cell.detail }}</span>
                                     </template>
                                     <span v-else-if="cell.kind === 'detail'" class="comparison-detail">{{ cell.text }}</span>
+                                    <template v-else-if="cell.kind === 'ticket-benefit'">
+                                        <span class="comparison-check" role="img" aria-label="Disponível">✓</span>
+                                        <BenefitTooltip v-if="open" :id="`ticket-benefit-${cell.slug}`"
+                                            :summary="cell.text" :plan-name="cell.planName">
+                                            <span>{{ cell.explanation }}</span>
+                                            <span v-if="cell.levelExplanation">{{ cell.levelExplanation }}</span>
+                                            <span>{{ cell.detail }}</span>
+                                        </BenefitTooltip>
+                                    </template>
                                     <template v-else-if="cell.kind === 'availability'">
                                         <span :class="cell.available ? 'comparison-check' : 'comparison-cross'"
                                             role="img" :aria-label="cell.available ? 'Disponível' : 'Não disponível'">{{ cell.available ? '✓' : '✗' }}</span>
@@ -43,7 +52,7 @@
                             <td v-for="plan in motor.plans" :key="plan.slug" :class="highlight(plan)">
                                 <a :href="plan.contratacao.link" target="_blank" rel="noopener noreferrer"
                                     class="plan-cta" :data-plan="plan.nome" @click="emit('subscribe', plan, 'comparativo')">
-                                    {{ motor.getCTAText(plan) }}
+                                    {{ motor.getCTAText(plan, answers) }}
                                 </a>
                             </td>
                         </tr></tfoot>
@@ -55,6 +64,7 @@
 </template>
 <script setup>
 import { inject, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
+import BenefitTooltip from './BenefitTooltip.vue';
 const props = defineProps({ open: Boolean, result: Object, answers: Object });
 const emit = defineEmits(['close', 'subscribe']);
 const motor = inject('motor');
@@ -64,12 +74,10 @@ const highlight = (plan) => plan.slug === props.result?.winner?.plan.slug ? 'com
 const aboveBudget = (plan) => evaluated(plan)?.eligibility.withinBudget === false;
 function badge(plan) {
     if (plan.slug === props.result?.winner?.plan.slug) return 'Recomendado';
-    if (props.result?.closeCall && plan.slug === props.result.runnerUp?.plan.slug) return 'Também recomendado';
     if (aboveBudget(plan)) return 'Acima do orçamento';
     return '';
 }
 const featureDefinitions = [
-    { label: 'Contratação', cell: (plan) => ({ kind: 'detail', text: motor.getPlanContract(plan).detail }) },
     { label: 'Preço', cell: (plan) => {
         const contract = motor.getPlanContract(plan);
         return { kind: 'price', text: contract.priceText, detail: contract.totalText };
@@ -77,7 +85,27 @@ const featureDefinitions = [
     { label: 'Taxa de adesão', cell: (plan) => ({ kind: 'text', text: plan.contratacao.taxaAdesao ? `${motor.formatBRL(plan.contratacao.taxaAdesao)} (única)` : 'Sem taxa' }) },
     { label: 'Benefício de ingresso', cell: (plan) => {
         const ticket = motor.getTicketBenefit(plan, props.answers);
-        return { kind: 'availability', available: true, text: ticket.text, detail: `Setores: ${ticket.setorTexto}` };
+        const levels = plan.ingresso.niveis;
+        const discounts = levels?.map((level) => Math.round(level.desconto * 100));
+        const maxDiscount = discounts ? Math.max(...discounts) : null;
+        const summaries = {
+            gratuito: '1 ingresso grátis/temporada',
+            popular: '1 ingresso popular/jogo',
+            garantido: '1 ingresso garantido/jogo',
+            desconto: levels
+                ? `${Math.min(...discounts)}% a ${maxDiscount}% por nível`
+                : `${Math.round(ticket.desconto * 100)}% em ${ticket.quantidade > 1 ? `até ${ticket.quantidade} ingressos` : '1 ingresso'}/jogo`
+        };
+        return {
+            kind: 'ticket-benefit', planName: plan.nome, text: summaries[ticket.tipo] || ticket.text,
+            explanation: levels
+                ? `1 ingresso por jogo, mediante disponibilidade. Exemplo com ${maxDiscount}%: de ${motor.formatBRL(motor.ASSUMPTIONS.precoIngressoCheio)} por ${motor.formatBRL(motor.ASSUMPTIONS.precoIngressoCheio * (1 - maxDiscount / 100))}.`
+                : ticket.text,
+            levelExplanation: levels
+                ? `${levels.map((level) => `Nível ${level.nivel}: ${Math.round(level.desconto * 100)}%`).join('; ')}. O nível depende dos jogos consecutivos que você frequenta. Confira seu nível atual na conta de sócio.`
+                : '',
+            detail: `Setores: ${ticket.setorTexto}`
+        };
     } },
     { label: 'Prioridade / garantia', cell: (plan) => ({ kind: 'text', text: motor.getPriority(plan, props.answers).label }) },
     { label: 'Desconto na loja', cell: (plan) => ({ kind: 'availability', available: true, text: plan.loja.texto }) },

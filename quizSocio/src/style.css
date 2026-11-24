@@ -896,6 +896,76 @@
             line-height: 1.35;
         }
 
+        .benefit-tooltip {
+            display: block;
+        }
+
+        .benefit-tooltip-trigger {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            min-height: 44px;
+            max-width: 100%;
+            padding: 4px;
+            border: 0;
+            border-radius: 6px;
+            background: transparent;
+            color: #c4d6ee;
+            font: inherit;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .benefit-tooltip-trigger:hover,
+        .benefit-tooltip-trigger[aria-expanded="true"] {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .benefit-tooltip-icon {
+            display: inline-flex;
+            flex: 0 0 18px;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            border: 1px solid currentColor;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        /* O popover fica acima da área rolável, sem cortar a explicação. */
+        .benefit-tooltip-content {
+            position: fixed;
+            inset: auto;
+            width: min(320px, calc(100vw - 24px));
+            max-height: calc(100dvh - 24px);
+            margin: 0;
+            padding: 14px 16px;
+            overflow: auto;
+            border: 1px solid #78c6ff;
+            border-radius: 10px;
+            background: #021a3e;
+            color: #e6f0ff;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            text-align: left;
+            overflow-wrap: break-word;
+        }
+
+        .benefit-tooltip-content > span {
+            display: block;
+        }
+
+        .benefit-tooltip-content > span + span {
+            margin-top: 8px;
+        }
+
         .comparison-table tbody tr:hover td {
             background: rgba(255, 255, 255, 0.03);
         }
@@ -972,6 +1042,14 @@
 
         .comparison-table tbody tr:hover td:first-child {
             background: rgba(0, 64, 128, 0.25);
+        }
+
+        @media (max-width: 768px) {
+            .modal-body .comparison-table th:first-child,
+            .modal-body .comparison-table td:first-child,
+            .modal-body .comparison-table tbody tr:is(:hover, :focus-within, :active) td:first-child {
+                background: linear-gradient(145deg, #021a3e, #002864);
+            }
         }
 
         @keyframes goldShine {

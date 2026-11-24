@@ -121,7 +121,7 @@ export function createEngine(configuration) {
     function getAnswerError(question) {
         if (question.type === 'range') {
             return question.allowUnknown
-                ? 'Escolha uma quantidade de jogos ou marque “Não sei / novo sócio”.'
+                ? `Escolha uma quantidade de jogos ou marque “${question.unknownLabel}”.`
                 : 'Escolha uma quantidade de jogos. Zero é uma resposta válida.';
         }
         return 'Selecione uma das opções para continuar.';
@@ -189,7 +189,9 @@ export function createEngine(configuration) {
 
     const FREQUENCY_BY_PRESENCE = perfil.frecuencia.presencas;
     const FREQUENCY_BY_DECLARATION = perfil.frecuencia.declaracoes;
-    const PRICE_IMPORTANCE_BY_BUDGET = perfil.importanciaPreco;
+    // Respostas de três níveis: sempre/com frequência, às vezes, nunca.
+    const DISCOUNT_BY_PURCHASE = { true: perfil.descuentos.true, sometimes: perfil.descuentos.sometimes, false: perfil.descuentos.false };
+    const DIGITAL_BONUS = { true: perfil.experiencias.bonusDigital, sometimes: perfil.experiencias.bonusDigitalParcial, false: 0 };
 
     function clamp(value, min, max) {
         return Math.min(max, Math.max(min, value));
@@ -223,37 +225,27 @@ export function createEngine(configuration) {
         let experiencias = answers.wantsParticipation === true ? perfil.experiencias.true : answers.wantsParticipation === false ? perfil.experiencias.false : perfil.experiencias.padrao;
         // Conteúdo digital sustenta interesse em conteúdo/experiências; não
         // acrescenta frequência presencial nem consumo de produtos.
-        if (answers.digitalExperience === true) experiencias += perfil.experiencias.bonusDigital;
+        experiencias += DIGITAL_BONUS[answers.digitalExperience] ?? 0;
 
-        const descuentos = answers.wantsStoreDiscount === true ? perfil.descuentos.true : answers.wantsStoreDiscount === false ? perfil.descuentos.false : perfil.descuentos.padrao;
-        const productos = descuentos;
+        const descuentos = DISCOUNT_BY_PURCHASE[answers.wantsStoreDiscount] ?? perfil.descuentos.padrao;
 
+        // Só o que o ranking lê. Setor preferido é lido direto das respostas.
         return {
             frecuencia: clamp(frecuencia, 0, 10),
             prioridad: clamp(prioridad, 0, 10),
             experiencias: clamp(experiencias, 0, 10),
             descuentos: clamp(descuentos, 0, 10),
-            productos: clamp(productos, 0, 10),
-            importanciaPreco: PRICE_IMPORTANCE_BY_BUDGET[answers.budget] ?? perfil.frecuencia.padrao,
             adultos: answers.buysTwoTickets === true ? perfil.adultos.true : perfil.adultos.false,
-            kids: answers.kidsCount === true ? 1 : (Number.isInteger(answers.kidsCount) ? clamp(answers.kidsCount, 0, perfil.kids.max) : 0),
-            setorPreferido: answers.preferredSector || null
+            // `true` é aceito só por compatibilidade do perfil; a pergunta valida 0 ou 1.
+            kids: answers.kidsCount === true ? 1 : (Number.isInteger(answers.kidsCount) ? clamp(answers.kidsCount, 0, perfil.kids.max) : 0)
         };
     }
 
     function getSectorFit(plan, answers) {
-        const pref = answers.preferredSector;
-        if (!pref || !SECTOR_GROUPS[pref]) {
-            return {
-                level: 'not-preferred',
-                label: 'Sem preferência de setor',
-                matched: [],
-                missing: [],
-                text: 'Você não informou uma preferência de setor.'
-            };
-        }
+        // A pergunta de setor é obrigatória; o ranking não tem caminho "sem preferência".
+        const group = SECTOR_GROUPS[answers.preferredSector];
+        if (!group) throw new Error(`Setor preferido inválido: ${String(answers.preferredSector)}. Valide as respostas antes de recomendar.`);
 
-        const group = SECTOR_GROUPS[pref];
         const covered = plan.ingresso.setores;
         const matched = group.sectors.filter((sector) => covered.includes(sector));
         const missing = group.sectors.filter((sector) => !covered.includes(sector));
@@ -318,6 +310,7 @@ export function createEngine(configuration) {
             return {
                 value: config ? config.prioridade : 4,
                 garantido: false,
+                nivel: level.nivel,
                 label: `Prioridade ${config ? config.prioridade : 4} (nível ${level.nivel})`
             };
         }
@@ -328,45 +321,57 @@ export function createEngine(configuration) {
         };
     }
 
-    function getTicketBenefit(plan, answers) {
-        const level = resolveLevel(plan, answers);
-        const discount = getDiscount(plan, answers);
-        const price = ASSUMPTIONS.precoIngressoCheio;
-        let text;
-        let score;
+    const TICKET_TEXTS = {
+        gratuito: '1 ingresso gratuito por temporada, mediante disponibilidade',
+        popular: '1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade',
+        garantido: '1 ingresso garantido por jogo no Sicoob — Leste Inferior, temporada 2026',
+        semBeneficio: 'Não inclui benefício de ingresso'
+    };
 
-        if (plan.ingresso.tipo === 'gratuito') {
-            text = '1 ingresso gratuito por temporada, mediante disponibilidade';
-            // Um ingresso por temporada não equivale a desconto em todos os jogos.
-            score = ranking.ticket.utilidades.gratuito;
-        } else if (plan.ingresso.tipo === 'popular') {
-            text = '1 ingresso popular, pelo menor valor online da arquibancada, mediante disponibilidade';
-            score = ranking.ticket.utilidades.popular;
-        } else if (plan.ingresso.tipo === 'garantido') {
-            text = '1 ingresso garantido por jogo no Sicoob — Leste Inferior, temporada 2026';
-            score = ranking.ticket.utilidades.garantido;
-        } else if (plan.ingresso.tipo === 'desconto') {
-            const discountText = Math.round((discount || 0) * 100);
-            const example = (price * (1 - (discount || 0))).toFixed(2).replace('.', ',');
-            const quantityText = plan.ingresso.quantidade > 1 ? `Até ${plan.ingresso.quantidade} ingressos` : '1 ingresso';
-            text = `${quantityText} com ${discountText}% de desconto (ex.: R$ 150 por R$ ${example}), mediante disponibilidade`;
-            // A utilidade representa o tipo de benefício; o percentual é exibido
-            // no ingresso, separado do valor de assinatura (ADR-0001).
-            score = ranking.ticket.utilidades.desconto;
-        } else {
-            text = 'Não inclui benefício de ingresso';
-            score = ranking.ticket.utilidades.semBeneficio;
+    function describeDiscountTicket(plan, discount) {
+        const percent = Math.round((discount || 0) * 100);
+        const example = (ASSUMPTIONS.precoIngressoCheio * (1 - (discount || 0))).toFixed(2).replace('.', ',');
+        const quantity = plan.ingresso.quantidade > 1 ? `Até ${plan.ingresso.quantidade} ingressos por jogo` : '1 ingresso por jogo';
+        return `Economize ${percent}% em ${lowerFirst(quantity)}. Ex.: de R$ 150 por R$ ${example} cada. Mediante disponibilidade.`;
+    }
+
+    /*
+     * Utilidade do ingresso entre 0 e 1. Cada tipo tem a sua utilidade de
+     * referência; no tipo "desconto" ela cresce com o percentual do catálogo,
+     * a partir de `descontoReferencia`. No benefício "por temporada" ela
+     * cresce com a parcela dos jogos declarados que os ingressos da temporada
+     * cobrem (1 ingresso para 1 jogo cobre tudo; para 30 jogos, quase nada),
+     * até `bonusCoberturaTemporada` acima da utilidade base. Nenhum custo
+     * mensal é calculado (ADR-0001): a medida é o tamanho do benefício.
+     */
+    function getTicketUtility(plan, discount, answers) {
+        const { utilidades, descontoReferencia, bonusCoberturaTemporada } = ranking.ticket;
+        const tipo = plan.ingresso.tipo;
+        if (tipo === 'desconto') {
+            const scaled = Math.round(utilidades.desconto * ((discount || 0) / descontoReferencia) * 1e6) / 1e6;
+            return clamp(scaled, 0, 1);
         }
+        const base = utilidades[tipo] ?? utilidades.semBeneficio;
+        if (plan.ingresso.periodicidade === 'temporada') {
+            const games = Number.isFinite(answers?.gamesPerYear) ? answers.gamesPerYear : 0;
+            const share = games > 0 ? Math.min(1, plan.ingresso.quantidade / games) : 0;
+            return clamp(Math.round((base + bonusCoberturaTemporada * share) * 1e6) / 1e6, 0, 1);
+        }
+        return clamp(base, 0, 1);
+    }
 
+    function getTicketBenefit(plan, answers) {
+        const tipo = plan.ingresso.tipo;
+        const discount = getDiscount(plan, answers);
         return {
-            tipo: plan.ingresso.tipo,
+            tipo,
             quantidade: plan.ingresso.quantidade,
             setores: plan.ingresso.setores.slice(),
             setorTexto: plan.ingresso.setorTexto,
             desconto: discount,
-            nivel: level,
-            text,
-            score: clamp(score, 0, 1)
+            nivel: resolveLevel(plan, answers),
+            text: tipo === 'desconto' ? describeDiscountTicket(plan, discount) : (TICKET_TEXTS[tipo] ?? TICKET_TEXTS.semBeneficio),
+            score: getTicketUtility(plan, discount, answers)
         };
     }
 
@@ -406,100 +411,143 @@ export function createEngine(configuration) {
         const benefits = [ticket.text];
 
         if (priority.garantido) {
-            benefits.push('Ingresso carregado automaticamente na conta do titular, com plano ativo e adimplente');
+            benefits.push('Ingresso direto na sua conta, com o plano ativo e em dia');
         } else {
-            benefits.push(priority.label + ' na compra de ingressos');
+            benefits.push(describePriority(priority));
         }
 
-        benefits.push(plan.loja.texto);
+        benefits.push(describeStoreDiscount(plan));
 
         if (plan.conteudoExclusivo && plan.votacao) {
-            benefits.push('Conteúdo exclusivo, quiz e votações online');
+            benefits.push('Acesse conteúdo exclusivo, quiz e votações online');
         } else if (plan.conteudoExclusivo) {
-            benefits.push('Conteúdo exclusivo');
+            benefits.push('Acesse conteúdo exclusivo');
         }
 
         if (plan.opcionais.kids.disponivel) {
-            benefits.push(`Opcional Kids: ${formatBRL(plan.opcionais.kids.precoMensal)}/mês por criança, até ${plan.opcionais.kids.maxCriancas} menores de ${plan.opcionais.kids.idadeMaxima} anos`);
+            benefits.push(`Kids opcional: ${formatBRL(plan.opcionais.kids.precoMensal)}/mês por criança · até ${plan.opcionais.kids.maxCriancas} menores de ${plan.opcionais.kids.idadeMaxima} anos`);
         }
 
         // Carteirinha não entra nos benefícios: quase todos os planos a incluem,
         // então o texto não diferencia a escolha (ADR de catálogo 2026-10-28).
         if (ticket.nivel && ticket.nivel.origem === 'inicial') {
-            benefits.push('Já é sócio? Confira seu desconto atual na sua conta.');
+            benefits.push('Já é sócio? Confira na sua conta se seu nível e desconto são maiores.');
         }
 
         return benefits;
     }
 
-    function getCTAText(plan) {
-        const ctas = {
-            'meu-cruzeiro': 'FAZER PARTE DOS CABULOSOS',
-            'time-do-povo': 'QUERO O INGRESSO POPULAR',
-            cabuloso: 'GARANTIR MEU DESCONTO DE 50%',
-            'cabuloso-max': 'ATÉ 2 INGRESSOS COM 65%OFF'
-        };
-        return ctas[plan.slug] || 'ASSINAR AGORA';
+    /*
+     * Texto da prioridade de compra para o card: a prioridade 1 é a mais alta.
+     * Nos planos com níveis, o nível vem do histórico informado (ou é o
+     * inicial, quando o histórico não foi confirmado).
+     */
+    function describePriority(priority) {
+        const where = priority.nivel ? ` · nível ${priority.nivel}` : '';
+        return priority.value === 1
+            ? `Compre ingressos com prioridade 1, a mais alta${where}`
+            : `Prioridade ${priority.value} para comprar ingressos (1 é a mais alta)${where}`;
     }
 
-    function scorePlan(plan, profile, answers, pricing, sectorFit, priceRange) {
+    // Apresenta o desconto da loja como economia, preservando o limite "até".
+    function describeStoreDiscount(plan) {
+        const text = plan.loja.texto || '';
+        return /^até\s/i.test(text) ? `Economize ${lowerFirst(text)}` : text;
+    }
+
+    /*
+     * O CTA de cada plano nomeia o benefício principal. No Cabuloso o desconto
+     * depende do nível, então o percentual vem do benefício calculado para as
+     * respostas (ou do nível inicial, sem respostas).
+     */
+    function getCTAText(plan, answers) {
+        if (answers && buildUserProfile(answers).frecuencia === 0) {
+            return answers.wantsStoreDiscount !== false
+                ? `Quero até ${Math.round(plan.loja.percentual * 100)}% na loja` : 'Quero ser sócio';
+        }
+        if (plan.slug === 'cabuloso') {
+            const discount = answers ? getDiscount(plan, answers) : plan.ingresso.niveis?.[0]?.desconto;
+            const percent = Math.round((discount || 0) * 100);
+            return percent > 0 ? `Quero ${percent}% de desconto` : 'Quero ser Cabuloso';
+        }
+        const ctas = {
+            'meu-cruzeiro': 'Quero ser sócio',
+            'time-do-povo': 'Quero ingresso popular',
+            'cabuloso-max': 'Quero 65% de desconto'
+        };
+        return ctas[plan.slug] || 'Assinar agora';
+    }
+
+    const COMPONENT_KEYS = ['ticket', 'priority', 'sector', 'discount', 'experiences', 'family'];
+
+    /*
+     * Pesos: o quanto cada componente importa para esta pessoa. Dependem só do
+     * perfil. Sem uso presencial declarado, ingresso, prioridade e setor têm
+     * peso zero e não decidem a ordem.
+     */
+    function getComponentWeights(profile, answers) {
+        const hasFamily = profile.adultos > 0 || profile.kids > 0;
+        const attendance = profile.frecuencia === 0 ? 0
+            : ranking.presenca.base + ranking.presenca.escala * (profile.frecuencia / 10);
+        const priorityShare = profile.prioridad / 10;
+        return {
+            ticket: attendance * (ranking.ticket.base + ranking.ticket.bonusPrioridade * priorityShare),
+            priority: attendance * (ranking.priority.base + ranking.priority.escala * priorityShare),
+            sector: attendance * ranking.sector.comPreferencia,
+            discount: answers.wantsStoreDiscount === false ? 0 : ranking.discount.base + ranking.discount.escala * (profile.descuentos / 10),
+            experiences: ranking.experiences.base + ranking.experiences.escala * (profile.experiencias / 10),
+            family: hasFamily ? ranking.family.comFamilia : ranking.family.semFamilia
+        };
+    }
+
+    /*
+     * Valores: o quanto o plano entrega em cada componente, entre 0 e 1.
+     * Dependem do catálogo, do setor preferido, do volume de jogos declarado
+     * (ingresso por temporada) e da capacidade para a família.
+     */
+    function getComponentValues(plan, profile, sectorFit, ticket, priority) {
+        const coverageKey = sectorFit.level;
+        const hasFamily = profile.adultos > 0 || profile.kids > 0;
+
+        // Ingresso perde valor quando o benefício não cobre o setor de preferência.
+        let ticketValue = ticket.score * ranking.ticket.cobertura[coverageKey];
+        if (profile.adultos > 0 && plan.ingresso.quantidade >= 2) {
+            ticketValue = Math.min(1, ticketValue + ranking.ticket.bonusAcompanhante);
+        }
+
+        // A capacidade de ingressos só vale com uso presencial; sem ele, os
+        // planos não se distinguem pela quantidade de ingressos que ninguém usa.
+        let familyValue = ranking.family.base;
+        if (hasFamily) {
+            const ticketCapacity = profile.frecuencia > 0 ? Math.min(1, plan.ingresso.quantidade / (1 + profile.adultos)) : 1;
+            const kidsSupport = plan.opcionais.kids.disponivel ? 1 : 0;
+            familyValue = ranking.family.capacidade * ticketCapacity + ranking.family.kids * kidsSupport;
+        }
+
+        return {
+            ticket: ticketValue,
+            priority: priority.garantido ? 1 : clamp((ranking.priority.pior - priority.value) / ranking.priority.intervalo, 0, 1),
+            sector: ranking.sector.cobertura[coverageKey],
+            discount: clamp(plan.loja.percentual / ranking.discount.referencia, 0, 1),
+            experiences: plan.conteudoExclusivo && plan.votacao ? ranking.experiences.ambos
+                : (plan.conteudoExclusivo || plan.votacao ? ranking.experiences.um : ranking.experiences.nenhum),
+            family: familyValue
+        };
+    }
+
+    /** Índice de afinidade: média dos valores ponderada pelos pesos, × 100, uma casa decimal. */
+    function scorePlan(plan, profile, answers, sectorFit) {
         const ticket = getTicketBenefit(plan, answers);
         const priority = getPriority(plan, answers);
-
-        // Ingresso: perde valor quando a pessoa não pretende ir ao estádio e
-        // quando o benefício não cobre o setor de preferência.
-        const coverageKey = sectorFit.level === 'not-preferred' ? 'notPreferred' : sectorFit.level;
-        const sectorMultiplier = ranking.ticket.cobertura[coverageKey];
-        let ticketComponent = ticket.score * sectorMultiplier;
-        if (profile.adultos > 0 && plan.ingresso.quantidade >= 2) {
-            ticketComponent = Math.min(1, ticketComponent + ranking.ticket.bonusAcompanhante);
-        }
-        const priorityComponent = priority.garantido ? 1 : clamp((ranking.priority.pior - priority.value) / ranking.priority.intervalo, 0, 1);
-        const sectorComponent = ranking.sector.cobertura[coverageKey];
-        const discountComponent = clamp(plan.loja.percentual / ranking.discount.referencia, 0, 1);
-        const experienceComponent = plan.conteudoExclusivo && plan.votacao
-            ? ranking.experiences.ambos
-            : (plan.conteudoExclusivo || plan.votacao ? ranking.experiences.um : ranking.experiences.nenhum);
-        let familyComponent = ranking.family.base;
-        if (profile.adultos > 0 || profile.kids > 0) {
-            const needed = 1 + profile.adultos;
-            const ticketCapacity = Math.min(1, plan.ingresso.quantidade / needed);
-            const kidsSupport = plan.opcionais.kids.disponivel ? 1 : 0;
-            familyComponent = ranking.family.capacidade * ticketCapacity + ranking.family.kids * kidsSupport;
-        }
-        const priceComponent = priceRange.max === priceRange.min
-            ? 1
-            : clamp(1 - (pricing.subscription - priceRange.min) / (priceRange.max - priceRange.min), 0, 1);
-        const attendanceWeight = ranking.presenca.base + ranking.presenca.escala * (profile.frecuencia / 10);
-        const ticketWeight = attendanceWeight * (ranking.ticket.base + ranking.ticket.bonusPrioridade * (profile.prioridad / 10));
-        const priorityWeight = attendanceWeight * (ranking.priority.base + ranking.priority.escala * (profile.prioridad / 10));
-        const sectorWeight = (answers.preferredSector ? ranking.sector.comPreferencia : ranking.sector.semPreferencia) * attendanceWeight;
-        const discountWeight = ranking.discount.base + ranking.discount.escala * (profile.descuentos / 10);
-        const experienceWeight = ranking.experiences.base + ranking.experiences.escala * (profile.experiencias / 10);
-        const familyWeight = (profile.adultos > 0 || profile.kids > 0) ? ranking.family.comFamilia : ranking.family.semFamilia;
-        // ADR-0001: somente a assinatura participa do componente financeiro.
-        const priceWeight = ranking.price.base + ranking.price.escala * (profile.importanciaPreco / 10);
-
-        const components = [
-            { key: 'ticket', weight: ticketWeight, value: ticketComponent },
-            { key: 'priority', weight: priorityWeight, value: priorityComponent },
-            { key: 'sector', weight: sectorWeight, value: sectorComponent },
-            { key: 'discount', weight: discountWeight, value: discountComponent },
-            { key: 'experiences', weight: experienceWeight, value: experienceComponent },
-            { key: 'family', weight: familyWeight, value: familyComponent },
-            { key: 'price', weight: priceWeight, value: priceComponent }
-        ];
+        const weights = getComponentWeights(profile, answers);
+        const values = getComponentValues(plan, profile, sectorFit, ticket, priority);
+        const components = COMPONENT_KEYS.map((key) => ({ key, weight: weights[key], value: values[key] }));
 
         const totalWeight = components.reduce((sum, item) => sum + item.weight, 0);
         if (!Number.isFinite(totalWeight) || totalWeight <= 0) throw new Error('Os pesos precisam produzir soma positiva.');
         const score = components.reduce((sum, item) => sum + item.weight * item.value, 0) / totalWeight * 100;
 
-        return {
-            score: Math.round(score * 10) / 10,
-            components,
-            ticket,
-            priority
-        };
+        return { score: Math.round(score * 10) / 10, components, ticket, priority };
     }
 
     function lowerFirst(text) {
@@ -512,69 +560,69 @@ export function createEngine(configuration) {
         const ticket = result.ticket;
         const plan = result.plan;
 
-        if (result.sectorFit.level === 'none') {
+        if (profile.frecuencia > 0 && result.sectorFit.level === 'none') {
             reasons.push({
                 tone: 'warning',
-                text: `Seu setor preferido é ${result.sectorFit.label}, mas o benefício de ingresso do ${plan.nome} vale para ${plan.ingresso.setorTexto}.`
+                text: `Seu setor preferido é ${result.sectorFit.label}. O benefício de ingresso vale para ${plan.ingresso.setorTexto}.`
             });
-        } else if (result.sectorFit.level === 'partial') {
+        } else if (profile.frecuencia > 0 && result.sectorFit.level === 'partial') {
             reasons.push({
                 tone: 'warning',
-                text: `O ${plan.nome} cobre só parte do setor ${result.sectorFit.label}: ${result.sectorFit.text}`
+                text: `Cobertura parcial do seu setor: ${result.sectorFit.text}`
             });
         }
 
         if (profile.frecuencia > 0) {
             reasons.push({
                 tone: 'positive',
-                text: `Você quer ir a ${answers.gamesPerYear} ${answers.gamesPerYear === 1 ? 'jogo' : 'jogos'} por ano, e o ${plan.nome} oferece ${lowerFirst(ticket.text)}.`
+                text: `Para ${answers.gamesPerYear} ${answers.gamesPerYear === 1 ? 'jogo' : 'jogos'} por ano: ${lowerFirst(ticket.text)}${ticket.text.endsWith('.') ? '' : '.'}`
             });
         } else {
             reasons.push({
                 tone: 'neutral',
-                text: 'Como você não pretende ir ao estádio, o benefício de ingresso pesou pouco nesta recomendação.'
+                text: 'Como você não pretende ir ao estádio, os benefícios de ingresso não influenciaram a escolha.'
             });
         }
 
-        if (result.priority.garantido) {
+        if (profile.frecuencia > 0 && result.priority.garantido) {
             reasons.push({
                 tone: 'positive',
-                text: `O ${plan.nome} garante seu ingresso em ${plan.ingresso.setorTexto}, sem precisar disputar a abertura das vendas.`
+                text: `Ingresso garantido em ${plan.ingresso.setorTexto}, sem disputar a abertura das vendas.`
             });
-        } else if (profile.prioridad >= 6) {
+        } else if (profile.frecuencia > 0 && profile.prioridad >= 6) {
             reasons.push({
                 tone: 'positive',
-                text: `Você gosta de comprar assim que as vendas abrem, e o ${plan.nome} tem prioridade ${result.priority.value} na compra de ingressos (a 1 é a mais alta).`
+                text: `Para comprar ingressos: prioridade ${result.priority.value} (1 é a mais alta).`
             });
         }
 
         if (profile.descuentos >= 6 && plan.loja.percentual > 0) {
             reasons.push({
                 tone: 'positive',
-                text: `Você valoriza produtos oficiais, e o ${plan.nome} oferece ${lowerFirst(plan.loja.texto)}.`
+                text: `${describeStoreDiscount(plan)}.`
             });
         }
 
         if (profile.experiencias >= 6 && plan.conteudoExclusivo && plan.votacao) {
             reasons.push({
                 tone: 'positive',
-                text: 'Você curte experiências com o clube, e o plano inclui conteúdo exclusivo, quiz e votações online.'
+                text: 'Participe de quiz e votações online e acesse conteúdo exclusivo do clube.'
             });
         }
 
-        if (profile.adultos > 0) {
+        if (profile.frecuencia > 0 && profile.adultos > 0) {
             const coverage = plan.ingresso.quantidade >= 2
-                ? 'o benefício vale para até 2 ingressos, o seu e o de quem vai com você'
-                : 'o benefício vale para 1 ingresso; o de quem vai com você é pago à parte';
+                ? 'benefício em até 2 ingressos, para você e seu acompanhante'
+                : 'benefício em 1 ingresso; acompanhante paga à parte';
             reasons.push({
                 tone: 'neutral',
-                text: `Você costuma ir com companhia: no ${plan.nome}, ${coverage}.${profile.kids > 0 ? ` Para as crianças, o opcional Kids custa ${formatBRL(plan.opcionais.kids.precoMensal)}/mês por criança.` : ''}`
+                text: `Para ir com companhia: ${coverage}.${profile.kids > 0 ? ` Kids opcional: ${formatBRL(plan.opcionais.kids.precoMensal)}/mês por criança.` : ''}`
             });
         }
 
         const priceReason = {
             tone: 'neutral',
-            text: `Assinatura de ${formatBRL(result.pricing.subscription)}/mês (valor de referência). ${result.pricing.adhesion ? 'Taxa de adesão e opcionais são cobrados à parte.' : 'Sem taxa de adesão; opcionais são cobrados à parte.'}`
+            text: `Assinatura: ${formatBRL(result.pricing.subscription)}/mês (referência). ${result.pricing.adhesion ? 'Taxa de adesão e opcionais à parte.' : 'Sem taxa de adesão; opcionais à parte.'}`
         };
 
         const warnings = reasons.filter((reason) => reason.tone === 'warning');
@@ -588,12 +636,12 @@ export function createEngine(configuration) {
     }
 
     /*
-     * Ordem: maior índice; em empate, menor assinatura; depois slug. A ordem do
-     * catálogo recebido não influencia o resultado.
+     * Ordem: maior afinidade com os benefícios; em empate, slug. Preço só
+     * filtra elegibilidade e não interfere na pontuação nem no desempate.
      */
     function compareRanked(a, b) {
         if (b.score !== a.score) return b.score - a.score;
-        if (a.pricing.subscription !== b.pricing.subscription) return a.pricing.subscription - b.pricing.subscription;
+        if ((b.profileFit || 0) !== (a.profileFit || 0)) return (b.profileFit || 0) - (a.profileFit || 0);
         return a.plan.slug < b.plan.slug ? -1 : a.plan.slug > b.plan.slug ? 1 : 0;
     }
 
@@ -617,16 +665,16 @@ export function createEngine(configuration) {
             };
         });
 
-        const priceRange = {
-            min: Math.min(...scored.map((item) => item.pricing.subscription)),
-            max: Math.max(...scored.map((item) => item.pricing.subscription))
-        };
-
         const evaluated = scored.map((item) => {
-            const scoredPlan = scorePlan(item.plan, profile, answers, item.pricing, item.sectorFit, priceRange);
+            const scoredPlan = scorePlan(item.plan, profile, answers, item.sectorFit);
             return {
                 ...item,
-                ...scoredPlan
+                ...scoredPlan,
+                // Sem uso presencial, escolhe o produto voltado ao interesse declarado.
+                // O preço continua restrito à elegibilidade, inclusive no desempate.
+                profileFit: profile.frecuencia === 0 ? Number(answers.wantsStoreDiscount === false
+                    ? item.plan.ingresso.periodicidade === 'temporada'
+                    : item.plan.ingresso.tipo === 'desconto' && item.plan.ingresso.quantidade === 1) : 0
             };
         });
 
@@ -644,10 +692,17 @@ export function createEngine(configuration) {
 
         const winner = eligible.length ? recommendations[0] : null;
         const runnerUp = eligible.length > 1 ? recommendations[1] : null;
-        const closeCall = Boolean(winner && runnerUp && (winner.score - runnerUp.score) < 1);
+        const closeCall = false;
+        const recommendationReason = !winner ? '' : profile.frecuencia === 0
+            ? answers.wantsStoreDiscount === false
+                ? 'Seu foco é apoiar o clube, sem uso de ingressos ou descontos na loja. O plano de apoio atende a esse perfil.'
+                : 'Seu interesse está nos produtos oficiais. A recomendação considera o desconto na loja dentro do seu orçamento.'
+            : profile.adultos > 0 && winner.plan.ingresso.quantidade >= 2
+                ? 'Você costuma ir acompanhado. Este plano oferece benefício para o seu ingresso e o do acompanhante.'
+                : `Para sua frequência de ${answers.gamesPerYear} jogos por ano, este plano reúne a melhor combinação de ingresso, setor e prioridade dentro do seu orçamento.`;
         const allPlansFit = evaluated.every((item) => item.eligibility.withinBudget);
 
-        const sectorAlternative = winner && winner.sectorFit.level !== 'full'
+        const sectorAlternative = profile.frecuencia > 0 && winner && winner.sectorFit.level !== 'full'
             ? eligible.find((item) => item.sectorFit.level === 'full' && item.plan.slug !== winner.plan.slug) || null
             : null;
 
@@ -665,6 +720,7 @@ export function createEngine(configuration) {
             winner,
             runnerUp,
             closeCall,
+            recommendationReason,
             allPlansFit,
             noEligible: !winner,
             closest,

@@ -1,0 +1,79 @@
+{
+  "checkedAt": "2026-11-03T17:43:13.173Z",
+  "measurementId": "G-EF75QCTCTV",
+  "propertyNumericId": null,
+  "streamId": null,
+  "enabledHosts": [
+    "quiz-socio.vercel.app"
+  ],
+  "versions": {
+    "catalog": "2026-10-28.2",
+    "rules": "2026-11-03.2",
+    "ga4": "2026-10-28.3"
+  },
+  "events": [
+    {
+      "name": "quiz_start",
+      "customParameters": []
+    },
+    {
+      "name": "quiz_answer",
+      "customParameters": [
+        "quiz_step",
+        "quiz_question",
+        "quiz_answer",
+        "quiz_answer_label",
+        "answer_time_sec"
+      ]
+    },
+    {
+      "name": "quiz_complete",
+      "customParameters": [
+        "recommended_plan",
+        "affinity_index",
+        "compatibility",
+        "score_semantics",
+        "no_eligible_plan",
+        "catalog_version",
+        "rules_version",
+        "total_time_sec",
+        "answer_gamesPerYear",
+        "answer_gamesHistory",
+        "answer_wantsGuaranteedTicket",
+        "answer_buysTwoTickets",
+        "answer_kidsCount",
+        "answer_needsPriority",
+        "answer_wantsParticipation",
+        "answer_wantsStoreDiscount",
+        "answer_gameFrequency",
+        "answer_digitalExperience",
+        "answer_budget",
+        "answer_preferredSector"
+      ]
+    },
+    {
+      "name": "quiz_subscribe_click",
+      "customParameters": [
+        "plan",
+        "recommended_plan",
+        "clicked_recommended",
+        "cta_location"
+      ]
+    }
+  ],
+  "access": {
+    "browser": "host indisponível; inventário sem navegadores",
+    "ga4Integration": "Windsor.ai localizado, não instalado/conectado",
+    "relevantEnvironmentPresence": {
+      "GOOGLE_APPLICATION_CREDENTIALS": false,
+      "GOOGLE_CLOUD_PROJECT": false,
+      "GA4_PROPERTY_ID": false,
+      "GA4_MEASUREMENT_ID": false,
+      "GA4_ACCESS_TOKEN": false
+    }
+  },
+  "adminRead": false,
+  "adminChanged": false,
+  "ga4IngestionConfirmed": false,
+  "crossDomainConfirmed": false
+}

@@ -1,0 +1,28 @@
+
+> quiz-socio-5-estrelas@2.0.0 build
+> npm run config:check && vite build
+
+
+> quiz-socio-5-estrelas@2.0.0 config:check
+> node scripts/config-check.mjs && node scripts/gerar-validadores.mjs --check
+
+Configuração válida: 3fca088a0572f28d19df8287caa05527180717404397b999784b93448da54813; regras 2026-11-03.2. A aprovação de entrega é verificada separadamente.
+OK: config/validadores-compilados.mjs (222251 bytes; 3 imports de runtime resolvidos)
+vite v6.4.5 building for production...
+transforming...
+✓ 39 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/build-manifest.json                                       1.00 kB │ gzip:  0.58 kB
+dist/index.html                                                2.47 kB │ gzip:  0.98 kB
+dist/img/Estutura de Páginas_fundoestrelado_siteapp.jpeg      69.17 kB
+dist/img/background.jpg                                       95.20 kB
+dist/img/cruzeiro.png                                        179.12 kB
+dist/img/meuCruzeiro.png                                     193.74 kB
+dist/img/cabuloso.png                                        201.80 kB
+dist/img/timeDoPovo.png                                      203.89 kB
+dist/img/cabulosoMax.png                                     227.59 kB
+dist/img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4     13,830.47 kB
+dist/assets/index-B-nb6OAm.css                                30.91 kB │ gzip:  6.86 kB
+dist/assets/index-B7XfV_Kf.js                                305.52 kB │ gzip: 66.42 kB
+✓ built in 1.26s

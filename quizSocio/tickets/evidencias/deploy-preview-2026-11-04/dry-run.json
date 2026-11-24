@@ -1,0 +1,154 @@
+{
+  "framework": {
+    "name": "Other",
+    "slug": null
+  },
+  "basePath": "/tmp/quiz-vercel-preview-2026-11-04-ucy_b0i4/upload",
+  "fileCount": 12,
+  "totalSize": 15342029,
+  "ignoredCount": 0,
+  "ignored": [],
+  "directories": [
+    {
+      "path": "quizSocio",
+      "fileCount": 12,
+      "size": 15342029
+    }
+  ],
+  "largestFiles": [
+    {
+      "path": "quizSocio/img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4",
+      "size": 13830472,
+      "mode": 33204,
+      "sha": "612ab3dec0c086dc86520ac91f4d1d0a28e90d78"
+    },
+    {
+      "path": "quizSocio/assets/index-DKZPtjSj.js",
+      "size": 306678,
+      "mode": 33204,
+      "sha": "6d120a5d383f865efae2f93fbdabf63ee8f21458"
+    },
+    {
+      "path": "quizSocio/img/cabulosoMax.png",
+      "size": 227593,
+      "mode": 33204,
+      "sha": "f24b4db5c553029df9ae2c107f8c04aefe4209fa"
+    },
+    {
+      "path": "quizSocio/img/timeDoPovo.png",
+      "size": 203894,
+      "mode": 33204,
+      "sha": "34908db4cc26f9d028c2087b9b0c1a624c59fdb3"
+    },
+    {
+      "path": "quizSocio/img/cabuloso.png",
+      "size": 201799,
+      "mode": 33204,
+      "sha": "647d479216f3fdb56f55b34ee6bf53df1a08dc9f"
+    },
+    {
+      "path": "quizSocio/img/meuCruzeiro.png",
+      "size": 193740,
+      "mode": 33204,
+      "sha": "69d60e85e02331ec7daa7454c86c655ad9da9d0d"
+    },
+    {
+      "path": "quizSocio/img/cruzeiro.png",
+      "size": 179121,
+      "mode": 33204,
+      "sha": "745cb437cbb9a4b5889fb4d40df92defb23c599c"
+    },
+    {
+      "path": "quizSocio/img/background.jpg",
+      "size": 95196,
+      "mode": 33204,
+      "sha": "e01862f96063d74bbf0bd6050ea91224a3864afe"
+    },
+    {
+      "path": "quizSocio/img/Estutura de Páginas_fundoestrelado_siteapp.jpeg",
+      "size": 69166,
+      "mode": 33204,
+      "sha": "728dbe16af0f34057047bcac9042f736a99e5206"
+    },
+    {
+      "path": "quizSocio/assets/index-B-nb6OAm.css",
+      "size": 30908,
+      "mode": 33204,
+      "sha": "a8260e8d6dfb0c99e875feb5fd5bbc925ca9c601"
+    }
+  ],
+  "files": [
+    {
+      "path": "quizSocio/assets/index-B-nb6OAm.css",
+      "size": 30908,
+      "mode": 33204,
+      "sha": "a8260e8d6dfb0c99e875feb5fd5bbc925ca9c601"
+    },
+    {
+      "path": "quizSocio/assets/index-DKZPtjSj.js",
+      "size": 306678,
+      "mode": 33204,
+      "sha": "6d120a5d383f865efae2f93fbdabf63ee8f21458"
+    },
+    {
+      "path": "quizSocio/build-manifest.json",
+      "size": 997,
+      "mode": 33204,
+      "sha": "03b9754acdd9b8e297e4ddd8ecfd4c3936c85e22"
+    },
+    {
+      "path": "quizSocio/img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4",
+      "size": 13830472,
+      "mode": 33204,
+      "sha": "612ab3dec0c086dc86520ac91f4d1d0a28e90d78"
+    },
+    {
+      "path": "quizSocio/img/background.jpg",
+      "size": 95196,
+      "mode": 33204,
+      "sha": "e01862f96063d74bbf0bd6050ea91224a3864afe"
+    },
+    {
+      "path": "quizSocio/img/cabuloso.png",
+      "size": 201799,
+      "mode": 33204,
+      "sha": "647d479216f3fdb56f55b34ee6bf53df1a08dc9f"
+    },
+    {
+      "path": "quizSocio/img/cabulosoMax.png",
+      "size": 227593,
+      "mode": 33204,
+      "sha": "f24b4db5c553029df9ae2c107f8c04aefe4209fa"
+    },
+    {
+      "path": "quizSocio/img/cruzeiro.png",
+      "size": 179121,
+      "mode": 33204,
+      "sha": "745cb437cbb9a4b5889fb4d40df92defb23c599c"
+    },
+    {
+      "path": "quizSocio/img/Estutura de Páginas_fundoestrelado_siteapp.jpeg",
+      "size": 69166,
+      "mode": 33204,
+      "sha": "728dbe16af0f34057047bcac9042f736a99e5206"
+    },
+    {
+      "path": "quizSocio/img/meuCruzeiro.png",
+      "size": 193740,
+      "mode": 33204,
+      "sha": "69d60e85e02331ec7daa7454c86c655ad9da9d0d"
+    },
+    {
+      "path": "quizSocio/img/timeDoPovo.png",
+      "size": 203894,
+      "mode": 33204,
+      "sha": "34908db4cc26f9d028c2087b9b0c1a624c59fdb3"
+    },
+    {
+      "path": "quizSocio/index.html",
+      "size": 2465,
+      "mode": 33204,
+      "sha": "be5a36c650cd6701b01297cffbb2a5f3f5c279f5"
+    }
+  ]
+}

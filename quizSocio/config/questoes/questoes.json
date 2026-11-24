@@ -1,7 +1,7 @@
 [
   {
     "key": "gamesPerYear",
-    "title": "Em média, a quantos jogos do Cruzeiro você pretende ir por ano?",
+    "title": "Em média, a quantos jogos do Cruzeiro você pretende ir em 2027?",
     "type": "range",
     "min": 0,
     "max": 30,
@@ -11,19 +11,19 @@
   },
   {
     "key": "gamesHistory",
-    "title": "Nos últimos 15 meses, a quantos jogos do Cruzeiro você foi no Mineirão?",
+    "title": "Nos últimos 15 meses, em quantos jogos do Cruzeiro você esteve presente no estádio?",
     "type": "range",
     "min": 0,
     "max": 30,
     "suffix": "jogos",
-    "help": "Não lembra ou ainda não é sócio? Marque a opção abaixo para continuar.",
+    "help": "Não lembra? Marque a opção abaixo para continuar.",
     "allowUnknown": true,
-    "unknownLabel": "Não sei ou sou novo sócio",
+    "unknownLabel": "Não sei",
     "options": null
   },
   {
     "key": "wantsGuaranteedTicket",
-    "title": "O que melhor te define como torcedor?",
+    "title": "O que melhor define seu perfil de torcedor?",
     "options": [
       {
         "label": "Não frequento o estádio",
@@ -113,16 +113,21 @@
   },
   {
     "key": "wantsStoreDiscount",
-    "title": "Sempre que sai um novo manto ou produto oficial, o que você faz?",
+    "title": "Sempre que lança uma camisa nova ou produto oficial, o que você faz?",
     "options": [
       {
-        "label": "Sempre tento comprar",
+        "label": "Sempre compro",
         "description": "Gosto de colecionar ou renovar minhas camisas e busco descontos para isso.",
         "value": true
       },
       {
-        "label": "Raramente compro",
-        "description": "Não costumo consumir muitos produtos na loja oficial.",
+        "label": "Compro às vezes",
+        "description": "Compro quando um lançamento me agrada.",
+        "value": "sometimes"
+      },
+      {
+        "label": "Nunca compro",
+        "description": "Não costumo consumir produtos na loja oficial.",
         "value": false
       }
     ],
@@ -130,7 +135,7 @@
   },
   {
     "key": "gameFrequency",
-    "title": "Como você costuma viver a paixão nos dias de jogo?",
+    "title": "Como você costuma acompanhar o Cabuloso nos dias de jogos?",
     "options": [
       {
         "label": "Sempre na arquibancada",
@@ -155,12 +160,17 @@
     "title": "O quanto você consome os conteúdos digitais e de bastidores do clube?",
     "options": [
       {
-        "label": "Acompanho tudo diariamente",
+        "label": "Acompanho com frequência",
         "description": "Valorizo o aplicativo oficial e quero acesso a informações em primeira mão.",
         "value": true
       },
       {
-        "label": "Foco apenas no campo",
+        "label": "Acompanho às vezes",
+        "description": "Vejo os conteúdos do clube de vez em quando.",
+        "value": "sometimes"
+      },
+      {
+        "label": "Nunca acompanho",
         "description": "Meu interesse principal são os 90 minutos de bola rolando.",
         "value": false
       }

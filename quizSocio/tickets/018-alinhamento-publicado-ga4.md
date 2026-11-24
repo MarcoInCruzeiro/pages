@@ -1,11 +1,13 @@
 # QUIZ-018 — Alinhar o contrato de analytics da versão publicada
 
-Status: Bloqueado
+Status: Em andamento
 Prioridade: P1
 
 ## Descrição
 
-Na abertura deste ticket, o endereço indicado no `og:url` continha uma versão anterior ao código local, sem os campos atuais de afinidade, semântica e versão. Evidência histórica: [verificação pública de 26/10/2026](evidencias/ga4/verificacao-publica.json). O deploy de 27/10/2026 entregou o pacote atual à Vercel; a execução do contrato em produção e o recebimento no GA4 continuam pendentes.
+Na abertura deste ticket, o endereço indicado no `og:url` continha uma versão anterior ao código local, sem os campos atuais de afinidade, semântica e versão. Evidência histórica: [verificação pública de 26/10/2026](evidencias/ga4/verificacao-publica.json). O deploy de 27/10/2026 entregou o pacote estático daquela data à Vercel; a entrega e o recebimento da revisão Vue atual continuam pendentes.
+
+Retomado por solicitação do usuário em 03/11/2026. A entrega de 27/10 foi da aplicação estática; a revisão local agora usa Vue e regras `2026-11-03.2`. O domínio ainda serve regras `2026-10-26.2`, confirmadas por leitura do motor público. [Registro da retomada](../docs/execucao-ga4-018-2026-11-03.md).
 
 ## Escopo
 
@@ -18,15 +20,18 @@ Criar este ticket não executa deploy. A publicação continua sendo uma ação 
 
 ## Critérios de aceite
 
-- [x] Destino de produção, versão de origem e processo de entrega registrados: projeto `marco11/quiz-socio`, alias `quiz-socio.vercel.app`, pacote do workspace identificado por manifesto e deploy direto via CLI autorizado pelo usuário.
-- [x] O artefato entregue contém as correções locais verificadas no QUIZ-016 e a política de ambientes aplicável ao domínio de produção. Hashes conferidos contra o workspace; 82/82 testes aprovados antes da publicação.
-- [x] O escopo da entrega e seus bloqueadores estão explícitos. Publicação concluída na Vercel; restam a execução do contrato em produção e o aceite de recebimento do QUIZ-017.
-- [ ] Após publicação, o domínio oficial carrega a versão identificada e emite o contrato vigente, incluindo `rules_version`.
+- [x] Destino e histórico de entrega identificados: projeto `marco11/quiz-socio`, alias `quiz-socio.vercel.app`, entrega estática de 27/10 documentada e versão pública reconferida por HTTP em 03/11. A autorização de outubro não autoriza automaticamente publicar o novo pacote Vue.
+- [x] Pacote após a revisão seletiva preparado e identificado por manifesto: 12 arquivos compilados, regras `2026-11-03.2`, alterações não commitadas declaradas e contrato isolado validado; entregue em preview em 04/11.
+- [x] Escopo e bloqueadores atuais explícitos: preparo anterior documentado, novo pacote após a revisão seletiva pendente; candidato com árvore limpa/CI, publicação Vue, execução pública e recebimento real ainda pendentes.
+- [ ] O artefato Vue atual é entregue pelo processo de integração/publicação, com o candidato rastreável e as condições de entrega atendidas.
+- [ ] Após publicação, o domínio oficial carrega a versão identificada e emite o contrato vigente, incluindo `versao_das_regras` no contrato português.
 - [ ] Uma execução controlada confirma recebimento e parâmetros no DebugView da propriedade correta, distinguindo intenção de contratar de contratação efetiva.
-- [ ] O registro informa data, versão publicada, resultados e como separar a série antiga de `compatibility` da afinidade atual.
-- [x] O roteiro de retorno identifica a versão anterior e a configuração de analytics correspondente: HTML público idêntico ao commit `2cecf81`, com tag `G-EF75QCTCTV`; deployment anterior `dpl_AqDicKu9ZniTnALtZ2hs2qgvbqYx`, registrado antes da entrega.
+- [ ] O registro informa data, versão publicada, resultados e como relacionar o contrato inglês ao português, incluindo `compatibility` → `compatibilidade`, e segmentar a afinidade por versão.
+- [ ] O roteiro de retorno da entrega Vue confirma na plataforma o deployment atualmente servido e registra o alvo válido antes da nova publicação. Os IDs de outubro abaixo são históricos, não reconfirmação atual.
 
 ## Bloqueadores
+
+- Entrega atual: a versão Vue ainda não está publicada e o pacote preparado declara `workingTreeHasChanges: true`. A integração/candidato com árvore limpa e o CI pertencem à fase de entrega; não foram executados nesta retomada.
 
 - Externo atual: falta de acesso à propriedade GA4 para comprovar recebimento da versão publicada. **Responsável:** administrador de analytics. **Desbloqueio:** acesso autorizado ou execução acompanhada do roteiro do QUIZ-017. O destino de produção e o acesso Vercel foram resolvidos.
 - Dependências de validação: [QUIZ-016](concluidos/016-regressao-da-integracao-ga4.md) e [QUIZ-017](017-configuracao-e-validacao-ga4.md).
@@ -39,6 +44,30 @@ Comparar versão e contrato no artefato preparado antes da entrega. Após a publ
 ## Registro de conclusão
 
 Entrega realizada e identificada abaixo. Pendente: executar o contrato no ambiente publicado e comprovar recebimento na propriedade correta.
+
+## Preview publicado — 04/11/2026
+
+Novo pacote de 12 arquivos preparado após a revisão seletiva, validado com 173 testes e contrato isolado, e entregue em preview no projeto existente. Estado `READY`; produção e recebimento real no GA4 continuam pendentes. [URL, manifesto e evidências](../docs/deploy-preview-2026-11-04.md). O pacote ainda declara alterações não commitadas.
+
+## Revisão seletiva — 04/11/2026
+
+A [revisão seletiva de respostas](../docs/revisao-seletiva-2026-11-04.md) alterou a aplicação após a conferência isolada abaixo. Preparar outro build e candidato e repetir a conferência antes da entrega. Os manifestos existentes permanecem como evidência dos pacotes anteriores.
+
+## Atualização do pacote — 04/11/2026
+
+O pacote de 03/11 foi superado pela mudança de GA4. A revisão vigente usa catálogo `2026-10-28.2`, regras `2026-11-03.2`, GA4 `2026-11-03.1` e hash `3fca088a0572f28d19df8287caa05527180717404397b999784b93448da54813`.
+
+O novo [manifesto](evidencias/018/2026-11-04/release-manifest.json) identifica 12 arquivos e declara alterações não commitadas. Os 12 hashes foram conferidos no pacote isolado, e o [contrato em português](evidencias/018/2026-11-04/contrato-isolado.json) concluiu o cenário CAL-02 com 20 parâmetros e 12 respostas traduzidas, sem envio ao GA4. O procedimento vigente usa [verify-package-contract.cjs](../scripts/verify-package-contract.cjs), que recusa pacotes de outra revisão. O script de 03/11 permanece apenas para reproduzir a evidência histórica daquele contrato.
+
+A [migração dos consumidores](../docs/migracao-ga4-portugues.md), entrega com árvore limpa/CI, publicação e confirmação no DebugView continuam pendentes. Não houve leitura pública nova, acesso ao Admin nem deploy nesta correção documental. [Roteiro e comandos atuais](../docs/execucao-ga4-018-2026-11-03.md).
+
+## Retomada — 03/11/2026 (pacote histórico)
+
+O [verificador de build publicado](../scripts/verify-published-build.mjs) compara os arquivos compilados com o manifesto de um pacote preparado, em vez de comparar o HTML público com o HTML-fonte. A leitura do domínio retornou HTML legado (HTTP 200), motor público com regras `2026-10-26.2`/catálogo `2026-09-11` e `build-manifest.json` ausente (HTTP 404). A comparação recusou a identidade com o Vue local, saída 2. [Evidência pública](evidencias/018/2026-11-03/publicacao.json) e [versões extraídas por HTTP](evidencias/018/2026-11-03/versao-legada.json).
+
+O pacote de revisão atual contém 12 arquivos, identificados no [manifesto](evidencias/018/2026-11-03/release-manifest.json). Os 12 hashes coincidem quando o pacote é servido isoladamente. No Chrome, a jornada local gerou 1 início, 12 respostas e 1 conclusão com 20 parâmetros, versões corretas, afinidade/alias e CTA do Time do Povo no caso CAL-02. A captura foi local e os destinos de coleta bloqueados; não houve envio de eventos ao GA4. [Contrato isolado](evidencias/018/2026-11-03/contrato-isolado.json).
+
+Os nove testes de verificação passaram. A aprovação do gate local do ranking está registrada no manifesto, mas não equivale a candidato com árvore limpa, autorização de publicar ou validação no GA4. Não houve commit, merge ou deploy. O ticket permanece em andamento para a entrega atual e os aceites externos.
 
 ## Candidato preparado — 27/10/2026
 

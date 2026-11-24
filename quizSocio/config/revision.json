@@ -1,16 +1,16 @@
 {
   "catalogVersion": "2026-10-28.2",
-  "rulesVersion": "2026-10-29.2",
-  "ga4Version": "2026-10-28.3",
+  "rulesVersion": "2026-11-12.5",
+  "ga4Version": "2026-11-03.1",
   "hashes": {
     "catalog": "8deb97d4dc4e561e9c054be01866965615c1b08d51c851cecc56af8543952b1e",
-    "questions": "b240eb9e9c8630f26875643e240e8a3e36ead785180261ac9b5cda9fb9dea20e",
-    "ranking": "919d5fd87b99316c905f3bec49f3cd4ce79056a939ed8a5b808c7b75ecdd1b97",
-    "profile": "58dcecda5c785370632e834fff121200222aa57b7770867408863ddb3813dcdb",
-    "ga4": "07cacb43a39652c5d2786fd8823659545bdd1fc3b913401d7b0e752c45a93824",
-    "engine": "037c38e48125c60bf3b05900d069988baf72627a8190f52758dabe9a63a5c615",
-    "schemas": "bee191332bd0320ec3b6622b862586d867af7efefd792f226a8d7f071ac64b8b",
-    "rules": "055fce497105df60b12abb62aac50450c9663eac5604db60b5a21990048cc06a",
-    "aggregate": "523de1ae47be4b1e15acb1897567a44fc5346592140bc3e41ba9e468fee5d59c"
+    "questions": "b0cdccd420dc235172aac46f95af5ab1eef17f0548664aa20f43b8a31ed78b3b",
+    "ranking": "2811330054f4b787233a642e2f304add7081c894c1624200836179f1d03434b4",
+    "profile": "fc3c2c12d457ab147d0610c5367cc7ae27ce9a94dc67116b23bd4fc3993b6995",
+    "ga4": "2dd69c568ecdc4bbfc9a61abb7db600e0d44fb48776d64b7009ed141011e356e",
+    "engine": "d6deea2a38b1bb5cc8c4c4d01797b547564774f30603f9c42e90f2fc9c2a76b0",
+    "schemas": "62ddb694a392d1dae1115a99973b165fb0d605989f985ced27ceb6dcbca4ced0",
+    "rules": "3cd958569384463f6c51db318b3f2ad2bf4ae1ae6a156e4f4ba1ebb2fd9ff64f",
+    "aggregate": "87043ceba43ecf7cfe987feb23069ab0d3f8636b5c603ff5d1ac9200a0e2af6a"
   }
 }

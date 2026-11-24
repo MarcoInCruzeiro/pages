@@ -1,0 +1,158 @@
+TAP version 13
+# Subtest: preço só filtra o orçamento: mudar preços elegíveis não altera índices nem ordem
+not ok 1 - preço só filtra o orçamento: mudar preços elegíveis não altera índices nem ordem
+  ---
+  duration_ms: 14.404324
+  type: 'test'
+  location: '/home/marco-repoles/workspace/pages/quizSocio/tests/engine.test.js:285:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+        [
+    +     'cabuloso-max',
+    +     96
+    +   ],
+    +   [
+          'cabuloso',
+    +     83.4
+    -     81
+        ],
+        [
+    +     'time-do-povo',
+    +     42.9
+    -     'cabuloso-max',
+    -     78.2
+        ],
+        [
+          'meu-cruzeiro',
+    +     36.4
+    -     54.3
+        ],
+    -   [
+    -     'time-do-povo',
+    -     52.1
+    -   ]
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      0: 'cabuloso'
+      1: 81
+    1:
+      0: 'cabuloso-max'
+      1: 78.2
+    2:
+      0: 'meu-cruzeiro'
+      1: 54.3
+    3:
+      0: 'time-do-povo'
+      1: 52.1
+  actual:
+    0:
+      0: 'cabuloso-max'
+      1: 96
+    1:
+      0: 'cabuloso'
+      1: 83.4
+    2:
+      0: 'time-do-povo'
+      1: 42.9
+    3:
+      0: 'meu-cruzeiro'
+      1: 36.4
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/engine.test.js:293:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: preço não desempata planos com os mesmos benefícios
+not ok 2 - preço não desempata planos com os mesmos benefícios
+  ---
+  duration_ms: 1.147506
+  type: 'test'
+  location: '/home/marco-repoles/workspace/pages/quizSocio/tests/engine.test.js:298:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    89.4 !== 71.5
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 71.5
+  actual: 89.4
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/engine.test.js:304:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: orçamento não muda a afinidade dos planos que continuam elegíveis
+not ok 3 - orçamento não muda a afinidade dos planos que continuam elegíveis
+  ---
+  duration_ms: 2.240584
+  type: 'test'
+  location: '/home/marco-repoles/workspace/pages/quizSocio/tests/engine.test.js:309:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    79.3 !== 81
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 81
+  actual: 79.3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/engine.test.js:313:16)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: as quatro divergências rejeitadas recomendam os benefícios esperados
+not ok 4 - as quatro divergências rejeitadas recomendam os benefícios esperados
+  ---
+  duration_ms: 0.982163
+  type: 'test'
+  location: '/home/marco-repoles/workspace/pages/quizSocio/tests/engine.test.js:319:1'
+  failureType: 'testCodeFailure'
+  error: 'CAL-02: meu-cruzeiro; esperado time-do-povo'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/engine.test.js:327:16)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 0
+# fail 4
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 292.445893

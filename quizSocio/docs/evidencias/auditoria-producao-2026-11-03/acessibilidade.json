@@ -1,0 +1,99 @@
+{
+  "states": [
+    {
+      "state": "inicio",
+      "violations": [],
+      "incomplete": [
+        "color-contrast",
+        "no-autoplay-audio"
+      ]
+    },
+    {
+      "state": "pergunta1",
+      "violations": [],
+      "incomplete": [
+        "color-contrast",
+        "no-autoplay-audio"
+      ]
+    },
+    {
+      "state": "resultado",
+      "violations": [
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "help": "Elements must have their visible text as part of their accessible name",
+          "nodes": [
+            {
+              "target": [
+                "#subscribeButton"
+              ],
+              "summary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+            }
+          ]
+        }
+      ],
+      "incomplete": [
+        "color-contrast",
+        "no-autoplay-audio"
+      ]
+    },
+    {
+      "state": "comparativo",
+      "violations": [
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "help": "Elements must have their visible text as part of their accessible name",
+          "nodes": [
+            {
+              "target": [
+                "#subscribeButton"
+              ],
+              "summary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+            }
+          ]
+        }
+      ],
+      "incomplete": [
+        "color-contrast",
+        "label-content-name-mismatch",
+        "no-autoplay-audio"
+      ]
+    }
+  ],
+  "sliderBefore": {
+    "value": "0",
+    "label": "0 jogos",
+    "disabled": false
+  },
+  "sliderAfterHome": {
+    "value": "0",
+    "disabled": false
+  },
+  "modalBackgroundExposed": [
+    {
+      "role": "button",
+      "name": "Refazer quiz"
+    },
+    {
+      "role": "link",
+      "name": "Assinar o plano Cabuloso Max"
+    },
+    {
+      "role": "StaticText",
+      "name": "Refazer quiz"
+    },
+    {
+      "role": "InlineTextBox",
+      "name": "Refazer quiz"
+    }
+  ],
+  "video": {
+    "paused": false,
+    "duration": 60.75,
+    "display": "none",
+    "controls": false,
+    "resources": []
+  }
+}

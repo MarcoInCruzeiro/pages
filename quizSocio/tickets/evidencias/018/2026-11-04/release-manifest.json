@@ -1,0 +1,93 @@
+{
+  "preparedAt": "2026-11-04T12:19:51.671Z",
+  "commit": "feb130ba4cb2231ab879b65d6f1b784d829a51db",
+  "workingTreeHasChanges": true,
+  "rulesVersion": "2026-11-03.2",
+  "catalogVersion": "2026-10-28.2",
+  "ga4Version": "2026-11-03.1",
+  "configurationHashes": {
+    "catalog": "8deb97d4dc4e561e9c054be01866965615c1b08d51c851cecc56af8543952b1e",
+    "questions": "b240eb9e9c8630f26875643e240e8a3e36ead785180261ac9b5cda9fb9dea20e",
+    "ranking": "a6bced5a0bd8a10c6c8794c1a2c38c4a257de8837134adc21e4ead227c7041ff",
+    "profile": "9b7c4c8d063ef6bf0112c431d5d6ca2415576989a53701c879f41451bec3b1d8",
+    "ga4": "2dd69c568ecdc4bbfc9a61abb7db600e0d44fb48776d64b7009ed141011e356e",
+    "engine": "8be6bed083101f0272606d26154d69ce777f4c27306524ac3f23e5cfceb175aa",
+    "schemas": "48b206f613a204a11fcf6668ce221ea31883bfc66bfaea0999483dadcab38ff7",
+    "rules": "2a96b94850fa938ffe3cd78fae9bb7932399568bad4edfc3ea9d44c49104e33f",
+    "aggregate": "3fca088a0572f28d19df8287caa05527180717404397b999784b93448da54813"
+  },
+  "releaseApproved": true,
+  "diagnostic": false,
+  "quality": {
+    "metricsPassed": true,
+    "regressionIds": [],
+    "reviewAccepted": false,
+    "referenceHashes": {
+      "historical": "14d5440c6377222552c745c77800709163ec9db7a6f99a3aaedcab66e74a6f23",
+      "profiles": "e7128debfadfbf3948b3cdfbff12e9238043e969674c13481867f0c4393b0e9e"
+    }
+  },
+  "scope": "Candidato local validado; publicação e aceite externo são ações separadas.",
+  "files": [
+    {
+      "path": "assets/index-B-nb6OAm.css",
+      "bytes": 30908,
+      "sha256": "320f2dc58182cb4fe0fcefc9f292548aca8ff369db2fd1fdee9d399dc6913a6b"
+    },
+    {
+      "path": "assets/index-B7XfV_Kf.js",
+      "bytes": 305523,
+      "sha256": "fd5e4e2d3a997fe9ee3942ded9d822686050018c989297732ccfec77a69c774f"
+    },
+    {
+      "path": "build-manifest.json",
+      "bytes": 997,
+      "sha256": "0cbd739028ec7e11424b27255d91783207b720e31a9d08ce19321d077d6c036a"
+    },
+    {
+      "path": "img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4",
+      "bytes": 13830472,
+      "sha256": "60997beb61445b58b13e259708cf687db4da98ee868df184dc8fa4f4c227a938"
+    },
+    {
+      "path": "img/Estutura de Páginas_fundoestrelado_siteapp.jpeg",
+      "bytes": 69166,
+      "sha256": "2b710a0e705bb42b691b22b3eb184389e8e49deb59fbefbd80010c45e4cf1fa3"
+    },
+    {
+      "path": "img/background.jpg",
+      "bytes": 95196,
+      "sha256": "311c7283c6b22807769c9662573c2bb95a96ba87702b4306d621c132856ca8a9"
+    },
+    {
+      "path": "img/cabuloso.png",
+      "bytes": 201799,
+      "sha256": "4547f0d037a200fe4cb7b4f35ef5ee04e80fe634cd3f71d84405451e9ddc4ee9"
+    },
+    {
+      "path": "img/cabulosoMax.png",
+      "bytes": 227593,
+      "sha256": "76333900f6031023e20f612a3db0606cb1e0ce97156b47466f6b5031cdda7c19"
+    },
+    {
+      "path": "img/cruzeiro.png",
+      "bytes": 179121,
+      "sha256": "c10e65a3b7610cf8987bcd428ac6b0fb3f10ece5bc40d4435fb6729b37842e8c"
+    },
+    {
+      "path": "img/meuCruzeiro.png",
+      "bytes": 193740,
+      "sha256": "10171f7eda9b7b434d180aeb13be6ecafd8df7d9da40d7ed21ca5eff6de9804e"
+    },
+    {
+      "path": "img/timeDoPovo.png",
+      "bytes": 203894,
+      "sha256": "08f1ec74ae633a47b07490599a8a614d5d790c412095b6469739e9b4de4dea8b"
+    },
+    {
+      "path": "index.html",
+      "bytes": 2465,
+      "sha256": "0edbc8b34b93e1e736d0a50f40a59ff64979292fbf3ceb9cac0a7f19a0a38675"
+    }
+  ]
+}

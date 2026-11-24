@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-11-03T17:54:51.361Z",
+  "method": "HTTP GET e extração textual; nenhum script executado.",
+  "entries": [
+    {
+      "url": "https://quiz-socio.vercel.app/",
+      "status": 200,
+      "sha256": "5460bce5a118c77c543244d7b94407482af0382dc43b11c1de4f1be513482d02",
+      "catalogVersion": null,
+      "rulesVersion": null,
+      "measurementIds": [
+        "G-EF75QCTCTV"
+      ]
+    },
+    {
+      "url": "https://quiz-socio.vercel.app/quiz-engine.js",
+      "status": 200,
+      "sha256": "d2bc8591724b44773b9641bafac0f305f2b4396ed652b76db15b167b0c8486e5",
+      "catalogVersion": "2026-09-11",
+      "rulesVersion": "2026-10-26.2",
+      "measurementIds": []
+    }
+  ]
+}

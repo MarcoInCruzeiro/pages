@@ -14,7 +14,7 @@
 - [x] Início, progresso, 12 perguntas, retorno, confirmação/revisão de conflitos, resultado, comparativo e refazer funcionam pelo fluxo Vue.
 - [x] Respostas ausentes impedem avanço com orientação; confirmação não corrige incompatibilidades silenciosamente.
 - [x] Resultado mantém valores financeiros separados, motivos coerentes, condições de setor/nível e afinidade estimada.
-- [x] Comparativo usa o catálogo recebido, sem depender de quantidade fixa de planos; três origens de CTA mantêm links e dimensões corretos.
+- [x] Comparativo usa o catálogo recebido, sem depender de quantidade fixa de planos; as origens `resultado`, `lista`, `comparativo` e `alternativa-setor` quando disponível usam links e dimensões do contrato. A matriz externa do QUIZ-019 cobre as quatro; seus aceites continuam pendentes.
 - [x] Cliques repetidos, troca rápida de direção e remontagem não avançam duas perguntas, repetem resultado ou duplicam eventos/listeners.
 - [x] Teclado, foco de modal, navegação móvel, contraste, ausência de overflow e redução de movimento permanecem atendidos.
 - [x] Testes de jornada usam a aplicação compilada e verificam comportamento observável; não introduzir uma nova ferramenta de E2E sem necessidade.

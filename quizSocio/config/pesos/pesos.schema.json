@@ -43,6 +43,16 @@
               "minimum": 0,
               "maximum": 100
             },
+            "descontoReferencia": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 1
+            },
+            "bonusCoberturaTemporada": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
             "utilidades": {
               "type": "object",
               "properties": {
@@ -98,18 +108,12 @@
                   "type": "number",
                   "minimum": 0,
                   "maximum": 1
-                },
-                "notPreferred": {
-                  "type": "number",
-                  "minimum": 0,
-                  "maximum": 1
                 }
               },
               "required": [
                 "full",
                 "partial",
-                "none",
-                "notPreferred"
+                "none"
               ],
               "additionalProperties": false
             }
@@ -118,6 +122,8 @@
             "base",
             "bonusPrioridade",
             "bonusAcompanhante",
+            "descontoReferencia",
+            "bonusCoberturaTemporada",
             "utilidades",
             "cobertura"
           ],
@@ -163,11 +169,6 @@
               "minimum": 0,
               "maximum": 100
             },
-            "semPreferencia": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            },
             "cobertura": {
               "type": "object",
               "properties": {
@@ -185,25 +186,18 @@
                   "type": "number",
                   "minimum": 0,
                   "maximum": 1
-                },
-                "notPreferred": {
-                  "type": "number",
-                  "minimum": 0,
-                  "maximum": 1
                 }
               },
               "required": [
                 "full",
                 "partial",
-                "none",
-                "notPreferred"
+                "none"
               ],
               "additionalProperties": false
             }
           },
           "required": [
             "comPreferencia",
-            "semPreferencia",
             "cobertura"
           ],
           "additionalProperties": false
@@ -309,26 +303,6 @@
             "kids"
           ],
           "additionalProperties": false
-        },
-        "price": {
-          "type": "object",
-          "properties": {
-            "base": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            },
-            "escala": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            }
-          },
-          "required": [
-            "base",
-            "escala"
-          ],
-          "additionalProperties": false
         }
       },
       "required": [
@@ -338,8 +312,7 @@
         "sector",
         "discount",
         "experiences",
-        "family",
-        "price"
+        "family"
       ],
       "additionalProperties": false
     },
@@ -486,13 +459,19 @@
               "type": "number",
               "minimum": 0,
               "maximum": 100
+            },
+            "bonusDigitalParcial": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
             }
           },
           "required": [
             "true",
             "false",
             "padrao",
-            "bonusDigital"
+            "bonusDigital",
+            "bonusDigitalParcial"
           ],
           "additionalProperties": false
         },
@@ -500,6 +479,11 @@
           "type": "object",
           "properties": {
             "true": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "sometimes": {
               "type": "number",
               "minimum": 0,
               "maximum": 100
@@ -517,40 +501,9 @@
           },
           "required": [
             "true",
+            "sometimes",
             "false",
             "padrao"
-          ],
-          "additionalProperties": false
-        },
-        "importanciaPreco": {
-          "type": "object",
-          "properties": {
-            "40": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            },
-            "100": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            },
-            "200": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            },
-            "400": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            }
-          },
-          "required": [
-            "40",
-            "100",
-            "200",
-            "400"
           ],
           "additionalProperties": false
         },
@@ -594,7 +547,6 @@
         "prioridad",
         "experiencias",
         "descuentos",
-        "importanciaPreco",
         "adultos",
         "kids"
       ],

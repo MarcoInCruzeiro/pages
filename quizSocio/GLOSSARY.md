@@ -6,6 +6,10 @@ Vocabulário dos valores e benefícios apresentados ao torcedor.
 
 **Assinatura**: valor do plano na modalidade comercial oferecida. O valor mensal equivalente permite comparar assinaturas de modalidades distintas.
 
+**Orçamento**: limite mensal informado pelo torcedor para a assinatura; determina quais planos são elegíveis para recomendação.
+
+**Afinidade**: índice estimado de adequação dos benefícios do plano ao perfil declarado pelo torcedor. Não representa probabilidade de acerto nem economia total.
+
 **Taxa de adesão**: cobrança única de entrada no plano, separada da assinatura. Um plano sem essa cobrança é isento de adesão.
 
 **Opcional Kids**: benefício adicional por criança elegível e aprovada, com preço por criança separado da assinatura do titular.

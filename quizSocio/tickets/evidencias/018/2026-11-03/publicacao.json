@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-11-03T17:54:14.416Z",
+  "publicUrl": "https://quiz-socio.vercel.app/",
+  "method": "HTTP GET de arquivos públicos e SHA-256; sem executar scripts ou enviar eventos.",
+  "expectedVersions": {
+    "catalogVersion": "2026-10-28.2",
+    "rulesVersion": "2026-11-03.2",
+    "ga4Version": "2026-10-28.3"
+  },
+  "publishedVersions": null,
+  "configurationHash": "017b48ef2eb86078ed88e91b128012b3dd5dcd243abc4a28df585cb4fa60a1b6",
+  "sourceCommit": "feb130ba4cb2231ab879b65d6f1b784d829a51db",
+  "workingTreeHasChanges": true,
+  "candidateReleaseApproved": true,
+  "diagnostic": false,
+  "matchesPreparedBuild": false,
+  "legacyScriptDetected": true,
+  "files": [
+    {
+      "path": "build-manifest.json",
+      "requestedUrl": "https://quiz-socio.vercel.app/build-manifest.json",
+      "finalUrl": "https://quiz-socio.vercel.app/build-manifest.json",
+      "status": 404,
+      "expectedSha256": "413e0d99623095e89b0ddb556fd5fec126b7e720a67f6848e9f1c7ebf86d6ab6",
+      "actualSha256": "bec7364b3e2b3f2bad1cf6d42a79b874b73f10793c3b67b7d659e7f986d1e4e3",
+      "bytes": 79,
+      "matches": false
+    },
+    {
+      "path": "index.html",
+      "requestedUrl": "https://quiz-socio.vercel.app/",
+      "finalUrl": "https://quiz-socio.vercel.app/",
+      "status": 200,
+      "expectedSha256": "abe7090066ff155a8833ed63ae14e0c16dd1699434161054e8fc259bb99fe8cb",
+      "actualSha256": "5460bce5a118c77c543244d7b94407482af0382dc43b11c1de4f1be513482d02",
+      "bytes": 120728,
+      "matches": false
+    }
+  ],
+  "skippedFiles": [
+    "assets/index-B-nb6OAm.css",
+    "assets/index-BTfOKAah.js",
+    "img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4",
+    "img/Estutura de Páginas_fundoestrelado_siteapp.jpeg",
+    "img/background.jpg",
+    "img/cabuloso.png",
+    "img/cabulosoMax.png",
+    "img/cruzeiro.png",
+    "img/meuCruzeiro.png",
+    "img/timeDoPovo.png"
+  ],
+  "runtimeContractVerified": false,
+  "ga4IngestionConfirmed": false,
+  "remaining": "Igualdade estática não comprova execução do contrato nem recebimento no GA4; validar em navegador e DebugView."
+}

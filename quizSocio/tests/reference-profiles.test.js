@@ -47,7 +47,8 @@ test('transformação do engine preserva as necessidades descritas em cada perfi
         assert.equal(profile.kids, expected.kids, scenario.id);
         if (expected.attendance === 'none') assert.equal(profile.frecuencia, 0, scenario.id);
         else assert.ok(profile.frecuencia > 0, scenario.id);
-        for (const key of ['frecuencia', 'prioridad', 'experiencias', 'descuentos', 'productos', 'importanciaPreco']) {
+        assert.equal(Object.hasOwn(profile, 'importanciaPreco'), false);
+        for (const key of ['frecuencia', 'prioridad', 'experiencias', 'descuentos']) {
             assert.ok(Number.isFinite(profile[key]) && profile[key] >= 0 && profile[key] <= 10, `${scenario.id}: ${key}`);
         }
     }

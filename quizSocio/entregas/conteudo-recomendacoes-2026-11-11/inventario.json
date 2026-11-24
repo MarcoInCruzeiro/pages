@@ -1,0 +1,133 @@
+{
+  "data": "2026-11-11",
+  "imagens": 19,
+  "planos": 4,
+  "tooltips": 4,
+  "arquivos": [
+    {
+      "caminho": "README.md",
+      "bytes": 2737,
+      "sha256": "c98d11a39f1194dc08d43839eddb739c5d8e5c61f90966a6c7cbe8614309d103"
+    },
+    {
+      "caminho": "imagens/cards/cabuloso-max.png",
+      "bytes": 294879,
+      "sha256": "09cc43622c802cc57c230850da829ef31bfd00e3440fcd4d29fb34b1d27723c5"
+    },
+    {
+      "caminho": "imagens/cards/cabuloso-nivel-2.png",
+      "bytes": 294391,
+      "sha256": "224635e516c6149ea36d994c1331b5f85cd9a119d5b52439438ef1f37d888a5b"
+    },
+    {
+      "caminho": "imagens/cards/cabuloso-nivel-3.png",
+      "bytes": 293805,
+      "sha256": "4aca2969ad89ad7135b7a0e3bb62e52c63b26c586a253b1b32ea72603cbb6e51"
+    },
+    {
+      "caminho": "imagens/cards/cabuloso.png",
+      "bytes": 320783,
+      "sha256": "16a9cbeb78aade163e6455ba5eef0c57f6baddbaa873aeee1ded937f0f6009a6"
+    },
+    {
+      "caminho": "imagens/cards/meu-cruzeiro.png",
+      "bytes": 286733,
+      "sha256": "73879fd805ba89fbcfa3f9831220d3ad91b627ef71fd55adc24655367fc82e55"
+    },
+    {
+      "caminho": "imagens/cards/time-do-povo.png",
+      "bytes": 293927,
+      "sha256": "de92294b5ad92c4333c8ed3e2136869e0bb40d9f09d4c604813e61228c13bd75"
+    },
+    {
+      "caminho": "imagens/comparacao/tabela-completa.png",
+      "bytes": 507479,
+      "sha256": "8a46ed1a96354891f8ea3f71df3212e6030e4fca1203fc64452fd612dba6da7f"
+    },
+    {
+      "caminho": "imagens/comparacao/tooltip-cabuloso-max.png",
+      "bytes": 514326,
+      "sha256": "d2652327df1a824b9a52a7c309688f08721a7b0d1bf13e6ede447b227ca9a750"
+    },
+    {
+      "caminho": "imagens/comparacao/tooltip-cabuloso.png",
+      "bytes": 515261,
+      "sha256": "14d9eb97ac30dfe8b708dfe7646a495bdbdd64f6fa266b117d859bfa5ee981e1"
+    },
+    {
+      "caminho": "imagens/comparacao/tooltip-meu-cruzeiro.png",
+      "bytes": 505067,
+      "sha256": "a6e2e274946a74cc9349216b67000a3efc769094da6ab880f9729951c5e916a9"
+    },
+    {
+      "caminho": "imagens/comparacao/tooltip-time-do-povo.png",
+      "bytes": 508801,
+      "sha256": "e8b1996aa5fd03097f6d3079309dcb2324efae8ffa50cd07e34c90afe4e793d7"
+    },
+    {
+      "caminho": "imagens/logotipos/cabuloso-max.png",
+      "bytes": 227593,
+      "sha256": "76333900f6031023e20f612a3db0606cb1e0ce97156b47466f6b5031cdda7c19"
+    },
+    {
+      "caminho": "imagens/logotipos/cabuloso.png",
+      "bytes": 201799,
+      "sha256": "4547f0d037a200fe4cb7b4f35ef5ee04e80fe634cd3f71d84405451e9ddc4ee9"
+    },
+    {
+      "caminho": "imagens/logotipos/meu-cruzeiro.png",
+      "bytes": 193740,
+      "sha256": "10171f7eda9b7b434d180aeb13be6ecafd8df7d9da40d7ed21ca5eff6de9804e"
+    },
+    {
+      "caminho": "imagens/logotipos/time-do-povo.png",
+      "bytes": 203894,
+      "sha256": "08f1ec74ae633a47b07490599a8a614d5d790c412095b6469739e9b4de4dea8b"
+    },
+    {
+      "caminho": "imagens/resultados/cabuloso-max.png",
+      "bytes": 301988,
+      "sha256": "3c12aa701b5d24cd4c3aaca4c85fb7cdb2ffb058516db71632525784a8a4d09f"
+    },
+    {
+      "caminho": "imagens/resultados/cabuloso.png",
+      "bytes": 327798,
+      "sha256": "fd31794ac5183267d1800e75e68cfdc0cfa19e894412ced518e407d6860d6a83"
+    },
+    {
+      "caminho": "imagens/resultados/meu-cruzeiro.png",
+      "bytes": 271804,
+      "sha256": "9f892548d96c8ff211d239e2426a61ee5e310b1ade33b36374f1ac8f4266deeb"
+    },
+    {
+      "caminho": "imagens/resultados/time-do-povo.png",
+      "bytes": 273022,
+      "sha256": "dec890b0ca9c2a99bde7522c59afd9b9ccd6cd782847c78c609035f89909f94d"
+    },
+    {
+      "caminho": "textos/01-cards-recomendacao.md",
+      "bytes": 6303,
+      "sha256": "57d3fde5467389e291174b87ab65f0164b64c4b6438a8bbb214a06f15aac7383"
+    },
+    {
+      "caminho": "textos/02-tabela-comparacao.md",
+      "bytes": 4641,
+      "sha256": "f046615a0556cd5b01ec1dc6068a5c22929483f10687dacec4bf29a761f9f798"
+    },
+    {
+      "caminho": "textos/03-resultado-e-textos-dinamicos.md",
+      "bytes": 7321,
+      "sha256": "87eb7f2914a89419af58223762c9317877f1e1d4ee9f2f9b664ab30d5ce3c5b6"
+    },
+    {
+      "caminho": "textos/conteudo-completo.txt",
+      "bytes": 18151,
+      "sha256": "270aea8ecf2eb1a6b8075a4f910bced4f7f79c9091a64b877b91889e131fcb4b"
+    },
+    {
+      "caminho": "textos/conteudo-estruturado.json",
+      "bytes": 52387,
+      "sha256": "d0d87cd53a2b33a8a6430a77f07694fdca102e234d6b392475d4dd842938ef76"
+    }
+  ]
+}

@@ -316,7 +316,7 @@
             suffix: 'jogos',
             allowUnknown: true,
             unknownLabel: 'Não sei ou sou novo sócio',
-            help: 'Não lembra ou ainda não é sócio? Marque a opção abaixo para continuar.'
+            help: 'Não lembra? Marque a opção abaixo para continuar.'
         },
         {
             key: 'wantsGuaranteedTicket',

@@ -5,7 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { canonicalize, inspectConfiguration, sha256 } from '../scripts/config-release.mjs';
+import { canonicalize, inspectConfiguration, inspectQuality, sha256 } from '../scripts/config-release.mjs';
 
 const exec = promisify(execFile);
 const project = path.resolve(new URL('../', import.meta.url).pathname);
@@ -45,7 +45,8 @@ test('comandos locais versionam, preservam backup e restauram sem escrever no pr
         const first = await run(...args);
         const unchanged = await run(...args);
         assert.deepEqual(unchanged.metadata, first.metadata, 'preparo repetido é idempotente');
-        assert.equal(first.releaseApproved, false, 'nenhum aceite de regressão é inventado');
+        assert.equal(first.releaseApproved, true, 'nenhum aceite é necessário quando não há perdas');
+        await assert.rejects(fs.access(path.join(isolated, 'config/quality-approval.json')), { code: 'ENOENT' });
         const originalCatalog = JSON.parse(await fs.readFile(path.join(isolated, 'config/planos/catalogo.json'), 'utf8'));
         const modified = structuredClone(originalCatalog);
         modified[0].nome += ' — revisão local';
@@ -71,4 +72,26 @@ test('comandos locais versionam, preservam backup e restauram sem escrever no pr
         await run('restore', '--directory', path.join(isolated, 'snapshots'), '--hash', first.metadata.hashes.aggregate);
         assert.deepEqual(JSON.parse(await fs.readFile(path.join(isolated, 'config/planos/catalogo.json'), 'utf8')), originalCatalog);
     } finally { await fs.rm(isolated, { recursive: true, force: true }); }
+});
+
+test('gate recusa perdas e só aceita decisão vinculada à configuração e referências certas', async () => {
+    const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'quiz-quality-gate-'));
+    try {
+        const configuration = inspectConfiguration().configuration;
+        configuration.pesosRanking.ticket.utilidades.popular = 0.4;
+        const inspection = inspectConfiguration({ configuration });
+        const approvalPath = path.join(directory, 'approval.json');
+        const quality = await inspectQuality({ ...inspection, approvalPath });
+        assert.equal(quality.metricsPassed, true);
+        assert.ok(quality.regressionIds.length > 0);
+        assert.equal(quality.reviewAccepted, false);
+        assert.equal(quality.releaseApproved, false);
+        const approval = { approved: true, approvedBy: 'Responsável fictício do teste', approvedAt: '2026-11-03T12:00:00-03:00',
+            configurationHash: quality.configurationHash, referenceHashes: quality.referenceHashes,
+            acceptedRegressionIds: quality.regressionIds };
+        await fs.writeFile(approvalPath, JSON.stringify({ ...approval, configurationHash: 'desatualizado' }));
+        assert.equal((await inspectQuality({ ...inspection, approvalPath })).releaseApproved, false);
+        await fs.writeFile(approvalPath, JSON.stringify(approval));
+        assert.equal((await inspectQuality({ ...inspection, approvalPath })).releaseApproved, true);
+    } finally { await fs.rm(directory, { recursive: true, force: true }); }
 });

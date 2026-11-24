@@ -1,0 +1,148 @@
+{
+  "checkedAt": "2026-11-04T12:24:10.473Z",
+  "publicUrl": "http://127.0.0.1:40041/",
+  "method": "HTTP GET de arquivos públicos e SHA-256; sem executar scripts ou enviar eventos.",
+  "expectedVersions": {
+    "catalogVersion": "2026-10-28.2",
+    "rulesVersion": "2026-11-03.2",
+    "ga4Version": "2026-11-03.1"
+  },
+  "publishedVersions": {
+    "catalogVersion": "2026-10-28.2",
+    "rulesVersion": "2026-11-03.2",
+    "ga4Version": "2026-11-03.1"
+  },
+  "configurationHash": "3fca088a0572f28d19df8287caa05527180717404397b999784b93448da54813",
+  "sourceCommit": "feb130ba4cb2231ab879b65d6f1b784d829a51db",
+  "workingTreeHasChanges": true,
+  "candidateReleaseApproved": true,
+  "diagnostic": false,
+  "matchesPreparedBuild": true,
+  "legacyScriptDetected": false,
+  "files": [
+    {
+      "path": "build-manifest.json",
+      "requestedUrl": "http://127.0.0.1:40041/build-manifest.json",
+      "finalUrl": "http://127.0.0.1:40041/build-manifest.json",
+      "status": 200,
+      "expectedSha256": "0cbd739028ec7e11424b27255d91783207b720e31a9d08ce19321d077d6c036a",
+      "actualSha256": "0cbd739028ec7e11424b27255d91783207b720e31a9d08ce19321d077d6c036a",
+      "bytes": 997,
+      "matches": true
+    },
+    {
+      "path": "index.html",
+      "requestedUrl": "http://127.0.0.1:40041/",
+      "finalUrl": "http://127.0.0.1:40041/",
+      "status": 200,
+      "expectedSha256": "0edbc8b34b93e1e736d0a50f40a59ff64979292fbf3ceb9cac0a7f19a0a38675",
+      "actualSha256": "0edbc8b34b93e1e736d0a50f40a59ff64979292fbf3ceb9cac0a7f19a0a38675",
+      "bytes": 2465,
+      "matches": true
+    },
+    {
+      "path": "assets/index-B-nb6OAm.css",
+      "requestedUrl": "http://127.0.0.1:40041/assets/index-B-nb6OAm.css",
+      "finalUrl": "http://127.0.0.1:40041/assets/index-B-nb6OAm.css",
+      "status": 200,
+      "expectedSha256": "320f2dc58182cb4fe0fcefc9f292548aca8ff369db2fd1fdee9d399dc6913a6b",
+      "actualSha256": "320f2dc58182cb4fe0fcefc9f292548aca8ff369db2fd1fdee9d399dc6913a6b",
+      "bytes": 30908,
+      "matches": true
+    },
+    {
+      "path": "assets/index-B7XfV_Kf.js",
+      "requestedUrl": "http://127.0.0.1:40041/assets/index-B7XfV_Kf.js",
+      "finalUrl": "http://127.0.0.1:40041/assets/index-B7XfV_Kf.js",
+      "status": 200,
+      "expectedSha256": "fd5e4e2d3a997fe9ee3942ded9d822686050018c989297732ccfec77a69c774f",
+      "actualSha256": "fd5e4e2d3a997fe9ee3942ded9d822686050018c989297732ccfec77a69c774f",
+      "bytes": 305523,
+      "matches": true
+    },
+    {
+      "path": "img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4",
+      "requestedUrl": "http://127.0.0.1:40041/img/2025_12_26_h264_9x16_CRUZEIRO%20JOGA%20JUNTO.mp4",
+      "finalUrl": "http://127.0.0.1:40041/img/2025_12_26_h264_9x16_CRUZEIRO%20JOGA%20JUNTO.mp4",
+      "status": 200,
+      "expectedSha256": "60997beb61445b58b13e259708cf687db4da98ee868df184dc8fa4f4c227a938",
+      "actualSha256": "60997beb61445b58b13e259708cf687db4da98ee868df184dc8fa4f4c227a938",
+      "bytes": 13830472,
+      "matches": true
+    },
+    {
+      "path": "img/Estutura de Páginas_fundoestrelado_siteapp.jpeg",
+      "requestedUrl": "http://127.0.0.1:40041/img/Estutura%20de%20P%C3%A1ginas_fundoestrelado_siteapp.jpeg",
+      "finalUrl": "http://127.0.0.1:40041/img/Estutura%20de%20P%C3%A1ginas_fundoestrelado_siteapp.jpeg",
+      "status": 200,
+      "expectedSha256": "2b710a0e705bb42b691b22b3eb184389e8e49deb59fbefbd80010c45e4cf1fa3",
+      "actualSha256": "2b710a0e705bb42b691b22b3eb184389e8e49deb59fbefbd80010c45e4cf1fa3",
+      "bytes": 69166,
+      "matches": true
+    },
+    {
+      "path": "img/background.jpg",
+      "requestedUrl": "http://127.0.0.1:40041/img/background.jpg",
+      "finalUrl": "http://127.0.0.1:40041/img/background.jpg",
+      "status": 200,
+      "expectedSha256": "311c7283c6b22807769c9662573c2bb95a96ba87702b4306d621c132856ca8a9",
+      "actualSha256": "311c7283c6b22807769c9662573c2bb95a96ba87702b4306d621c132856ca8a9",
+      "bytes": 95196,
+      "matches": true
+    },
+    {
+      "path": "img/cabuloso.png",
+      "requestedUrl": "http://127.0.0.1:40041/img/cabuloso.png",
+      "finalUrl": "http://127.0.0.1:40041/img/cabuloso.png",
+      "status": 200,
+      "expectedSha256": "4547f0d037a200fe4cb7b4f35ef5ee04e80fe634cd3f71d84405451e9ddc4ee9",
+      "actualSha256": "4547f0d037a200fe4cb7b4f35ef5ee04e80fe634cd3f71d84405451e9ddc4ee9",
+      "bytes": 201799,
+      "matches": true
+    },
+    {
+      "path": "img/cabulosoMax.png",
+      "requestedUrl": "http://127.0.0.1:40041/img/cabulosoMax.png",
+      "finalUrl": "http://127.0.0.1:40041/img/cabulosoMax.png",
+      "status": 200,
+      "expectedSha256": "76333900f6031023e20f612a3db0606cb1e0ce97156b47466f6b5031cdda7c19",
+      "actualSha256": "76333900f6031023e20f612a3db0606cb1e0ce97156b47466f6b5031cdda7c19",
+      "bytes": 227593,
+      "matches": true
+    },
+    {
+      "path": "img/cruzeiro.png",
+      "requestedUrl": "http://127.0.0.1:40041/img/cruzeiro.png",
+      "finalUrl": "http://127.0.0.1:40041/img/cruzeiro.png",
+      "status": 200,
+      "expectedSha256": "c10e65a3b7610cf8987bcd428ac6b0fb3f10ece5bc40d4435fb6729b37842e8c",
+      "actualSha256": "c10e65a3b7610cf8987bcd428ac6b0fb3f10ece5bc40d4435fb6729b37842e8c",
+      "bytes": 179121,
+      "matches": true
+    },
+    {
+      "path": "img/meuCruzeiro.png",
+      "requestedUrl": "http://127.0.0.1:40041/img/meuCruzeiro.png",
+      "finalUrl": "http://127.0.0.1:40041/img/meuCruzeiro.png",
+      "status": 200,
+      "expectedSha256": "10171f7eda9b7b434d180aeb13be6ecafd8df7d9da40d7ed21ca5eff6de9804e",
+      "actualSha256": "10171f7eda9b7b434d180aeb13be6ecafd8df7d9da40d7ed21ca5eff6de9804e",
+      "bytes": 193740,
+      "matches": true
+    },
+    {
+      "path": "img/timeDoPovo.png",
+      "requestedUrl": "http://127.0.0.1:40041/img/timeDoPovo.png",
+      "finalUrl": "http://127.0.0.1:40041/img/timeDoPovo.png",
+      "status": 200,
+      "expectedSha256": "08f1ec74ae633a47b07490599a8a614d5d790c412095b6469739e9b4de4dea8b",
+      "actualSha256": "08f1ec74ae633a47b07490599a8a614d5d790c412095b6469739e9b4de4dea8b",
+      "bytes": 203894,
+      "matches": true
+    }
+  ],
+  "skippedFiles": [],
+  "runtimeContractVerified": false,
+  "ga4IngestionConfirmed": false,
+  "remaining": "Igualdade estática não comprova execução do contrato nem recebimento no GA4; validar em navegador e DebugView."
+}

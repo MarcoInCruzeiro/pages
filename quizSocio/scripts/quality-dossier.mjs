@@ -2,7 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { inspectConfiguration, inspectQuality } from './config-release.mjs';
 
-const directory = path.resolve(process.argv[2] || 'tickets/evidencias/qualidade-e-entrega-2026-10-29');
+const directory = path.resolve(process.argv[2] || '.scratch/quality-dossier');
 const inspection = inspectConfiguration();
 const quality = await inspectQuality(inspection);
 await mkdir(directory, { recursive: true });
@@ -19,9 +19,12 @@ const table = rows.map((row) => {
 const metrics = Object.entries(quality.reports).flatMap(([name, report]) =>
     Object.entries(report.groups).map(([split, group]) =>
         `| ${name} / ${split} | ${group.top1}/${group.total} | ${group.top3}/${group.total} | ${group.budgetViolations} |`)).join('\n');
-await writeFile(path.join(directory, 'decisao-ranking.md'), `# Dossiê para decisão do responsável
+const decision = quality.reviewRequired
+    ? `As perdas \`${quality.regressionIds.join(', ')}\` exigem revisão do responsável. Atender aos pisos agregados não constitui aceite. Uma eventual decisão deve registrar identidade, data, hash da configuração, hashes das referências e exatamente esses IDs.`
+    : 'Não há regressões de acerto nesta revisão; não há perdas a aceitar. A aprovação local de qualidade não constitui autorização de publicação ou aceite externo.';
+await writeFile(path.join(directory, 'decisao-ranking.md'), `# Dossiê de qualidade do ranking
 
-Gerado em ${quality.reports.historical.evaluatedAt}. Reprodução: \`node scripts/quality-dossier.mjs\`.
+Gerado em ${quality.reports.historical.evaluatedAt}. Reprodução: \`node scripts/quality-dossier.mjs DIRETORIO_DE_SAIDA\`. Sem argumento, a saída fica em \`.scratch/quality-dossier\`, preservando evidências históricas.
 Versões: \`${JSON.stringify(inspection.versions)}\`.
 Configuração: \`${quality.configurationHash}\`.
 Referência histórica: \`${quality.referenceHashes.historical}\`.
@@ -34,14 +37,14 @@ ${metrics}
 
 | Caso | Vencedor(es) esperado(s) | Atual | Placar dos elegíveis | Margem 1º–2º | Top-1 / Top-3 | Violação de orçamento |
 | --- | --- | --- | --- | --- | --- | --- |
-${table}
+${table || '| — | — | — | Sem regressões | — | — | — |'}
 
-A referência anterior preservada inclui cinco planos. A retirada do Cativo e a normalização pelos quatro planos ativos mudaram a escala e a posição relativa dos demais; os relatórios registram também os placares e vencedores anteriores. Nenhuma expectativa, peso ou resposta foi ajustada para acompanhar a saída. As referências são sintéticas, sem validação externa ou cega.
+A comparação anterior preservada usa o motor histórico de cinco planos; os relatórios registram seus placares e vencedores. A avaliação atual usa as regras identificadas acima, preservando respostas e expectativas das referências congeladas. As referências são sintéticas, sem validação externa ou cega.
 
-O responsável pode **aceitar as quatro novas escolhas** para esta configuração e estas referências, ou **pedir revisão do ranking**, apontando os casos a corrigir. Atender os pisos agregados não constitui aceite das perdas. Não foi criado aceite: \`reviewAccepted: ${quality.reviewAccepted}\`, \`releaseApproved: ${quality.releaseApproved}\`.
+${decision}
 
-Para um aceite futuro, registrar identidade do responsável, data explícita, o hash de configuração e os dois hashes de referência acima, e exatamente os IDs \`${quality.regressionIds.join(', ')}\`. Qualquer mudança nessas identidades exige nova decisão.
+Estado: \`reviewAccepted: ${quality.reviewAccepted}\`, \`releaseApproved: ${quality.releaseApproved}\`. Este comando não cria arquivo de aceite.
 
-Evidência anterior preservada em [port-vue-2026-10-28](../port-vue-2026-10-28/quality.json). Este dossiê atende à evidência técnica dos tickets [06](../../port-vue/issues/06-quatro-planos-e-avaliacao.md), [07](../../port-vue/issues/07-versionamento-backup-e-restauracao.md) e [08](../../port-vue/issues/08-integracao-e-artefato-de-entrega.md); o aceite continua pendente.
+Mudanças na configuração ou nas referências exigem nova avaliação. As evidências históricas não devem ser sobrescritas para acompanhar um resultado novo.
 `);
 console.log(JSON.stringify({ directory, regressions: quality.regressionIds, releaseApproved: quality.releaseApproved }));

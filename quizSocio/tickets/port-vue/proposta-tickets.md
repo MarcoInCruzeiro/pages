@@ -2,4 +2,4 @@
 
 A proposta foi convertida em oito tickets locais individuais. O [índice de execução](README.md) é a fonte vigente de títulos, dependências e situação. Os critérios de aceite ficam em cada ticket, evitando cópias divergentes.
 
-A [spec](../../docs/spec-port-vue.md) registra as decisões: quiz público em Vue 3 + Vite, configuração JSON, quatro planos ativos e admin adiado. A implementação ainda não começou.
+A [spec](../../docs/spec-port-vue.md) registra as decisões: quiz público em Vue 3 + Vite, configuração JSON, quatro planos ativos e admin adiado. O planejamento original foi implementado; consultar o [índice vigente](README.md) e seus registros de execução para o estado atual, incluindo a correção do ranking sem preço.

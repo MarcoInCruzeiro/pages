@@ -1,9 +1,9 @@
 # QUIZ-017 — Conferir a configuração da propriedade e dos relatórios GA4
 
-Status: Bloqueado
+Status: Em andamento
 Prioridade: P2
 
-Bloqueio mantido por solicitação expressa do usuário em 27/10/2026. Os detalhes abaixo indicam o que foi preparado localmente e o que requer acesso à propriedade.
+Retomado por solicitação expressa do usuário em 03/11/2026, substituindo o pedido anterior de manter o ticket bloqueado. O inventário está em andamento; a leitura do Admin e do DebugView ainda depende de acesso à propriedade. [Registro da retomada](../docs/execucao-ga4-017-2026-11-03.md).
 
 ## Descrição
 
@@ -21,7 +21,7 @@ Fontes: contrato em [estrutura_quiz.md](../estrutura_quiz.md#9-analytics) e [pen
 ## Critérios de aceite
 
 - [ ] Propriedade, fluxos, domínio oficial do quiz e destinos de contratação estão identificados por evidência datada.
-- [ ] Os parâmetros necessários estão registrados com escopo e tipo adequados, incluindo `rules_version` após QUIZ-014; decisões sobre campos dispensados ficam justificadas.
+- [ ] Os parâmetros necessários estão registrados com escopo e tipo adequados, incluindo `versao_das_regras` no contrato português (antes `rules_version`); decisões sobre campos dispensados ficam justificadas.
 - [ ] Conclusão do quiz, clique para contratar e contratação efetiva têm significados distintos nos eventos principais e relatórios.
 - [ ] Filtros internos/de desenvolvedor e suas consequências para a validação estão registrados.
 - [ ] A configuração entre os domínios foi conferida nas duas pontas, ou o impedimento está explicitado; compartilhar um identificador por comentário não basta como evidência.
@@ -42,6 +42,22 @@ Conferir o inventário no Admin e registrar a configuração antes/depois dos aj
 
 Pendente: responsável pela conferência, configurações e decisões, data, evidências e validação nos relatórios.
 
+## Atualização do contrato — 04/11/2026
+
+O inventário vigente usa GA4 `2026-11-03.1`: `inicio_do_quiz`, `resposta_do_quiz`, `quiz_concluido` e `clique_de_assinatura`. Os nomes de parâmetros e respostas seguem o [mapa de migração](../docs/migracao-ga4-portugues.md). `compatibilidade` duplica o índice no contrato atual; o nome antigo `compatibility` deixou de ser enviado, exigindo adaptação dos consumidores. A origem `alternativa-setor` integra a matriz de quatro CTAs.
+
+O [inventário local de 04/11](evidencias/017/2026-11-04/inventario-local.json) foi regenerado da configuração, preservando o registro anterior. O acesso externo não foi reconferido nesta correção; propriedade/fluxo, definições, filtros, consumidores e recebimento continuam pendentes. [Roteiro atualizado](../docs/execucao-ga4-017-2026-11-03.md).
+
+## Retomada — 03/11/2026 (contrato anterior)
+
+Conferidos a configuração operacional e o contrato atual: tag `G-EF75QCTCTV`, catálogo `2026-10-28.2`, regras `2026-11-03.2` e GA4 `2026-10-28.3`. A conclusão possui 20 parâmetros personalizados, incluindo as 12 respostas. A origem adicional `alternativa-setor` também deve entrar no inventário de `cta_location`.
+
+O inventário de superfícies retornou nenhum navegador e informou indisponibilidade do host de acesso. A integração Windsor.ai foi localizada sem instalação/conexão confirmadas; ela pode auxiliar na leitura de relatórios, mas não foi demonstrada capacidade de alterar o Admin ou operar o DebugView. As variáveis usuais de acesso GA4/Google verificadas estão ausentes; isso não constitui inspeção de todas as possíveis credenciais da máquina.
+
+Solicitados ao usuário os identificadores da propriedade e do fluxo que contém a tag, para começar a conferência acompanhada. Não houve acesso ao Admin, alteração na propriedade nem envio de eventos de teste ao GA4. Critérios de recebimento, relatórios e configuração continuam pendentes.
+
+[Inventário local e diagnóstico de acesso](evidencias/017/2026-11-03/inventario-local.json). O [registro de execução](../docs/execucao-ga4-017-2026-11-03.md) separa o que foi observado no código, as propostas e os campos que dependem de consulta à conta.
+
 ## Execução local — 27/10/2026
 
 Preparados o [inventário de dimensões/métricas e o roteiro de DebugView](../docs/validacao-e-entrega.md#3-conferir-a-propriedade-ga4--quiz-017), com tipos dos campos, versões e distinção entre conclusão, clique e contratação. O inventário é uma proposta de configuração, não um registro de alterações feitas no Admin.
@@ -60,6 +76,8 @@ As verificações locais do contrato e os roteiros estão disponíveis, mas o en
 
 ## Detalhamento solicitado pelo usuário
 
+Roteiro vigente atualizado em 04/11/2026 para a revisão GA4 `2026-11-03.1`.
+
 ### O que esta tarefa deve entregar
 
 Comprovar que os eventos e parâmetros produzidos pelo quiz chegam à propriedade correta, podem ser usados nos relatórios e seguem a configuração de filtros e conversões definida pelo produto. Esse aceite é administrativo e de recebimento real; os testes locais do QUIZ-016 não o substituem.
@@ -67,7 +85,7 @@ Comprovar que os eventos e parâmetros produzidos pelo quiz chegam à propriedad
 ### O que já está pronto
 
 - Tag de medição no código: `G-EF75QCTCTV`; domínio habilitado localmente: `quiz-socio.vercel.app`.
-- Eventos: `quiz_start`, `quiz_answer`, `quiz_complete`, `quiz_subscribe_click`.
+- Eventos: `inicio_do_quiz`, `resposta_do_quiz`, `quiz_concluido`, `clique_de_assinatura`.
 - Payload com plano, origem do CTA, respostas, tempos, afinidade e versões de catálogo/regras.
 - Isolamento de preview/desenvolvimento e captura local antes da transmissão.
 - [Inventário de parâmetros e roteiro de DebugView](../docs/validacao-e-entrega.md#3-conferir-a-propriedade-ga4--quiz-017).

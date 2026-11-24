@@ -8,6 +8,7 @@
     "propriedade",
     "ambientesHabilitados",
     "eventos",
+    "respostas",
     "isolamento"
   ],
   "properties": {
@@ -73,10 +74,10 @@
           "chave": {
             "type": "string",
             "enum": [
-              "quiz_start",
-              "quiz_answer",
-              "quiz_complete",
-              "quiz_subscribe_click"
+              "inicio_do_quiz",
+              "resposta_do_quiz",
+              "quiz_concluido",
+              "clique_de_assinatura"
             ]
           },
           "tipos": {
@@ -96,6 +97,38 @@
       },
       "minItems": 4,
       "maxItems": 4
+    },
+    "respostas": {
+      "type": "object",
+      "required": [
+        "gamesPerYear",
+        "gamesHistory",
+        "wantsGuaranteedTicket",
+        "buysTwoTickets",
+        "kidsCount",
+        "needsPriority",
+        "wantsParticipation",
+        "wantsStoreDiscount",
+        "gameFrequency",
+        "digitalExperience",
+        "budget",
+        "preferredSector"
+      ],
+      "properties": {
+        "gamesPerYear": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "gamesHistory": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "wantsGuaranteedTicket": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "buysTwoTickets": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "kidsCount": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "needsPriority": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "wantsParticipation": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "wantsStoreDiscount": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "gameFrequency": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "digitalExperience": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "budget": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "preferredSector": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" }
+      },
+      "additionalProperties": false
     },
     "isolamento": {
       "type": "object",

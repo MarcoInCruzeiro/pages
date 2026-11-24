@@ -57,9 +57,10 @@ export async function prepareRelease(output, { diagnostic = false, buildDirector
         workingTreeHasChanges: Boolean((await exec('git', ['status', '--porcelain', '--', '.'], { cwd: projectRoot })).stdout.trim()),
         rulesVersion: inspection.versions.rulesVersion, catalogVersion: inspection.versions.catalogVersion,
         ga4Version: inspection.versions.ga4Version, configurationHashes: inspection.hashes,
-        releaseApproved: quality.releaseApproved, diagnostic,
+        releaseApproved: quality.releaseApproved && !diagnostic, diagnostic,
         quality: { metricsPassed: quality.metricsPassed, regressionIds: quality.regressionIds, reviewAccepted: quality.reviewAccepted, referenceHashes: quality.referenceHashes },
-        scope: quality.releaseApproved ? 'Candidato local validado; publicação e aceite externo são ações separadas.' : 'Diagnóstico local não aprovado; entrega bloqueada por revisão de qualidade.',
+        scope: diagnostic ? 'Diagnóstico local não aprovado para publicação.'
+            : 'Candidato local validado; publicação e aceite externo são ações separadas.',
         files: []
     };
     const temporary = path.join(destination, '.prepare');

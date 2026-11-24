@@ -1,5 +1,5 @@
 /*
- * Testes de navegador do Quiz Sócio 5 Estrelas.
+ * Testes de navegador do SEU PLANO IDEAL.
  *
  * Usam o Chrome instalado via CDP, sem Playwright. Cada teste recarrega a
  * página, instala captura local de analytics e interage com o DOM real.
@@ -69,9 +69,9 @@ const BUDGET_PURPLE_ANSWERS = [
     { type: 'option', index: 0 },
     { type: 'option', index: 1 },
     { type: 'option', index: 1 },
+    { type: 'option', index: 2 },
     { type: 'option', index: 1 },
-    { type: 'option', index: 1 },
-    { type: 'option', index: 1 },
+    { type: 'option', index: 2 },
     { type: 'option', index: 0 },
     { type: 'option', index: 2 }
 ];
@@ -244,7 +244,7 @@ function waitUntil(predicate, timeout = 5000) {
     });
 }
 
-describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
+describe('SEU PLANO IDEAL — fluxo de navegador', { concurrency: 1 }, () => {
     before(async () => {
         server = await startServer(ROOT);
         page = await launchChrome({ chromePath: CHROME_PATH });
@@ -284,10 +284,10 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         await waitStep(2);
         assert.equal(await text('#stepCounter'), 'Pergunta 2 de 12');        assert.match(await text('#quizTitle'), /últimos 15 meses/);
 
-        const answers = await getEvents('quiz_answer');
+        const answers = await getEvents('resposta_do_quiz');
         assert.equal(answers.length, 1);
-        assert.equal(answers[0].params.quiz_question, 'gamesPerYear');
-        assert.equal(answers[0].params.quiz_step, 1);
+        assert.equal(answers[0].params.pergunta_do_quiz, 'gamesPerYear');
+        assert.equal(answers[0].params.etapa_do_quiz, 1);
     });
 
     it('alternar rapidamente Voltar e Continuar mantém a pergunta correta', async () => {
@@ -297,7 +297,7 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         await click('#nextButton');
         await waitStep(2);
         const historyHint = await text('.range-value');
-        assert.match(historyHint, /Não lembra ou ainda não é sócio/);
+        assert.match(historyHint, /Não lembra/);
         assert.doesNotMatch(historyHint, /define o nível|histórico confirmado|condição inicial/i);
         await applyAnswer({ type: 'unknown' });
         await click('#nextButton');
@@ -353,7 +353,7 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         await waitStep(3);
 
         assert.equal(await evaluate(() => document.querySelector('#nextButton').disabled), true);
-        const before = (await getEvents('quiz_answer')).length;
+        const before = (await getEvents('resposta_do_quiz')).length;
 
         await evaluate(() => {
             const button = document.querySelector('#nextButton');
@@ -369,14 +369,14 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
             return [style.color, style.backgroundColor];
         });
         assert.ok(contrastRatio(...errorColors) >= 4.5, 'mensagem de erro precisa ser legível no fundo claro');
-        assert.equal((await getEvents('quiz_answer')).length, before);
+        assert.equal((await getEvents('resposta_do_quiz')).length, before);
 
         await applyAnswer({ type: 'option', index: 1 });
         await click('#nextButton');
         await waitStep(4);
-        const after = await getEvents('quiz_answer');
+        const after = await getEvents('resposta_do_quiz');
         assert.equal(after.length, before + 1);
-        assert.equal(after.at(-1).params.quiz_question, 'wantsGuaranteedTicket');
+        assert.equal(after.at(-1).params.pergunta_do_quiz, 'wantsGuaranteedTicket');
     });
 
     it('zero jogos e opções false são respostas válidas', async () => {
@@ -392,11 +392,11 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         await click('#nextButton');
         await waitStep(4);
 
-        const answers = await getEvents('quiz_answer');
-        assert.equal(answers[0].params.quiz_answer, '0');
-        const falseAnswer = answers.find((event) => event.params.quiz_question === 'wantsGuaranteedTicket');
-        assert.equal(falseAnswer.params.quiz_answer, 'false');
-        assert.match(falseAnswer.params.quiz_answer_label, /jogos mais decisivos/i);
+        const answers = await getEvents('resposta_do_quiz');
+        assert.equal(answers[0].params.valor_da_resposta, '0');
+        const falseAnswer = answers.find((event) => event.params.pergunta_do_quiz === 'wantsGuaranteedTicket');
+        assert.equal(falseAnswer.params.valor_da_resposta, 'false');
+        assert.match(falseAnswer.params.rotulo_da_resposta, /jogos mais decisivos/i);
     });
 
     it('conflito pede confirmação e produz um único resultado', async () => {
@@ -436,19 +436,127 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
 
         assert.equal(await evaluate(() => document.querySelectorAll('.results').length), 1);
         assert.equal(await evaluate(() => document.querySelectorAll('.result-card').length), 1);
-        assert.equal((await getEvents('quiz_complete')).length, 1);
+        assert.equal((await getEvents('quiz_concluido')).length, 1);
     });
 
-    it('revisar respostas a partir do conflito volta à primeira pergunta', async () => {
+    it('revisão pela maioria corrige só a resposta divergente e conclui sem repetir o quiz', async () => {
         await setup();
         await startQuiz();
         await runQuiz(CONFLICT_ANSWERS);
         await waitConflictGate();
 
         await click('#backButton');
-        await waitStep(1);
         await waitQuestionTitle('Em média, a quantos jogos');
+        assert.equal(await text('#stepCounter'), 'Revisão 1 de 1 · Pergunta 1 de 12');
+        assert.equal(await evaluate(() => document.querySelector('#rangeInput').value), '0');
         assert.equal(await evaluate(() => document.querySelectorAll('.results').length), 0);
+        await applyAnswer({ type: 'range', value: 15 });
+        await click('#nextButton');
+        await waitResults();
+        const events = await getEvents('resposta_do_quiz');
+        assert.equal(events.length, 13);
+        assert.equal(events.at(-1).params.pergunta_do_quiz, 'gamesPerYear');
+        assert.equal((await getEvents('quiz_concluido')).length, 1);
+        const payload = (await getEvents('quiz_concluido'))[0].params;
+        assert.equal(payload.resposta_jogos_por_ano, '15');
+        assert.equal(payload.resposta_historico_de_jogos, '0');
+        assert.equal(payload.resposta_orcamento, '200');
+    });
+
+    it('revisão salta à terceira pergunta e preserva todas as outras respostas', async () => {
+        await setup();
+        await startQuiz();
+        const answers = NORMAL_ANSWERS.map(answer => ({ ...answer }));
+        answers[2] = { type: 'option', index: 0 };
+        await runQuiz(answers);
+        await waitConflictGate();
+        await click('#backButton');
+        await page.waitFor('document.querySelector("#stepCounter")?.textContent === "Revisão 1 de 1 · Pergunta 3 de 12"');
+        assert.equal(await evaluate(() => document.querySelector('#backButton').disabled), true);
+        assert.equal(await text('#nextButton'), 'Conferir respostas');
+        await applyAnswer({ type: 'option', index: 1 });
+        await click('#nextButton');
+        await waitResults();
+        const events = await getEvents('resposta_do_quiz');
+        assert.equal(events.length, 13);
+        assert.equal(events.at(-1).params.pergunta_do_quiz, 'wantsGuaranteedTicket');
+        assert.equal(events.at(-1).params.etapa_do_quiz, 3);
+        const names = require('../config/ga4/ga4.json').respostas;
+        const payload = (await getEvents('quiz_concluido'))[0].params;
+        for (const event of events.slice(0, 12)) {
+            const key = event.params.pergunta_do_quiz;
+            assert.equal(payload[`resposta_${names[key]}`], key === 'wantsGuaranteedTicket' ? 'true' : event.params.valor_da_resposta);
+        }
+        assert.equal((await getEvents('inicio_do_quiz')).length, 1);
+        assert.equal((await getEvents('quiz_concluido')).length, 1);
+    });
+
+    it('revisão sem maioria percorre só perguntas em conflito e permite voltar e manter', async () => {
+        await setup();
+        await startQuiz();
+        const answers = CONFLICT_ANSWERS.map(answer => ({ ...answer }));
+        answers[8] = { type: 'option', index: 2 };
+        await runQuiz(answers);
+        await waitConflictGate();
+        await click('#backButton');
+        await page.waitFor('document.querySelector("#stepCounter")?.textContent === "Revisão 1 de 2 · Pergunta 1 de 12"');
+        await click('#nextButton');
+        await page.waitFor('document.querySelector("#stepCounter")?.textContent === "Revisão 2 de 2 · Pergunta 3 de 12"');
+        await click('#backButton');
+        await page.waitFor('document.querySelector("#stepCounter")?.textContent === "Revisão 1 de 2 · Pergunta 1 de 12"');
+        await click('#nextButton');
+        await page.waitFor('document.querySelector("#stepCounter")?.textContent === "Revisão 2 de 2 · Pergunta 3 de 12"');
+        await click('#nextButton');
+        await waitConflictGate();
+        assert.equal((await getEvents('quiz_concluido')).length, 0);
+        await click('#nextButton');
+        await waitResults();
+        assert.equal((await getEvents('quiz_concluido')).length, 1);
+        await click('#restartButton');
+        await page.waitFor('Boolean(document.querySelector("#startButton"))');
+        await startQuiz();
+        assert.equal(await text('#stepCounter'), 'Pergunta 1 de 12');
+    });
+
+    it('revisão encerra antes da segunda pergunta quando o conflito já foi resolvido', async () => {
+        await setup();
+        await startQuiz();
+        const answers = CONFLICT_ANSWERS.map(answer => ({ ...answer }));
+        answers[8] = { type: 'option', index: 2 };
+        await runQuiz(answers);
+        await waitConflictGate();
+        await click('#backButton');
+        await page.waitFor('document.querySelector("#stepCounter")?.textContent === "Revisão 1 de 2 · Pergunta 1 de 12"');
+        await applyAnswer({ type: 'range', value: 15 });
+        await click('#nextButton');
+        await waitResults();
+        assert.equal((await getEvents('resposta_do_quiz')).length, 13);
+        assert.equal((await getEvents('quiz_concluido')).length, 1);
+    });
+
+    it('revisão no celular isola a frequência divergente e permite confirmar pelo teclado', async () => {
+        await page.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+        try {
+            await setup();
+            await startQuiz();
+            const answers = CONFLICT_ANSWERS.map(answer => ({ ...answer }));
+            answers[2] = { type: 'option', index: 0 };
+            await runQuiz(answers);
+            await waitConflictGate();
+            await click('#backButton');
+            await page.waitFor('document.querySelector("#stepCounter")?.textContent === "Revisão 1 de 1 · Pergunta 9 de 12"');
+            assert.equal(await evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+            await applyAnswer({ type: 'option', index: 2 });
+            await evaluate(() => document.querySelector('#nextButton').focus());
+            await dispatchEnter();
+            await waitResults();
+            const event = (await getEvents('resposta_do_quiz')).at(-1);
+            assert.equal(event.params.etapa_do_quiz, 9);
+            assert.equal(event.params.pergunta_do_quiz, 'gameFrequency');
+            assert.equal((await getEvents('quiz_concluido')).length, 1);
+        } finally {
+            await page.send('Emulation.clearDeviceMetricsOverride');
+        }
     });
 
     it('confirmação no celular mantém leitura e ações acessíveis sem espaço extra', async () => {
@@ -503,48 +611,48 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         assert.equal(await evaluate(() => document.querySelectorAll('.results').length), 1);
         assert.equal(await evaluate(() => document.querySelectorAll('.result-card').length), 1);
 
-        const starts = await getEvents('quiz_start');
-        const answers = await getEvents('quiz_answer');
-        const completes = await getEvents('quiz_complete');
+        const starts = await getEvents('inicio_do_quiz');
+        const answers = await getEvents('resposta_do_quiz');
+        const completes = await getEvents('quiz_concluido');
         assert.equal(starts.length, 1);
         assert.equal(answers.length, 12);
         assert.equal(completes.length, 1);
 
         const questionKeys = engine.questions.map((question) => question.key);
         answers.forEach((event, index) => {
-            assert.equal(event.params.quiz_step, index + 1);
-            assert.equal(event.params.quiz_question, questionKeys[index]);
-            assert.equal(typeof event.params.quiz_answer, 'string');
-            assert.equal(typeof event.params.quiz_answer_label, 'string');
-            assert.equal(typeof event.params.answer_time_sec, 'number');
+            assert.equal(event.params.etapa_do_quiz, index + 1);
+            assert.equal(event.params.pergunta_do_quiz, questionKeys[index]);
+            assert.equal(typeof event.params.valor_da_resposta, 'string');
+            assert.equal(typeof event.params.rotulo_da_resposta, 'string');
+            assert.equal(typeof event.params.tempo_de_resposta_seg, 'number');
         });
 
         const complete = completes[0].params;
-        assert.equal(typeof complete.recommended_plan, 'string');
-        assert.equal(typeof complete.affinity_index, 'number');
-        assert.equal(complete.score_semantics, 'indice_afinidade_estimado');
-        assert.equal(complete.catalog_version, engine.CATALOG_VERSION);
-        assert.equal(typeof complete.total_time_sec, 'number');
-        assert.equal(complete.answer_gamesPerYear, '15');
-        assert.equal(complete.answer_gamesHistory, 'unknown');
-        assert.equal(complete.answer_wantsGuaranteedTicket, 'true');
-        // QUIZ-014: rules_version comparada com o motor vigente, sem copiar o
+        assert.equal(typeof complete.plano_recomendado, 'string');
+        assert.equal(typeof complete.indice_de_afinidade, 'number');
+        assert.equal(complete.semantica_do_score, 'indice_afinidade_estimado');
+        assert.equal(complete.versao_do_catalogo, engine.CATALOG_VERSION);
+        assert.equal(typeof complete.tempo_total_seg, 'number');
+        assert.equal(complete.resposta_jogos_por_ano, '15');
+        assert.equal(complete.resposta_historico_de_jogos, 'unknown');
+        assert.equal(complete.resposta_quer_ingresso_garantido, 'true');
+        // QUIZ-014: versao_das_regras comparada com o motor vigente, sem copiar o
         // valor literal da versão; a página e o módulo testado coincidem.
-        assert.equal(complete.rules_version, await evaluate(() => window.QuizEngine.RULES_VERSION),
-            'rules_version deve corresponder ao motor vigente embutido na página');
-        assert.equal(complete.rules_version, engine.RULES_VERSION,
+        assert.equal(complete.versao_das_regras, await evaluate(() => window.QuizEngine.RULES_VERSION),
+            'versao_das_regras deve corresponder ao motor vigente embutido na página');
+        assert.equal(complete.versao_das_regras, engine.RULES_VERSION,
             'motor da página e módulo testado devem coincidir');
         // GA4 aceita até 25 parâmetros por evento; o contrato atual usa no
-        // máximo 20 (campos principais + answer_*).
-        assert.ok(Object.keys(complete).length <= 20, `contrato de quiz_complete excedeu 20 parâmetros: ${Object.keys(complete).length}`);
+        // máximo 20 (campos principais + resposta_*).
+        assert.ok(Object.keys(complete).length <= 20, `contrato de quiz_concluido excedeu 20 parâmetros: ${Object.keys(complete).length}`);
 
         assert.match(await text('#scoreExplainer'), /esta sugestão/i);
         assert.doesNotMatch(await text('#scoreExplainer'), /Catálogo \d{4}|índice de 0 a 100/i);
         assert.match(await text('#assumptionNote'), /R\$\s*150/);
         assert.match(await text('#assumptionNote'), /Kids depende de aprovação/);
         assert.match(await text('#assumptionNote'), /mediante disponibilidade e aquisição do ingresso do titular/);
-        assert.match(await text('#resultSummary'), /Afinidade estimada de .+ de 100/);
-        assert.ok((await text('#resultSummary')).includes(Number(complete.affinity_index).toLocaleString('pt-BR', { maximumFractionDigits: 1 })));
+        assert.match(await text('#resultSummary'), /é o plano indicado para você/);
+        assert.ok((await text('#resultSummary')).includes(complete.plano_recomendado));
         assert.match(await text('#resultAdhesion'), /Taxa única de adesão|Sem taxa de adesão/);
         assert.equal(await evaluate(() => document.querySelectorAll('.plan-cost').length), 0);
 
@@ -572,11 +680,11 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         await click('#subscribeButton');
         await waitUntil(() => page.checkoutAttempts.length === 1);
 
-        const subscribe = await getEvents('quiz_subscribe_click');
+        const subscribe = await getEvents('clique_de_assinatura');
         assert.equal(subscribe.length, 1);
-        assert.equal(subscribe[0].params.cta_location, 'resultado');
-        assert.equal(subscribe[0].params.plan, cta.plano);
-        assert.equal(subscribe[0].params.clicked_recommended, 'true');
+        assert.equal(subscribe[0].params.local_do_cta, 'resultado');
+        assert.equal(subscribe[0].params.plano, cta.plano);
+        assert.equal(subscribe[0].params.clicou_no_recomendado, 'true');
         assert.equal(page.checkoutAttempts[0], cta.href, 'a navegação interceptada é o destino do link');
         assert.deepEqual(await page.evaluate('window.__opened || []'), [], 'CTA não pode usar window.open');
     });
@@ -597,18 +705,18 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         await runQuiz(NORMAL_ANSWERS);
         await waitResults();
 
-        assert.equal((await getEvents('quiz_start')).length, 2);
-        assert.equal((await getEvents('quiz_answer')).length, 24);
-        assert.equal((await getEvents('quiz_complete')).length, 2);
+        assert.equal((await getEvents('inicio_do_quiz')).length, 2);
+        assert.equal((await getEvents('resposta_do_quiz')).length, 24);
+        assert.equal((await getEvents('quiz_concluido')).length, 2);
 
         // QUIZ-014: cada nova conclusão é válida e carrega a versão vigente do
         // motor, sem duplicidade por renderização ou clique repetido.
         const motor = await evaluate(() => window.QuizEngine.RULES_VERSION);
-        const conclusoes = await getEvents('quiz_complete');
+        const conclusoes = await getEvents('quiz_concluido');
         conclusoes.forEach((evento, index) => {
-            assert.equal(evento.params.rules_version, motor, `conclusão ${index + 1} deve usar o motor vigente`);
-            assert.equal(typeof evento.params.recommended_plan, 'string', `conclusão ${index + 1} recomenda um plano`);
-            assert.equal(typeof evento.params.affinity_index, 'number', `conclusão ${index + 1} tem afinidade numérica`);
+            assert.equal(evento.params.versao_das_regras, motor, `conclusão ${index + 1} deve usar o motor vigente`);
+            assert.equal(typeof evento.params.plano_recomendado, 'string', `conclusão ${index + 1} recomenda um plano`);
+            assert.equal(typeof evento.params.indice_de_afinidade, 'number', `conclusão ${index + 1} tem afinidade numérica`);
         });
     });
 
@@ -618,10 +726,11 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         await runQuiz(BUDGET_PURPLE_ANSWERS);
         await waitResults();
 
-        assert.match(await evaluate(() => document.querySelector('#resultLogo').alt), /Meu Cruzeiro/);
-        assert.match(await text('#resultPrice'), /R\$\s*12,00.*mês/);
+        assert.match(await evaluate(() => document.querySelector('#resultLogo').alt), /Time do Povo/);
+        assert.match(await text('#resultPrice'), /R\$\s*40,00.*mês/);
         assert.match(await text('#resultContract'), /Valor mensal de referência/);
-        assert.match(await text('#results'), /ingresso gratuito por temporada/i);
+        assert.match(await text('#resultReasons'), /ingresso popular/i);
+        assert.match(await text('#scoreExplainer'), /menor preço não aumenta a afinidade/i);
         assert.match(await text('#resultAdhesion'), /Taxa única de adesão|Sem taxa de adesão/);
         assert.doesNotMatch(await text('#results'), /Custo de uso estimado|primeiro mês|custo total|total anual|\d+x\s*R\$/i);
         assert.match(await text('.sector-warning'), /Atenção ao setor/);
@@ -642,10 +751,10 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
             await applyAnswer({ type: 'option', index });
             await click('#nextButton');
             await waitStep(6);
-            const event = (await getEvents('quiz_answer')).at(-1);
-            assert.equal(event.params.quiz_question, 'kidsCount');
-            assert.equal(event.params.quiz_answer, String(index));
-            assert.equal(event.params.quiz_answer_label, index ? 'Sim' : 'Não');
+            const event = (await getEvents('resposta_do_quiz')).at(-1);
+            assert.equal(event.params.pergunta_do_quiz, 'kidsCount');
+            assert.equal(event.params.valor_da_resposta, String(index));
+            assert.equal(event.params.rotulo_da_resposta, index ? 'Sim' : 'Não');
             await click('#backButton');
             await waitStep(5);
             assert.equal(await evaluate(() => document.querySelector('.option.selected').dataset.optionIndex), String(index));
@@ -669,10 +778,26 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         });
         assert.match(maxCard, /R\$\s*200,00 \/ mês/);
         assert.match(maxCard, /adesão de\s*R\$\s*30(?:,00)?/i);
-        assert.match(maxCard, /Kids:\s*R\$\s*30,00\/mês por criança/);
-        assert.match(maxCard, /R\$ 150 por R\$ 52,50/);
+        assert.match(maxCard, /Kids opcional:\s*R\$\s*30,00\/mês por criança/);
+        assert.match(maxCard, /Ex\.: de R\$ 150 por R\$ 52,50 cada/);
         assert.doesNotMatch(maxCard, /Custo de uso|R\$\s*305|R\$\s*335|primeiro mês/i);
         assert.equal(await evaluate(() => document.querySelectorAll('.plan-cost').length), 0);
+    });
+
+    it('torcedor sem estádio nem compras recebe indicação única de Meu Cruzeiro', async () => {
+        await setup();
+        await startQuiz();
+        await runQuiz([{ type: 'range', value: 0 }, { type: 'unknown' },
+            ...[0, 1, 0, 1, 1, 2, 2, 2, 3, 2].map((index) => ({ type: 'option', index }))]);
+        await waitResults();
+        assert.match(await text('#resultSummary'), /Meu Cruzeiro é o plano indicado.*apoiar o clube/);
+        assert.equal(await text('#subscribeButton'), 'Quero ser sócio');
+        assert.doesNotMatch(await text('#results'), /equivalentes|Também recomendado|quase empatado|pouco peso/);
+        assert.equal(await evaluate(() => document.querySelectorAll('.sector-warning').length), 0);
+        await click('#compareButton');
+        assert.deepEqual(await evaluate(() => [...document.querySelectorAll('.comparison-table .plan-badge')]
+            .filter((el) => el.textContent === 'Recomendado').map((el) => el.closest('th').querySelector('.plan-name').textContent)), ['Meu Cruzeiro']);
+        await click('#modalClose');
     });
 
     it('comparativo apresenta a matriz oficial, referência mensal e checkout correto', async () => {
@@ -708,8 +833,8 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         assert.match(columns['Time do Povo']['Prioridade / garantia'], /Prioridade 4/);
         assert.match(columns['Time do Povo']['Conteúdo e votação'], /✓/);
         assert.match(columns['Time do Povo']['Benefício de ingresso'], /popular/i);
-        assert.match(columns['Time do Povo']['Contratação'], /Valor mensal de referência/i);
         for (const column of Object.values(columns)) {
+            assert.equal(Object.hasOwn(column, 'Contratação'), false);
             assert.match(column['Preço'], /R\$\s*[\d,.]+ \/ mês/);
             assert.doesNotMatch(Object.values(column).join(' '), /total anual|\d+x\s*R\$/i);
         }
@@ -735,6 +860,109 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         });
         assert.equal(await evaluate(() => document.querySelector('#comparisonModal').classList.contains('is-open')), false);
         assert.equal(await evaluate(() => document.body.style.overflow), '');
+    });
+
+    it('benefícios do comparativo ficam resumidos e os tooltips abrem por foco e mouse', async () => {
+        await openPage('?preview');
+        await waitResults();
+        await click('#compareButton');
+        await page.waitFor('document.querySelectorAll(".benefit-tooltip-trigger").length === 4');
+
+        const row = await evaluate(() => {
+            const row = [...document.querySelectorAll('.comparison-table tbody tr')]
+                .find(row => row.firstElementChild.textContent === 'Benefício de ingresso');
+            return {
+                text: row.innerText,
+                summaries: [...row.querySelectorAll('.benefit-tooltip-trigger > span:first-child')]
+                    .map(summary => summary.textContent),
+                open: row.querySelectorAll(':popover-open').length
+            };
+        });
+        assert.deepEqual(row.summaries, [
+            '1 ingresso grátis/temporada', '1 ingresso popular/jogo',
+            '50% a 60% por nível', '65% em até 2 ingressos/jogo'
+        ]);
+        assert.equal(row.open, 0);
+        assert.doesNotMatch(row.text, /Setores:|Exemplo|disponibilidade|jogos consecutivos/i);
+
+        await page.send('Page.bringToFront');
+        await evaluate(() => document.querySelector('[aria-describedby="ticket-benefit-cabuloso"]').focus());
+        await page.waitFor('document.querySelector("#ticket-benefit-cabuloso").matches(":popover-open")');
+        const details = await evaluate(() => {
+            const tooltip = document.querySelector('#ticket-benefit-cabuloso');
+            const trigger = document.querySelector('[aria-describedby="ticket-benefit-cabuloso"]');
+            return { text: tooltip.innerText, role: tooltip.getAttribute('role'),
+                expanded: trigger.getAttribute('aria-expanded'), outline: getComputedStyle(trigger).outlineWidth };
+        });
+        assert.equal(details.role, 'tooltip');
+        assert.equal(details.expanded, 'true');
+        assert.notEqual(details.outline, '0px');
+        assert.match(details.text, /Nível 1: 50%; Nível 2: 55%; Nível 3: 60%/);
+        assert.match(details.text, /jogos consecutivos/);
+        assert.match(details.text, /Exemplo com 60%: de R\$\s*150,00 por R\$\s*60,00/);
+        assert.match(details.text, /disponibilidade.*Setores:.*Roxo Superior/s);
+
+        await dispatchKey('Escape', 'Escape', 27);
+        assert.equal(await evaluate(() => document.querySelector('#ticket-benefit-cabuloso').matches(':popover-open')), false);
+        assert.equal(await evaluate(() => document.querySelector('#comparisonModal').classList.contains('is-open')), true);
+
+        const point = await evaluate(() => {
+            document.querySelector('#modalClose').focus();
+            const trigger = document.querySelector('[aria-describedby="ticket-benefit-meu-cruzeiro"]');
+            trigger.scrollIntoView({ block: 'center', inline: 'center', behavior: 'instant' });
+            const rect = trigger.getBoundingClientRect();
+            return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 };
+        });
+        await page.send('Input.dispatchMouseEvent', { type: 'mouseMoved', ...point });
+        await page.waitFor('document.querySelector("#ticket-benefit-meu-cruzeiro").matches(":popover-open")');
+        assert.match(await text('#ticket-benefit-meu-cruzeiro'), /gratuito por temporada.*mediante disponibilidade/s);
+        await dispatchKey('Escape', 'Escape', 27);
+        assert.equal(await evaluate(() => document.querySelectorAll('.benefit-tooltip-content:popover-open').length), 0);
+    });
+
+    it('tooltips dos benefícios funcionam por toque e cabem na tela do celular', async () => {
+        await page.send('Emulation.setTouchEmulationEnabled', { enabled: true });
+        try {
+            for (const width of [320, 390]) {
+                await page.send('Emulation.setDeviceMetricsOverride', { width, height: 844, deviceScaleFactor: 1, mobile: true });
+                await openPage('?preview');
+                await waitResults();
+                await click('#compareButton');
+                await page.waitFor('Boolean(document.querySelector(".benefit-tooltip-trigger"))');
+                await page.waitFor("getComputedStyle(document.querySelector('.modal-content')).transform === 'matrix(1, 0, 0, 1, 0, 0)'");
+                const point = await evaluate(() => {
+                    const trigger = document.querySelector('[aria-describedby="ticket-benefit-cabuloso"]');
+                    trigger.scrollIntoView({ block: 'center', inline: 'center', behavior: 'instant' });
+                    const rect = trigger.getBoundingClientRect();
+                    return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2, height: rect.height };
+                });
+                assert.ok(point.height >= 44, 'o benefício precisa de uma área de toque acessível');
+                const touch = { x: point.x, y: point.y };
+                await page.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [touch] });
+                await page.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+                await page.waitFor('document.querySelector("#ticket-benefit-cabuloso").matches(":popover-open")');
+                const geometry = await evaluate(() => {
+                    const rect = document.querySelector('#ticket-benefit-cabuloso').getBoundingClientRect();
+                    return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom,
+                        height: innerHeight, overflow: document.documentElement.scrollWidth > innerWidth + 1 };
+                });
+                assert.ok(geometry.left >= 0 && geometry.right <= width, `${width}px: tooltip recortado nas laterais`);
+                assert.ok(geometry.top >= 0 && geometry.bottom <= geometry.height, `${width}px: tooltip recortado na vertical`);
+                assert.equal(geometry.overflow, false);
+
+                await page.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [touch] });
+                await page.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+                await page.waitFor('!document.querySelector("#ticket-benefit-cabuloso").matches(":popover-open")');
+                await click('[aria-describedby="ticket-benefit-cabuloso"]');
+                await page.waitFor('document.querySelector("#ticket-benefit-cabuloso").matches(":popover-open")');
+                await click('#modalClose');
+                await page.waitFor('document.querySelectorAll(".benefit-tooltip-content:popover-open").length === 0');
+                assert.equal(await evaluate(() => document.querySelector('#comparisonModal').classList.contains('is-open')), false);
+            }
+        } finally {
+            await page.send('Emulation.setTouchEmulationEnabled', { enabled: false });
+            await page.send('Emulation.clearDeviceMetricsOverride');
+        }
     });
 
     it('teclado seleciona uma opção e libera Continuar', async () => {
@@ -932,7 +1160,7 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
         assert.match(await text('#rangeOutput'), /^17\s*jogos$/i);
         await click('#nextButton');
         await waitStep(3);
-        assert.equal((await getEvents('quiz_answer')).at(-1).params.quiz_answer, '17');
+        assert.equal((await getEvents('resposta_do_quiz')).at(-1).params.valor_da_resposta, '17');
     });
 
     it('comparativo mantém preços destacados e avisos discretos acima do orçamento', async () => {
@@ -950,14 +1178,15 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
                 prices: price.querySelectorAll('strong').length,
                 totals: price.querySelectorAll('br + .comparison-detail').length,
                 ticketChecks: ticket.querySelectorAll('.comparison-check').length,
-                sectorBreaks: ticket.querySelectorAll('.comparison-detail br').length,
+                tooltipSectors: [...ticket.querySelectorAll('[role="tooltip"]')]
+                    .filter(tooltip => tooltip.textContent.includes('Setores:')).length,
                 muted: [...document.querySelectorAll('.plan-badge-muted')].map((badge) => badge.textContent.trim())
             };
         });
         assert.equal(cells.prices, 4);
         assert.equal(cells.totals, 4);
         assert.equal(cells.ticketChecks, 4);
-        assert.equal(cells.sectorBreaks, 4);
+        assert.equal(cells.tooltipSectors, 4);
         assert.deepEqual(cells.muted, ['Acima do orçamento', 'Acima do orçamento']);
     });
 
@@ -1043,7 +1272,7 @@ describe('Quiz Sócio — fluxo de navegador', { concurrency: 1 }, () => {
  * de rede para destinos de analytics é interceptada antes da transmissão
  * (tests/cdp.js) e registrada como tentativa, não como ausência.
  */
-describe('Quiz Sócio — isolamento da coleta GA4', { concurrency: 1 }, () => {
+describe('SEU PLANO IDEAL — isolamento da coleta GA4', { concurrency: 1 }, () => {
     let httpsServer;
 
     function ga4Attempts() {
@@ -1155,9 +1384,9 @@ describe('Quiz Sócio — isolamento da coleta GA4', { concurrency: 1 }, () => {
         await runQuiz(NORMAL_ANSWERS);
         await waitResults();
 
-        assert.equal((await getEvents('quiz_start')).length, 1);
-        assert.equal((await getEvents('quiz_answer')).length, 12);
-        assert.equal((await getEvents('quiz_complete')).length, 1);
+        assert.equal((await getEvents('inicio_do_quiz')).length, 1);
+        assert.equal((await getEvents('resposta_do_quiz')).length, 12);
+        assert.equal((await getEvents('quiz_concluido')).length, 1);
         assert.deepEqual(page.analyticsAttempts, [], 'nenhuma nova tentativa de coleta sai durante o quiz (gtag é substitudo)');
     });
 
@@ -1211,7 +1440,7 @@ describe('Quiz Sócio — isolamento da coleta GA4', { concurrency: 1 }, () => {
         assert.equal(estado.coletaHabilitada, false);
         assert.equal(estado.scriptsTag, 0);
         assert.deepEqual(estado.comandos, []);
-        assert.equal((await getEvents('quiz_start')).length, 0, 'arquivo local não emite eventos; a aplicação compilada requer HTTP');
+        assert.equal((await getEvents('inicio_do_quiz')).length, 0, 'arquivo local não emite eventos; a aplicação compilada requer HTTP');
     });
 
     it('a lista de ambientes habilitados é explícita na configuração compartilhada', () => {
@@ -1226,7 +1455,7 @@ describe('Quiz Sócio — isolamento da coleta GA4', { concurrency: 1 }, () => {
  * abrem o resultado fictício; parâmetros que apenas contêm "preview" no valor
  * (como utm_campaign=preview_newsletter) abrem o quiz normalmente.
  */
-describe('Quiz Sócio — reconhecimento do preview', { concurrency: 1 }, () => {
+describe('SEU PLANO IDEAL — reconhecimento do preview', { concurrency: 1 }, () => {
     before(async () => {
         server = await startServer(ROOT);
         page = await launchChrome({ chromePath: CHROME_PATH });
@@ -1284,9 +1513,9 @@ describe('Quiz Sócio — reconhecimento do preview', { concurrency: 1 }, () => 
         await waitResults();
 
         assert.equal(await evaluate(() => window.isPreview), false);
-        assert.equal((await getEvents('quiz_start')).length, 1);
-        assert.equal((await getEvents('quiz_answer')).length, 12);
-        assert.equal((await getEvents('quiz_complete')).length, 1);
+        assert.equal((await getEvents('inicio_do_quiz')).length, 1);
+        assert.equal((await getEvents('resposta_do_quiz')).length, 12);
+        assert.equal((await getEvents('quiz_concluido')).length, 1);
     });
 });
 
@@ -1297,7 +1526,7 @@ describe('Quiz Sócio — reconhecimento do preview', { concurrency: 1 }, () => 
  * eventos registra a origem do clique. Contrato de eventos usa habilitação
  * artificial (setup()); nada sai do navegador.
  */
-describe('Quiz Sócio — CTAs de contratação', { concurrency: 1 }, () => {
+describe('SEU PLANO IDEAL — CTAs de contratação', { concurrency: 1 }, () => {
     before(async () => {
         server = await startServer(ROOT);
         page = await launchChrome({ chromePath: CHROME_PATH });
@@ -1350,8 +1579,8 @@ describe('Quiz Sócio — CTAs de contratação', { concurrency: 1 }, () => {
             await dispatchEnter();
             await waitUntil(() => page.checkoutAttempts.length === 1);
             assert.equal(page.checkoutAttempts[0], cta.href);
-            assert.equal((await getEvents('quiz_subscribe_click')).length, 1);
-            assert.equal((await getEvents('quiz_subscribe_click'))[0].params.cta_location, 'resultado');
+            assert.equal((await getEvents('clique_de_assinatura')).length, 1);
+            assert.equal((await getEvents('clique_de_assinatura'))[0].params.local_do_cta, 'resultado');
         } finally {
             await page.send('Emulation.clearDeviceMetricsOverride');
             page.checkoutAttempts = [];
@@ -1377,9 +1606,9 @@ describe('Quiz Sócio — CTAs de contratação', { concurrency: 1 }, () => {
         await waitUntil(() => page.checkoutAttempts.length === 1);
 
         assert.equal(page.checkoutAttempts[0], destino.href, 'navegação deve ser o link do plano clicado');
-        const evento = (await getEvents('quiz_subscribe_click'))[0];
-        assert.equal(evento.params.cta_location, 'lista');
-        assert.equal(evento.params.plan, destino.plano);
+        const evento = (await getEvents('clique_de_assinatura'))[0];
+        assert.equal(evento.params.local_do_cta, 'lista');
+        assert.equal(evento.params.plano, destino.plano);
     });
 
     it('CTA do comparativo navega com origem comparativo', async () => {
@@ -1399,9 +1628,9 @@ describe('Quiz Sócio — CTAs de contratação', { concurrency: 1 }, () => {
         await waitUntil(() => page.checkoutAttempts.length === 1);
 
         assert.equal(page.checkoutAttempts[0], destino.href, 'navegação deve ser o link do plano do comparativo');
-        const evento = (await getEvents('quiz_subscribe_click'))[0];
-        assert.equal(evento.params.cta_location, 'comparativo');
-        assert.equal(evento.params.plan, destino.plano);
+        const evento = (await getEvents('clique_de_assinatura'))[0];
+        assert.equal(evento.params.local_do_cta, 'comparativo');
+        assert.equal(evento.params.plano, destino.plano);
     });
 
     it('sem plano elegível, o estado indisponível não navega nem gera evento', async () => {
@@ -1422,7 +1651,7 @@ describe('Quiz Sócio — CTAs de contratação', { concurrency: 1 }, () => {
         await click('#subscribeButton');
 
         assert.deepEqual(page.checkoutAttempts, [], 'estado indisponível não navega');
-        assert.deepEqual(await getEvents('quiz_subscribe_click'), [], 'estado indisponível não gera evento de contratação');
+        assert.deepEqual(await getEvents('clique_de_assinatura'), [], 'estado indisponível não gera evento de contratação');
         assert.equal(await page.evaluate('location.pathname'), '/index.html');
         assert.equal(await page.evaluate('document.querySelector("#subscribeButton").textContent.trim()'), 'Sem plano no orçamento');
     });

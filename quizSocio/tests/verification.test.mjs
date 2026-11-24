@@ -1,11 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, rm, readdir, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, rm, readdir, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { inspectPage, verifyExternal } from '../scripts/verify-external.mjs';
 import { prepareRelease } from '../scripts/prepare-release.mjs';
 import engine from '../quiz-engine.js';
+import { createHash } from 'node:crypto';
+import { verifyPublishedBuild } from '../scripts/verify-published-build.mjs';
 
 test('catálogo atende à referência documental oficial sem alegar validação independente do ranking', async () => {
     const reference = JSON.parse(await readFile(new URL('./fixtures/official-commercial-reference.json', import.meta.url), 'utf8'));
@@ -82,9 +84,14 @@ test('candidato de entrega contém somente arquivos públicos e recusa sobrescri
 });
 
 
-test('preparo de entrega bloqueia regressões sem aceite explícito', async () => {
+test('preparo de entrega sem perdas dispensa aceite de regressão', async () => {
     const output = await mkdtemp(path.join(os.tmpdir(), 'quiz-release-gated-'));
-    try { await assert.rejects(prepareRelease(output), /aceite explícito/); }
+    try {
+        const manifest = await prepareRelease(output);
+        assert.equal(manifest.releaseApproved, true);
+        assert.equal(manifest.diagnostic, false);
+        assert.deepEqual(manifest.quality.regressionIds, []);
+    }
     finally { await rm(output, { recursive: true, force: true }); }
 });
 
@@ -102,4 +109,74 @@ test('servidor de teste respeita a raiz solicitada mesmo com dist existente', as
         if (server) await server.close();
         await rm(directory, { recursive: true, force: true });
     }
+});
+
+async function compiledPackage() {
+    const directory = await mkdtemp(path.join(os.tmpdir(), 'quiz-published-build-'));
+    const versions = { catalogVersion: 'test-catalog', rulesVersion: 'test-rules', ga4Version: 'test-ga4' };
+    const hashes = { aggregate: 'test-configuration' };
+    const sources = {
+        'index.html': '<script type="module" src="/assets/app.js"></script>',
+        'build-manifest.json': JSON.stringify({ versions, hashes }),
+        'assets/app.js': 'console.log("compiled quiz");'
+    };
+    const manifest = { ...versions, configurationHashes: hashes, commit: 'test-commit', workingTreeHasChanges: false,
+        releaseApproved: true, diagnostic: false, files: [] };
+    for (const [name, content] of Object.entries(sources)) {
+        await mkdir(path.dirname(path.join(directory, 'public', name)), { recursive: true });
+        await writeFile(path.join(directory, 'public', name), content);
+        manifest.files.push({ path: name, bytes: Buffer.byteLength(content), sha256: createHash('sha256').update(content).digest('hex') });
+    }
+    await writeFile(path.join(directory, 'manifest.json'), JSON.stringify(manifest));
+    return { directory, sources, manifest };
+}
+
+test('publicação só coincide quando HTML, manifesto e bundle têm os hashes do pacote', async () => {
+    const fixture = await compiledPackage();
+    try {
+        const fetchImpl = async (url) => new Response(fixture.sources[new URL(url).pathname.slice(1) || 'index.html']);
+        const report = await verifyPublishedBuild({ packageDirectory: fixture.directory, publicUrl: 'https://quiz.example/', fetchImpl });
+        assert.equal(report.matchesPreparedBuild, true);
+        assert.deepEqual(report.publishedVersions, report.expectedVersions);
+        assert.equal(report.files.length, 3);
+        assert.equal(report.runtimeContractVerified, false);
+        assert.equal(report.ga4IngestionConfirmed, false);
+        fixture.sources['assets/app.js'] += ' /* bundle diferente */';
+        const changed = await verifyPublishedBuild({ packageDirectory: fixture.directory, publicUrl: 'https://quiz.example/', fetchImpl });
+        assert.equal(changed.matchesPreparedBuild, false);
+        assert.equal(changed.files.find((file) => file.path === 'assets/app.js').matches, false);
+    } finally { await rm(fixture.directory, { recursive: true, force: true }); }
+});
+
+test('legado e manifesto ausente não são aprovados por HTML 200 ou presença da tag', async () => {
+    const fixture = await compiledPackage();
+    try {
+        const calls = [];
+        const fetchImpl = async (url) => {
+            calls.push(url);
+            return new URL(url).pathname === '/'
+                ? new Response('<script src="./quiz-engine.js"></script>G-EF75QCTCTV', { status: 200 })
+                : new Response('Not found', { status: 404 });
+        };
+        const report = await verifyPublishedBuild({ packageDirectory: fixture.directory, publicUrl: 'https://quiz.example/', fetchImpl });
+        assert.equal(report.matchesPreparedBuild, false);
+        assert.equal(report.legacyScriptDetected, true);
+        assert.equal(report.publishedVersions, null);
+        assert.equal(calls.length, 2);
+        assert.deepEqual(report.skippedFiles, ['assets/app.js']);
+    } finally { await rm(fixture.directory, { recursive: true, force: true }); }
+});
+
+test('verificação recusa pacote local adulterado e caminhos fora da pasta pública antes da rede', async () => {
+    const fixture = await compiledPackage();
+    let calls = 0;
+    const options = { packageDirectory: fixture.directory, fetchImpl: async () => { calls++; return new Response(''); } };
+    try {
+        await writeFile(path.join(fixture.directory, 'public/assets/app.js'), 'alterado');
+        await assert.rejects(verifyPublishedBuild(options), /Pacote local alterado/);
+        fixture.manifest.files[0].path = '../.env';
+        await writeFile(path.join(fixture.directory, 'manifest.json'), JSON.stringify(fixture.manifest));
+        await assert.rejects(verifyPublishedBuild(options), /Manifesto inválido/);
+        assert.equal(calls, 0);
+    } finally { await rm(fixture.directory, { recursive: true, force: true }); }
 });

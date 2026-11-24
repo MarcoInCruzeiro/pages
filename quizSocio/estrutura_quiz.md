@@ -1,8 +1,10 @@
 # Estrutura do Quiz Sócio 5 Estrelas
 
-Decisão vigente sobre valores: [ADR-0001](docs/adr/0001-valores-e-taxas-separados.md).
+Decisões vigentes: [ADR-0001 — apresentação separada dos valores](docs/adr/0001-valores-e-taxas-separados.md) e [ADR-0003 — preço somente como filtro de orçamento](docs/adr/0003-orcamento-sem-prioridade-de-preco.md).
 
-Documento de apoio do quiz publicado em [`index.html`](index.html). O catálogo comercial tem uma fonte própria, [`catalogo-comercial.md`](catalogo-comercial.md); este documento descreve como perguntas, perfil, ranking e interface usam esses dados.
+Regra de recomendação determinada pelo usuário em 03/11/2026: o preço serve somente para filtrar o orçamento; não aumenta a afinidade nem desempata planos. Essa regra substitui o componente financeiro da revisão anterior. [Correção e evidências](docs/correcao-ranking-sem-preco-2026-11-03.md).
+
+Documento de apoio da implementação Vue local. [`index.html`](index.html) é a entrada do Vite; a jornada está em [`src/App.vue`](src/App.vue). O catálogo comercial tem uma fonte própria, [`catalogo-comercial.md`](catalogo-comercial.md); este documento descreve como perguntas, perfil, ranking e interface usam esses dados. A entrega pública da revisão Vue continua no QUIZ-018.
 
 ## 0. Visão geral
 
@@ -10,11 +12,12 @@ Documento de apoio do quiz publicado em [`index.html`](index.html). O catálogo 
 |---|---|---|
 | Catálogo e perguntas | [`config/`](config) | JSONs validados; identidade em `config/revision.json` |
 | Validação e ranking | [`adapter.js`](config/adapter.js) e [`engine-core.mjs`](src/engine-core.mjs) | Funções puras; `quiz-engine.js` é a fachada Node |
-| Interface | [`index.html`](index.html) | Renderização, navegação, confirmação de conflitos, analytics e CTAs |
+| Interface | [`App.vue`](src/App.vue), componentes e composables em `src/` | Renderização, navegação, confirmação de conflitos e CTAs |
+| Inicialização e analytics | [`main.js`](src/main.js) e [`analytics.mjs`](src/analytics.mjs) | Montagem Vue, decisão de coleta e despacho de eventos |
 | Fonte comercial | [`catalogo-comercial.md`](catalogo-comercial.md) | Condições oficiais, divergências, pendências e data de consulta |
 | Testes | [`tests/`](tests/) | Motor, referência de qualidade e fluxo real de navegador |
 
-Fonte oficial consultada em 26/10/2026: https://socio.cruzeiro.com.br/pt-BR/paginas/termo-de-uso (publicação de 11/09/2026). O motor expõe `CATALOG_VERSION = 2026-09-11` e `RULES_VERSION = 2026-10-26.2` (regras de perfil, custo e ranking).
+Fonte oficial consultada em 26/10/2026: https://socio.cruzeiro.com.br/pt-BR/paginas/termo-de-uso (publicação de 11/09/2026). Identidade vigente em `config/revision.json`: catálogo `2026-10-28.2` e regras `2026-11-03.2`.
 
 ## 1. Planos — condições confirmadas
 
@@ -38,16 +41,16 @@ Regras que a interface deve preservar:
 
 | # | Chave | Tipo | Valores | Uso no perfil |
 |---|---|---|---|---|
-| 1 | `gamesPerYear` | Range 0–30 | 0 a 30 | Intenção anual de jogos; volume de uso e custo |
+| 1 | `gamesPerYear` | Range 0–30 | 0 a 30 | Intenção anual de jogos; necessidade presencial |
 | 2 | `gamesHistory` | Range 0–30 ou “não sei” | 0 a 30, `unknown` | Histórico de 15 meses; define nível do Cabuloso |
 | 3 | `wantsGuaranteedTicket` | Opção | `never`, `true`, `false` | Presença declarada; detecta conflito com jogos |
 | 4 | `buysTwoTickets` | Opção | `true`, `false` | Necessidade de acompanhante adulto |
 | 5 | `kidsCount` | Opção | 0 (Não), 1 (Sim) | Interesse em incluir uma criança no plano |
 | 6 | `needsPriority` | Opção | `true`, `false` | Importância de prioridade na compra |
 | 7 | `wantsParticipation` | Opção | `true`, `false` | Interesse em experiências e conteúdo |
-| 8 | `wantsStoreDiscount` | Opção | `true`, `false` | Interesse em produtos oficiais |
+| 8 | `wantsStoreDiscount` | Opção | `true` (sempre compro), `sometimes` (compro às vezes), `false` (nunca compro) | Interesse em produtos oficiais |
 | 9 | `gameFrequency` | Opção | `always`, `frequent`, `occasional` | Frequência declarada; detecta conflito com jogos |
-| 10 | `digitalExperience` | Opção | `true`, `false` | Interesse em conteúdo digital |
+| 10 | `digitalExperience` | Opção | `true` (com frequência), `sometimes` (às vezes), `false` (nunca) | Interesse em conteúdo digital |
 | 11 | `budget` | Opção | 40, 100, 200, 400 | Teto mensal da assinatura, não do uso |
 | 12 | `preferredSector` | Opção | `yellow-orange`, `blue`, `purple` | Preferência flexível de setor |
 
@@ -62,22 +65,20 @@ Combinações incompatíveis não são corrigidas em silêncio. A interface most
 - 0 jogo por ano + “fico dividido entre estádio e TV”.
 - Mais de 0 jogo por ano + “não frequento o estádio”.
 
-Ao confirmar, as duas respostas permanecem registradas. A intenção anual define o volume de jogos; a declaração de não frequentar o estádio zera a necessidade presencial. Revisar volta à primeira pergunta envolvida.
+Ao confirmar, as duas respostas permanecem registradas. A intenção anual define o volume de jogos; a declaração de não frequentar o estádio zera a necessidade presencial. Revisar percorre somente as respostas divergentes da maioria entre intenção anual de jogos, declaração de presença e frequência. Dois sinais concordantes definem a maioria; acompanhar mais de casa é neutro, pois permite presença ocasional. Sem maioria clara, a revisão inclui apenas as perguntas que formam o conflito. As demais respostas são preservadas, sem alteração automática. O quiz confere os conflitos após cada resposta revisada e apresenta o resultado assim que forem resolvidos; se persistirem ao final da revisão, solicita nova confirmação.
 
 ## 3. Perfil do usuário — escala 0 a 10
 
-O perfil é reconstruído a cada resposta; voltar e editar não acumula efeitos.
+O perfil é calculado a partir do conjunto de respostas ao gerar o resultado; voltar e editar não acumula efeitos.
 
 | Atributo | Cálculo |
 |---|---|
 | `frecuencia` | 0,4 × (`gamesPerYear` / 30 × 10) + 0,3 × presença (`never` 0, `true` 9, `false` 5) + 0,3 × declaração (`always` 10, `frequent` 7, `occasional` 2). É zero se `gamesPerYear = 0` ou presença `never` |
 | `prioridad` | `needsPriority = true` → 8; `false` → 2; ausente → 5 |
-| `experiencias` | `wantsParticipation = true` → 8; `false` → 1; ausente → 5; +2 se `digitalExperience = true` |
-| `descuentos` e `productos` | `wantsStoreDiscount = true` → 8; `false` → 1; ausente → 5 |
-| `importanciaPreco` | Orçamento 40 → 8; 100 → 5; 200 → 3; 400 → 1 |
+| `experiencias` | `wantsParticipation = true` → 8; `false` → 1; ausente → 5; mais `digitalExperience`: `true` +2, `sometimes` +1, `false` +0; limite 10 |
+| `descuentos` | `wantsStoreDiscount = true` → 8; `sometimes` → 4,5; `false` → 1; ausente → 5 |
 | `adultos` | 1 se `buysTwoTickets = true`; caso contrário 0 |
 | `kids` | 0 ou 1 conforme o interesse declarado; não estima a quantidade total de crianças da família |
-| `setorPreferido` | `preferredSector` |
 
 Não há inferência de frequência presencial a partir de conteúdo digital, nem de consumo de produtos a partir de frequência. Cada efeito acima tem correspondência direta no texto da pergunta.
 
@@ -109,29 +110,27 @@ Valores apresentados são formatados em reais com centavos. O índice de afinida
 
 ## 6. Ranking — média ponderada transparente
 
-Cada plano recebe sete componentes normalizados entre 0 e 1:
+Cada plano recebe seis componentes normalizados entre 0 e 1, vinculados a benefícios. O orçamento não é atributo de afinidade:
 
 | Componente | Valor |
 |---|---|
-| `ticket` | Tipo de ingresso: gratuito 0,45; popular 0,75; garantido 1; desconto 0,80 (utilidade do tipo de benefício; percentual exibido no ingresso); sem benefício 0,10. Multiplicado por 1 (setor completo), 0,75 (parcial), 0,10 (fora do setor) ou 1 (sem preferência). +0,08 se leva acompanhante e o plano oferece 2 ingressos |
+| `ticket` | Tipo de ingresso: popular 0,75; garantido 1; sem benefício 0,10; desconto 0,80 × (percentual / 0,50), limitado a 1 — 50% → 0,80; 55% → 0,88; 60% → 0,96; 65% → 1 (desde 10/11/2026; o percentual mede o tamanho do benefício, sem calcular gasto). Gratuito por temporada: 0,45 + 0,40 × min(1, ingressos por temporada / `gamesPerYear`) — 1 jogo → 0,85; 2 → 0,65; 5 → 0,53; 30 → 0,46 (desde 12/11/2026: um ingresso por temporada vale pela parcela dos jogos que cobre). Multiplicado por 1 (setor completo), 0,75 (parcial) ou 0,10 (fora do setor). +0,08 se leva acompanhante e o plano oferece 2 ingressos |
 | `priority` | Garantido → 1; caso contrário (`5 − prioridade`) / 4, limitado a 0–1 |
-| `sector` | Preferência completa → 1; parcial → 0,6; fora → 0; sem preferência → 0,7 |
+| `sector` | Preferência completa → 1; parcial → 0,6; fora → 0. A pergunta de setor é obrigatória; não há caminho "sem preferência" (removido em 10/11/2026) |
 | `discount` | Percentual da loja / 0,15, limitado a 1 |
 | `experiences` | Conteúdo e votação → 1; apenas um → 0,7; nenhum → 0,1 |
-| `family` | Sem acompanhantes nem Kids → 0,6. Com família: 0,6 × cobertura de ingressos + 0,4 × suporte a Kids |
-| `price` | Normalização do valor mensal equivalente da assinatura entre o menor e o maior dos quatro planos ativos |
+| `family` | Sem acompanhantes nem Kids → 0,6. Com família: 0,6 × cobertura de ingressos + 0,4 × suporte a Kids. Sem uso presencial a cobertura de ingressos vale 1 para todos os planos (desde 12/11/2026): dois ingressos que ninguém usa não decidem |
 
 Pesos:
 
 ```
-presenca = 0,05 + 0,95 × (frecuencia / 10)
+presenca = 0 se frecuencia = 0; caso contrário, 0,05 + 0,95 × (frecuencia / 10)
 pesoIngresso = presenca × (1 + 0,15 × prioridad / 10)
 pesoPrioridade = presenca × (0,2 + 0,8 × prioridad / 10)
-pesoSector = (0,8 com preferência; 0,1 sem) × presenca
+pesoSector = 0,8 × presenca
 pesoDesconto = 0,2 + 0,8 × descuentos / 10
 pesoExperiencia = 0,2 + 0,8 × experiencias / 10
 pesoFamilia = 0,7 com acompanhantes ou Kids; 0,05 sem
-pesoPreco = 0,8 + 0,8 × importanciaPreco / 10
 ```
 
 O índice de afinidade é a média ponderada dos componentes × 100, arredondada a uma casa. Não é probabilidade de acerto. A interface chama o número de “afinidade estimada”, explica os componentes e informa as premissas.
@@ -141,11 +140,12 @@ O índice de afinidade é a média ponderada dos componentes × 100, arredondada
 Os índices e métricas citados nesta subseção descrevem a revisão anterior de cinco planos. A avaliação vigente de quatro planos preserva expectativas e registra as mudanças separadamente; consulte a [spec](docs/spec-port-vue.md) e o [avaliador](scripts/evaluate-reference.mjs).
 
 - **Elegibilidade:** a assinatura mensal equivalente precisa caber no teto. É restrição, com tolerância zero.
-- **Preço:** o componente `price` compara apenas a assinatura mensal equivalente. Taxa de adesão, Kids e ingressos são campos separados e não compõem um total para o ranking, conforme a ADR-0001.
-- **Desconto de ingresso:** percentual e exemplo unitário permanecem no benefício. A escala de utilidade do tipo de ingresso continua em 0,80 para desconto; nenhum custo mensal de ingressos é calculado.
-- **Setor:** tem dois papéis distintos e mantidos. O multiplicador do `ticket` mede onde o benefício vale; o componente `sector` mede a preferência atendida. Sem o componente `sector`, a calibração cai para 11/12 (CAL-10). O peso do setor passou a escalar com a presença: antes, com zero jogos, a cobertura de um ingresso que não seria usado decidia o ranking (CAL-01: Cabuloso 93,1, Max 86,9, Meu Cruzeiro 66,6). Agora: Cabuloso 91,2, Meu Cruzeiro 85,2, Max 83,2; calibração mantida em 12/12.
-- **Consumo:** `descuentos` pesa apenas a loja. `productos` existe no perfil, mas não entra no ranking.
+- **Preço, regra vigente desde 03/11/2026:** não existe componente `price` nem importância de preço no perfil. A assinatura só determina elegibilidade. Alterar preços sem mudar quais planos cabem no orçamento não altera índices ou ordem. Taxa de adesão, Kids e ingressos continuam apresentados separadamente.
+- **Desconto de ingresso:** percentual e exemplo unitário permanecem no benefício. Desde 10/11/2026 a utilidade do tipo desconto cresce com o percentual do catálogo (`ticket.descontoReferencia` = 0,50 mantém 50% em 0,80); nenhum custo mensal de ingressos é calculado. Isso desfaz os empates Cabuloso/Max que eram decididos por slug quando há uso presencial.
+- **Setor:** o multiplicador do `ticket` mede onde o benefício vale; o componente `sector` mede a preferência atendida. Desde 03/11/2026, ingresso, prioridade e setor têm peso zero quando a necessidade presencial é zero, evitando que benefícios não usados decidam o resultado.
+- **Consumo:** `descuentos` pesa apenas a loja. O campo `productos` (cópia de `descuentos`) e `setorPreferido` foram removidos do perfil em 10/11/2026 porque nada os lia; o setor é lido das respostas.
 - **Frequência:** pesa ingresso e prioridade, que são benefícios diferentes; não pesa loja nem conteúdo.
+- **Volume de jogos, desde 12/11/2026:** o ingresso gratuito por temporada do Meu Cruzeiro vale pela parcela dos jogos declarados que cobre (`ticket.bonusCoberturaTemporada`). Com teto de R$ 40, um jogo por ano aponta Meu Cruzeiro; dois ou mais, Time do Povo. A capacidade de ingressos para acompanhante só distingue planos com uso presencial.
 - **Bônus de setor:** o bônus manual de 6 pontos do commit `2cecf81` foi substituído pela cobertura explícita de setores do catálogo.
 
 ### Exemplo verificado com quatro planos (`tests/engine.test.js`)
@@ -154,17 +154,19 @@ Entrada: 10 jogos por ano, histórico 10 (Cabuloso nível 2, 55%), foco nos jogo
 
 | Plano | Assinatura/mês de referência | Adesão única separada | Setor | Índice | Elegível |
 |---|---|---|---|---|---|
-| Cabuloso | R$ 100 | R$ 30 | Completo | 78,3 | Sim — vencedor |
-| Cabuloso Max | R$ 200 | R$ 30 | Completo | 59,4 | Não (R$ 200 > R$ 100) |
-| Meu Cruzeiro | R$ 12 | Sem taxa | Fora | 72,3 | Sim |
-| Time do Povo | R$ 40 | R$ 30 | Fora | 67,0 | Sim |
+| Cabuloso | R$ 100 | R$ 30 | Completo | 95,0 | Sim — vencedor |
+| Cabuloso Max | R$ 200 | R$ 30 | Completo | 99,0 | Não (R$ 200 > R$ 100) |
+| Meu Cruzeiro | R$ 12 | Sem taxa | Fora | 55,6 | Sim |
+| Time do Povo | R$ 40 | R$ 30 | Fora | 56,2 | Sim |
+
+Índices conferidos na calibração de 12/11/2026 ([registro](docs/calibracao-pesos-2026-11-12.md)); a regra do ingresso por temporada não muda este exemplo.
 
 ## 7. Filtro, setor e desempate
 
 - **Orçamento:** planos com assinatura acima do teto ficam fora da recomendação. Se nenhum couber, não há vencedor; os planos aparecem para comparação e o CTA é desativado.
 - **Setor:** a preferência é flexível. O vencedor pode não cobrir todo o setor, mas o resultado destaca a diferença e, se houver, oferece uma alternativa que cobre o setor dentro do orçamento.
 - **Empate:** diferença menor que 1 ponto no índice marca os dois primeiros como recomendados.
-- **Ordem determinística:** maior índice; em empate, menor assinatura; depois, slug do plano. A ordem do catálogo não influencia (`recommendPlans(respostas, catalogo)` recebe o catálogo explicitamente).
+- **Ordem determinística:** maior índice; em empate exato do índice arredondado, slug do plano. A assinatura não desempata. A ordem do catálogo não influencia (`recommendPlans(respostas, catalogo)` recebe o catálogo explicitamente).
 - **Motivos:** o resultado lista avisos de setor, motivos positivos ligados às respostas e o valor da assinatura. Nenhum motivo é inventado para justificar o vencedor.
 
 ## 8. Interface e fluxo
@@ -220,21 +222,21 @@ Eventos enviados ao GA4 somente fora do modo preview:
 
 | Evento | Campos principais |
 |---|---|
-| `quiz_start` | — |
-| `quiz_answer` | `quiz_step`, `quiz_question`, `quiz_answer`, `quiz_answer_label`, `answer_time_sec` |
-| `quiz_complete` | `recommended_plan`, `affinity_index`, `compatibility` (legado), `score_semantics`, `no_eligible_plan`, `catalog_version`, `rules_version`, `total_time_sec` e `answer_*` |
-| `quiz_subscribe_click` | `plan`, `recommended_plan`, `clicked_recommended`, `cta_location` |
+| `inicio_do_quiz` | — |
+| `resposta_do_quiz` | `etapa_do_quiz`, `pergunta_do_quiz`, `valor_da_resposta`, `rotulo_da_resposta`, `tempo_de_resposta_seg` |
+| `quiz_concluido` | `plano_recomendado`, `indice_de_afinidade`, `compatibilidade`, `semantica_do_score`, `sem_plano_elegivel`, `versao_do_catalogo`, `versao_das_regras`, `tempo_total_seg` e `resposta_*` |
+| `clique_de_assinatura` | `plano`, `plano_recomendado`, `clicou_no_recomendado`, `local_do_cta` |
 
-`compatibility` é mantido como alias do índice para não quebrar consumidores existentes; `score_semantics = indice_afinidade_estimado` documenta a mudança de leitura. `rules_version` identifica a versão das regras do recomendador usadas na execução (`RULES_VERSION` do motor). O modo preview (`?preview`, `?preview=1`, `?preview=false` e `#preview`) renderiza um cenário fixo e não envia eventos. Outros parâmetros cujo valor contenha "preview" (como `?utm_campaign=preview_newsletter`) abrem o quiz normalmente.
+`compatibilidade` tem o mesmo valor de `indice_de_afinidade` no contrato em português. O nome anterior `compatibility` deixou de ser enviado; a revisão GA4 `2026-11-03.1` requer adaptação dos consumidores conforme o [mapa de migração](docs/migracao-ga4-portugues.md). `semantica_do_score = indice_afinidade_estimado` documenta a interpretação do índice. `versao_das_regras` identifica as regras usadas (`RULES_VERSION` do motor). O sufixo de cada `resposta_*` vem do mapa `respostas` em `config/ga4/ga4.json` (`jogos_por_ano`, `historico_de_jogos`, `quer_ingresso_garantido`, etc.). O valor de `pergunta_do_quiz` conserva a chave interna, como `gamesPerYear`. O modo preview (`?preview`, `?preview=1`, `?preview=false` e `#preview`) renderiza um cenário fixo e não envia eventos. Outros parâmetros cujo valor contenha "preview" (como `?utm_campaign=preview_newsletter`) abrem o quiz normalmente.
 
 Isolamento da coleta (duas camadas distintas):
 
 1. **Supressão de eventos personalizados**: `trackEvent()` só despacha quando `window.coletaHabilitada` é verdadeira — cobre preview e desenvolvimento local. Isso sozinho não impede `page_view`, cookies e beacons da tag.
 2. **Isolamento completo da tag**: a tag `gtag.js` e o comando `config` só são injetados quando `window.coletaHabilitada` é verdadeira; fora disso não há `<script>`, fila de comandos, `page_view` nem cookies novos da coleta.
 
-`window.coletaHabilitada` é decidida no `<head>`, antes de qualquer inicialização de analytics: verdadeira somente para hosts da lista explícita `AMBIENTES_HABILITADOS` (hoje, `quiz-socio.vercel.app` — a confirmação do domínio publicado permanece no QUIZ-018) e quando não há sinal de preview. Qualquer outro host — inclusive `localhost`, loopback IPv4/IPv6 (`127.0.0.0/8`, `::1`) e `file://` — fica fora da coleta; a lista é inclusiva por construção: um host novo só coleta quando acrescido explicitamente. O script de visitas da Vercel (`/_vercel/insights/`) não é coleta GA4 e está fora do escopo do isolamento; os testes o filtram explicitamente.
+O `<head>` inicia `window.coletaHabilitada = false`. Depois, `src/main.js` chama `initializeAnalytics` de `src/analytics.mjs`, que decide a coleta com o snapshot de `config/ga4/ga4.json` antes de anexar a tag: somente hosts exatos de `ambientesHabilitados` (hoje, `quiz-socio.vercel.app`) e sem sinal de preview. Localhost, loopbacks IPv4/IPv6 e `file://` permanecem excluídos mesmo se inseridos na lista. Um host novo só coleta quando acrescido explicitamente. O script de visitas da Vercel (`/_vercel/insights/`) não é coleta GA4 e fica fora desse isolamento.
 
-O evento `quiz_subscribe_click` é emitido no clique do link de contratação, que usa o comportamento nativo do `<a>` (nova aba, `rel="noopener noreferrer"`), em qualquer um dos três locais (`resultado`, `lista`, `comparativo`); sem plano elegível, o link não tem `href`, não navega e não emite evento. A verificação permanente desses comportamentos está em `tests/browser.test.js` (`npm run test:browser`), com interceptação de requisições antes da transmissão (CDP): nenhuma coleta de teste sai do navegador.
+O evento `clique_de_assinatura` é emitido no clique do link de contratação, que usa o comportamento nativo do `<a>` (nova aba, `rel="noopener noreferrer"`). `local_do_cta` identifica `resultado`, `lista`, `comparativo` ou `alternativa-setor`, quando houver alternativa elegível de cobertura. Sem plano elegível, o CTA principal e os cards acima do teto ficam sem `href` e não emitem evento. Os testes de contratação em `tests/browser.test.js` interceptam requisições antes da transmissão. A matriz de validação externa do QUIZ-019 deve cobrir as quatro origens.
 
 ## 10. Verificação
 
@@ -245,9 +247,9 @@ O evento `quiz_subscribe_click` é emitido no clique do link de contratação, q
 | `npm run test:browser` | Navegação, conflitos, resultado único, modal, analytics, mobile e desktop |
 | `npm run baseline` | Regenera `tests/fixtures/baseline-reference.json` executando o ranking do commit `2cecf81` sobre a referência. Depende do histórico git; fora de `npm test` |
 
-Metas do QUIZ-009: zero violação de orçamento de assinatura, pelo menos 80% de acerto no primeiro plano e 95% de opção aceitável entre as três primeiras. A referência contém 12 cenários de calibração, 12 na partição histórica chamada reserva e 5 de contradição. Com a ADR-0001, calibração: 12/12 no top-1; reserva histórica: 11/12 no top-1 e 12/12 no top-3. A mudança foi registrada sem alterar os planos aceitáveis em `tests/fixtures/separate-prices-results.json`.
+Metas do QUIZ-009: zero violação de orçamento de assinatura, pelo menos 80% de acerto no primeiro plano e 95% de opção aceitável entre as três primeiras. Nas regras `2026-11-03.2`, a referência histórica tem top-1/top-3 12/12 tanto na calibração quanto na reserva; os perfis têm 8/8 nas duas partições. Os cinco cenários de contradição ficam fora dessas métricas. São 40/40 primeiros lugares aceitáveis e zero violações, sem alterar as expectativas congeladas. A avaliação anterior à remoção do componente financeiro está preservada em `tests/fixtures/separate-prices-results.json`.
 
-Esses resultados são regressão sintética; a base histórica já foi consultada e não comprova avaliação externa ou desempenho real. Sua proveniência continua registrada. Em 27/10/2026, o usuário autorizou criar a referência do QUIZ-009: `tests/fixtures/reference-profiles.js` contém oito perfis e 16 cenários, com hash e limites em `reference-profiles-provenance.json`. O [QUIZ-010-A](tickets/concluidos/010-A-referencia.md) avaliou calibração e validação, ambas com top-1/top-3 8/8 e zero violações, sem modificar motor ou expectativas. `tests/evaluation.test.mjs` mantém essas verificações e a divergência histórica RES-11. QUIZ-003, 009, 010-A/010 e 011 estão concluídos; o aceite de GA4 continua no QUIZ-017. Relatórios anteriores à ADR permanecem históricos.
+Esses resultados são regressão sintética; a base histórica já foi consultada e não comprova avaliação externa ou desempenho real. Sua proveniência continua registrada. Os oito perfis e 16 cenários foram criados por autorização do usuário em 27/10/2026, com hashes registrados. `tests/evaluation.test.mjs` verifica as expectativas preservadas e a correção de RES-11 para Time do Povo. QUIZ-003, 009, 010-A/010 e 011 estão concluídos; os aceites externos de GA4 permanecem nos QUIZ-017 a 019. Relatórios de revisões anteriores são evidência histórica.
 
 ## 11. Rodapé
 

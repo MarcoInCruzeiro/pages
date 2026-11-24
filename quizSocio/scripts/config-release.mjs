@@ -45,8 +45,10 @@ export function inspectConfiguration({ configuration, date = today() } = {}) {
         engine: sha256(fs.readFileSync(path.join(projectRoot, 'src/engine-core.mjs'), 'utf8')),
         schemas: sha256(schemaHashes)
     };
-    hashes.rules = sha256({ catalog: hashes.catalog, questions: hashes.questions, ranking: hashes.ranking,
-        profile: hashes.profile, engine: hashes.engine });
+    hashes.rules = sha256({
+        catalog: hashes.catalog, questions: hashes.questions, ranking: hashes.ranking,
+        profile: hashes.profile, engine: hashes.engine
+    });
     hashes.aggregate = sha256(hashes);
     const previous = config.metadata;
     const changed = (key) => previous.hashes?.[key] !== hashes[key];
@@ -94,9 +96,11 @@ export async function inspectQuality({ configuration, hashes, approvalPath = pat
             && canonicalize([...(approval.acceptedRegressionIds ?? [])].sort()) === canonicalize(regressions);
     }
     const metricsPassed = historical.passed && profiles.passed;
-    return { metricsPassed, reviewRequired: regressions.length > 0, regressionIds: regressions,
+    return {
+        metricsPassed, reviewRequired: regressions.length > 0, regressionIds: regressions,
         reviewAccepted: accepted, releaseApproved: metricsPassed && (!regressions.length || accepted),
-        configurationHash: hashes.aggregate, referenceHashes, reports: { historical, profiles } };
+        configurationHash: hashes.aggregate, referenceHashes, reports: { historical, profiles }
+    };
 }
 
 function atomicWrite(name, contents) {
@@ -125,8 +129,10 @@ export async function prepareConfiguration({ directory = path.join(projectRoot, 
     if (!quality.releaseApproved && !diagnostic) throw new Error('Entrega bloqueada: regressões precisam de aceite explícito ou métricas estão abaixo do piso. Use --diagnostic somente para candidato local não aprovado.');
     fs.mkdirSync(store, { recursive: true });
     const snapshotPath = path.join(store, 'revisions', inspection.hashes.aggregate + '.json');
-    const snapshot = { format: 1, metadata, configuration, schemaHashes: inspection.schemaHashes,
-        quality, scope: quality.releaseApproved ? 'candidato local; entrega é ação separada' : 'diagnóstico local; entrega bloqueada' };
+    const snapshot = {
+        format: 1, metadata, configuration, schemaHashes: inspection.schemaHashes,
+        quality, scope: quality.releaseApproved ? 'candidato local; entrega é ação separada' : 'diagnóstico local; entrega bloqueada'
+    };
     if (!fs.existsSync(snapshotPath)) atomicWrite(snapshotPath, serialize(snapshot));
     const pointer = path.join(store, 'current.json');
     if (fs.existsSync(pointer)) {

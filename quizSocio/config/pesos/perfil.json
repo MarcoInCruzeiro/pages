@@ -25,18 +25,14 @@
     "true": 8,
     "false": 1,
     "padrao": 5,
-    "bonusDigital": 2
+    "bonusDigital": 2,
+    "bonusDigitalParcial": 1
   },
   "descuentos": {
     "true": 8,
+    "sometimes": 4.5,
     "false": 1,
     "padrao": 5
-  },
-  "importanciaPreco": {
-    "40": 8,
-    "100": 5,
-    "200": 3,
-    "400": 1
   },
   "adultos": {
     "true": 1,

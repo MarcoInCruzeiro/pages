@@ -1,0 +1,64 @@
+TAP version 13
+# Subtest: catálogo atende à referência documental oficial sem alegar validação independente do ranking
+ok 1 - catálogo atende à referência documental oficial sem alegar validação independente do ranking
+  ---
+  duration_ms: 5.996185
+  type: 'test'
+  ...
+# Subtest: HTTP 200 e uma tag presente não comprovam oferta nem recebimento GA4
+ok 2 - HTTP 200 e uma tag presente não comprovam oferta nem recebimento GA4
+  ---
+  duration_ms: 34.687016
+  type: 'test'
+  ...
+# Subtest: desafio 403 e falha de rede são registrados sem inventar confirmação
+ok 3 - desafio 403 e falha de rede são registrados sem inventar confirmação
+  ---
+  duration_ms: 0.604246
+  type: 'test'
+  ...
+# Subtest: candidato de entrega contém somente arquivos públicos e recusa sobrescrita
+ok 4 - candidato de entrega contém somente arquivos públicos e recusa sobrescrita
+  ---
+  duration_ms: 112.572531
+  type: 'test'
+  ...
+# Subtest: preparo de entrega sem perdas dispensa aceite de regressão
+ok 5 - preparo de entrega sem perdas dispensa aceite de regressão
+  ---
+  duration_ms: 102.688558
+  type: 'test'
+  ...
+# Subtest: servidor de teste respeita a raiz solicitada mesmo com dist existente
+ok 6 - servidor de teste respeita a raiz solicitada mesmo com dist existente
+  ---
+  duration_ms: 32.770906
+  type: 'test'
+  ...
+# Subtest: publicação só coincide quando HTML, manifesto e bundle têm os hashes do pacote
+ok 7 - publicação só coincide quando HTML, manifesto e bundle têm os hashes do pacote
+  ---
+  duration_ms: 5.586762
+  type: 'test'
+  ...
+# Subtest: legado e manifesto ausente não são aprovados por HTML 200 ou presença da tag
+ok 8 - legado e manifesto ausente não são aprovados por HTML 200 ou presença da tag
+  ---
+  duration_ms: 2.359303
+  type: 'test'
+  ...
+# Subtest: verificação recusa pacote local adulterado e caminhos fora da pasta pública antes da rede
+ok 9 - verificação recusa pacote local adulterado e caminhos fora da pasta pública antes da rede
+  ---
+  duration_ms: 2.372182
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 510.578976

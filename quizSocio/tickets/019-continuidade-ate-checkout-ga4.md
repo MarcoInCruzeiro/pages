@@ -9,7 +9,7 @@ Há UTMs nos destinos comerciais e um evento local de clique, mas a identificaç
 
 ## Escopo
 
-- Verificar resultado, lista e comparativo no ambiente oficial, nas condições de coleta definidas pelo QUIZ-017.
+- Verificar resultado, lista, comparativo e alternativa de setor quando disponível no ambiente oficial, nas condições de coleta definidas pelo QUIZ-017.
 - Conferir a decoração de URL quando aplicável e a continuidade dos identificadores de medição após redirecionamentos.
 - Identificar se o destino já mede contratação concluída e registrar seu contrato, separando essa medição da intenção capturada pelo quiz.
 
@@ -21,7 +21,7 @@ Este ticket comprova atribuição. A conferência de plano, modalidade e preço 
 - [ ] Em navegação entre domínios com coleta habilitada, a transferência de identificação é comprovada por URL e observação nas duas pontas; UTMs isoladas não satisfazem o critério.
 - [ ] Os identificadores de pessoa e sessão permanecem coerentes no destino dentro da mesma execução controlada. Se o mesmo domínio de cookie tornar `_gl` dispensável, a justificativa e a continuidade observada ficam registradas.
 - [ ] Os redirecionamentos exercitados preservam a identificação e não criam atribuição indevida ao próprio site.
-- [ ] Há evidência dos três locais de CTA, com acesso ao destino interrompido antes de contratação ou pagamento.
+- [ ] Há evidência das quatro origens de CTA (`resultado`, `lista`, `comparativo`, `alternativa-setor` quando houver alternativa elegível), com acesso ao destino interrompido antes de contratação ou pagamento.
 - [ ] O evento que comprova contratação no destino é identificado, ou sua ausência fica registrada com responsável e ticket de implementação próprio. O clique do quiz permanece descrito como intenção.
 - [ ] As evidências registram continuidade como resultado da comparação, sem persistir cookies, parâmetros `_gl` ou identificadores pessoais brutos.
 
@@ -32,11 +32,15 @@ Este ticket comprova atribuição. A conferência de plano, modalidade e preço 
 
 ## Verificação
 
-Executar o mesmo roteiro para resultado, lista e comparativo, anotando origem, destino, preservação de parâmetros e resultado da comparação dos identificadores. Conferir no GA4 a continuidade observada. A ausência de acesso ao destino mantém o aceite pendente, mesmo com testes locais passando.
+Executar o mesmo roteiro para as quatro origens, anotando origem, destino, preservação de parâmetros e resultado da comparação dos identificadores. No contrato português, conferir `clique_de_assinatura` e `local_do_cta`; a origem `alternativa-setor` requer um cenário com alternativa elegível de cobertura. Conferir no GA4 a continuidade observada. A ausência de acesso ao destino mantém o aceite pendente, mesmo com testes locais passando. [Mapa do contrato](../docs/migracao-ga4-portugues.md).
 
 ## Registro de conclusão
 
 Pendente: versão/ambiente, responsáveis, matriz por origem de CTA e evidências da continuidade ou dos impedimentos.
+
+## Revisão de escopo — 04/11/2026
+
+A matriz foi corrigida para quatro origens de CTA e para o contrato GA4 em português. O ticket continua bloqueado por validação externa; esta revisão documental não realizou navegação ao checkout nem comprovou atribuição. O registro abaixo conserva o roteiro e a consulta de outubro.
 
 ## Execução da preparação e diagnóstico — 27/10/2026
 

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import engine from '../quiz-engine.js';
 import reference from './fixtures/four-plans/profiles.json' with { type: 'json' };
+import historicalReference from './fixtures/four-plans/historical.json' with { type: 'json' };
 import { evaluateReference, evaluateScenarios } from '../scripts/evaluate-reference.mjs';
 
 test('referência congelada de perfis atende às metas em calibração e validação', async () => {
@@ -28,9 +29,9 @@ test('avaliação registra falha de expectativa e recusa conjunto vazio ou invá
     assert.throws(() => evaluateScenarios([{ ...scenario, answers: {} }]), /respostas inválidas/);
 });
 
-test('regressão histórica preserva RES-11 e separa resultados das novas partições', async () => {
+test('regra sem preço corrige RES-11 sem alterar sua expectativa e separa partições', async () => {
     const historical = await evaluateReference();
-    assert.equal(historical.rows.find((row) => row.id === 'RES-11').top1, false);
+    assert.equal(historical.rows.find((row) => row.id === 'RES-11').top1, true);
     assert.deepEqual(historical.rows.find((row) => row.id === 'RES-11').acceptable, ['time-do-povo']);
     const validation = await evaluateReference({ reference: 'profiles', split: 'validacao' });
     assert.deepEqual(Object.keys(validation.groups), ['validacao']);
@@ -39,12 +40,34 @@ test('regressão histórica preserva RES-11 e separa resultados das novas parti�
 });
 
 
-test('piso estatístico não aprova perdas de acerto da migração automaticamente', async () => {
+test('nova regra atende a todas as expectativas congeladas sem aceite de perdas', async () => {
     for (const reference of ['historical', 'profiles']) {
         const report = await evaluateReference({ reference });
+        assert.ok(report.rows.every((row) => row.top1), JSON.stringify(report.rows.filter((row) => !row.top1)));
+        assert.equal(report.reviewRequired, false);
+        assert.deepEqual(report.regressions, []);
+        assert.equal(report.releaseApproved, true);
+    }
+});
+
+test('piso estatístico não aprova novas perdas de acerto automaticamente', () => {
+    for (const data of [historicalReference, reference]) {
+        const scenarios = data.scenarios.filter((s) => s.split !== 'contradicao');
+        const target = scenarios[0];
+        const regressed = {
+            ...engine,
+            recommendPlans(answers) {
+                const result = engine.recommendPlans(answers);
+                if (answers !== target.answers) return result;
+                const wrong = result.eligible.find((p) => !target.acceptable.includes(p.plan.slug));
+                const eligible = [wrong, ...result.eligible.filter((p) => p !== wrong)];
+                return { ...result, eligible, winner: wrong };
+            }
+        };
+        const report = evaluateScenarios(scenarios, { motor: regressed, baseline: engine });
         assert.equal(report.passed, true, JSON.stringify(report.groups));
         assert.equal(report.reviewRequired, true);
-        assert.ok(report.regressions.length > 0);
+        assert.deepEqual(report.regressions, [target.id]);
         assert.equal(report.releaseApproved, false);
         assert.ok(report.rows.some((row) => row.winnerChanged));
     }

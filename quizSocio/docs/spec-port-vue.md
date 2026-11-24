@@ -1,16 +1,19 @@
 # Spec — Quiz público em Vue e configuração em JSON
 
-Status: implementação técnica corrigida e verificada; entrega retida para revisão dos efeitos no ranking.
+Status: implementação local corrigida e verificada; ranking sem preço aprovado no gate de qualidade, com publicação pendente.
+
+Atualização de requisito em 03/11/2026: o usuário rejeitou aceitar as quatro perdas e determinou que o recomendador jamais priorize a menor assinatura. A implementação vigente usa orçamento somente como filtro, seis componentes de benefícios e desempate por slug. `price` e `importanciaPreco` foram removidos da configuração. Benefícios presenciais têm peso zero quando a necessidade presencial é zero. O registro abaixo descreve também requisitos e estados históricos da migração; a regra nova prevalece sobre a paridade da fórmula financeira anterior. [Correção vigente](correcao-ranking-sem-preco-2026-11-03.md).
 Data: 27/10/2026.
+Revisão documental: 04/11/2026. Configuração local vigente: catálogo `2026-10-28.2`, regras `2026-11-03.2`, GA4 `2026-11-03.1`. [Contrato GA4 e migração de consumidores](migracao-ga4-portugues.md).
 Branch criada: `quiz/port-vue`, a partir de `quiz-socio/tickets-correcoes`, HEAD `8250641b854ab489d60a283eb17106114f0790bd`.
 
-## Problem Statement
+## Problem Statement — contexto original da migração
 
 O mantenedor precisa mudar perguntas, condições comerciais, coeficientes do recomendador e medição sem editar a lógica do quiz. Hoje esses dados estão misturados ao motor e à página. Isso dificulta revisar alterações, detectar resultados inesperados e identificar qual configuração originou uma recomendação.
 
 O torcedor também continua vendo o Cabuloso Cativo, cuja oferta tem pendências. A decisão desta entrega é removê-lo do catálogo ativo e migrar a experiência pública para Vue, preservando as regras de orçamento, a apresentação separada dos valores e a confirmação de respostas incompatíveis.
 
-### Estado atual verificado
+### Estado verificado no início da migração (histórico)
 
 - Aplicação estática em HTML/JavaScript, sem framework, dependências npm ou build de aplicação. O motor é puro e exposto em Node e navegador por um adaptador UMD.
 - O motor contém cinco planos, 12 perguntas, configuração do perfil e coeficientes de cálculo. As perguntas são duas faixas numéricas e dez listas de opções; estas não têm tipo explícito atualmente. Valores incluem números, strings e booleanos.
@@ -24,14 +27,14 @@ O torcedor também continua vendo o Cabuloso Cativo, cuja oferta tem pendências
 
 O quiz público será uma aplicação Vue 3 com Vite. Perguntas, catálogo, parâmetros de perfil, coeficientes do ranking e configuração GA4 terão entradas JSON validadas e incorporadas ao artefato de aplicação. O mantenedor editará esses arquivos localmente, avaliará os efeitos e preparará uma revisão identificável, com backup antes da substituição de um candidato anterior.
 
-Os quatro planos ativos serão Meu Cruzeiro, Time do Povo, Cabuloso e Cabuloso Max. O cálculo de preço considerará exclusivamente esse catálogo ativo. A mudança será avaliada separadamente da migração mecânica e ficará impedida de ser liberada enquanto seus efeitos não forem revisados.
+Os quatro planos ativos são Meu Cruzeiro, Time do Povo, Cabuloso e Cabuloso Max. O preço mensal equivalente determina somente elegibilidade. A afinidade usa os benefícios e a entrega exige a avaliação da revisão vigente.
 
-**Decisões confirmadas pelo usuário:** migrar também o quiz público para Vue + Vite; adiar completamente a implementação do painel administrativo; usar JSON como fonte operacional; remover o Cativo, sem mantê-lo como plano invisível; avaliar os efeitos da normalização com quatro planos antes da entrega.
+**Decisões confirmadas pelo usuário:** quiz público em Vue + Vite; painel administrativo adiado; JSON como fonte operacional; retirada do Cativo; avaliação dos efeitos das mudanças antes da entrega. Em 03/11/2026, o usuário rejeitou aceitar as quatro perdas e determinou que o ranking não priorize a menor assinatura, conforme a [ADR-0003](adr/0003-orcamento-sem-prioridade-de-preco.md).
 
 ## User Stories
 
 1. Como torcedor, quero responder às mesmas 12 perguntas, para receber uma recomendação sem reaprender a navegação.
-2. Como torcedor, quero voltar e revisar respostas, para corrigir escolhas preservadas pelo quiz.
+2. Como torcedor, quero voltar e revisar respostas, para corrigir escolhas preservadas pelo quiz. Ao revisar conflitos, quero percorrer somente as respostas divergentes da maioria entre as perguntas relacionadas à presença no estádio. Sem maioria clara, reviso apenas as perguntas em conflito; as demais respostas ficam preservadas.
 3. Como torcedor, quero confirmar respostas incompatíveis, para decidir conscientemente qual declaração prevalece.
 4. Como torcedor, quero que zero, falso e histórico desconhecido sejam aceitos quando previstos, para não precisar inventar respostas.
 5. Como torcedor, quero recomendações dentro do orçamento informado, para comparar assinaturas que posso contratar.
@@ -84,22 +87,22 @@ Os quatro planos ativos serão Meu Cruzeiro, Time do Povo, Cabuloso e Cabuloso M
 
 - Remover o Cativo do catálogo operacional, das recomendações, listas, comparativo, links próprios e textos ativos. Não criar sinalizador para preservá-lo invisível. Os quatro planos remanescentes mantêm as condições comerciais já aceitas.
 - Atualizar a documentação ativa do catálogo e da estrutura. Evidências, referências e relatórios históricos continuam identificados pela revisão de cinco planos, sem reescrita retroativa.
-- A normalização de preço continuará usando mínimo e máximo do catálogo ativo inteiro, inclusive planos fora do orçamento; agora serão quatro planos. Não congelar artificialmente a assinatura de R$ 400 como âncora de um plano removido. A filtragem de orçamento permanece independente.
+- O preço não é normalizado nem participa da afinidade. A assinatura mensal equivalente é comparada ao teto informado somente para filtrar elegíveis. Não existe âncora financeira de plano removido nem dependência dos índices dos demais planos em relação aos preços mínimo/máximo do catálogo.
 - Primeiro comprovar paridade da extração com a revisão de cinco planos. Depois produzir uma revisão de referência com quatro planos: retirar apenas o slug excluído dos aceitáveis, registrar a justificativa e um novo hash, mantendo respostas e histórico originais. Se um conjunto aceitável ficar vazio, bloquear a avaliação até revisão explícita desse caso.
 - Congelar a revisão derivada antes de eventual calibração. Alterar pesos exige outra revisão de regras e comparação; não ajustar expectativas a partir dos vencedores observados para melhorar métricas.
 - Aplicar os pisos atuais de avaliação sintética: top-1 de pelo menos 80%, top-3 de pelo menos 95%, zero violações de orçamento e zero scores inválidos, por partição. Além dos pisos, toda perda de acerto em cenário anteriormente aprovado precisa de resolução ou aceite explícito, identificado pela configuração e relatório; um resultado agregado acima do piso não encerra essa revisão.
-- Retornar em recomendações apenas planos elegíveis. Sem elegíveis, vencedor nulo e recomendações vazias; a lista de todos os planos e eventual alternativa mais próxima permanecem informativas e claramente indisponíveis para recomendação. Essa é uma alteração explícita do fallback atual, que ainda preenche recomendações com planos acima do teto.
-- Manter desempate por índice decrescente, assinatura crescente e slug. Alterações de ordem do catálogo não podem alterar o resultado.
+- Retornar em recomendações apenas planos elegíveis. Sem elegíveis, vencedor nulo e recomendações vazias; a lista de todos os planos e o menor preço informado são recursos de comparação, sem recomendação acima do teto.
+- Regra atualizada em 03/11/2026: ordenar por índice decrescente e slug em empate exato. A assinatura não pontua nem desempata. Alterações da ordem ou dos preços do catálogo, mantendo elegibilidade e benefícios, não podem alterar o ranking.
 
 ### Medição GA4
 
-- Extrair o ID, hosts permitidos, nomes dos quatro eventos e definições/tipos dos parâmetros. O snapshot inicial preservará os valores atuais e os eventos `quiz_start`, `quiz_answer`, `quiz_complete` e `quiz_subscribe_click`.
-- Usar identidades semânticas estáveis para os quatro pontos de emissão. Renomear um evento ou parâmetro enviado exige registro de migração e revisão de consumidores; editar o JSON não deverá desconectar uma ação da interface de sua emissão.
-- O bootstrap declarado no head decidirá `coletaHabilitada` usando a configuração incorporada, antes de inserir a tag ou chamar a inicialização. A tag real continua sendo anexada ao head somente após essa decisão. Nenhum componente Vue inicializará GA4 por conta própria.
+- Configurar o ID, hosts permitidos, nomes dos quatro eventos e definições/tipos dos parâmetros. A revisão local GA4 `2026-11-03.1` usa `inicio_do_quiz`, `resposta_do_quiz`, `quiz_concluido` e `clique_de_assinatura`; os nomes ingleses da extração inicial são históricos. O [mapa de migração](migracao-ga4-portugues.md) relaciona eventos, parâmetros e respostas.
+- As chaves semânticas atuais estão em português. O despachante resolve a chave para o nome enviado configurado. Alterar chave, evento ou parâmetro exige manter os pontos de emissão coerentes, registrar a migração e revisar consumidores.
+- O head começa com `coletaHabilitada = false`; `src/main.js` chama `initializeAnalytics` com a configuração incorporada, que decide coleta antes de anexar a tag ao head. Os componentes Vue usam o despachante; não inicializam GA4 por conta própria.
 - Preview é reconhecido pelo nome do parâmetro ou fragmento já suportado. Localhost, loopbacks IPv4/IPv6 e protocolo local permanecem excluídos mesmo se adicionados por engano à allowlist. Hosts são exatos, normalizados, sem curingas, caminhos ou correspondência por sufixo.
 - Configuração de analytics ausente/inválida mantém a coleta desligada. Um erro de medição em execução não pode impedir o uso do quiz. O validador de candidato, porém, rejeita configurações inválidas antes da entrega.
 - O teto interno será de 20 parâmetros personalizados por evento, contando o payload final e os 12 campos de resposta na conclusão; o limite técnico publicado pelo Google é 25. Não enviar novos parâmetros de rastreabilidade sem conferir esse orçamento.
-- Preservar `rules_version`, `catalog_version`, afinidade, semântica e o campo legado `compatibility`, além dos parâmetros atuais de respostas, tempos e origem de CTA. Remover `rules_version` não é uma edição comum: exige justificativa e aprovação de migração do contrato.
+- A conclusão atual envia `versao_das_regras`, `versao_do_catalogo`, `indice_de_afinidade`, `semantica_do_score`, `compatibilidade`, tempos e respostas. `compatibilidade` duplica a afinidade dentro do contrato atual; o nome inglês `compatibility` deixou de ser enviado. Relatórios e integrações antigos precisam ser adaptados pelo mapa de migração; a compatibilidade por nome com o contrato anterior não é mantida.
 - O hash completo da configuração ficará no manifesto de entrega; não será acrescentado automaticamente ao evento de conclusão, que já possui 20 parâmetros personalizados na configuração vigente.
 - Medição administrativa, definições no Admin, DebugView, recebimento e identidade entre domínios continuam sendo aceites externos. Nenhum destes será declarado resolvido pelo build ou pelos testes locais.
 
@@ -108,10 +111,10 @@ Os quatro planos ativos serão Meu Cruzeiro, Time do Povo, Cabuloso e Cabuloso M
 - O fluxo implementado nesta etapa será local: carregar JSONs → editar arquivos → validar schemas e invariantes → avaliar referências → preparar versão/candidato → revisar → entregar por ação específica. Não haverá tela, API de escrita ou credencial administrativa no site público.
 - Preparar versões por comando explícito; builds de verificação não alteram fontes, incrementam versões ou publicam. A preparação é idempotente para o mesmo conteúdo e parte da última revisão registrada, nunca de um contador em memória.
 - Usar versões de revisão no formato data mais sequência, preservando as versões anteriores como origem. Separar a revisão operacional do catálogo da data de publicação/consulta da fonte oficial.
-- Mudanças de catálogo avançam a revisão de catálogo; mudanças de perguntas/regras/perfil/pesos/motor e do catálogo que participa da normalização avançam a revisão de regras. Analytics tem revisão própria. O manifesto relaciona versões, schemas, hashes por domínio, hash agregado e revisão de código, incluindo a indicação de workspace modificado.
+- Mudanças de catálogo avançam a revisão de catálogo; mudanças de perguntas/regras/perfil/pesos/motor e catálogo também avançam a revisão de regras. Analytics tem revisão própria. O manifesto relaciona versões, schemas, hashes por domínio, hash agregado e revisão de código, incluindo a indicação de workspace modificado.
 - SHA-256 é identificação de conteúdo, não incremento nem prova de aprovação. Calcular sobre representação canônica: chaves de objetos ordenadas, arrays preservados e tipos mantidos. O hash agregado exclui timestamps e seus próprios campos de hash. A identidade das regras inclui a lógica do motor e os dados que influenciam o cálculo.
 - Antes de substituir um candidato local, preservar snapshot completo e manifesto da revisão anterior fora da saída pública. Gravar em área temporária, validar e só então substituir o candidato; erro deixa o anterior intacto. Restauração local usa o mesmo validador e preserva o histórico.
-- O artefato público será a saída estática do Vite. O preparo atual, baseado numa lista fixa de HTML/motor/imagens, precisa ser substituído por empacotamento validado dessa saída; não enviar o workspace como diretório público.
+- O artefato público é a saída estática do Vite. `prepare-release.mjs` empacota `dist/` com manifesto e hashes, recusando um build desatualizado; o workspace não é enviado como diretório público.
 - A configuração de entrega manterá o projeto Vercel existente e seu diretório raiz. Testes devem exercitar o artefato compilado, com assets locais resolvidos e contratos de preview/hosts preservados. Ajustar o build e a saída do projeto será parte do corte de entrega, sem alterar produção durante a elaboração desta spec.
 - Branch de trabalho e preview são os destinos de desenvolvimento. Geração de artefato não faz push, deploy ou alteração no GA4. A entrega em produção e eventual rollback são ações específicas, posteriores à revisão do candidato.
 
@@ -119,10 +122,10 @@ Os quatro planos ativos serão Meu Cruzeiro, Time do Povo, Cabuloso e Cabuloso M
 
 - A fronteira principal é o motor configurado: os mesmos JSONs devem produzir a mesma recomendação na aplicação e no avaliador. Testar comportamento observável, não coeficientes copiados em asserts que reproduzam a fórmula.
 - Usar a suíte Node e as referências existentes como ponto de partida. Registrar o baseline do workspace e preservar evidências de cinco planos antes da remoção. Quantidade de testes não é meta: manter a cobertura aplicável dos 82 testes, justificar substituições dos casos exclusivos do plano removido e acrescentar cobertura dos novos contratos.
-- Antes de mudar o catálogo, exigir igualdade de respostas válidas, conflitos, elegibilidade, ranking, índices, motivos e valores separados entre implementação anterior e configuração extraída. Exercitar também duas instâncias com pesos diferentes sem interferência.
+- A paridade da extração inicial é evidência histórica. Na regra atual, verificar preços apresentados, setores, perfil de necessidades e conflitos preservados; preço não altera afinidade nem desempate. Exercitar duas instâncias com pesos diferentes sem interferência e preservar as referências congeladas de negócio.
 - Validar uma configuração correta e mutações inválidas significativas: tipo de opção trocado, chave semântica desconhecida, ordem duplicada, peso negativo/nulo inválido, nível sobreposto, modalidade incoerente, URL não permitida e evento acima do teto interno.
 - Rodar a avaliação sintética nas duas partições de perfis e nas duas partições históricas. Contradições ficam separadas das métricas de precisão; registrar detecção e confirmação. Relatório compara cada vencedor e score antes/depois, versões, hashes, top-1/top-3, violações e casos sem elegíveis.
-- Preservar os testes de navegador via CDP, adaptados para servir a saída Vite. Testar início, 12 perguntas, retorno, revisão, confirmação, resultado, quatro planos no comparativo, três origens de CTA e refazer. Esperar a aplicação estar pronta antes de instalar/interagir com os controles de teste.
+- Preservar os testes de navegador via CDP, adaptados para servir a saída Vite. Testar início, 12 perguntas, retorno, revisão, confirmação, resultado, quatro planos no comparativo, origens de CTA e refazer. A matriz externa inclui `resultado`, `lista`, `comparativo` e `alternativa-setor` quando disponível; registrar a cobertura de cada origem sem inferir recebimento real a partir de testes locais. Esperar a aplicação estar pronta antes de instalar/interagir com os controles de teste.
 - Cobrir clique duplo, alternância rápida, limpeza de listeners e duplicação de eventos por montagem/remontagem Vue. Conferir teclado, foco de modal, leitura móvel, ausência de overflow e preferência por redução de movimento.
 - Interceptar rede e analytics antes do bootstrap. Comprovar ausência de inicialização/tag nos hosts excluídos e preview; no host habilitado simulado, confirmar inicialização única e payloads corretos. Testes não enviam eventos a GA4 nem concluem checkout.
 - Testar a fronteira de release com configuração inválida, revisão desatualizada, preparo repetido idempotente, falha antes da substituição e restauração. Conferir que backup, ambiente, credenciais, testes, documentos e futuro admin não integram o artefato público.

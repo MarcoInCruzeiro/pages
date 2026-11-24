@@ -103,8 +103,26 @@ test('conteúdo digital não acrescenta frequência nem consumo de produtos', ()
     const withoutDigital = engine.buildUserProfile({ ...fullAnswers, digitalExperience: false });
     const withDigital = engine.buildUserProfile({ ...fullAnswers, digitalExperience: true });
     assert.equal(withoutDigital.frecuencia, withDigital.frecuencia);
-    assert.equal(withoutDigital.productos, withDigital.productos);
+    assert.equal(withoutDigital.descuentos, withDigital.descuentos);
     assert.ok(withDigital.experiencias > withoutDigital.experiencias);
+});
+
+test('respostas "às vezes" de compra e conteúdo digital valem o ponto médio', () => {
+    for (const key of ['wantsStoreDiscount', 'digitalExperience']) {
+        assert.deepEqual(engine.QUESTION_BY_KEY[key].options.map((option) => option.value), [true, 'sometimes', false], key);
+        assert.equal(engine.isAnswerValid(engine.QUESTION_BY_KEY[key], 'sometimes'), true, key);
+    }
+    const store = (value) => engine.buildUserProfile({ ...fullAnswers, wantsStoreDiscount: value }).descuentos;
+    assert.deepEqual([store(true), store('sometimes'), store(false)], [8, 4.5, 1]);
+
+    const digital = (value) => engine.buildUserProfile({ ...fullAnswers, wantsParticipation: false, digitalExperience: value }).experiencias;
+    assert.deepEqual([digital(true), digital('sometimes'), digital(false)], [3, 2, 1]);
+});
+
+test('histórico desconhecido usa o texto configurado no checkbox', () => {
+    const history = engine.QUESTION_BY_KEY.gamesHistory;
+    assert.equal(history.unknownLabel, 'Não sei');
+    assert.equal(engine.getAnswerError(history), 'Escolha uma quantidade de jogos ou marque “Não sei”.');
 });
 
 test('frequência declarada não implica interesse em produtos ou experiências', () => {
@@ -123,7 +141,7 @@ test('frequência declarada não implica interesse em produtos ou experiências'
         gameFrequency: 'always'
     });
     assert.ok(always.frecuencia > occasional.frecuencia);
-    assert.equal(always.productos, occasional.productos);
+    assert.equal(always.descuentos, occasional.descuentos);
     assert.equal(always.experiencias, occasional.experiencias);
 });
 
@@ -239,12 +257,12 @@ test('exemplo de desconto do Max permanece unitário para titular e acompanhante
     const ticket = engine.getTicketBenefit(plan, { ...fullAnswers, gamesPerYear: 12, buysTwoTickets: true });
     assert.equal(ticket.quantidade, 2);
     assert.equal(ticket.desconto, 0.65);
-    assert.match(ticket.text, /Até 2 ingressos/);
-    assert.match(ticket.text, /R\$ 150 por R\$ 52,50/);
+    assert.match(ticket.text, /até 2 ingressos por jogo/i);
+    assert.match(ticket.text, /Ex\.: de R\$ 150 por R\$ 52,50 cada/);
     assert.equal(engine.getTicketBenefit(plan, { ...fullAnswers, gamesPerYear: 30, kidsCount: 1 }).text, ticket.text);
 });
 
-test('taxas e preços de opcionais não entram no componente de preço nem no índice', () => {
+test('taxas e preços de opcionais não entram no índice', () => {
     const original = engine.recommendPlans(fullAnswers);
     const catalog = structuredClone(engine.plans);
     catalog.forEach((plan) => {
@@ -255,8 +273,7 @@ test('taxas e preços de opcionais não entram no componente de preço nem no í
     original.all.forEach((item) => {
         const other = changed.all.find((candidate) => candidate.plan.slug === item.plan.slug);
         assert.equal(other.score, item.score, item.plan.slug);
-        assert.equal(other.components.find((c) => c.key === 'price').value,
-            item.components.find((c) => c.key === 'price').value);
+        assert.deepEqual(other.components, item.components);
     });
 });
 
@@ -280,6 +297,66 @@ test('ranking é determinístico, finito e respeita o orçamento', () => {
     first.eligible.forEach((item) => {
         assert.ok(item.pricing.subscription <= fullAnswers.budget);
     });
+});
+
+test('preço só filtra o orçamento: mudar preços elegíveis não altera índices nem ordem', () => {
+    const original = engine.recommendPlans(fullAnswers);
+    const catalog = structuredClone(engine.plans);
+    for (const [index, plan] of catalog.entries()) {
+        const price = 200 - index * 40;
+        Object.assign(plan.contratacao, { precoMensal: price, precoMensalEquivalente: price, valorParcela: price });
+    }
+    const changed = engine.recommendPlans(fullAnswers, catalog);
+    assert.deepEqual(changed.eligible.map((p) => [p.plan.slug, p.score]),
+        original.eligible.map((p) => [p.plan.slug, p.score]));
+    assert.ok(changed.all.every((p) => p.components.every((c) => c.key !== 'price')));
+});
+
+test('preço não desempata planos com os mesmos benefícios', () => {
+    const plan = structuredClone(engine.assinaturasSocios.cabuloso);
+    const expensive = { ...plan, slug: 'gemeo-a', contratacao: { ...plan.contratacao, precoMensalEquivalente: 200 } };
+    const cheap = { ...plan, slug: 'gemeo-b', contratacao: { ...plan.contratacao, precoMensalEquivalente: 12 } };
+    const forward = engine.recommendPlans(fullAnswers, [cheap, expensive]);
+    const backward = engine.recommendPlans(fullAnswers, [expensive, cheap]);
+    assert.equal(forward.all[0].score, forward.all[1].score);
+    assert.deepEqual(forward.all.map((p) => p.plan.slug), ['gemeo-a', 'gemeo-b']);
+    assert.deepEqual(backward.all.map((p) => p.plan.slug), ['gemeo-a', 'gemeo-b']);
+});
+
+test('orçamento não muda a afinidade dos planos que continuam elegíveis', () => {
+    const low = engine.recommendPlans({ ...fullAnswers, budget: 100 });
+    const high = engine.recommendPlans({ ...fullAnswers, budget: 400 });
+    for (const item of low.eligible) {
+        assert.equal(item.score, high.eligible.find((p) => p.plan.slug === item.plan.slug).score);
+    }
+    assert.deepEqual(low.eligible.map((p) => p.plan.slug),
+        high.eligible.filter((p) => p.pricing.subscription <= 100).map((p) => p.plan.slug));
+});
+
+test('as quatro divergências rejeitadas recomendam os benefícios esperados', () => {
+    const historical = require('./fixtures/four-plans/historical.json');
+    const profiles = require('./fixtures/four-plans/profiles.json');
+    const ids = ['CAL-02', 'CAL-10', 'PER-02-C', 'RES-05'];
+    const scenarios = [...historical.scenarios, ...profiles.scenarios].filter((s) => ids.includes(s.id));
+    assert.equal(scenarios.length, 4);
+    for (const scenario of scenarios) {
+        const result = engine.recommendPlans(scenario.answers);
+        assert.ok(scenario.acceptable.includes(result.winner.plan.slug),
+            `${scenario.id}: ${result.winner.plan.slug}; esperado ${scenario.acceptable.join(', ')}`);
+    }
+});
+
+test('sem necessidade presencial, ingresso, prioridade e setor não distinguem planos', () => {
+    const answers = { ...fullAnswers, gamesPerYear: 0, wantsGuaranteedTicket: 'never', gameFrequency: 'occasional' };
+    const result = engine.recommendPlans(answers);
+    const cabuloso = result.all.find((p) => p.plan.slug === 'cabuloso');
+    const max = result.all.find((p) => p.plan.slug === 'cabuloso-max');
+    assert.equal(cabuloso.score, max.score, 'benefícios presenciais não usados não devem favorecer o Max');
+    for (const item of result.all) {
+        for (const key of ['ticket', 'priority', 'sector']) {
+            assert.equal(item.components.find((c) => c.key === key).weight, 0, key);
+        }
+    }
 });
 
 test('enumeração representativa recalcula o espaço finito de respostas', (t) => {
@@ -429,12 +506,13 @@ test('exemplo documentado da fórmula: 10 jogos, histórico 10, Sicoob, teto 100
     const result = engine.recommendPlans(answers);
     const byslug = Object.fromEntries(result.all.map((item) => [item.plan.slug, item]));
 
-    assert.deepEqual(result.eligible.map((item) => item.plan.slug), ['cabuloso', 'meu-cruzeiro', 'time-do-povo']);
-    // A retirada comercial muda somente a normalização de preço (máximo ativo 200).
-    assert.equal(byslug.cabuloso.score, 78.3);
-    assert.equal(byslug['time-do-povo'].score, 67);
-    assert.equal(byslug['meu-cruzeiro'].score, 72.3);
-    assert.equal(byslug['cabuloso-max'].score, 59.4);
+    assert.deepEqual(result.eligible.map((item) => item.plan.slug), ['cabuloso', 'time-do-povo', 'meu-cruzeiro']);
+    // Histórico 10 → nível 2 (55%): utilidade do ingresso 0,88; Max (65%) → 1.
+    // Gratuito por temporada com 10 jogos: 0,45 + 0,4 × 1/10 = 0,49, fora do setor (× 0,1).
+    assert.equal(byslug.cabuloso.score, 94.1);
+    assert.equal(byslug['time-do-povo'].score, 54.4);
+    assert.equal(byslug['meu-cruzeiro'].score, 53.8);
+    assert.equal(byslug['cabuloso-max'].score, 98.8);
     assert.equal(byslug['cabuloso-max'].eligibility.withinBudget, false);
     assert.equal(byslug.cabuloso.pricing.subscription, 100);
     assert.equal(byslug['cabuloso-cativo'], undefined);
@@ -447,13 +525,78 @@ test('exemplo documentado da fórmula: 10 jogos, histórico 10, Sicoob, teto 100
     });
 });
 
-test('nível do ingresso não altera o valor de assinatura do Cabuloso', () => {
+test('nível do ingresso altera só o benefício do Cabuloso, nunca o valor de assinatura', () => {
     const level1 = engine.recommendPlans({ ...fullAnswers, gamesHistory: 0 }).all.find((item) => item.plan.slug === 'cabuloso');
     const level3 = engine.recommendPlans({ ...fullAnswers, gamesHistory: 25 }).all.find((item) => item.plan.slug === 'cabuloso');
     const ticket = (item) => item.components.find((c) => c.key === 'ticket').value;
-    assert.equal(ticket(level1), ticket(level3));
+    assert.ok(ticket(level3) > ticket(level1), 'desconto maior vale mais no componente de ingresso');
     assert.deepEqual(level3.pricing, level1.pricing);
-    assert.equal(level3.components.find((c) => c.key === 'price').value, level1.components.find((c) => c.key === 'price').value);
+    assert.ok(level3.components.every((c) => c.key !== 'price'));
+});
+
+test('utilidade do ingresso com desconto cresce com o percentual do catálogo', () => {
+    const utility = (slug, history) => engine.getTicketBenefit(engine.plans.find((p) => p.slug === slug), { ...fullAnswers, gamesHistory: history }).score;
+    assert.equal(utility('cabuloso', 0), 0.8, '50% é a referência e mantém a utilidade configurada');
+    assert.equal(utility('cabuloso', 10), 0.88);
+    assert.equal(utility('cabuloso', 25), 0.96);
+    assert.equal(utility('cabuloso-max', 'unknown'), 1, '65% atinge o teto 1');
+    const utilities = engine.plans.map((plan) => engine.getTicketBenefit(plan, fullAnswers).score);
+    assert.ok(utilities.every((value) => value >= 0 && value <= 1));
+});
+
+test('ingresso por temporada vale mais quando cobre parcela maior dos jogos declarados', () => {
+    const meuCruzeiro = engine.assinaturasSocios.meuCruzeiro;
+    const timeDoPovo = engine.assinaturasSocios.timeDoPovo;
+    const utility = (plan, games) => engine.getTicketBenefit(plan, { ...fullAnswers, gamesPerYear: games }).score;
+    assert.equal(utility(meuCruzeiro, 1), 0.85, '1 ingresso cobre o único jogo: utilidade base + bônus integral');
+    assert.equal(utility(meuCruzeiro, 2), 0.65, 'cobre metade dos jogos');
+    assert.equal(utility(meuCruzeiro, 10), 0.49);
+    assert.equal(utility(meuCruzeiro, 30), 0.463333);
+    assert.ok(utility(meuCruzeiro, 1) > utility(timeDoPovo, 1), 'com um jogo, o ingresso gratuito supera o popular');
+    assert.ok(utility(meuCruzeiro, 2) < utility(timeDoPovo, 2), 'com dois jogos, o popular por jogo supera');
+    assert.equal(utility(timeDoPovo, 1), utility(timeDoPovo, 30), 'o ingresso por jogo não depende do volume');
+    assert.equal(utility(meuCruzeiro, 0), engine.getDefaultConfiguration().pesosRanking.ticket.utilidades.gratuito, 'sem jogos, utilidade base');
+});
+
+test('com teto de R$ 40, um jogo por ano aponta Meu Cruzeiro e dois ou mais o Time do Povo', () => {
+    const base = { ...fullAnswers, wantsGuaranteedTicket: false, gameFrequency: 'occasional', needsPriority: false, wantsParticipation: false, wantsStoreDiscount: false, digitalExperience: false, budget: 40, preferredSector: 'yellow-orange' };
+    const one = engine.recommendPlans({ ...base, gamesPerYear: 1 });
+    assert.equal(one.winner.plan.slug, 'meu-cruzeiro');
+    assert.ok(one.winner.score > one.runnerUp.score);
+    for (const games of [2, 10]) {
+        const result = engine.recommendPlans({ ...base, gamesPerYear: games });
+        assert.equal(result.winner.plan.slug, 'time-do-povo', `${games} jogos`);
+        assert.ok(result.winner.score > result.runnerUp.score, `${games} jogos`);
+    }
+});
+
+test('sem uso presencial, a capacidade de ingressos para acompanhante não favorece o Max', () => {
+    const answers = { ...fullAnswers, gamesPerYear: 0, wantsGuaranteedTicket: 'never', gameFrequency: 'occasional', buysTwoTickets: true, kidsCount: 1 };
+    const result = engine.recommendPlans(answers);
+    const cabuloso = result.all.find((p) => p.plan.slug === 'cabuloso');
+    const max = result.all.find((p) => p.plan.slug === 'cabuloso-max');
+    assert.equal(cabuloso.score, max.score, 'dois ingressos que ninguém usa não decidem');
+    assert.equal(result.winner.plan.slug, 'cabuloso');
+    const family = (item) => item.components.find((c) => c.key === 'family').value;
+    assert.equal(family(cabuloso), family(max));
+});
+
+test('setor preferido ausente ou inválido é erro explícito, não caminho silencioso', () => {
+    for (const preferredSector of [null, undefined, '', 'verde']) {
+        assert.throws(() => engine.recommendPlans({ ...fullAnswers, preferredSector }), /Setor preferido inválido/);
+    }
+    const ranking = engine.getDefaultConfiguration().pesosRanking;
+    assert.equal(ranking.sector.semPreferencia, undefined);
+    assert.equal(ranking.sector.cobertura.notPreferred, undefined);
+    assert.equal(ranking.ticket.cobertura.notPreferred, undefined);
+});
+
+test('com uso presencial e sem teto, o Max deixa de empatar com o Cabuloso por slug', () => {
+    const result = engine.recommendPlans({ ...fullAnswers, gamesHistory: 25, needsPriority: true });
+    const [first, second] = result.eligible;
+    assert.equal(first.plan.slug, 'cabuloso-max');
+    assert.equal(second.plan.slug, 'cabuloso');
+    assert.ok(first.score > second.score, 'o desempate vem do benefício maior, não do slug');
 });
 
 test('motivos seguem as regras que classificaram o plano', () => {
@@ -479,4 +622,30 @@ test('resultado do motor identifica a versão das regras vigentes', () => {
     assert.equal(result.rulesVersion, engine.RULES_VERSION,
         'rules_version do resultado deve vir do motor vigente, sem cópia literal do valor');
     assert.equal(result.catalogVersion, engine.CATALOG_VERSION);
+});
+
+test('torcedor sem estádio nem compras recebe Meu Cruzeiro em qualquer orçamento', () => {
+    for (const budget of [40, 100, 200, 400]) {
+        const answers = { ...fullAnswers, gamesPerYear: 0, wantsGuaranteedTicket: 'never', gameFrequency: 'occasional', wantsStoreDiscount: false, budget };
+        const result = engine.recommendPlans(answers);
+        assert.equal(result.winner.plan.slug, 'meu-cruzeiro');
+        assert.equal(result.closeCall, false);
+        assert.match(result.recommendationReason, /apoiar o clube/);
+        assert.equal(engine.getCTAText(result.winner.plan, answers), 'Quero ser sócio');
+    }
+});
+
+test('perfis presenciais e de compras têm uma indicação principal dentro do orçamento', () => {
+    const cases = [
+        [{ gamesPerYear: 0, wantsGuaranteedTicket: 'never', gameFrequency: 'occasional', budget: 200 }, 'cabuloso'],
+        [{ budget: 40, preferredSector: 'yellow-orange' }, 'time-do-povo'],
+        [{ budget: 100, preferredSector: 'blue' }, 'cabuloso'],
+        [{ budget: 200, buysTwoTickets: true, preferredSector: 'purple' }, 'cabuloso-max']
+    ];
+    for (const [patch, slug] of cases) {
+        const result = engine.recommendPlans({ ...fullAnswers, ...patch });
+        assert.equal(result.winner.plan.slug, slug);
+        assert.equal(result.closeCall, false);
+        assert.ok(result.winner.eligibility.withinBudget);
+    }
 });
