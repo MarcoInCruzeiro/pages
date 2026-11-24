@@ -79,7 +79,6 @@ const invalid = [
     ['ranking sem peso residual positivo', (c) => {
         c.pesosRanking.presenca.base = 0;
         c.pesosRanking.discount.base = 0;
-        c.pesosRanking.experiences.base = 0;
         c.pesosRanking.family.semFamilia = 0;
     }],
     ['normalização com divisor zero', (c) => { c.pesosRanking.discount.referencia = 0; }],

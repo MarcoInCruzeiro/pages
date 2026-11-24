@@ -831,10 +831,10 @@ describe('SEU PLANO IDEAL — fluxo de navegador', { concurrency: 1 }, () => {
 
         assert.match(columns['Time do Povo']['Desconto na loja'], /Até 10%/);
         assert.match(columns['Time do Povo']['Prioridade / garantia'], /Prioridade 4/);
-        assert.match(columns['Time do Povo']['Conteúdo e votação'], /✓/);
         assert.match(columns['Time do Povo']['Benefício de ingresso'], /popular/i);
         for (const column of Object.values(columns)) {
             assert.equal(Object.hasOwn(column, 'Contratação'), false);
+            assert.equal(Object.hasOwn(column, 'Conteúdo e votação'), false);
             assert.match(column['Preço'], /R\$\s*[\d,.]+ \/ mês/);
             assert.doesNotMatch(Object.values(column).join(' '), /total anual|\d+x\s*R\$/i);
         }

@@ -39,8 +39,6 @@
       "percentual": 0.1,
       "texto": "Até 10% em produtos e serviços oficiais"
     },
-    "conteudoExclusivo": true,
-    "votacao": true,
     "opcionais": {
       "kids": {
         "disponivel": true,
@@ -100,8 +98,6 @@
       "percentual": 0.1,
       "texto": "Até 10% em produtos e serviços oficiais"
     },
-    "conteudoExclusivo": true,
-    "votacao": true,
     "opcionais": {
       "kids": {
         "disponivel": true,
@@ -186,8 +182,6 @@
       "percentual": 0.15,
       "texto": "Até 15% em produtos e serviços oficiais"
     },
-    "conteudoExclusivo": true,
-    "votacao": true,
     "opcionais": {
       "kids": {
         "disponivel": true,
@@ -251,8 +245,6 @@
       "percentual": 0.15,
       "texto": "Até 15% em produtos e serviços oficiais"
     },
-    "conteudoExclusivo": true,
-    "votacao": true,
     "opcionais": {
       "kids": {
         "disponivel": true,

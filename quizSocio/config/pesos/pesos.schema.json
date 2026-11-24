@@ -228,44 +228,6 @@
           ],
           "additionalProperties": false
         },
-        "experiences": {
-          "type": "object",
-          "properties": {
-            "base": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            },
-            "escala": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 100
-            },
-            "ambos": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 1
-            },
-            "um": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 1
-            },
-            "nenhum": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 1
-            }
-          },
-          "required": [
-            "base",
-            "escala",
-            "ambos",
-            "um",
-            "nenhum"
-          ],
-          "additionalProperties": false
-        },
         "family": {
           "type": "object",
           "properties": {
@@ -311,7 +273,6 @@
         "priority",
         "sector",
         "discount",
-        "experiences",
         "family"
       ],
       "additionalProperties": false

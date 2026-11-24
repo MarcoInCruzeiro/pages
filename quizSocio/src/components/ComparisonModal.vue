@@ -109,7 +109,6 @@ const featureDefinitions = [
     } },
     { label: 'Prioridade / garantia', cell: (plan) => ({ kind: 'text', text: motor.getPriority(plan, props.answers).label }) },
     { label: 'Desconto na loja', cell: (plan) => ({ kind: 'availability', available: true, text: plan.loja.texto }) },
-    { label: 'Conteúdo e votação', cell: (plan) => ({ kind: 'availability', available: plan.conteudoExclusivo && plan.votacao }) },
     { label: 'Kids', cell: (plan) => ({
         kind: 'availability', available: plan.opcionais.kids.disponivel,
         text: plan.opcionais.kids.disponivel ? `${motor.formatBRL(plan.opcionais.kids.precoMensal)}/mês por criança (até ${plan.opcionais.kids.maxCriancas})` : ''

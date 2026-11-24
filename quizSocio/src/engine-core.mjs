@@ -418,12 +418,6 @@ export function createEngine(configuration) {
 
         benefits.push(describeStoreDiscount(plan));
 
-        if (plan.conteudoExclusivo && plan.votacao) {
-            benefits.push('Acesse conteúdo exclusivo, quiz e votações online');
-        } else if (plan.conteudoExclusivo) {
-            benefits.push('Acesse conteúdo exclusivo');
-        }
-
         if (plan.opcionais.kids.disponivel) {
             benefits.push(`Kids opcional: ${formatBRL(plan.opcionais.kids.precoMensal)}/mês por criança · até ${plan.opcionais.kids.maxCriancas} menores de ${plan.opcionais.kids.idadeMaxima} anos`);
         }
@@ -478,7 +472,7 @@ export function createEngine(configuration) {
         return ctas[plan.slug] || 'Assinar agora';
     }
 
-    const COMPONENT_KEYS = ['ticket', 'priority', 'sector', 'discount', 'experiences', 'family'];
+    const COMPONENT_KEYS = ['ticket', 'priority', 'sector', 'discount', 'family'];
 
     /*
      * Pesos: o quanto cada componente importa para esta pessoa. Dependem só do
@@ -495,7 +489,6 @@ export function createEngine(configuration) {
             priority: attendance * (ranking.priority.base + ranking.priority.escala * priorityShare),
             sector: attendance * ranking.sector.comPreferencia,
             discount: answers.wantsStoreDiscount === false ? 0 : ranking.discount.base + ranking.discount.escala * (profile.descuentos / 10),
-            experiences: ranking.experiences.base + ranking.experiences.escala * (profile.experiencias / 10),
             family: hasFamily ? ranking.family.comFamilia : ranking.family.semFamilia
         };
     }
@@ -529,8 +522,6 @@ export function createEngine(configuration) {
             priority: priority.garantido ? 1 : clamp((ranking.priority.pior - priority.value) / ranking.priority.intervalo, 0, 1),
             sector: ranking.sector.cobertura[coverageKey],
             discount: clamp(plan.loja.percentual / ranking.discount.referencia, 0, 1),
-            experiences: plan.conteudoExclusivo && plan.votacao ? ranking.experiences.ambos
-                : (plan.conteudoExclusivo || plan.votacao ? ranking.experiences.um : ranking.experiences.nenhum),
             family: familyValue
         };
     }
@@ -600,13 +591,6 @@ export function createEngine(configuration) {
             reasons.push({
                 tone: 'positive',
                 text: `${describeStoreDiscount(plan)}.`
-            });
-        }
-
-        if (profile.experiencias >= 6 && plan.conteudoExclusivo && plan.votacao) {
-            reasons.push({
-                tone: 'positive',
-                text: 'Participe de quiz e votações online e acesse conteúdo exclusivo do clube.'
             });
         }
 

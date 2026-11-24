@@ -41,13 +41,6 @@
     "escala": 0.8,
     "referencia": 0.15
   },
-  "experiences": {
-    "base": 0.2,
-    "escala": 0.8,
-    "ambos": 1,
-    "um": 0.7,
-    "nenhum": 0.1
-  },
   "family": {
     "comFamilia": 0.7,
     "semFamilia": 0.05,

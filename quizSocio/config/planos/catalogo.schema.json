@@ -17,8 +17,6 @@
       "prioridade",
       "garantiaIngresso",
       "loja",
-      "conteudoExclusivo",
-      "votacao",
       "opcionais",
       "camposPendentes",
       "id"
@@ -237,12 +235,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "conteudoExclusivo": {
-        "type": "boolean"
-      },
-      "votacao": {
-        "type": "boolean"
       },
       "opcionais": {
         "type": "object",

@@ -21,8 +21,8 @@ test('catálogo mantém quatro planos ativos e as condições comerciais aceitas
     const tdp = engine.assinaturasSocios.timeDoPovo;
     assert.equal(tdp.loja.percentual, 0.10);
     assert.equal(tdp.prioridade, 4);
-    assert.equal(tdp.conteudoExclusivo, true);
-    assert.equal(tdp.votacao, true);
+    assert.equal('conteudoExclusivo' in tdp, false);
+    assert.equal('votacao' in tdp, false);
     assert.equal(tdp.ingresso.tipo, 'popular');
     assert.equal(tdp.ingresso.quantidade, 1);
     assert.deepEqual(tdp.ingresso.setores, [
@@ -509,10 +509,10 @@ test('exemplo documentado da fórmula: 10 jogos, histórico 10, Sicoob, teto 100
     assert.deepEqual(result.eligible.map((item) => item.plan.slug), ['cabuloso', 'time-do-povo', 'meu-cruzeiro']);
     // Histórico 10 → nível 2 (55%): utilidade do ingresso 0,88; Max (65%) → 1.
     // Gratuito por temporada com 10 jogos: 0,45 + 0,4 × 1/10 = 0,49, fora do setor (× 0,1).
-    assert.equal(byslug.cabuloso.score, 94.1);
-    assert.equal(byslug['time-do-povo'].score, 54.4);
-    assert.equal(byslug['meu-cruzeiro'].score, 53.8);
-    assert.equal(byslug['cabuloso-max'].score, 98.8);
+    assert.equal(byslug.cabuloso.score, 88.5);
+    assert.equal(byslug['time-do-povo'].score, 10.6);
+    assert.equal(byslug['meu-cruzeiro'].score, 9.5);
+    assert.equal(byslug['cabuloso-max'].score, 97.7);
     assert.equal(byslug['cabuloso-max'].eligibility.withinBudget, false);
     assert.equal(byslug.cabuloso.pricing.subscription, 100);
     assert.equal(byslug['cabuloso-cativo'], undefined);

@@ -41,7 +41,6 @@ A revisão de quatro planos foi solicitada pelo usuário na spec de migração. 
 | Setores | Amarelo (inferior ou superior) ou Laranja (inferior ou superior) |
 | Prioridade | 4 |
 | Loja | Até 10% em produtos e serviços oficiais |
-| Conteúdo, quiz e votação | Sim |
 | Carteirinha | Digital; física opcional por R$ 30 |
 | Kids | Opcional: R$ 30/mês por criança, até 3 menores de 12 anos |
 | PcD | Não |
@@ -57,7 +56,6 @@ A revisão de quatro planos foi solicitada pelo usuário na spec de migração. 
 | Setores | Amarelo (inferior ou superior) ou Laranja (inferior ou superior) |
 | Prioridade | 4 |
 | Loja | Até 10% em produtos e serviços oficiais |
-| Conteúdo, quiz e votação | Sim |
 | Carteirinha | Física incluída |
 | Kids | Opcional: R$ 30/mês por criança, até 3 menores de 12 anos |
 | PcD | Não |
@@ -74,7 +72,6 @@ A revisão de quatro planos foi solicitada pelo usuário na spec de migração. 
 | Níveis | 0–9 jogos em 15 meses: nível 1, prioridade 3, 50%; 10–19: nível 2, prioridade 2, 55%; 20 ou mais: nível 3, prioridade 1, 60% |
 | Histórico não confirmado | Nível 1 (condição inicial), identificado como projeção |
 | Loja | Até 15% em produtos e serviços oficiais |
-| Conteúdo, quiz e votação | Sim |
 | Carteirinha | Física incluída |
 | Kids | Opcional: R$ 30/mês por criança, até 3 menores de 12 anos |
 | PcD | Opcional gratuito no Sicoob — Leste Inferior, mediante análise e disponibilidade |
@@ -90,7 +87,6 @@ A revisão de quatro planos foi solicitada pelo usuário na spec de migração. 
 | Setores | Amarelo, Laranja, Sicoob/Leste e Roxo (inferior e superior) |
 | Prioridade | 1 |
 | Loja | Até 15% em produtos e serviços oficiais |
-| Conteúdo, quiz e votação | Sim |
 | Carteirinha | Física incluída |
 | Kids | Opcional: R$ 30/mês por criança, até 3 menores de 12 anos |
 | PcD | Não |
@@ -125,6 +121,7 @@ Os destinos de contratação usam o plano e o intervalo vigentes. A abertura dos
 | Cabuloso — prioridade | Lista de níveis sem uso no ranking | Prioridade derivada do nível 1/2/3 | Torna prioridade e desconto coerentes com o histórico informado |
 | Cabuloso Max — exemplo de preço | “R$ 150 por R$ 52” | 65% sobre R$ 150 = R$ 52,50 | Corrige arredondamento; o card usa o percentual e o valor calculado |
 | Todos — desconto em parceiros | `true` sem confirmação | Não confirmado na fonte | Removido dos benefícios e mantido como campo pendente |
+| Todos — conteúdo, quiz e votação | `conteudoExclusivo` e `votacao` = `true` | Removido do catálogo em 24/11/2026 | Sai dos benefícios, dos motivos e do comparativo; o componente `experiences` deixa o ranking |
 
 ## Campos pendentes
 

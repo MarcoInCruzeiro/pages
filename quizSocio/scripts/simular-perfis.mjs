@@ -38,7 +38,6 @@ const COMPONENTES = Object.freeze({
     priority: { nome: 'Prioridade', regra: '`ranking.priority` e `getPriority`' },
     sector: { nome: 'Setor', regra: '`ranking.sector` e `getSectorFit`' },
     discount: { nome: 'Desconto na loja', regra: '`ranking.discount` e `perfil.descuentos`' },
-    experiences: { nome: 'Experiências e conteúdo', regra: '`ranking.experiences` e `perfil.experiencias`' },
     family: { nome: 'Acompanhantes e Kids', regra: '`ranking.family`' }
 });
 

@@ -23,12 +23,12 @@ Fonte oficial consultada em 26/10/2026: https://socio.cruzeiro.com.br/pt-BR/pagi
 
 A matriz completa, com taxa de adesão, setores, níveis, opcionais e divergências, está em [`catalogo-comercial.md`](catalogo-comercial.md). Resumo usado pelo quiz:
 
-| Plano | Contratação exibida | Ingresso | Prioridade/garantia | Loja | Conteúdo e votação |
-|---|---|---|---|---|---|
-| Meu Cruzeiro | R$ 12/mês de referência; cobrança semestral ou anual; sem adesão | 1 gratuito por temporada, Amarelo/Laranja, mediante disponibilidade | Prioridade 4 | Até 10% | Sim |
-| Time do Povo | R$ 40/mês de referência; cobrança semestral ou anual; adesão R$ 30 | 1 popular pelo menor valor online da arquibancada, Amarelo/Laranja | Prioridade 4 | Até 10% | Sim |
-| Cabuloso | R$ 100/mês de referência; cobrança semestral ou anual; adesão R$ 30 | 1 com desconto progressivo de 50% a 60% | Nível 1: prioridade 3; nível 2: 2; nível 3: 1 | Até 15% | Sim |
-| Cabuloso Max | R$ 200/mês de referência; cobrança semestral ou anual; adesão R$ 30 | Até 2 com 65% de desconto | Prioridade 1 | Até 15% | Sim |
+| Plano | Contratação exibida | Ingresso | Prioridade/garantia | Loja |
+|---|---|---|---|---|
+| Meu Cruzeiro | R$ 12/mês de referência; cobrança semestral ou anual; sem adesão | 1 gratuito por temporada, Amarelo/Laranja, mediante disponibilidade | Prioridade 4 | Até 10% |
+| Time do Povo | R$ 40/mês de referência; cobrança semestral ou anual; adesão R$ 30 | 1 popular pelo menor valor online da arquibancada, Amarelo/Laranja | Prioridade 4 | Até 10% |
+| Cabuloso | R$ 100/mês de referência; cobrança semestral ou anual; adesão R$ 30 | 1 com desconto progressivo de 50% a 60% | Nível 1: prioridade 3; nível 2: 2; nível 3: 1 | Até 15% |
+| Cabuloso Max | R$ 200/mês de referência; cobrança semestral ou anual; adesão R$ 30 | Até 2 com 65% de desconto | Prioridade 1 | Até 15% |
 
 Regras que a interface deve preservar:
 
@@ -47,10 +47,10 @@ Regras que a interface deve preservar:
 | 4 | `buysTwoTickets` | Opção | `true`, `false` | Necessidade de acompanhante adulto |
 | 5 | `kidsCount` | Opção | 0 (Não), 1 (Sim) | Interesse em incluir uma criança no plano |
 | 6 | `needsPriority` | Opção | `true`, `false` | Importância de prioridade na compra |
-| 7 | `wantsParticipation` | Opção | `true`, `false` | Interesse em experiências e conteúdo |
+| 7 | `wantsParticipation` | Opção | `true`, `false` | Interesse em experiências e conteúdo (registrado no GA4; sem efeito no ranking desde 24/11/2026) |
 | 8 | `wantsStoreDiscount` | Opção | `true` (sempre compro), `sometimes` (compro às vezes), `false` (nunca compro) | Interesse em produtos oficiais |
 | 9 | `gameFrequency` | Opção | `always`, `frequent`, `occasional` | Frequência declarada; detecta conflito com jogos |
-| 10 | `digitalExperience` | Opção | `true` (com frequência), `sometimes` (às vezes), `false` (nunca) | Interesse em conteúdo digital |
+| 10 | `digitalExperience` | Opção | `true` (com frequência), `sometimes` (às vezes), `false` (nunca) | Interesse em conteúdo digital (registrado no GA4; sem efeito no ranking desde 24/11/2026) |
 | 11 | `budget` | Opção | 40, 100, 200, 400 | Teto mensal da assinatura, não do uso |
 | 12 | `preferredSector` | Opção | `yellow-orange`, `blue`, `purple` | Preferência flexível de setor |
 
@@ -110,7 +110,7 @@ Valores apresentados são formatados em reais com centavos. O índice de afinida
 
 ## 6. Ranking — média ponderada transparente
 
-Cada plano recebe seis componentes normalizados entre 0 e 1, vinculados a benefícios. O orçamento não é atributo de afinidade:
+Cada plano recebe cinco componentes normalizados entre 0 e 1, vinculados a benefícios. O orçamento não é atributo de afinidade:
 
 | Componente | Valor |
 |---|---|
@@ -118,7 +118,6 @@ Cada plano recebe seis componentes normalizados entre 0 e 1, vinculados a benef�
 | `priority` | Garantido → 1; caso contrário (`5 − prioridade`) / 4, limitado a 0–1 |
 | `sector` | Preferência completa → 1; parcial → 0,6; fora → 0. A pergunta de setor é obrigatória; não há caminho "sem preferência" (removido em 10/11/2026) |
 | `discount` | Percentual da loja / 0,15, limitado a 1 |
-| `experiences` | Conteúdo e votação → 1; apenas um → 0,7; nenhum → 0,1 |
 | `family` | Sem acompanhantes nem Kids → 0,6. Com família: 0,6 × cobertura de ingressos + 0,4 × suporte a Kids. Sem uso presencial a cobertura de ingressos vale 1 para todos os planos (desde 12/11/2026): dois ingressos que ninguém usa não decidem |
 
 Pesos:
@@ -129,7 +128,6 @@ pesoIngresso = presenca × (1 + 0,15 × prioridad / 10)
 pesoPrioridade = presenca × (0,2 + 0,8 × prioridad / 10)
 pesoSector = 0,8 × presenca
 pesoDesconto = 0,2 + 0,8 × descuentos / 10
-pesoExperiencia = 0,2 + 0,8 × experiencias / 10
 pesoFamilia = 0,7 com acompanhantes ou Kids; 0,05 sem
 ```
 
@@ -144,7 +142,7 @@ Os índices e métricas citados nesta subseção descrevem a revisão anterior d
 - **Desconto de ingresso:** percentual e exemplo unitário permanecem no benefício. Desde 10/11/2026 a utilidade do tipo desconto cresce com o percentual do catálogo (`ticket.descontoReferencia` = 0,50 mantém 50% em 0,80); nenhum custo mensal de ingressos é calculado. Isso desfaz os empates Cabuloso/Max que eram decididos por slug quando há uso presencial.
 - **Setor:** o multiplicador do `ticket` mede onde o benefício vale; o componente `sector` mede a preferência atendida. Desde 03/11/2026, ingresso, prioridade e setor têm peso zero quando a necessidade presencial é zero, evitando que benefícios não usados decidam o resultado.
 - **Consumo:** `descuentos` pesa apenas a loja. O campo `productos` (cópia de `descuentos`) e `setorPreferido` foram removidos do perfil em 10/11/2026 porque nada os lia; o setor é lido das respostas.
-- **Frequência:** pesa ingresso e prioridade, que são benefícios diferentes; não pesa loja nem conteúdo.
+- **Frequência:** pesa ingresso e prioridade, que são benefícios diferentes; não pesa loja.
 - **Volume de jogos, desde 12/11/2026:** o ingresso gratuito por temporada do Meu Cruzeiro vale pela parcela dos jogos declarados que cobre (`ticket.bonusCoberturaTemporada`). Com teto de R$ 40, um jogo por ano aponta Meu Cruzeiro; dois ou mais, Time do Povo. A capacidade de ingressos para acompanhante só distingue planos com uso presencial.
 - **Bônus de setor:** o bônus manual de 6 pontos do commit `2cecf81` foi substituído pela cobertura explícita de setores do catálogo.
 
@@ -154,12 +152,12 @@ Entrada: 10 jogos por ano, histórico 10 (Cabuloso nível 2, 55%), foco nos jogo
 
 | Plano | Assinatura/mês de referência | Adesão única separada | Setor | Índice | Elegível |
 |---|---|---|---|---|---|
-| Cabuloso | R$ 100 | R$ 30 | Completo | 95,0 | Sim — vencedor |
-| Cabuloso Max | R$ 200 | R$ 30 | Completo | 99,0 | Não (R$ 200 > R$ 100) |
-| Meu Cruzeiro | R$ 12 | Sem taxa | Fora | 55,6 | Sim |
-| Time do Povo | R$ 40 | R$ 30 | Fora | 56,2 | Sim |
+| Cabuloso | R$ 100 | R$ 30 | Completo | 88,5 | Sim — vencedor |
+| Cabuloso Max | R$ 200 | R$ 30 | Completo | 97,7 | Não (R$ 200 > R$ 100) |
+| Meu Cruzeiro | R$ 12 | Sem taxa | Fora | 9,5 | Sim |
+| Time do Povo | R$ 40 | R$ 30 | Fora | 10,6 | Sim |
 
-Índices conferidos na calibração de 12/11/2026 ([registro](docs/calibracao-pesos-2026-11-12.md)); a regra do ingresso por temporada não muda este exemplo.
+Índices conferidos em 24/11/2026, após a remoção de conteúdo exclusivo, quiz e votação do catálogo e do componente `experiences` do ranking. A ordem é a mesma da [calibração de 12/11/2026](docs/calibracao-pesos-2026-11-12.md); os índices de Meu Cruzeiro e Time do Povo caem porque este perfil não pesa loja e o componente removido valia 1 em todos os planos.
 
 ## 7. Filtro, setor e desempate
 

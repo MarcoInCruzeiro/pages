@@ -56,7 +56,7 @@ export function validateConfiguration(configuration) {
     if (profile.frecuencia.volume + profile.frecuencia.presenca + profile.frecuencia.declaracao <= 0) fail('perfil', 'frecuencia', 'soma de pesos precisa ser positiva');
     if (ranking.priority.intervalo <= 0 || ranking.discount.referencia <= 0) fail('ranking', 'normalização', 'divisores precisam ser positivos');
     // A presença pode zerar: os benefícios restantes precisam sustentar o índice.
-    const minimumTotalWeight = ranking.discount.base + ranking.experiences.base + Math.min(ranking.family.comFamilia, ranking.family.semFamilia);
+    const minimumTotalWeight = ranking.discount.base + Math.min(ranking.family.comFamilia, ranking.family.semFamilia);
     if (minimumTotalWeight <= 0) fail('ranking', 'pesos', 'soma residual de pesos precisa ser positiva para todo perfil');
     if (ranking.family.capacidade + ranking.family.kids !== 1) fail('ranking', 'family', 'capacidade e Kids devem somar 1');
     if (profile.adultos.true !== 1 || profile.adultos.false !== 0 || profile.kids.max !== 3) fail('perfil', 'família', 'cardinalidades de adultos e Kids são parte do contrato');
