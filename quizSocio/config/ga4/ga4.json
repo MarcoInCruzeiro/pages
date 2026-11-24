@@ -1,0 +1,114 @@
+{
+  "descricao": "Configuração de medição GA4",
+  "versao": "2026-10-27",
+  "propriedade": {
+    "measurementId": "G-EF75QCTCTV",
+    "nome": "Quiz Sócio 5 Estrelas (mesma propriedade do socio.cruzeiro.com.br)"
+  },
+  "ambientesHabilitados": [
+    "quiz-socio.vercel.app"
+  ],
+  "eventos": [
+    {
+      "nome": "inicio_do_quiz",
+      "quando": "Ao iniciar, inclusive depois de refazer",
+      "camposPrincipais": [],
+      "interpretacao": "Inícios de tentativa; uma pessoa pode gerar vários",
+      "chave": "inicio_do_quiz",
+      "tipos": {}
+    },
+    {
+      "nome": "resposta_do_quiz",
+      "quando": "Ao aceitar uma resposta e avançar",
+      "camposPrincipais": [
+        "etapa_do_quiz",
+        "pergunta_do_quiz",
+        "valor_da_resposta",
+        "rotulo_da_resposta",
+        "tempo_de_resposta_seg"
+      ],
+      "interpretacao": "Respostas aceitas, incluindo reenvios após voltar",
+      "chave": "resposta_do_quiz",
+      "tipos": {
+        "etapa_do_quiz": "number",
+        "pergunta_do_quiz": "string",
+        "valor_da_resposta": "string",
+        "rotulo_da_resposta": "string",
+        "tempo_de_resposta_seg": "number"
+      }
+    },
+    {
+      "nome": "quiz_concluido",
+      "quando": "Ao renderizar o resultado após a validação",
+      "camposPrincipais": [
+        "plano_recomendado",
+        "indice_de_afinidade",
+        "compatibilidade",
+        "semantica_do_score",
+        "sem_plano_elegivel",
+        "versao_do_catalogo",
+        "versao_das_regras",
+        "tempo_total_seg",
+        "resposta_*"
+      ],
+      "interpretacao": "Conclusões do quiz; afinidade representa o índice do modelo",
+      "chave": "quiz_concluido",
+      "tipos": {
+        "plano_recomendado": "string",
+        "indice_de_afinidade": "number|null",
+        "compatibilidade": "number|null",
+        "semantica_do_score": "string",
+        "sem_plano_elegivel": "boolean",
+        "versao_do_catalogo": "string",
+        "versao_das_regras": "string",
+        "tempo_total_seg": "number",
+        "resposta_*": "string"
+      }
+    },
+    {
+      "nome": "clique_de_assinatura",
+      "quando": "Ao clicar no CTA do resultado, lista ou comparativo",
+      "camposPrincipais": [
+        "plano",
+        "plano_recomendado",
+        "clicou_no_recomendado",
+        "local_do_cta"
+      ],
+      "interpretacao": "Intenção de contratar; não comprova compra ou assinatura concluída",
+      "chave": "clique_de_assinatura",
+      "tipos": {
+        "plano": "string",
+        "plano_recomendado": "string",
+        "clicou_no_recomendado": "string",
+        "local_do_cta": "string"
+      }
+    }
+  ],
+  "respostas": {
+    "gamesPerYear": "jogos_por_ano",
+    "gamesHistory": "historico_de_jogos",
+    "wantsGuaranteedTicket": "quer_ingresso_garantido",
+    "buysTwoTickets": "compra_dois_ingressos",
+    "kidsCount": "quantidade_de_criancas",
+    "needsPriority": "precisa_de_prioridade",
+    "wantsParticipation": "quer_participacao",
+    "wantsStoreDiscount": "quer_desconto_na_loja",
+    "gameFrequency": "frequencia_de_jogos",
+    "digitalExperience": "experiencia_digital",
+    "budget": "orcamento",
+    "preferredSector": "setor_preferido"
+  },
+  "isolamento": {
+    "camada1": "trackEvent só despacha quando coletaHabilitada é verdadeira",
+    "camada2": "Tag gtag.js e config só injetados quando coletaHabilitada é verdadeira",
+    "ambientesExcluidos": [
+      "localhost",
+      "loopback IPv4/IPv6 (127.0.0.0/8, ::1)",
+      "file://",
+      "preview (?preview, ?preview=1, ?preview=false, #preview)"
+    ],
+    "nota": "_vercel/insights não é coleta GA4 e fica fora do escopo do isolamento"
+  },
+  "limiteParametrosPersonalizados": 20,
+  "observacao": "O teto técnico publicado pelo Google é 25. A política interna é 20."
+}

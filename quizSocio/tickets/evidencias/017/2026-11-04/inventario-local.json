@@ -1,0 +1,84 @@
+{
+  "checkedAt": "2026-11-04T12:24:50.233Z",
+  "clientDate": "2026-11-04",
+  "measurementId": "G-EF75QCTCTV",
+  "propertyNumericId": null,
+  "streamId": null,
+  "enabledHosts": [
+    "quiz-socio.vercel.app"
+  ],
+  "versions": {
+    "catalog": "2026-10-28.2",
+    "rules": "2026-11-03.2",
+    "ga4": "2026-11-03.1"
+  },
+  "events": [
+    {
+      "name": "inicio_do_quiz",
+      "customParameters": []
+    },
+    {
+      "name": "resposta_do_quiz",
+      "customParameters": [
+        "etapa_do_quiz",
+        "pergunta_do_quiz",
+        "valor_da_resposta",
+        "rotulo_da_resposta",
+        "tempo_de_resposta_seg"
+      ]
+    },
+    {
+      "name": "quiz_concluido",
+      "customParameters": [
+        "plano_recomendado",
+        "indice_de_afinidade",
+        "compatibilidade",
+        "semantica_do_score",
+        "sem_plano_elegivel",
+        "versao_do_catalogo",
+        "versao_das_regras",
+        "tempo_total_seg",
+        "resposta_jogos_por_ano",
+        "resposta_historico_de_jogos",
+        "resposta_quer_ingresso_garantido",
+        "resposta_compra_dois_ingressos",
+        "resposta_quantidade_de_criancas",
+        "resposta_precisa_de_prioridade",
+        "resposta_quer_participacao",
+        "resposta_quer_desconto_na_loja",
+        "resposta_frequencia_de_jogos",
+        "resposta_experiencia_digital",
+        "resposta_orcamento",
+        "resposta_setor_preferido"
+      ]
+    },
+    {
+      "name": "clique_de_assinatura",
+      "customParameters": [
+        "plano",
+        "plano_recomendado",
+        "clicou_no_recomendado",
+        "local_do_cta"
+      ]
+    }
+  ],
+  "lastAccessCheck": {
+    "checkedAt": "2026-11-03T17:43:13.173Z",
+    "access": {
+      "browser": "host indisponível; inventário sem navegadores",
+      "ga4Integration": "Windsor.ai localizado, não instalado/conectado",
+      "relevantEnvironmentPresence": {
+        "GOOGLE_APPLICATION_CREDENTIALS": false,
+        "GOOGLE_CLOUD_PROJECT": false,
+        "GA4_PROPERTY_ID": false,
+        "GA4_MEASUREMENT_ID": false,
+        "GA4_ACCESS_TOKEN": false
+      }
+    },
+    "recheckedInThisExecution": false
+  },
+  "adminRead": false,
+  "adminChanged": false,
+  "ga4IngestionConfirmed": false,
+  "crossDomainConfirmed": false
+}

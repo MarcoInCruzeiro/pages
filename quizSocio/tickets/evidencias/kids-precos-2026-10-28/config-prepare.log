@@ -1,0 +1,30 @@
+
+> quiz-socio-5-estrelas@2.0.0 config:prepare
+> node scripts/config-release.mjs prepare --diagnostic
+
+{
+  "metadata": {
+    "catalogVersion": "2026-10-28.2",
+    "rulesVersion": "2026-10-28.4",
+    "ga4Version": "2026-10-28.3",
+    "hashes": {
+      "catalog": "8deb97d4dc4e561e9c054be01866965615c1b08d51c851cecc56af8543952b1e",
+      "questions": "b240eb9e9c8630f26875643e240e8a3e36ead785180261ac9b5cda9fb9dea20e",
+      "ranking": "919d5fd87b99316c905f3bec49f3cd4ce79056a939ed8a5b808c7b75ecdd1b97",
+      "profile": "58dcecda5c785370632e834fff121200222aa57b7770867408863ddb3813dcdb",
+      "ga4": "07cacb43a39652c5d2786fd8823659545bdd1fc3b913401d7b0e752c45a93824",
+      "engine": "6651ee254f759585e88add4b034d19c4bd0cb4bb0247f38a2911ffd4e5857fc4",
+      "schemas": "bee191332bd0320ec3b6622b862586d867af7efefd792f226a8d7f071ac64b8b",
+      "rules": "334a7f1ab4347ce44d5d52e4f6775cf4115e7bec2f0fbff931b556f954e52f7e",
+      "aggregate": "5378e5392ae34ec9f724807850bdc0f85702c3221a3b0268931e048a50550669"
+    }
+  },
+  "snapshot": "/home/marco-repoles/workspace/pages/quizSocio/.scratch/port-vue/config-candidates/revisions/5378e5392ae34ec9f724807850bdc0f85702c3221a3b0268931e048a50550669.json",
+  "releaseApproved": false,
+  "regressions": [
+    "CAL-02",
+    "CAL-10",
+    "PER-02-C",
+    "RES-05"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "verified_on": "2026-10-27",
+  "scope": "HTTP GET only; no login, script execution, form submission or purchase",
+  "pages": [
+    {
+      "slug": "quiz-publico",
+      "url": "https://quiz-socio.vercel.app/",
+      "status": 200,
+      "final_url": "https://quiz-socio.vercel.app/",
+      "title": "Quiz Sócio 5 Estrelas | Cruzeiro",
+      "sha256": "5d46a63533ff3c8d369886bc97b80bc834569efc6f920e1c66fd8ee475b30147",
+      "cloudflare_challenge": false,
+      "source_contains": {
+        "affinity_index": false,
+        "score_semantics": false,
+        "catalog_version": false,
+        "rules_version": false,
+        "quiz-engine.js": false,
+        "AMBIENTES_HABILITADOS": false
+      },
+      "quiz_complete_excerpt": "trackEvent('quiz_complete', {\n                recommended_plan: winner.plan.nome,\n                compatibility: winner.compatibilityPercent,\n                total_time_sec: secondsSince(quizStartedAt),\n                ...answerParams\n            });"
+    },
+    {
+      "slug": "meu-cruzeiro",
+      "url": "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro",
+      "status": 403,
+      "final_url": "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro",
+      "title": "Just a moment...",
+      "sha256": "6dc7c32ec46f84c86303cac303ecaf416e4f5b411a5a8f1caf90fde2354a5af6",
+      "cloudflare_challenge": true,
+      "offer_verified": false
+    },
+    {
+      "slug": "time-do-povo",
+      "url": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo",
+      "status": 403,
+      "final_url": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo",
+      "title": "Just a moment...",
+      "sha256": "17b4bb6e54e768f3b70ad2b84224555799d82d41b61292c6f27863b3ca0b2e10",
+      "cloudflare_challenge": true,
+      "offer_verified": false
+    },
+    {
+      "slug": "cabuloso",
+      "url": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso",
+      "status": 403,
+      "final_url": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso",
+      "title": "Just a moment...",
+      "sha256": "c94c6423603a819a780c6f49d4a0979aecfdfe20b77033dc94504df353f8d27e",
+      "cloudflare_challenge": true,
+      "offer_verified": false
+    },
+    {
+      "slug": "cabuloso-max",
+      "url": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-max",
+      "status": 403,
+      "final_url": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-max",
+      "title": "Just a moment...",
+      "sha256": "6d3b204a842673ec1cde4f467909b9450772767d996cfa5ff2ceb53504c0013b",
+      "cloudflare_challenge": true,
+      "offer_verified": false
+    },
+    {
+      "slug": "cabuloso-cativo",
+      "url": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=115&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-cativo",
+      "status": 403,
+      "final_url": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=115&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-cativo",
+      "title": "Just a moment...",
+      "sha256": "13c89b33c8b8ca623c0430d21822bb4cac93eecb8bcad830b22e2343389e719d",
+      "cloudflare_challenge": true,
+      "offer_verified": false
+    }
+  ]
+}

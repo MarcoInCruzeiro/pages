@@ -1,0 +1,727 @@
+{
+  "data": "2026-11-24",
+  "catalogo": "2026-11-24.1",
+  "regras": "2026-11-24.1",
+  "origem": "Aplicação compilada da pasta principal (quiz/port-vue); respostas sintéticas dadas pela interface",
+  "planos": [
+    {
+      "slug": "meu-cruzeiro",
+      "nome": "Meu Cruzeiro",
+      "preco": "R$ 12,00 / mês",
+      "referencia": "Valor mensal de referência",
+      "adesao": "Sem taxa de adesão",
+      "beneficios": [
+        "1 ingresso gratuito por temporada, mediante disponibilidade",
+        "Prioridade 4 para comprar ingressos (1 é a mais alta)",
+        "Economize até 10% em produtos e serviços oficiais",
+        "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+      ],
+      "cta": "Quero ser sócio",
+      "link": "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro"
+    },
+    {
+      "slug": "time-do-povo",
+      "nome": "Time do Povo",
+      "preco": "R$ 40,00 / mês",
+      "referencia": "Valor mensal de referência",
+      "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+      "beneficios": [
+        "1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade",
+        "Prioridade 4 para comprar ingressos (1 é a mais alta)",
+        "Economize até 10% em produtos e serviços oficiais",
+        "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+      ],
+      "cta": "Quero ingresso popular",
+      "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo"
+    },
+    {
+      "slug": "cabuloso",
+      "nome": "Cabuloso",
+      "preco": "R$ 100,00 / mês",
+      "referencia": "Valor mensal de referência",
+      "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+      "beneficios": [
+        "Economize 50% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 75,00 cada. Mediante disponibilidade.",
+        "Prioridade 3 para comprar ingressos (1 é a mais alta) · nível 1",
+        "Economize até 15% em produtos e serviços oficiais",
+        "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+      ],
+      "cta": "Quero 50% de desconto",
+      "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso"
+    },
+    {
+      "slug": "cabuloso-max",
+      "nome": "Cabuloso Max",
+      "preco": "R$ 200,00 / mês",
+      "referencia": "Valor mensal de referência",
+      "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+      "beneficios": [
+        "Economize 65% em até 2 ingressos por jogo. Ex.: de R$ 150 por R$ 52,50 cada. Mediante disponibilidade.",
+        "Compre ingressos com prioridade 1, a mais alta",
+        "Economize até 15% em produtos e serviços oficiais",
+        "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+      ],
+      "cta": "Quero 65% de desconto",
+      "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-max"
+    }
+  ],
+  "perfis": {
+    "1": {
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 15,
+        "gamesHistory": 5,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": true,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "frequent",
+        "budget": 100,
+        "preferredSector": "blue"
+      },
+      "selo": "Plano recomendado",
+      "plano": "Cabuloso",
+      "preco": "R$ 100,00 / mês",
+      "referencia": "Valor mensal de referência",
+      "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+      "resumo": "Cabuloso é o plano indicado para você. Para sua frequência de 15 jogos por ano, este plano reúne a melhor combinação de ingresso, setor e prioridade dentro do seu orçamento.",
+      "avisoSetor": "",
+      "motivos": [
+        "Para 15 jogos por ano: economize 50% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 75,00 cada. Mediante disponibilidade.",
+        "Para comprar ingressos: prioridade 3 (1 é a mais alta).",
+        "Assinatura: R$ 100,00/mês (referência). Taxa de adesão e opcionais à parte."
+      ],
+      "sobre": [
+        "Cruzamos suas respostas com os benefícios de cada plano para chegar a esta sugestão. Ela é um ponto de partida: vale comparar as opções antes de assinar.",
+        "O orçamento limita quais assinaturas podemos recomendar. Entre elas, a ordem considera os benefícios e suas respostas; o menor preço não aumenta a afinidade. Taxa de adesão, opcionais e ingressos ficam separados.",
+        "Os exemplos de desconto consideram R$ 150 por ingresso de referência; o preço real muda conforme o jogo e o setor. Kids depende de aprovação: ingresso da criança sem custo adicional no setor do titular, mediante disponibilidade e aquisição do ingresso do titular.",
+        "Disponibilidade e condições de cada benefício estão no site do Sócio 5 Estrelas."
+      ],
+      "acoes": [
+        "Refazer quiz",
+        "Comparar planos",
+        "Quero 50% de desconto"
+      ],
+      "tituloLista": "Melhores opções",
+      "subtituloLista": "Em ordem de afinidade com você",
+      "cards": [
+        {
+          "slug": "cabuloso",
+          "selo": "Recomendado",
+          "preco": "R$ 100,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+          "beneficios": [
+            "Economize 50% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 75,00 cada. Mediante disponibilidade.",
+            "Prioridade 3 para comprar ingressos (1 é a mais alta) · nível 1",
+            "Economize até 15% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+          ],
+          "avisoSetor": "",
+          "nota": "Indicado para o seu perfil",
+          "cta": "Quero 50% de desconto",
+          "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso"
+        },
+        {
+          "slug": "time-do-povo",
+          "selo": "Outra opção",
+          "preco": "R$ 40,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+          "beneficios": [
+            "1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade",
+            "Prioridade 4 para comprar ingressos (1 é a mais alta)",
+            "Economize até 10% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+          ],
+          "avisoSetor": "Atenção ao setor: Não cobre Sicoob (Leste, antigo Azul). O benefício de ingresso é em Amarelo (inferior ou superior) ou Laranja (inferior ou superior).",
+          "nota": "Compare os benefícios com o plano indicado",
+          "cta": "Quero ingresso popular",
+          "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo"
+        },
+        {
+          "slug": "meu-cruzeiro",
+          "selo": "Outra opção",
+          "preco": "R$ 12,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Sem taxa de adesão",
+          "beneficios": [
+            "1 ingresso gratuito por temporada, mediante disponibilidade",
+            "Prioridade 4 para comprar ingressos (1 é a mais alta)",
+            "Economize até 10% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+          ],
+          "avisoSetor": "Atenção ao setor: Não cobre Sicoob (Leste, antigo Azul). O benefício de ingresso é em Amarelo (inferior ou superior) ou Laranja (inferior ou superior).",
+          "nota": "Compare os benefícios com o plano indicado",
+          "cta": "Quero ser sócio",
+          "link": "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro"
+        }
+      ]
+    },
+    "2": {
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 15,
+        "gamesHistory": 25,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": true,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "frequent",
+        "budget": 100,
+        "preferredSector": "blue"
+      },
+      "selo": "Plano recomendado",
+      "plano": "Cabuloso",
+      "preco": "R$ 100,00 / mês",
+      "referencia": "Valor mensal de referência",
+      "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+      "resumo": "Cabuloso é o plano indicado para você. Para sua frequência de 15 jogos por ano, este plano reúne a melhor combinação de ingresso, setor e prioridade dentro do seu orçamento.",
+      "avisoSetor": "",
+      "motivos": [
+        "Para 15 jogos por ano: economize 60% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 60,00 cada. Mediante disponibilidade.",
+        "Para comprar ingressos: prioridade 1 (1 é a mais alta).",
+        "Assinatura: R$ 100,00/mês (referência). Taxa de adesão e opcionais à parte."
+      ],
+      "sobre": [
+        "Cruzamos suas respostas com os benefícios de cada plano para chegar a esta sugestão. Ela é um ponto de partida: vale comparar as opções antes de assinar.",
+        "O orçamento limita quais assinaturas podemos recomendar. Entre elas, a ordem considera os benefícios e suas respostas; o menor preço não aumenta a afinidade. Taxa de adesão, opcionais e ingressos ficam separados.",
+        "Os exemplos de desconto consideram R$ 150 por ingresso de referência; o preço real muda conforme o jogo e o setor. Kids depende de aprovação: ingresso da criança sem custo adicional no setor do titular, mediante disponibilidade e aquisição do ingresso do titular.",
+        "Disponibilidade e condições de cada benefício estão no site do Sócio 5 Estrelas."
+      ],
+      "acoes": [
+        "Refazer quiz",
+        "Comparar planos",
+        "Quero 60% de desconto"
+      ],
+      "tituloLista": "Melhores opções",
+      "subtituloLista": "Em ordem de afinidade com você",
+      "cards": [
+        {
+          "slug": "cabuloso",
+          "selo": "Recomendado",
+          "preco": "R$ 100,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+          "beneficios": [
+            "Economize 60% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 60,00 cada. Mediante disponibilidade.",
+            "Compre ingressos com prioridade 1, a mais alta · nível 3",
+            "Economize até 15% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+          ],
+          "avisoSetor": "",
+          "nota": "Indicado para o seu perfil",
+          "cta": "Quero 60% de desconto",
+          "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso"
+        },
+        {
+          "slug": "time-do-povo",
+          "selo": "Outra opção",
+          "preco": "R$ 40,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+          "beneficios": [
+            "1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade",
+            "Prioridade 4 para comprar ingressos (1 é a mais alta)",
+            "Economize até 10% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+          ],
+          "avisoSetor": "Atenção ao setor: Não cobre Sicoob (Leste, antigo Azul). O benefício de ingresso é em Amarelo (inferior ou superior) ou Laranja (inferior ou superior).",
+          "nota": "Compare os benefícios com o plano indicado",
+          "cta": "Quero ingresso popular",
+          "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo"
+        },
+        {
+          "slug": "meu-cruzeiro",
+          "selo": "Outra opção",
+          "preco": "R$ 12,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Sem taxa de adesão",
+          "beneficios": [
+            "1 ingresso gratuito por temporada, mediante disponibilidade",
+            "Prioridade 4 para comprar ingressos (1 é a mais alta)",
+            "Economize até 10% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+          ],
+          "avisoSetor": "Atenção ao setor: Não cobre Sicoob (Leste, antigo Azul). O benefício de ingresso é em Amarelo (inferior ou superior) ou Laranja (inferior ou superior).",
+          "nota": "Compare os benefícios com o plano indicado",
+          "cta": "Quero ser sócio",
+          "link": "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro"
+        }
+      ]
+    },
+    "3": {
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 10,
+        "gamesHistory": 5,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "occasional",
+        "budget": 40,
+        "preferredSector": "yellow-orange"
+      },
+      "selo": "Plano recomendado",
+      "plano": "Time do Povo",
+      "preco": "R$ 40,00 / mês",
+      "referencia": "Valor mensal de referência",
+      "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+      "resumo": "Time do Povo é o plano indicado para você. Para sua frequência de 10 jogos por ano, este plano reúne a melhor combinação de ingresso, setor e prioridade dentro do seu orçamento.",
+      "avisoSetor": "",
+      "motivos": [
+        "Para 10 jogos por ano: 1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade.",
+        "Assinatura: R$ 40,00/mês (referência). Taxa de adesão e opcionais à parte."
+      ],
+      "sobre": [
+        "Cruzamos suas respostas com os benefícios de cada plano para chegar a esta sugestão. Ela é um ponto de partida: vale comparar as opções antes de assinar.",
+        "O orçamento limita quais assinaturas podemos recomendar. Entre elas, a ordem considera os benefícios e suas respostas; o menor preço não aumenta a afinidade. Taxa de adesão, opcionais e ingressos ficam separados.",
+        "Os exemplos de desconto consideram R$ 150 por ingresso de referência; o preço real muda conforme o jogo e o setor. Kids depende de aprovação: ingresso da criança sem custo adicional no setor do titular, mediante disponibilidade e aquisição do ingresso do titular.",
+        "Disponibilidade e condições de cada benefício estão no site do Sócio 5 Estrelas."
+      ],
+      "acoes": [
+        "Refazer quiz",
+        "Comparar planos",
+        "Quero ingresso popular"
+      ],
+      "tituloLista": "Melhores opções",
+      "subtituloLista": "Em ordem de afinidade com você",
+      "cards": [
+        {
+          "slug": "time-do-povo",
+          "selo": "Recomendado",
+          "preco": "R$ 40,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+          "beneficios": [
+            "1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade",
+            "Prioridade 4 para comprar ingressos (1 é a mais alta)",
+            "Economize até 10% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+          ],
+          "avisoSetor": "",
+          "nota": "Indicado para o seu perfil",
+          "cta": "Quero ingresso popular",
+          "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo"
+        },
+        {
+          "slug": "meu-cruzeiro",
+          "selo": "Outra opção",
+          "preco": "R$ 12,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Sem taxa de adesão",
+          "beneficios": [
+            "1 ingresso gratuito por temporada, mediante disponibilidade",
+            "Prioridade 4 para comprar ingressos (1 é a mais alta)",
+            "Economize até 10% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+          ],
+          "avisoSetor": "",
+          "nota": "Compare os benefícios com o plano indicado",
+          "cta": "Quero ser sócio",
+          "link": "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro"
+        }
+      ]
+    },
+    "4a": {
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 0,
+        "gamesHistory": "unknown",
+        "wantsGuaranteedTicket": "never",
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "budget": 400,
+        "preferredSector": "yellow-orange"
+      },
+      "selo": "Plano recomendado",
+      "plano": "Meu Cruzeiro",
+      "preco": "R$ 12,00 / mês",
+      "referencia": "Valor mensal de referência",
+      "adesao": "Sem taxa de adesão",
+      "resumo": "Meu Cruzeiro é o plano indicado para você. Seu foco é apoiar o clube, sem uso de ingressos ou descontos na loja. O plano de apoio atende a esse perfil.",
+      "avisoSetor": "",
+      "motivos": [
+        "Como você não pretende ir ao estádio, os benefícios de ingresso não influenciaram a escolha.",
+        "Assinatura: R$ 12,00/mês (referência). Sem taxa de adesão; opcionais à parte."
+      ],
+      "sobre": [
+        "Cruzamos suas respostas com os benefícios de cada plano para chegar a esta sugestão. Ela é um ponto de partida: vale comparar as opções antes de assinar.",
+        "O orçamento limita quais assinaturas podemos recomendar. Entre elas, a ordem considera os benefícios e suas respostas; o menor preço não aumenta a afinidade. Taxa de adesão, opcionais e ingressos ficam separados.",
+        "Os exemplos de desconto consideram R$ 150 por ingresso de referência; o preço real muda conforme o jogo e o setor. Kids depende de aprovação: ingresso da criança sem custo adicional no setor do titular, mediante disponibilidade e aquisição do ingresso do titular.",
+        "Disponibilidade e condições de cada benefício estão no site do Sócio 5 Estrelas."
+      ],
+      "acoes": [
+        "Refazer quiz",
+        "Comparar planos",
+        "Quero ser sócio"
+      ],
+      "tituloLista": "Melhores opções",
+      "subtituloLista": "Em ordem de afinidade com você",
+      "cards": [
+        {
+          "slug": "meu-cruzeiro",
+          "selo": "Recomendado",
+          "preco": "R$ 12,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Sem taxa de adesão",
+          "beneficios": [
+            "1 ingresso gratuito por temporada, mediante disponibilidade",
+            "Prioridade 4 para comprar ingressos (1 é a mais alta)",
+            "Economize até 10% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+          ],
+          "avisoSetor": "",
+          "nota": "Indicado para o seu perfil",
+          "cta": "Quero ser sócio",
+          "link": "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro"
+        },
+        {
+          "slug": "cabuloso",
+          "selo": "Outra opção",
+          "preco": "R$ 100,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+          "beneficios": [
+            "Economize 50% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 75,00 cada. Mediante disponibilidade.",
+            "Prioridade 3 para comprar ingressos (1 é a mais alta) · nível 1",
+            "Economize até 15% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos",
+            "Já é sócio? Confira na sua conta se seu nível e desconto são maiores."
+          ],
+          "avisoSetor": "",
+          "nota": "Compare os benefícios com o plano indicado",
+          "cta": "Quero ser sócio",
+          "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso"
+        },
+        {
+          "slug": "cabuloso-max",
+          "selo": "Outra opção",
+          "preco": "R$ 200,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+          "beneficios": [
+            "Economize 65% em até 2 ingressos por jogo. Ex.: de R$ 150 por R$ 52,50 cada. Mediante disponibilidade.",
+            "Compre ingressos com prioridade 1, a mais alta",
+            "Economize até 15% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+          ],
+          "avisoSetor": "",
+          "nota": "Compare os benefícios com o plano indicado",
+          "cta": "Quero ser sócio",
+          "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-max"
+        }
+      ]
+    },
+    "4b": {
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 0,
+        "gamesHistory": "unknown",
+        "wantsGuaranteedTicket": "never",
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "occasional",
+        "budget": 100,
+        "preferredSector": "yellow-orange"
+      },
+      "selo": "Plano recomendado",
+      "plano": "Cabuloso",
+      "preco": "R$ 100,00 / mês",
+      "referencia": "Valor mensal de referência",
+      "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+      "resumo": "Cabuloso é o plano indicado para você. Seu interesse está nos produtos oficiais. A recomendação considera o desconto na loja dentro do seu orçamento.",
+      "avisoSetor": "",
+      "motivos": [
+        "Economize até 15% em produtos e serviços oficiais.",
+        "Como você não pretende ir ao estádio, os benefícios de ingresso não influenciaram a escolha.",
+        "Assinatura: R$ 100,00/mês (referência). Taxa de adesão e opcionais à parte."
+      ],
+      "sobre": [
+        "Cruzamos suas respostas com os benefícios de cada plano para chegar a esta sugestão. Ela é um ponto de partida: vale comparar as opções antes de assinar.",
+        "O orçamento limita quais assinaturas podemos recomendar. Entre elas, a ordem considera os benefícios e suas respostas; o menor preço não aumenta a afinidade. Taxa de adesão, opcionais e ingressos ficam separados.",
+        "Os exemplos de desconto consideram R$ 150 por ingresso de referência; o preço real muda conforme o jogo e o setor. Kids depende de aprovação: ingresso da criança sem custo adicional no setor do titular, mediante disponibilidade e aquisição do ingresso do titular.",
+        "Disponibilidade e condições de cada benefício estão no site do Sócio 5 Estrelas."
+      ],
+      "acoes": [
+        "Refazer quiz",
+        "Comparar planos",
+        "Quero até 15% na loja"
+      ],
+      "tituloLista": "Melhores opções",
+      "subtituloLista": "Em ordem de afinidade com você",
+      "cards": [
+        {
+          "slug": "cabuloso",
+          "selo": "Recomendado",
+          "preco": "R$ 100,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+          "beneficios": [
+            "Economize 50% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 75,00 cada. Mediante disponibilidade.",
+            "Prioridade 3 para comprar ingressos (1 é a mais alta) · nível 1",
+            "Economize até 15% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos",
+            "Já é sócio? Confira na sua conta se seu nível e desconto são maiores."
+          ],
+          "avisoSetor": "",
+          "nota": "Indicado para o seu perfil",
+          "cta": "Quero até 15% na loja",
+          "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso"
+        },
+        {
+          "slug": "meu-cruzeiro",
+          "selo": "Outra opção",
+          "preco": "R$ 12,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Sem taxa de adesão",
+          "beneficios": [
+            "1 ingresso gratuito por temporada, mediante disponibilidade",
+            "Prioridade 4 para comprar ingressos (1 é a mais alta)",
+            "Economize até 10% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+          ],
+          "avisoSetor": "",
+          "nota": "Compare os benefícios com o plano indicado",
+          "cta": "Quero até 10% na loja",
+          "link": "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro"
+        },
+        {
+          "slug": "time-do-povo",
+          "selo": "Outra opção",
+          "preco": "R$ 40,00 / mês",
+          "referencia": "Valor mensal de referência",
+          "adesao": "Taxa única de adesão de R$ 30,00, à parte",
+          "beneficios": [
+            "1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade",
+            "Prioridade 4 para comprar ingressos (1 é a mais alta)",
+            "Economize até 10% em produtos e serviços oficiais",
+            "Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos"
+          ],
+          "avisoSetor": "",
+          "nota": "Compare os benefícios com o plano indicado",
+          "cta": "Quero até 10% na loja",
+          "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo"
+        }
+      ]
+    }
+  },
+  "comparacao": {
+    "titulo": "Comparativo de planos",
+    "orientacao": "Deslize para o lado para comparar os quatro planos.",
+    "planos": [
+      {
+        "nome": "Meu Cruzeiro",
+        "selo": "",
+        "destacado": false
+      },
+      {
+        "nome": "Time do Povo",
+        "selo": "",
+        "destacado": false
+      },
+      {
+        "nome": "Cabuloso",
+        "selo": "Recomendado",
+        "destacado": true
+      },
+      {
+        "nome": "Cabuloso Max",
+        "selo": "Acima do orçamento",
+        "destacado": false
+      }
+    ],
+    "linhas": [
+      {
+        "rotulo": "Preço",
+        "celulas": [
+          {
+            "texto": "R$ 12,00 / mês · Valor mensal de referência"
+          },
+          {
+            "texto": "R$ 40,00 / mês · Valor mensal de referência"
+          },
+          {
+            "texto": "R$ 100,00 / mês · Valor mensal de referência"
+          },
+          {
+            "texto": "R$ 200,00 / mês · Valor mensal de referência"
+          }
+        ]
+      },
+      {
+        "rotulo": "Taxa de adesão",
+        "celulas": [
+          {
+            "texto": "Sem taxa"
+          },
+          {
+            "texto": "R$ 30,00 (única)"
+          },
+          {
+            "texto": "R$ 30,00 (única)"
+          },
+          {
+            "texto": "R$ 30,00 (única)"
+          }
+        ]
+      },
+      {
+        "rotulo": "Benefício de ingresso",
+        "celulas": [
+          {
+            "texto": "✓ · 1 ingresso grátis/temporada",
+            "tooltip": "1 ingresso gratuito por temporada, mediante disponibilidade\n\nSetores: Amarelo (inferior ou superior) ou Laranja (inferior ou superior)"
+          },
+          {
+            "texto": "✓ · 1 ingresso popular/jogo",
+            "tooltip": "1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade\n\nSetores: Amarelo (inferior ou superior) ou Laranja (inferior ou superior)"
+          },
+          {
+            "texto": "✓ · 50% a 60% por nível",
+            "tooltip": "1 ingresso por jogo, mediante disponibilidade. Exemplo com 60%: de R$ 150,00 por R$ 60,00.\n\nNível 1: 50%; Nível 2: 55%; Nível 3: 60%. O nível depende dos jogos consecutivos que você frequenta. Confira seu nível atual na conta de sócio.\n\nSetores: Amarelo, Laranja, Sicoob (Leste) e Roxo Superior"
+          },
+          {
+            "texto": "✓ · 65% em até 2 ingressos/jogo",
+            "tooltip": "Economize 65% em até 2 ingressos por jogo. Ex.: de R$ 150 por R$ 52,50 cada. Mediante disponibilidade.\n\nSetores: Amarelo, Laranja, Sicoob (Leste) e Roxo (inferior e superior)"
+          }
+        ]
+      },
+      {
+        "rotulo": "Prioridade / garantia",
+        "celulas": [
+          {
+            "texto": "Prioridade 4"
+          },
+          {
+            "texto": "Prioridade 4"
+          },
+          {
+            "texto": "Prioridade 3 (nível 1)"
+          },
+          {
+            "texto": "Prioridade 1"
+          }
+        ]
+      },
+      {
+        "rotulo": "Desconto na loja",
+        "celulas": [
+          {
+            "texto": "✓ · Até 10% em produtos e serviços oficiais"
+          },
+          {
+            "texto": "✓ · Até 10% em produtos e serviços oficiais"
+          },
+          {
+            "texto": "✓ · Até 15% em produtos e serviços oficiais"
+          },
+          {
+            "texto": "✓ · Até 15% em produtos e serviços oficiais"
+          }
+        ]
+      },
+      {
+        "rotulo": "Kids",
+        "celulas": [
+          {
+            "texto": "✓ · R$ 30,00/mês por criança (até 3)"
+          },
+          {
+            "texto": "✓ · R$ 30,00/mês por criança (até 3)"
+          },
+          {
+            "texto": "✓ · R$ 30,00/mês por criança (até 3)"
+          },
+          {
+            "texto": "✓ · R$ 30,00/mês por criança (até 3)"
+          }
+        ]
+      },
+      {
+        "rotulo": "Afinidade estimada",
+        "celulas": [
+          {
+            "texto": "23,2 de 100"
+          },
+          {
+            "texto": "24 de 100"
+          },
+          {
+            "texto": "81,5 de 100"
+          },
+          {
+            "texto": "99,2 de 100"
+          }
+        ]
+      }
+    ],
+    "ctas": [
+      {
+        "plano": "Meu Cruzeiro",
+        "texto": "Quero ser sócio",
+        "link": "https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro",
+        "desativado": false
+      },
+      {
+        "plano": "Time do Povo",
+        "texto": "Quero ingresso popular",
+        "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo",
+        "desativado": false
+      },
+      {
+        "plano": "Cabuloso",
+        "texto": "Quero 50% de desconto",
+        "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso",
+        "desativado": false
+      },
+      {
+        "plano": "Cabuloso Max",
+        "texto": "Quero 65% de desconto",
+        "link": "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-max",
+        "desativado": false
+      }
+    ]
+  },
+  "tooltips": [
+    {
+      "plano": "Meu Cruzeiro",
+      "linha": "Benefício de ingresso",
+      "texto": "1 ingresso gratuito por temporada, mediante disponibilidade\n\nSetores: Amarelo (inferior ou superior) ou Laranja (inferior ou superior)"
+    },
+    {
+      "plano": "Time do Povo",
+      "linha": "Benefício de ingresso",
+      "texto": "1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade\n\nSetores: Amarelo (inferior ou superior) ou Laranja (inferior ou superior)"
+    },
+    {
+      "plano": "Cabuloso",
+      "linha": "Benefício de ingresso",
+      "texto": "1 ingresso por jogo, mediante disponibilidade. Exemplo com 60%: de R$ 150,00 por R$ 60,00.\n\nNível 1: 50%; Nível 2: 55%; Nível 3: 60%. O nível depende dos jogos consecutivos que você frequenta. Confira seu nível atual na conta de sócio.\n\nSetores: Amarelo, Laranja, Sicoob (Leste) e Roxo Superior"
+    },
+    {
+      "plano": "Cabuloso Max",
+      "linha": "Benefício de ingresso",
+      "texto": "Economize 65% em até 2 ingressos por jogo. Ex.: de R$ 150 por R$ 52,50 cada. Mediante disponibilidade.\n\nSetores: Amarelo, Laranja, Sicoob (Leste) e Roxo (inferior e superior)"
+    }
+  ],
+  "verificacao": {
+    "errosDeExecucao": [],
+    "enviosDeAnalytics": [],
+    "navegacoesParaCheckout": []
+  }
+}

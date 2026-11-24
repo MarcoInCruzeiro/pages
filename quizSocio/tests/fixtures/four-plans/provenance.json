@@ -1,0 +1,29 @@
+{
+  "kind": "derived-synthetic-reference",
+  "independentValidation": false,
+  "createdOn": "2026-10-28",
+  "change": "Retirada do Cativo preservada. Migração autorizada de kidsCount > 0 para 1 (Sim); 0 continua Não. Descrições e necessidades numéricas acompanham a nova pergunta. IDs, partições e planos aceitáveis não mudam.",
+  "removedSlug": "cabuloso-cativo",
+  "references": {
+    "historical": {
+      "sourceSha256": "0a6b5aba8f40808678e27bf24acd00cf60323e470cb20f84a731ea01be9d73fa",
+      "derivedSha256": "14d5440c6377222552c745c77800709163ec9db7a6f99a3aaedcab66e74a6f23"
+    },
+    "profiles": {
+      "sourceSha256": "a6e5122518a1392835e2574375cae543378c370caac329969a4ef7571e0bcd97",
+      "derivedSha256": "e7128debfadfbf3948b3cdfbff12e9238043e969674c13481867f0c4393b0e9e"
+    }
+  },
+  "revisedOn": "2026-10-28",
+  "previousReferenceDirectory": "tests/fixtures/history/before-binary-kids",
+  "previousReferences": {
+    "historical": {
+      "sourceSha256": "922518db19abf890461ce4ebb75638b5eae888b2115a3ea91493e59ca63c56c5",
+      "derivedSha256": "0c41aca5f5ceb669a9ec5e6d596998595d3f37a836e27b6c6b35f702f9f1dc73"
+    },
+    "profiles": {
+      "sourceSha256": "a3f73bebe683b37c55efa6cf96b07815d2d4a311da79b1ef68ad8062dad53270",
+      "derivedSha256": "8084a5a1768f4eee7eb947200a48c398a5fc35dbf3673ed40094489cbb9154a6"
+    }
+  }
+}

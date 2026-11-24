@@ -1,0 +1,23 @@
+TAP version 13
+# Subtest: Quiz Sócio — fluxo de navegador
+    # Subtest: revisão no celular isola a frequência divergente e permite confirmar pelo teclado
+    ok 1 - revisão no celular isola a frequência divergente e permite confirmar pelo teclado
+      ---
+      duration_ms: 4478.084611
+      type: 'test'
+      ...
+    1..1
+ok 1 - Quiz Sócio — fluxo de navegador
+  ---
+  duration_ms: 4978.4949
+  type: 'suite'
+  ...
+1..1
+# tests 1
+# suites 1
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 20111.161525

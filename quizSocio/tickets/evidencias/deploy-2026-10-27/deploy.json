@@ -1,0 +1,27 @@
+{
+  "verifiedAt": "2026-10-27T13:08:39.750107-03:00",
+  "method": "Vercel CLI 65.4.0; deploy direto do pacote público; sem commit ou push",
+  "project": "quiz-socio",
+  "team": "marco11",
+  "url": "https://quiz-socio.vercel.app/",
+  "deploymentId": "dpl_5aGzo4F5S9RtEUWzbGWdV9xZWoKh",
+  "deploymentUrl": "https://quiz-socio-oug8krvw1-marco11.vercel.app",
+  "state": "READY",
+  "test": {
+    "command": "npm test",
+    "passed": 82,
+    "failed": 0,
+    "exitCode": 0
+  },
+  "package": {
+    "files": 10,
+    "workspaceHashesMatch": true,
+    "dryRunMatchesManifest": true
+  },
+  "previousDeployment": {
+    "id": "dpl_AqDicKu9ZniTnALtZ2hs2qgvbqYx",
+    "url": "https://quiz-socio-lqsjwx39z-marco11.vercel.app",
+    "sourceCommit": "2cecf81717d7abb25ff62db4fa310af5261c67a2"
+  },
+  "verificationLimits": "Status e aliases conferidos pela API/CLI Vercel; não foi feita leitura HTTP ou execução do site publicado. Recebimento no GA4 e continuidade no checkout permanecem pendentes."
+}

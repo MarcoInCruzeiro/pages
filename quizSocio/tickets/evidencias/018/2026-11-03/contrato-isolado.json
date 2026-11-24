@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-11-03T17:54:50.293Z",
+  "scope": "Pacote local isolado; não é execução do domínio público.",
+  "candidateDirectory": "/tmp/quiz-018-candidate-2026-11-03-At2Gwf",
+  "versions": {
+    "catalog": "2026-10-28.2",
+    "rules": "2026-11-03.2",
+    "ga4": "2026-10-28.3"
+  },
+  "collectionMode": "gtag substituído por captura local e habilitação artificial; destinos reais bloqueados pelo harness.",
+  "eventCounts": {
+    "quiz_start": 1,
+    "quiz_answer": 12,
+    "quiz_complete": 1
+  },
+  "completePayload": {
+    "recommended_plan": "Time do Povo",
+    "affinity_index": 78.3,
+    "compatibility": 78.3,
+    "score_semantics": "indice_afinidade_estimado",
+    "no_eligible_plan": false,
+    "catalog_version": "2026-10-28.2",
+    "rules_version": "2026-11-03.2",
+    "total_time_sec": 0.1,
+    "answer_gamesPerYear": "10",
+    "answer_gamesHistory": "5",
+    "answer_wantsGuaranteedTicket": "false",
+    "answer_buysTwoTickets": "false",
+    "answer_kidsCount": "0",
+    "answer_needsPriority": "false",
+    "answer_wantsParticipation": "false",
+    "answer_wantsStoreDiscount": "false",
+    "answer_gameFrequency": "occasional",
+    "answer_digitalExperience": "false",
+    "answer_budget": "40",
+    "answer_preferredSector": "yellow-orange"
+  },
+  "ctaPlanId": "34",
+  "runtimeErrors": [],
+  "analyticsAttempts": [],
+  "isolatedPackageContractVerified": true,
+  "publishedRuntimeContractVerified": false,
+  "ga4IngestionConfirmed": false
+}

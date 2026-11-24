@@ -1,0 +1,186 @@
+{
+  "reference-1280": {
+    "hero": {
+      "header": {
+        "top": 0,
+        "height": 101,
+        "width": 1280
+      },
+      "page": {
+        "top": 101,
+        "height": 563,
+        "width": 1200
+      },
+      "hero": {
+        "top": 194,
+        "height": 377,
+        "width": 960
+      },
+      "footer": {
+        "top": 664,
+        "height": 236,
+        "width": 1280
+      },
+      "viewport": 900
+    },
+    "question": {
+      "height": 82,
+      "titleTag": "STRONG",
+      "titleDisplay": "block",
+      "titleColor": "rgb(0, 0, 128)",
+      "titleSize": "16.8px",
+      "titleWeight": "700",
+      "titleTop": 318,
+      "descriptionTop": 344,
+      "cardHeight": 553
+    },
+    "modal": {
+      "bodyHeight": 654.203125,
+      "bodyScroll": 894,
+      "boldPrices": 5,
+      "lineBreaks": 5,
+      "checks": 20,
+      "crosses": 0,
+      "mutedBadges": 1,
+      "columns": 5
+    }
+  },
+  "vue-1280": {
+    "hero": {
+      "header": {
+        "top": 0,
+        "height": 101,
+        "width": 1280
+      },
+      "page": {
+        "top": 101,
+        "height": 563,
+        "width": 1200
+      },
+      "hero": {
+        "top": 194,
+        "height": 377,
+        "width": 960
+      },
+      "footer": {
+        "top": 664,
+        "height": 236,
+        "width": 1280
+      },
+      "viewport": 900
+    },
+    "question": {
+      "height": 82,
+      "titleTag": "STRONG",
+      "titleDisplay": "block",
+      "titleColor": "rgb(0, 0, 128)",
+      "titleSize": "16.8px",
+      "titleWeight": "700",
+      "titleTop": 318,
+      "descriptionTop": 344,
+      "cardHeight": 553
+    },
+    "modal": {
+      "bodyHeight": 654.203125,
+      "bodyScroll": 815,
+      "boldPrices": 4,
+      "lineBreaks": 4,
+      "checks": 16,
+      "crosses": 0,
+      "mutedBadges": 0,
+      "columns": 4
+    }
+  },
+  "reference-390": {
+    "hero": {
+      "header": {
+        "top": 0,
+        "height": 101,
+        "width": 390
+      },
+      "page": {
+        "top": 101,
+        "height": 450,
+        "width": 366
+      },
+      "hero": {
+        "top": 166.34375,
+        "height": 319.3125,
+        "width": 366
+      },
+      "footer": {
+        "top": 551,
+        "height": 300,
+        "width": 390
+      },
+      "viewport": 844
+    },
+    "question": {
+      "height": 100,
+      "titleTag": "STRONG",
+      "titleDisplay": "block",
+      "titleColor": "rgb(0, 0, 128)",
+      "titleSize": "16.8px",
+      "titleWeight": "700",
+      "titleTop": 308,
+      "descriptionTop": 334,
+      "cardHeight": 699
+    },
+    "modal": {
+      "bodyHeight": 686.40625,
+      "bodyScroll": 725,
+      "boldPrices": 5,
+      "lineBreaks": 5,
+      "checks": 20,
+      "crosses": 0,
+      "mutedBadges": 1,
+      "columns": 5
+    }
+  },
+  "vue-390": {
+    "hero": {
+      "header": {
+        "top": 0,
+        "height": 101,
+        "width": 390
+      },
+      "page": {
+        "top": 101,
+        "height": 450,
+        "width": 366
+      },
+      "hero": {
+        "top": 166.34375,
+        "height": 319.3125,
+        "width": 366
+      },
+      "footer": {
+        "top": 551,
+        "height": 300,
+        "width": 390
+      },
+      "viewport": 844
+    },
+    "question": {
+      "height": 100,
+      "titleTag": "STRONG",
+      "titleDisplay": "block",
+      "titleColor": "rgb(0, 0, 128)",
+      "titleSize": "16.8px",
+      "titleWeight": "700",
+      "titleTop": 308,
+      "descriptionTop": 334,
+      "cardHeight": 699
+    },
+    "modal": {
+      "bodyHeight": 661.90625,
+      "bodyScroll": 662,
+      "boldPrices": 4,
+      "lineBreaks": 4,
+      "checks": 16,
+      "crosses": 0,
+      "mutedBadges": 0,
+      "columns": 4
+    }
+  }
+}

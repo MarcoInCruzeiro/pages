@@ -1,0 +1,49 @@
+{
+  "id": "dpl_FrmkH3bmJxnr6u1AsDziznSktTfo",
+  "name": "quiz-socio",
+  "url": "quiz-socio-g5q5ozq1o-marco11.vercel.app",
+  "target": "preview",
+  "readyState": "READY",
+  "createdAt": 1793803163379,
+  "duration": {
+    "startTime": 1793803164490,
+    "timeToReady": 2372
+  },
+  "buildMachine": {
+    "cores": 2,
+    "memory": 8192,
+    "machine": "basic",
+    "selectionType": "fixed",
+    "selectionSource": "plan-default"
+  },
+  "buildCacheSummary": {
+    "save": {
+      "saved": false,
+      "reason": "no_files"
+    }
+  },
+  "builds": [
+    {
+      "id": "bld_gqad1xm4z",
+      "deploymentId": "dpl_FrmkH3bmJxnr6u1AsDziznSktTfo",
+      "entrypoint": ".",
+      "readyState": "READY",
+      "readyStateAt": 1793803163309,
+      "createdAt": 1793803163309,
+      "createdIn": "sfo1",
+      "use": "@vercel/vc-build",
+      "config": {
+        "nodeVersion": "24.x",
+        "projectCreatedAt": 1792775209140,
+        "vercelConfig": {
+          "name": "quiz-socio",
+          "version": 2
+        }
+      },
+      "middleware": [],
+      "output": [],
+      "fingerprint": null
+    }
+  ],
+  "contextName": "marco11"
+}

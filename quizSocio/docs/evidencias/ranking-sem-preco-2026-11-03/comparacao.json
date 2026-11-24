@@ -1,0 +1,206 @@
+{
+  "configurationHash": "017b48ef2eb86078ed88e91b128012b3dd5dcd243abc4a28df585cb4fa60a1b6",
+  "referenceHashes": {
+    "historical": "14d5440c6377222552c745c77800709163ec9db7a6f99a3aaedcab66e74a6f23",
+    "profiles": "e7128debfadfbf3948b3cdfbff12e9238043e969674c13481867f0c4393b0e9e"
+  },
+  "comparison": [
+    {
+      "id": "CAL-02",
+      "acceptable": [
+        "time-do-povo"
+      ],
+      "before": {
+        "winner": "meu-cruzeiro",
+        "scores": [
+          {
+            "plan": "meu-cruzeiro",
+            "score": 85.1
+          },
+          {
+            "plan": "time-do-povo",
+            "score": 81.7
+          }
+        ]
+      },
+      "after": {
+        "winner": "time-do-povo",
+        "scores": [
+          {
+            "plan": "time-do-povo",
+            "score": 78.3
+          },
+          {
+            "plan": "meu-cruzeiro",
+            "score": 70.1
+          }
+        ],
+        "top1": true
+      }
+    },
+    {
+      "id": "CAL-10",
+      "acceptable": [
+        "cabuloso-max"
+      ],
+      "before": {
+        "winner": "cabuloso",
+        "scores": [
+          {
+            "plan": "cabuloso",
+            "score": 76.6
+          },
+          {
+            "plan": "cabuloso-max",
+            "score": 71.9
+          },
+          {
+            "plan": "meu-cruzeiro",
+            "score": 64.4
+          },
+          {
+            "plan": "time-do-povo",
+            "score": 61.2
+          }
+        ]
+      },
+      "after": {
+        "winner": "cabuloso-max",
+        "scores": [
+          {
+            "plan": "cabuloso-max",
+            "score": 95.6
+          },
+          {
+            "plan": "cabuloso",
+            "score": 84.3
+          },
+          {
+            "plan": "time-do-povo",
+            "score": 53.3
+          },
+          {
+            "plan": "meu-cruzeiro",
+            "score": 52.8
+          }
+        ],
+        "top1": true
+      }
+    },
+    {
+      "id": "PER-02-C",
+      "acceptable": [
+        "time-do-povo"
+      ],
+      "before": {
+        "winner": "meu-cruzeiro",
+        "scores": [
+          {
+            "plan": "meu-cruzeiro",
+            "score": 81.1
+          },
+          {
+            "plan": "time-do-povo",
+            "score": 80.7
+          }
+        ]
+      },
+      "after": {
+        "winner": "time-do-povo",
+        "scores": [
+          {
+            "plan": "time-do-povo",
+            "score": 77.6
+          },
+          {
+            "plan": "meu-cruzeiro",
+            "score": 67.7
+          }
+        ],
+        "top1": true
+      }
+    },
+    {
+      "id": "RES-05",
+      "acceptable": [
+        "cabuloso-max"
+      ],
+      "before": {
+        "winner": "cabuloso",
+        "scores": [
+          {
+            "plan": "cabuloso",
+            "score": 75.1
+          },
+          {
+            "plan": "cabuloso-max",
+            "score": 71.3
+          },
+          {
+            "plan": "meu-cruzeiro",
+            "score": 60.7
+          },
+          {
+            "plan": "time-do-povo",
+            "score": 57.6
+          }
+        ]
+      },
+      "after": {
+        "winner": "cabuloso-max",
+        "scores": [
+          {
+            "plan": "cabuloso-max",
+            "score": 94.5
+          },
+          {
+            "plan": "cabuloso",
+            "score": 82.2
+          },
+          {
+            "plan": "time-do-povo",
+            "score": 48.7
+          },
+          {
+            "plan": "meu-cruzeiro",
+            "score": 48
+          }
+        ],
+        "top1": true
+      }
+    },
+    {
+      "id": "RES-11",
+      "acceptable": [
+        "time-do-povo"
+      ],
+      "before": {
+        "winner": "meu-cruzeiro",
+        "scores": [
+          {
+            "plan": "meu-cruzeiro",
+            "score": 70.4
+          },
+          {
+            "plan": "time-do-povo",
+            "score": 63.2
+          }
+        ]
+      },
+      "after": {
+        "winner": "time-do-povo",
+        "scores": [
+          {
+            "plan": "time-do-povo",
+            "score": 40.3
+          },
+          {
+            "plan": "meu-cruzeiro",
+            "score": 39.5
+          }
+        ],
+        "top1": true
+      }
+    }
+  ]
+}

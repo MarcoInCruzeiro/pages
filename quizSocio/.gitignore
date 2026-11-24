@@ -1,2 +1,9 @@
 .vercel
 .env*
+node_modules/
+
+dist/
+.scratch/port-vue/config-candidates/
+
+# Probes locais e snapshots não integram fonte nem pacote público.
+.scratch/

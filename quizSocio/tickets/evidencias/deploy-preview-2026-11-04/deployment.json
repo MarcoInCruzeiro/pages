@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "deployment": {
+    "id": "dpl_FrmkH3bmJxnr6u1AsDziznSktTfo",
+    "url": "https://quiz-socio-g5q5ozq1o-marco11.vercel.app",
+    "productionUrl": null,
+    "inspectorUrl": "https://vercel.com/marco11/quiz-socio/FrmkH3bmJxnr6u1AsDziznSktTfo",
+    "readyState": "INITIALIZING",
+    "target": null,
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_FrmkH3bmJxnr6u1AsDziznSktTfo",
+    "buildMachine": {
+      "cores": 2,
+      "memory": 8192,
+      "machine": "basic",
+      "selectionType": "fixed",
+      "selectionSource": "plan-default"
+    },
+    "deploymentProtection": [
+      "vercel_authentication"
+    ]
+  },
+  "message": "Deployment quiz-socio-g5q5ozq1o-marco11.vercel.app ready.",
+  "next": [
+    {
+      "command": "vercel curl https://quiz-socio-g5q5ozq1o-marco11.vercel.app",
+      "when": "Verify deployment, including when Deployment Protection is enabled"
+    },
+    {
+      "command": "vercel inspect quiz-socio-g5q5ozq1o-marco11.vercel.app --scope marco11",
+      "when": "Inspect deployment"
+    },
+    {
+      "command": "vercel deploy --prod --scope marco11",
+      "when": "Promote to production"
+    }
+  ]
+}

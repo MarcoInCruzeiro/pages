@@ -1,0 +1,2328 @@
+{
+  "versions": {
+    "catalogVersion": "2026-10-28.2",
+    "rulesVersion": "2026-11-03.2",
+    "ga4Version": "2026-11-03.1"
+  },
+  "configurationHash": "3fca088a0572f28d19df8287caa05527180717404397b999784b93448da54813",
+  "metricsPassed": true,
+  "reviewRequired": false,
+  "regressionIds": [],
+  "reviewAccepted": false,
+  "releaseApproved": true,
+  "referenceHashes": {
+    "historical": "14d5440c6377222552c745c77800709163ec9db7a6f99a3aaedcab66e74a6f23",
+    "profiles": "e7128debfadfbf3948b3cdfbff12e9238043e969674c13481867f0c4393b0e9e"
+  },
+  "reports": {
+    "historical": {
+      "evaluatedAt": "2026-11-04T12:24:10.315Z",
+      "kind": "derived-synthetic-reference",
+      "reference": "historical",
+      "referenceSha256": "14d5440c6377222552c745c77800709163ec9db7a6f99a3aaedcab66e74a6f23",
+      "sourceReferenceSha256": "0a6b5aba8f40808678e27bf24acd00cf60323e470cb20f84a731ea01be9d73fa",
+      "independentValidation": false,
+      "engineSha256": "8be6bed083101f0272606d26154d69ce777f4c27306524ac3f23e5cfceb175aa",
+      "configurationHash": "3fca088a0572f28d19df8287caa05527180717404397b999784b93448da54813",
+      "rulesVersion": "2026-11-03.2",
+      "catalogVersion": "2026-10-28.2",
+      "sourceProposedByUser": "https://socio.cruzeiro.com.br/planos",
+      "limitation": "Referências sintéticas; métricas não representam avaliação externa, cega ou desempenho com usuários reais. Perdas de acerto requerem revisão explícita antes da entrega.",
+      "thresholds": {
+        "top1": 0.8,
+        "top3": 0.95,
+        "budgetViolations": 0
+      },
+      "groups": {
+        "calibracao": {
+          "total": 12,
+          "top1": 12,
+          "top3": 12,
+          "budgetViolations": 0,
+          "scoreViolations": 0,
+          "top1Rate": 1,
+          "top3Rate": 1,
+          "passed": true
+        },
+        "reserva": {
+          "total": 12,
+          "top1": 12,
+          "top3": 12,
+          "budgetViolations": 0,
+          "scoreViolations": 0,
+          "top1Rate": 1,
+          "top3Rate": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "reviewRequired": false,
+      "regressions": [],
+      "releaseApproved": true,
+      "rows": [
+        {
+          "id": "CAL-01",
+          "split": "calibracao",
+          "profileId": null,
+          "category": "zero jogos com conteúdo",
+          "acceptable": [
+            "cabuloso",
+            "meu-cruzeiro"
+          ],
+          "reason": "Sem jogos, o benefício de ingresso é secundário; conteúdo e desconto de loja sustentam Cabuloso ou Meu Cruzeiro.",
+          "ranking": [
+            "cabuloso",
+            "cabuloso-max",
+            "meu-cruzeiro",
+            "time-do-povo"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 98.8
+            },
+            {
+              "plan": "cabuloso-max",
+              "score": 98.8
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 82.7
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 82.7
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 91.2
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 85.2
+              },
+              {
+                "plan": "cabuloso-max",
+                "score": 83.2
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 82.9
+              },
+              {
+                "plan": "cabuloso-cativo",
+                "score": 55.5
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "CAL-02",
+          "split": "calibracao",
+          "profileId": null,
+          "category": "orçamento 40 e setor popular",
+          "acceptable": [
+            "time-do-povo"
+          ],
+          "reason": "Com 10 jogos e teto de assinatura de R$ 40, o ingresso popular do Time do Povo atende ao uso e ao setor.",
+          "ranking": [
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "time-do-povo",
+              "score": 78.3
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 70.1
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "time-do-povo",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "time-do-povo",
+                "score": 85.5
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 85.1
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "CAL-03",
+          "split": "calibracao",
+          "profileId": null,
+          "category": "loja e conteúdo",
+          "acceptable": [
+            "cabuloso"
+          ],
+          "reason": "Quem quer desconto de loja e conteúdo encontra no Cabuloso o maior desconto confirmado dentro de R$ 100.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 92.9
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 56.3
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 55.8
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 88.4
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 68.5
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 66.8
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "CAL-04",
+          "split": "calibracao",
+          "profileId": null,
+          "category": "alta frequência no Sicoob",
+          "acceptable": [
+            "cabuloso",
+            "cabuloso-max"
+          ],
+          "reason": "Alta frequência e orçamento amplo admitem desconto progressivo, dois ingressos ou garantia no Sicoob.",
+          "ranking": [
+            "cabuloso",
+            "cabuloso-max",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 94.8
+            },
+            {
+              "plan": "cabuloso-max",
+              "score": 94.8
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 41
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 40.3
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 92
+              },
+              {
+                "plan": "cabuloso-max",
+                "score": 87.8
+              },
+              {
+                "plan": "cabuloso-cativo",
+                "score": 67.7
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 50
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 49.4
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "CAL-05",
+          "split": "calibracao",
+          "profileId": null,
+          "category": "casal no Roxo",
+          "acceptable": [
+            "cabuloso-max"
+          ],
+          "reason": "Casal no Roxo exige cobertura do setor e capacidade para dois ingressos; o Max atende ambos.",
+          "ranking": [
+            "cabuloso-max",
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso-max",
+              "score": 97.4
+            },
+            {
+              "plan": "cabuloso",
+              "score": 80.1
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 44.6
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 44
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso-max",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso-max",
+                "score": 89.6
+              },
+              {
+                "plan": "cabuloso",
+                "score": 79.6
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 53.5
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 52.8
+              },
+              {
+                "plan": "cabuloso-cativo",
+                "score": 47.8
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "CAL-06",
+          "split": "calibracao",
+          "profileId": null,
+          "category": "casal com interesse em Kids",
+          "acceptable": [
+            "cabuloso-max",
+            "cabuloso"
+          ],
+          "reason": "Dois adultos e interesse em incluir uma criança no Amarelo/Laranja admitem Max (dois ingressos) ou Cabuloso com Kids.",
+          "ranking": [
+            "cabuloso-max",
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso-max",
+              "score": 97.7
+            },
+            {
+              "plan": "cabuloso",
+              "score": 88.2
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 74.2
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 68.3
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso-max",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso-max",
+                "score": 89.6
+              },
+              {
+                "plan": "cabuloso",
+                "score": 86.3
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 77.4
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 73.9
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "CAL-07",
+          "split": "calibracao",
+          "profileId": null,
+          "category": "histórico nível 3",
+          "acceptable": [
+            "cabuloso"
+          ],
+          "reason": "Histórico de 25 jogos confirma nível 3 e o maior desconto do Cabuloso.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 95.1
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 56.2
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 55.6
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 88.4
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 72.3
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 69.9
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "CAL-08",
+          "split": "calibracao",
+          "profileId": null,
+          "category": "histórico nível 1",
+          "acceptable": [
+            "cabuloso"
+          ],
+          "reason": "Mesmo plano do CAL-07, mas com histórico de nível 1: o benefício atual é menor.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 91.7
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 56.2
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 55.6
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 86.3
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 72.3
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 69.9
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "CAL-09",
+          "split": "calibracao",
+          "profileId": null,
+          "category": "novo sócio",
+          "acceptable": [
+            "cabuloso",
+            "cabuloso-max"
+          ],
+          "reason": "Sem histórico confirmado, aplica-se o nível 1 inicial; planos com benefício fixo também são aceitáveis.",
+          "ranking": [
+            "cabuloso-max",
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso-max",
+              "score": 95.2
+            },
+            {
+              "plan": "cabuloso",
+              "score": 87.1
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 45
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 44.3
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso-max",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso-max",
+                "score": 87.4
+              },
+              {
+                "plan": "cabuloso",
+                "score": 85.3
+              },
+              {
+                "plan": "cabuloso-cativo",
+                "score": 66.5
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 54.3
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 53.5
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "CAL-10",
+          "split": "calibracao",
+          "profileId": null,
+          "category": "Roxo com teto de 200",
+          "acceptable": [
+            "cabuloso-max"
+          ],
+          "reason": "O Max é o único até R$ 200 que cobre Roxo inferior e superior.",
+          "ranking": [
+            "cabuloso-max",
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso-max",
+              "score": 95.6
+            },
+            {
+              "plan": "cabuloso",
+              "score": 84.3
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 53.3
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 52.8
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso-max",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso-max",
+                "score": 84.7
+              },
+              {
+                "plan": "cabuloso",
+                "score": 82.5
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 64.4
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 63.1
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "CAL-11",
+          "split": "calibracao",
+          "profileId": null,
+          "category": "acompanhante adulto",
+          "acceptable": [
+            "cabuloso"
+          ],
+          "reason": "Com teto de R$ 100 e acompanhante, o desconto do Cabuloso é a opção viável no setor.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 83.9
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 70.7
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 63.5
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 82
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 76.9
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 73.7
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "CAL-12",
+          "split": "calibracao",
+          "profileId": null,
+          "category": "baixa frequência e teto 40",
+          "acceptable": [
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "reason": "Com poucos jogos e teto de R$ 40, o ingresso popular ou o ingresso gratuito anual podem ser suficientes.",
+          "ranking": [
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "time-do-povo",
+              "score": 78.5
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 71
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "meu-cruzeiro",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "meu-cruzeiro",
+                "score": 86.3
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 86
+              }
+            ]
+          },
+          "winnerChanged": true,
+          "accuracyRegression": false
+        },
+        {
+          "id": "RES-01",
+          "split": "reserva",
+          "profileId": null,
+          "category": "zero jogos sem extras",
+          "acceptable": [
+            "meu-cruzeiro"
+          ],
+          "reason": "Sem jogos e sem interesse em extras, o menor custo de assinatura é o critério dominante.",
+          "ranking": [
+            "meu-cruzeiro",
+            "time-do-povo"
+          ],
+          "scores": [
+            {
+              "plan": "meu-cruzeiro",
+              "score": 81.4
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 81.4
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "meu-cruzeiro",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "meu-cruzeiro",
+                "score": 92.8
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 88.7
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "RES-02",
+          "split": "reserva",
+          "profileId": null,
+          "category": "zero jogos com loja",
+          "acceptable": [
+            "cabuloso",
+            "meu-cruzeiro"
+          ],
+          "reason": "Sem jogos, o desconto de loja e o custo definem; Cabuloso tem 15%, Meu Cruzeiro é mais barato.",
+          "ranking": [
+            "cabuloso",
+            "meu-cruzeiro",
+            "time-do-povo"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 98.3
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 74.4
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 74.4
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 87.4
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 83.8
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 80.3
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "RES-03",
+          "split": "reserva",
+          "profileId": null,
+          "category": "alta frequência no Amarelo",
+          "acceptable": [
+            "cabuloso",
+            "time-do-povo"
+          ],
+          "reason": "No Amarelo, o desconto progressivo do Cabuloso e o ingresso popular do Time do Povo são alternativas coerentes.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 93.8
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 74.1
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 65.6
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 89.9
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 78.5
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 73.8
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "RES-04",
+          "split": "reserva",
+          "profileId": null,
+          "category": "alta frequência com teto 40",
+          "acceptable": [
+            "time-do-povo"
+          ],
+          "reason": "Com trinta jogos e teto de R$ 40, o ingresso popular é o único benefício compatível com o uso.",
+          "ranking": [
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "time-do-povo",
+              "score": 77.1
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 66.2
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "time-do-povo",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "time-do-povo",
+                "score": 82.5
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 77.8
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "RES-05",
+          "split": "reserva",
+          "profileId": null,
+          "category": "Roxo sem cobertura do Cativo",
+          "acceptable": [
+            "cabuloso-max"
+          ],
+          "reason": "O Cativo cobre apenas Sicoob Leste Inferior; para Roxo, o Max é a alternativa compatível.",
+          "ranking": [
+            "cabuloso-max",
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso-max",
+              "score": 94.5
+            },
+            {
+              "plan": "cabuloso",
+              "score": 82.2
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 48.7
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 48
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso-max",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso-max",
+                "score": 84
+              },
+              {
+                "plan": "cabuloso",
+                "score": 81
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 60.7
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 59.5
+              },
+              {
+                "plan": "cabuloso-cativo",
+                "score": 42
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "RES-06",
+          "split": "reserva",
+          "profileId": null,
+          "category": "garantia no Sicoob",
+          "acceptable": [
+            "cabuloso",
+            "cabuloso-max"
+          ],
+          "reason": "No Sicoob, o Cativo garante o ingresso; Cabuloso e Max oferecem desconto e prioridade.",
+          "ranking": [
+            "cabuloso",
+            "cabuloso-max",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 95
+            },
+            {
+              "plan": "cabuloso-max",
+              "score": 95
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 43.5
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 42.9
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 92
+              },
+              {
+                "plan": "cabuloso-max",
+                "score": 87.5
+              },
+              {
+                "plan": "cabuloso-cativo",
+                "score": 66.9
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 52.7
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 52
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "RES-07",
+          "split": "reserva",
+          "profileId": null,
+          "category": "um Kids com teto 100",
+          "acceptable": [
+            "cabuloso"
+          ],
+          "reason": "Com teto de R$ 100, um adulto acompanhante e um Kids, o Cabuloso é o plano viável no setor.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 88.6
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 75
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 69.9
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 86.2
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 78.8
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 76.4
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "RES-08",
+          "split": "reserva",
+          "profileId": null,
+          "category": "casal no Roxo com teto 200",
+          "acceptable": [
+            "cabuloso-max"
+          ],
+          "reason": "Casal no Roxo e teto de R$ 200 apontam para o Max.",
+          "ranking": [
+            "cabuloso-max",
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso-max",
+              "score": 97.6
+            },
+            {
+              "plan": "cabuloso",
+              "score": 77.2
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 48.2
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 47.6
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso-max",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso-max",
+                "score": 87.9
+              },
+              {
+                "plan": "cabuloso",
+                "score": 77.2
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 58.7
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 57.6
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "RES-09",
+          "split": "reserva",
+          "profileId": null,
+          "category": "limite de nível 10 jogos",
+          "acceptable": [
+            "cabuloso"
+          ],
+          "reason": "Dez jogos históricos colocam o Cabuloso no nível 2.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 93.4
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 56.2
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 55.6
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 87.4
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 72.3
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 69.9
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "RES-10",
+          "split": "reserva",
+          "profileId": null,
+          "category": "limite de nível 20 jogos",
+          "acceptable": [
+            "cabuloso"
+          ],
+          "reason": "Vinte jogos históricos colocam o Cabuloso no nível 3.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 95.1
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 56.2
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 55.6
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 88.4
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 72.3
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 69.9
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "RES-11",
+          "split": "reserva",
+          "profileId": null,
+          "category": "teto 40 no Sicoob",
+          "acceptable": [
+            "time-do-povo"
+          ],
+          "reason": "Com teto de R$ 40, o Time do Povo é o único com benefício de ingresso por jogo; o setor preferido fica sinalizado como não coberto.",
+          "ranking": [
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "time-do-povo",
+              "score": 40.3
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 39.5
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "meu-cruzeiro",
+            "top1": false,
+            "scores": [
+              {
+                "plan": "meu-cruzeiro",
+                "score": 70.4
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 67.1
+              }
+            ]
+          },
+          "winnerChanged": true,
+          "accuracyRegression": false
+        },
+        {
+          "id": "RES-12",
+          "split": "reserva",
+          "profileId": null,
+          "category": "premium com família",
+          "acceptable": [
+            "cabuloso-max"
+          ],
+          "reason": "Casal, interesse em incluir uma criança e preferência por Roxo exigem capacidade de dois ingressos e cobertura do setor.",
+          "ranking": [
+            "cabuloso-max",
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso-max",
+              "score": 97.5
+            },
+            {
+              "plan": "cabuloso",
+              "score": 81.7
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 44.7
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 44.1
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso-max",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso-max",
+                "score": 90.9
+              },
+              {
+                "plan": "cabuloso",
+                "score": 81.1
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 52.2
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 51.7
+              },
+              {
+                "plan": "cabuloso-cativo",
+                "score": 48.8
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        }
+      ]
+    },
+    "profiles": {
+      "evaluatedAt": "2026-11-04T12:24:10.329Z",
+      "kind": "derived-synthetic-reference",
+      "reference": "profiles",
+      "referenceSha256": "e7128debfadfbf3948b3cdfbff12e9238043e969674c13481867f0c4393b0e9e",
+      "sourceReferenceSha256": "a6e5122518a1392835e2574375cae543378c370caac329969a4ef7571e0bcd97",
+      "independentValidation": false,
+      "engineSha256": "8be6bed083101f0272606d26154d69ce777f4c27306524ac3f23e5cfceb175aa",
+      "configurationHash": "3fca088a0572f28d19df8287caa05527180717404397b999784b93448da54813",
+      "rulesVersion": "2026-11-03.2",
+      "catalogVersion": "2026-10-28.2",
+      "sourceProposedByUser": "https://socio.cruzeiro.com.br/planos",
+      "limitation": "Referências sintéticas; métricas não representam avaliação externa, cega ou desempenho com usuários reais. Perdas de acerto requerem revisão explícita antes da entrega.",
+      "thresholds": {
+        "top1": 0.8,
+        "top3": 0.95,
+        "budgetViolations": 0
+      },
+      "groups": {
+        "calibracao": {
+          "total": 8,
+          "top1": 8,
+          "top3": 8,
+          "budgetViolations": 0,
+          "scoreViolations": 0,
+          "top1Rate": 1,
+          "top3Rate": 1,
+          "passed": true
+        },
+        "validacao": {
+          "total": 8,
+          "top1": 8,
+          "top3": 8,
+          "budgetViolations": 0,
+          "scoreViolations": 0,
+          "top1Rate": 1,
+          "top3Rate": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "reviewRequired": false,
+      "regressions": [],
+      "releaseApproved": true,
+      "rows": [
+        {
+          "id": "PER-01-C",
+          "split": "calibracao",
+          "profileId": "apoio-economico",
+          "category": "apoio-economico",
+          "acceptable": [
+            "meu-cruzeiro"
+          ],
+          "reason": "Sem uso presencial e sem interesse declarado em extras, a assinatura de menor valor atende ao apoio ao clube; setor não deve decidir.",
+          "ranking": [
+            "meu-cruzeiro",
+            "time-do-povo"
+          ],
+          "scores": [
+            {
+              "plan": "meu-cruzeiro",
+              "score": 81.4
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 81.4
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "meu-cruzeiro",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "meu-cruzeiro",
+                "score": 92.8
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 88.7
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-01-V",
+          "split": "validacao",
+          "profileId": "apoio-economico",
+          "category": "apoio-economico",
+          "acceptable": [
+            "meu-cruzeiro"
+          ],
+          "reason": "Sem uso presencial e sem interesse declarado em extras, a assinatura de menor valor atende ao apoio ao clube; setor não deve decidir.",
+          "ranking": [
+            "meu-cruzeiro",
+            "time-do-povo"
+          ],
+          "scores": [
+            {
+              "plan": "meu-cruzeiro",
+              "score": 81.4
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 81.4
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "meu-cruzeiro",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "meu-cruzeiro",
+                "score": 90
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 85.3
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-02-C",
+          "split": "calibracao",
+          "profileId": "popular-frequente",
+          "category": "popular-frequente",
+          "acceptable": [
+            "time-do-povo"
+          ],
+          "reason": "Com frequência elevada, teto de assinatura de R$ 40 e setor popular, o ingresso popular por jogo é mais adequado que um ingresso por temporada.",
+          "ranking": [
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "time-do-povo",
+              "score": 77.6
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 67.7
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "time-do-povo",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "time-do-povo",
+                "score": 83.9
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 81.1
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-02-V",
+          "split": "validacao",
+          "profileId": "popular-frequente",
+          "category": "popular-frequente",
+          "acceptable": [
+            "time-do-povo"
+          ],
+          "reason": "Com frequência elevada, teto de assinatura de R$ 40 e setor popular, o ingresso popular por jogo é mais adequado que um ingresso por temporada.",
+          "ranking": [
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "time-do-povo",
+              "score": 77.3
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 66.8
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "time-do-povo",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "time-do-povo",
+                "score": 83.1
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 79.2
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-03-C",
+          "split": "calibracao",
+          "profileId": "titular-progressivo",
+          "category": "titular-progressivo",
+          "acceptable": [
+            "cabuloso"
+          ],
+          "reason": "Uso frequente no Sicoob, desconto progressivo e prioridade atual justificam Cabuloso dentro de R$ 100, sem conceder nível pela intenção futura.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 92.1
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 50
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 49.4
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 88.4
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 62.2
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 60.8
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-03-V",
+          "split": "validacao",
+          "profileId": "titular-progressivo",
+          "category": "titular-progressivo",
+          "acceptable": [
+            "cabuloso"
+          ],
+          "reason": "Uso frequente no Sicoob, desconto progressivo e prioridade atual justificam Cabuloso dentro de R$ 100, sem conceder nível pela intenção futura.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 95.4
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 47.8
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 47.2
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 91
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 60
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 58.7
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-04-C",
+          "split": "calibracao",
+          "profileId": "casal-roxo",
+          "category": "casal-roxo",
+          "acceptable": [
+            "cabuloso-max"
+          ],
+          "reason": "Dois ingressos com desconto e cobertura de Roxo inferior e superior sustentam Max; assinatura e despesas do acompanhante continuam separadas.",
+          "ranking": [
+            "cabuloso-max",
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso-max",
+              "score": 97.6
+            },
+            {
+              "plan": "cabuloso",
+              "score": 74.5
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 45.9
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 45.3
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso-max",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso-max",
+                "score": 89.2
+              },
+              {
+                "plan": "cabuloso",
+                "score": 75
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 55.3
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 54.5
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-04-V",
+          "split": "validacao",
+          "profileId": "casal-roxo",
+          "category": "casal-roxo",
+          "acceptable": [
+            "cabuloso-max"
+          ],
+          "reason": "Dois ingressos com desconto e cobertura de Roxo inferior e superior sustentam Max; assinatura e despesas do acompanhante continuam separadas.",
+          "ranking": [
+            "cabuloso-max",
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso-max",
+              "score": 97.4
+            },
+            {
+              "plan": "cabuloso",
+              "score": 81.1
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 43
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 42.3
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso-max",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso-max",
+                "score": 89.6
+              },
+              {
+                "plan": "cabuloso",
+                "score": 80.5
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 52.2
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 51.5
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-05-C",
+          "split": "calibracao",
+          "profileId": "presenca-sicoob",
+          "category": "presenca-sicoob",
+          "acceptable": [
+            "cabuloso-max",
+            "cabuloso"
+          ],
+          "reason": "A declaração expressa desejo de presença, não uma restrição obrigatória de garantia; garantia do Cativo e descontos com prioridade de Max/Cabuloso são alternativas aceitáveis.",
+          "ranking": [
+            "cabuloso",
+            "cabuloso-max",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 92.8
+            },
+            {
+              "plan": "cabuloso-max",
+              "score": 92.8
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 23.8
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 22.8
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 89.5
+              },
+              {
+                "plan": "cabuloso-max",
+                "score": 84.1
+              },
+              {
+                "plan": "cabuloso-cativo",
+                "score": 62.2
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 39.1
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 38.3
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-05-V",
+          "split": "validacao",
+          "profileId": "presenca-sicoob",
+          "category": "presenca-sicoob",
+          "acceptable": [
+            "cabuloso-max",
+            "cabuloso"
+          ],
+          "reason": "A declaração expressa desejo de presença, não uma restrição obrigatória de garantia; garantia do Cativo e descontos com prioridade de Max/Cabuloso são alternativas aceitáveis.",
+          "ranking": [
+            "cabuloso",
+            "cabuloso-max",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 92.8
+            },
+            {
+              "plan": "cabuloso-max",
+              "score": 92.8
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 24.4
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 23.4
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 89.4
+              },
+              {
+                "plan": "cabuloso-max",
+                "score": 83.8
+              },
+              {
+                "plan": "cabuloso-cativo",
+                "score": 61.7
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 40.1
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 39.3
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-06-C",
+          "split": "calibracao",
+          "profileId": "familia-kids",
+          "category": "familia-kids",
+          "acceptable": [
+            "time-do-povo",
+            "cabuloso"
+          ],
+          "reason": "Presença recorrente e Kids elegível admitem benefício popular ou desconto progressivo; o teto limita só a assinatura e o opcional é exposto por criança.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 91
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 84.1
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 76.9
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "time-do-povo",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "time-do-povo",
+                "score": 86.9
+              },
+              {
+                "plan": "cabuloso",
+                "score": 86.7
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 84.3
+              }
+            ]
+          },
+          "winnerChanged": true,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-06-V",
+          "split": "validacao",
+          "profileId": "familia-kids",
+          "category": "familia-kids",
+          "acceptable": [
+            "time-do-povo",
+            "cabuloso"
+          ],
+          "reason": "Presença recorrente e Kids elegível admitem benefício popular ou desconto progressivo; o teto limita só a assinatura e o opcional é exposto por criança.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 92.6
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 83.5
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 75.7
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 88
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 86.3
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 83
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-07-C",
+          "split": "calibracao",
+          "profileId": "loja-digital",
+          "category": "loja-digital",
+          "acceptable": [
+            "meu-cruzeiro",
+            "cabuloso"
+          ],
+          "reason": "Conteúdo e apoio econômico admitem Meu Cruzeiro; o maior desconto de loja pode justificar Cabuloso. Histórico e conteúdo digital não criam necessidade presencial.",
+          "ranking": [
+            "cabuloso",
+            "meu-cruzeiro",
+            "time-do-povo"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 98.9
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 84.1
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 84.1
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 90.3
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 87.4
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 84.8
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-07-V",
+          "split": "validacao",
+          "profileId": "loja-digital",
+          "category": "loja-digital",
+          "acceptable": [
+            "meu-cruzeiro",
+            "cabuloso"
+          ],
+          "reason": "Conteúdo e apoio econômico admitem Meu Cruzeiro; o maior desconto de loja pode justificar Cabuloso. Histórico e conteúdo digital não criam necessidade presencial.",
+          "ranking": [
+            "cabuloso",
+            "meu-cruzeiro",
+            "time-do-povo"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 98.9
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 84.1
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 84.1
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 89.7
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 87.4
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 84.8
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-08-C",
+          "split": "calibracao",
+          "profileId": "roxo-orcamento-limitado",
+          "category": "roxo-orcamento-limitado",
+          "acceptable": [
+            "cabuloso"
+          ],
+          "reason": "Cabuloso oferece desconto no Roxo Superior dentro do teto, com cobertura parcial explícita; preferir Roxo não autoriza recomendar Max acima do orçamento.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 67.9
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 30.1
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 29.2
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 71.2
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 54.1
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 52.1
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        },
+        {
+          "id": "PER-08-V",
+          "split": "validacao",
+          "profileId": "roxo-orcamento-limitado",
+          "category": "roxo-orcamento-limitado",
+          "acceptable": [
+            "cabuloso"
+          ],
+          "reason": "Cabuloso oferece desconto no Roxo Superior dentro do teto, com cobertura parcial explícita; preferir Roxo não autoriza recomendar Max acima do orçamento.",
+          "ranking": [
+            "cabuloso",
+            "time-do-povo",
+            "meu-cruzeiro"
+          ],
+          "scores": [
+            {
+              "plan": "cabuloso",
+              "score": 72.7
+            },
+            {
+              "plan": "time-do-povo",
+              "score": 28.4
+            },
+            {
+              "plan": "meu-cruzeiro",
+              "score": 27.5
+            }
+          ],
+          "top1": true,
+          "top3": true,
+          "budgetViolation": false,
+          "scoreViolation": false,
+          "previous": {
+            "winner": "cabuloso",
+            "top1": true,
+            "scores": [
+              {
+                "plan": "cabuloso",
+                "score": 74.2
+              },
+              {
+                "plan": "meu-cruzeiro",
+                "score": 51.5
+              },
+              {
+                "plan": "time-do-povo",
+                "score": 49.7
+              }
+            ]
+          },
+          "winnerChanged": false,
+          "accuracyRegression": false
+        }
+      ]
+    }
+  }
+}

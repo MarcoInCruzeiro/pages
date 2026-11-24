@@ -1,0 +1,856 @@
+{
+  "rulesVersion": "2026-10-26.2",
+  "catalogVersion": "2026-09-11",
+  "referenceSha256": "a3f73bebe683b37c55efa6cf96b07815d2d4a311da79b1ef68ad8062dad53270",
+  "independentValidation": false,
+  "rows": [
+    {
+      "id": "PER-01-C",
+      "profile": "apoio-economico",
+      "acceptable": [
+        "meu-cruzeiro"
+      ],
+      "ranking": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 92.8
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 88.7
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "components": [
+        {
+          "plan": "meu-cruzeiro",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.051500000000000004,
+              "value": 0.45
+            },
+            {
+              "key": "priority",
+              "weight": 0.018000000000000002,
+              "value": 0.25
+            },
+            {
+              "key": "sector",
+              "weight": 0.04000000000000001,
+              "value": 1
+            },
+            {
+              "key": "discount",
+              "weight": 0.28,
+              "value": 0.6666666666666667
+            },
+            {
+              "key": "experiences",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.05,
+              "value": 0.6
+            },
+            {
+              "key": "price",
+              "weight": 1.4400000000000002,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "plan": "time-do-povo",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.051500000000000004,
+              "value": 0.75
+            },
+            {
+              "key": "priority",
+              "weight": 0.018000000000000002,
+              "value": 0.25
+            },
+            {
+              "key": "sector",
+              "weight": 0.04000000000000001,
+              "value": 1
+            },
+            {
+              "key": "discount",
+              "weight": 0.28,
+              "value": 0.6666666666666667
+            },
+            {
+              "key": "experiences",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.05,
+              "value": 0.6
+            },
+            {
+              "key": "price",
+              "weight": 1.4400000000000002,
+              "value": 0.9278350515463918
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PER-02-C",
+      "profile": "popular-frequente",
+      "acceptable": [
+        "time-do-povo"
+      ],
+      "ranking": [
+        {
+          "plan": "time-do-povo",
+          "score": 83.9
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 81.1
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "components": [
+        {
+          "plan": "time-do-povo",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.6646933333333334,
+              "value": 0.75
+            },
+            {
+              "key": "priority",
+              "weight": 0.23232000000000003,
+              "value": 0.25
+            },
+            {
+              "key": "sector",
+              "weight": 0.5162666666666667,
+              "value": 1
+            },
+            {
+              "key": "discount",
+              "weight": 0.28,
+              "value": 0.6666666666666667
+            },
+            {
+              "key": "experiences",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.05,
+              "value": 0.6
+            },
+            {
+              "key": "price",
+              "weight": 1.4400000000000002,
+              "value": 0.9278350515463918
+            }
+          ]
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.6646933333333334,
+              "value": 0.45
+            },
+            {
+              "key": "priority",
+              "weight": 0.23232000000000003,
+              "value": 0.25
+            },
+            {
+              "key": "sector",
+              "weight": 0.5162666666666667,
+              "value": 1
+            },
+            {
+              "key": "discount",
+              "weight": 0.28,
+              "value": 0.6666666666666667
+            },
+            {
+              "key": "experiences",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.05,
+              "value": 0.6
+            },
+            {
+              "key": "price",
+              "weight": 1.4400000000000002,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PER-03-C",
+      "profile": "titular-progressivo",
+      "acceptable": [
+        "cabuloso"
+      ],
+      "ranking": [
+        {
+          "plan": "cabuloso",
+          "score": 88.4
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 62.2
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 60.8
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "components": [
+        {
+          "plan": "cabuloso",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.6660266666666668,
+              "value": 0.8
+            },
+            {
+              "key": "priority",
+              "weight": 0.4995200000000001,
+              "value": 0.75
+            },
+            {
+              "key": "sector",
+              "weight": 0.47573333333333334,
+              "value": 1
+            },
+            {
+              "key": "discount",
+              "weight": 0.8400000000000001,
+              "value": 1
+            },
+            {
+              "key": "experiences",
+              "weight": 1,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.05,
+              "value": 0.6
+            },
+            {
+              "key": "price",
+              "weight": 1.2000000000000002,
+              "value": 0.7731958762886598
+            }
+          ]
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.6660266666666668,
+              "value": 0.045000000000000005
+            },
+            {
+              "key": "priority",
+              "weight": 0.4995200000000001,
+              "value": 0.25
+            },
+            {
+              "key": "sector",
+              "weight": 0.47573333333333334,
+              "value": 0
+            },
+            {
+              "key": "discount",
+              "weight": 0.8400000000000001,
+              "value": 0.6666666666666667
+            },
+            {
+              "key": "experiences",
+              "weight": 1,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.05,
+              "value": 0.6
+            },
+            {
+              "key": "price",
+              "weight": 1.2000000000000002,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PER-04-C",
+      "profile": "casal-roxo",
+      "acceptable": [
+        "cabuloso-max"
+      ],
+      "ranking": [
+        {
+          "plan": "cabuloso-max",
+          "score": 89.2
+        },
+        {
+          "plan": "cabuloso",
+          "score": 75
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 55.3
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 54.5
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "components": [
+        {
+          "plan": "cabuloso-max",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.9178400000000001,
+              "value": 0.88
+            },
+            {
+              "key": "priority",
+              "weight": 0.6883800000000001,
+              "value": 1
+            },
+            {
+              "key": "sector",
+              "weight": 0.6556000000000001,
+              "value": 1
+            },
+            {
+              "key": "discount",
+              "weight": 0.8400000000000001,
+              "value": 1
+            },
+            {
+              "key": "experiences",
+              "weight": 0.8400000000000001,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.7,
+              "value": 1
+            },
+            {
+              "key": "price",
+              "weight": 1.04,
+              "value": 0.5154639175257731
+            }
+          ]
+        },
+        {
+          "plan": "cabuloso",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.9178400000000001,
+              "value": 0.6000000000000001
+            },
+            {
+              "key": "priority",
+              "weight": 0.6883800000000001,
+              "value": 0.5
+            },
+            {
+              "key": "sector",
+              "weight": 0.6556000000000001,
+              "value": 0.6
+            },
+            {
+              "key": "discount",
+              "weight": 0.8400000000000001,
+              "value": 1
+            },
+            {
+              "key": "experiences",
+              "weight": 0.8400000000000001,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.7,
+              "value": 0.7
+            },
+            {
+              "key": "price",
+              "weight": 1.04,
+              "value": 0.7731958762886598
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PER-05-C",
+      "profile": "presenca-sicoob",
+      "acceptable": [
+        "cabuloso-cativo",
+        "cabuloso-max",
+        "cabuloso"
+      ],
+      "ranking": [
+        {
+          "plan": "cabuloso",
+          "score": 89.5
+        },
+        {
+          "plan": "cabuloso-max",
+          "score": 84.1
+        },
+        {
+          "plan": "cabuloso-cativo",
+          "score": 62.2
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 39.1
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 38.3
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "components": [
+        {
+          "plan": "cabuloso",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 1.0880800000000002,
+              "value": 0.8
+            },
+            {
+              "key": "priority",
+              "weight": 0.8160600000000001,
+              "value": 1
+            },
+            {
+              "key": "sector",
+              "weight": 0.7772000000000001,
+              "value": 1
+            },
+            {
+              "key": "discount",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "experiences",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.05,
+              "value": 0.6
+            },
+            {
+              "key": "price",
+              "weight": 0.8800000000000001,
+              "value": 0.7731958762886598
+            }
+          ]
+        },
+        {
+          "plan": "cabuloso-max",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 1.0880800000000002,
+              "value": 0.8
+            },
+            {
+              "key": "priority",
+              "weight": 0.8160600000000001,
+              "value": 1
+            },
+            {
+              "key": "sector",
+              "weight": 0.7772000000000001,
+              "value": 1
+            },
+            {
+              "key": "discount",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "experiences",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.05,
+              "value": 0.6
+            },
+            {
+              "key": "price",
+              "weight": 0.8800000000000001,
+              "value": 0.5154639175257731
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PER-06-C",
+      "profile": "familia-kids",
+      "acceptable": [
+        "time-do-povo",
+        "cabuloso"
+      ],
+      "ranking": [
+        {
+          "plan": "time-do-povo",
+          "score": 86.9
+        },
+        {
+          "plan": "cabuloso",
+          "score": 86.7
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 84.3
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "components": [
+        {
+          "plan": "time-do-povo",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.6125066666666666,
+              "value": 0.75
+            },
+            {
+              "key": "priority",
+              "weight": 0.21408000000000002,
+              "value": 0.25
+            },
+            {
+              "key": "sector",
+              "weight": 0.47573333333333334,
+              "value": 1
+            },
+            {
+              "key": "discount",
+              "weight": 0.28,
+              "value": 0.6666666666666667
+            },
+            {
+              "key": "experiences",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.7,
+              "value": 1
+            },
+            {
+              "key": "price",
+              "weight": 1.2000000000000002,
+              "value": 0.9278350515463918
+            }
+          ]
+        },
+        {
+          "plan": "cabuloso",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.6125066666666666,
+              "value": 0.8
+            },
+            {
+              "key": "priority",
+              "weight": 0.21408000000000002,
+              "value": 0.5
+            },
+            {
+              "key": "sector",
+              "weight": 0.47573333333333334,
+              "value": 1
+            },
+            {
+              "key": "discount",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "experiences",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.7,
+              "value": 1
+            },
+            {
+              "key": "price",
+              "weight": 1.2000000000000002,
+              "value": 0.7731958762886598
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PER-07-C",
+      "profile": "loja-digital",
+      "acceptable": [
+        "meu-cruzeiro",
+        "cabuloso"
+      ],
+      "ranking": [
+        {
+          "plan": "cabuloso",
+          "score": 90.3
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 87.4
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 84.8
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "components": [
+        {
+          "plan": "cabuloso",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.051500000000000004,
+              "value": 0.8
+            },
+            {
+              "key": "priority",
+              "weight": 0.018000000000000002,
+              "value": 0.5
+            },
+            {
+              "key": "sector",
+              "weight": 0.04000000000000001,
+              "value": 1
+            },
+            {
+              "key": "discount",
+              "weight": 0.8400000000000001,
+              "value": 1
+            },
+            {
+              "key": "experiences",
+              "weight": 1,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.05,
+              "value": 0.6
+            },
+            {
+              "key": "price",
+              "weight": 1.2000000000000002,
+              "value": 0.7731958762886598
+            }
+          ]
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.051500000000000004,
+              "value": 0.045000000000000005
+            },
+            {
+              "key": "priority",
+              "weight": 0.018000000000000002,
+              "value": 0.25
+            },
+            {
+              "key": "sector",
+              "weight": 0.04000000000000001,
+              "value": 0
+            },
+            {
+              "key": "discount",
+              "weight": 0.8400000000000001,
+              "value": 0.6666666666666667
+            },
+            {
+              "key": "experiences",
+              "weight": 1,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.05,
+              "value": 0.6
+            },
+            {
+              "key": "price",
+              "weight": 1.2000000000000002,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PER-08-C",
+      "profile": "roxo-orcamento-limitado",
+      "acceptable": [
+        "cabuloso"
+      ],
+      "ranking": [
+        {
+          "plan": "cabuloso",
+          "score": 71.2
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 54.1
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 52.1
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "components": [
+        {
+          "plan": "cabuloso",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.65184,
+              "value": 0.6000000000000001
+            },
+            {
+              "key": "priority",
+              "weight": 0.48888000000000004,
+              "value": 0.5
+            },
+            {
+              "key": "sector",
+              "weight": 0.4656,
+              "value": 0.6
+            },
+            {
+              "key": "discount",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "experiences",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.05,
+              "value": 0.6
+            },
+            {
+              "key": "price",
+              "weight": 1.2000000000000002,
+              "value": 0.7731958762886598
+            }
+          ]
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "components": [
+            {
+              "key": "ticket",
+              "weight": 0.65184,
+              "value": 0.045000000000000005
+            },
+            {
+              "key": "priority",
+              "weight": 0.48888000000000004,
+              "value": 0.25
+            },
+            {
+              "key": "sector",
+              "weight": 0.4656,
+              "value": 0
+            },
+            {
+              "key": "discount",
+              "weight": 0.28,
+              "value": 0.6666666666666667
+            },
+            {
+              "key": "experiences",
+              "weight": 0.28,
+              "value": 1
+            },
+            {
+              "key": "family",
+              "weight": 0.05,
+              "value": 0.6
+            },
+            {
+              "key": "price",
+              "weight": 1.2000000000000002,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

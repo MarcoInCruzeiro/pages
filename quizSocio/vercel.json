@@ -1,0 +1,7 @@
+{
+  "git": { "deploymentEnabled": { ".*": false } },
+  "framework": "vite",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "dist"
+}

@@ -1,0 +1,25 @@
+{
+  "commit": "5a292533305fd91ce5c4ede06a78ea2ad0127f22",
+  "npmCi": true,
+  "buildPassed": true,
+  "markdownDocumentsChecked": 63,
+  "workingTreePorcelain": "",
+  "package": {
+    "files": 12,
+    "workingTreeHasChanges": false,
+    "diagnostic": true,
+    "releaseApproved": false
+  },
+  "isolatedJourney": {
+    "questions": 48,
+    "viewports": [
+      320,
+      390,
+      768,
+      1280
+    ],
+    "errors": [],
+    "missingAssets": []
+  },
+  "scope": "Clone esparso da revis\u00e3o indicada, sem fontes ou node_modules do workspace. N\u00e3o foi publicado."
+}

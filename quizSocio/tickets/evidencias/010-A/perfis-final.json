@@ -1,0 +1,588 @@
+{
+  "evaluatedAt": "2026-10-27T14:31:33.560Z",
+  "kind": "agent-authored-synthetic-reference",
+  "reference": "profiles",
+  "referenceSha256": "a3f73bebe683b37c55efa6cf96b07815d2d4a311da79b1ef68ad8062dad53270",
+  "independentValidation": false,
+  "engineSha256": "d2bc8591724b44773b9641bafac0f305f2b4396ed652b76db15b167b0c8486e5",
+  "rulesVersion": "2026-10-26.2",
+  "catalogVersion": "2026-09-11",
+  "sourceProposedByUser": "https://socio.cruzeiro.com.br/planos",
+  "limitation": "Referências sintéticas; métricas não representam avaliação externa, cega ou desempenho com usuários reais.",
+  "thresholds": {
+    "top1": 0.8,
+    "top3": 0.95,
+    "budgetViolations": 0
+  },
+  "groups": {
+    "calibracao": {
+      "total": 8,
+      "top1": 8,
+      "top3": 8,
+      "budgetViolations": 0,
+      "scoreViolations": 0,
+      "top1Rate": 1,
+      "top3Rate": 1,
+      "passed": true
+    },
+    "validacao": {
+      "total": 8,
+      "top1": 8,
+      "top3": 8,
+      "budgetViolations": 0,
+      "scoreViolations": 0,
+      "top1Rate": 1,
+      "top3Rate": 1,
+      "passed": true
+    }
+  },
+  "passed": true,
+  "rows": [
+    {
+      "id": "PER-01-C",
+      "split": "calibracao",
+      "profileId": "apoio-economico",
+      "category": "apoio-economico",
+      "acceptable": [
+        "meu-cruzeiro"
+      ],
+      "reason": "Sem uso presencial e sem interesse declarado em extras, a assinatura de menor valor atende ao apoio ao clube; setor não deve decidir.",
+      "ranking": [
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 92.8
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 88.7
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-01-V",
+      "split": "validacao",
+      "profileId": "apoio-economico",
+      "category": "apoio-economico",
+      "acceptable": [
+        "meu-cruzeiro"
+      ],
+      "reason": "Sem uso presencial e sem interesse declarado em extras, a assinatura de menor valor atende ao apoio ao clube; setor não deve decidir.",
+      "ranking": [
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "meu-cruzeiro",
+          "score": 90
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 85.3
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-02-C",
+      "split": "calibracao",
+      "profileId": "popular-frequente",
+      "category": "popular-frequente",
+      "acceptable": [
+        "time-do-povo"
+      ],
+      "reason": "Com frequência elevada, teto de assinatura de R$ 40 e setor popular, o ingresso popular por jogo é mais adequado que um ingresso por temporada.",
+      "ranking": [
+        "time-do-povo",
+        "meu-cruzeiro"
+      ],
+      "scores": [
+        {
+          "plan": "time-do-povo",
+          "score": 83.9
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 81.1
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-02-V",
+      "split": "validacao",
+      "profileId": "popular-frequente",
+      "category": "popular-frequente",
+      "acceptable": [
+        "time-do-povo"
+      ],
+      "reason": "Com frequência elevada, teto de assinatura de R$ 40 e setor popular, o ingresso popular por jogo é mais adequado que um ingresso por temporada.",
+      "ranking": [
+        "time-do-povo",
+        "meu-cruzeiro"
+      ],
+      "scores": [
+        {
+          "plan": "time-do-povo",
+          "score": 83.1
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 79.2
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-03-C",
+      "split": "calibracao",
+      "profileId": "titular-progressivo",
+      "category": "titular-progressivo",
+      "acceptable": [
+        "cabuloso"
+      ],
+      "reason": "Uso frequente no Sicoob, desconto progressivo e prioridade atual justificam Cabuloso dentro de R$ 100, sem conceder nível pela intenção futura.",
+      "ranking": [
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 88.4
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 62.2
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 60.8
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-03-V",
+      "split": "validacao",
+      "profileId": "titular-progressivo",
+      "category": "titular-progressivo",
+      "acceptable": [
+        "cabuloso"
+      ],
+      "reason": "Uso frequente no Sicoob, desconto progressivo e prioridade atual justificam Cabuloso dentro de R$ 100, sem conceder nível pela intenção futura.",
+      "ranking": [
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 91
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 60
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 58.7
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-04-C",
+      "split": "calibracao",
+      "profileId": "casal-roxo",
+      "category": "casal-roxo",
+      "acceptable": [
+        "cabuloso-max"
+      ],
+      "reason": "Dois ingressos com desconto e cobertura de Roxo inferior e superior sustentam Max; assinatura e despesas do acompanhante continuam separadas.",
+      "ranking": [
+        "cabuloso-max",
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso-max",
+          "score": 89.2
+        },
+        {
+          "plan": "cabuloso",
+          "score": 75
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 55.3
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 54.5
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-04-V",
+      "split": "validacao",
+      "profileId": "casal-roxo",
+      "category": "casal-roxo",
+      "acceptable": [
+        "cabuloso-max"
+      ],
+      "reason": "Dois ingressos com desconto e cobertura de Roxo inferior e superior sustentam Max; assinatura e despesas do acompanhante continuam separadas.",
+      "ranking": [
+        "cabuloso-max",
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso-max",
+          "score": 89.6
+        },
+        {
+          "plan": "cabuloso",
+          "score": 80.5
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 52.2
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 51.5
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-05-C",
+      "split": "calibracao",
+      "profileId": "presenca-sicoob",
+      "category": "presenca-sicoob",
+      "acceptable": [
+        "cabuloso-cativo",
+        "cabuloso-max",
+        "cabuloso"
+      ],
+      "reason": "A declaração expressa desejo de presença, não uma restrição obrigatória de garantia; garantia do Cativo e descontos com prioridade de Max/Cabuloso são alternativas aceitáveis.",
+      "ranking": [
+        "cabuloso",
+        "cabuloso-max",
+        "cabuloso-cativo",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 89.5
+        },
+        {
+          "plan": "cabuloso-max",
+          "score": 84.1
+        },
+        {
+          "plan": "cabuloso-cativo",
+          "score": 62.2
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 39.1
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 38.3
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-05-V",
+      "split": "validacao",
+      "profileId": "presenca-sicoob",
+      "category": "presenca-sicoob",
+      "acceptable": [
+        "cabuloso-cativo",
+        "cabuloso-max",
+        "cabuloso"
+      ],
+      "reason": "A declaração expressa desejo de presença, não uma restrição obrigatória de garantia; garantia do Cativo e descontos com prioridade de Max/Cabuloso são alternativas aceitáveis.",
+      "ranking": [
+        "cabuloso",
+        "cabuloso-max",
+        "cabuloso-cativo",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 89.4
+        },
+        {
+          "plan": "cabuloso-max",
+          "score": 83.8
+        },
+        {
+          "plan": "cabuloso-cativo",
+          "score": 61.7
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 40.1
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 39.3
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-06-C",
+      "split": "calibracao",
+      "profileId": "familia-kids",
+      "category": "familia-kids",
+      "acceptable": [
+        "time-do-povo",
+        "cabuloso"
+      ],
+      "reason": "Presença recorrente e Kids elegível admitem benefício popular ou desconto progressivo; o teto limita só a assinatura e o opcional é exposto por criança.",
+      "ranking": [
+        "time-do-povo",
+        "cabuloso",
+        "meu-cruzeiro"
+      ],
+      "scores": [
+        {
+          "plan": "time-do-povo",
+          "score": 86.9
+        },
+        {
+          "plan": "cabuloso",
+          "score": 86.7
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 84.3
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-06-V",
+      "split": "validacao",
+      "profileId": "familia-kids",
+      "category": "familia-kids",
+      "acceptable": [
+        "time-do-povo",
+        "cabuloso"
+      ],
+      "reason": "Presença recorrente e Kids elegível admitem benefício popular ou desconto progressivo; o teto limita só a assinatura e o opcional é exposto por criança.",
+      "ranking": [
+        "cabuloso",
+        "time-do-povo",
+        "meu-cruzeiro"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 88
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 86.3
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 83
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-07-C",
+      "split": "calibracao",
+      "profileId": "loja-digital",
+      "category": "loja-digital",
+      "acceptable": [
+        "meu-cruzeiro",
+        "cabuloso"
+      ],
+      "reason": "Conteúdo e apoio econômico admitem Meu Cruzeiro; o maior desconto de loja pode justificar Cabuloso. Histórico e conteúdo digital não criam necessidade presencial.",
+      "ranking": [
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 90.3
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 87.4
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 84.8
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-07-V",
+      "split": "validacao",
+      "profileId": "loja-digital",
+      "category": "loja-digital",
+      "acceptable": [
+        "meu-cruzeiro",
+        "cabuloso"
+      ],
+      "reason": "Conteúdo e apoio econômico admitem Meu Cruzeiro; o maior desconto de loja pode justificar Cabuloso. Histórico e conteúdo digital não criam necessidade presencial.",
+      "ranking": [
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 89.7
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 87.4
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 84.8
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-08-C",
+      "split": "calibracao",
+      "profileId": "roxo-orcamento-limitado",
+      "category": "roxo-orcamento-limitado",
+      "acceptable": [
+        "cabuloso"
+      ],
+      "reason": "Cabuloso oferece desconto no Roxo Superior dentro do teto, com cobertura parcial explícita; preferir Roxo não autoriza recomendar Max acima do orçamento.",
+      "ranking": [
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 71.2
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 54.1
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 52.1
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    },
+    {
+      "id": "PER-08-V",
+      "split": "validacao",
+      "profileId": "roxo-orcamento-limitado",
+      "category": "roxo-orcamento-limitado",
+      "acceptable": [
+        "cabuloso"
+      ],
+      "reason": "Cabuloso oferece desconto no Roxo Superior dentro do teto, com cobertura parcial explícita; preferir Roxo não autoriza recomendar Max acima do orçamento.",
+      "ranking": [
+        "cabuloso",
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "scores": [
+        {
+          "plan": "cabuloso",
+          "score": 74.2
+        },
+        {
+          "plan": "meu-cruzeiro",
+          "score": 51.5
+        },
+        {
+          "plan": "time-do-povo",
+          "score": 49.7
+        }
+      ],
+      "top1": true,
+      "top3": true,
+      "budgetViolation": false,
+      "scoreViolation": false
+    }
+  ]
+}

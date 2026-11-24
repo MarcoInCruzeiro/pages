@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quiz-socio.vercel.app/config/ga4/ga4.schema.json",
+  "title": "Configuração GA4",
+  "description": "Configuração de medição GA4 extraída do index.html",
+  "type": "object",
+  "required": [
+    "propriedade",
+    "ambientesHabilitados",
+    "eventos",
+    "respostas",
+    "isolamento"
+  ],
+  "properties": {
+    "descricao": {
+      "type": "string"
+    },
+    "versao": {
+      "type": "string"
+    },
+    "propriedade": {
+      "type": "object",
+      "required": [
+        "measurementId"
+      ],
+      "properties": {
+        "measurementId": {
+          "type": "string",
+          "pattern": "^G-[A-Z0-9]+$"
+        },
+        "nome": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ambientesHabilitados": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "hostname"
+      },
+      "uniqueItems": true
+    },
+    "eventos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "nome",
+          "quando",
+          "camposPrincipais",
+          "interpretacao",
+          "chave",
+          "tipos"
+        ],
+        "properties": {
+          "nome": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,39}$"
+          },
+          "quando": {
+            "type": "string"
+          },
+          "camposPrincipais": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "interpretacao": {
+            "type": "string"
+          },
+          "chave": {
+            "type": "string",
+            "enum": [
+              "inicio_do_quiz",
+              "resposta_do_quiz",
+              "quiz_concluido",
+              "clique_de_assinatura"
+            ]
+          },
+          "tipos": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "enum": [
+                "string",
+                "number",
+                "boolean",
+                "number|null"
+              ]
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "respostas": {
+      "type": "object",
+      "required": [
+        "gamesPerYear",
+        "gamesHistory",
+        "wantsGuaranteedTicket",
+        "buysTwoTickets",
+        "kidsCount",
+        "needsPriority",
+        "wantsParticipation",
+        "wantsStoreDiscount",
+        "gameFrequency",
+        "digitalExperience",
+        "budget",
+        "preferredSector"
+      ],
+      "properties": {
+        "gamesPerYear": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "gamesHistory": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "wantsGuaranteedTicket": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "buysTwoTickets": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "kidsCount": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "needsPriority": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "wantsParticipation": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "wantsStoreDiscount": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "gameFrequency": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "digitalExperience": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "budget": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" },
+        "preferredSector": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,29}$" }
+      },
+      "additionalProperties": false
+    },
+    "isolamento": {
+      "type": "object",
+      "properties": {
+        "camada1": {
+          "type": "string"
+        },
+        "camada2": {
+          "type": "string"
+        },
+        "ambientesExcluidos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nota": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "camada1",
+        "camada2",
+        "ambientesExcluidos",
+        "nota"
+      ],
+      "additionalProperties": false
+    },
+    "limiteParametrosPersonalizados": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20
+    },
+    "observacao": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,5 @@
+
+> quiz-socio-5-estrelas@2.0.0 config:check
+> node scripts/config-check.mjs
+
+Configuração inválida [questoes] kidsCount: tipo e valores semânticos das opções precisam ser preservados

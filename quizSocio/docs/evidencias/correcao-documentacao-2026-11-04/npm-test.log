@@ -1,0 +1,1068 @@
+
+> quiz-socio-5-estrelas@2.0.0 pretest
+> npm run build
+
+
+> quiz-socio-5-estrelas@2.0.0 build
+> npm run config:check && vite build
+
+
+> quiz-socio-5-estrelas@2.0.0 config:check
+> node scripts/config-check.mjs && node scripts/gerar-validadores.mjs --check
+
+Configuração válida: 3fca088a0572f28d19df8287caa05527180717404397b999784b93448da54813; regras 2026-11-03.2. A aprovação de entrega é verificada separadamente.
+OK: config/validadores-compilados.mjs (222251 bytes; 3 imports de runtime resolvidos)
+vite v6.4.5 building for production...
+transforming...
+✓ 39 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/build-manifest.json                                       1.00 kB │ gzip:  0.58 kB
+dist/index.html                                                2.47 kB │ gzip:  0.98 kB
+dist/img/Estutura de Páginas_fundoestrelado_siteapp.jpeg      69.17 kB
+dist/img/background.jpg                                       95.20 kB
+dist/img/cruzeiro.png                                        179.12 kB
+dist/img/meuCruzeiro.png                                     193.74 kB
+dist/img/cabuloso.png                                        201.80 kB
+dist/img/timeDoPovo.png                                      203.89 kB
+dist/img/cabulosoMax.png                                     227.59 kB
+dist/img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4     13,830.47 kB
+dist/assets/index-B-nb6OAm.css                                30.91 kB │ gzip:  6.86 kB
+dist/assets/index-B7XfV_Kf.js                                305.52 kB │ gzip: 66.42 kB
+✓ built in 749ms
+
+> quiz-socio-5-estrelas@2.0.0 test
+> node --test tests/engine.test.js tests/configuration.test.mjs tests/analytics.test.mjs tests/config-release.test.mjs tests/reference.test.js tests/reference-profiles.test.js tests/evaluation.test.mjs tests/verification.test.mjs tests/validadores-compilados.test.mjs tests/dev-startup.test.mjs tests/browser.test.js
+
+TAP version 13
+# Subtest: GA4 exclui desenvolvimento e preview mesmo inseridos na allowlist
+ok 1 - GA4 exclui desenvolvimento e preview mesmo inseridos na allowlist
+  ---
+  duration_ms: 6.491212
+  type: 'test'
+  ...
+# Subtest: GA4 inicializa uma vez e despacha um evento sem duplicar a fila
+ok 2 - GA4 inicializa uma vez e despacha um evento sem duplicar a fila
+  ---
+  duration_ms: 1.212349
+  type: 'test'
+  ...
+# Subtest: GA4 usa nome configurado por identidade semântica e respeita supressão no despachante
+ok 3 - GA4 usa nome configurado por identidade semântica e respeita supressão no despachante
+  ---
+  duration_ms: 1.022849
+  type: 'test'
+  ...
+# Subtest: GA4 falha fechado sem interromper o chamador e rejeita payload acima do teto
+ok 4 - GA4 falha fechado sem interromper o chamador e rejeita payload acima do teto
+  ---
+  duration_ms: 0.916052
+  type: 'test'
+  ...
+# Subtest: Quiz Sócio — fluxo de navegador
+    # Subtest: clique duplo em Continuar avança exatamente uma pergunta
+    ok 1 - clique duplo em Continuar avança exatamente uma pergunta
+      ---
+      duration_ms: 931.850409
+      type: 'test'
+      ...
+    # Subtest: alternar rapidamente Voltar e Continuar mantém a pergunta correta
+    ok 2 - alternar rapidamente Voltar e Continuar mantém a pergunta correta
+      ---
+      duration_ms: 1340.596413
+      type: 'test'
+      ...
+    # Subtest: Voltar preserva as respostas e a seleção visual
+    ok 3 - Voltar preserva as respostas e a seleção visual
+      ---
+      duration_ms: 2269.820974
+      type: 'test'
+      ...
+    # Subtest: resposta ausente não avança e mostra orientação
+    ok 4 - resposta ausente não avança e mostra orientação
+      ---
+      duration_ms: 1392.723552
+      type: 'test'
+      ...
+    # Subtest: zero jogos e opções false são respostas válidas
+    ok 5 - zero jogos e opções false são respostas válidas
+      ---
+      duration_ms: 1380.439993
+      type: 'test'
+      ...
+    # Subtest: conflito pede confirmação e produz um único resultado
+    ok 6 - conflito pede confirmação e produz um único resultado
+      ---
+      duration_ms: 4227.742489
+      type: 'test'
+      ...
+    # Subtest: revisar respostas a partir do conflito volta à primeira pergunta
+    ok 7 - revisar respostas a partir do conflito volta à primeira pergunta
+      ---
+      duration_ms: 4006.148392
+      type: 'test'
+      ...
+    # Subtest: confirmação no celular mantém leitura e ações acessíveis sem espaço extra
+    ok 8 - confirmação no celular mantém leitura e ações acessíveis sem espaço extra
+      ---
+      duration_ms: 3807.980666
+      type: 'test'
+      ...
+    # Subtest: menu móvel pode ser aberto por teclado e informa seu estado
+    ok 9 - menu móvel pode ser aberto por teclado e informa seu estado
+      ---
+      duration_ms: 133.432775
+      type: 'test'
+      ...
+    # Subtest: resultado único mantém o contrato de analytics e o CTA
+    ok 10 - resultado único mantém o contrato de analytics e o CTA
+      ---
+      duration_ms: 3813.653546
+      type: 'test'
+      ...
+    # Subtest: Refazer quiz limpa o estado e permite nova conclusão
+    ok 11 - Refazer quiz limpa o estado e permite nova conclusão
+      ---
+      duration_ms: 7863.051816
+      type: 'test'
+      ...
+    # Subtest: orçamento restrito e setor incompatível preservam preços e taxas separados
+    ok 12 - orçamento restrito e setor incompatível preservam preços e taxas separados
+      ---
+      duration_ms: 3737.234343
+      type: 'test'
+      ...
+    # Subtest: Kids oferece Sim/Não, preserva a escolha ao voltar e registra valores 0/1
+    ok 13 - Kids oferece Sim/Não, preserva a escolha ao voltar e registra valores 0/1
+      ---
+      duration_ms: 2750.187975
+      type: 'test'
+      ...
+    # Subtest: casal com Kids vê assinatura, adesão, opcional e exemplo de ingresso separados
+    ok 14 - casal com Kids vê assinatura, adesão, opcional e exemplo de ingresso separados
+      ---
+      duration_ms: 3956.955674
+      type: 'test'
+      ...
+    # Subtest: comparativo apresenta a matriz oficial, referência mensal e checkout correto
+    ok 15 - comparativo apresenta a matriz oficial, referência mensal e checkout correto
+      ---
+      duration_ms: 166.489179
+      type: 'test'
+      ...
+    # Subtest: teclado seleciona uma opção e libera Continuar
+    ok 16 - teclado seleciona uma opção e libera Continuar
+      ---
+      duration_ms: 1116.048807
+      type: 'test'
+      ...
+    # Subtest: teclado abre e fecha o comparativo a partir do resultado
+    ok 17 - teclado abre e fecha o comparativo a partir do resultado
+      ---
+      duration_ms: 174.364189
+      type: 'test'
+      ...
+    # Subtest: abertura mantém o rodapé abaixo da área reservada às perguntas
+    ok 18 - abertura mantém o rodapé abaixo da área reservada às perguntas
+      ---
+      duration_ms: 179.282501
+      type: 'test'
+      ...
+    # Subtest: rodapé mantém a posição nas 12 perguntas e libera a altura no resultado
+    ok 19 - rodapé mantém a posição nas 12 perguntas e libera a altura no resultado
+      ---
+      duration_ms: 970.187235
+      type: 'test'
+      ...
+    # Subtest: altura reservada se adapta ao redimensionar durante as perguntas
+    ok 20 - altura reservada se adapta ao redimensionar durante as perguntas
+      ---
+      duration_ms: 284.292564
+      type: 'test'
+      ...
+    # Subtest: opções preservam título destacado e descrição em outra linha
+    ok 21 - opções preservam título destacado e descrição em outra linha
+      ---
+      duration_ms: 1100.919121
+      type: 'test'
+      ...
+    # Subtest: desmarcar histórico desconhecido recupera a quantidade anterior
+    ok 22 - desmarcar histórico desconhecido recupera a quantidade anterior
+      ---
+      duration_ms: 1100.110565
+      type: 'test'
+      ...
+    # Subtest: comparativo mantém preços destacados e avisos discretos acima do orçamento
+    ok 23 - comparativo mantém preços destacados e avisos discretos acima do orçamento
+      ---
+      duration_ms: 3683.145442
+      type: 'test'
+      ...
+    # Subtest: concluir e refazer reposicionam a leitura no celular
+    ok 24 - concluir e refazer reposicionam a leitura no celular
+      ---
+      duration_ms: 4893.191839
+      type: 'test'
+      ...
+    # Subtest: mobile e desktop não têm rolagem horizontal inesperada
+    ok 25 - mobile e desktop não têm rolagem horizontal inesperada
+      ---
+      duration_ms: 1044.963956
+      type: 'test'
+      ...
+    1..25
+ok 5 - Quiz Sócio — fluxo de navegador
+  ---
+  duration_ms: 56761.491877
+  type: 'suite'
+  ...
+# Subtest: Quiz Sócio — isolamento da coleta GA4
+    # Subtest: preview observa a decisão original da página e não inicializa a coleta
+    ok 1 - preview observa a decisão original da página e não inicializa a coleta
+      ---
+      duration_ms: 174.704634
+      type: 'test'
+      ...
+    # Subtest: loopback IPv6 ([::1]) e 127.0.0.2 ficam fora da coleta de produção
+    ok 2 - loopback IPv6 ([::1]) e 127.0.0.2 ficam fora da coleta de produção
+      ---
+      duration_ms: 255.712164
+      type: 'test'
+      ...
+    # Subtest: host remoto fora da lista explícita fica fora da coleta
+    ok 3 - host remoto fora da lista explícita fica fora da coleta
+      ---
+      duration_ms: 105.526026
+      type: 'test'
+      ...
+    # Subtest: produção (host publicado) habilita a coleta com inicialização única e o quiz funciona
+    ok 4 - produção (host publicado) habilita a coleta com inicialização única e o quiz funciona
+      ---
+      duration_ms: 4151.885048
+      type: 'test'
+      ...
+    # Subtest: preview mantém a supressão mesmo em ambiente habilitado
+    ok 5 - preview mantém a supressão mesmo em ambiente habilitado
+      ---
+      duration_ms: 130.150255
+      type: 'test'
+      ...
+    # Subtest: cookies anteriores permanecem e nenhum cookie novo de analytics surge nos modos excluídos
+    ok 6 - cookies anteriores permanecem e nenhum cookie novo de analytics surge nos modos excluídos
+      ---
+      duration_ms: 241.446082
+      type: 'test'
+      ...
+    # Subtest: arquivo local (file://) fica fora da coleta de produção
+    ok 7 - arquivo local (file://) fica fora da coleta de produção
+      ---
+      duration_ms: 25.157751
+      type: 'test'
+      ...
+    # Subtest: a lista de ambientes habilitados é explícita na configuração compartilhada
+    ok 8 - a lista de ambientes habilitados é explícita na configuração compartilhada
+      ---
+      duration_ms: 0.430575
+      type: 'test'
+      ...
+    1..8
+ok 6 - Quiz Sócio — isolamento da coleta GA4
+  ---
+  duration_ms: 5426.893877
+  type: 'suite'
+  ...
+# Subtest: Quiz Sócio — reconhecimento do preview
+    # Subtest: modos explícitos de preview abrem o resultado fictício sem coleta
+    ok 1 - modos explícitos de preview abrem o resultado fictício sem coleta
+      ---
+      duration_ms: 537.305283
+      type: 'test'
+      ...
+    # Subtest: parâmetros que apenas contêm "preview" no valor abrem o início normal
+    ok 2 - parâmetros que apenas contêm "preview" no valor abrem o início normal
+      ---
+      duration_ms: 258.073812
+      type: 'test'
+      ...
+    # Subtest: com UTMs falsos-positivos o quiz percorre completo e gera os eventos normais no caminho habilitado
+    ok 3 - com UTMs falsos-positivos o quiz percorre completo e gera os eventos normais no caminho habilitado
+      ---
+      duration_ms: 3773.022214
+      type: 'test'
+      ...
+    1..3
+ok 7 - Quiz Sócio — reconhecimento do preview
+  ---
+  duration_ms: 4886.418523
+  type: 'suite'
+  ...
+# Subtest: Quiz Sócio — CTAs de contratação
+    # Subtest: teclado aciona a contratação com foco visível e dimensões preservadas
+    ok 1 - teclado aciona a contratação com foco visível e dimensões preservadas
+      ---
+      duration_ms: 7718.167537
+      type: 'test'
+      ...
+    # Subtest: CTA da lista navega ao plano clicado e registra a origem lista
+    ok 2 - CTA da lista navega ao plano clicado e registra a origem lista
+      ---
+      duration_ms: 3788.799742
+      type: 'test'
+      ...
+    # Subtest: CTA do comparativo navega com origem comparativo
+    ok 3 - CTA do comparativo navega com origem comparativo
+      ---
+      duration_ms: 3856.777096
+      type: 'test'
+      ...
+    # Subtest: sem plano elegível, o estado indisponível não navega nem gera evento
+    ok 4 - sem plano elegível, o estado indisponível não navega nem gera evento
+      ---
+      duration_ms: 3767.747494
+      type: 'test'
+      ...
+    1..4
+ok 8 - Quiz Sócio — CTAs de contratação
+  ---
+  duration_ms: 19471.818059
+  type: 'suite'
+  ...
+# Subtest: identidade canônica mantém tipos e ordem de arrays sem depender de ordem das propriedades
+ok 9 - identidade canônica mantém tipos e ordem de arrays sem depender de ordem das propriedades
+  ---
+  duration_ms: 4.912124
+  type: 'test'
+  ...
+# Subtest: mudar só GA4 não altera a identidade das regras nem a revisão comercial
+ok 10 - mudar só GA4 não altera a identidade das regras nem a revisão comercial
+  ---
+  duration_ms: 51.951058
+  type: 'test'
+  ...
+# Subtest: comandos locais versionam, preservam backup e restauram sem escrever no projeto real
+ok 11 - comandos locais versionam, preservam backup e restauram sem escrever no projeto real
+  ---
+  duration_ms: 2036.173741
+  type: 'test'
+  ...
+# Subtest: gate recusa perdas e só aceita decisão vinculada à configuração e referências certas
+ok 12 - gate recusa perdas e só aceita decisão vinculada à configuração e referências certas
+  ---
+  duration_ms: 58.010733
+  type: 'test'
+  ...
+# Subtest: nova regra preserva preços apresentados, setores, perfil de necessidades e conflitos históricos
+ok 13 - nova regra preserva preços apresentados, setores, perfil de necessidades e conflitos históricos
+  ---
+  duration_ms: 42.92315
+  type: 'test'
+  ...
+# Subtest: adicionar plano ao catálogo não renormaliza afinidade dos planos existentes
+ok 14 - adicionar plano ao catálogo não renormaliza afinidade dos planos existentes
+  ---
+  duration_ms: 15.063925
+  type: 'test'
+  ...
+# Subtest: alterações reais de perfil e ranking são aplicadas em instâncias isoladas
+ok 15 - alterações reais de perfil e ranking são aplicadas em instâncias isoladas
+  ---
+  duration_ms: 5.231331
+  type: 'test'
+  ...
+# Subtest: questões reordenadas preservam valores tipados, validação e pontuação
+ok 16 - questões reordenadas preservam valores tipados, validação e pontuação
+  ---
+  duration_ms: 5.688359
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: valor booleano convertido para string
+ok 17 - configuração inválida é recusada: valor booleano convertido para string
+  ---
+  duration_ms: 1.613069
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: chave semântica desconhecida
+ok 18 - configuração inválida é recusada: chave semântica desconhecida
+  ---
+  duration_ms: 0.730592
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: chave duplicada
+ok 19 - configuração inválida é recusada: chave duplicada
+  ---
+  duration_ms: 0.784696
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: peso negativo
+ok 20 - configuração inválida é recusada: peso negativo
+  ---
+  duration_ms: 0.574954
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: peso descrito como código
+ok 21 - configuração inválida é recusada: peso descrito como código
+  ---
+  duration_ms: 0.895512
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: reintrodução de peso de preço
+ok 22 - configuração inválida é recusada: reintrodução de peso de preço
+  ---
+  duration_ms: 3.23451
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: reintrodução de importância de preço no perfil
+ok 23 - configuração inválida é recusada: reintrodução de importância de preço no perfil
+  ---
+  duration_ms: 0.689723
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: ranking sem peso residual positivo
+ok 24 - configuração inválida é recusada: ranking sem peso residual positivo
+  ---
+  duration_ms: 0.620447
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: normalização com divisor zero
+ok 25 - configuração inválida é recusada: normalização com divisor zero
+  ---
+  duration_ms: 0.477989
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: perfil sem soma positiva
+ok 26 - configuração inválida é recusada: perfil sem soma positiva
+  ---
+  duration_ms: 0.445291
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: utilidade fora do domínio
+ok 27 - configuração inválida é recusada: utilidade fora do domínio
+  ---
+  duration_ms: 0.427403
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: propriedade desconhecida aninhada
+ok 28 - configuração inválida é recusada: propriedade desconhecida aninhada
+  ---
+  duration_ms: 0.562647
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: catálogo vazio
+ok 29 - configuração inválida é recusada: catálogo vazio
+  ---
+  duration_ms: 0.425429
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: slug duplicado
+ok 30 - configuração inválida é recusada: slug duplicado
+  ---
+  duration_ms: 0.47255
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: setor desconhecido
+ok 31 - configuração inválida é recusada: setor desconhecido
+  ---
+  duration_ms: 0.552633
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: níveis sobrepostos
+ok 32 - configuração inválida é recusada: níveis sobrepostos
+  ---
+  duration_ms: 0.818717
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: link com destino não permitido
+ok 33 - configuração inválida é recusada: link com destino não permitido
+  ---
+  duration_ms: 1.07126
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: identificador de oferta não corresponde ao checkout
+ok 34 - configuração inválida é recusada: identificador de oferta não corresponde ao checkout
+  ---
+  duration_ms: 0.988515
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: preço inconsistente com modalidade
+ok 35 - configuração inválida é recusada: preço inconsistente com modalidade
+  ---
+  duration_ms: 0.952363
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: evento excede teto interno
+ok 36 - configuração inválida é recusada: evento excede teto interno
+  ---
+  duration_ms: 0.939528
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: remoção de versao_das_regras sem migração
+ok 37 - configuração inválida é recusada: remoção de versao_das_regras sem migração
+  ---
+  duration_ms: 1.10118
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: tipos GA4 ausentes
+ok 38 - configuração inválida é recusada: tipos GA4 ausentes
+  ---
+  duration_ms: 4.142982
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: campo legado de conclusão removido
+ok 39 - configuração inválida é recusada: campo legado de conclusão removido
+  ---
+  duration_ms: 1.11396
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: nome de resposta repetido
+ok 40 - configuração inválida é recusada: nome de resposta repetido
+  ---
+  duration_ms: 2.049167
+  type: 'test'
+  ...
+# Subtest: configuração inválida é recusada: host com curinga
+ok 41 - configuração inválida é recusada: host com curinga
+  ---
+  duration_ms: 2.963508
+  type: 'test'
+  ...
+# Subtest: nome wire de evento é editável sem mudar sua identidade semântica
+ok 42 - nome wire de evento é editável sem mudar sua identidade semântica
+  ---
+  duration_ms: 1.974972
+  type: 'test'
+  ...
+# Subtest: sem elegíveis, somente catálogo informativo contém planos fora do teto
+ok 43 - sem elegíveis, somente catálogo informativo contém planos fora do teto
+  ---
+  duration_ms: 0.41006
+  type: 'test'
+  ...
+# Port 5173 is in use, trying another one...
+# Subtest: servidor de desenvolvimento renderiza a entrada e inicia o quiz sem erros
+ok 44 - servidor de desenvolvimento renderiza a entrada e inicia o quiz sem erros
+  ---
+  duration_ms: 1791.782005
+  type: 'test'
+  ...
+# Subtest: catálogo mantém quatro planos ativos e as condições comerciais aceitas
+ok 45 - catálogo mantém quatro planos ativos e as condições comerciais aceitas
+  ---
+  duration_ms: 15.236942
+  type: 'test'
+  ...
+# Subtest: exemplo de desconto do Max respeita 65% de R$ 150
+ok 46 - exemplo de desconto do Max respeita 65% de R$ 150
+  ---
+  duration_ms: 0.506799
+  type: 'test'
+  ...
+# Subtest: validação aceita zero e false e rejeita ausentes ou inválidos
+ok 47 - validação aceita zero e false e rejeita ausentes ou inválidos
+  ---
+  duration_ms: 0.264626
+  type: 'test'
+  ...
+# Subtest: Kids é uma escolha binária numérica e mantém limites de defesa do perfil
+ok 48 - Kids é uma escolha binária numérica e mantém limites de defesa do perfil
+  ---
+  duration_ms: 2.166028
+  type: 'test'
+  ...
+# Subtest: apresentação de todos os planos usa referência mensal sem total anual ou parcelas
+ok 49 - apresentação de todos os planos usa referência mensal sem total anual ou parcelas
+  ---
+  duration_ms: 1.259152
+  type: 'test'
+  ...
+# Subtest: validação aponta a primeira pergunta sem resposta
+ok 50 - validação aponta a primeira pergunta sem resposta
+  ---
+  duration_ms: 0.474726
+  type: 'test'
+  ...
+# Subtest: conteúdo digital não acrescenta frequência nem consumo de produtos
+ok 51 - conteúdo digital não acrescenta frequência nem consumo de produtos
+  ---
+  duration_ms: 0.396057
+  type: 'test'
+  ...
+# Subtest: frequência declarada não implica interesse em produtos ou experiências
+ok 52 - frequência declarada não implica interesse em produtos ou experiências
+  ---
+  duration_ms: 0.286782
+  type: 'test'
+  ...
+# Subtest: zero jogos ou não frequentar resultam em necessidade presencial nula
+ok 53 - zero jogos ou não frequentar resultam em necessidade presencial nula
+  ---
+  duration_ms: 0.466864
+  type: 'test'
+  ...
+# Subtest: contradições são detectadas sem correção silenciosa
+ok 54 - contradições são detectadas sem correção silenciosa
+  ---
+  duration_ms: 0.811778
+  type: 'test'
+  ...
+# Subtest: níveis do Cabuloso usam histórico e seguem os limites oficiais
+ok 55 - níveis do Cabuloso usam histórico e seguem os limites oficiais
+  ---
+  duration_ms: 0.515549
+  type: 'test'
+  ...
+# Subtest: desconto e prioridade derivam do mesmo nível
+ok 56 - desconto e prioridade derivam do mesmo nível
+  ---
+  duration_ms: 0.348189
+  type: 'test'
+  ...
+# Subtest: cobertura de setor distingue completo, parcial e ausente
+ok 57 - cobertura de setor distingue completo, parcial e ausente
+  ---
+  duration_ms: 0.356396
+  type: 'test'
+  ...
+# Subtest: preferência pelo Roxo oferece cobertura ativa sem reintroduzir o Cativo
+ok 58 - preferência pelo Roxo oferece cobertura ativa sem reintroduzir o Cativo
+  ---
+  duration_ms: 2.008932
+  type: 'test'
+  ...
+# Subtest: valores de assinatura, adesão e Kids são independentes, sem totais combinados
+ok 59 - valores de assinatura, adesão e Kids são independentes, sem totais combinados
+  ---
+  duration_ms: 0.209237
+  type: 'test'
+  ...
+# Subtest: frequência, acompanhantes e Kids não somam valores à assinatura apresentada
+ok 60 - frequência, acompanhantes e Kids não somam valores à assinatura apresentada
+  ---
+  duration_ms: 2.433926
+  type: 'test'
+  ...
+# Subtest: exemplo de desconto do Max permanece unitário para titular e acompanhante
+ok 61 - exemplo de desconto do Max permanece unitário para titular e acompanhante
+  ---
+  duration_ms: 0.330039
+  type: 'test'
+  ...
+# Subtest: taxas e preços de opcionais não entram no índice
+ok 62 - taxas e preços de opcionais não entram no índice
+  ---
+  duration_ms: 1.530948
+  type: 'test'
+  ...
+# Subtest: ingresso gratuito é apresentado como benefício por temporada
+ok 63 - ingresso gratuito é apresentado como benefício por temporada
+  ---
+  duration_ms: 0.224561
+  type: 'test'
+  ...
+# Subtest: ranking é determinístico, finito e respeita o orçamento
+ok 64 - ranking é determinístico, finito e respeita o orçamento
+  ---
+  duration_ms: 1.014113
+  type: 'test'
+  ...
+# Subtest: preço só filtra o orçamento: mudar preços elegíveis não altera índices nem ordem
+ok 65 - preço só filtra o orçamento: mudar preços elegíveis não altera índices nem ordem
+  ---
+  duration_ms: 1.250851
+  type: 'test'
+  ...
+# Subtest: preço não desempata planos com os mesmos benefícios
+ok 66 - preço não desempata planos com os mesmos benefícios
+  ---
+  duration_ms: 0.689824
+  type: 'test'
+  ...
+# Subtest: orçamento não muda a afinidade dos planos que continuam elegíveis
+ok 67 - orçamento não muda a afinidade dos planos que continuam elegíveis
+  ---
+  duration_ms: 1.045976
+  type: 'test'
+  ...
+# Subtest: as quatro divergências rejeitadas recomendam os benefícios esperados
+ok 68 - as quatro divergências rejeitadas recomendam os benefícios esperados
+  ---
+  duration_ms: 3.324501
+  type: 'test'
+  ...
+# Subtest: sem necessidade presencial, ingresso, prioridade e setor não distinguem planos
+ok 69 - sem necessidade presencial, ingresso, prioridade e setor não distinguem planos
+  ---
+  duration_ms: 0.727691
+  type: 'test'
+  ...
+# Subtest: enumeração representativa recalcula o espaço finito de respostas
+ok 70 - enumeração representativa recalcula o espaço finito de respostas
+  ---
+  duration_ms: 487.476495
+  type: 'test'
+  ...
+# espaço nominal: 6856704; combinações executadas: 1546; combinações categoriais com conflito confirmável: 5376
+# Subtest: ausência de plano elegível é explícita e não recomenda acima do teto
+ok 71 - ausência de plano elegível é explícita e não recomenda acima do teto
+  ---
+  duration_ms: 3.569118
+  type: 'test'
+  ...
+# Subtest: motivos do resultado citam respostas e condições comerciais
+ok 72 - motivos do resultado citam respostas e condições comerciais
+  ---
+  duration_ms: 1.007426
+  type: 'test'
+  ...
+# Subtest: zero jogos reduz o peso do benefício de ingresso
+ok 73 - zero jogos reduz o peso do benefício de ingresso
+  ---
+  duration_ms: 0.941212
+  type: 'test'
+  ...
+# Subtest: ordem do catálogo não altera ranking nem índices
+ok 74 - ordem do catálogo não altera ranking nem índices
+  ---
+  duration_ms: 21.025846
+  type: 'test'
+  ...
+# Subtest: empate de índice e assinatura é resolvido pelo slug
+ok 75 - empate de índice e assinatura é resolvido pelo slug
+  ---
+  duration_ms: 0.997541
+  type: 'test'
+  ...
+# Subtest: exemplo documentado da fórmula: 10 jogos, histórico 10, Sicoob, teto 100
+ok 76 - exemplo documentado da fórmula: 10 jogos, histórico 10, Sicoob, teto 100
+  ---
+  duration_ms: 0.895442
+  type: 'test'
+  ...
+# Subtest: nível do ingresso não altera o valor de assinatura do Cabuloso
+ok 77 - nível do ingresso não altera o valor de assinatura do Cabuloso
+  ---
+  duration_ms: 1.098513
+  type: 'test'
+  ...
+# Subtest: motivos seguem as regras que classificaram o plano
+ok 78 - motivos seguem as regras que classificaram o plano
+  ---
+  duration_ms: 0.825209
+  type: 'test'
+  ...
+# Subtest: benefícios não anunciam carteirinha, pois quase todos os planos a incluem
+ok 79 - benefícios não anunciam carteirinha, pois quase todos os planos a incluem
+  ---
+  duration_ms: 1.075449
+  type: 'test'
+  ...
+# Subtest: resultado do motor identifica a versão das regras vigentes
+ok 80 - resultado do motor identifica a versão das regras vigentes
+  ---
+  duration_ms: 0.536692
+  type: 'test'
+  ...
+# Subtest: referência congelada de perfis atende às metas em calibração e validação
+ok 81 - referência congelada de perfis atende às metas em calibração e validação
+  ---
+  duration_ms: 27.010586
+  type: 'test'
+  ...
+# Subtest: avaliação registra falha de expectativa e recusa conjunto vazio ou inválido
+ok 82 - avaliação registra falha de expectativa e recusa conjunto vazio ou inválido
+  ---
+  duration_ms: 1.855943
+  type: 'test'
+  ...
+# Subtest: regra sem preço corrige RES-11 sem alterar sua expectativa e separa partições
+ok 83 - regra sem preço corrige RES-11 sem alterar sua expectativa e separa partições
+  ---
+  duration_ms: 13.907545
+  type: 'test'
+  ...
+# Subtest: nova regra atende a todas as expectativas congeladas sem aceite de perdas
+ok 84 - nova regra atende a todas as expectativas congeladas sem aceite de perdas
+  ---
+  duration_ms: 15.074792
+  type: 'test'
+  ...
+# Subtest: piso estatístico não aprova novas perdas de acerto automaticamente
+ok 85 - piso estatístico não aprova novas perdas de acerto automaticamente
+  ---
+  duration_ms: 19.489758
+  type: 'test'
+  ...
+# Subtest: referência de perfis possui respostas completas, partições disjuntas e sem contradições
+ok 86 - referência de perfis possui respostas completas, partições disjuntas e sem contradições
+  ---
+  duration_ms: 9.417829
+  type: 'test'
+  ...
+# Subtest: expectativas dos perfis cobrem os planos e respeitam o teto da assinatura
+ok 87 - expectativas dos perfis cobrem os planos e respeitam o teto da assinatura
+  ---
+  duration_ms: 0.870684
+  type: 'test'
+  ...
+# Subtest: transformação do engine preserva as necessidades descritas em cada perfil
+ok 88 - transformação do engine preserva as necessidades descritas em cada perfil
+  ---
+  duration_ms: 1.331925
+  type: 'test'
+  ...
+# Subtest: referência sintética fica congelada e declara autoria e limites de validação
+ok 89 - referência sintética fica congelada e declara autoria e limites de validação
+  ---
+  duration_ms: 1.145148
+  type: 'test'
+  ...
+# Subtest: revisão de quatro planos preserva os dados da referência binária e remove apenas o slug
+ok 90 - revisão de quatro planos preserva os dados da referência binária e remove apenas o slug
+  ---
+  duration_ms: 0.777906
+  type: 'test'
+  ...
+# Subtest: migração binária preserva histórico, partições e expectativas de planos
+ok 91 - migração binária preserva histórico, partições e expectativas de planos
+  ---
+  duration_ms: 4.80953
+  type: 'test'
+  ...
+# Subtest: a referência sintética atende às metas de regressão, sem comprovar avaliação independente
+ok 92 - a referência sintética atende às metas de regressão, sem comprovar avaliação independente
+  ---
+  duration_ms: 23.245657
+  type: 'test'
+  ...
+# top-1 12/12; top-3 12/12; avaliação independente: pendente
+# Subtest: a base de calibração também é consistente
+ok 93 - a base de calibração também é consistente
+  ---
+  duration_ms: 2.822604
+  type: 'test'
+  ...
+# Subtest: a partição é disjunta e os cenários válidos não contêm contradições
+ok 94 - a partição é disjunta e os cenários válidos não contêm contradições
+  ---
+  duration_ms: 2.17709
+  type: 'test'
+  ...
+# Subtest: cenários contraditórios são detectados e ficam fora das métricas
+ok 95 - cenários contraditórios são detectados e ficam fora das métricas
+  ---
+  duration_ms: 0.396121
+  type: 'test'
+  ...
+# Subtest: premissas de preço da referência são as mesmas do motor
+ok 96 - premissas de preço da referência são as mesmas do motor
+  ---
+  duration_ms: 0.126089
+  type: 'test'
+  ...
+# Subtest: cada plano tem cenário em que é aceitável
+ok 97 - cada plano tem cenário em que é aceitável
+  ---
+  duration_ms: 0.114522
+  type: 'test'
+  ...
+# Subtest: cenários ambíguos aceitam mais de um plano e não exigem vencedor fixo
+ok 98 - cenários ambíguos aceitam mais de um plano e não exigem vencedor fixo
+  ---
+  duration_ms: 0.157439
+  type: 'test'
+  ...
+# Subtest: mudar apenas o histórico cruza o nível e altera o benefício atual
+ok 99 - mudar apenas o histórico cruza o nível e altera o benefício atual
+  ---
+  duration_ms: 2.439536
+  type: 'test'
+  ...
+# Subtest: mudar apenas a intenção futura não concede nível superior
+ok 100 - mudar apenas a intenção futura não concede nível superior
+  ---
+  duration_ms: 1.419006
+  type: 'test'
+  ...
+# Subtest: comparação com a linha de base registra as mudanças intencionais
+ok 101 - comparação com a linha de base registra as mudanças intencionais
+  ---
+  duration_ms: 3.341835
+  type: 'test'
+  ...
+# Subtest: linha de base do ranking anterior cobre toda a referência, por segmento
+ok 102 - linha de base do ranking anterior cobre toda a referência, por segmento
+  ---
+  duration_ms: 8.009166
+  type: 'test'
+  ...
+# calibracao · zero jogos com conteúdo: antes ok (cabuloso) → agora ok (cabuloso)
+# calibracao · orçamento 40 e setor popular: antes ok (time-do-povo) → agora ok (time-do-povo)
+# calibracao · loja e conteúdo: antes ok (cabuloso) → agora ok (cabuloso)
+# calibracao · alta frequência no Sicoob: antes ok (cabuloso-cativo) → agora ok (cabuloso)
+# calibracao · casal no Roxo: antes falha (cabuloso-cativo) → agora ok (cabuloso-max)
+# calibracao · casal com dois Kids: antes ok (cabuloso-max) → agora ok (cabuloso-max)
+# calibracao · histórico nível 3: antes falha (meu-cruzeiro) → agora ok (cabuloso)
+# calibracao · histórico nível 1: antes falha (meu-cruzeiro) → agora ok (cabuloso)
+# calibracao · novo sócio: antes ok (cabuloso-cativo) → agora ok (cabuloso-max)
+# calibracao · Roxo com teto de 200: antes falha (cabuloso) → agora ok (cabuloso-max)
+# calibracao · acompanhante adulto: antes ok (cabuloso) → agora ok (cabuloso)
+# calibracao · baixa frequência e teto 40: antes ok (time-do-povo) → agora ok (time-do-povo)
+# reserva · zero jogos sem extras: antes ok (meu-cruzeiro) → agora ok (meu-cruzeiro)
+# reserva · zero jogos com loja: antes falha (time-do-povo) → agora ok (cabuloso)
+# reserva · alta frequência no Amarelo: antes ok (cabuloso) → agora ok (cabuloso)
+# reserva · alta frequência com teto 40: antes ok (time-do-povo) → agora ok (time-do-povo)
+# reserva · Roxo sem cobertura do Cativo: antes falha (cabuloso-cativo) → agora ok (cabuloso-max)
+# reserva · garantia no Sicoob: antes ok (cabuloso-cativo) → agora ok (cabuloso)
+# reserva · um Kids com teto 100: antes ok (cabuloso) → agora ok (cabuloso)
+# reserva · casal no Roxo com teto 200: antes ok (cabuloso-max) → agora ok (cabuloso-max)
+# reserva · limite de nível 10 jogos: antes falha (meu-cruzeiro) → agora ok (cabuloso)
+# reserva · limite de nível 20 jogos: antes falha (meu-cruzeiro) → agora ok (cabuloso)
+# reserva · teto 40 no Sicoob: antes falha (meu-cruzeiro) → agora ok (time-do-povo)
+# reserva · premium com família: antes ok (cabuloso-max) → agora ok (cabuloso-max)
+# reserva top-1: antes 7/12, agora 12/12
+# Subtest: validadores compilados aceitam a configuração ativa como o Ajv
+ok 103 - validadores compilados aceitam a configuração ativa como o Ajv
+  ---
+  duration_ms: 17.522341
+  type: 'test'
+  ...
+# Subtest: erro idêntico: catalogo — sem slug
+ok 104 - erro idêntico: catalogo — sem slug
+  ---
+  duration_ms: 4.623132
+  type: 'test'
+  ...
+# Subtest: erro idêntico: catalogo — preço negativo
+ok 105 - erro idêntico: catalogo — preço negativo
+  ---
+  duration_ms: 0.850035
+  type: 'test'
+  ...
+# Subtest: erro idêntico: catalogo — campo desconhecido
+ok 106 - erro idêntico: catalogo — campo desconhecido
+  ---
+  duration_ms: 0.820317
+  type: 'test'
+  ...
+# Subtest: erro idêntico: catalogo — URI inválida
+ok 107 - erro idêntico: catalogo — URI inválida
+  ---
+  duration_ms: 0.949779
+  type: 'test'
+  ...
+# Subtest: erro idêntico: questoes — menos de 12
+ok 108 - erro idêntico: questoes — menos de 12
+  ---
+  duration_ms: 0.871719
+  type: 'test'
+  ...
+# Subtest: erro idêntico: questoes — tipo trocado
+ok 109 - erro idêntico: questoes — tipo trocado
+  ---
+  duration_ms: 1.023231
+  type: 'test'
+  ...
+# Subtest: erro idêntico: pesosRanking — divisor com tipo inválido
+ok 110 - erro idêntico: pesosRanking — divisor com tipo inválido
+  ---
+  duration_ms: 0.756483
+  type: 'test'
+  ...
+# Subtest: erro idêntico: pesosPerfil — propriedade não permitida
+ok 111 - erro idêntico: pesosPerfil — propriedade não permitida
+  ---
+  duration_ms: 1.221699
+  type: 'test'
+  ...
+# Subtest: erro idêntico: ga4 — measurementId fora do padrão
+ok 112 - erro idêntico: ga4 — measurementId fora do padrão
+  ---
+  duration_ms: 2.195049
+  type: 'test'
+  ...
+# Subtest: erro idêntico: ga4 — teto de parâmetros estourado
+ok 113 - erro idêntico: ga4 — teto de parâmetros estourado
+  ---
+  duration_ms: 1.591092
+  type: 'test'
+  ...
+# Subtest: último estado de errors limpo depois de dado válido
+ok 114 - último estado de errors limpo depois de dado válido
+  ---
+  duration_ms: 0.671944
+  type: 'test'
+  ...
+# Subtest: carregarConfiguracao pré-compilado valida o catálogo e falha com o prefixo canônico
+ok 115 - carregarConfiguracao pré-compilado valida o catálogo e falha com o prefixo canônico
+  ---
+  duration_ms: 1.345424
+  type: 'test'
+  ...
+# Subtest: bundle do navegador tem os validadores gerados e não tem o compilador Ajv
+ok 116 - bundle do navegador tem os validadores gerados e não tem o compilador Ajv
+  ---
+  duration_ms: 19.904313
+  type: 'test'
+  ...
+# Subtest: catálogo atende à referência documental oficial sem alegar validação independente do ranking
+ok 117 - catálogo atende à referência documental oficial sem alegar validação independente do ranking
+  ---
+  duration_ms: 18.160435
+  type: 'test'
+  ...
+# Subtest: HTTP 200 e uma tag presente não comprovam oferta nem recebimento GA4
+ok 118 - HTTP 200 e uma tag presente não comprovam oferta nem recebimento GA4
+  ---
+  duration_ms: 56.565047
+  type: 'test'
+  ...
+# Subtest: desafio 403 e falha de rede são registrados sem inventar confirmação
+ok 119 - desafio 403 e falha de rede são registrados sem inventar confirmação
+  ---
+  duration_ms: 0.766243
+  type: 'test'
+  ...
+# Subtest: candidato de entrega contém somente arquivos públicos e recusa sobrescrita
+ok 120 - candidato de entrega contém somente arquivos públicos e recusa sobrescrita
+  ---
+  duration_ms: 147.623103
+  type: 'test'
+  ...
+# Subtest: preparo de entrega sem perdas dispensa aceite de regressão
+ok 121 - preparo de entrega sem perdas dispensa aceite de regressão
+  ---
+  duration_ms: 131.840721
+  type: 'test'
+  ...
+# Subtest: servidor de teste respeita a raiz solicitada mesmo com dist existente
+ok 122 - servidor de teste respeita a raiz solicitada mesmo com dist existente
+  ---
+  duration_ms: 61.001136
+  type: 'test'
+  ...
+# Subtest: publicação só coincide quando HTML, manifesto e bundle têm os hashes do pacote
+ok 123 - publicação só coincide quando HTML, manifesto e bundle têm os hashes do pacote
+  ---
+  duration_ms: 24.74342
+  type: 'test'
+  ...
+# Subtest: legado e manifesto ausente não são aprovados por HTML 200 ou presença da tag
+ok 124 - legado e manifesto ausente não são aprovados por HTML 200 ou presença da tag
+  ---
+  duration_ms: 12.191864
+  type: 'test'
+  ...
+# Subtest: verificação recusa pacote local adulterado e caminhos fora da pasta pública antes da rede
+ok 125 - verificação recusa pacote local adulterado e caminhos fora da pasta pública antes da rede
+  ---
+  duration_ms: 12.871384
+  type: 'test'
+  ...
+1..125
+# tests 161
+# suites 4
+# pass 161
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 102096.221669

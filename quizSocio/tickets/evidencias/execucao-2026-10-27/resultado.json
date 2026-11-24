@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-27",
+  "tests": {
+    "passed": 75,
+    "failed": 0
+  },
+  "ticketStatuses": {
+    "Bloqueado": 7,
+    "Concluído": 12
+  },
+  "brokenLinksAfterCorrection": 0,
+  "candidateFilesVerified": 10,
+  "candidateSmokeTest": {
+    "passed": true,
+    "engineLoaded": true,
+    "resultRendered": true,
+    "checkoutLinkPresent": true,
+    "ga4CollectionEnabled": false
+  },
+  "candidateArchive": "/tmp/quizSocio-release-2026-10-27.tar.gz",
+  "ga4AndVercelConnected": false,
+  "userBrowserAvailable": false,
+  "independentRankingValidation": false,
+  "publicationPerformed": false
+}

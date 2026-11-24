@@ -1,0 +1,550 @@
+{
+  "metadata": {
+    "nome": "Simulação de 19 perfis de torcedor",
+    "kind": "synthetic-diagnostic-reference",
+    "independentValidation": false,
+    "createdOn": "2026-11-12",
+    "objetivo": "Avaliar o motor atual com expectativas definidas antes da execução, sem alterar pesos ou regras para obter os resultados desejados.",
+    "congelamento": "Expectativas registradas antes da primeira execução do motor nestes perfis. O SHA-256 deste arquivo fica no commit que o introduz e é conferido por scripts/simular-perfis.mjs; respostas, expectativas e perfis não mudam depois de observado o resultado.",
+    "limitacao": "Perfis sintéticos escritos para diagnóstico. Acertos e divergências não medem precisão com usuários reais.",
+    "orcamentoPrincipal": "budget 400 corresponde à opção \"Sem limite definido\": todos os planos cabem e a ordem depende só da afinidade. Não é a resposta realista de todas as personas.",
+    "padrao": {
+      "gamesHistory": "unknown",
+      "wantsGuaranteedTicket": "never com 0 jogos; false (Foco nos jogos mais decisivos) com jogos",
+      "buysTwoTickets": false,
+      "kidsCount": 0,
+      "needsPriority": false,
+      "wantsParticipation": false,
+      "wantsStoreDiscount": false,
+      "gameFrequency": "occasional (com 0 jogos é o único valor sem contradição)",
+      "digitalExperience": false,
+      "budget": 400,
+      "preferredSector": "yellow-orange"
+    },
+    "equivalencias": {
+      "compras frequentes": "wantsStoreDiscount true (Sempre compro)",
+      "loja às vezes": "wantsStoreDiscount sometimes (Compro às vezes)",
+      "experiências frequentes": "wantsParticipation true (Tenho muito interesse); a pergunta tem só duas opções",
+      "setor popular": "preferredSector yellow-orange (Setor Amarelo ou Laranja)",
+      "Sicoob": "preferredSector blue",
+      "Roxo": "preferredSector purple",
+      "divide estádio e TV": "gameFrequency frequent",
+      "sempre na arquibancada": "gameFrequency always",
+      "faz questão de todos os jogos": "wantsGuaranteedTicket true",
+      "prioridade / compra no primeiro minuto": "needsPriority true"
+    },
+    "migracoes": "A origem é um perfil do mesmo grupo; mudancas lista as respostas que diferem dela. O quiz não pergunta o plano atual, então a migração é um rótulo narrativo."
+  },
+  "perfis": [
+    {
+      "id": "MC-1",
+      "grupo": "meu-cruzeiro",
+      "intensidade": "puro",
+      "descricao": "Zero jogos; deseja apenas apoiar o clube.",
+      "answers": {
+        "gamesPerYear": 0,
+        "gamesHistory": "unknown",
+        "wantsGuaranteedTicket": "never",
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "yellow-orange"
+      },
+      "acceptable": ["meu-cruzeiro"],
+      "reason": "Não pretende ir ao estádio nem tem interesse em loja, experiências ou conteúdo: o vínculo é apoiar o clube. Ingresso por jogo, desconto em ingresso, prioridade e cobertura de setor dos demais planos não seriam usados; o Meu Cruzeiro é o plano de apoio do catálogo.",
+      "origem": null,
+      "mudancas": [],
+      "observacoes": [
+        "\"Deseja apenas apoiar o clube\" não corresponde a uma resposta; o perfil é o padrão com zero jogos.",
+        "A opção 400 (\"quero o plano mais completo\") não descreve esta persona; aqui significa só ausência de restrição de preço.",
+        "Com orçamento de R$ 40, as 12 respostas coincidem com RES-01 e PER-01-C."
+      ]
+    },
+    {
+      "id": "MC-2",
+      "grupo": "meu-cruzeiro",
+      "intensidade": "forte",
+      "descricao": "Zero jogos; interesse em experiências e conteúdo digital frequente.",
+      "answers": {
+        "gamesPerYear": 0,
+        "gamesHistory": "unknown",
+        "wantsGuaranteedTicket": "never",
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": true,
+        "budget": 400,
+        "preferredSector": "yellow-orange"
+      },
+      "acceptable": ["meu-cruzeiro"],
+      "reason": "Sem uso presencial; o interesse está em experiências e conteúdo digital. Conteúdo exclusivo e votação existem nos quatro planos, então os benefícios próprios dos outros planos (ingresso por jogo, desconto em ingresso, prioridade) continuariam sem uso; o plano de apoio atende ao perfil.",
+      "origem": null,
+      "mudancas": [],
+      "observacoes": [
+        "Os sinais que tornam o perfil \"forte\" (experiências e conteúdo) são benefícios comuns aos quatro planos no catálogo.",
+        "A opção 400 (\"quero o plano mais completo\") não descreve esta persona; aqui significa só ausência de restrição de preço."
+      ]
+    },
+    {
+      "id": "MC-3",
+      "grupo": "meu-cruzeiro",
+      "intensidade": "moderado",
+      "descricao": "Um jogo por ano, sozinho, no setor popular.",
+      "answers": {
+        "gamesPerYear": 1,
+        "gamesHistory": "unknown",
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "yellow-orange"
+      },
+      "acceptable": ["meu-cruzeiro"],
+      "reason": "Um jogo por ano, sozinho, no Amarelo ou Laranja: o ingresso gratuito por temporada do Meu Cruzeiro (1 por temporada, nesses setores) cobre esse único jogo; os benefícios por jogo dos demais planos teriam uso mínimo.",
+      "origem": null,
+      "mudancas": [],
+      "observacoes": [
+        "Difere de TP-3, MC-4, CA-4 e TP-1 só no número de jogos e de TP-4 só no conteúdo digital."
+      ]
+    },
+    {
+      "id": "MC-4",
+      "grupo": "meu-cruzeiro",
+      "intensidade": "migração",
+      "descricao": "Meu Cruzeiro — migração: seis jogos por ano; passa a precisar de benefício recorrente no setor popular.",
+      "answers": {
+        "gamesPerYear": 6,
+        "gamesHistory": "unknown",
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "yellow-orange"
+      },
+      "acceptable": ["time-do-povo"],
+      "reason": "Seis jogos por ano no setor popular: o ingresso gratuito por temporada cobre só um deles; o Time do Povo dá 1 ingresso popular por jogo no Amarelo ou Laranja, benefício recorrente para todos os jogos.",
+      "origem": "MC-3",
+      "mudancas": ["gamesPerYear"],
+      "observacoes": [
+        "\"Benefício recorrente no setor popular\" não corresponde a uma resposta; a migração se expressa só pelo número de jogos."
+      ]
+    },
+    {
+      "id": "TP-1",
+      "grupo": "time-do-povo",
+      "intensidade": "puro",
+      "descricao": "Doze jogos por ano; sozinho, Amarelo/Laranja, sem extras.",
+      "answers": {
+        "gamesPerYear": 12,
+        "gamesHistory": "unknown",
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "yellow-orange"
+      },
+      "acceptable": ["time-do-povo"],
+      "reason": "Doze jogos por ano, sozinho, no Amarelo ou Laranja, sem prioridade nem extras: o ingresso popular por jogo do Time do Povo atende exatamente esse uso, no setor que o plano cobre.",
+      "origem": null,
+      "mudancas": [],
+      "observacoes": [
+        "Doze jogos com \"Acompanho mais de casa mesmo\" (resposta padrão) é uma combinação limítrofe."
+      ]
+    },
+    {
+      "id": "TP-2",
+      "grupo": "time-do-povo",
+      "intensidade": "forte",
+      "descricao": "Vinte jogos por ano; histórico de dez jogos; divide acompanhamento entre estádio e TV.",
+      "answers": {
+        "gamesPerYear": 20,
+        "gamesHistory": 10,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "frequent",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "yellow-orange"
+      },
+      "acceptable": ["time-do-povo"],
+      "reason": "Vinte jogos por ano no Amarelo ou Laranja, sozinho, sem prioridade nem extras: uso intenso do ingresso popular por jogo no setor que o Time do Povo cobre. O histórico de dez jogos só mudaria o nível do Cabuloso, cujos diferenciais (Sicoob, prioridade, 15% na loja) não foram pedidos.",
+      "origem": null,
+      "mudancas": [],
+      "observacoes": [
+        "\"Foco nos jogos mais decisivos\" (resposta padrão) convive com 20 jogos por ano."
+      ]
+    },
+    {
+      "id": "TP-3",
+      "grupo": "time-do-povo",
+      "intensidade": "moderado",
+      "descricao": "Três jogos por ano; sozinho, setor popular e compra com calma.",
+      "answers": {
+        "gamesPerYear": 3,
+        "gamesHistory": "unknown",
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "yellow-orange"
+      },
+      "acceptable": ["time-do-povo"],
+      "reason": "Três jogos por ano, sozinho, no setor popular, comprando com calma: mais de um jogo, então o ingresso popular por jogo rende mais que o gratuito por temporada; não há pedido de prioridade, Sicoob ou extras.",
+      "origem": null,
+      "mudancas": [],
+      "observacoes": []
+    },
+    {
+      "id": "TP-4",
+      "grupo": "time-do-povo",
+      "intensidade": "migração",
+      "descricao": "Time do Povo — migração para apoio: um jogo por ano; acompanha conteúdo digital às vezes.",
+      "answers": {
+        "gamesPerYear": 1,
+        "gamesHistory": "unknown",
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": "sometimes",
+        "budget": 400,
+        "preferredSector": "yellow-orange"
+      },
+      "acceptable": ["meu-cruzeiro"],
+      "reason": "Um jogo por ano: o ingresso gratuito por temporada do Meu Cruzeiro cobre esse jogo; conteúdo digital às vezes é benefício comum aos quatro planos.",
+      "origem": "TP-3",
+      "mudancas": ["gamesPerYear", "digitalExperience"],
+      "observacoes": [
+        "Difere de MC-3 só no conteúdo digital."
+      ]
+    },
+    {
+      "id": "TP-5",
+      "grupo": "time-do-povo",
+      "intensidade": "migração",
+      "descricao": "Time do Povo — migração de setor: doze jogos por ano; histórico dez; Sicoob; compra no primeiro minuto; loja às vezes.",
+      "answers": {
+        "gamesPerYear": 12,
+        "gamesHistory": 10,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": true,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "blue"
+      },
+      "acceptable": ["cabuloso"],
+      "reason": "Doze jogos por ano no Sicoob, compra no primeiro minuto, loja às vezes, histórico de dez jogos: o Time do Povo não cobre o Sicoob; o Cabuloso cobre, dá desconto por jogo (nível 2 com esse histórico), prioridade melhor que a do Time do Povo e 15% na loja. Vai sozinho, então o segundo ingresso do Max não seria usado.",
+      "origem": "TP-1",
+      "mudancas": ["gamesHistory", "needsPriority", "wantsStoreDiscount", "preferredSector"],
+      "observacoes": []
+    },
+    {
+      "id": "CA-1",
+      "grupo": "cabuloso",
+      "intensidade": "puro",
+      "descricao": "Dezesseis jogos por ano; histórico dez; Sicoob; sozinho; prioridade; divide estádio e TV.",
+      "answers": {
+        "gamesPerYear": 16,
+        "gamesHistory": 10,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": true,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "frequent",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "blue"
+      },
+      "acceptable": ["cabuloso"],
+      "reason": "Dezesseis jogos por ano no Sicoob, sozinho, compra no primeiro minuto, histórico de dez: perfil do titular do Cabuloso, com desconto por jogo para um ingresso, cobertura do Sicoob e prioridade 2 no nível 2. Sem acompanhante, o segundo ingresso do Max não seria usado.",
+      "origem": null,
+      "mudancas": [],
+      "observacoes": [
+        "\"Foco nos jogos mais decisivos\" (resposta padrão) convive com 16 jogos por ano."
+      ]
+    },
+    {
+      "id": "CA-2",
+      "grupo": "cabuloso",
+      "intensidade": "forte",
+      "descricao": "Vinte e dois jogos por ano; histórico vinte; Sicoob; prioridade; compras frequentes; digital às vezes; divide estádio e TV.",
+      "answers": {
+        "gamesPerYear": 22,
+        "gamesHistory": 20,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": true,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "frequent",
+        "digitalExperience": "sometimes",
+        "budget": 400,
+        "preferredSector": "blue"
+      },
+      "acceptable": ["cabuloso"],
+      "reason": "Vinte e dois jogos no Sicoob, sozinho, prioridade, histórico de vinte (nível 3: 60% e prioridade 1) e compras frequentes: o Cabuloso no nível 3 entrega desconto alto, prioridade máxima e 15% na loja para um titular; o segundo ingresso do Max não seria usado.",
+      "origem": null,
+      "mudancas": [],
+      "observacoes": [
+        "\"Foco nos jogos mais decisivos\" (resposta padrão) convive com 22 jogos por ano."
+      ]
+    },
+    {
+      "id": "CA-3",
+      "grupo": "cabuloso",
+      "intensidade": "moderado",
+      "descricao": "Oito jogos por ano; histórico nove; Sicoob; sozinho; loja às vezes.",
+      "answers": {
+        "gamesPerYear": 8,
+        "gamesHistory": 9,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "blue"
+      },
+      "acceptable": ["cabuloso"],
+      "reason": "Oito jogos no Sicoob, sozinho, loja às vezes, histórico de nove (nível 1): uso regular de um ingresso no Sicoob, setor que Time do Povo e Meu Cruzeiro não cobrem; sem acompanhante nem Roxo.",
+      "origem": null,
+      "mudancas": [],
+      "observacoes": [
+        "Histórico de nove jogos é o limite superior do nível 1 do Cabuloso."
+      ]
+    },
+    {
+      "id": "CA-4",
+      "grupo": "cabuloso",
+      "intensidade": "migração",
+      "descricao": "Cabuloso — migração popular: oito jogos por ano; Amarelo/Laranja; sozinho; sem prioridade ou compras.",
+      "answers": {
+        "gamesPerYear": 8,
+        "gamesHistory": "unknown",
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "yellow-orange"
+      },
+      "acceptable": ["time-do-povo"],
+      "reason": "Oito jogos no Amarelo ou Laranja, sozinho, sem prioridade nem compras: os diferenciais do Cabuloso (Sicoob, prioridade, 15% na loja) não são pedidos; o ingresso popular por jogo do Time do Povo cobre o setor preferido.",
+      "origem": "CA-3",
+      "mudancas": ["gamesHistory", "wantsStoreDiscount", "preferredSector"],
+      "observacoes": [
+        "As respostas não guardam traço do Cabuloso: o perfil difere de MC-3, TP-3, MC-4 e TP-1 só no número de jogos."
+      ]
+    },
+    {
+      "id": "CA-5",
+      "grupo": "cabuloso",
+      "intensidade": "migração",
+      "descricao": "Cabuloso — migração com acompanhante: dezesseis jogos por ano; histórico dez; Roxo; acompanhante adulto; prioridade; divide estádio e TV.",
+      "answers": {
+        "gamesPerYear": 16,
+        "gamesHistory": 10,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": true,
+        "kidsCount": 0,
+        "needsPriority": true,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "frequent",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "purple"
+      },
+      "acceptable": ["cabuloso-max"],
+      "reason": "Dezesseis jogos no Roxo com acompanhante adulto e prioridade: o Cabuloso cobre só o Roxo Superior e 1 ingresso por jogo; o Max cobre o Roxo inteiro e até 2 ingressos com 65%, para o titular e o acompanhante, com prioridade 1.",
+      "origem": "CA-1",
+      "mudancas": ["buysTwoTickets", "preferredSector"],
+      "observacoes": [
+        "\"Foco nos jogos mais decisivos\" (resposta padrão) convive com 16 jogos por ano."
+      ]
+    },
+    {
+      "id": "MX-1",
+      "grupo": "cabuloso-max",
+      "intensidade": "puro",
+      "descricao": "Trinta jogos por ano; histórico vinte; faz questão de todos os jogos e está sempre na arquibancada; Roxo; acompanhante; prioridade; Kids; compras, experiências e digital frequentes.",
+      "answers": {
+        "gamesPerYear": 30,
+        "gamesHistory": 20,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": true,
+        "kidsCount": 1,
+        "needsPriority": true,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "always",
+        "digitalExperience": true,
+        "budget": 400,
+        "preferredSector": "purple"
+      },
+      "acceptable": ["cabuloso-max"],
+      "reason": "Trinta jogos, sempre na arquibancada, no Roxo, com acompanhante, prioridade e compras frequentes: usa todos os diferenciais do Max (até 2 ingressos com 65%, Roxo inteiro, prioridade 1, 15% na loja). Kids, conteúdo e votação existem nos quatro planos.",
+      "origem": null,
+      "mudancas": [],
+      "observacoes": [
+        "Kids, experiências e conteúdo digital são benefícios comuns aos quatro planos no catálogo."
+      ]
+    },
+    {
+      "id": "MX-2",
+      "grupo": "cabuloso-max",
+      "intensidade": "forte",
+      "descricao": "Vinte jogos por ano; histórico dez; Sicoob; acompanhante; prioridade; loja às vezes; divide estádio e TV.",
+      "answers": {
+        "gamesPerYear": 20,
+        "gamesHistory": 10,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": true,
+        "kidsCount": 0,
+        "needsPriority": true,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "frequent",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "blue"
+      },
+      "acceptable": ["cabuloso-max"],
+      "reason": "Vinte jogos no Sicoob com acompanhante e prioridade: o Max dá até 2 ingressos com 65% por jogo e prioridade 1; o Cabuloso cobre o Sicoob, mas com 1 ingresso, e o acompanhante pagaria à parte.",
+      "origem": null,
+      "mudancas": [],
+      "observacoes": [
+        "\"Foco nos jogos mais decisivos\" (resposta padrão) convive com 20 jogos por ano."
+      ]
+    },
+    {
+      "id": "MX-3",
+      "grupo": "cabuloso-max",
+      "intensidade": "moderado",
+      "descricao": "Seis jogos por ano; Roxo; acompanhante; compra com calma; sem extras.",
+      "answers": {
+        "gamesPerYear": 6,
+        "gamesHistory": "unknown",
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": true,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "purple"
+      },
+      "acceptable": ["cabuloso-max"],
+      "reason": "Seis jogos no Roxo com acompanhante, sem prioridade nem extras: só o Max cobre o Roxo inteiro e 2 ingressos por jogo; o Cabuloso cobre só o Roxo Superior e 1 ingresso.",
+      "origem": null,
+      "mudancas": [],
+      "observacoes": []
+    },
+    {
+      "id": "MX-4",
+      "grupo": "cabuloso-max",
+      "intensidade": "migração",
+      "descricao": "Max — migração para titular: doze jogos por ano; histórico vinte; Sicoob; sozinho; prioridade; compras frequentes; divide estádio e TV.",
+      "answers": {
+        "gamesPerYear": 12,
+        "gamesHistory": 20,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": true,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "frequent",
+        "digitalExperience": false,
+        "budget": 400,
+        "preferredSector": "blue"
+      },
+      "acceptable": ["cabuloso"],
+      "reason": "Doze jogos no Sicoob, sozinho, prioridade, compras frequentes e histórico de vinte (nível 3): sem acompanhante, o segundo ingresso do Max não é usado; o Cabuloso no nível 3 oferece 60%, prioridade 1 e 15% na loja, os diferenciais que o perfil usa.",
+      "origem": "MX-2",
+      "mudancas": ["gamesPerYear", "gamesHistory", "buysTwoTickets", "wantsStoreDiscount"],
+      "observacoes": []
+    },
+    {
+      "id": "MX-5",
+      "grupo": "cabuloso-max",
+      "intensidade": "migração",
+      "descricao": "Max — migração para apoio: zero jogos futuros, apesar do histórico de vinte; sem compras; interesse em Kids e conteúdo digital frequente.",
+      "answers": {
+        "gamesPerYear": 0,
+        "gamesHistory": 20,
+        "wantsGuaranteedTicket": "never",
+        "buysTwoTickets": false,
+        "kidsCount": 1,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": true,
+        "budget": 400,
+        "preferredSector": "yellow-orange"
+      },
+      "acceptable": ["meu-cruzeiro"],
+      "reason": "Não pretende ir a jogos em 2027, apesar de ter ido a vinte; sem compras; interesse em Kids e conteúdo digital: os benefícios presenciais do Max não seriam usados, e Kids e conteúdo existem nos quatro planos; o plano de apoio atende.",
+      "origem": "MX-1",
+      "mudancas": ["gamesPerYear", "wantsGuaranteedTicket", "buysTwoTickets", "needsPriority", "wantsParticipation", "wantsStoreDiscount", "gameFrequency", "preferredSector"],
+      "observacoes": [
+        "\"Não frequento o estádio\" convive com 20 jogos no histórico.",
+        "Kids e conteúdo digital são benefícios comuns aos quatro planos no catálogo.",
+        "A opção 400 (\"quero o plano mais completo\") não descreve esta persona; aqui significa só ausência de restrição de preço."
+      ]
+    }
+  ]
+}

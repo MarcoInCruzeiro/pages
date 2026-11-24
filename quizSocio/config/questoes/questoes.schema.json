@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quiz-socio.vercel.app/config/questoes/questoes.schema.json",
+  "title": "Perguntas do quiz",
+  "description": "As 12 perguntas do quiz com tipos, valores, rótulos e ordem",
+  "type": "array",
+  "minItems": 12,
+  "maxItems": 12,
+  "items": {
+    "type": "object",
+    "required": [
+      "key",
+      "title",
+      "type"
+    ],
+    "properties": {
+      "key": {
+        "type": "string",
+        "enum": [
+          "gamesPerYear",
+          "gamesHistory",
+          "wantsGuaranteedTicket",
+          "buysTwoTickets",
+          "kidsCount",
+          "needsPriority",
+          "wantsParticipation",
+          "wantsStoreDiscount",
+          "gameFrequency",
+          "digitalExperience",
+          "budget",
+          "preferredSector"
+        ]
+      },
+      "title": {
+        "type": "string",
+        "minLength": 1
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "range",
+          "option"
+        ]
+      },
+      "min": {
+        "type": "integer"
+      },
+      "max": {
+        "type": "integer"
+      },
+      "suffix": {
+        "type": "string"
+      },
+      "help": {
+        "type": "string"
+      },
+      "allowUnknown": {
+        "type": "boolean"
+      },
+      "unknownLabel": {
+        "type": "string"
+      },
+      "options": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "object",
+          "required": [
+            "label",
+            "description",
+            "value"
+          ],
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "value": {}
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "additionalProperties": false
+  },
+  "uniqueItems": true
+}

@@ -1,0 +1,195 @@
+{
+  "date": "2026-10-27",
+  "commit": "8250641",
+  "tickets": [
+    {
+      "file": "tickets/003-modalidade-e-checkout.md",
+      "status": "Bloqueado",
+      "pending_criteria": [
+        "Cada CTA abre a oferta do plano e da modalidade apresentados ao usuário, com preço correspondente.",
+        "O destino do Meu Cruzeiro corresponde à modalidade e ao valor anunciados no quiz."
+      ]
+    },
+    {
+      "file": "tickets/009-referencia-de-qualidade.md",
+      "status": "Bloqueado",
+      "pending_criteria": [
+        "Cenários de calibração e avaliação são separados antes de ajustar o ranking; a partição fica versionada. A base atual já foi consultada e não atende à independência exigida."
+      ]
+    },
+    {
+      "file": "tickets/010-recalibracao-do-ranking.md",
+      "status": "Bloqueado",
+      "pending_criteria": [
+        "A avaliação reservada atinge todas as metas do QUIZ-009 e registra comparação por segmento com a linha de base. A regressão sintética passa; a avaliação independente continua pendente."
+      ]
+    },
+    {
+      "file": "tickets/011-regressao-e-entrega.md",
+      "status": "Bloqueado",
+      "pending_criteria": [
+        "Todos os tickets anteriores estão concluídos, com evidência registrada; a publicação permanece uma ação separada deste backlog."
+      ]
+    },
+    {
+      "file": "tickets/017-configuracao-e-validacao-ga4.md",
+      "status": "Bloqueado",
+      "pending_criteria": [
+        "Propriedade, fluxos, domínio oficial do quiz e destinos de contratação estão identificados por evidência datada.",
+        "Os parâmetros necessários estão registrados com escopo e tipo adequados, incluindo `rules_version` após QUIZ-014; decisões sobre campos dispensados ficam justificadas.",
+        "Conclusão do quiz, clique para contratar e contratação efetiva têm significados distintos nos eventos principais e relatórios.",
+        "Filtros internos/de desenvolvedor e suas consequências para a validação estão registrados.",
+        "A configuração entre os domínios foi conferida nas duas pontas, ou o impedimento está explicitado; compartilhar um identificador por comentário não basta como evidência.",
+        "Um roteiro de DebugView identifica eventos e parâmetros esperados do contrato vigente e o ambiente no qual será executado.",
+        "A coleta de validação é diferenciada do tráfego normal; evidências e decisões são registradas sem credenciais ou identificadores pessoais brutos."
+      ]
+    },
+    {
+      "file": "tickets/018-alinhamento-publicado-ga4.md",
+      "status": "Bloqueado",
+      "pending_criteria": [
+        "Domínio oficial, versão de origem e processo de entrega estão registrados; um endereço de metadados é apenas evidência inicial.",
+        "O artefato preparado contém as correções locais verificadas no QUIZ-016 e a política de ambientes aplicável ao domínio confirmado.",
+        "O escopo da entrega e seus bloqueadores estão explícitos. Publicar o conjunto atual depende do encerramento do QUIZ-011; uma entrega de escopo diferente precisa de definição própria e verificação correspondente.",
+        "Após publicação, o domínio oficial carrega a versão identificada e emite o contrato vigente, incluindo `rules_version`.",
+        "Uma execução controlada confirma recebimento e parâmetros no DebugView da propriedade correta, distinguindo intenção de contratar de contratação efetiva.",
+        "O registro informa data, versão publicada, resultados e como separar a série antiga de `compatibility` da afinidade atual.",
+        "O roteiro de retorno identifica a versão anterior e a configuração de analytics correspondente."
+      ]
+    },
+    {
+      "file": "tickets/019-continuidade-ate-checkout-ga4.md",
+      "status": "Bloqueado",
+      "pending_criteria": [
+        "Cada origem de CTA gera o evento correto e abre o destino sem perder os parâmetros necessários à atribuição.",
+        "Em navegação entre domínios com coleta habilitada, a transferência de identificação é comprovada por URL e observação nas duas pontas; UTMs isoladas não satisfazem o critério.",
+        "Os identificadores de pessoa e sessão permanecem coerentes no destino dentro da mesma execução controlada. Se o mesmo domínio de cookie tornar `_gl` dispensável, a justificativa e a continuidade observada ficam registradas.",
+        "Os redirecionamentos exercitados preservam a identificação e não criam atribuição indevida ao próprio site.",
+        "Há evidência dos três locais de CTA, com acesso ao destino interrompido antes de contratação ou pagamento.",
+        "O evento que comprova contratação no destino é identificado, ou sua ausência fica registrada com responsável e ticket de implementação próprio. O clique do quiz permanece descrito como intenção.",
+        "As evidências registram continuidade como resultado da comparação, sem persistir cookies, parâmetros `_gl` ou identificadores pessoais brutos."
+      ]
+    },
+    {
+      "file": "tickets/concluidos/001-navegacao-e-validacao.md",
+      "status": "Concluído",
+      "pending_criteria": []
+    },
+    {
+      "file": "tickets/concluidos/002-catalogo-comercial.md",
+      "status": "Concluído",
+      "pending_criteria": []
+    },
+    {
+      "file": "tickets/concluidos/004-comunicacao-da-pontuacao.md",
+      "status": "Concluído",
+      "pending_criteria": []
+    },
+    {
+      "file": "tickets/concluidos/005-adequacao-de-setor.md",
+      "status": "Concluído",
+      "pending_criteria": []
+    },
+    {
+      "file": "tickets/concluidos/006-coerencia-das-respostas.md",
+      "status": "Concluído",
+      "pending_criteria": []
+    },
+    {
+      "file": "tickets/concluidos/007-historico-e-niveis.md",
+      "status": "Concluído",
+      "pending_criteria": []
+    },
+    {
+      "file": "tickets/concluidos/008-familia-e-custo.md",
+      "status": "Concluído",
+      "pending_criteria": []
+    },
+    {
+      "file": "tickets/concluidos/012-preview-explicito.md",
+      "status": "Concluído",
+      "pending_criteria": []
+    },
+    {
+      "file": "tickets/concluidos/013-isolamento-da-coleta-ga4.md",
+      "status": "Concluído",
+      "pending_criteria": []
+    },
+    {
+      "file": "tickets/concluidos/014-versao-das-regras-no-ga4.md",
+      "status": "Concluído",
+      "pending_criteria": []
+    },
+    {
+      "file": "tickets/concluidos/015-cta-principal-com-link.md",
+      "status": "Concluído",
+      "pending_criteria": []
+    },
+    {
+      "file": "tickets/concluidos/016-regressao-da-integracao-ga4.md",
+      "status": "Concluído",
+      "pending_criteria": []
+    }
+  ],
+  "broken_links": [
+    {
+      "file": "tickets/017-configuracao-e-validacao-ga4.md",
+      "line": 32,
+      "target": "014-versao-das-regras-no-ga4.md"
+    },
+    {
+      "file": "tickets/018-alinhamento-publicado-ga4.md",
+      "line": 32,
+      "target": "016-regressao-da-integracao-ga4.md"
+    },
+    {
+      "file": "tickets/019-continuidade-ate-checkout-ga4.md",
+      "line": 30,
+      "target": "015-cta-principal-com-link.md"
+    },
+    {
+      "file": "tickets/concluidos/012-preview-explicito.md",
+      "line": 8,
+      "target": "../docs/revisao-tickets-ga4-2026-10-27.md"
+    },
+    {
+      "file": "tickets/concluidos/013-isolamento-da-coleta-ga4.md",
+      "line": 8,
+      "target": "../docs/revisao-tickets-ga4-2026-10-27.md"
+    },
+    {
+      "file": "tickets/concluidos/014-versao-das-regras-no-ga4.md",
+      "line": 8,
+      "target": "../docs/revisao-tickets-ga4-2026-10-27.md"
+    },
+    {
+      "file": "tickets/concluidos/015-cta-principal-com-link.md",
+      "line": 8,
+      "target": "../docs/analise-ga4.md#4-p2--a-continuidade-até-o-checkout-está-em-risco"
+    },
+    {
+      "file": "tickets/concluidos/015-cta-principal-com-link.md",
+      "line": 17,
+      "target": "../index.html"
+    },
+    {
+      "file": "tickets/concluidos/016-regressao-da-integracao-ga4.md",
+      "line": 16,
+      "target": "../tests/browser.test.js"
+    },
+    {
+      "file": "tickets/concluidos/016-regressao-da-integracao-ga4.md",
+      "line": 16,
+      "target": "../tests/cdp.js"
+    },
+    {
+      "file": "tickets/concluidos/016-regressao-da-integracao-ga4.md",
+      "line": 16,
+      "target": "../package.json"
+    }
+  ],
+  "status_counts": {
+    "Bloqueado": 7,
+    "Concluído": 12
+  }
+}

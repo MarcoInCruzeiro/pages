@@ -1,0 +1,98 @@
+{
+  "preparedAt": "2026-10-29T17:50:43.760Z",
+  "commit": "5a292533305fd91ce5c4ede06a78ea2ad0127f22",
+  "workingTreeHasChanges": false,
+  "rulesVersion": "2026-10-29.2",
+  "catalogVersion": "2026-10-28.2",
+  "ga4Version": "2026-10-28.3",
+  "configurationHashes": {
+    "catalog": "8deb97d4dc4e561e9c054be01866965615c1b08d51c851cecc56af8543952b1e",
+    "questions": "b240eb9e9c8630f26875643e240e8a3e36ead785180261ac9b5cda9fb9dea20e",
+    "ranking": "919d5fd87b99316c905f3bec49f3cd4ce79056a939ed8a5b808c7b75ecdd1b97",
+    "profile": "58dcecda5c785370632e834fff121200222aa57b7770867408863ddb3813dcdb",
+    "ga4": "07cacb43a39652c5d2786fd8823659545bdd1fc3b913401d7b0e752c45a93824",
+    "engine": "037c38e48125c60bf3b05900d069988baf72627a8190f52758dabe9a63a5c615",
+    "schemas": "bee191332bd0320ec3b6622b862586d867af7efefd792f226a8d7f071ac64b8b",
+    "rules": "055fce497105df60b12abb62aac50450c9663eac5604db60b5a21990048cc06a",
+    "aggregate": "523de1ae47be4b1e15acb1897567a44fc5346592140bc3e41ba9e468fee5d59c"
+  },
+  "releaseApproved": false,
+  "diagnostic": true,
+  "quality": {
+    "metricsPassed": true,
+    "regressionIds": [
+      "CAL-02",
+      "CAL-10",
+      "PER-02-C",
+      "RES-05"
+    ],
+    "reviewAccepted": false,
+    "referenceHashes": {
+      "historical": "14d5440c6377222552c745c77800709163ec9db7a6f99a3aaedcab66e74a6f23",
+      "profiles": "e7128debfadfbf3948b3cdfbff12e9238043e969674c13481867f0c4393b0e9e"
+    }
+  },
+  "scope": "Diagnóstico local não aprovado; entrega bloqueada por revisão de qualidade.",
+  "files": [
+    {
+      "path": "assets/index-B-nb6OAm.css",
+      "bytes": 30908,
+      "sha256": "320f2dc58182cb4fe0fcefc9f292548aca8ff369db2fd1fdee9d399dc6913a6b"
+    },
+    {
+      "path": "assets/index-C7ddryUC.js",
+      "bytes": 299646,
+      "sha256": "e080b4c1922d25cd63235fdea864ceabb325bd655471c21169282d70ac6c03de"
+    },
+    {
+      "path": "build-manifest.json",
+      "bytes": 997,
+      "sha256": "902896be53e40c6f6c80daae2064284afa8862a5e33db0b0a438d9cc51d0a2e3"
+    },
+    {
+      "path": "img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4",
+      "bytes": 13830472,
+      "sha256": "60997beb61445b58b13e259708cf687db4da98ee868df184dc8fa4f4c227a938"
+    },
+    {
+      "path": "img/Estutura de Páginas_fundoestrelado_siteapp.jpeg",
+      "bytes": 69166,
+      "sha256": "2b710a0e705bb42b691b22b3eb184389e8e49deb59fbefbd80010c45e4cf1fa3"
+    },
+    {
+      "path": "img/background.jpg",
+      "bytes": 95196,
+      "sha256": "311c7283c6b22807769c9662573c2bb95a96ba87702b4306d621c132856ca8a9"
+    },
+    {
+      "path": "img/cabuloso.png",
+      "bytes": 201799,
+      "sha256": "4547f0d037a200fe4cb7b4f35ef5ee04e80fe634cd3f71d84405451e9ddc4ee9"
+    },
+    {
+      "path": "img/cabulosoMax.png",
+      "bytes": 227593,
+      "sha256": "76333900f6031023e20f612a3db0606cb1e0ce97156b47466f6b5031cdda7c19"
+    },
+    {
+      "path": "img/cruzeiro.png",
+      "bytes": 179121,
+      "sha256": "c10e65a3b7610cf8987bcd428ac6b0fb3f10ece5bc40d4435fb6729b37842e8c"
+    },
+    {
+      "path": "img/meuCruzeiro.png",
+      "bytes": 193740,
+      "sha256": "10171f7eda9b7b434d180aeb13be6ecafd8df7d9da40d7ed21ca5eff6de9804e"
+    },
+    {
+      "path": "img/timeDoPovo.png",
+      "bytes": 203894,
+      "sha256": "08f1ec74ae633a47b07490599a8a614d5d790c412095b6469739e9b4de4dea8b"
+    },
+    {
+      "path": "index.html",
+      "bytes": 2465,
+      "sha256": "a71dcbb33e0cda02f492dc32113bb8302bc4afe483f48d6f1df2750e7b159ae0"
+    }
+  ]
+}

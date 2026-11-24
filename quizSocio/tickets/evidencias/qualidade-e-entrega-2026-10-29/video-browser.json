@@ -1,0 +1,12 @@
+{
+  "duration": 60.75,
+  "width": 720,
+  "height": 1280,
+  "autoplay": true,
+  "muted": true,
+  "loop": true,
+  "playsInline": true,
+  "paused": false,
+  "currentTime": 0.0065,
+  "poster": "http://127.0.0.1:36209/img/background.jpg"
+}

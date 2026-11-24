@@ -1,0 +1,74 @@
+TAP version 13
+# Testes de transições de UX — Quiz Sócio 5 Estrelas
+# Data: 26/10/2026
+# Alteração: fade puro, durações centralizadas, movimento reduzido, foco em transições
+
+# Suíte de motor e referência (unitários)
+ok 1 - catálogo concilia os cinco planos com o regulamento
+ok 2 - exemplo de desconto do Max respeita 65% de R$ 150
+ok 3 - validação aceita zero e false e rejeita ausentes ou inválidos
+ok 4 - validação aponta a primeira pergunta sem resposta
+ok 5 - conteúdo digital não acrescenta frequência nem consumo de produtos
+ok 6 - frequência declarada não implica interesse em produtos ou experiências
+ok 7 - zero jogos ou não frequentar resultam em necessidade presencial nula
+ok 8 - contradições são detectadas sem correção silenciosa
+ok 9 - níveis do Cabuloso usam histórico e seguem os limites oficiais
+ok 10 - desconto e prioridade derivam do mesmo nível
+ok 11 - cobertura de setor distingue completo, parcial e ausente
+ok 12 - preferência pelo Roxo não apresenta o Cativo como benefício no setor
+ok 13 - valores de assinatura, adesão e Kids são independentes, sem totais combinados
+ok 14 - frequência, acompanhantes e Kids não somam valores à assinatura apresentada
+ok 15 - exemplo de desconto do Max permanece unitário para titular e acompanhante
+ok 16 - taxas e preços de opcionais não entram no componente de preço nem no índice
+ok 17 - ingresso gratuito é apresentado como benefício por temporada
+ok 18 - ranking é determinístico, finito e respeita o orçamento
+ok 19 - enumeração representativa recalcula o espaço finito de respostas
+ok 20 - ausência de plano elegível é explícita e não recomenda acima do teto
+ok 21 - motivos do resultado citam respostas e condições comerciais
+ok 22 - zero jogos reduz o peso do benefício de benefício de ingresso
+ok 23 - ordem do catálogo não altera ranking nem índices
+ok 24 - empate de índice e assinatura é resolvido pelo slug
+ok 25 - exemplo documentado da fórmula: 10 jogos, histórico 10, Sicoob, teto 100
+ok 26 - nível do ingresso não altera o valor de assinatura do Cabuloso
+ok 27 - motivos seguem as regras que classificaram o plano
+ok 28 - a referência sintética atende às metas de regressão, sem comprovar avaliação independente
+ok 29 - a base de calibração também é consistente
+ok 30 - a partição é disjunta e os cenários válidos não contêm contradições
+ok 31 - cenários contraditórios são detectados e ficam fora das métricas
+ok 32 - premissas de preço da referência são as mesmas do motor
+ok 33 - cada plano tem cenário em que é aceitável
+ok 34 - cenários ambíguos aceitam mais de um plano e não exigem vencedor fixo
+ok 35 - mudar apenas o histórico cruza o nível e altera o benefício atual
+ok 36 - mudar apenas a intenção futura não concede nível superior
+ok 37 - comparação com a linha de base registra as mudanças intencionais
+ok 38 - linha de base do ranking anterior cobre toda a referência, por segmento
+1..38
+# tests 38
+# pass 38
+# fail 0
+
+# Suíte de navegador (Chrome headless)
+ok 39 - clique duplo em Continuar avança exatamente uma pergunta
+ok 40 - alternar rapidamente Voltar e Continuar mantém a pergunta correta
+ok 41 - Voltar preserva as respostas e a seleção visual
+ok 42 - resposta ausente não avança e mostra orientação
+ok 43 - zero jogos e opções false são respostas válidas
+ok 44 - conflito pede confirmação e produz um único resultado
+ok 45 - revisar respostas a partir do conflito volta à primeira pergunta
+ok 46 - confirmação no celular mantém leitura e ações acessíveis sem espaço extra
+ok 47 - menu móvel pode ser aberto por teclado e informa seu estado
+ok 48 - resultado único mantém o contrato de analytics e o CTA
+ok 49 - Refazer quiz limpa o estado e permite nova conclusão
+ok 50 - orçamento restrito e setor incompatível preservam preços e taxas separados
+ok 51 - casal com Kids vê assinatura, adesão, opcional e exemplo de ingresso separados
+ok 52 - comparativo apresenta a matriz oficial, contrato anual e checkout correto
+ok 53 - teclado seleciona uma opção e libera Continuar
+ok 54 - teclado abre e fecha o comparativo a partir do resultado
+ok 55 - mobile e desktop não têm rolagem horizontal inesperada
+1..55
+# tests 55
+# pass 55
+# fail 0
+
+# Total: 55/55 (38 motor/referência + 17 navegador)
+# Duração: sem falhas, cancelamentos ou testes ignorados

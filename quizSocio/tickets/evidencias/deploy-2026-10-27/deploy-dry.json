@@ -1,0 +1,144 @@
+{
+  "framework": {
+    "name": "Other",
+    "slug": null
+  },
+  "basePath": "/tmp/quizSocio-prod-2026-10-27-lgy5khex/upload",
+  "fileCount": 10,
+  "totalSize": 41605072,
+  "ignoredCount": 1,
+  "ignored": [
+    ".vercel"
+  ],
+  "directories": [
+    {
+      "path": "quizSocio",
+      "fileCount": 10,
+      "size": 41605072
+    }
+  ],
+  "largestFiles": [
+    {
+      "path": "quizSocio/img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4",
+      "size": 36348058,
+      "mode": 33204,
+      "sha": "7b49ed83eb42257566f1ff6ecf5cc196eb594c17"
+    },
+    {
+      "path": "quizSocio/img/Estutura de Páginas_fundoestrelado_siteapp.jpeg",
+      "size": 3216121,
+      "mode": 33204,
+      "sha": "ed8ba211b7ce0ecac94ce2537274ad7c834597a4"
+    },
+    {
+      "path": "quizSocio/img/background.jpg",
+      "size": 866124,
+      "mode": 33204,
+      "sha": "915010758ae7bac48e4880530fe5d1703d65f2e6"
+    },
+    {
+      "path": "quizSocio/img/cabulosoMax.png",
+      "size": 227593,
+      "mode": 33204,
+      "sha": "f24b4db5c553029df9ae2c107f8c04aefe4209fa"
+    },
+    {
+      "path": "quizSocio/img/timeDoPovo.png",
+      "size": 203894,
+      "mode": 33204,
+      "sha": "34908db4cc26f9d028c2087b9b0c1a624c59fdb3"
+    },
+    {
+      "path": "quizSocio/img/cabuloso.png",
+      "size": 201799,
+      "mode": 33204,
+      "sha": "647d479216f3fdb56f55b34ee6bf53df1a08dc9f"
+    },
+    {
+      "path": "quizSocio/img/meuCruzeiro.png",
+      "size": 193740,
+      "mode": 33204,
+      "sha": "69d60e85e02331ec7daa7454c86c655ad9da9d0d"
+    },
+    {
+      "path": "quizSocio/img/cruzeiro.png",
+      "size": 179121,
+      "mode": 33204,
+      "sha": "745cb437cbb9a4b5889fb4d40df92defb23c599c"
+    },
+    {
+      "path": "quizSocio/index.html",
+      "size": 120728,
+      "mode": 33204,
+      "sha": "2a1613a7a59a702b6a422cf3e142a8777bc3a334"
+    },
+    {
+      "path": "quizSocio/quiz-engine.js",
+      "size": 47894,
+      "mode": 33204,
+      "sha": "cca542e23f7e38bcdf58faa78f81ed254ae7922c"
+    }
+  ],
+  "files": [
+    {
+      "path": "quizSocio/img/2025_12_26_h264_9x16_CRUZEIRO JOGA JUNTO.mp4",
+      "size": 36348058,
+      "mode": 33204,
+      "sha": "7b49ed83eb42257566f1ff6ecf5cc196eb594c17"
+    },
+    {
+      "path": "quizSocio/img/background.jpg",
+      "size": 866124,
+      "mode": 33204,
+      "sha": "915010758ae7bac48e4880530fe5d1703d65f2e6"
+    },
+    {
+      "path": "quizSocio/img/cabuloso.png",
+      "size": 201799,
+      "mode": 33204,
+      "sha": "647d479216f3fdb56f55b34ee6bf53df1a08dc9f"
+    },
+    {
+      "path": "quizSocio/img/cabulosoMax.png",
+      "size": 227593,
+      "mode": 33204,
+      "sha": "f24b4db5c553029df9ae2c107f8c04aefe4209fa"
+    },
+    {
+      "path": "quizSocio/img/cruzeiro.png",
+      "size": 179121,
+      "mode": 33204,
+      "sha": "745cb437cbb9a4b5889fb4d40df92defb23c599c"
+    },
+    {
+      "path": "quizSocio/img/Estutura de Páginas_fundoestrelado_siteapp.jpeg",
+      "size": 3216121,
+      "mode": 33204,
+      "sha": "ed8ba211b7ce0ecac94ce2537274ad7c834597a4"
+    },
+    {
+      "path": "quizSocio/img/meuCruzeiro.png",
+      "size": 193740,
+      "mode": 33204,
+      "sha": "69d60e85e02331ec7daa7454c86c655ad9da9d0d"
+    },
+    {
+      "path": "quizSocio/img/timeDoPovo.png",
+      "size": 203894,
+      "mode": 33204,
+      "sha": "34908db4cc26f9d028c2087b9b0c1a624c59fdb3"
+    },
+    {
+      "path": "quizSocio/index.html",
+      "size": 120728,
+      "mode": 33204,
+      "sha": "2a1613a7a59a702b6a422cf3e142a8777bc3a334"
+    },
+    {
+      "path": "quizSocio/quiz-engine.js",
+      "size": 47894,
+      "mode": 33204,
+      "sha": "cca542e23f7e38bcdf58faa78f81ed254ae7922c"
+    }
+  ]
+}

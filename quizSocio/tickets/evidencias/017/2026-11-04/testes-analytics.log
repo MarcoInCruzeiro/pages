@@ -1,0 +1,133 @@
+TAP version 13
+# Subtest: GA4 exclui desenvolvimento e preview mesmo inseridos na allowlist
+ok 1 - GA4 exclui desenvolvimento e preview mesmo inseridos na allowlist
+  ---
+  duration_ms: 2.539361
+  type: 'test'
+  ...
+# Subtest: GA4 inicializa uma vez e despacha um evento sem duplicar a fila
+ok 2 - GA4 inicializa uma vez e despacha um evento sem duplicar a fila
+  ---
+  duration_ms: 0.423763
+  type: 'test'
+  ...
+# Subtest: GA4 usa nome configurado por identidade semântica e respeita supressão no despachante
+ok 3 - GA4 usa nome configurado por identidade semântica e respeita supressão no despachante
+  ---
+  duration_ms: 0.341228
+  type: 'test'
+  ...
+# Subtest: GA4 falha fechado sem interromper o chamador e rejeita payload acima do teto
+ok 4 - GA4 falha fechado sem interromper o chamador e rejeita payload acima do teto
+  ---
+  duration_ms: 0.291483
+  type: 'test'
+  ...
+# Subtest: Quiz Sócio — fluxo de navegador
+    # Subtest: resultado único mantém o contrato de analytics e o CTA
+    ok 1 - resultado único mantém o contrato de analytics e o CTA
+      ---
+      duration_ms: 4053.304483
+      type: 'test'
+      ...
+    1..1
+ok 5 - Quiz Sócio — fluxo de navegador
+  ---
+  duration_ms: 4409.745017
+  type: 'suite'
+  ...
+# Subtest: Quiz Sócio — isolamento da coleta GA4
+    # Subtest: preview observa a decisão original da página e não inicializa a coleta
+    ok 1 - preview observa a decisão original da página e não inicializa a coleta
+      ---
+      duration_ms: 180.12994
+      type: 'test'
+      ...
+    # Subtest: loopback IPv6 ([::1]) e 127.0.0.2 ficam fora da coleta de produção
+    ok 2 - loopback IPv6 ([::1]) e 127.0.0.2 ficam fora da coleta de produção
+      ---
+      duration_ms: 286.958087
+      type: 'test'
+      ...
+    # Subtest: host remoto fora da lista explícita fica fora da coleta
+    ok 3 - host remoto fora da lista explícita fica fora da coleta
+      ---
+      duration_ms: 133.562682
+      type: 'test'
+      ...
+    # Subtest: produção (host publicado) habilita a coleta com inicialização única e o quiz funciona
+    ok 4 - produção (host publicado) habilita a coleta com inicialização única e o quiz funciona
+      ---
+      duration_ms: 3869.26143
+      type: 'test'
+      ...
+    # Subtest: preview mantém a supressão mesmo em ambiente habilitado
+    ok 5 - preview mantém a supressão mesmo em ambiente habilitado
+      ---
+      duration_ms: 101.628974
+      type: 'test'
+      ...
+    # Subtest: cookies anteriores permanecem e nenhum cookie novo de analytics surge nos modos excluídos
+    ok 6 - cookies anteriores permanecem e nenhum cookie novo de analytics surge nos modos excluídos
+      ---
+      duration_ms: 192.481812
+      type: 'test'
+      ...
+    # Subtest: arquivo local (file://) fica fora da coleta de produção
+    ok 7 - arquivo local (file://) fica fora da coleta de produção
+      ---
+      duration_ms: 33.483045
+      type: 'test'
+      ...
+    # Subtest: a lista de ambientes habilitados é explícita na configuração compartilhada
+    ok 8 - a lista de ambientes habilitados é explícita na configuração compartilhada
+      ---
+      duration_ms: 0.783236
+      type: 'test'
+      ...
+    1..8
+ok 6 - Quiz Sócio — isolamento da coleta GA4
+  ---
+  duration_ms: 5174.443969
+  type: 'suite'
+  ...
+# Subtest: Quiz Sócio — CTAs de contratação
+    # Subtest: teclado aciona a contratação com foco visível e dimensões preservadas
+    ok 1 - teclado aciona a contratação com foco visível e dimensões preservadas
+      ---
+      duration_ms: 7825.390855
+      type: 'test'
+      ...
+    # Subtest: CTA da lista navega ao plano clicado e registra a origem lista
+    ok 2 - CTA da lista navega ao plano clicado e registra a origem lista
+      ---
+      duration_ms: 3814.141039
+      type: 'test'
+      ...
+    # Subtest: CTA do comparativo navega com origem comparativo
+    ok 3 - CTA do comparativo navega com origem comparativo
+      ---
+      duration_ms: 4002.520193
+      type: 'test'
+      ...
+    # Subtest: sem plano elegível, o estado indisponível não navega nem gera evento
+    ok 4 - sem plano elegível, o estado indisponível não navega nem gera evento
+      ---
+      duration_ms: 3754.288012
+      type: 'test'
+      ...
+    1..4
+ok 7 - Quiz Sócio — CTAs de contratação
+  ---
+  duration_ms: 19749.485454
+  type: 'suite'
+  ...
+1..7
+# tests 17
+# suites 3
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 44433.742902

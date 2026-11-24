@@ -1,0 +1,637 @@
+
+> quiz-socio-5-estrelas@2.0.0 test
+> node --test tests/engine.test.js tests/reference.test.js tests/browser.test.js
+
+TAP version 13
+# Subtest: Quiz Sócio — fluxo de navegador
+    # Subtest: clique duplo em Continuar avança exatamente uma pergunta
+    not ok 1 - clique duplo em Continuar avança exatamente uma pergunta
+      ---
+      duration_ms: 299.739759
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:227:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: alternar rapidamente Voltar e Continuar mantém a pergunta correta
+    not ok 2 - alternar rapidamente Voltar e Continuar mantém a pergunta correta
+      ---
+      duration_ms: 234.017343
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:248:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: Voltar preserva as respostas e a seleção visual
+    not ok 3 - Voltar preserva as respostas e a seleção visual
+      ---
+      duration_ms: 148.429899
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:271:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: resposta ausente não avança e mostra orientação
+    not ok 4 - resposta ausente não avança e mostra orientação
+      ---
+      duration_ms: 117.2491
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:300:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: zero jogos e opções false são respostas válidas
+    not ok 5 - zero jogos e opções false são respostas válidas
+      ---
+      duration_ms: 201.175498
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:337:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: conflito pede confirmação e produz um único resultado
+    not ok 6 - conflito pede confirmação e produz um único resultado
+      ---
+      duration_ms: 187.494334
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:357:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: revisar respostas a partir do conflito volta à primeira pergunta
+    not ok 7 - revisar respostas a partir do conflito volta à primeira pergunta
+      ---
+      duration_ms: 153.820646
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:397:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: confirmação no celular mantém leitura e ações acessíveis sem espaço extra
+    not ok 8 - confirmação no celular mantém leitura e ações acessíveis sem espaço extra
+      ---
+      duration_ms: 213.958202
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:409:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: menu móvel pode ser aberto por teclado e informa seu estado
+    not ok 9 - menu móvel pode ser aberto por teclado e informa seu estado
+      ---
+      duration_ms: 214.330301
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:436:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: resultado único mantém o contrato de analytics e o CTA
+    not ok 10 - resultado único mantém o contrato de analytics e o CTA
+      ---
+      duration_ms: 134.42493
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:452:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: Refazer quiz limpa o estado e permite nova conclusão
+    not ok 11 - Refazer quiz limpa o estado e permite nova conclusão
+      ---
+      duration_ms: 130.059808
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:512:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: orçamento restrito e setor incompatível preservam preços e taxas separados
+    not ok 12 - orçamento restrito e setor incompatível preservam preços e taxas separados
+      ---
+      duration_ms: 112.754329
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:535:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: casal com Kids vê assinatura, adesão, opcional e exemplo de ingresso separados
+    not ok 13 - casal com Kids vê assinatura, adesão, opcional e exemplo de ingresso separados
+      ---
+      duration_ms: 85.621867
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:553:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: comparativo apresenta a matriz oficial, contrato anual e checkout correto
+    not ok 14 - comparativo apresenta a matriz oficial, contrato anual e checkout correto
+      ---
+      duration_ms: 211.208405
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:576:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: teclado seleciona uma opção e libera Continuar
+    not ok 15 - teclado seleciona uma opção e libera Continuar
+      ---
+      duration_ms: 161.078131
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:640:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: teclado abre e fecha o comparativo a partir do resultado
+    not ok 16 - teclado abre e fecha o comparativo a partir do resultado
+      ---
+      duration_ms: 191.346576
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:661:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    # Subtest: mobile e desktop não têm rolagem horizontal inesperada
+    not ok 17 - mobile e desktop não têm rolagem horizontal inesperada
+      ---
+      duration_ms: 285.690549
+      type: 'test'
+      location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:679:5'
+      failureType: 'testCodeFailure'
+      error: '{"code":-32602,"message":"Invalid parameters","data":"Failed to deserialize params.expression - BINDINGS: mandatory field missing at position 50"}'
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        WebSocket.<anonymous> (/home/marco-repoles/workspace/pages/quizSocio/tests/cdp.js:76:43)
+        [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)
+        WebSocket.dispatchEvent (node:internal/event_target:776:26)
+        fireEvent (node:internal/deps/undici/undici:13189:14)
+        #onMessage (node:internal/deps/undici/undici:14418:9)
+        Object.onMessage (node:internal/deps/undici/undici:14131:76)
+        websocketMessageReceived (node:internal/deps/undici/undici:13193:15)
+        node:internal/deps/undici/undici:13850:19
+        node:internal/deps/undici/undici:13670:11
+        afterWrite (node:internal/streams/writable:710:5)
+      ...
+    1..17
+not ok 1 - Quiz Sócio — fluxo de navegador
+  ---
+  duration_ms: 3462.150098
+  type: 'suite'
+  location: '/home/marco-repoles/workspace/pages/quizSocio/tests/browser.test.js:203:1'
+  failureType: 'subtestsFailed'
+  error: '17 subtests failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: catálogo concilia os cinco planos com o regulamento
+ok 2 - catálogo concilia os cinco planos com o regulamento
+  ---
+  duration_ms: 20.046501
+  type: 'test'
+  ...
+# Subtest: exemplo de desconto do Max respeita 65% de R$ 150
+ok 3 - exemplo de desconto do Max respeita 65% de R$ 150
+  ---
+  duration_ms: 0.485859
+  type: 'test'
+  ...
+# Subtest: validação aceita zero e false e rejeita ausentes ou inválidos
+ok 4 - validação aceita zero e false e rejeita ausentes ou inválidos
+  ---
+  duration_ms: 0.311781
+  type: 'test'
+  ...
+# Subtest: validação aponta a primeira pergunta sem resposta
+ok 5 - validação aponta a primeira pergunta sem resposta
+  ---
+  duration_ms: 0.494745
+  type: 'test'
+  ...
+# Subtest: conteúdo digital não acrescenta frequência nem consumo de produtos
+ok 6 - conteúdo digital não acrescenta frequência nem consumo de produtos
+  ---
+  duration_ms: 0.598004
+  type: 'test'
+  ...
+# Subtest: frequência declarada não implica interesse em produtos ou experiências
+ok 7 - frequência declarada não implica interesse em produtos ou experiências
+  ---
+  duration_ms: 0.254539
+  type: 'test'
+  ...
+# Subtest: zero jogos ou não frequentar resultam em necessidade presencial nula
+ok 8 - zero jogos ou não frequentar resultam em necessidade presencial nula
+  ---
+  duration_ms: 0.208058
+  type: 'test'
+  ...
+# Subtest: contradições são detectadas sem correção silenciosa
+ok 9 - contradições são detectadas sem correção silenciosa
+  ---
+  duration_ms: 0.445759
+  type: 'test'
+  ...
+# Subtest: níveis do Cabuloso usam histórico e seguem os limites oficiais
+ok 10 - níveis do Cabuloso usam histórico e seguem os limites oficiais
+  ---
+  duration_ms: 0.798086
+  type: 'test'
+  ...
+# Subtest: desconto e prioridade derivam do mesmo nível
+ok 11 - desconto e prioridade derivam do mesmo nível
+  ---
+  duration_ms: 0.805326
+  type: 'test'
+  ...
+# Subtest: cobertura de setor distingue completo, parcial e ausente
+ok 12 - cobertura de setor distingue completo, parcial e ausente
+  ---
+  duration_ms: 0.49236
+  type: 'test'
+  ...
+# Subtest: preferência pelo Roxo não apresenta o Cativo como benefício no setor
+ok 13 - preferência pelo Roxo não apresenta o Cativo como benefício no setor
+  ---
+  duration_ms: 1.920903
+  type: 'test'
+  ...
+# Subtest: valores de assinatura, adesão e Kids são independentes, sem totais combinados
+ok 14 - valores de assinatura, adesão e Kids são independentes, sem totais combinados
+  ---
+  duration_ms: 0.301834
+  type: 'test'
+  ...
+# Subtest: frequência, acompanhantes e Kids não somam valores à assinatura apresentada
+ok 15 - frequência, acompanhantes e Kids não somam valores à assinatura apresentada
+  ---
+  duration_ms: 2.34875
+  type: 'test'
+  ...
+# Subtest: exemplo de desconto do Max permanece unitário para titular e acompanhante
+ok 16 - exemplo de desconto do Max permanece unitário para titular e acompanhante
+  ---
+  duration_ms: 0.208675
+  type: 'test'
+  ...
+# Subtest: taxas e preços de opcionais não entram no componente de preço nem no índice
+ok 17 - taxas e preços de opcionais não entram no componente de preço nem no índice
+  ---
+  duration_ms: 1.517005
+  type: 'test'
+  ...
+# Subtest: ingresso gratuito é apresentado como benefício por temporada
+ok 18 - ingresso gratuito é apresentado como benefício por temporada
+  ---
+  duration_ms: 0.184379
+  type: 'test'
+  ...
+# Subtest: ranking é determinístico, finito e respeita o orçamento
+ok 19 - ranking é determinístico, finito e respeita o orçamento
+  ---
+  duration_ms: 1.12798
+  type: 'test'
+  ...
+# Subtest: enumeração representativa recalcula o espaço finito de respostas
+ok 20 - enumeração representativa recalcula o espaço finito de respostas
+  ---
+  duration_ms: 481.894925
+  type: 'test'
+  ...
+# espaço nominal: 13713408; combinações executadas: 3082; combinações categoriais com conflito confirmável: 10752
+# Subtest: ausência de plano elegível é explícita e não recomenda acima do teto
+ok 21 - ausência de plano elegível é explícita e não recomenda acima do teto
+  ---
+  duration_ms: 0.286331
+  type: 'test'
+  ...
+# Subtest: motivos do resultado citam respostas e condições comerciais
+ok 22 - motivos do resultado citam respostas e condições comerciais
+  ---
+  duration_ms: 0.318198
+  type: 'test'
+  ...
+# Subtest: zero jogos reduz o peso do benefício de ingresso
+ok 23 - zero jogos reduz o peso do benefício de ingresso
+  ---
+  duration_ms: 0.339259
+  type: 'test'
+  ...
+# Subtest: ordem do catálogo não altera ranking nem índices
+ok 24 - ordem do catálogo não altera ranking nem índices
+  ---
+  duration_ms: 9.178529
+  type: 'test'
+  ...
+# Subtest: empate de índice e assinatura é resolvido pelo slug
+ok 25 - empate de índice e assinatura é resolvido pelo slug
+  ---
+  duration_ms: 0.662998
+  type: 'test'
+  ...
+# Subtest: exemplo documentado da fórmula: 10 jogos, histórico 10, Sicoob, teto 100
+ok 26 - exemplo documentado da fórmula: 10 jogos, histórico 10, Sicoob, teto 100
+  ---
+  duration_ms: 0.392839
+  type: 'test'
+  ...
+# Subtest: nível do ingresso não altera o valor de assinatura do Cabuloso
+ok 27 - nível do ingresso não altera o valor de assinatura do Cabuloso
+  ---
+  duration_ms: 0.404962
+  type: 'test'
+  ...
+# Subtest: motivos seguem as regras que classificaram o plano
+ok 28 - motivos seguem as regras que classificaram o plano
+  ---
+  duration_ms: 0.383761
+  type: 'test'
+  ...
+# Subtest: a referência sintética atende às metas de regressão, sem comprovar avaliação independente
+ok 29 - a referência sintética atende às metas de regressão, sem comprovar avaliação independente
+  ---
+  duration_ms: 19.316265
+  type: 'test'
+  ...
+# top-1 11/12; top-3 12/12; avaliação independente: pendente
+# Subtest: a base de calibração também é consistente
+ok 30 - a base de calibração também é consistente
+  ---
+  duration_ms: 2.067305
+  type: 'test'
+  ...
+# Subtest: a partição é disjunta e os cenários válidos não contêm contradições
+ok 31 - a partição é disjunta e os cenários válidos não contêm contradições
+  ---
+  duration_ms: 1.341167
+  type: 'test'
+  ...
+# Subtest: cenários contraditórios são detectados e ficam fora das métricas
+ok 32 - cenários contraditórios são detectados e ficam fora das métricas
+  ---
+  duration_ms: 0.281758
+  type: 'test'
+  ...
+# Subtest: premissas de preço da referência são as mesmas do motor
+ok 33 - premissas de preço da referência são as mesmas do motor
+  ---
+  duration_ms: 0.101691
+  type: 'test'
+  ...
+# Subtest: cada plano tem cenário em que é aceitável
+ok 34 - cada plano tem cenário em que é aceitável
+  ---
+  duration_ms: 0.100174
+  type: 'test'
+  ...
+# Subtest: cenários ambíguos aceitam mais de um plano e não exigem vencedor fixo
+ok 35 - cenários ambíguos aceitam mais de um plano e não exigem vencedor fixo
+  ---
+  duration_ms: 0.133918
+  type: 'test'
+  ...
+# Subtest: mudar apenas o histórico cruza o nível e altera o benefício atual
+ok 36 - mudar apenas o histórico cruza o nível e altera o benefício atual
+  ---
+  duration_ms: 0.47192
+  type: 'test'
+  ...
+# Subtest: mudar apenas a intenção futura não concede nível superior
+ok 37 - mudar apenas a intenção futura não concede nível superior
+  ---
+  duration_ms: 0.502688
+  type: 'test'
+  ...
+# Subtest: comparação com a linha de base registra as mudanças intencionais
+ok 38 - comparação com a linha de base registra as mudanças intencionais
+  ---
+  duration_ms: 1.081883
+  type: 'test'
+  ...
+# Subtest: linha de base do ranking anterior cobre toda a referência, por segmento
+ok 39 - linha de base do ranking anterior cobre toda a referência, por segmento
+  ---
+  duration_ms: 5.473295
+  type: 'test'
+  ...
+# calibracao · zero jogos com conteúdo: antes ok (cabuloso) → agora ok (cabuloso)
+# calibracao · orçamento 40 e setor popular: antes ok (time-do-povo) → agora ok (time-do-povo)
+# calibracao · loja e conteúdo: antes ok (cabuloso) → agora ok (cabuloso)
+# calibracao · alta frequência no Sicoob: antes ok (cabuloso-cativo) → agora ok (cabuloso)
+# calibracao · casal no Roxo: antes falha (cabuloso-cativo) → agora ok (cabuloso-max)
+# calibracao · casal com dois Kids: antes ok (cabuloso-max) → agora ok (cabuloso-max)
+# calibracao · histórico nível 3: antes falha (meu-cruzeiro) → agora ok (cabuloso)
+# calibracao · histórico nível 1: antes falha (meu-cruzeiro) → agora ok (cabuloso)
+# calibracao · novo sócio: antes ok (cabuloso-cativo) → agora ok (cabuloso-max)
+# calibracao · Roxo com teto de 200: antes falha (cabuloso) → agora ok (cabuloso-max)
+# calibracao · acompanhante adulto: antes ok (cabuloso) → agora ok (cabuloso)
+# calibracao · baixa frequência e teto 40: antes ok (time-do-povo) → agora ok (meu-cruzeiro)
+# reserva · zero jogos sem extras: antes ok (meu-cruzeiro) → agora ok (meu-cruzeiro)
+# reserva · zero jogos com loja: antes falha (time-do-povo) → agora ok (cabuloso)
+# reserva · alta frequência no Amarelo: antes ok (cabuloso) → agora ok (cabuloso)
+# reserva · alta frequência com teto 40: antes ok (time-do-povo) → agora ok (time-do-povo)
+# reserva · Roxo sem cobertura do Cativo: antes falha (cabuloso-cativo) → agora ok (cabuloso-max)
+# reserva · garantia no Sicoob: antes ok (cabuloso-cativo) → agora ok (cabuloso)
+# reserva · um Kids com teto 100: antes ok (cabuloso) → agora ok (cabuloso)
+# reserva · casal no Roxo com teto 200: antes ok (cabuloso-max) → agora ok (cabuloso-max)
+# reserva · limite de nível 10 jogos: antes falha (meu-cruzeiro) → agora ok (cabuloso)
+# reserva · limite de nível 20 jogos: antes falha (meu-cruzeiro) → agora ok (cabuloso)
+# reserva · teto 40 no Sicoob: antes falha (meu-cruzeiro) → agora falha (meu-cruzeiro)
+# reserva · premium com família: antes ok (cabuloso-max) → agora ok (cabuloso-max)
+# reserva top-1: antes 7/12, agora 11/12
+1..39
+# tests 55
+# suites 1
+# pass 38
+# fail 17
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 18470.817764

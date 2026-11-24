@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-28",
+  "isolation": "Código atual, questões do HEAD válido; configuração editada no workspace preservada.",
+  "sourceHashes": {
+    "src/App.vue": "154430238293bbaa8759644d063652fcf7a46609db4340a4abc55a876c93cd7d",
+    "src/style.css": "4785e20d2ccc8b62e2fb329e1e475b968ad424b540ae2a84f671bde8db983801",
+    "src/components/QuizCard.vue": "45551fa2457079bcd14733b21e0e8f7b9267559f6954a055e729cdad9e772266",
+    "src/components/QuizQuestion.vue": "282ad92002e702146b0be31f840616430ea8a6bcb8c445e52304349a412c1a44",
+    "src/composables/useQuestionSpace.js": "7eeff68e8255cdcbb8c7214e085821e1c49d07ec49aeb4ca364555ad71316613",
+    "tests/browser.test.js": "c4cba07646fb5d4a633c0bc2f9923e31877a3e0890764a1aecf7e0c46ceaeab2"
+  },
+  "fullRun": {
+    "command": "npm test",
+    "passed": 126,
+    "failed": 1,
+    "browserPassed": 39,
+    "failure": "Teste de empacotamento: git rev-parse HEAD indisponível na cópia temporária sem metadados Git."
+  },
+  "rerun": {
+    "command": "node --test tests/verification.test.mjs",
+    "passed": 6,
+    "failed": 0,
+    "environmentFix": "Metadados Git do HEAD original carregados somente na cópia temporária."
+  },
+  "workspaceConfigCheck": {
+    "passed": false,
+    "error": "Configuração inválida [questoes] kidsCount: tipo e valores semânticos das opções precisam ser preservados"
+  },
+  "productionChanged": false
+}

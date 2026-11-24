@@ -1,0 +1,136 @@
+{
+  "date": "2026-10-26",
+  "baselineCommit": "01f6d20",
+  "rulesVersion": "2026-10-26.1",
+  "independentValidation": false,
+  "summary": {
+    "calibration": {
+      "total": 12,
+      "beforeTop1": 12,
+      "afterTop1": 12,
+      "afterTop3": 12,
+      "violations": 0,
+      "winnerChanges": []
+    },
+    "legacyReserve": {
+      "total": 12,
+      "beforeTop1": 12,
+      "afterTop1": 12,
+      "afterTop3": 12,
+      "violations": 0,
+      "winnerChanges": []
+    }
+  },
+  "evaluatedScenarioIds": [
+    "CAL-01",
+    "CAL-02",
+    "CAL-03",
+    "CAL-04",
+    "CAL-05",
+    "CAL-06",
+    "CAL-07",
+    "CAL-08",
+    "CAL-09",
+    "CAL-10",
+    "CAL-11",
+    "CAL-12",
+    "RES-01",
+    "RES-02",
+    "RES-03",
+    "RES-04",
+    "RES-05",
+    "RES-06",
+    "RES-07",
+    "RES-08",
+    "RES-09",
+    "RES-10",
+    "RES-11",
+    "RES-12"
+  ],
+  "changes": [
+    {
+      "id": "CAL-05",
+      "beforeWinner": "cabuloso-max",
+      "afterWinner": "cabuloso-max",
+      "beforeScore": 97.8,
+      "afterScore": 96.8,
+      "costs": [
+        {
+          "plan": "cabuloso-max",
+          "before": 287.5,
+          "after": 375
+        }
+      ]
+    },
+    {
+      "id": "CAL-06",
+      "beforeWinner": "cabuloso-max",
+      "afterWinner": "cabuloso-max",
+      "beforeScore": 98.1,
+      "afterScore": 97,
+      "costs": [
+        {
+          "plan": "cabuloso-max",
+          "before": 347.5,
+          "after": 435
+        }
+      ]
+    },
+    {
+      "id": "CAL-11",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 80.7,
+      "afterScore": 80.7,
+      "costs": [
+        {
+          "plan": "cabuloso-max",
+          "before": 252.5,
+          "after": 305
+        }
+      ]
+    },
+    {
+      "id": "RES-07",
+      "beforeWinner": "cabuloso",
+      "afterWinner": "cabuloso",
+      "beforeScore": 85.2,
+      "afterScore": 85.2,
+      "costs": [
+        {
+          "plan": "cabuloso-max",
+          "before": 282.5,
+          "after": 335
+        }
+      ]
+    },
+    {
+      "id": "RES-08",
+      "beforeWinner": "cabuloso-max",
+      "afterWinner": "cabuloso-max",
+      "beforeScore": 98.1,
+      "afterScore": 94.5,
+      "costs": [
+        {
+          "plan": "cabuloso-max",
+          "before": 265.625,
+          "after": 331.25
+        }
+      ]
+    },
+    {
+      "id": "RES-12",
+      "beforeWinner": "cabuloso-max",
+      "afterWinner": "cabuloso-max",
+      "beforeScore": 97.9,
+      "afterScore": 97.9,
+      "costs": [
+        {
+          "plan": "cabuloso-max",
+          "before": 421.25,
+          "after": 552.5
+        }
+      ]
+    }
+  ]
+}

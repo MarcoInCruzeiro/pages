@@ -1,0 +1,874 @@
+{
+  "scope": "Local browser, real gtag.js, all external browser requests blocked before transmission",
+  "cases": [
+    {
+      "urlSuffix": "?preview",
+      "initialCommands": [
+        [
+          "js",
+          "date"
+        ],
+        [
+          "set",
+          "allow_google_signals",
+          false
+        ],
+        [
+          "config",
+          "G-EF75QCTCTV"
+        ]
+      ],
+      "customEvents": [],
+      "generated": [
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html?preview",
+            "en": "page_view"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html?preview",
+            "en": "page_view"
+          }
+        }
+      ],
+      "cookieNames": [
+        "_ga_EF75QCTCTV",
+        "_ga"
+      ]
+    },
+    {
+      "urlSuffix": "#preview",
+      "initialCommands": [
+        [
+          "js",
+          "date"
+        ],
+        [
+          "set",
+          "allow_google_signals",
+          false
+        ],
+        [
+          "config",
+          "G-EF75QCTCTV"
+        ]
+      ],
+      "customEvents": [],
+      "generated": [],
+      "cookieNames": [
+        "_ga",
+        "_ga_EF75QCTCTV"
+      ]
+    },
+    {
+      "urlSuffix": "?utm_campaign=preview_newsletter",
+      "initialCommands": [
+        [
+          "js",
+          "date"
+        ],
+        [
+          "set",
+          "allow_google_signals",
+          false
+        ],
+        [
+          "config",
+          "G-EF75QCTCTV"
+        ]
+      ],
+      "customEvents": [],
+      "generated": [],
+      "cookieNames": [
+        "_ga",
+        "_ga_EF75QCTCTV"
+      ]
+    },
+    {
+      "urlSuffix": "",
+      "eventCounts": {
+        "quiz_start": 1,
+        "quiz_answer": 12,
+        "quiz_complete": 1,
+        "quiz_subscribe_click": 2
+      },
+      "commands": [
+        [
+          "event",
+          "quiz_start",
+          {}
+        ],
+        [
+          "event",
+          "quiz_answer",
+          {
+            "quiz_step": 1,
+            "quiz_question": "gamesPerYear",
+            "quiz_answer": "15",
+            "quiz_answer_label": "15 jogos",
+            "answer_time_sec": 0
+          }
+        ],
+        [
+          "event",
+          "quiz_answer",
+          {
+            "quiz_step": 2,
+            "quiz_question": "gamesHistory",
+            "quiz_answer": "unknown",
+            "quiz_answer_label": "Não sei ou sou novo sócio",
+            "answer_time_sec": 0
+          }
+        ],
+        [
+          "event",
+          "quiz_answer",
+          {
+            "quiz_step": 3,
+            "quiz_question": "wantsGuaranteedTicket",
+            "quiz_answer": "true",
+            "quiz_answer_label": "Faço questão de ir a todos os jogos",
+            "answer_time_sec": 0
+          }
+        ],
+        [
+          "event",
+          "quiz_answer",
+          {
+            "quiz_step": 4,
+            "quiz_question": "buysTwoTickets",
+            "quiz_answer": "false",
+            "quiz_answer_label": "Não, geralmente vou sozinho",
+            "answer_time_sec": 0
+          }
+        ],
+        [
+          "event",
+          "quiz_answer",
+          {
+            "quiz_step": 5,
+            "quiz_question": "kidsCount",
+            "quiz_answer": "0",
+            "quiz_answer_label": "Nenhuma",
+            "answer_time_sec": 0
+          }
+        ],
+        [
+          "event",
+          "quiz_answer",
+          {
+            "quiz_step": 6,
+            "quiz_question": "needsPriority",
+            "quiz_answer": "true",
+            "quiz_answer_label": "Compro no primeiro minuto",
+            "answer_time_sec": 0
+          }
+        ],
+        [
+          "event",
+          "quiz_answer",
+          {
+            "quiz_step": 7,
+            "quiz_question": "wantsParticipation",
+            "quiz_answer": "true",
+            "quiz_answer_label": "Tenho muito interesse",
+            "answer_time_sec": 0
+          }
+        ],
+        [
+          "event",
+          "quiz_answer",
+          {
+            "quiz_step": 8,
+            "quiz_question": "wantsStoreDiscount",
+            "quiz_answer": "true",
+            "quiz_answer_label": "Sempre tento comprar",
+            "answer_time_sec": 0
+          }
+        ],
+        [
+          "event",
+          "quiz_answer",
+          {
+            "quiz_step": 9,
+            "quiz_question": "gameFrequency",
+            "quiz_answer": "always",
+            "quiz_answer_label": "Sempre na arquibancada",
+            "answer_time_sec": 0
+          }
+        ],
+        [
+          "event",
+          "quiz_answer",
+          {
+            "quiz_step": 10,
+            "quiz_question": "digitalExperience",
+            "quiz_answer": "true",
+            "quiz_answer_label": "Acompanho tudo diariamente",
+            "answer_time_sec": 0
+          }
+        ],
+        [
+          "event",
+          "quiz_answer",
+          {
+            "quiz_step": 11,
+            "quiz_question": "budget",
+            "quiz_answer": "200",
+            "quiz_answer_label": "Até R$ 200/mês",
+            "answer_time_sec": 0
+          }
+        ],
+        [
+          "event",
+          "quiz_answer",
+          {
+            "quiz_step": 12,
+            "quiz_question": "preferredSector",
+            "quiz_answer": "blue",
+            "quiz_answer_label": "Setor Sicoob (Leste, antigo Azul)",
+            "answer_time_sec": 0
+          }
+        ],
+        [
+          "event",
+          "quiz_complete",
+          {
+            "recommended_plan": "Cabuloso Max",
+            "affinity_index": 86.3,
+            "compatibility": 86.3,
+            "score_semantics": "indice_afinidade_estimado",
+            "no_eligible_plan": false,
+            "catalog_version": "2026-09-11",
+            "total_time_sec": 0.1,
+            "answer_gamesPerYear": "15",
+            "answer_gamesHistory": "unknown",
+            "answer_wantsGuaranteedTicket": "true",
+            "answer_buysTwoTickets": "false",
+            "answer_kidsCount": "0",
+            "answer_needsPriority": "true",
+            "answer_wantsParticipation": "true",
+            "answer_wantsStoreDiscount": "true",
+            "answer_gameFrequency": "always",
+            "answer_digitalExperience": "true",
+            "answer_budget": "200",
+            "answer_preferredSector": "blue"
+          }
+        ],
+        [
+          "event",
+          "quiz_subscribe_click",
+          {
+            "plan": "Cabuloso Max",
+            "recommended_plan": "Cabuloso Max",
+            "clicked_recommended": "true",
+            "cta_location": "resultado"
+          }
+        ],
+        [
+          "event",
+          "quiz_subscribe_click",
+          {
+            "plan": "Cabuloso Max",
+            "recommended_plan": "Cabuloso Max",
+            "clicked_recommended": "true",
+            "cta_location": "lista"
+          }
+        ]
+      ],
+      "constraints": [
+        {
+          "event": "quiz_start",
+          "params": 0,
+          "maxParamName": 0,
+          "maxStringValue": 0
+        },
+        {
+          "event": "quiz_answer",
+          "params": 5,
+          "maxParamName": 17,
+          "maxStringValue": 12
+        },
+        {
+          "event": "quiz_answer",
+          "params": 5,
+          "maxParamName": 17,
+          "maxStringValue": 25
+        },
+        {
+          "event": "quiz_answer",
+          "params": 5,
+          "maxParamName": 17,
+          "maxStringValue": 35
+        },
+        {
+          "event": "quiz_answer",
+          "params": 5,
+          "maxParamName": 17,
+          "maxStringValue": 27
+        },
+        {
+          "event": "quiz_answer",
+          "params": 5,
+          "maxParamName": 17,
+          "maxStringValue": 9
+        },
+        {
+          "event": "quiz_answer",
+          "params": 5,
+          "maxParamName": 17,
+          "maxStringValue": 25
+        },
+        {
+          "event": "quiz_answer",
+          "params": 5,
+          "maxParamName": 17,
+          "maxStringValue": 21
+        },
+        {
+          "event": "quiz_answer",
+          "params": 5,
+          "maxParamName": 17,
+          "maxStringValue": 20
+        },
+        {
+          "event": "quiz_answer",
+          "params": 5,
+          "maxParamName": 17,
+          "maxStringValue": 22
+        },
+        {
+          "event": "quiz_answer",
+          "params": 5,
+          "maxParamName": 17,
+          "maxStringValue": 26
+        },
+        {
+          "event": "quiz_answer",
+          "params": 5,
+          "maxParamName": 17,
+          "maxStringValue": 14
+        },
+        {
+          "event": "quiz_answer",
+          "params": 5,
+          "maxParamName": 17,
+          "maxStringValue": 33
+        },
+        {
+          "event": "quiz_complete",
+          "params": 19,
+          "maxParamName": 28,
+          "maxStringValue": 25
+        },
+        {
+          "event": "quiz_subscribe_click",
+          "params": 4,
+          "maxParamName": 19,
+          "maxStringValue": 12
+        },
+        {
+          "event": "quiz_subscribe_click",
+          "params": 4,
+          "maxParamName": 19,
+          "maxStringValue": 12
+        }
+      ],
+      "generated": [
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "page_view"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "page_view"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_start"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "1",
+            "ep.quiz_question": "gamesPerYear",
+            "ep.quiz_answer": "15",
+            "ep.quiz_answer_label": "15 jogos",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "2",
+            "ep.quiz_question": "gamesHistory",
+            "ep.quiz_answer": "unknown",
+            "ep.quiz_answer_label": "Não sei ou sou novo sócio",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "3",
+            "ep.quiz_question": "wantsGuaranteedTicket",
+            "ep.quiz_answer": "true",
+            "ep.quiz_answer_label": "Faço questão de ir a todos os jogos",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "4",
+            "ep.quiz_question": "buysTwoTickets",
+            "ep.quiz_answer": "false",
+            "ep.quiz_answer_label": "Não, geralmente vou sozinho",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "5",
+            "ep.quiz_question": "kidsCount",
+            "ep.quiz_answer": "0",
+            "ep.quiz_answer_label": "Nenhuma",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "6",
+            "ep.quiz_question": "needsPriority",
+            "ep.quiz_answer": "true",
+            "ep.quiz_answer_label": "Compro no primeiro minuto",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "7",
+            "ep.quiz_question": "wantsParticipation",
+            "ep.quiz_answer": "true",
+            "ep.quiz_answer_label": "Tenho muito interesse",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "8",
+            "ep.quiz_question": "wantsStoreDiscount",
+            "ep.quiz_answer": "true",
+            "ep.quiz_answer_label": "Sempre tento comprar",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "9",
+            "ep.quiz_question": "gameFrequency",
+            "ep.quiz_answer": "always",
+            "ep.quiz_answer_label": "Sempre na arquibancada",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "10",
+            "ep.quiz_question": "digitalExperience",
+            "ep.quiz_answer": "true",
+            "ep.quiz_answer_label": "Acompanho tudo diariamente",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "11",
+            "ep.quiz_question": "budget",
+            "ep.quiz_answer": "200",
+            "ep.quiz_answer_label": "Até R$ 200/mês",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "12",
+            "ep.quiz_question": "preferredSector",
+            "ep.quiz_answer": "blue",
+            "ep.quiz_answer_label": "Setor Sicoob (Leste, antigo Azul)",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_complete",
+            "ep.recommended_plan": "Cabuloso Max",
+            "epn.affinity_index": "86.3",
+            "epn.compatibility": "86.3",
+            "ep.score_semantics": "indice_afinidade_estimado",
+            "ep.no_eligible_plan": "false",
+            "ep.catalog_version": "2026-09-11",
+            "epn.total_time_sec": "0.1",
+            "ep.answer_gamesPerYear": "15",
+            "ep.answer_gamesHistory": "unknown",
+            "ep.answer_wantsGuaranteedTicket": "true",
+            "ep.answer_buysTwoTickets": "false",
+            "ep.answer_kidsCount": "0",
+            "ep.answer_needsPriority": "true",
+            "ep.answer_wantsParticipation": "true",
+            "ep.answer_wantsStoreDiscount": "true",
+            "ep.answer_gameFrequency": "always",
+            "ep.answer_digitalExperience": "true",
+            "ep.answer_budget": "200",
+            "ep.answer_preferredSector": "blue\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_subscribe_click",
+            "ep.plan": "Cabuloso Max",
+            "ep.recommended_plan": "Cabuloso Max",
+            "ep.clicked_recommended": "true",
+            "ep.cta_location": "resultado\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google-analytics.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_subscribe_click",
+            "ep.plan": "Cabuloso Max",
+            "ep.recommended_plan": "Cabuloso Max",
+            "ep.clicked_recommended": "true",
+            "ep.cta_location": "lista"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_start"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "1",
+            "ep.quiz_question": "gamesPerYear",
+            "ep.quiz_answer": "15",
+            "ep.quiz_answer_label": "15 jogos",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "2",
+            "ep.quiz_question": "gamesHistory",
+            "ep.quiz_answer": "unknown",
+            "ep.quiz_answer_label": "Não sei ou sou novo sócio",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "3",
+            "ep.quiz_question": "wantsGuaranteedTicket",
+            "ep.quiz_answer": "true",
+            "ep.quiz_answer_label": "Faço questão de ir a todos os jogos",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "4",
+            "ep.quiz_question": "buysTwoTickets",
+            "ep.quiz_answer": "false",
+            "ep.quiz_answer_label": "Não, geralmente vou sozinho",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "5",
+            "ep.quiz_question": "kidsCount",
+            "ep.quiz_answer": "0",
+            "ep.quiz_answer_label": "Nenhuma",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "6",
+            "ep.quiz_question": "needsPriority",
+            "ep.quiz_answer": "true",
+            "ep.quiz_answer_label": "Compro no primeiro minuto",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "7",
+            "ep.quiz_question": "wantsParticipation",
+            "ep.quiz_answer": "true",
+            "ep.quiz_answer_label": "Tenho muito interesse",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "8",
+            "ep.quiz_question": "wantsStoreDiscount",
+            "ep.quiz_answer": "true",
+            "ep.quiz_answer_label": "Sempre tento comprar",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "9",
+            "ep.quiz_question": "gameFrequency",
+            "ep.quiz_answer": "always",
+            "ep.quiz_answer_label": "Sempre na arquibancada",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "10",
+            "ep.quiz_question": "digitalExperience",
+            "ep.quiz_answer": "true",
+            "ep.quiz_answer_label": "Acompanho tudo diariamente",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "11",
+            "ep.quiz_question": "budget",
+            "ep.quiz_answer": "200",
+            "ep.quiz_answer_label": "Até R$ 200/mês",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_answer",
+            "epn.quiz_step": "12",
+            "ep.quiz_question": "preferredSector",
+            "ep.quiz_answer": "blue",
+            "ep.quiz_answer_label": "Setor Sicoob (Leste, antigo Azul)",
+            "epn.answer_time_sec": "0\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_complete",
+            "ep.recommended_plan": "Cabuloso Max",
+            "epn.affinity_index": "86.3",
+            "epn.compatibility": "86.3",
+            "ep.score_semantics": "indice_afinidade_estimado",
+            "ep.no_eligible_plan": "false",
+            "ep.catalog_version": "2026-09-11",
+            "epn.total_time_sec": "0.1",
+            "ep.answer_gamesPerYear": "15",
+            "ep.answer_gamesHistory": "unknown",
+            "ep.answer_wantsGuaranteedTicket": "true",
+            "ep.answer_buysTwoTickets": "false",
+            "ep.answer_kidsCount": "0",
+            "ep.answer_needsPriority": "true",
+            "ep.answer_wantsParticipation": "true",
+            "ep.answer_wantsStoreDiscount": "true",
+            "ep.answer_gameFrequency": "always",
+            "ep.answer_digitalExperience": "true",
+            "ep.answer_budget": "200",
+            "ep.answer_preferredSector": "blue\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_subscribe_click",
+            "ep.plan": "Cabuloso Max",
+            "ep.recommended_plan": "Cabuloso Max",
+            "ep.clicked_recommended": "true",
+            "ep.cta_location": "resultado\r"
+          }
+        },
+        {
+          "endpoint": "https://www.google.com/g/collect",
+          "fields": {
+            "tid": "G-EF75QCTCTV",
+            "dl": "http://127.0.0.1/index.html",
+            "en": "quiz_subscribe_click",
+            "ep.plan": "Cabuloso Max",
+            "ep.recommended_plan": "Cabuloso Max",
+            "ep.clicked_recommended": "true",
+            "ep.cta_location": "lista"
+          }
+        }
+      ],
+      "controlledCrossDomainTest": {
+        "configuration": "Injected locally before config; does not prove Admin configuration",
+        "mainCtaHasLinker": false,
+        "anchorHadLinker": false,
+        "anchorHasLinkerAfterClick": false
+      },
+      "cookieNames": [
+        "_ga",
+        "_ga_EF75QCTCTV"
+      ]
+    }
+  ],
+  "errors": [],
+  "externalResponses": [],
+  "interceptedExternalRequests": [
+    "https://fonts.googleapis.com/css2",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-oficial-ab1c760e9a477f26ab6d.png",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-loja-9ef84c1a2fcdf75c75f2.png",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/facebook_icon-94e950311eb66faf3686.png",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/instagram_icon-975c4138b57629c0b3f3.png",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/x_icon-0cb02697682b758664e4.png",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/tiktok_icon-302b8bad23fca898a772.png",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/youtube_icon-845711630bb5a2bd015c.png",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/logo-site-60f55ac6e5da9ad26583.png",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/logo-rodape-4badfb6988b9a00780ab.svg",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/facebook_icon-48d8b35fd74ce4cd95cb.svg",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/instagram_icon-6b996608e02c1e84e224.svg",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/x_icon-e57d61853ba24e10f61b.svg",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/tiktok_icon-13ed59f7dad9ff5dd2ac.svg",
+    "https://socio.cruzeiro.com.br/packs/static/cruzeiro/images/icon-social/youtube_icon-9a510453dec45685082d.svg",
+    "https://www.cruzeiro.com.br/favicon.ico",
+    "https://www.google.com/g/collect",
+    "https://www.google-analytics.com/g/collect"
+  ],
+  "local_index_sha256": "876a04185acdcd7443480cecc32e4a3f7a137520b8c63f691d782999c47eeee6",
+  "library_sha256": "bcd2ff073d0658aad7265d8eec41dd90ecb6566e80d1c6b9996545645b042d2a",
+  "verified_at": "2026-10-26T20:10:47.562404+00:00",
+  "limitations": [
+    "Collector requests were intercepted before transmission; generated payloads do not establish GA4 ingestion.",
+    "The browser library was injected from a public download after document load; this does not validate production loading timing.",
+    "Local linker configuration was injected for exploration; neither destination nor Admin cross-domain configuration was verified.",
+    "Multiple attempted collector endpoints can represent fallback due to blocking; request counts are not received event counts."
+  ]
+}

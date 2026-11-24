@@ -1,0 +1,79 @@
+{
+  "engineChanged": false,
+  "expectationsChanged": false,
+  "referenceSha256": "a3f73bebe683b37c55efa6cf96b07815d2d4a311da79b1ef68ad8062dad53270",
+  "groups": {
+    "calibracao": {
+      "total": 8,
+      "top1": 8,
+      "top3": 8,
+      "budgetViolations": 0,
+      "scoreViolations": 0,
+      "top1Rate": 1,
+      "top3Rate": 1,
+      "passed": true
+    },
+    "validacao": {
+      "total": 8,
+      "top1": 8,
+      "top3": 8,
+      "budgetViolations": 0,
+      "scoreViolations": 0,
+      "top1Rate": 1,
+      "top3Rate": 1,
+      "passed": true
+    }
+  },
+  "historicalGroups": {
+    "calibracao": {
+      "total": 12,
+      "top1": 12,
+      "top3": 12,
+      "budgetViolations": 0,
+      "scoreViolations": 0,
+      "top1Rate": 1,
+      "top3Rate": 1,
+      "passed": true
+    },
+    "reserva": {
+      "total": 12,
+      "top1": 11,
+      "top3": 12,
+      "budgetViolations": 0,
+      "scoreViolations": 0,
+      "top1Rate": 0.9166666666666666,
+      "top3Rate": 1,
+      "passed": true
+    }
+  },
+  "historicalChangedWinners": [],
+  "knownHistoricalDivergence": {
+    "id": "RES-11",
+    "split": "reserva",
+    "profileId": null,
+    "category": "teto 40 no Sicoob",
+    "acceptable": [
+      "time-do-povo"
+    ],
+    "reason": "Com teto de R$ 40, o Time do Povo é o único com benefício de ingresso por jogo; o setor preferido fica sinalizado como não coberto.",
+    "ranking": [
+      "meu-cruzeiro",
+      "time-do-povo"
+    ],
+    "scores": [
+      {
+        "plan": "meu-cruzeiro",
+        "score": 70.4
+      },
+      {
+        "plan": "time-do-povo",
+        "score": 67.1
+      }
+    ],
+    "top1": false,
+    "top3": true,
+    "budgetViolation": false,
+    "scoreViolation": false
+  },
+  "independentValidation": false
+}

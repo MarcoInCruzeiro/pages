@@ -1,0 +1,174 @@
+{
+  "390": [
+    {
+      "step": 1,
+      "footer": 1048,
+      "main": 947,
+      "card": 457,
+      "reserve": "947px"
+    },
+    {
+      "step": 2,
+      "footer": 1048,
+      "main": 947,
+      "card": 545,
+      "reserve": "947px"
+    },
+    {
+      "step": 3,
+      "footer": 1048,
+      "main": 947,
+      "card": 699,
+      "reserve": "947px"
+    },
+    {
+      "step": 4,
+      "footer": 1048,
+      "main": 947,
+      "card": 577,
+      "reserve": "947px"
+    },
+    {
+      "step": 5,
+      "footer": 1048,
+      "main": 947,
+      "card": 731,
+      "reserve": "947px"
+    },
+    {
+      "step": 6,
+      "footer": 1048,
+      "main": 947,
+      "card": 575,
+      "reserve": "947px"
+    },
+    {
+      "step": 7,
+      "footer": 1048,
+      "main": 947,
+      "card": 575,
+      "reserve": "947px"
+    },
+    {
+      "step": 8,
+      "footer": 1048,
+      "main": 947,
+      "card": 575,
+      "reserve": "947px"
+    },
+    {
+      "step": 9,
+      "footer": 1048,
+      "main": 947,
+      "card": 643,
+      "reserve": "947px"
+    },
+    {
+      "step": 10,
+      "footer": 1048,
+      "main": 947,
+      "card": 575,
+      "reserve": "947px"
+    },
+    {
+      "step": 11,
+      "footer": 1048,
+      "main": 947,
+      "card": 821,
+      "reserve": "947px"
+    },
+    {
+      "step": 12,
+      "footer": 1048,
+      "main": 947,
+      "card": 661,
+      "reserve": "947px"
+    }
+  ],
+  "1280": [
+    {
+      "step": 1,
+      "footer": 916,
+      "main": 815,
+      "card": 415,
+      "reserve": "815px"
+    },
+    {
+      "step": 2,
+      "footer": 916,
+      "main": 815,
+      "card": 469,
+      "reserve": "815px"
+    },
+    {
+      "step": 3,
+      "footer": 916,
+      "main": 815,
+      "card": 553,
+      "reserve": "815px"
+    },
+    {
+      "step": 4,
+      "footer": 916,
+      "main": 815,
+      "card": 497,
+      "reserve": "815px"
+    },
+    {
+      "step": 5,
+      "footer": 916,
+      "main": 815,
+      "card": 689,
+      "reserve": "815px"
+    },
+    {
+      "step": 6,
+      "footer": 916,
+      "main": 815,
+      "card": 497,
+      "reserve": "815px"
+    },
+    {
+      "step": 7,
+      "footer": 916,
+      "main": 815,
+      "card": 497,
+      "reserve": "815px"
+    },
+    {
+      "step": 8,
+      "footer": 916,
+      "main": 815,
+      "card": 497,
+      "reserve": "815px"
+    },
+    {
+      "step": 9,
+      "footer": 916,
+      "main": 815,
+      "card": 553,
+      "reserve": "815px"
+    },
+    {
+      "step": 10,
+      "footer": 916,
+      "main": 815,
+      "card": 497,
+      "reserve": "815px"
+    },
+    {
+      "step": 11,
+      "footer": 916,
+      "main": 815,
+      "card": 689,
+      "reserve": "815px"
+    },
+    {
+      "step": 12,
+      "footer": 916,
+      "main": 815,
+      "card": 553,
+      "reserve": "815px"
+    }
+  ]
+}

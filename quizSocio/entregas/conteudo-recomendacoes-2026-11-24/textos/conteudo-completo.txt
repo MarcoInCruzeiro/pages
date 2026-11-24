@@ -1,0 +1,313 @@
+Cards de recomendação
+
+Conteúdo atual da aplicação, exportado em 24/11/2026 (catálogo 2026-11-24.1, regras 2026-11-24.1). Os benefícios e CTAs abaixo são os que o motor da página gera com as respostas do perfil 1; os cards de cada perfil estão em `03-resultado-e-textos-dinamicos.md`.
+
+Textos comuns
+
+- Título da lista: Melhores opções
+- Subtítulo: Em ordem de afinidade com você
+- Selos que apareceram nesta exportação: Outra opção; Recomendado. O selo "Acima do orçamento" só aparece no comparativo, porque a lista mostra os 3 primeiros planos dentro do orçamento.
+- Notas no lugar da afinidade: Compare os benefícios com o plano indicado; Indicado para o seu perfil.
+
+Meu Cruzeiro
+
+- Preço: R$ 12,00 / mês
+- Referência: Valor mensal de referência
+- Adesão: Sem taxa de adesão
+- CTA: Quero ser sócio
+- Logotipo: imagens/logotipos/meu-cruzeiro.png
+- Texto alternativo: Logo do plano Meu Cruzeiro
+
+Benefícios
+
+- 1 ingresso gratuito por temporada, mediante disponibilidade
+- Prioridade 4 para comprar ingressos (1 é a mais alta)
+- Economize até 10% em produtos e serviços oficiais
+- Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+
+Link de contratação
+
+https://socio.cruzeiro.com.br/complementos?plano_id=21&tipo=contrato&intervalo_cobrancas=anual&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-meu-cruzeiro
+
+Time do Povo
+
+- Preço: R$ 40,00 / mês
+- Referência: Valor mensal de referência
+- Adesão: Taxa única de adesão de R$ 30,00, à parte
+- CTA: Quero ingresso popular
+- Logotipo: imagens/logotipos/time-do-povo.png
+- Texto alternativo: Logo do plano Time do Povo
+
+Benefícios
+
+- 1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade
+- Prioridade 4 para comprar ingressos (1 é a mais alta)
+- Economize até 10% em produtos e serviços oficiais
+- Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+
+Link de contratação
+
+https://socio.cruzeiro.com.br/assinar/checkout?plano_id=34&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-time-do-povo
+
+Cabuloso
+
+- Preço: R$ 100,00 / mês
+- Referência: Valor mensal de referência
+- Adesão: Taxa única de adesão de R$ 30,00, à parte
+- CTA: Quero 50% de desconto
+- Logotipo: imagens/logotipos/cabuloso.png
+- Texto alternativo: Logo do plano Cabuloso
+
+Benefícios
+
+- Economize 50% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 75,00 cada. Mediante disponibilidade.
+- Prioridade 3 para comprar ingressos (1 é a mais alta) · nível 1
+- Economize até 15% em produtos e serviços oficiais
+- Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+
+Link de contratação
+
+https://socio.cruzeiro.com.br/assinar/checkout?plano_id=10&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso
+
+Cabuloso Max
+
+- Preço: R$ 200,00 / mês
+- Referência: Valor mensal de referência
+- Adesão: Taxa única de adesão de R$ 30,00, à parte
+- CTA: Quero 65% de desconto
+- Logotipo: imagens/logotipos/cabuloso-max.png
+- Texto alternativo: Logo do plano Cabuloso Max
+
+Benefícios
+
+- Economize 65% em até 2 ingressos por jogo. Ex.: de R$ 150 por R$ 52,50 cada. Mediante disponibilidade.
+- Compre ingressos com prioridade 1, a mais alta
+- Economize até 15% em produtos e serviços oficiais
+- Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+
+Link de contratação
+
+https://socio.cruzeiro.com.br/assinar/checkout?plano_id=11&intervalo_cobrancas=anual&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-max
+
+
+Comparativo de planos
+
+Deslize para o lado para comparar os quatro planos.
+
+Conteúdo da tabela (perfil 1)
+
+A coluna destacada é a do plano recomendado (Cabuloso). A tabela tem 7 linhas de informação, mais a linha dos botões.
+
+| Informação | Meu Cruzeiro | Time do Povo | Cabuloso | Cabuloso Max |
+| --- | --- | --- | --- | --- |
+| Selo | — | — | Recomendado | Acima do orçamento |
+| Preço | R$ 12,00 / mês<br>Valor mensal de referência | R$ 40,00 / mês<br>Valor mensal de referência | R$ 100,00 / mês<br>Valor mensal de referência | R$ 200,00 / mês<br>Valor mensal de referência |
+| Taxa de adesão | Sem taxa | R$ 30,00 (única) | R$ 30,00 (única) | R$ 30,00 (única) |
+| Benefício de ingresso | ✓<br>1 ingresso grátis/temporada | ✓<br>1 ingresso popular/jogo | ✓<br>50% a 60% por nível | ✓<br>65% em até 2 ingressos/jogo |
+| Prioridade / garantia | Prioridade 4 | Prioridade 4 | Prioridade 3 (nível 1) | Prioridade 1 |
+| Desconto na loja | ✓<br>Até 10% em produtos e serviços oficiais | ✓<br>Até 10% em produtos e serviços oficiais | ✓<br>Até 15% em produtos e serviços oficiais | ✓<br>Até 15% em produtos e serviços oficiais |
+| Kids | ✓<br>R$ 30,00/mês por criança (até 3) | ✓<br>R$ 30,00/mês por criança (até 3) | ✓<br>R$ 30,00/mês por criança (até 3) | ✓<br>R$ 30,00/mês por criança (até 3) |
+| Afinidade estimada | 23,2 de 100 | 24 de 100 | 81,5 de 100 | 99,2 de 100 |
+| CTA | Quero ser sócio | Quero ingresso popular | Quero 50% de desconto | Quero 65% de desconto |
+
+Textos completos dos tooltips
+
+Meu Cruzeiro
+
+1 ingresso gratuito por temporada, mediante disponibilidade
+
+Setores: Amarelo (inferior ou superior) ou Laranja (inferior ou superior)
+
+Time do Povo
+
+1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade
+
+Setores: Amarelo (inferior ou superior) ou Laranja (inferior ou superior)
+
+Cabuloso
+
+1 ingresso por jogo, mediante disponibilidade. Exemplo com 60%: de R$ 150,00 por R$ 60,00.
+
+Nível 1: 50%; Nível 2: 55%; Nível 3: 60%. O nível depende dos jogos consecutivos que você frequenta. Confira seu nível atual na conta de sócio.
+
+Setores: Amarelo, Laranja, Sicoob (Leste) e Roxo Superior
+
+Cabuloso Max
+
+Economize 65% em até 2 ingressos por jogo. Ex.: de R$ 150 por R$ 52,50 cada. Mediante disponibilidade.
+
+Setores: Amarelo, Laranja, Sicoob (Leste) e Roxo (inferior e superior)
+
+
+Card principal e textos dinâmicos
+
+Textos que a aplicação mostrou para cada perfil desta exportação, extraídos da tela na mesma rodada das imagens (24/11/2026).
+
+Perfil 1 · Cabuloso presencial
+
+Capturas: imagens/resultados/cabuloso.png, imagens/cards/cabuloso.png, imagens/cards/outra-opcao.png, imagens/comparacao/tabela-completa.png, imagens/mobile/resultado-390.png, imagens/mobile/comparativo-390.png
+
+- Selo: Plano recomendado
+- Plano: Cabuloso
+- Preço: R$ 100,00 / mês · Valor mensal de referência · Taxa única de adesão de R$ 30,00, à parte
+- Resumo: Cabuloso é o plano indicado para você. Para sua frequência de 15 jogos por ano, este plano reúne a melhor combinação de ingresso, setor e prioridade dentro do seu orçamento.
+- Motivos:
+    - Para 15 jogos por ano: economize 50% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 75,00 cada. Mediante disponibilidade.
+    - Para comprar ingressos: prioridade 3 (1 é a mais alta).
+    - Assinatura: R$ 100,00/mês (referência). Taxa de adesão e opcionais à parte.
+- Botões: Refazer quiz · Comparar planos · Quero 50% de desconto
+
+Lista: Melhores opções (Em ordem de afinidade com você)
+
+1. **Cabuloso** · Recomendado · Indicado para o seu perfil · CTA "Quero 50% de desconto"
+    - Economize 50% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 75,00 cada. Mediante disponibilidade.
+    - Prioridade 3 para comprar ingressos (1 é a mais alta) · nível 1
+    - Economize até 15% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+2. **Time do Povo** · Outra opção · Compare os benefícios com o plano indicado · CTA "Quero ingresso popular"
+    - 1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade
+    - Prioridade 4 para comprar ingressos (1 é a mais alta)
+    - Economize até 10% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+    - Atenção ao setor: Não cobre Sicoob (Leste, antigo Azul). O benefício de ingresso é em Amarelo (inferior ou superior) ou Laranja (inferior ou superior).
+3. **Meu Cruzeiro** · Outra opção · Compare os benefícios com o plano indicado · CTA "Quero ser sócio"
+    - 1 ingresso gratuito por temporada, mediante disponibilidade
+    - Prioridade 4 para comprar ingressos (1 é a mais alta)
+    - Economize até 10% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+    - Atenção ao setor: Não cobre Sicoob (Leste, antigo Azul). O benefício de ingresso é em Amarelo (inferior ou superior) ou Laranja (inferior ou superior).
+
+Perfil 2 · Cabuloso nível 3
+
+Capturas: imagens/cards/cabuloso-nivel-3.png
+
+- Selo: Plano recomendado
+- Plano: Cabuloso
+- Preço: R$ 100,00 / mês · Valor mensal de referência · Taxa única de adesão de R$ 30,00, à parte
+- Resumo: Cabuloso é o plano indicado para você. Para sua frequência de 15 jogos por ano, este plano reúne a melhor combinação de ingresso, setor e prioridade dentro do seu orçamento.
+- Motivos:
+    - Para 15 jogos por ano: economize 60% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 60,00 cada. Mediante disponibilidade.
+    - Para comprar ingressos: prioridade 1 (1 é a mais alta).
+    - Assinatura: R$ 100,00/mês (referência). Taxa de adesão e opcionais à parte.
+- Botões: Refazer quiz · Comparar planos · Quero 60% de desconto
+
+Lista: Melhores opções (Em ordem de afinidade com você)
+
+1. **Cabuloso** · Recomendado · Indicado para o seu perfil · CTA "Quero 60% de desconto"
+    - Economize 60% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 60,00 cada. Mediante disponibilidade.
+    - Compre ingressos com prioridade 1, a mais alta · nível 3
+    - Economize até 15% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+2. **Time do Povo** · Outra opção · Compare os benefícios com o plano indicado · CTA "Quero ingresso popular"
+    - 1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade
+    - Prioridade 4 para comprar ingressos (1 é a mais alta)
+    - Economize até 10% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+    - Atenção ao setor: Não cobre Sicoob (Leste, antigo Azul). O benefício de ingresso é em Amarelo (inferior ou superior) ou Laranja (inferior ou superior).
+3. **Meu Cruzeiro** · Outra opção · Compare os benefícios com o plano indicado · CTA "Quero ser sócio"
+    - 1 ingresso gratuito por temporada, mediante disponibilidade
+    - Prioridade 4 para comprar ingressos (1 é a mais alta)
+    - Economize até 10% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+    - Atenção ao setor: Não cobre Sicoob (Leste, antigo Azul). O benefício de ingresso é em Amarelo (inferior ou superior) ou Laranja (inferior ou superior).
+
+Perfil 3 · Time do Povo
+
+Capturas: imagens/cards/time-do-povo.png
+
+- Selo: Plano recomendado
+- Plano: Time do Povo
+- Preço: R$ 40,00 / mês · Valor mensal de referência · Taxa única de adesão de R$ 30,00, à parte
+- Resumo: Time do Povo é o plano indicado para você. Para sua frequência de 10 jogos por ano, este plano reúne a melhor combinação de ingresso, setor e prioridade dentro do seu orçamento.
+- Motivos:
+    - Para 10 jogos por ano: 1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade.
+    - Assinatura: R$ 40,00/mês (referência). Taxa de adesão e opcionais à parte.
+- Botões: Refazer quiz · Comparar planos · Quero ingresso popular
+
+Lista: Melhores opções (Em ordem de afinidade com você)
+
+1. **Time do Povo** · Recomendado · Indicado para o seu perfil · CTA "Quero ingresso popular"
+    - 1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade
+    - Prioridade 4 para comprar ingressos (1 é a mais alta)
+    - Economize até 10% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+2. **Meu Cruzeiro** · Outra opção · Compare os benefícios com o plano indicado · CTA "Quero ser sócio"
+    - 1 ingresso gratuito por temporada, mediante disponibilidade
+    - Prioridade 4 para comprar ingressos (1 é a mais alta)
+    - Economize até 10% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+
+Perfil 4a · Sem estádio, sem compras
+
+Capturas: imagens/resultados/sem-estadio-apoio.png
+
+- Selo: Plano recomendado
+- Plano: Meu Cruzeiro
+- Preço: R$ 12,00 / mês · Valor mensal de referência · Sem taxa de adesão
+- Resumo: Meu Cruzeiro é o plano indicado para você. Seu foco é apoiar o clube, sem uso de ingressos ou descontos na loja. O plano de apoio atende a esse perfil.
+- Motivos:
+    - Como você não pretende ir ao estádio, os benefícios de ingresso não influenciaram a escolha.
+    - Assinatura: R$ 12,00/mês (referência). Sem taxa de adesão; opcionais à parte.
+- Botões: Refazer quiz · Comparar planos · Quero ser sócio
+
+Lista: Melhores opções (Em ordem de afinidade com você)
+
+1. **Meu Cruzeiro** · Recomendado · Indicado para o seu perfil · CTA "Quero ser sócio"
+    - 1 ingresso gratuito por temporada, mediante disponibilidade
+    - Prioridade 4 para comprar ingressos (1 é a mais alta)
+    - Economize até 10% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+2. **Cabuloso** · Outra opção · Compare os benefícios com o plano indicado · CTA "Quero ser sócio"
+    - Economize 50% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 75,00 cada. Mediante disponibilidade.
+    - Prioridade 3 para comprar ingressos (1 é a mais alta) · nível 1
+    - Economize até 15% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+    - Já é sócio? Confira na sua conta se seu nível e desconto são maiores.
+3. **Cabuloso Max** · Outra opção · Compare os benefícios com o plano indicado · CTA "Quero ser sócio"
+    - Economize 65% em até 2 ingressos por jogo. Ex.: de R$ 150 por R$ 52,50 cada. Mediante disponibilidade.
+    - Compre ingressos com prioridade 1, a mais alta
+    - Economize até 15% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+
+Perfil 4b · Sem estádio, com compras
+
+Capturas: imagens/resultados/sem-estadio-loja.png
+
+- Selo: Plano recomendado
+- Plano: Cabuloso
+- Preço: R$ 100,00 / mês · Valor mensal de referência · Taxa única de adesão de R$ 30,00, à parte
+- Resumo: Cabuloso é o plano indicado para você. Seu interesse está nos produtos oficiais. A recomendação considera o desconto na loja dentro do seu orçamento.
+- Motivos:
+    - Economize até 15% em produtos e serviços oficiais.
+    - Como você não pretende ir ao estádio, os benefícios de ingresso não influenciaram a escolha.
+    - Assinatura: R$ 100,00/mês (referência). Taxa de adesão e opcionais à parte.
+- Botões: Refazer quiz · Comparar planos · Quero até 15% na loja
+
+Lista: Melhores opções (Em ordem de afinidade com você)
+
+1. **Cabuloso** · Recomendado · Indicado para o seu perfil · CTA "Quero até 15% na loja"
+    - Economize 50% em 1 ingresso por jogo. Ex.: de R$ 150 por R$ 75,00 cada. Mediante disponibilidade.
+    - Prioridade 3 para comprar ingressos (1 é a mais alta) · nível 1
+    - Economize até 15% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+    - Já é sócio? Confira na sua conta se seu nível e desconto são maiores.
+2. **Meu Cruzeiro** · Outra opção · Compare os benefícios com o plano indicado · CTA "Quero até 10% na loja"
+    - 1 ingresso gratuito por temporada, mediante disponibilidade
+    - Prioridade 4 para comprar ingressos (1 é a mais alta)
+    - Economize até 10% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+3. **Time do Povo** · Outra opção · Compare os benefícios com o plano indicado · CTA "Quero até 10% na loja"
+    - 1 ingresso popular por jogo: menor preço online da arquibancada, mediante disponibilidade
+    - Prioridade 4 para comprar ingressos (1 é a mais alta)
+    - Economize até 10% em produtos e serviços oficiais
+    - Kids opcional: R$ 30,00/mês por criança · até 3 menores de 12 anos
+
+Sobre a recomendação
+
+Cruzamos suas respostas com os benefícios de cada plano para chegar a esta sugestão. Ela é um ponto de partida: vale comparar as opções antes de assinar.
+
+O orçamento limita quais assinaturas podemos recomendar. Entre elas, a ordem considera os benefícios e suas respostas; o menor preço não aumenta a afinidade. Taxa de adesão, opcionais e ingressos ficam separados.
+
+Os exemplos de desconto consideram R$ 150 por ingresso de referência; o preço real muda conforme o jogo e o setor. Kids depende de aprovação: ingresso da criança sem custo adicional no setor do titular, mediante disponibilidade e aquisição do ingresso do titular.
+
+Disponibilidade e condições de cada benefício estão no site do Sócio 5 Estrelas.

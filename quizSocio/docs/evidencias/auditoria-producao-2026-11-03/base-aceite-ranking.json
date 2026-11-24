@@ -1,0 +1,278 @@
+{
+  "evaluatedAt": "2026-11-03T17:24:25.472Z",
+  "versions": {
+    "catalogVersion": "2026-10-28.2",
+    "rulesVersion": "2026-10-29.2",
+    "ga4Version": "2026-10-28.3"
+  },
+  "configurationHash": "523de1ae47be4b1e15acb1897567a44fc5346592140bc3e41ba9e468fee5d59c",
+  "referenceHashes": {
+    "historical": "14d5440c6377222552c745c77800709163ec9db7a6f99a3aaedcab66e74a6f23",
+    "profiles": "e7128debfadfbf3948b3cdfbff12e9238043e969674c13481867f0c4393b0e9e"
+  },
+  "regressionIds": [
+    "CAL-02",
+    "CAL-10",
+    "PER-02-C",
+    "RES-05"
+  ],
+  "metricsPassed": true,
+  "reviewAccepted": false,
+  "releaseApproved": false,
+  "cases": [
+    {
+      "id": "CAL-02",
+      "answers": {
+        "gamesPerYear": 10,
+        "gamesHistory": 5,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "digitalExperience": false,
+        "budget": 40,
+        "preferredSector": "yellow-orange"
+      },
+      "acceptedByReference": [
+        "time-do-povo"
+      ],
+      "candidates": [
+        {
+          "plan": "meu-cruzeiro",
+          "monthly": 12,
+          "score": 85.1,
+          "sectorFit": "full",
+          "priority": 4,
+          "ticket": "1 ingresso gratuito por temporada, mediante disponibilidade",
+          "contributions": {
+            "ticket": 6.07,
+            "priority": 1.18,
+            "sector": 10.47,
+            "discount": 6.5,
+            "experiences": 9.74,
+            "family": 1.04,
+            "price": 50.11
+          }
+        },
+        {
+          "plan": "time-do-povo",
+          "monthly": 40,
+          "score": 81.7,
+          "sectorFit": "full",
+          "priority": 4,
+          "ticket": "1 ingresso popular, pelo menor valor online da arquibancada, mediante disponibilidade",
+          "contributions": {
+            "ticket": 10.11,
+            "priority": 1.18,
+            "sector": 10.47,
+            "discount": 6.5,
+            "experiences": 9.74,
+            "family": 1.04,
+            "price": 42.64
+          }
+        }
+      ],
+      "shownRecommendations": [
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "closeCall": false,
+      "sectorWarning": "Cobre o setor que você prefere (Amarelo ou Laranja).",
+      "sectorAlternative": null
+    },
+    {
+      "id": "CAL-10",
+      "answers": {
+        "gamesPerYear": 15,
+        "gamesHistory": 15,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "frequent",
+        "digitalExperience": true,
+        "budget": 200,
+        "preferredSector": "purple"
+      },
+      "acceptedByReference": [
+        "cabuloso-max"
+      ],
+      "candidates": [
+        {
+          "plan": "cabuloso",
+          "monthly": 100,
+          "score": 76.6,
+          "sectorFit": "partial",
+          "priority": 2,
+          "ticket": "1 ingresso com 55% de desconto (ex.: R$ 150 por R$ 67,50), mediante disponibilidade",
+          "contributions": {
+            "ticket": 8.55,
+            "priority": 3.74,
+            "sector": 6.64,
+            "discount": 19.98,
+            "experiences": 23.78,
+            "family": 0.71,
+            "price": 13.16
+          }
+        },
+        {
+          "plan": "cabuloso-max",
+          "monthly": 200,
+          "score": 71.9,
+          "sectorFit": "full",
+          "priority": 1,
+          "ticket": "Até 2 ingressos com 65% de desconto (ex.: R$ 150 por R$ 52,50), mediante disponibilidade",
+          "contributions": {
+            "ticket": 11.41,
+            "priority": 4.98,
+            "sector": 11.07,
+            "discount": 19.98,
+            "experiences": 23.78,
+            "family": 0.71,
+            "price": 0
+          }
+        }
+      ],
+      "shownRecommendations": [
+        "cabuloso",
+        "cabuloso-max",
+        "meu-cruzeiro"
+      ],
+      "closeCall": false,
+      "sectorWarning": "Cobre apenas Roxo Superior dentro de Roxo.",
+      "sectorAlternative": "cabuloso-max"
+    },
+    {
+      "id": "RES-05",
+      "answers": {
+        "gamesPerYear": 10,
+        "gamesHistory": 20,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": true,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "frequent",
+        "digitalExperience": true,
+        "budget": 400,
+        "preferredSector": "purple"
+      },
+      "acceptedByReference": [
+        "cabuloso-max"
+      ],
+      "candidates": [
+        {
+          "plan": "cabuloso",
+          "monthly": 100,
+          "score": 75.1,
+          "sectorFit": "partial",
+          "priority": 1,
+          "ticket": "1 ingresso com 60% de desconto (ex.: R$ 150 por R$ 60,00), mediante disponibilidade",
+          "contributions": {
+            "ticket": 10.87,
+            "priority": 6.33,
+            "sector": 8.45,
+            "discount": 7.79,
+            "experiences": 27.81,
+            "family": 0.83,
+            "price": 13.02
+          }
+        },
+        {
+          "plan": "cabuloso-max",
+          "monthly": 200,
+          "score": 71.3,
+          "sectorFit": "full",
+          "priority": 1,
+          "ticket": "Até 2 ingressos com 65% de desconto (ex.: R$ 150 por R$ 52,50), mediante disponibilidade",
+          "contributions": {
+            "ticket": 14.5,
+            "priority": 6.33,
+            "sector": 14.08,
+            "discount": 7.79,
+            "experiences": 27.81,
+            "family": 0.83,
+            "price": 0
+          }
+        }
+      ],
+      "shownRecommendations": [
+        "cabuloso",
+        "cabuloso-max",
+        "meu-cruzeiro"
+      ],
+      "closeCall": false,
+      "sectorWarning": "Cobre apenas Roxo Superior dentro de Roxo.",
+      "sectorAlternative": "cabuloso-max"
+    },
+    {
+      "id": "PER-02-C",
+      "answers": {
+        "gamesPerYear": 20,
+        "gamesHistory": 9,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "kidsCount": 0,
+        "needsPriority": false,
+        "wantsParticipation": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "frequent",
+        "digitalExperience": false,
+        "budget": 40,
+        "preferredSector": "yellow-orange"
+      },
+      "acceptedByReference": [
+        "time-do-povo"
+      ],
+      "candidates": [
+        {
+          "plan": "meu-cruzeiro",
+          "monthly": 12,
+          "score": 81.1,
+          "sectorFit": "full",
+          "priority": 4,
+          "ticket": "1 ingresso gratuito por temporada, mediante disponibilidade",
+          "contributions": {
+            "ticket": 8.64,
+            "priority": 1.68,
+            "sector": 14.91,
+            "discount": 5.39,
+            "experiences": 8.08,
+            "family": 0.87,
+            "price": 41.58
+          }
+        },
+        {
+          "plan": "time-do-povo",
+          "monthly": 40,
+          "score": 80.7,
+          "sectorFit": "full",
+          "priority": 4,
+          "ticket": "1 ingresso popular, pelo menor valor online da arquibancada, mediante disponibilidade",
+          "contributions": {
+            "ticket": 14.39,
+            "priority": 1.68,
+            "sector": 14.91,
+            "discount": 5.39,
+            "experiences": 8.08,
+            "family": 0.87,
+            "price": 35.39
+          }
+        }
+      ],
+      "shownRecommendations": [
+        "meu-cruzeiro",
+        "time-do-povo"
+      ],
+      "closeCall": true,
+      "sectorWarning": "Cobre o setor que você prefere (Amarelo ou Laranja).",
+      "sectorAlternative": null
+    }
+  ]
+}

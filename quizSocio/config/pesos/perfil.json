@@ -1,0 +1,44 @@
+{
+  "frecuencia": {
+    "volume": 0.4,
+    "presenca": 0.3,
+    "declaracao": 0.3,
+    "maxJogos": 30,
+    "padrao": 5,
+    "presencas": {
+      "never": 0,
+      "true": 9,
+      "false": 5
+    },
+    "declaracoes": {
+      "always": 10,
+      "frequent": 7,
+      "occasional": 2
+    }
+  },
+  "prioridad": {
+    "true": 8,
+    "false": 2,
+    "padrao": 5
+  },
+  "experiencias": {
+    "true": 8,
+    "false": 1,
+    "padrao": 5,
+    "bonusDigital": 2,
+    "bonusDigitalParcial": 1
+  },
+  "descuentos": {
+    "true": 8,
+    "sometimes": 4.5,
+    "false": 1,
+    "padrao": 5
+  },
+  "adultos": {
+    "true": 1,
+    "false": 0
+  },
+  "kids": {
+    "max": 3
+  }
+}

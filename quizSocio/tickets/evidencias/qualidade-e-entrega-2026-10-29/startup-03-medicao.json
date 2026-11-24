@@ -1,0 +1,44 @@
+{
+  "measuredAt": "2026-10-29T17:48:30.342Z",
+  "cpu": 6,
+  "viewport": [
+    1280,
+    900
+  ],
+  "samples": [
+    {
+      "tasks": [
+        {
+          "start": 114.40000000223517,
+          "duration": 580
+        }
+      ],
+      "navigation": 813.6999999992549
+    },
+    {
+      "tasks": [
+        {
+          "start": 117.5,
+          "duration": 213
+        }
+      ],
+      "navigation": 485.30000000074506
+    },
+    {
+      "tasks": [
+        {
+          "start": 81.89999999850988,
+          "duration": 173
+        }
+      ],
+      "navigation": 412.8999999985099
+    }
+  ],
+  "largestTasksMs": [
+    580,
+    213,
+    173
+  ],
+  "medianLargestTaskMs": 213,
+  "limitations": "Chrome headless, fontes externas interceptadas, cache HTTP desativado. Mede abertura sob CPU limitada; não comprova resolução da travada persistente."
+}

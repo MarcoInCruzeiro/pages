@@ -1,0 +1,902 @@
+{
+  "data": "2026-11-24",
+  "versoes": {
+    "catalogo": "2026-11-24.1",
+    "regras": "2026-11-24.1",
+    "ga4": "2026-11-03.1"
+  },
+  "capturas": [
+    {
+      "arquivo": "imagens/resultados/cabuloso.png",
+      "captura": "A",
+      "perfil": "1",
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 15,
+        "gamesHistory": 5,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": true,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "frequent",
+        "budget": 100,
+        "preferredSector": "blue"
+      },
+      "planoRecomendado": "cabuloso",
+      "notas": {
+        "cabuloso-max": {
+          "indice": 99.2,
+          "noOrcamento": false
+        },
+        "cabuloso": {
+          "indice": 81.5,
+          "noOrcamento": true
+        },
+        "time-do-povo": {
+          "indice": 24,
+          "noOrcamento": true
+        },
+        "meu-cruzeiro": {
+          "indice": 23.2,
+          "noOrcamento": true
+        }
+      },
+      "viewport": {
+        "largura": 1280,
+        "altura": 900,
+        "densidade": 2,
+        "celular": false
+      },
+      "recorte": {
+        "x": 16,
+        "y": 149,
+        "largura": 1248,
+        "altura": 781,
+        "unidade": "px CSS"
+      },
+      "elementos": {
+        "selo": {
+          "css": {
+            "x": 57,
+            "y": 57,
+            "largura": 197,
+            "altura": 34
+          },
+          "imagem": {
+            "x": 114,
+            "y": 114,
+            "largura": 394,
+            "altura": 68
+          }
+        },
+        "preco": {
+          "css": {
+            "x": 480,
+            "y": 277,
+            "largura": 287,
+            "altura": 33
+          },
+          "imagem": {
+            "x": 960,
+            "y": 554,
+            "largura": 574,
+            "altura": 66
+          }
+        },
+        "adesao": {
+          "css": {
+            "x": 480,
+            "y": 344,
+            "largura": 287,
+            "altura": 22
+          },
+          "imagem": {
+            "x": 960,
+            "y": 688,
+            "largura": 574,
+            "altura": 44
+          }
+        },
+        "resumo": {
+          "css": {
+            "x": 57,
+            "y": 396,
+            "largura": 1134,
+            "altura": 56
+          },
+          "imagem": {
+            "x": 114,
+            "y": 792,
+            "largura": 2268,
+            "altura": 112
+          }
+        },
+        "motivos": {
+          "css": {
+            "x": 57,
+            "y": 472,
+            "largura": 1134,
+            "altura": 103
+          },
+          "imagem": {
+            "x": 114,
+            "y": 944,
+            "largura": 2268,
+            "altura": 206
+          }
+        },
+        "sobre": {
+          "css": {
+            "x": 57,
+            "y": 594,
+            "largura": 1134,
+            "altura": 50
+          },
+          "imagem": {
+            "x": 114,
+            "y": 1188,
+            "largura": 2268,
+            "altura": 100
+          }
+        },
+        "botoes": {
+          "css": {
+            "x": 57,
+            "y": 672,
+            "largura": 1134,
+            "altura": 52
+          },
+          "imagem": {
+            "x": 114,
+            "y": 1344,
+            "largura": 2268,
+            "altura": 104
+          }
+        }
+      },
+      "estadoNaCaptura": {
+        "foco": null,
+        "tooltipsAbertos": 0,
+        "sobreAberto": false,
+        "animacoesEmCurso": 0
+      },
+      "compressao": "PNG sem perda",
+      "pixels": {
+        "largura": 2496,
+        "altura": 1562
+      },
+      "sha256": "f4568df001c460d950a2f92c49d133be828189cce6880e52a9bf6a9d0d8054a0",
+      "bytes": 847362,
+      "versoes": {
+        "catalogo": "2026-11-24.1",
+        "regras": "2026-11-24.1"
+      }
+    },
+    {
+      "arquivo": "imagens/cards/cabuloso.png",
+      "captura": "B (posição 1 na lista)",
+      "perfil": "1",
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 15,
+        "gamesHistory": 5,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": true,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "frequent",
+        "budget": 100,
+        "preferredSector": "blue"
+      },
+      "planoRecomendado": "cabuloso",
+      "notas": {
+        "cabuloso-max": {
+          "indice": 99.2,
+          "noOrcamento": false
+        },
+        "cabuloso": {
+          "indice": 81.5,
+          "noOrcamento": true
+        },
+        "time-do-povo": {
+          "indice": 24,
+          "noOrcamento": true
+        },
+        "meu-cruzeiro": {
+          "indice": 23.2,
+          "noOrcamento": true
+        }
+      },
+      "viewport": {
+        "largura": 1280,
+        "altura": 900,
+        "densidade": 2,
+        "celular": false
+      },
+      "recorte": {
+        "x": 49,
+        "y": 997,
+        "largura": 1182,
+        "altura": 672,
+        "unidade": "px CSS"
+      },
+      "estadoNaCaptura": {
+        "foco": null,
+        "tooltipsAbertos": 0,
+        "sobreAberto": false,
+        "animacoesEmCurso": 0
+      },
+      "compressao": "PNG sem perda",
+      "pixels": {
+        "largura": 2364,
+        "altura": 1344
+      },
+      "sha256": "655e40eda6d587efcc91a71066c8e24a3b5e1699a40c59a52597b778dba46576",
+      "bytes": 790733,
+      "versoes": {
+        "catalogo": "2026-11-24.1",
+        "regras": "2026-11-24.1"
+      }
+    },
+    {
+      "arquivo": "imagens/cards/outra-opcao.png",
+      "captura": "F (posição 2 na lista)",
+      "perfil": "1",
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 15,
+        "gamesHistory": 5,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": true,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "frequent",
+        "budget": 100,
+        "preferredSector": "blue"
+      },
+      "planoRecomendado": "cabuloso",
+      "notas": {
+        "cabuloso-max": {
+          "indice": 99.2,
+          "noOrcamento": false
+        },
+        "cabuloso": {
+          "indice": 81.5,
+          "noOrcamento": true
+        },
+        "time-do-povo": {
+          "indice": 24,
+          "noOrcamento": true
+        },
+        "meu-cruzeiro": {
+          "indice": 23.2,
+          "noOrcamento": true
+        }
+      },
+      "viewport": {
+        "largura": 1280,
+        "altura": 900,
+        "densidade": 2,
+        "celular": false
+      },
+      "recorte": {
+        "x": 49,
+        "y": 1635,
+        "largura": 1182,
+        "altura": 731,
+        "unidade": "px CSS"
+      },
+      "estadoNaCaptura": {
+        "foco": null,
+        "tooltipsAbertos": 0,
+        "sobreAberto": false,
+        "animacoesEmCurso": 0
+      },
+      "compressao": "PNG sem perda",
+      "pixels": {
+        "largura": 2364,
+        "altura": 1462
+      },
+      "sha256": "726c0725dbdbc5f6e983b925eba10cf7770d8bdab3ff350c1b9425719ca44190",
+      "bytes": 889652,
+      "versoes": {
+        "catalogo": "2026-11-24.1",
+        "regras": "2026-11-24.1"
+      }
+    },
+    {
+      "arquivo": "imagens/comparacao/tabela-completa.png",
+      "captura": "C",
+      "perfil": "1",
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 15,
+        "gamesHistory": 5,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": true,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "frequent",
+        "budget": 100,
+        "preferredSector": "blue"
+      },
+      "planoRecomendado": "cabuloso",
+      "notas": {
+        "cabuloso-max": {
+          "indice": 99.2,
+          "noOrcamento": false
+        },
+        "cabuloso": {
+          "indice": 81.5,
+          "noOrcamento": true
+        },
+        "time-do-povo": {
+          "indice": 24,
+          "noOrcamento": true
+        },
+        "meu-cruzeiro": {
+          "indice": 23.2,
+          "noOrcamento": true
+        }
+      },
+      "viewport": {
+        "largura": 1280,
+        "altura": 900,
+        "densidade": 2,
+        "celular": false
+      },
+      "recorte": {
+        "x": 16,
+        "y": 8,
+        "largura": 1248,
+        "altura": 829,
+        "unidade": "px CSS"
+      },
+      "estadoNaCaptura": {
+        "foco": null,
+        "tooltipsAbertos": 0,
+        "sobreAberto": false,
+        "animacoesEmCurso": 0
+      },
+      "compressao": "PNG com paleta de 256 cores (libimagequant, pontilhado), porque a versão sem perda passava de 1 MB",
+      "pixels": {
+        "largura": 2496,
+        "altura": 1657
+      },
+      "sha256": "6ec28d25d32d6fbf097edde20b912d3616775af1410277b7f11522735b63152b",
+      "bytes": 468278,
+      "versoes": {
+        "catalogo": "2026-11-24.1",
+        "regras": "2026-11-24.1"
+      }
+    },
+    {
+      "arquivo": "imagens/cards/cabuloso-nivel-3.png",
+      "captura": "D (posição 1 na lista)",
+      "perfil": "2",
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 15,
+        "gamesHistory": 25,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": true,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "frequent",
+        "budget": 100,
+        "preferredSector": "blue"
+      },
+      "planoRecomendado": "cabuloso",
+      "notas": {
+        "cabuloso-max": {
+          "indice": 99.2,
+          "noOrcamento": false
+        },
+        "cabuloso": {
+          "indice": 98,
+          "noOrcamento": true
+        },
+        "time-do-povo": {
+          "indice": 24,
+          "noOrcamento": true
+        },
+        "meu-cruzeiro": {
+          "indice": 23.2,
+          "noOrcamento": true
+        }
+      },
+      "viewport": {
+        "largura": 1280,
+        "altura": 900,
+        "densidade": 2,
+        "celular": false
+      },
+      "recorte": {
+        "x": 49,
+        "y": 997,
+        "largura": 1182,
+        "altura": 672,
+        "unidade": "px CSS"
+      },
+      "estadoNaCaptura": {
+        "foco": null,
+        "tooltipsAbertos": 0,
+        "sobreAberto": false,
+        "animacoesEmCurso": 0
+      },
+      "compressao": "PNG sem perda",
+      "pixels": {
+        "largura": 2364,
+        "altura": 1344
+      },
+      "sha256": "92c66b444676a0447c53a33e0359be1c73ca134b1963d53186619224073283e0",
+      "bytes": 789437,
+      "versoes": {
+        "catalogo": "2026-11-24.1",
+        "regras": "2026-11-24.1"
+      }
+    },
+    {
+      "arquivo": "imagens/cards/time-do-povo.png",
+      "captura": "E (posição 1 na lista)",
+      "perfil": "3",
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 10,
+        "gamesHistory": 5,
+        "wantsGuaranteedTicket": false,
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "occasional",
+        "budget": 40,
+        "preferredSector": "yellow-orange"
+      },
+      "planoRecomendado": "time-do-povo",
+      "notas": {
+        "cabuloso-max": {
+          "indice": 98.6,
+          "noOrcamento": false
+        },
+        "cabuloso": {
+          "indice": 88.5,
+          "noOrcamento": false
+        },
+        "time-do-povo": {
+          "indice": 71.7,
+          "noOrcamento": true
+        },
+        "meu-cruzeiro": {
+          "indice": 64.7,
+          "noOrcamento": true
+        }
+      },
+      "viewport": {
+        "largura": 1280,
+        "altura": 900,
+        "densidade": 2,
+        "celular": false
+      },
+      "recorte": {
+        "x": 49,
+        "y": 958,
+        "largura": 1182,
+        "altura": 672,
+        "unidade": "px CSS"
+      },
+      "estadoNaCaptura": {
+        "foco": null,
+        "tooltipsAbertos": 0,
+        "sobreAberto": false,
+        "animacoesEmCurso": 0
+      },
+      "compressao": "PNG sem perda",
+      "pixels": {
+        "largura": 2364,
+        "altura": 1344
+      },
+      "sha256": "f190bddb484c3db966222b72bd3419467f813e7afdbb499f581daf84276d78c7",
+      "bytes": 804090,
+      "versoes": {
+        "catalogo": "2026-11-24.1",
+        "regras": "2026-11-24.1"
+      }
+    },
+    {
+      "arquivo": "imagens/resultados/sem-estadio-apoio.png",
+      "captura": "G (apoio)",
+      "perfil": "4a",
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 0,
+        "gamesHistory": "unknown",
+        "wantsGuaranteedTicket": "never",
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsStoreDiscount": false,
+        "gameFrequency": "occasional",
+        "budget": 400,
+        "preferredSector": "yellow-orange"
+      },
+      "planoRecomendado": "meu-cruzeiro",
+      "notas": {
+        "meu-cruzeiro": {
+          "indice": 60,
+          "noOrcamento": true
+        },
+        "cabuloso": {
+          "indice": 60,
+          "noOrcamento": true
+        },
+        "cabuloso-max": {
+          "indice": 60,
+          "noOrcamento": true
+        },
+        "time-do-povo": {
+          "indice": 60,
+          "noOrcamento": true
+        }
+      },
+      "viewport": {
+        "largura": 1280,
+        "altura": 900,
+        "densidade": 2,
+        "celular": false
+      },
+      "recorte": {
+        "x": 16,
+        "y": 149,
+        "largura": 1248,
+        "altura": 742,
+        "unidade": "px CSS"
+      },
+      "estadoNaCaptura": {
+        "foco": null,
+        "tooltipsAbertos": 0,
+        "sobreAberto": false,
+        "animacoesEmCurso": 0
+      },
+      "compressao": "PNG sem perda",
+      "pixels": {
+        "largura": 2496,
+        "altura": 1485
+      },
+      "sha256": "3c55ef5c76e6566ec9ec7d406a415a0c8f5bfddb15b79a8f3619ff1e7d5c37d2",
+      "bytes": 762684,
+      "versoes": {
+        "catalogo": "2026-11-24.1",
+        "regras": "2026-11-24.1"
+      }
+    },
+    {
+      "arquivo": "imagens/resultados/sem-estadio-loja.png",
+      "captura": "G (loja)",
+      "perfil": "4b",
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 0,
+        "gamesHistory": "unknown",
+        "wantsGuaranteedTicket": "never",
+        "buysTwoTickets": false,
+        "needsPriority": false,
+        "wantsStoreDiscount": true,
+        "gameFrequency": "occasional",
+        "budget": 100,
+        "preferredSector": "yellow-orange"
+      },
+      "planoRecomendado": "cabuloso",
+      "notas": {
+        "cabuloso": {
+          "indice": 97.8,
+          "noOrcamento": true
+        },
+        "cabuloso-max": {
+          "indice": 97.8,
+          "noOrcamento": false
+        },
+        "meu-cruzeiro": {
+          "indice": 66.3,
+          "noOrcamento": true
+        },
+        "time-do-povo": {
+          "indice": 66.3,
+          "noOrcamento": true
+        }
+      },
+      "viewport": {
+        "largura": 1280,
+        "altura": 900,
+        "densidade": 2,
+        "celular": false
+      },
+      "recorte": {
+        "x": 16,
+        "y": 149,
+        "largura": 1248,
+        "altura": 781,
+        "unidade": "px CSS"
+      },
+      "estadoNaCaptura": {
+        "foco": null,
+        "tooltipsAbertos": 0,
+        "sobreAberto": false,
+        "animacoesEmCurso": 0
+      },
+      "compressao": "PNG sem perda",
+      "pixels": {
+        "largura": 2496,
+        "altura": 1562
+      },
+      "sha256": "cf0c734acde1b04628a9fb5252ef38cbabdcaf41381b0e2c98ce1904e01ef4aa",
+      "bytes": 827854,
+      "versoes": {
+        "catalogo": "2026-11-24.1",
+        "regras": "2026-11-24.1"
+      }
+    },
+    {
+      "arquivo": "imagens/mobile/resultado-390.png",
+      "captura": "H (resultado)",
+      "perfil": "1",
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 15,
+        "gamesHistory": 5,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": true,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "frequent",
+        "budget": 100,
+        "preferredSector": "blue"
+      },
+      "planoRecomendado": "cabuloso",
+      "notas": {
+        "cabuloso-max": {
+          "indice": 99.2,
+          "noOrcamento": false
+        },
+        "cabuloso": {
+          "indice": 81.5,
+          "noOrcamento": true
+        },
+        "time-do-povo": {
+          "indice": 24,
+          "noOrcamento": true
+        },
+        "meu-cruzeiro": {
+          "indice": 23.2,
+          "noOrcamento": true
+        }
+      },
+      "viewport": {
+        "largura": 390,
+        "altura": 1186,
+        "densidade": 3,
+        "celular": true
+      },
+      "recorte": {
+        "x": 0,
+        "y": 0,
+        "largura": 390,
+        "altura": 1186,
+        "unidade": "px CSS"
+      },
+      "estadoNaCaptura": {
+        "foco": null,
+        "tooltipsAbertos": 0,
+        "sobreAberto": false,
+        "animacoesEmCurso": 0
+      },
+      "compressao": "PNG com paleta de 256 cores (libimagequant, pontilhado), porque a versão sem perda passava de 1 MB",
+      "pixels": {
+        "largura": 1170,
+        "altura": 3558
+      },
+      "sha256": "33e29e0ca7533ca49f03b9af4035138da4986b4a76543dcec3a17fd262feb539",
+      "bytes": 407895,
+      "versoes": {
+        "catalogo": "2026-11-24.1",
+        "regras": "2026-11-24.1"
+      }
+    },
+    {
+      "arquivo": "imagens/mobile/comparativo-390.png",
+      "captura": "H (comparativo)",
+      "perfil": "1",
+      "respostas": {
+        "kidsCount": 0,
+        "wantsParticipation": false,
+        "digitalExperience": false,
+        "gamesPerYear": 15,
+        "gamesHistory": 5,
+        "wantsGuaranteedTicket": true,
+        "buysTwoTickets": false,
+        "needsPriority": true,
+        "wantsStoreDiscount": "sometimes",
+        "gameFrequency": "frequent",
+        "budget": 100,
+        "preferredSector": "blue"
+      },
+      "planoRecomendado": "cabuloso",
+      "notas": {
+        "cabuloso-max": {
+          "indice": 99.2,
+          "noOrcamento": false
+        },
+        "cabuloso": {
+          "indice": 81.5,
+          "noOrcamento": true
+        },
+        "time-do-povo": {
+          "indice": 24,
+          "noOrcamento": true
+        },
+        "meu-cruzeiro": {
+          "indice": 23.2,
+          "noOrcamento": true
+        }
+      },
+      "viewport": {
+        "largura": 390,
+        "altura": 844,
+        "densidade": 3,
+        "celular": true
+      },
+      "recorte": {
+        "x": 0,
+        "y": 0,
+        "largura": 390,
+        "altura": 844,
+        "unidade": "px CSS"
+      },
+      "estadoNaCaptura": {
+        "foco": null,
+        "tooltipsAbertos": 0,
+        "sobreAberto": false,
+        "animacoesEmCurso": 0
+      },
+      "compressao": "PNG sem perda",
+      "pixels": {
+        "largura": 1170,
+        "altura": 2532
+      },
+      "sha256": "49fbbf968ae30e2b914fb8b6ef96dc6e2aacfe71705dee35b702e41a6a2d9223",
+      "bytes": 754207,
+      "versoes": {
+        "catalogo": "2026-11-24.1",
+        "regras": "2026-11-24.1"
+      }
+    }
+  ],
+  "verificacao": {
+    "errosDeExecucao": [],
+    "enviosDeAnalytics": [],
+    "navegacoesParaCheckout": []
+  },
+  "arquivos": [
+    {
+      "caminho": "README.md",
+      "bytes": 2718,
+      "sha256": "33c8c8ac63d6adaa89ca339bc51d1979322c1fa6fe0b975910c4b2c4efc53231"
+    },
+    {
+      "caminho": "imagens/cards/cabuloso-nivel-3.png",
+      "bytes": 789437,
+      "sha256": "92c66b444676a0447c53a33e0359be1c73ca134b1963d53186619224073283e0"
+    },
+    {
+      "caminho": "imagens/cards/cabuloso.png",
+      "bytes": 790733,
+      "sha256": "655e40eda6d587efcc91a71066c8e24a3b5e1699a40c59a52597b778dba46576"
+    },
+    {
+      "caminho": "imagens/cards/outra-opcao.png",
+      "bytes": 889652,
+      "sha256": "726c0725dbdbc5f6e983b925eba10cf7770d8bdab3ff350c1b9425719ca44190"
+    },
+    {
+      "caminho": "imagens/cards/time-do-povo.png",
+      "bytes": 804090,
+      "sha256": "f190bddb484c3db966222b72bd3419467f813e7afdbb499f581daf84276d78c7"
+    },
+    {
+      "caminho": "imagens/comparacao/tabela-completa.png",
+      "bytes": 468278,
+      "sha256": "6ec28d25d32d6fbf097edde20b912d3616775af1410277b7f11522735b63152b"
+    },
+    {
+      "caminho": "imagens/logotipos/cabuloso-max.png",
+      "bytes": 227593,
+      "sha256": "76333900f6031023e20f612a3db0606cb1e0ce97156b47466f6b5031cdda7c19"
+    },
+    {
+      "caminho": "imagens/logotipos/cabuloso.png",
+      "bytes": 201799,
+      "sha256": "4547f0d037a200fe4cb7b4f35ef5ee04e80fe634cd3f71d84405451e9ddc4ee9"
+    },
+    {
+      "caminho": "imagens/logotipos/meu-cruzeiro.png",
+      "bytes": 193740,
+      "sha256": "10171f7eda9b7b434d180aeb13be6ecafd8df7d9da40d7ed21ca5eff6de9804e"
+    },
+    {
+      "caminho": "imagens/logotipos/time-do-povo.png",
+      "bytes": 203894,
+      "sha256": "08f1ec74ae633a47b07490599a8a614d5d790c412095b6469739e9b4de4dea8b"
+    },
+    {
+      "caminho": "imagens/mobile/comparativo-390.png",
+      "bytes": 754207,
+      "sha256": "49fbbf968ae30e2b914fb8b6ef96dc6e2aacfe71705dee35b702e41a6a2d9223"
+    },
+    {
+      "caminho": "imagens/mobile/resultado-390.png",
+      "bytes": 407895,
+      "sha256": "33e29e0ca7533ca49f03b9af4035138da4986b4a76543dcec3a17fd262feb539"
+    },
+    {
+      "caminho": "imagens/resultados/cabuloso.png",
+      "bytes": 847362,
+      "sha256": "f4568df001c460d950a2f92c49d133be828189cce6880e52a9bf6a9d0d8054a0"
+    },
+    {
+      "caminho": "imagens/resultados/sem-estadio-apoio.png",
+      "bytes": 762684,
+      "sha256": "3c55ef5c76e6566ec9ec7d406a415a0c8f5bfddb15b79a8f3619ff1e7d5c37d2"
+    },
+    {
+      "caminho": "imagens/resultados/sem-estadio-loja.png",
+      "bytes": 827854,
+      "sha256": "cf0c734acde1b04628a9fb5252ef38cbabdcaf41381b0e2c98ce1904e01ef4aa"
+    },
+    {
+      "caminho": "revision.json",
+      "bytes": 867,
+      "sha256": "a2472819f082d7ed09054b1c20446b5f43f4337bce55402a8582bfcda6b4a2b9"
+    },
+    {
+      "caminho": "textos/01-cards-recomendacao.md",
+      "bytes": 3861,
+      "sha256": "ac1ffca951ec333a57d283f87025d74052eddad8c80dfbc57fb702838b333c11"
+    },
+    {
+      "caminho": "textos/02-tabela-comparacao.md",
+      "bytes": 2437,
+      "sha256": "e22879f9bea03f6b448e49f590754a1346b684010de6a90d335c68a33731b14c"
+    },
+    {
+      "caminho": "textos/03-resultado-e-textos-dinamicos.md",
+      "bytes": 11391,
+      "sha256": "657b94ac61f7fb86ebb04a2234af18d08efb34d77efa891257d0eef11affba80"
+    },
+    {
+      "caminho": "textos/conteudo-completo.txt",
+      "bytes": 17580,
+      "sha256": "3e92c6d900e3a44f9737f95ad23cd45b9e0cdb597c0e60613ff76ab9d291e5b7"
+    },
+    {
+      "caminho": "textos/conteudo-estruturado.json",
+      "bytes": 35703,
+      "sha256": "e77cd3fd8a890d320e9c358cacc192a2a8de2b8d3ae4debb9a8a936d76667bdc"
+    }
+  ]
+}
