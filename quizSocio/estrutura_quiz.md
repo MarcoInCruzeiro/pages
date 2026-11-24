@@ -21,11 +21,8 @@ Todas as perguntas e planos usam **escala 0-20** para os atributos de perfil.
 | **Carteirinha digital** | Sim |
 | **Taxa de adesão** | Não |
 | **Desconto loja** | Até 10% |
-| **Conteúdo exclusivo** | Sim |
-| **Participação em quizzes** | Sim |
-| **Votação em decisões** | Sim |
 | **Complementos disponíveis** | Kids, Carteirinha Física |
-| **Benefícios** | Ingresso grátis por temporada · Carteirinha digital · Até 10% na Loja · Participação em quizzes |
+| **Benefícios** | Ingresso grátis por temporada · Carteirinha digital · Até 10% na Loja |
 
 ### 1.2. Time do Povo — R$ 40/mês
 
@@ -37,11 +34,8 @@ Todas as perguntas e planos usam **escala 0-20** para os atributos de perfil.
 | **Taxa de adesão** | R$ 30 única |
 | **Desconto ingresso** | Todo jogo nos setores Amarelo e Laranja custa R$ 40,00 |
 | **Desconto loja** | Até 15% |
-| **Conteúdo exclusivo** | Não |
-| **Participação em quizzes** | Sim |
-| **Votação em decisões** | Não |
 | **Complementos disponíveis** | Kids, Carteirinha Física |
-| **Benefícios** | Carteirinha digital · Ingresso a R$ 40 nos setores Amarelo e Laranja · Até 15% na Loja · Participação em quizzes |
+| **Benefícios** | Carteirinha digital · Ingresso a R$ 40 nos setores Amarelo e Laranja · Até 15% na Loja |
 
 ### 1.3. Cabuloso — R$ 100/mês
 
@@ -55,11 +49,8 @@ Todas as perguntas e planos usam **escala 0-20** para os atributos de perfil.
 | **Níveis de desconto** | Nível 1 (0-9 jogos): 50% · Nível 2 (10-19 jogos): 55% · Nível 3 (20+ jogos): 60% |
 | **Prioridade na compra** | Sim (varia por nível) |
 | **Desconto loja** | Até 15% |
-| **Conteúdo exclusivo** | Sim |
-| **Participação em quizzes** | Sim |
-| **Votação em decisões** | Sim |
 | **Complementos disponíveis** | Kids, Carteirinha Física |
-| **Benefícios** | Carteirinha digital · Desconto progressivo (50% a 60%) · Até 15% na Loja · Participação em quizzes |
+| **Benefícios** | Carteirinha digital · Desconto progressivo (50% a 60%) · Até 15% na Loja |
 
 ### 1.4. Cabuloso Max — R$ 200/mês
 
@@ -72,11 +63,8 @@ Todas as perguntas e planos usam **escala 0-20** para os atributos de perfil.
 | **Desconto ingresso** | Até 2 ingressos por jogo com 65% de desconto |
 | **Prioridade na compra** | Prioridade máxima (nível 1) |
 | **Desconto loja** | Até 15% |
-| **Conteúdo exclusivo** | Sim |
-| **Participação em quizzes** | Sim |
-| **Votação em decisões** | Sim |
 | **Complementos disponíveis** | Kids, Carteirinha Física |
-| **Benefícios** | Carteirinha digital · 2 ingressos com 65% off · Até 15% na Loja · Participação em quizzes |
+| **Benefícios** | Carteirinha digital · 2 ingressos com 65% off · Até 15% na Loja |
 
 ### 1.5. Cabuloso Cativo — R$ 400/mês
 
@@ -89,11 +77,8 @@ Todas as perguntas e planos usam **escala 0-20** para os atributos de perfil.
 | **Desconto ingresso** | 1 ingresso garantido no Azul Inferior |
 | **Prioridade na compra** | Prioridade máxima (assento cativo) |
 | **Desconto loja** | Até 10% |
-| **Conteúdo exclusivo** | Sim |
-| **Participação em quizzes** | Sim |
-| **Votação em decisões** | Sim |
 | **Complementos disponíveis** | Kids |
-| **Benefícios** | Carteirinha digital · 1 ingresso garantido no Azul Inferior · Até 10% na Loja · Participação em quizzes |
+| **Benefícios** | Carteirinha digital · 1 ingresso garantido no Azul Inferior · Até 10% na Loja |
 
 ---
 
@@ -240,7 +225,7 @@ Isso direciona torcedores frequentes (>10 jogos/ano) para planos como Time do Po
 | `importanciaPreco` | 20 | 19 | 15 | 10 | 0 |
 | `frequenciaEstadio` | 2 | 6 | 10 | 16 | 20 |
 | `interesseDescontos` | 4 | 14 | 18 | 19 | 12 |
-| `interesseExperiencias` | 18 | 5 | 18 | 20 | 20 |
+| `interesseExperiencias` | 5 | 5 | 5 | 7 | 7 |
 | `levaAcompanhantes` | 1 | 3 | 5 | 16 | 8 |
 | `prioridadeIngressos` | 2 | 6 | 10 | 16 | 20 |
 | `consumoProdutosOficiais` | 12 | 18 | 18 | 18 | 12 |

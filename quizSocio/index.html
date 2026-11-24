@@ -2149,9 +2149,7 @@
                     percentual: 0.1,
                     texto: "Até 10% na loja"
                 },
-                conteudoExclusivo: true,
                 descontoEmParceiros: true,
-                votacaoEmDecisoesNoClube: true,
                 complementos: {
                     kids: true,
                     carteirinhaFisica: true
@@ -2185,9 +2183,7 @@
                     percentual: 0.15,
                     texto: "Até 15% na loja"
                 },
-                conteudoExclusivo: false,
                 descontoEmParceiros: true,
-                votacaoEmDecisoesNoClube: false,
                 complementos: {
                     kids: true,
                     carteirinhaFisica: true
@@ -2256,9 +2252,7 @@
                     percentual: 0.15,
                     texto: "Até 15% na loja"
                 },
-                conteudoExclusivo: true,
                 descontoEmParceiros: true,
-                votacaoEmDecisoesNoClube: true,
                 complementos: {
                     kids: true,
                     carteirinhaFisica: true
@@ -2293,9 +2287,7 @@
                     percentual: 0.15,
                     texto: "Até 15% na loja"
                 },
-                conteudoExclusivo: true,
                 descontoEmParceiros: true,
-                votacaoEmDecisoesNoClube: true,
                 complementos: {
                     kids: true,
                     carteirinhaFisica: true
@@ -2330,9 +2322,7 @@
                     percentual: 0.1,
                     texto: "Até 10% na loja "
                 },
-                conteudoExclusivo: true,
                 descontoEmParceiros: true,
-                votacaoEmDecisoesNoClube: true,
                 complementos: {
                     kids: true,
                     carteirinhaFisica: false
@@ -2340,7 +2330,6 @@
                 beneficios: [
                     "Seu assento cativo no Azul Inferior em todos os jogos",
                     "Até 10% de desconto na Loja do Cruzeiro",
-                    "Experiência premium: conteúdo exclusivo e voto nas decisões",
                 ],
                 link: "https://socio.cruzeiro.com.br/assinar/checkout?plano_id=115&intervalo_cobrancas=mensal&assinatura_id=&tipo=contrato&utm_source=quiz_socio&utm_medium=site&utm_campaign=quiz_socio_5_estrelas&utm_content=plano-cabuloso-cativo"
             }
@@ -2904,11 +2893,9 @@
             }
             interesseDescontos = Math.min(20, Math.round(interesseDescontos));
 
-            // 4. Interesse em experiências: baseado em conteúdos exclusivos, quizzes e etc (0-20)
+            // 4. Interesse em experiências: baseado em descontos em parceiros e no nível do plano (0-20)
             let interesseExperiencias = 0;
-            if (plan.conteudoExclusivo) interesseExperiencias += 6;
             if (plan.descontoEmParceiros) interesseExperiencias += 5;
-            if (plan.votacaoEmDecisoesNoClube) interesseExperiencias += 7;
             if (plan.slug === 'cabuloso-cativo' || plan.slug === 'cabuloso-max') interesseExperiencias += 2;
             interesseExperiencias = Math.min(20, interesseExperiencias);
 
@@ -3192,12 +3179,6 @@
                     getValue: (plan) => '<span class="comparison-check">✓</span> <span class="comparison-detail">' + (plan.descontoNaLoja?.texto || '') + '</span>'
                 },
 
-                {
-                    label: 'Conteúdo exclusivo',
-                    getValue: (plan) => plan.conteudoExclusivo
-                        ? '<span class="comparison-check">✓</span>'
-                        : '<span class="comparison-cross">✗</span>'
-                },
                 {
                     label: 'Desconto em parceiros',
                     getValue: (plan) => plan.descontoEmParceiros
